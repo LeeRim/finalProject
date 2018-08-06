@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="AdminMapper">
+
+	<sql id="select">
+		SELECT C_KEY, C_NAME, C_OWNER, C_ADDRESS, C_LOGO, C_SIGN, C_QRCODE, C_MILEAGE, C_CLOSEDAY, C_LEVEL
+		FROM COMPANY
+	</sql>
+
+	<select id="selectCompanyList" resultType="Company">
+		<include refid="select"></include>
+	</select>
+
+</mapper>
