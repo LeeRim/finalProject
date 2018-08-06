@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EmployeeMapper">
+
+	<sql id="selectEmployee">
+		SELECT E_KEY ,
+		E_NO ,
+		C_KEY_FK ,
+		E_TYPE ,
+		E_ID ,
+		E_PWD ,
+		E_NAME ,
+		E_JOBCODE_FK ,
+		E_DEPART_FK ,
+		E_ADDRESS ,
+		E_EXTEN ,
+		E_PHONE ,
+		E_EMAIL ,
+		E_HIRE_DATE ,
+		E_ENT_DATE ,
+		E_ENT_YN ,
+		E_PHOTO
+		FROM EMPLOYEE
+	</sql>
+
+	<select id="selectEmployeeById" parameterType="string" resultType="EmployeeVo">
+		<include refid="selectEmployee"></include>
+		WHERE E_ID = #{eId}
+	</select>
+
+</mapper>

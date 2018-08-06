@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ApprovalMapper">
+
+	<resultMap type="ApprovalVo" id="approvalMap">
+		<id property="aKey" column="A_KEY" />
+		<result property="cKeyFk" column="C_KEY_FK" />
+		<result property="divDoctypeFk" column="DIV_DOCTYPE_FK" />
+		<result property="aTitle" column="A_TITLE" />
+		<result property="aWriterFk" column="A_WRITER_FK" />
+		<result property="aWriteDate" column="A_WRITE_DATE" />
+		<result property="aCondition" column="A_CONDITION" />
+		<collection property="aConList" column="A_KEY" ofType="AppConVo"
+			resultMap="appConMap"></collection>
+	</resultMap>
+
+	<resultMap type="AppConVo" id="appConMap">
+		<id property="acKey" column="AC_KEY" />
+		<result property="aKeyFk" column="A_KEY_FK" />
+		<result property="acApprovalFk" column="AC_APPROVER_FK" />
+		<result property="acCondition" column="AC_CONDITION" />
+		<result property="acApprovalDate" column="AC_APPROVAL_DATE" />
+	</resultMap>
+
+	<sql id="selectApproval">
+		SELECT A.A_KEY A_KEY,
+		A.C_KEY_FK C_KEY_FK,
+		A.DIV_DOCTYPE_FK DIV_DOCTYPE_FK,
+		A.A_TITLE A_TITLE,
+		A.A_WRITER_FK A_WRITER_FK,
+		A.A_WRITE_DATE A_WRITE_DATE,
+		A.A_CONDITION A_CONDITION,
+		AC.AC_KEY AC_KEY,
+		AC.A_KEY_FK A_KEY_FK,
+		AC.AC_APPROVER_FK AC_APPROVER_FK,
+		AC.AC_CONDITION AC_CONDITION,
+		AC.AC_APPROVAL_DATE AC_APPROVAL_DATE
+		FROM APPROVAL A
+		JOIN APPROVAL_CONDITION AC ON(AC.A_KEY_FK=A.A_KEY)
+	</sql>
+
+	<select id="selectDraftApprovalList" parameterType="int"
+		resultMap="approvalMap">
+		SELECT *
+		FROM APPROVAL A
+		JOIN APPROVAL_CONDITION AC ON(AC.A_KEY_FK=A.A_KEY)
+		WHERE A_WRITER_FK = #{eKey}
+	</select>
+
+</mapper>
