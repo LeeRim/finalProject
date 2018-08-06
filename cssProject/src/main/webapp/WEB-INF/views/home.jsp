@@ -12,11 +12,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Starter</title>
+  
   <script>
-	function note(){
-		location.href="moveNote.do";
-	}
-</script>
+  	function boardPage(bType){
+  		location.href="borderList.do?bCateGory=" + bType;
+  	}
+  </script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -46,11 +47,14 @@ desired effect
   
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" >
+  <div class="content-wrapper" style="height: 100%;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
         Page Header
+        <button onclick="boardPage(1);">공지사항</button>
+        <button onclick="boardPage(2);">자유게시판</button>
+        <button onclick="boardPage(3);">경조사</button>
         <small>Optional description</small>
       </h1>
       <ol class="breadcrumb">
@@ -65,10 +69,6 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        <a href="loginForm.do">로그인하러가기</a>
-        <a href="approvalPage.do">전자결재페이지가기</a>
-        	<button onclick="note()">쪽지기능 고고씽</button>
-    	<a href="loginForm.do">로그인 고고씽</a>
 
     </section>
     <!-- /.content -->

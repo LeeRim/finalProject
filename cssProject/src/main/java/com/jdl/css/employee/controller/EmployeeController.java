@@ -26,6 +26,8 @@ public class EmployeeController {
 		System.out.println(user);
 		if(user.getePwd().equals(e.getePwd())){
 			session.setAttribute("user", user);
+		}else{
+			System.out.println("비밀번호 오류");
 		}
 		return "redirect:index.do";
 	}

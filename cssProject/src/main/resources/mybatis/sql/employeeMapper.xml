@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="EmployeeMapper">
 
-	<sql id="selectEmployee">
+	
+	<sql id="select">
 		SELECT E_KEY ,
 		E_NO ,
 		C_KEY_FK ,
@@ -25,8 +26,8 @@
 		FROM EMPLOYEE
 	</sql>
 
-	<select id="selectEmployeeById" parameterType="string" resultType="EmployeeVo">
-		<include refid="selectEmployee"></include>
+	<select id="selectEmployeeById" parameterType="string" resultType="Employee">
+		<include refid="select"></include>
 		WHERE E_ID = #{eId}
 	</select>
 
