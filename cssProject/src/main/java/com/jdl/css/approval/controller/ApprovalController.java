@@ -45,6 +45,11 @@ public class ApprovalController {
 		return "approval/approvalForm/spendingResolution";
 	}
 	
+	@RequestMapping("orderFormPage.do")
+	public String openOrderFormPage(){
+		return "approval/approvalForm/orderForm";
+	}
+	
 	@RequestMapping("selectDraftApprovalList.do")
 	public ModelAndView selectDraftApprovalList(ModelAndView mv,HttpSession session){
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
