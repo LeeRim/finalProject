@@ -10,10 +10,15 @@
   <typeAliases>
 	<typeAlias type="com.jdl.css.border.model.vo.BorderVo" alias="Border" /> 
 	<typeAlias type="com.jdl.css.employee.model.vo.EmployeeVo" alias="Employee" /> 
+	<typeAlias type="com.jdl.css.company.model.vo.CompanyVo" alias="Company"/>
+
   </typeAliases>
 
   <mappers>
+
 	<mapper resource="mybatis/sql/BorderMapper.xml" /> 
 	<mapper resource="mybatis/sql/employeeMapper.xml" /> 
+	<mapper resource="mybatis/sql/adminMapper.xml"/>
+
   </mappers>
 </configuration>
