@@ -19,14 +19,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script>
   		var names = new Array();
   		var num = new Array();
+  		
+  		var nameTest = new Array();
+  		
   	function select(no,name){
   		
   		names.push(name);
+  		for(var i in names){
+  			console.log("이거야 = " +names[i]);
+ 			if(names[i]==name && names[i]==names[i+1]){
+	  			names.push(name);
+  			}
+  		}
   		num.push(no);
-  		console.log(names);
-  		console.log(num);
+//   		console.log(names);
+//   		console.log(num);
+		var test = $("#to").val();
+// 		console.log(test)
+  		nameTest = test.split(', ');
+//   		console.log(nameTest);
   		
-  		$("#to").val(names.join(", "));
+  		
+  		
+		$("#to").val(names.join(", "));  							  				
   		
   		$("#receive").val(names);
   		$("#receiveNo").val(num);

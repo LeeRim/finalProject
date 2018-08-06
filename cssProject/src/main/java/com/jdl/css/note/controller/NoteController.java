@@ -39,7 +39,7 @@ public class NoteController {
 		int resultReceive = service.insertReceiveNote(note);
 		
 		System.out.println("result = "+resultReceive);
-		mv.setViewName("note/writeNote");
+		mv.setViewName("note/noteMain");
 		
 		return mv;
 	};
