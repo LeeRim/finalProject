@@ -97,10 +97,13 @@ desired effect
 													</tr>
 													<tr>
 														<td
-															style="background: white; padding: 0px !important; border: currentColor; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
-
+															style="background: white; padding: 0px !important; border: currentColor; border-image: none; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;"><span
+															class="sign_type1_inline" data-group-seq="3"
+															data-group-name="합의" data-group-max-count="1"
+															data-group-type="type1" data-is-agreement="true"
+															id="agreementWrap"></span> <!-- 에디터 &nbsp; 버그. 개행과 공백을 최소화 시키자. -->
 															<table
-																style="border: 1px solid rgb(0, 0, 0); font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
+																style="border: 1px solid rgb(0, 0, 0); border-image: none; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 																<!-- User -->
 																<colgroup>
 																	<col width="90">
@@ -110,116 +113,45 @@ desired effect
 																<tbody>
 																	<tr>
 																		<td
-																			style="background: rgb(226, 226, 226); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																			기안자</td>
 																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																			<span unselectable="on" contenteditable="false"
-																			class="comp_wrap" data-cid="0"
-																			data-dsl="{{label:draftUser}}" data-wrapper=""
-																			style="" data-value="" data-autotype=""><span
-																				class="comp_item">기안자</span><span
-																				contenteditable="false" class="comp_active"
-																				style="display: none;"> <span
-																					class="Active_dot1"></span><span
-																					class="Active_dot2"></span> <span
-																					class="Active_dot3"></span><span
-																					class="Active_dot4"></span>
-																			</span> <span contenteditable="false" class="comp_hover"
-																				data-content-protect-cover="true" data-origin="0">
-																					<a contenteditable="false"
-																					class="ic_prototype ic_prototype_trash"
-																					data-content-protect-cover="true"
-																					data-component-delete-button="true"></a>
-																			</span> </span>
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<c:out value="${sessionScope.user.eName}"></c:out>
 																		</td>
 																	</tr>
 																	<tr>
 																		<td
-																			style="background: rgb(226, 226, 226); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																			소속</td>
 																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																			<span unselectable="on" contenteditable="false"
-																			class="comp_wrap" data-cid="1"
-																			data-dsl="{{label:draftDept}}" data-wrapper=""
-																			style="" data-value="" data-autotype=""><span
-																				class="comp_item">기안부서</span><span
-																				contenteditable="false" class="comp_active"
-																				style="display: none;"> <span
-																					class="Active_dot1"></span><span
-																					class="Active_dot2"></span> <span
-																					class="Active_dot3"></span><span
-																					class="Active_dot4"></span>
-																			</span> <span contenteditable="false" class="comp_hover"
-																				data-content-protect-cover="true" data-origin="1">
-																					<a contenteditable="false"
-																					class="ic_prototype ic_prototype_trash"
-																					data-content-protect-cover="true"
-																					data-component-delete-button="true"></a>
-																			</span> </span>
-																		</td>
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
 																	</tr>
 																	<tr>
 																		<td
-																			style="background: rgb(226, 226, 226); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																			기안일</td>
+
 																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																			<span unselectable="on" contenteditable="false"
-																			class="comp_wrap" data-cid="2"
-																			data-dsl="{{label:draftDate}}" data-wrapper=""
-																			style="" data-value="" data-autotype=""><span
-																				class="comp_item">기안일</span><span
-																				contenteditable="false" class="comp_active"
-																				style="display: none;"> <span
-																					class="Active_dot1"></span><span
-																					class="Active_dot2"></span> <span
-																					class="Active_dot3"></span><span
-																					class="Active_dot4"></span>
-																			</span> <span contenteditable="false" class="comp_hover"
-																				data-content-protect-cover="true" data-origin="2">
-																					<a contenteditable="false"
-																					class="ic_prototype ic_prototype_trash"
-																					data-content-protect-cover="true"
-																					data-component-delete-button="true"></a>
-																			</span> </span>
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<jsp:useBean id="currentTime" class="java.util.Date" />
+																			<fmt:formatDate value="${currentTime }"
+																				pattern="yyyy-MM-dd" var="currentTime" /> <c:out value="${currentTime }"></c:out><input type="hidden" name="aWriteDate" value="${currentTime }">
 																		</td>
 																	</tr>
 																	<tr>
 																		<td
-																			style="background: rgb(226, 226, 226); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																			문서번호</td>
 																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																			<span unselectable="on" contenteditable="false"
-																			class="comp_wrap" data-cid="3"
-																			data-dsl="{{label:docNo}}" data-wrapper="" style=""
-																			data-value="" data-autotype=""><span
-																				class="comp_item">문서번호</span><span
-																				contenteditable="false" class="comp_active"
-																				style="display: none;"> <span
-																					class="Active_dot1"></span><span
-																					class="Active_dot2"></span> <span
-																					class="Active_dot3"></span><span
-																					class="Active_dot4"></span>
-																			</span> <span contenteditable="false" class="comp_hover"
-																				data-content-protect-cover="true" data-origin="3">
-																					<a contenteditable="false"
-																					class="ic_prototype ic_prototype_trash"
-																					data-content-protect-cover="true"
-																					data-component-delete-button="true"></a>
-																			</span> </span>
-																		</td>
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
 																	</tr>
 																</tbody>
-															</table>
-
-														</td>
+															</table></td>
 														<td
 															style="background: white; padding: 0px !important; border: currentColor; text-align: right; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
 															<span unselectable="on" contenteditable="false"
