@@ -56,11 +56,16 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <button onclick="boardPage(1);">공지사항</button>
-        <button onclick="boardPage(2);">자유게시판</button>
-        <button onclick="boardPage(3);">경조사</button>
-        <small>Optional description</small>
+        <h1>커뮤니티 버튼</h1>
+        <button onclick="boardPage(1);">공지사항</button><br>
+        <button onclick="boardPage(2);">자유게시판</button><br>
+        <button onclick="boardPage(3);">경조사</button><br>
+        <hr>
+        <h1>쪽지 버튼</h1>
+        <a href="moveNote.do">쪽지 메인 페이지 이동</a>
+        <h1>로그인 버튼</h1>
+        <a href="loginForm.do">로그인 페이지 이동</a>
+	
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>

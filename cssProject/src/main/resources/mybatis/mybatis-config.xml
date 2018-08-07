@@ -11,6 +11,7 @@
 	<typeAlias type="com.jdl.css.border.model.vo.BorderVo" alias="Border" /> 
 	<typeAlias type="com.jdl.css.employee.model.vo.EmployeeVo" alias="Employee" /> 
 	<typeAlias type="com.jdl.css.company.model.vo.CompanyVo" alias="Company"/>
+	<typeAlias type="com.jdl.css.note.model.vo.NoteVo" alias="NoteVo"/>
 
   </typeAliases>
 
@@ -19,6 +20,7 @@
 	<mapper resource="mybatis/sql/BorderMapper.xml" /> 
 	<mapper resource="mybatis/sql/employeeMapper.xml" /> 
 	<mapper resource="mybatis/sql/adminMapper.xml"/>
+	<mapper resource="mybatis/sql/noteMapper.xml"/>
 
   </mappers>
 </configuration>

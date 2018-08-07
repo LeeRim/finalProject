@@ -32,7 +32,7 @@ public class HomeController {
 
 		
 		
-		return "admin/admin_main";
+		return "home";
 	}
 	
 }
