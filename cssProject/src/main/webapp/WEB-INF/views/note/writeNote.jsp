@@ -23,8 +23,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 
 <!-- include summernote css/js-->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>  
+<link href="resources/Js/summernote.css" rel="stylesheet">
+<script src="resources/Js/summernote.js"></script>
+<script src="resources/Js/summernote-ko-KR.js"></script>
   <script>
   		var names = new Array();
   		var num = new Array();
@@ -53,13 +54,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   		$("#receiveNo").val(num);
   	}
   	
-  	$(document).ready(function() {
-  	     $('#summernote').summernote({
-  	             height: 300,                 // set editor height
-  	             minHeight: null,             // set minimum height of editor
-  	             maxHeight: null,             // set maximum height of editor
-  	             focus: true                  // set focus to editable area after initializing summernote
-  	     });
+  	$(function() {
+  	  $('#summernote').summernote({
+  		  height: 300,
+  		  lang: 'ko-KR'
+  	  });
   	});
 
   </script>
@@ -108,63 +107,38 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
-<div class="row">
+	<div class="row">
        <div class="col-md-6" style="width: 200px;">
           <div class="box box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">수신자 선택</h3>
             </div>
             <!-- /.box-header -->
+                <c:forEach items="${department}" var="department">
             <div class="box-body">
               <div class="box-group" id="accordion">
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-                <div class="panel box box-primary">
-                  <div class="box-header with-border">
-                    <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                        부서1
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="box-body" onclick="select(1,'name1');" style="cursor: pointer;">
-                    	test1
-                    </div>
-                    <div class="box-body" onclick="select(2,'name2');" style="cursor: pointer;">
-                    	test2
-                    </div>
-                  </div>
-                </div>
-                <div class="panel box box-danger">
-                  <div class="box-header with-border">
-                    <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                        부서2
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="box-body" onclick="select(3,'name3');" style="cursor: pointer;">
-                     	test3
-                    </div>
-                  </div>
-                </div>
-                <div class="panel box box-success">
-                  <div class="box-header with-border">
-                    <h4 class="box-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                        부서3
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="box-body">
-                      test3
-                    </div>
-                  </div>
-                </div>
+	                <div class="panel box box-primary">
+	                  <div class="box-header with-border">
+	                    <h4 class="box-title">
+	                      <a data-toggle="collapse" data-parent="#accordion"  href="#${department.department}">
+	                        <c:out value="${department.department}"/>
+	                      </a>
+	                    </h4>
+	                  </div>
+	                  <div id="${department.department}" class="panel-collapse collapse">
+	                  <c:forEach items="${employee}" var ="employee">
+	                  <c:if test="${employee.department == department.department}">
+		                    <div class="box-body" onclick="select(${employee.eKey},'${employee.eName}');" style="cursor: pointer;">
+		                    		<c:out value="${employee.eName}"/>
+		                    </div>
+	                    </c:if>
+	                  </c:forEach>
+	                  </div>
+	                </div>
               </div>
             </div>
+                </c:forEach>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

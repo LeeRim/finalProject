@@ -1,9 +1,12 @@
 package com.jdl.css.note.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jdl.css.employee.model.vo.EmployeeVo;
 import com.jdl.css.note.model.vo.NoteVo;
 
 
@@ -18,6 +21,14 @@ public class NoteDao {
 
 	public int insertReceiveNote(NoteVo note) {
 		return session.insert("NoteMapper.insertReceiveNote",note);
+	}
+
+	public List<EmployeeVo> selectEmployee(int companyK) {
+		return session.selectList("EmployeeMapper.selectEmployeeList", companyK);
+	}
+
+	public List<EmployeeVo> selectDepartment(int companyK) {
+		return session.selectList("EmployeeMapper.selectDepartment", companyK);
 	}
 
 
