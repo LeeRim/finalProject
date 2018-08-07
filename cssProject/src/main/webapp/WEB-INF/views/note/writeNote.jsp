@@ -16,36 +16,52 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   
+  <!-- summerNote 관련  -->
+  <!-- include libraries(jQuery, bootstrap) -->
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+
+<!-- include summernote css/js-->
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>  
   <script>
   		var names = new Array();
   		var num = new Array();
   		
-  		var nameTest = new Array();
   		
   	function select(no,name){
+  		var nameFlag = true;
   		
-  		names.push(name);
   		for(var i in names){
-  			console.log("이거야 = " +names[i]);
- 			if(names[i]==name && names[i]==names[i+1]){
-	  			names.push(name);
+ 			if(names[i]==name){
+ 				nameFlag=false;
   			}
   		}
-  		num.push(no);
-//   		console.log(names);
-//   		console.log(num);
+  		
+  		if(nameFlag){
+			names.push(name);
+			num.push(no);
+  		}
+  		console.log(names);
+  		console.log(num);
 		var test = $("#to").val();
-// 		console.log(test)
-  		nameTest = test.split(', ');
-//   		console.log(nameTest);
-  		
-  		
   		
 		$("#to").val(names.join(", "));  							  				
   		
   		$("#receive").val(names);
   		$("#receiveNo").val(num);
   	}
+  	
+  	$(document).ready(function() {
+  	     $('#summernote').summernote({
+  	             height: 300,                 // set editor height
+  	             minHeight: null,             // set minimum height of editor
+  	             maxHeight: null,             // set maximum height of editor
+  	             focus: true                  // set focus to editable area after initializing summernote
+  	     });
+  	});
+
   </script>
  
 </head>
@@ -128,8 +144,8 @@ desired effect
                     </h4>
                   </div>
                   <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="box-body">
-                     	test2
+                    <div class="box-body" onclick="select(3,'name3');" style="cursor: pointer;">
+                     	test3
                     </div>
                   </div>
                 </div>
@@ -171,7 +187,7 @@ desired effect
                 <input class="form-control" placeholder="Subject:" name="snTitle">
               </div>
               <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px" name="snContent">
+                    <textarea id="summernote" class="form-control" style="height: 300px" name="snContent">
                     </textarea>
               </div>
               <div class="form-group">
