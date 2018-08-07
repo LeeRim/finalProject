@@ -145,7 +145,9 @@ desired effect
 
 																			소속</td>
 																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<c:out value="${sessionScope.user.department}"></c:out>
+																			</td>
 																	</tr>
 																	<tr>
 																		<td

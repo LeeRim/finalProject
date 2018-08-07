@@ -55,7 +55,7 @@ desired effect
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
+
         <h1>커뮤니티 버튼</h1>
         <button onclick="boardPage(1);">공지사항</button><br>
         <button onclick="boardPage(2);">자유게시판</button><br>
@@ -66,7 +66,6 @@ desired effect
         <h1>로그인 버튼</h1>
         <a href="loginForm.do">로그인 페이지 이동</a>
 	
-      </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>

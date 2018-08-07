@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/include/header.jsp" />
 <!DOCTYPE html>
 <!--
@@ -127,7 +128,8 @@ desired effect
 
 																			소속</td>
 																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<c:out value=""></c:out></td>
 																	</tr>
 																	<tr>
 																		<td
@@ -312,7 +314,7 @@ desired effect
 														class="comp_wrap" data-cid="4" data-dsl="{{text}}"
 														data-wrapper="" style="width: 100%;" data-value=""
 														data-autotype=""><input class="ipt_editor"
-														type="text"><span contenteditable="false"
+														type="text" id="aTitle" name="aTitle"><span contenteditable="false"
 														class="comp_active" style="display: none;"> <span
 															class="Active_dot1"></span><span class="Active_dot2"></span>
 															<span class="Active_dot3"></span><span
@@ -328,94 +330,6 @@ desired effect
 											</td>
 										</tr>
 										<tr>
-											<td height="30"
-												style="padding-top: 1px; padding-right: 1px; padding-left: 1px; font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; vertical-align: middle; white-space: nowrap; font-size: 10pt; text-align: center; border-right: 1px solid windowtext; border-bottom: 1px solid windowtext; border-left: 1px solid windowtext; border-image: initial; height: 30px; border-top: none; background-color: rgb(226, 226, 226); width: 83px;"
-												class="dext_table_border_t"><strong>작성일자</strong></td>
-											<td colspan="6"
-												style="padding-top: 1px; padding-right: 1px; padding-left: 1px; font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; vertical-align: middle; white-space: nowrap; font-size: 10pt; text-align: center; border-top: 1px solid windowtext; border-right: 1px solid windowtext; border-bottom: 1px solid windowtext; border-image: initial; border-left: none; width: 303px;"
-												class="dext_table_border_l">
-												<p
-													style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; font-size: 10pt; line-height: 20px; margin-top: 0px; margin-bottom: 0px;">
-													<span unselectable="on" contenteditable="false"
-														class="comp_wrap" data-cid="5" data-dsl="{{calendar}}"
-														data-wrapper="" style="" data-value="" data-autotype=""><input
-														class="ipt_editor ipt_editor_date" type="text"><span
-														contenteditable="false" class="comp_active"
-														style="display: none;"> <span class="Active_dot1"></span><span
-															class="Active_dot2"></span> <span class="Active_dot3"></span><span
-															class="Active_dot4"></span>
-													</span> <span contenteditable="false" class="comp_hover"
-														data-content-protect-cover="true" data-origin="5">
-															<a contenteditable="false"
-															class="ic_prototype ic_prototype_trash"
-															data-content-protect-cover="true"
-															data-component-delete-button="true"></a>
-													</span> </span><br>
-												</p>
-											</td>
-											<td
-												style="padding-top: 1px; padding-right: 1px; padding-left: 1px; font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; vertical-align: middle; white-space: nowrap; font-size: 10pt; text-align: center; border-right: 1px solid windowtext; border-bottom: 1px solid windowtext; border-left: 1px solid windowtext; border-image: initial; height: 30px; border-top: none; background-color: rgb(226, 226, 226); width: 79px;"
-												class="dext_table_border_t"><strong>소 속</strong></td>
-											<td colspan="5"
-												style="padding-top: 1px; padding-right: 1px; padding-left: 1px; font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; vertical-align: middle; white-space: nowrap; font-size: 10pt; text-align: center; border-top: 1px solid windowtext; border-right: 1px solid windowtext; border-bottom: 1px solid windowtext; border-image: initial; border-left: none; width: 242px;"
-												class="dext_table_border_l">
-												<p
-													style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; font-size: 10pt; line-height: 20px; margin-top: 0px; margin-bottom: 0px;">
-													<span unselectable="on" contenteditable="false"
-														class="comp_wrap" data-cid="6" data-dsl="{{text}}"
-														data-wrapper="" style="width: 100%;" data-value=""
-														data-autotype=""><input class="ipt_editor"
-														type="text"><span contenteditable="false"
-														class="comp_active" style="display: none;"> <span
-															class="Active_dot1"></span><span class="Active_dot2"></span>
-															<span class="Active_dot3"></span><span
-															class="Active_dot4"></span>
-													</span> <span contenteditable="false" class="comp_hover"
-														data-content-protect-cover="true" data-origin="6">
-															<a contenteditable="false"
-															class="ic_prototype ic_prototype_trash"
-															data-content-protect-cover="true"
-															data-component-delete-button="true"></a>
-													</span> </span><br>
-												</p>
-											</td>
-										</tr>
-										<tr>
-											<td height="30"
-												style="padding-top: 1px; padding-right: 1px; padding-left: 1px; font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; vertical-align: middle; white-space: nowrap; font-size: 10pt; text-align: center; border-right: 1px solid windowtext; border-bottom: 1px solid windowtext; border-left: 1px solid windowtext; border-image: initial; height: 30px; border-top: none; background-color: rgb(226, 226, 226); width: 83px;"
-												class="dext_table_border_t"><strong>작 성 자</strong></td>
-											<td colspan="6"
-												style="padding-top: 1px; padding-right: 1px; padding-left: 1px; font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; vertical-align: middle; white-space: nowrap; font-size: 10pt; text-align: center; border-top: 1px solid windowtext; border-right: 1px solid windowtext; border-bottom: 1px solid windowtext; border-image: initial; border-left: none; width: 303px;"
-												class="dext_table_border_l">
-												<p
-													style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; font-size: 10pt; line-height: 20px; margin-top: 0px; margin-bottom: 0px;">
-													<span unselectable="on" contenteditable="false"
-														class="comp_wrap" data-cid="7" data-dsl="{{text}}"
-														data-wrapper="" style="width: 100%;" data-value=""
-														data-autotype=""><input class="ipt_editor"
-														type="text"><span contenteditable="false"
-														class="comp_active" style="display: none;"> <span
-															class="Active_dot1"></span><span class="Active_dot2"></span>
-															<span class="Active_dot3"></span><span
-															class="Active_dot4"></span>
-													</span> <span contenteditable="false" class="comp_hover"
-														data-content-protect-cover="true" data-origin="7">
-															<a contenteditable="false"
-															class="ic_prototype ic_prototype_trash"
-															data-content-protect-cover="true"
-															data-component-delete-button="true"></a>
-													</span> </span><br>
-												</p>
-											</td>
-											<td
-												style="padding-top: 1px; padding-right: 1px; padding-left: 1px; font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; vertical-align: middle; white-space: nowrap; font-size: 10pt; text-align: center; border-right: 1px solid windowtext; border-bottom: 1px solid windowtext; border-left: 1px solid windowtext; border-image: initial; height: 30px; border-top: none; background-color: rgb(226, 226, 226); width: 79px;"
-												class="dext_table_border_t"><strong>금 액</strong></td>
-											<td class="total_price dext_table_border_l" colspan="5"
-												style="padding-top: 1px; padding-right: 1px; padding-left: 1px; font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; vertical-align: middle; white-space: nowrap; font-size: 10pt; text-align: center; border-top: 1px solid windowtext; border-right: 1px solid windowtext; border-bottom: 1px solid windowtext; border-image: initial; border-left: none; width: 242px;">
-
-											</td>
-										</tr>
-										<tr>
 											<td height="150"
 												style="padding-top: 1px; padding-right: 1px; padding-left: 1px; font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot; , monospace; vertical-align: middle; white-space: nowrap; font-size: 10pt; text-align: center; border-right: 1px solid windowtext; border-bottom: 1px solid windowtext; border-left: 1px solid windowtext; border-image: initial; height: 117px; border-top: none; background-color: rgb(226, 226, 226); width: 83px;"
 												class="dext_table_border_t"><strong>지출사유</strong></td>
@@ -427,7 +341,7 @@ desired effect
 													<span unselectable="on" contenteditable="false"
 														class="comp_wrap" data-cid="8" data-dsl="{{textarea}}"
 														data-wrapper="" style="width: 100%;" data-value=""
-														data-autotype=""><textarea class="txta_editor"></textarea><span
+														data-autotype=""><textarea class="txta_editor" id="aContent" name="aContent"></textarea><span
 														contenteditable="false" class="comp_active"
 														style="display: none;"> <span class="Active_dot1"></span><span
 															class="Active_dot2"></span> <span class="Active_dot3"></span><span
@@ -497,7 +411,7 @@ desired effect
 													contenteditable="false" class="comp_wrap" data-cid="9"
 													data-dsl="{{calendar}}" data-wrapper="" style=""
 													data-value="" data-autotype=""><input
-														class="ipt_editor ipt_editor_date" type="text"><span
+														class="ipt_editor ipt_editor_date" type="text" id="rsDate" name="rsDate"><span
 														contenteditable="false" class="comp_active"
 														style="display: none;"> <span class="Active_dot1"></span><span
 															class="Active_dot2"></span> <span class="Active_dot3"></span><span
@@ -515,7 +429,7 @@ desired effect
 													contenteditable="false" class="comp_wrap" data-cid="10"
 													data-dsl="{{cSel__물품구입비_잡비_회식비_식비_교통비_기타}}" data-wrapper=""
 													style="" data-value="" data-autotype=""><select
-														class="editor_slt" style="width: 100%"><option
+														class="editor_slt" style="width: 100%"  id="rsType" name="rsType"><option
 																selected="selected"></option>
 															<option>물품구입비</option>
 															<option>잡비</option>
@@ -540,7 +454,7 @@ desired effect
 													contenteditable="false" class="comp_wrap" data-cid="11"
 													data-dsl="{{currency_0}}" data-wrapper="" style=""
 													data-value="" data-autotype=""><input
-														class="ipt_editor ipt_editor_currency" type="text"
+														class="ipt_editor ipt_editor_currency" type="text" id="rsMoney" name="rsMoney"
 														style=""><span contenteditable="false"
 														class="comp_active" style="display: none;"> <span
 															class="Active_dot1"></span><span class="Active_dot2"></span>
@@ -559,7 +473,7 @@ desired effect
 													contenteditable="false" class="comp_wrap" data-cid="12"
 													data-dsl="{{text}}" data-wrapper="" style="width: 100%;"
 													data-value="" data-autotype=""><input
-														class="ipt_editor" type="text"><span
+														class="ipt_editor" type="text" id="rsContent" name="rsContent"><span
 														contenteditable="false" class="comp_active"
 														style="display: none;"> <span class="Active_dot1"></span><span
 															class="Active_dot2"></span> <span class="Active_dot3"></span><span
@@ -577,7 +491,7 @@ desired effect
 													contenteditable="false" class="comp_wrap" data-cid="13"
 													data-dsl="{{text}}" data-wrapper="" style="width: 100%;"
 													data-value="" data-autotype=""><input
-														class="ipt_editor" type="text"><span
+														class="ipt_editor" type="text" id="rsNote" name="rsNote"><span
 														contenteditable="false" class="comp_active"
 														style="display: none;"> <span class="Active_dot1"></span><span
 															class="Active_dot2"></span> <span class="Active_dot3"></span><span
