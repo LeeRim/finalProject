@@ -18,6 +18,8 @@
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="resources/dist/css/skins/skin-blue.min.css">
+  
+  <link rel="stylesheet" href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
 
   <!-- Google Font -->
   <link rel="stylesheet"
@@ -30,6 +32,8 @@
 	<!-- AdminLTE App -->
 	<script src="resources/dist/js/adminlte.min.js"></script>
 	<!-- REQUIRED JS SCRIPTS -->
+	<script src="resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	
 </head>
 <body>
 <!-- Main Header -->

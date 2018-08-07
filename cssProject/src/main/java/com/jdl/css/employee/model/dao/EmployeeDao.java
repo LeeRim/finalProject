@@ -1,5 +1,9 @@
 package com.jdl.css.employee.model.dao;
 
+import java.util.List;
+
+
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +18,15 @@ public class EmployeeDao {
 	
 	public EmployeeVo selectEmployeeById(String eId) {
 		return sqlSession.selectOne("EmployeeMapper.selectEmployeeById", eId);
+	}
+
+	public int insertMember(EmployeeVo member) {
+		
+		return sqlSession.insert("EmployeeMapper.insertEmployee",member);
+	}
+
+	public List<EmployeeVo> selectEmployeeList() {
+		return sqlSession.selectList("EmployeeMapper.selectEmployeeList");
 	}
 
 }

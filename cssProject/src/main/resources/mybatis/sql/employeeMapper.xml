@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="EmployeeMapper">
 
-	<sql id="selectEmployee">
+	<sql id="select">
 		SELECT E_KEY ,
 		E_NO ,
 		C_KEY_FK ,
@@ -24,10 +24,51 @@
 		E_PHOTO
 		FROM EMPLOYEE
 	</sql>
+	
+	<resultMap type="EmployeeVo" id="EmployeeMap">
+		<result property="eId" column="ID"/>
+		<result property="eDepart" column="DEPARTMENT"/>
+		<result property="eJob" column="JOBCODE"/>
+		<result property="eName" column="NAME"/>
+		<result property="eExten" column="EXTEN"/>
+		<result property="ePhone" column="PHONE"/>
+		<result property="eHireDate" column="HIREDATE"/>
+	</resultMap>
+	
+	
+	
+	
 
 	<select id="selectEmployeeById" parameterType="string" resultType="EmployeeVo">
-		<include refid="selectEmployee"></include>
+		<include refid="select"></include>
 		WHERE E_ID = #{eId}
 	</select>
+	
+	<insert id="insertEmployee" parameterType="EmployeeVo">
+INSERT INTO EMPLOYEE
+(E_KEY,  E_NO, E_TYPE, E_ID,  E_PWD, 
+E_NAME, E_ADDRESS, E_EXTEN, E_PHONE, E_EMAIL,
+ E_BIRTH, E_HIRE_DATE, E_PHOTO)
+VALUES (SEQ_EMPLOYEE.NEXTVAL,  #{eNo}, 'A' , #{eId}, #{ePwd}, 
+	#{eName}, #{eAddress} , #{eExten}, #{ePhone}, #{eEmail}, 
+	  #{eBirth}, #{eHireDate}, 'aa' )
+</insert>
+	
+	<select id="selectEmployeeList"  resultMap="EmployeeMap">
+		SELECT
+    E.E_ID AS "ID", 
+    D.DIV_INFO AS "DEPARTMENT", 
+    J.DIV_INFO  AS "JOBCODE", 
+    E.E_NAME AS "NAME", 
+    E.E_EXTEN AS "EXTEN", 
+    E.E_PHONE AS "PHONE", 
+    E.E_HIRE_DATE AS "HIREDATE"
+FROM EMPLOYEE E
+JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
+ORDER BY  E_DEPART_FK ASC , E_JOBCODE_FK ASC 
+	</select>
+	
+	
 
 </mapper>

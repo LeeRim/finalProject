@@ -12,11 +12,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Starter</title>
-  <script>
-	function note(){
-		location.href="moveNote.do";
-	}
-</script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -44,9 +39,8 @@ desired effect
 	<c:import url="include/left_column.jsp"/>
   
   
-
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" >
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -65,10 +59,6 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        <a href="loginForm.do">로그인하러가기</a>
-        <a href="approvalPage.do">전자결재페이지가기</a>
-        	<button onclick="note()">쪽지기능 고고씽</button>
-    	<a href="loginForm.do">로그인 고고씽</a>
 
     </section>
     <!-- /.content -->
@@ -82,5 +72,6 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<P>  The time on the server is ${serverTime}. 111</P>
 </body>
 </html>

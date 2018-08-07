@@ -2,6 +2,7 @@ package com.jdl.css.employee.model.vo;
 
 import java.sql.Date;
 
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,10 +17,13 @@ public class EmployeeVo {
     private String eName;
     private int eJobcodeFk;
     private int eDepartFk;
+    private String eJob;
+    private String eDepart;
     private String eAddress;
     private int eExten;
     private String ePhone;
     private String eEmail;
+    private Date eBirth;
     private Date eHireDate;
     private Date eEntDate;
     private char eEntYn;
@@ -30,8 +34,9 @@ public class EmployeeVo {
 	}
 
 	public EmployeeVo(int eKey, String eNo, int cKeyFk, char eType, String eId, String ePwd, String eName,
-			int eJobcodeFk, int eDepartFk, String eAddress, int eExten, String ePhone, String eEmail, Date eHireDate,
-			Date eEntDate, char eEntYn, String ePhoto) {
+			int eJobcodeFk, int eDepartFk, String eJob, String eDepart, String eAddress, int eExten, String ePhone,
+			String eEmail, Date eBirth, Date eHireDate, Date eEntDate, char eEntYn, String ePhoto) {
+		super();
 		this.eKey = eKey;
 		this.eNo = eNo;
 		this.cKeyFk = cKeyFk;
@@ -41,10 +46,13 @@ public class EmployeeVo {
 		this.eName = eName;
 		this.eJobcodeFk = eJobcodeFk;
 		this.eDepartFk = eDepartFk;
+		this.eJob = eJob;
+		this.eDepart = eDepart;
 		this.eAddress = eAddress;
 		this.eExten = eExten;
 		this.ePhone = ePhone;
 		this.eEmail = eEmail;
+		this.eBirth = eBirth;
 		this.eHireDate = eHireDate;
 		this.eEntDate = eEntDate;
 		this.eEntYn = eEntYn;
@@ -123,6 +131,22 @@ public class EmployeeVo {
 		this.eDepartFk = eDepartFk;
 	}
 
+	public String geteJob() {
+		return eJob;
+	}
+
+	public void seteJob(String eJob) {
+		this.eJob = eJob;
+	}
+
+	public String geteDepart() {
+		return eDepart;
+	}
+
+	public void seteDepart(String eDepart) {
+		this.eDepart = eDepart;
+	}
+
 	public String geteAddress() {
 		return eAddress;
 	}
@@ -153,6 +177,14 @@ public class EmployeeVo {
 
 	public void seteEmail(String eEmail) {
 		this.eEmail = eEmail;
+	}
+
+	public Date geteBirth() {
+		return eBirth;
+	}
+
+	public void seteBirth(Date eBirth) {
+		this.eBirth = eBirth;
 	}
 
 	public Date geteHireDate() {
@@ -191,10 +223,14 @@ public class EmployeeVo {
 	public String toString() {
 		return "EmployeeVo [eKey=" + eKey + ", eNo=" + eNo + ", cKeyFk=" + cKeyFk + ", eType=" + eType + ", eId=" + eId
 				+ ", ePwd=" + ePwd + ", eName=" + eName + ", eJobcodeFk=" + eJobcodeFk + ", eDepartFk=" + eDepartFk
-				+ ", eAddress=" + eAddress + ", eExten=" + eExten + ", ePhone=" + ePhone + ", eEmail=" + eEmail
-				+ ", eHireDate=" + eHireDate + ", eEntDate=" + eEntDate + ", eEntYn=" + eEntYn + ", ePhoto=" + ePhoto
-				+ "]";
+				+ ", eJob=" + eJob + ", eDepart=" + eDepart + ", eAddress=" + eAddress + ", eExten=" + eExten
+				+ ", ePhone=" + ePhone + ", eEmail=" + eEmail + ", eBirth=" + eBirth + ", eHireDate=" + eHireDate
+				+ ", eEntDate=" + eEntDate + ", eEntYn=" + eEntYn + ", ePhoto=" + ePhoto + "]";
 	}
+
+	
+	
+	
     
     
 }
