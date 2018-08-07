@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
 
 @Repository
@@ -31,6 +32,7 @@ public class BorderDao {
 	}
 
 	public List<BorderVo> selectBoardList(BorderVo board) {
+		System.out.println("dao board : " + board);
 		return sqlSession.selectList("BorderMapper.BorderSelectList", board);
 	}
 

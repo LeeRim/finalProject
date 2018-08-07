@@ -61,7 +61,6 @@
 <form action="updateBorder.do" method="post" enctype="multipart/form-data">
 <input type="hidden" name=boardKey value="<c:out value='${board.boardKey }' />">
 제목 : <input type="text" name="bTitle" value="${board.bTitle }"/>
-조회수 : <span class="label label-danger"><c:out value="${board.bCount }"/></span>
 내용 : <textarea id="summernote" name="bContent">${board.bContent }</textarea>
 <input type="submit" value="수정"/>
 <input type="button" value="취소" onclick="border();"/>

@@ -26,7 +26,36 @@
 </script>
 </head>
 <body>
-<c:out value="${board.bCateGory}"/>작성<br>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+   <c:import url="/WEB-INF/views/include/left_column.jsp"/>
+
+<div class="content-wrapper">
+ <!-- Content Header (Page header) -->
+    <section class="content-header">
+ <h1>
+        게시판
+        <small>
+        <c:choose>
+			<c:when test="${board.bCateGory eq 1}">
+				공지사항
+			</c:when>
+			<c:when test="${board.bCateGory eq 2}">
+				자유게시판
+			</c:when>
+			<c:when test="${board.bCateGory eq 3}">
+				경조사
+			</c:when>
+		</c:choose>
+        </small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">게시판</a></li>
+        <li class="active">게시판</li>
+      </ol>
+    </section>
+
 <form action="writeBoard.do" method="post" enctype="multipart/form-data">
 <input type="hidden" name="bCateGory" value="<c:out value="${board.bCateGory}"/>"/>
 <input type="hidden" name="companyKey" value='<c:out value="${user.cKeyFk}"></c:out>'>
@@ -37,6 +66,8 @@
 <input type="button" value="취소" onclick="border();"/>
 </form>
 
+</div>
+</div>
 <c:import url="../include/footer.jsp"/>
 </body>
 </html>

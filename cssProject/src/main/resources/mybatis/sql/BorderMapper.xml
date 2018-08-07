@@ -57,4 +57,10 @@
 		ORDER BY b.B_KEY DESC) P)
 		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
+	
+	<insert id="bcInsert" parameterType="Border">
+		INSERT INTO BOARD_COMMENT VALUES(SEQ_COMMENT.NEXTVAL, #{boardKeyFk}, #{cWriter}, #{cContent}, SYSDATE);
+	</insert>
+	
+	
 </mapper>
