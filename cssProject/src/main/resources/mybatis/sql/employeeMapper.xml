@@ -30,5 +30,26 @@
 		<include refid="select"></include>
 		WHERE E_ID = #{eId}
 	</select>
+	
+	<!-- 노트 직원 불러오는 쿼리문 -->
+	<select id="selectEmployeeList" parameterType="int" resultType="Employee">
+		SELECT E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
+		,E.E_EXTEN, E.E_PHONE,E.E_EMAIL, E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN,E.E_PHOTO
+		,J.DIV_INFO AS "JOB", D.DIV_INFO AS "DEPARTMENT"
+		FROM EMPLOYEE E
+		JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
+		WHERE E.C_KEY_FK = #{companyK}
+	</select>
+	<!-- 부서 불러오기 -->
+	<select id="selectDepartment" parameterType="int" resultType="Employee">
+		SELECT D.DIV_INFO AS "DEPARTMENT"
+		FROM EMPLOYEE E
+		JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
+		WHERE E.C_KEY_FK = #{compnayK}
+		GROUP BY D.DIV_INFO
+	</select>
+	<!-- 노트 직원 불러오는 쿼리문 끝-->
 
 </mapper>

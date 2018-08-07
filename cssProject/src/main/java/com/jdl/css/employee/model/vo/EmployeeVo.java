@@ -25,9 +25,11 @@ public class EmployeeVo {
     private char eEntYn;
     private String ePhoto;
     
+    
+    private String job;
+    private String department;
     public EmployeeVo() {
-		// TODO Auto-generated constructor stub
-	}
+    }
 
 	public EmployeeVo(int eKey, String eNo, int cKeyFk, char eType, String eId, String ePwd, String eName,
 			int eJobcodeFk, int eDepartFk, String eAddress, int eExten, String ePhone, String eEmail, Date eHireDate,
@@ -182,6 +184,24 @@ public class EmployeeVo {
 	public String getePhoto() {
 		return ePhoto;
 	}
+	
+	
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
 
 	public void setePhoto(String ePhoto) {
 		this.ePhoto = ePhoto;
@@ -193,8 +213,9 @@ public class EmployeeVo {
 				+ ", ePwd=" + ePwd + ", eName=" + eName + ", eJobcodeFk=" + eJobcodeFk + ", eDepartFk=" + eDepartFk
 				+ ", eAddress=" + eAddress + ", eExten=" + eExten + ", ePhone=" + ePhone + ", eEmail=" + eEmail
 				+ ", eHireDate=" + eHireDate + ", eEntDate=" + eEntDate + ", eEntYn=" + eEntYn + ", ePhoto=" + ePhoto
-				+ "]";
+				+ ", job=" + job + ", department=" + department + "]";
 	}
-    
+
+	
     
 }

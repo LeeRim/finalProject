@@ -1,8 +1,11 @@
 package com.jdl.css.note.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jdl.css.employee.model.vo.EmployeeVo;
 import com.jdl.css.note.model.dao.NoteDao;
 import com.jdl.css.note.model.vo.NoteVo;
 
@@ -23,6 +26,14 @@ public class NoteService {
 			result = dao.insertReceiveNote(note);			
 		}
 		return result;
+	}
+
+	public List<EmployeeVo> selectEmployee(int companyK) {
+		return dao.selectEmployee(companyK);
+	}
+
+	public List<EmployeeVo> selectDepartment(int companyK) {
+		return dao.selectDepartment(companyK);
 	}
 
 
