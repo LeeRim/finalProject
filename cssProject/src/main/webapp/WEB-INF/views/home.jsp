@@ -79,6 +79,9 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
+        
+        <a href="loginForm.do">로그인</a>
+        <a href="approvalPage.do">전자결재</a>
 
     </section>
     <!-- /.content -->
