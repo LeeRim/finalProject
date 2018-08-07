@@ -49,14 +49,10 @@ public class NoteController {
 	@RequestMapping("sendNote.do")
 	public ModelAndView sendNote(NoteVo note ,ModelAndView mv){
 		
-//		System.out.println("note(전) = "+note);
 		int resultSend = service.insertNote(note);
-		
-//		System.out.println("note(후) = " + note);
 		
 		int resultReceive = service.insertReceiveNote(note);
 		
-//		System.out.println("result = "+resultReceive);
 		mv.setViewName("note/noteMain");
 		
 		return mv;

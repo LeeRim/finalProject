@@ -15,6 +15,7 @@ public class NoteVo {
 	private String snContent;
 	private Date snWriteDate;
 	private char snDeleteYn;
+	private String snAttach;
 	
 	private List<String> receive;
 	private List<Integer> receiveNo;
@@ -93,14 +94,24 @@ public class NoteVo {
 	public void setReceiver(int receiver) {
 		this.receiver = receiver;
 	}
+	
+	
+	public String getSnAttach() {
+		return snAttach;
+	}
+
+	public void setSnAttach(String snAttach) {
+		this.snAttach = snAttach;
+	}
 
 	@Override
 	public String toString() {
 		return "NoteVo [snKey=" + snKey + ", snSenderFk=" + snSenderFk + ", snTitle=" + snTitle + ", snContent="
-				+ snContent + ", snWriteDate=" + snWriteDate + ", snDeleteYn=" + snDeleteYn + ", receive=" + receive
-				+ ", receiveNo=" + receiveNo + ", receiver=" + receiver + "]";
+				+ snContent + ", snWriteDate=" + snWriteDate + ", snDeleteYn=" + snDeleteYn + ", snAttach=" + snAttach
+				+ ", receive=" + receive + ", receiveNo=" + receiveNo + ", receiver=" + receiver + "]";
 	}
 
+	
 	
 	
 }

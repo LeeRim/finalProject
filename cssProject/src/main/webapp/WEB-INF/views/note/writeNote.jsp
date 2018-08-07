@@ -43,6 +43,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   		if(nameFlag){
 			names.push(name);
 			num.push(no);
+  		}else{
+  			names.splice(names.indexOf(name),1);
   		}
   		console.log(names);
   		console.log(num);
@@ -56,11 +58,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   	
   	$(function() {
   	  $('#summernote').summernote({
-  		  height: 300,
+  		  height: 500,
   		  lang: 'ko-KR'
   	  });
   	});
-
+	
+  	function cancel(){
+  		location.href="moveNote.do";	
+  	};
   </script>
  
 </head>
@@ -108,54 +113,47 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
 	<div class="row">
-       <div class="col-md-6" style="width: 200px;">
-          <div class="box box-solid">
+       <div class="col-md-3">
+          <label class="btn btn-primary btn-block margin-bottom" >수신자 선택</label>
+	
+		 <c:forEach items="${department}" var="department">
+          <div class="box box-solid" style="width: 100%">
             <div class="box-header with-border">
-              <h3 class="box-title">수신자 선택</h3>
-            </div>
-            <!-- /.box-header -->
-                <c:forEach items="${department}" var="department">
-            <div class="box-body">
-              <div class="box-group" id="accordion">
-                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-	                <div class="panel box box-primary">
-	                  <div class="box-header with-border">
-	                    <h4 class="box-title">
-	                      <a data-toggle="collapse" data-parent="#accordion"  href="#${department.department}">
-	                        <c:out value="${department.department}"/>
-	                      </a>
-	                    </h4>
-	                  </div>
-	                  <div id="${department.department}" class="panel-collapse collapse">
-	                  <c:forEach items="${employee}" var ="employee">
-	                  <c:if test="${employee.department == department.department}">
-		                    <div class="box-body" onclick="select(${employee.eKey},'${employee.eName}');" style="cursor: pointer;">
-		                    		<c:out value="${employee.eName}"/>
-		                    </div>
-	                    </c:if>
-	                  </c:forEach>
-	                  </div>
-	                </div>
+              <h3 class="box-title"><c:out value="${department.department}"/></h3>
+
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
               </div>
             </div>
+            <div class="box-body no-padding">
+              <ul class="nav nav-pills nav-stacked">
+               <c:forEach items="${employee}" var ="employee">
+	               	<c:if test="${employee.department == department.department}">
+	                	<li><a href="#" onclick="select(${employee.eKey},'${employee.eName}');"><i class="fa fa-circle-o text-red"></i> <c:out value="${employee.eName}"/></a></li>
+	                </c:if>
                 </c:forEach>
+              </ul>
+            </div>
             <!-- /.box-body -->
           </div>
+          </c:forEach>
           <!-- /.box -->
         </div>
         <!-- /.col -->
+       
         <div class="col-md-9">
-          <div class="box box-primary">
+          <div class="box box-primary" style="width: 80%">
             <div class="box-header with-border">
               <h3 class="box-title">Compose New Message</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <form action="sendNote.do" method="get">
+            <form action="sendNote.do" method="get" enctype="multipart/form-data">
             	<input type="hidden" value ="${sessionScope.user.eKey}" name="snSenderFk"/>
             	<input type="hidden" value="" name="receiveNo" id="receiveNo"/>
               <div class="form-group">
-                <input class="form-control" placeholder="To:" id="to"  name="receive">
+                <input class="form-control" placeholder="To:" id="to"  name="receive" readonly >
               </div>
               <div class="form-group">
                 <input class="form-control" placeholder="Subject:" name="snTitle">
@@ -167,7 +165,7 @@ desired effect
               <div class="form-group">
                 <div class="btn btn-default btn-file">
                   <i class="fa fa-paperclip"></i> Attachment
-                  <input type="file" name="attachment">
+                  <input multiple="multiple" type ="file" name="attachment">
                 </div>
                 <p class="help-block">Max. 32MB</p>
               </div>
@@ -177,7 +175,7 @@ desired effect
               <div class="pull-right">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 전송</button>
               </div>
-              <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> 취소</button>
+              <button onclick="cancel();" class="btn btn-default"><i class="fa fa-times"></i> 취소</button>
             </div>
             </form>
             <!-- /.box-footer -->
