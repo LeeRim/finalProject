@@ -115,11 +115,7 @@ desired effect
 													</tr>
 													<tr>
 														<td
-															style="background: white; padding: 0px !important; border: currentColor; border-image: none; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;"><span
-															class="sign_type1_inline" data-group-seq="3"
-															data-group-name="합의" data-group-max-count="1"
-															data-group-type="type1" data-is-agreement="true"
-															id="agreementWrap"></span> <!-- 에디터 &nbsp; 버그. 개행과 공백을 최소화 시키자. -->
+															style="background: white; padding: 0px !important; border: currentColor; border-image: none; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
 															<table
 																style="border: 1px solid rgb(0, 0, 0); border-image: none; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 																<!-- User -->
@@ -147,7 +143,7 @@ desired effect
 																		<td
 																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																			<c:out value="${sessionScope.user.department}"></c:out>
-																			</td>
+																		</td>
 																	</tr>
 																	<tr>
 																		<td
@@ -159,7 +155,9 @@ desired effect
 																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																			<jsp:useBean id="currentTime" class="java.util.Date" />
 																			<fmt:formatDate value="${currentTime }"
-																				pattern="yyyy-MM-dd" var="currentTime" /> <c:out value="${currentTime }"></c:out><input type="hidden" name="aWriteDate" value="${currentTime }">
+																				pattern="yyyy-MM-dd" var="currentTime" /> <c:out
+																				value="${currentTime }"></c:out><input type="hidden"
+																			name="aWriteDate" value="${currentTime }">
 																		</td>
 																	</tr>
 																	<tr>
@@ -171,12 +169,11 @@ desired effect
 																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
 																	</tr>
 																</tbody>
-															</table></td>
+															</table>
+														</td>
 														<td>
 															<div class="sign_condition">
-																<span class="sign_type1_inline" data-group-seq="0"
-																	data-group-name="승인" data-group-max-count="1"
-																	data-group-type="type1" data-is-reception=""><span
+																<span class="sign_type1_inline"><span
 																	class="sign_tit_wrap"><span class="sign_tit"><strong>승인</strong></span></span>
 																	<!--  --> <span class="sign_member_wrap"
 																	id="activity_15162"><span class="sign_member"><span
@@ -200,9 +197,7 @@ desired effect
 															</div>
 
 															<div class="sign_condition">
-																<span class="sign_type1_inline" data-group-seq="0"
-																	data-group-name="신청" data-group-max-count="1"
-																	data-group-type="type1" data-is-reception=""><span
+																<span class="sign_type1_inline"><span
 																	class="sign_tit_wrap"><span class="sign_tit"><strong>신청</strong></span></span>
 																	<!--  --> <span class="sign_member_wrap"
 																	id="activity_15162"><span class="sign_member"><span
@@ -237,11 +232,8 @@ desired effect
 															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;">
 															<input type="text" readonly=""
 															class="ipt_editor ipt_editor_date hasDatepicker"
-															data-dsl="{{calendar$width:150$}}" id="jpWorkingDate"
-															data-id="" data-name="" data-require="false"
-															data-maxlength="" data-width="150" data-defaultstr=""
-															data-editable="false" name="jpWorkingDate" data-value=""
-															placeholder="" value="" style="width: 150px;">
+															id="jpWorkingDate" name="jpWorkingDate" value=""
+															style="width: 150px;">
 														</td>
 														<td
 															style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
@@ -249,12 +241,8 @@ desired effect
 															협조부서</td>
 														<td
 															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"><input
-															type="text" class="ipt_editor"
-															data-dsl="{{text$defaultstr:111$}}" name="jpCooperation"
-															id="jpCooperation" value="" data-id="" data-name=""
-															data-require="false" data-maxlength="" data-width=""
-															data-defaultstr="111" data-editable="false" data-value=""
-															placeholder=""></td>
+															type="text" class="ipt_editor" name="jpCooperation"
+															id="jpCooperation" value=""></td>
 													</tr>
 
 													<tr>
@@ -265,11 +253,7 @@ desired effect
 														<td
 															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
 															colspan="3"><input type="text" class="ipt_editor"
-															data-dsl="{{text$require$:subject}}" name="aTitle"
-															id="aTitle" value="" data-id="subject"
-															data-name="subject" data-require="true" data-maxlength=""
-															data-width="" data-defaultstr="" data-editable="false"
-															data-value="" placeholder=""></td>
+															name="aTitle" id="aTitle" value=""></td>
 													</tr>
 													<tr>
 														<td
@@ -277,15 +261,19 @@ desired effect
 															colspan="4" class=""><textarea
 																data-dsl="{{editor:appContent}}" name="jpContent"
 																id="jpContent" style="width: 100%; min-width: 200px;"
-																data-id="appContent" data-name="appContent"
-																data-require="false" data-maxlength="" data-width=""
-																data-defaultstr="" data-editable="false" data-value=""
-																placeholder="" value="" data-skintype="detail"
-																class="go-editor"></textarea></td>
+																value="" class="go-editor"></textarea></td>
 													</tr>
 												</tbody>
 											</table>
-										</span> <input type="submit" value="제출">
+										</span>
+										<div class="form-group">
+											<div class="btn btn-default btn-file">
+												<i class="fa fa-paperclip"></i> Attachment <input
+													type="file" name="attachment">
+											</div> 
+											<p class="help-block">Max. 32MB</p>
+										</div>
+										<input type="submit" value="제출">
 									</form>
 								</div>
 

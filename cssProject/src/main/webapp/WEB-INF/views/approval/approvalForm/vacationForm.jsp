@@ -17,6 +17,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- 승인table -->
 <link rel="stylesheet" href="resources/dist/css/approval.css">
 
+<!-- datepicker -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+<script type="text/javascript">
+	$(function() {
+		$('#vfStartdate,#vfEnddate').datepicker({
+			format : "yyyy/mm/dd",
+			language : "kr",
+			autoclose : true
+		});
+	});
+</script>
+<!--  -->
+
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -64,7 +80,11 @@ desired effect
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-
+				<div class="addApprover">
+					<div class="btn btn-app">
+						<i class="fa fa-user-plus"></i>결재자추가
+					</div>
+				</div>
 				<section class="content_wrapper">
 					<!--전자결제 상세-->
 					<div class="report_type approval_type form_back">
@@ -74,8 +94,8 @@ desired effect
 							<form id="document_content" class="form_doc_editor editor_view"
 								onsubmit="return false;">
 								<span
-									style="font-family: &amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span
-									style="font-family: &amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span
+									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span
+									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span
 										style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"></span></span>
 									<table class="__se_tbl"
 										style="background: white; border: 0px solid black; border-image: none; width: 800px; color: black; font-family: malgun gothic, dotum, arial, tahoma; font-size: 12px; border-collapse: collapse !important;">
@@ -89,120 +109,99 @@ desired effect
 											</tr>
 											<tr>
 												<td
-													style="padding: 0px !important; border: 0px currentColor; border-image: none; width: 300px;"
-													class=""><table class="__se_tbl"
-														style="background: white; margin: 0px; border: 1px solid black; border-image: none; color: black; font-family: malgun gothic, dotum, arial, tahoma; font-size: 12px; border-collapse: collapse !important;">
+													style="background: white; padding: 0px !important; border: currentColor; border-image: none; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
+													<table
+														style="border: 1px solid rgb(0, 0, 0); border-image: none; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 														<!-- User -->
+														<colgroup>
+															<col width="90">
+															<col width="220">
+														</colgroup>
 
 														<tbody>
 															<tr>
 																<td
-																	style="background: rgb(221, 221, 221); padding: 3px !important; border: 1px solid black; border-image: none; width: 100px; height: 22px; text-align: center; font-weight: bold; vertical-align: middle;">
+																	style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																	기안자</td>
 																<td
-																	style="padding: 3px !important; border: 1px solid black; border-image: none; width: 200px; height: 22px; text-align: left; vertical-align: middle;"><input
-																	type="text" readonly=""
-																	style="vertical-align: middle; width: 100%; border: 0px; box-shadow: inset 0px 0px 0px rgba(150, 150, 150, 0.2)"
-																	data-dsl="{{label:draftUser}}" name="draftUser"
-																	id="draftUser" value="김지연" data-id="draftUser"
-																	data-name="draftUser" data-require="false"
-																	data-maxlength="" data-width="" data-defaultstr=""
-																	data-editable="false" data-value="김지연" placeholder="">
+																	style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																	<c:out value="${sessionScope.user.eName}"></c:out>
 																</td>
 															</tr>
 															<tr>
 																<td
-																	style="background: rgb(221, 221, 221); padding: 3px !important; border: 1px solid black; border-image: none; width: 100px; height: 22px; text-align: center; font-weight: bold; vertical-align: middle;">
+																	style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
-																	기안부서</td>
+																	소속</td>
 																<td
-																	style="padding: 3px !important; border: 1px solid black; border-image: none; width: 200px; height: 22px; text-align: left; vertical-align: middle;"><input
-																	type="text" readonly=""
-																	style="vertical-align: middle; width: 100%; border: 0px; box-shadow: inset 0px 0px 0px rgba(150, 150, 150, 0.2)"
-																	data-dsl="{{label:draftDept}}" name="draftDept"
-																	id="draftDept" value="영업본부" data-id="draftDept"
-																	data-name="draftDept" data-require="false"
-																	data-maxlength="" data-width="" data-defaultstr=""
-																	data-editable="false" data-value="영업본부" placeholder="">
+																	style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																	<c:out value="${sessionScope.user.department}"></c:out>
 																</td>
 															</tr>
 															<tr>
 																<td
-																	style="background: rgb(221, 221, 221); padding: 3px !important; border: 1px solid black; border-image: none; width: 100px; height: 22px; text-align: center; font-weight: bold; vertical-align: middle;">
+																	style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																	기안일</td>
+
 																<td
-																	style="padding: 3px !important; border: 1px solid black; border-image: none; width: 200px; height: 22px; text-align: left; vertical-align: middle;"><input
-																	type="text" readonly=""
-																	style="vertical-align: middle; width: 100%; border: 0px; box-shadow: inset 0px 0px 0px rgba(150, 150, 150, 0.2)"
-																	data-dsl="{{label:draftDate}}" name="draftDate"
-																	id="draftDate" value="" data-id="draftDate"
-																	data-name="draftDate" data-require="false"
-																	data-maxlength="" data-width="" data-defaultstr=""
-																	data-editable="false" data-value="2018-08-06(월)"
-																	placeholder=""></td>
+																	style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																	<jsp:useBean id="currentTime" class="java.util.Date" />
+																	<fmt:formatDate value="${currentTime }"
+																		pattern="yyyy-MM-dd" var="currentTime" /> <c:out
+																		value="${currentTime }"></c:out><input type="hidden"
+																	name="aWriteDate" value="${currentTime }">
+																</td>
 															</tr>
 															<tr>
 																<td
-																	style="background: rgb(221, 221, 221); padding: 3px !important; border: 1px solid black; border-image: none; width: 100px; height: 22px; text-align: center; font-weight: bold; vertical-align: middle;">
+																	style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																	문서번호</td>
 																<td
-																	style="padding: 3px !important; border: 1px solid black; border-image: none; width: 200px; height: 22px; text-align: left; vertical-align: middle;"><input
-																	type="text" readonly=""
-																	style="vertical-align: middle; width: 100%; border: 0px; box-shadow: inset 0px 0px 0px rgba(150, 150, 150, 0.2)"
-																	data-dsl="{{label:docNo}}" name="docNo" id="docNo"
-																	value="" data-id="docNo" data-name="docNo"
-																	data-require="false" data-maxlength="" data-width=""
-																	data-defaultstr="" data-editable="false" data-value=""
-																	placeholder=""></td>
+																	style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
 															</tr>
 														</tbody>
-													</table></td>
+													</table>
+												</td>
 												<td>
-												
-												<div class="sign_condition">
-																<span class="sign_type1_inline" data-group-seq="0"
-																	data-group-name="승인" data-group-max-count="1"
-																	data-group-type="type1" data-is-reception=""><span
-																	class="sign_tit_wrap"><span class="sign_tit"><strong>승인</strong></span></span>
-																	<!--  --> <span class="sign_member_wrap"
-																	id="activity_15162"><span class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
-																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span> <span
-																	class="sign_member_wrap" id="activity_15162"><span
-																		class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
-																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span> <span
-																	class="sign_member_wrap" id="activity_15162"><span
-																		class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
-																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span> <!--  --></span>
+													<div class="sign_condition">
+														<span class="sign_type1_inline"><span
+															class="sign_tit_wrap"><span class="sign_tit"><strong>승인</strong></span></span>
+															<!--  --> <span class="sign_member_wrap"
+															id="activity_15162"><span class="sign_member"><span
+																	class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
+																	class="sign_wrap"><span class="sign_name">김지연</span></span><span
+																	class="sign_date_wrap"><span class="sign_date "
+																		id="date_15162"></span></span></span></span> <span class="sign_member_wrap"
+															id="activity_15162"><span class="sign_member"><span
+																	class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
+																	class="sign_wrap"><span class="sign_name">김지연</span></span><span
+																	class="sign_date_wrap"><span class="sign_date "
+																		id="date_15162"></span></span></span></span> <span class="sign_member_wrap"
+															id="activity_15162"><span class="sign_member"><span
+																	class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
+																	class="sign_wrap"><span class="sign_name">김지연</span></span><span
+																	class="sign_date_wrap"><span class="sign_date "
+																		id="date_15162"></span></span></span></span> <!--  --></span>
 
-															</div>
+													</div>
 
-															<div class="sign_condition">
-																<span class="sign_type1_inline" data-group-seq="0"
-																	data-group-name="신청" data-group-max-count="1"
-																	data-group-type="type1" data-is-reception=""><span
-																	class="sign_tit_wrap"><span class="sign_tit"><strong>신청</strong></span></span>
-																	<!--  --> <span class="sign_member_wrap"
-																	id="activity_15162"><span class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
-																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span></span>
-															</div>
+													<div class="sign_condition">
+														<span class="sign_type1_inline"><span
+															class="sign_tit_wrap"><span class="sign_tit"><strong>신청</strong></span></span>
+															<!--  --> <span class="sign_member_wrap"
+															id="activity_15162"><span class="sign_member"><span
+																	class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
+																	class="sign_wrap"><span class="sign_name">김지연</span></span><span
+																	class="sign_date_wrap"><span class="sign_date "
+																		id="date_15162"></span></span></span></span></span>
+													</div>
 
 												</td>
 											</tr>
+
 										</tbody>
 									</table> <br>
 
@@ -219,8 +218,7 @@ desired effect
 													id="vacationTypeArea"
 													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; margin-top: 0px; margin-bottom: 0px;"
 													name="select"> <!-- SELECT  --> <select
-														class="editor_slt" data-dsl="{{cSel_연차_조퇴_지각_경조_공가_질병휴가}}"
-														name="select_type">
+														class="editor_slt" name="vfType">
 															<option value="연차">연차</option>
 															<option value="조퇴">조퇴</option>
 															<option value="지각">지각</option>
@@ -239,22 +237,14 @@ desired effect
 													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 22px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle;"><input
 													type="text" readonly=""
 													class="ipt_editor ipt_editor_date hasDatepicker"
-													data-dsl="{{calendar:startDate}}" id="startDate"
-													data-id="startDate" data-name="startDate"
-													data-require="false" data-maxlength="" data-width=""
-													data-defaultstr="" data-editable="false" name="startDate"
-													data-value="" placeholder="" value="">&nbsp;~&nbsp;
+													id="vfStartdate" name="vfStartdate" value="">&nbsp;~&nbsp;
 													<input type="text" readonly=""
 													class="ipt_editor ipt_editor_date hasDatepicker"
-													data-dsl="{{calendar:endDate}}" id="endDate"
-													data-id="endDate" data-name="endDate" data-require="false"
-													data-maxlength="" data-width="" data-defaultstr=""
-													data-editable="false" name="endDate" data-value=""
-													placeholder="" value=""> <span id="usingPointArea"
+													id="vfEnddate" name="vfEnddate" value=""> <span
+													id="usingPointArea"
 													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>사용일수
 															: </b> <input type="text" class="ipt_editor ipt_editor_num"
 														data-dsl="{{number:usingPoint}}" name="usingPoint"
-														id="usingPoint" data-require="false" data-editable="true"
 														value="1" readonly="readonly"> <b
 														id="usingPoint_Comment"
 														style="font-weight: bold; color: red"></b> </span></td>
@@ -269,38 +259,12 @@ desired effect
 													id="vacationHalfArea"
 													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; margin-top: 0px; margin-bottom: 0px;"><span
 														class="halfArea"> <input type="checkbox"
-															class="editor_opt" data-dsl="{{check_시작일_종료일}}"
-															value="시작일" data-autotype="false" data-require="false"
-															name="check_startHalf" id="startHalf" data-label="시작일">
-															<label class="editor_label" data-type="removeSpan">시작일</label>
-															( <input type="radio" class="editor_opt"
-															data-dsl="{{radio_오전_오후}}" name="radio_startHalf"
-															id="startAMHalf" value="오전" data-autotype="false"
-															data-require="false" data-label="오전" disabled="disabled">
-															<label class="editor_label" data-type="removeSpan">오전</label>
-
-															<input type="radio" class="editor_opt"
-															data-dsl="{{radio_오전_오후}}" name="radio_startHalf"
-															id="startPMHalf" value="오후" data-autotype="false"
-															data-require="false" data-label="오후"> <label
-															class="editor_label" data-type="removeSpan">오후</label> )
-													</span> <span class="halfArea"> <input type="checkbox"
-															class="editor_opt" data-dsl="{{check_시작일_종료일}}"
-															value="종료일" data-autotype="false" data-require="false"
-															name="check_startHalf" id="endHalf" data-label="종료일">
-															<label class="editor_label" data-type="removeSpan">종료일</label>
-															( <input type="radio" class="editor_opt"
-															data-dsl="{{radio_오전_오후}}" name="radio_endHalf"
-															id="endAMHalf" value="오전" data-autotype="false"
-															data-require="false" data-label="오전" disabled="disabled">
-															<label class="editor_label" data-type="removeSpan">오전</label>
-
-															<input type="radio" class="editor_opt"
-															data-dsl="{{radio_오전_오후}}" name="radio_endHalf"
-															id="endPMHalf" value="오후" data-autotype="false"
-															data-require="false" data-label="오후" disabled="disabled">
-															<label class="editor_label" data-type="removeSpan">오후</label>
-															)
+															class="editor_opt" value="시작일" name="check_startHalf"
+															id="startHalf"> <label class="editor_label">시작일</label>
+													</span><span class="halfArea"> <input type="checkbox"
+															class="editor_opt" value="종료일" name="check_startHalf"
+															id="endHalf"> <label class="editor_label"
+															data-type="removeSpan">종료일</label>
 													</span> </span></td>
 											</tr>
 											<tr>
@@ -313,18 +277,14 @@ desired effect
 													id="restPointArea"
 													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>잔여연차
 															: </b> <input type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number:restPoint}}" name="restPoint"
-														id="restPoint" data-require="false" data-editable="true"
-														value="15" readonly="readonly"> <b
-														id="restPoint_Comment"
+														name="restPoint" id="restPoint" value="15"
+														readonly="readonly"> <b id="restPoint_Comment"
 														style="font-weight: bold; color: red"></b> </span><span
 													id="applyPointArea"
 													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>신청연차
 															: </b> <input type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number:applyPoint}}" name="applyPoint"
-														id="applyPoint" data-require="false" data-editable="true"
-														value="3" readonly="readonly"> <b
-														id="applyPoint_Comment"
+														name="applyPoint" id="applyPoint" value="3"
+														readonly="readonly"> <b id="applyPoint_Comment"
 														style="font-weight: bold; color: red"></b> </span></td>
 											</tr>
 											<tr>
@@ -333,12 +293,8 @@ desired effect
 													style="color: rgb(255, 0, 0);">*</b>&nbsp;휴가&nbsp;사유</td>
 												<td
 													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 100px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: top;"><textarea
-														class="txta_editor" data-dsl="{{textarea:description}}"
-														name="description" id="description" value=""
-														data-id="description" data-name="description"
-														data-require="false" data-maxlength="" data-width=""
-														data-defaultstr="" data-editable="false" data-value=""
-														placeholder=""></textarea></td>
+														class="txta_editor" name="vfReason" id="vfReason"
+														value=""></textarea></td>
 											</tr>
 											<tr>
 												<td
@@ -354,20 +310,7 @@ desired effect
 									</table></span>
 							</form>
 						</div>
-						<div id="attachView" style="display: none;">
-							<div class="add_file" style="display:">
-								<div class="add_file_header">
-									<span class="subject"> <span class="ic ic_file_s"></span>
-										<strong>첨부파일</strong> <span class="num">0</span>개 <span
-										class="size">(0.0Byte)</span>
-									</span>
-								</div>
-								<ul class="file_wrap" id="file_wrap"></ul>
-								<ul class="img_wrap" id="img_wrap"
-									style="margin-bottom: 10px; margin-left: 10px; margin-right: 10px; margin-top: 0px;"></ul>
-							</div>
-						</div>
-						
+
 					</div>
 				</section>
 

@@ -64,7 +64,11 @@ desired effect
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-
+				<div class="addApprover">
+					<div class="btn btn-app">
+						<i class="fa fa-user-plus"></i>결재자추가
+					</div>
+				</div>
 				<!-- 3단 레이아웃 멀티클래스 -->
 				<section class="content_wrapper">
 					<!--전자결제 상세-->
@@ -75,10 +79,9 @@ desired effect
 							<form id="document_content" class="form_doc_editor editor_view"
 								onsubmit="return false;">
 								<span><span
-									style="font-family: &amp; quot; 맑은 고딕&amp;quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
-										<!-- default copy start -->
-										<span
-										style="font-family: &amp; quot; 맑은 고딕&amp;quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+									style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+										<!-- default copy start --> <span
+										style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
 
 											<table
 												style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
@@ -128,7 +131,7 @@ desired effect
 																		<td
 																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																			<c:out value="${sessionScope.user.department}"></c:out>
-																			</td>
+																		</td>
 																	</tr>
 																	<tr>
 																		<td
@@ -140,7 +143,9 @@ desired effect
 																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
 																			<jsp:useBean id="currentTime" class="java.util.Date" />
 																			<fmt:formatDate value="${currentTime }"
-																				pattern="yyyy-MM-dd" var="currentTime" /> <c:out value="${currentTime }"></c:out><input type="hidden" name="aWriteDate" value="${currentTime }">
+																				pattern="yyyy-MM-dd" var="currentTime" /> <c:out
+																				value="${currentTime }"></c:out><input type="hidden"
+																			name="aWriteDate" value="${currentTime }">
 																		</td>
 																	</tr>
 																	<tr>
@@ -264,8 +269,8 @@ desired effect
 													<td
 														style="text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; padding-top: 5px"
 														class=""><input type="text" class="ipt_editor"
-														data-dsl="{{text}}" name="oNo" id="oNo"
-														value="" data-id="" data-name="" data-require="false"
+														data-dsl="{{text}}" name="oNo" id="oNo" value=""
+														data-id="" data-name="" data-require="false"
 														data-maxlength="" data-width="" data-defaultstr=""
 														data-editable="false" data-value="" placeholder=""><br>
 													</td>
@@ -278,11 +283,10 @@ desired effect
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" readonly=""
 														class="ipt_editor ipt_editor_date hasDatepicker"
-														data-dsl="{{calendar}}" id="oDate" data-id=""
-														data-name="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														name="oDate" data-value="" placeholder="" value=""><br>
-													</td>
+														data-dsl="{{calendar}}" id="oDate" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" name="oDate"
+														data-value="" placeholder="" value=""><br></td>
 												</tr>
 												<tr>
 													<td
@@ -292,11 +296,10 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="oPayment" id="oPayment" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="oPayment" id="oPayment" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(221, 221, 221); height: 18px; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: bold; border-right: black 1px solid; padding-top: 5px">
 
@@ -306,12 +309,10 @@ desired effect
 														data-type="period" data-value=""><input type="text"
 															readonly=""
 															class="ipt_editor ipt_editor_date hasDatepicker"
-															data-dsl="{{calendar}}" id="oStartdate"
-															name="oStartdate"> ~ <input type="text"
-															readonly=""
+															data-dsl="{{calendar}}" id="oStartdate" name="oStartdate">
+															~ <input type="text" readonly=""
 															class="ipt_editor ipt_editor_date hasDatepicker"
-															data-dsl="{{calendar}}" id="oEnddate"
-															name="oEnddate"></span><br></td>
+															data-dsl="{{calendar}}" id="oEnddate" name="oEnddate"></span><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(221, 221, 221); height: 18px; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: bold; border-right: black 1px solid; padding-top: 5px"
 														colspan="2">완납일자</td>
@@ -333,18 +334,17 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"
 														colspan="6"><input type="text" class="ipt_editor"
-														data-dsl="{{text}}" name="oPurpose"
-														id="oPurpose" value="" data-id="" data-name=""
-														data-require="false" data-maxlength="" data-width=""
-														data-defaultstr="" data-editable="false" data-value=""
-														placeholder=""><br></td>
+														data-dsl="{{text}}" name="oPurpose" id="oPurpose" value=""
+														data-id="" data-name="" data-require="false"
+														data-maxlength="" data-width="" data-defaultstr=""
+														data-editable="false" data-value="" placeholder=""><br></td>
 												</tr>
 											</tbody>
 										</table>
 
 
 										<table
-											style="border-bottom: 2px solid black; border-left: 2px solid black; width: 800px; border-collapse: collapse; font-family: &amp; quot; malgun gothic&amp;quot; , dotum , arial, tahoma; border-right: 2px solid black; height: 453.636px;">
+											style="border-bottom: 2px solid black; border-left: 2px solid black; width: 800px; border-collapse: collapse; font-family: &amp; amp; quot; malgun gothic&amp;amp; quot; , dotum , arial, tahoma; border-right: 2px solid black; height: 453.636px;">
 											<colgroup>
 												<col width="40">
 												<col width="300">
@@ -1164,20 +1164,19 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"
 														colspan="8"><p
-															style="margin: 0px 0px 10px; font-family: &amp; quot; malgun gothic&amp;quot; , dotum , arial, tahoma; font-size: 9pt; line-height: 18px;">※
-															특기사항</p>
-														<textarea class="txta_editor" data-dsl="{{textarea}}"
-															name="editorForm_100" id="editorForm_100" value=""
-															data-id="" data-name="" data-require="false"
-															data-maxlength="" data-width="" data-defaultstr=""
-															data-editable="false" data-value="" placeholder=""></textarea><br>
-													</td>
+															style="margin: 0px 0px 10px; font-family: &amp; amp; quot; malgun gothic&amp;amp; quot; , dotum , arial, tahoma; font-size: 9pt; line-height: 18px;">※
+															특기사항</p> <textarea class="txta_editor"
+															data-dsl="{{textarea}}" name="editorForm_100"
+															id="editorForm_100" value="" data-id="" data-name=""
+															data-require="false" data-maxlength="" data-width=""
+															data-defaultstr="" data-editable="false" data-value=""
+															placeholder=""></textarea><br></td>
 												</tr>
 											</tbody>
 										</table>
 								</span>
 									<p
-										style="font-family: &amp; quot; 맑은 고딕&amp;quot;; font-size: 10pt; line-height: 20px; margin-top: 0px; margin-bottom: 0px;">&nbsp;</p></span>
+										style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot;; font-size: 10pt; line-height: 20px; margin-top: 0px; margin-bottom: 0px;">&nbsp;</p></span>
 							</form>
 						</div>
 
