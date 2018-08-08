@@ -134,25 +134,21 @@ function validate(){
                 
                 <div class="form-group"style="width:200px;">
                 <label>부서</label>
-                 <input type="hidden" name="eJobcodeFk" id="eJobcodeFk" value="1"/>
-                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" >
-                  <option selected="selected">임원</option>
-                  <option>경영지원팀</option>
-                  <option>현장서비스팀</option>
-                  <option>운영개발팀</option>
+                 
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true"  name="eDepartFk">
+                  <c:forEach items="${list2 }" var="e2" >
+                  <option value="${e2.eDepartFk}">${e2.eDepart}</option>
+                  </c:forEach>
                 </select>
               </div>
                 <div class="form-group"style="width:200px;">
                 <label>직급</label>
-                 <input type="hidden" name="eDepartFk" id="eDepartFk" value="1"/>
-                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" >
-                  <option selected="selected">사원</option>
-                  <option>대리</option>
-                  <option>과장</option>
-                  <option>차장</option>
-                  <option>부장</option>
-                  <option>이사</option>
-                  <option>전무</option>
+                 
+                <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="eJobcodeFk">
+                 <c:forEach items="${list }" var="e" >
+                  <option value="${e.eJobcodeFk}">${e.eJob}</option>
+                  </c:forEach>
+                  
                 </select>
               </div>
                 

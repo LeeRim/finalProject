@@ -41,9 +41,17 @@ public class EmployeeController {
 //	}
 	
 	@RequestMapping("memberAdd.do")
-	public String memberAdd(){
-		return "memberAdd";
+	public ModelAndView memberAdd(ModelAndView mv){
+		List<EmployeeVo> list = eService.selectJobList();
+		List<EmployeeVo> list2 = eService.selectDepartList();
+		
+		mv.addObject("list", list);
+		mv.addObject("list2", list2);
+		mv.setViewName("memberAdd");
+		return mv;
+		
 	}
+	
 	
 	
 	@RequestMapping("insertMember.do" )
@@ -58,8 +66,6 @@ public class EmployeeController {
 		Date birth2 = Date.valueOf(eBirth1);
 		Date hire2 = Date.valueOf(eHireDate1);
 
-		System.out.println(birth2);
-		System.out.println(hire2);
 		
 		member.seteBirth(birth2);
 		member.seteHireDate(hire2);
@@ -84,19 +90,32 @@ public class EmployeeController {
 	public ModelAndView employeeList(ModelAndView mv){
 		
 		List<EmployeeVo> list = eService.selectEmployeeList();
-		System.out.println(list);
+//		System.out.println(list);
 		mv.addObject("list", list);
 		mv.setViewName("organizationChart");
 		return mv;
 	}
 	
 	
-		@RequestMapping("NewFile.do")
-	public String NewFile(){
-		return "NewFile";
+		@RequestMapping("employeeIndex.do")
+	public String employeeIndex(){
+		return "employeeIndex";
 	}
-	
-	
+		
+		
+//		@RequestMapping("selectEmployee.do")
+//		public ModelAndView selectEmployee(ModelAndView mv){
+//			
+//			List<EmployeeVo> list3 = eService.selectEmployee();
+////			System.out.println(list);
+//			mv.addObject("list3", list3);
+//			mv.setViewName("organizationChart");
+//			return mv;
+//		}
+//		
+		
+		
+		
 	
 	
 	

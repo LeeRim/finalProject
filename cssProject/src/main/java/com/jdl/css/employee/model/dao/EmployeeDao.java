@@ -29,4 +29,12 @@ public class EmployeeDao {
 		return sqlSession.selectList("EmployeeMapper.selectEmployeeList");
 	}
 
+	public List<EmployeeVo> selectJobList() {
+		return sqlSession.selectList("EmployeeMapper.selectJobList");
+	}
+
+	public List<EmployeeVo> selectDepartList() {
+		return sqlSession.selectList("EmployeeMapper.selectDepartList");
+	}
+
 }

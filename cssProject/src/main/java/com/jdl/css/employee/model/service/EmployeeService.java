@@ -26,4 +26,12 @@ public class EmployeeService {
 	public List<EmployeeVo> selectEmployeeList() {
 		return dao.selectEmployeeList();
 	}
+
+	public List<EmployeeVo> selectJobList() {
+		return dao.selectJobList();
+	}
+
+	public List<EmployeeVo> selectDepartList() {
+		return dao.selectDepartList();
+	}
 }
