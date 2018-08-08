@@ -29,7 +29,6 @@
 	}
 	.tdBox{
 		text-align:center;
-		border:noen;
 	}
 	
 	.levelCheckbox + label {
@@ -62,35 +61,7 @@
 	}
 </style>
 <script>
-	
-	function submitLevel(level,obj){
-		$(".levelDiv").each(function(){
-			if($(this).text() == $(obj).text()){
-				$(this).css("border","2px solid gray");
-			}else{
-				$(this).css("border","1px solid #bcbcbc");
-			}
-		});
-		$("#cLevel").val(level);
-		console.log($("#cLevel").val());
-	}
-	
-	function validate(){
-		
-	var companies = new Array();
-	$(".levelCheckbox").each(function(value){
-		if($(this).prop("checked")){
-			companies.push($(this).val());
-		}
-	});
-	$("#companyList").val(companies.join(","));
-	
-	return true;
-	}
-	
-	function updateCompanyLevel(){
-		$("#updateLevel").submit();
-	}
+
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -102,7 +73,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        관리자페이지<small>회원관리_회원설정</small>
+        관리자페이지
+        <small>문의사항</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -110,59 +82,32 @@
         <li class="active">Data tables</li>
       </ol>
     </section>
-	
-	<form id="updateLevel" method="get" action="updateCompanyLevel.do" onsubmit="return validate();">
-	<input type="hidden" name="companyList" id="companyList"/>
-	<input type="hidden" name="cLevel" id="cLevel"/>
-	<input type="hidden" name="listValue" value="setList"/>
+
     <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
+
             <div class="box-body">
-          <div class="selDiv">
-			<div class="levelDiv" id="level1" onclick="submitLevel(1,this);">LEVEL 1</div>
-			<div class="levelDiv" id="level2" onclick="submitLevel(2,this);">LEVEL 2</div>
-			<div class="levelDiv" id="level3" onclick="submitLevel(3,this);">LEVEL 3</div>
-			<div class="chgDiv" onclick="updateCompanyLevel();">변경</div>
-          </div>
-              <table id="example2" class="table table-bordered table-hover" >
+              <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>레벨</th>
+                  <th>작성일</th>
                   <th>회사 명</th>
-                  <th>사원 수</th>
-                  <th>대표</th>
-                  <th>주소</th>
-                  <th>마일리지</th>
-                  <th>사용 종료일</th>
-                  <th>등급 변경</th>
+                  <th>제목</th>
+                  <th>답변여부</th>
+                  <th>답변일</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:if test="${empty list }">
-                	<tr>
-                		<td colspan="8">조회 된 회사가 없습니다.</td>
-                	</tr>
-                </c:if>
-                <c:if test="${!empty list }">
-                <c:forEach items="${list }" var="n" varStatus="status">
 	                <tr>
-	                  <td>LEVEL ${n.cLevel }</td>
-	                  <td>${n.cName }</td>
-	                  <td>330</td>
-	                  <td>${n.cOwner }</td>
-	                  <td>${n.cAddress }</td>
-	                  <td>${n.cMileage }</td>
-	                  <td>${n.cCloseDay }</td>
-	                  <td class="tdBox">
-	                  	<input type="checkbox" value="${n.cKey }" name="levelCheckbox" class="levelCheckbox" id="cb${status.count }">
-    					<label for="cb${status.count }"></label>
-	                  </td>
-	                </tr>
-                </c:forEach>
-                </c:if>
+	                  <td>2018/08/08</td>
+	                  <td>KH정보교육원</td>
+	                  <td>집에보내주세요</td>
+	                  <td>읽지않음</td>
+	                  <td> </td>
+	                 </tr>
                 </tbody>
               </table>
             </div>
@@ -174,7 +119,6 @@
       </div>
       <!-- /.row -->
     </section>
-	</form>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

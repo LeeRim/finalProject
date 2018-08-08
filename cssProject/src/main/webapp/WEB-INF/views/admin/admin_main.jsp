@@ -284,7 +284,7 @@ desired effect
                     <li><i class="fa fa-circle-o text-green"></i> 인천광역시</li>
                     <li><i class="fa fa-circle-o text-aqua"></i> 대전광역시</li>
                     <li><i class="fa fa-circle-o text-light-blue"></i> 제주특별자치도</li>
-                    <li><i class="fa fa-circle-o text-gray"></i>경기도 성남시 </li>
+                    <li><i class="fa fa-circle-o text-gray"></i> 경기도 성남시 </li>
                   </ul>
                 </div>
                 <!-- /.col -->

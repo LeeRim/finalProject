@@ -72,7 +72,7 @@
 			<ul class="sidebar-menu" data-widget="tree">
 				<li class="header">메뉴</li>
 				<!-- Optionally, you can add icons to the links -->
-				<li class="active" id="main"><a href="index.do" onclick="menuHighlight(1);"><i class="fa fa-th-large"></i> <span>메인</span></a></li>
+				<li class="active" id="main"><a href="adminMain.do" onclick="menuHighlight(1);"><i class="fa fa-th-large"></i> <span>메인</span></a></li>
 				<li class="treeview">
 					<a href="#"><i class="fa fa-user"></i>
 						<span>회원관리</span>
@@ -85,7 +85,7 @@
 						<li><a href="companySet.do" onclick="menuHighlight(2);">회원설정</a></li>
 					</ul>
 				</li>
-				<li><a href="#" onclick="menuHighlight(3);"><i class="fa fa-question"></i> <span>문의사항</span></a></li>
+				<li><a href="qnaList.do" onclick="menuHighlight(3);"><i class="fa fa-question"></i> <span>문의사항</span></a></li>
 				<li><a href="#" onclick="menuHighlight(4);"><i class="fa fa-krw"></i> <span>결제현황</span></a></li>
 			</ul>
 			<!-- /.sidebar-menu -->

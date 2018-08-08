@@ -53,4 +53,9 @@ public class AdminController {
 		}
 		return "redirect:companyList.do";
 	}
+	
+	@RequestMapping("qnaList.do")
+	public String qnaList(){
+		return "admin/qnaList";
+	}
 }
