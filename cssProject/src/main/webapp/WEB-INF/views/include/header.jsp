@@ -31,13 +31,18 @@
 	<script src="resources/dist/js/adminlte.min.js"></script>
 	<!-- REQUIRED JS SCRIPTS -->
   <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <script>
+  		function menuHighlight(clickIdx){
+  			sessionStorage.setItem("menu", clickIdx);
+  		}
+  </script>
 </head>
 <body>
 <!-- Main Header -->
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index.do" class="logo">
+    <a href="index.do" class="logo" onclick="menuHighlight(1);">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>C</b>SS</span>
       <!-- logo for regular state and mobile devices -->

@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
  	margin-top:80px;
  	font-size:17px;
  }
- ul li{
+ .no-padding ul li{
  	margin-bottom:10px;
  }
 .pieChart{
@@ -55,6 +55,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
  
 </style>
+<script>
+  		function menuHighlight(clickIdx){
+  			sessionStorage.setItem("menu", clickIdx);
+  		}
+  </script>
 </head>
 <!--
 BODY TAG OPTIONS:
