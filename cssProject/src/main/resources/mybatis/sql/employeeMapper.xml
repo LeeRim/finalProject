@@ -31,7 +31,7 @@
 		WHERE E_ID = #{eId}
 	</select>
 	
-	<!-- 노트 직원 불러오는 쿼리문 -->
+	<!-- 쪽지 직원 불러오는 쿼리문 -->
 	<select id="selectEmployeeList" parameterType="int" resultType="Employee">
 		SELECT E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
 		,E.E_EXTEN, E.E_PHONE,E.E_EMAIL, E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN,E.E_PHOTO
@@ -50,6 +50,6 @@
 		WHERE E.C_KEY_FK = #{compnayK}
 		GROUP BY D.DIV_INFO
 	</select>
-	<!-- 노트 직원 불러오는 쿼리문 끝-->
+	<!-- 쪽지 직원 불러오는 쿼리문 끝-->
 
 </mapper>

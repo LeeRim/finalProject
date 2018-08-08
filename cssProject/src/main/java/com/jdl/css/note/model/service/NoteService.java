@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 import com.jdl.css.note.model.dao.NoteDao;
 import com.jdl.css.note.model.vo.NoteVo;
@@ -23,7 +24,7 @@ public class NoteService {
 		int result = 0;
 		for(Integer i : note.getReceiveNo()){
 			note.setReceiver(i);
-			result = dao.insertReceiveNote(note);			
+			result += dao.insertReceiveNote(note);			
 		}
 		return result;
 	}
@@ -34,6 +35,14 @@ public class NoteService {
 
 	public List<EmployeeVo> selectDepartment(int companyK) {
 		return dao.selectDepartment(companyK);
+	}
+
+	public int insertAttach(NoteVo note) {
+		int result= 0;
+		for(AttachmentVo av : note.getAttach()){
+			result += dao.insertAttach(av);
+		}
+		return result;
 	}
 
 

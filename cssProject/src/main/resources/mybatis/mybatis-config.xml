@@ -12,6 +12,7 @@
 	<typeAlias type="com.jdl.css.employee.model.vo.EmployeeVo" alias="Employee" /> 
 	<typeAlias type="com.jdl.css.company.model.vo.CompanyVo" alias="Company"/>
 	<typeAlias type="com.jdl.css.note.model.vo.NoteVo" alias="NoteVo"/>
+	<typeAlias type="com.jdl.css.common.model.vo.AttachmentVo" alias="AttachVo"/>
 
   </typeAliases>
 

@@ -148,8 +148,8 @@ desired effect
               <h3 class="box-title">Compose New Message</h3>
             </div>
             <!-- /.box-header -->
+            <form action="sendNote.do" method="post" enctype="multipart/form-data">
             <div class="box-body">
-            <form action="sendNote.do" method="get" enctype="multipart/form-data">
             	<input type="hidden" value ="${sessionScope.user.eKey}" name="snSenderFk"/>
             	<input type="hidden" value="" name="receiveNo" id="receiveNo"/>
               <div class="form-group">
@@ -163,33 +163,33 @@ desired effect
                     </textarea>
               </div>
 	<script>
-	$(document)
-	.ready(
-		function() {
-			var fileTarget = $('.form-group .upload-hidden');
-			fileTarget.on('change',function() { // 값이 변경되면 
-				if (window.FileReader) { // modern browser 
-					var filename = $(this)[0].files[0].name;
-					console.log(filename);
-				} else { // old IE
-					var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
-				}
-				// 추출한 파일명 삽입 
-
-				var files = $('.file-list').html();
-				if (files != '') {
-					files += '<br>';
-				}
-				$('.file-list').html(files+ filename+"&nbsp<i class='fa fa-remove'></i>");
-			});
-		});
+	   $(document)
+	   .ready(
+	      function() {
+	         var fileTarget = $('.form-group .upload-hidden');
+	         fileTarget.on('change',function() { // 값이 변경되면 
+	         var filenames ="";
+	            if (window.FileReader) { // modern browser 
+	            
+	            for(var i=0;i<$(this)[0].files.length;i++){
+	               var file = $(this)[0].files[i];
+	               filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove'></i><br>";
+	               console.log(filenames);
+	            }
+	            } else { // old IE
+	               var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+	            }
+	            // 추출한 파일명 삽입 
+	            $('.file-list').html(filenames);
+	         });
+	      });
 	</script>
 
 										<div class="form-group" style="height: 100px;">
 											<div style="float: left; height: 100px; width: 130px;">
 												<div class="btn btn-default btn-file">
 													<i class="fa fa-paperclip"></i> Attachment <input
-														type="file" name="attachment" class="upload-hidden">
+														multiple="multiple"  type="file" name="files" class="upload-hidden">
 												</div>
 												<p class="help-block">Max. 32MB</p>
 											</div>
