@@ -11,5 +11,5 @@ Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE
 
 Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO) values (1,1,1,'현장서비스팀');
 Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO) values (2,1,1,'인프라운영팀');
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO) values (3,1,2,'대리');
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO) values (4,1,2,'과장');
+Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO) values (3,1,2,'대리',2);
+Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO) values (4,1,2,'과장',1);
