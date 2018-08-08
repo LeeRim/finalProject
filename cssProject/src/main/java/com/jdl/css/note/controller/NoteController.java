@@ -103,4 +103,14 @@ public class NoteController {
 		
 		return mv;
 	};
+	
+	@RequestMapping("sendNoteList.do")
+	public ModelAndView sendNoteList(ModelAndView mv, HttpSession session){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		//사원키
+		int ekey = user.geteKey();
+		
+		mv.setViewName("note/sendNoteList");
+		return mv;
+	}
 }
