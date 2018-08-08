@@ -267,56 +267,31 @@ desired effect
 											</table>
 										</span>
 
-										<script>
-											$(document)
-													.ready(
-															function() {
-																var fileTarget = $('.form-group .upload-hidden');
-																var files = $(
-																		'.file-list')
-																		.html();
-																console
-																		.log(files);
-																fileTarget
-																		.on(
-																				'change',
-																				function() { // 값이 변경되면 
-																					if (window.FileReader) { // modern browser 
-																						var filename = $(this)[0].files[0].name;
-																						console
-																								.log(filename);
-																					} else { // old IE
-																						var filename = $(
-																								this)
-																								.val()
-																								.split(
-																										'/')
-																								.pop()
-																								.split(
-																										'\\')
-																								.pop(); // 파일명만 추출
-																					}
-																					// 추출한 파일명 삽입 
+	<script>
+	$(document)
+	.ready(
+		function() {
+			var fileTarget = $('.form-group .upload-hidden');
+			fileTarget.on('change',function() { // 값이 변경되면 
+				if (window.FileReader) { // modern browser 
+					var filename = $(this)[0].files[0].name;
+					console.log(filename);
+				} else { // old IE
+					var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+				}
+				// 추출한 파일명 삽입 
 
-																					var files = $(
-																							'.file-list')
-																							.html();
-																					if (files != '') {
-																						files += '<br>';
-																					}
-																					console
-																							.log(files);
-																					$(
-																							'.file-list')
-																							.html(
-																									files
-																											+ filename+"&nbsp<i class='fa fa-remove'></i>");
-																				});
-															});
-										</script>
+				var files = $('.file-list').html();
+				if (files != '') {
+					files += '<br>';
+				}
+				$('.file-list').html(files+ filename+"&nbsp<i class='fa fa-remove'></i>");
+			});
+		});
+	</script>
 
-										<div class="form-group" style="height:100px;">
-											<div style="float: left; height:100px; width:130px;">
+										<div class="form-group" style="height: 100px;">
+											<div style="float: left; height: 100px; width: 130px;">
 												<div class="btn btn-default btn-file">
 													<i class="fa fa-paperclip"></i> Attachment <input
 														type="file" name="attachment" class="upload-hidden">
