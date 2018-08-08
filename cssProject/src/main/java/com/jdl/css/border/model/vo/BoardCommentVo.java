@@ -1,6 +1,7 @@
 package com.jdl.css.border.model.vo;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ public class BoardCommentVo {
 	private String cWriter; //작성자
 	private String cContent; //내용
 	private Date cDate; //작성일
+	private String eName; //작성자이름
 	
 	public BoardCommentVo(){
 		
@@ -22,6 +24,14 @@ public class BoardCommentVo {
 		this.cWriter = cWriter;
 		this.cContent = cContent;
 		this.cDate = cDate;
+	}
+
+	public String geteName() {
+		return eName;
+	}
+
+	public void seteName(String eName) {
+		this.eName = eName;
 	}
 
 	public int getCommentKey() {
@@ -67,8 +77,9 @@ public class BoardCommentVo {
 	@Override
 	public String toString() {
 		return "BoardCommentVo [commentKey=" + commentKey + ", boardKeyFk=" + boardKeyFk + ", cWriter=" + cWriter
-				+ ", cContent=" + cContent + ", cDate=" + cDate + "]";
+				+ ", cContent=" + cContent + ", cDate=" + cDate + ", eName=" + eName + "]";
 	}
+
 
 	
 }

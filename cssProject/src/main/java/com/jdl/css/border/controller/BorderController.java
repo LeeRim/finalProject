@@ -1,7 +1,10 @@
 package com.jdl.css.border.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.border.model.service.BorderService;
+import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
 import com.jdl.css.border.model.vo.PageInfo;
+import com.jdl.css.border.model.vo.MemberVo;
 
 @Controller
 public class BorderController {
@@ -78,7 +83,7 @@ public class BorderController {
 		List<BorderVo> list = borderservice.getNoticeList(board);
 		if(list != null){
 			mv.addObject("list", list);
-			mv.addObject("bCateGory",board);
+			mv.addObject("bCateGory", board.getbCateGory());
 			mv.addObject("pi", pi);
 			mv.setViewName("border/borderList");
 		}
@@ -101,7 +106,7 @@ public class BorderController {
 			int result = borderservice.writeBoard(board);
 			
 			if(result > 0){
-				mv.setViewName("redirect:borderList.do?bType="+ board.getbCateGory());
+				mv.setViewName("redirect:borderList.do?bCateGory="+ board.getbCateGory());
 			}
 		return mv;
 	}
@@ -111,10 +116,16 @@ public class BorderController {
 		
 		System.out.println("selectBoard.do : " + b);
 		BorderVo board = borderservice.selectBoard(b.getBoardKey());
+		
+		List<BoardCommentVo> bList = borderservice.selectCommentList(b.getBoardKey());
 		if(board != null){
+			board.setbCount(board.getbCount() + 1);
+			mv.addObject("bList", bList);
 			mv.addObject("board", board);
 			mv.setViewName("border/borderDetail");
 		}
+		System.out.println("bList : " +  bList);
+		int result = borderservice.updateBoardCount(b.getBoardKey());
 		return mv;
 	}
 	
@@ -124,9 +135,75 @@ public class BorderController {
 		System.out.println(border);
 		int result = borderservice.updateBoard(border);
 		if(result > 0){
-			mv.setViewName("redirect:borderList.do?bType="+ border.getbCateGory());
+			mv.setViewName("redirect:borderList.do?bCateGory="+ border.getbCateGory());
 		}
 		return mv;
 	}
+	
+	@RequestMapping("borderUpdateForm.do")
+	public ModelAndView borderUpdateForm(BorderVo b, ModelAndView mv){
+		
+		BorderVo board = borderservice.selectBoard(b.getBoardKey());
+		if(board != null){
+			mv.addObject("board", board);
+			mv.setViewName("border/borderUpdateForm");
+		}
+		return mv;
+	}
+	
+	@RequestMapping("borderIndex.do")
+	public String borderIndex(){
+		return "border/borderIndex";
+	}
+	
+	@RequestMapping("writeComment.do")
+	public ModelAndView writeComment(int boardKey, String cWriter, String cContent, ModelAndView mv){
+		
+		BoardCommentVo bc = new BoardCommentVo();
+		bc.setBoardKeyFk(boardKey);
+		bc.setcWriter(cWriter);
+		bc.setcContent(cContent);
+		System.out.println(bc);
+		int result = borderservice.InsertborderComment(bc);
+		System.out.println(result);
+		mv.setViewName("redirect:selectBoard.do?boardKey=" + bc.getBoardKeyFk() + "&currentPage=1");
+		return mv;
+	}
+	
+	/*@RequestMapping("test11.do")
+	public ModelAndView test(ModelAndView mv, HttpServletResponse response){
+		List<MemberVo> list = new ArrayList<MemberVo>();
+		MemberVo mv1 = new MemberVo("userid1", "이름1", 20);
+		MemberVo mv2 = new MemberVo("userid2", "이름2", 25);
+		MemberVo mv3 = new MemberVo("userid3", "이름3", 30);
+		MemberVo mv4 = new MemberVo("userid4", "이름4", 31);
+		MemberVo mv5 = new MemberVo("userid5", "이름5", 32);
+		MemberVo mv6 = new MemberVo("userid6", "이름6", 33);
+		MemberVo mv7 = new MemberVo("userid7", "이름7", 34);
+		MemberVo mv8 = new MemberVo("userid8", "이름8", 35);
+		MemberVo mv9 = new MemberVo("userid9", "이름9", 36);
+		MemberVo mv10 = new MemberVo("userid10", "이름10", 40);
+		list.add(mv1);
+		list.add(mv2);
+		list.add(mv3);
+		list.add(mv4);
+		list.add(mv5);
+		list.add(mv6);
+		list.add(mv7);
+		list.add(mv8);
+		list.add(mv9);
+		list.add(mv10);
+		
+		//userid=membervo
+		Map<String, MemberVo> result = new HashMap<String, MemberVo>();
+		for(MemberVo m : list){
+			result.put(m.getUserId(), m);
+		}
+				
+		response.setContentType("application/json; charset=UTF-8"); 
+		new Gson().toJson(result, response.getWriter());
+	
+	}*/
+	
 	
 }

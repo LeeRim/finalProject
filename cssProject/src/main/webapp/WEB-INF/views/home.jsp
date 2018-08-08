@@ -17,6 +17,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   	function boardPage(bType){
   		location.href="borderList.do?bCateGory=" + bType;
   	}
+  	function board(){
+  		location.href="borderIndex.do"
+  	}
   </script>
 </head>
 <!--
@@ -55,6 +58,7 @@ desired effect
         <button onclick="boardPage(1);">공지사항</button>
         <button onclick="boardPage(2);">자유게시판</button>
         <button onclick="boardPage(3);">경조사</button>
+        <button onclick="board();">게시판 인덱스</button>
         <small>Optional description</small>
       </h1>
       <ol class="breadcrumb">

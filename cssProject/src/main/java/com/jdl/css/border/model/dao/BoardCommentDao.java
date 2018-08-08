@@ -9,4 +9,5 @@ public class BoardCommentDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
 }

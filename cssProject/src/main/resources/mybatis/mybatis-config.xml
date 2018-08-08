@@ -10,6 +10,7 @@
   <typeAliases>
 	<typeAlias type="com.jdl.css.border.model.vo.BorderVo" alias="Border" /> 
 	<typeAlias type="com.jdl.css.employee.model.vo.EmployeeVo" alias="Employee" /> 
+	<typeAlias type="com.jdl.css.border.model.vo.BoardCommentVo" alias="Comment" /> 
   </typeAliases>
 
   <mappers>

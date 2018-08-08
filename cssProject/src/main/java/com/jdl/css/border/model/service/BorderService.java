@@ -1,11 +1,13 @@
 package com.jdl.css.border.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jdl.css.border.model.dao.BorderDao;
+import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
 
 @Service
@@ -36,6 +38,18 @@ public class BorderService {
 
 	public int countBoardList(String getbCateGory) {
 		return dao.selectBoardTotalCount(getbCateGory);
+	}
+
+	public int updateBoardCount(int boardKey) {
+		return dao.updateBoardCount(boardKey);
+	}
+
+	public List<BoardCommentVo> selectCommentList(int boardKey) {
+		return dao.selectCommentList(boardKey);
+	}
+
+	public int InsertborderComment(BoardCommentVo bc) {
+		return dao.insertComment(bc);
 	}
 
 

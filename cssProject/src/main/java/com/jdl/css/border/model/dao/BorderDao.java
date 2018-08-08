@@ -1,11 +1,13 @@
 package com.jdl.css.border.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
 
 @Repository
@@ -36,6 +38,18 @@ public class BorderDao {
 
 	public int selectBoardTotalCount(String getbCateGory) {
 		return sqlSession.selectOne("BorderMapper.selectBoardTotalCount", getbCateGory);
+	}
+
+	public int updateBoardCount(int boardKey) {
+		return sqlSession.update("BorderMapper.BorderCountUpdate", boardKey);
+	}
+
+	public List<BoardCommentVo> selectCommentList(int boardKey) {
+		return sqlSession.selectList("BorderMapper.selectCommentList", boardKey);
+	}
+
+	public int insertComment(BoardCommentVo bc) {
+		return sqlSession.insert("BorderMapper.BorderComment", bc);
 	}
 
 	
