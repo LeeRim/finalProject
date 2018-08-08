@@ -11,6 +11,7 @@ public class ApprovalVo {
 	private int aKey;
 	private int cKeyFk;
 	private String aTitle;
+	private String aContent;
 	private int aWriterFk;
 	private String aWriteDate;
 	private int aCondition;

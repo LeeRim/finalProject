@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/include/header.jsp" />
 <!DOCTYPE html>
 <!--
@@ -63,7 +64,11 @@ desired effect
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-
+				<div class="addApprover">
+					<div class="btn btn-app">
+						<i class="fa fa-user-plus"></i>결재자추가
+					</div>
+				</div>
 				<!-- 3단 레이아웃 멀티클래스 -->
 				<section class="content_wrapper">
 					<!--전자결제 상세-->
@@ -74,10 +79,9 @@ desired effect
 							<form id="document_content" class="form_doc_editor editor_view"
 								onsubmit="return false;">
 								<span><span
-									style="font-family: &amp; quot; 맑은 고딕&amp;quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
-										<!-- default copy start -->
-										<span
-										style="font-family: &amp; quot; 맑은 고딕&amp;quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+									style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+										<!-- default copy start --> <span
+										style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
 
 											<table
 												style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
@@ -95,127 +99,106 @@ desired effect
 													</tr>
 													<tr>
 														<td
-															style="background: white; padding: 0px !important; border: currentColor; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;"><table
-																style="border: 1px solid rgb(0, 0, 0); font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
+															style="background: white; padding: 0px !important; border: currentColor; border-image: none; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;"><span
+															class="sign_type1_inline" data-group-seq="3"
+															data-group-name="합의" data-group-max-count="1"
+															data-group-type="type1" data-is-agreement="true"
+															id="agreementWrap"></span> <!-- 에디터 &nbsp; 버그. 개행과 공백을 최소화 시키자. -->
+															<table
+																style="border: 1px solid rgb(0, 0, 0); border-image: none; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 																<!-- User -->
 																<colgroup>
 																	<col width="90">
-																	<col width="120">
+																	<col width="220">
 																</colgroup>
 
 																<tbody>
 																	<tr>
 																		<td
-																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+
+																			기안자</td>
+																		<td
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<c:out value="${sessionScope.user.eName}"></c:out>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td
+																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+
+																			소속</td>
+																		<td
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<c:out value="${sessionScope.user.department}"></c:out>
+																		</td>
+																	</tr>
+																	<tr>
+																		<td
+																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
+
+																			기안일</td>
+
+																		<td
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<jsp:useBean id="currentTime" class="java.util.Date" />
+																			<fmt:formatDate value="${currentTime }"
+																				pattern="yyyy-MM-dd" var="currentTime" /> <c:out
+																				value="${currentTime }"></c:out><input type="hidden"
+																			name="aWriteDate" value="${currentTime }">
+																		</td>
+																	</tr>
+																	<tr>
+																		<td
+																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																			문서번호</td>
 																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"><input
-																			type="text" readonly=""
-																			style="vertical-align: middle; width: 100%; border: 0px; box-shadow: inset 0px 0px 0px rgba(150, 150, 150, 0.2)"
-																			data-dsl="{{label:docNo}}" name="docNo" id="docNo"
-																			value="" data-id="docNo" data-name="docNo"
-																			data-require="false" data-maxlength="" data-width=""
-																			data-defaultstr="" data-editable="false"
-																			data-value="" placeholder=""><br></td>
-																	</tr>
-																	<tr style="height: 32px;">
-																		<td
-																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
-																			부&nbsp; &nbsp; &nbsp;서</td>
-																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; height: 18px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"><input
-																			type="text" readonly=""
-																			style="vertical-align: middle; width: 100%; border: 0px; box-shadow: inset 0px 0px 0px rgba(150, 150, 150, 0.2)"
-																			data-dsl="{{label:draftDept}}" name="draftDept"
-																			id="draftDept" value="영업본부" data-id="draftDept"
-																			data-name="draftDept" data-require="false"
-																			data-maxlength="" data-width="" data-defaultstr=""
-																			data-editable="false" data-value="영업본부"
-																			placeholder=""><br></td>
-																	</tr>
-																	<tr>
-																		<td
-																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
-																			기 안 일</td>
-																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"><input
-																			type="text" readonly=""
-																			style="vertical-align: middle; width: 100%; border: 0px; box-shadow: inset 0px 0px 0px rgba(150, 150, 150, 0.2)"
-																			data-dsl="{{label:draftDate}}" name="draftDate"
-																			id="draftDate" value="" data-id="draftDate"
-																			data-name="draftDate" data-require="false"
-																			data-maxlength="" data-width="" data-defaultstr=""
-																			data-editable="false" data-value="2018-08-07(화)"
-																			placeholder=""><br></td>
-																	</tr>
-																	<tr>
-																		<td
-																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
-																			기 안 자</td>
-																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"><input
-																			type="text" readonly=""
-																			style="vertical-align: middle; width: 100%; border: 0px; box-shadow: inset 0px 0px 0px rgba(150, 150, 150, 0.2)"
-																			data-dsl="{{label:draftUser}}" name="draftUser"
-																			id="draftUser" value="김지연" data-id="draftUser"
-																			data-name="draftUser" data-require="false"
-																			data-maxlength="" data-width="" data-defaultstr=""
-																			data-editable="false" data-value="김지연" placeholder=""><br>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td
-																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
-																			공개여부</td>
-																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"><input
-																			type="text" readonly=""
-																			style="vertical-align: middle; width: 100%; border: 0px; box-shadow: inset 0px 0px 0px rgba(150, 150, 150, 0.2)"
-																			data-dsl="{{label:openOption}}" name="openOption"
-																			id="openOption" value="비공개" data-id="openOption"
-																			data-name="openOption" data-require="false"
-																			data-maxlength="" data-width="" data-defaultstr=""
-																			data-editable="false" data-value="비공개" placeholder=""><br>
-																		</td>
-																	</tr>
-																	<tr>
-																		<td
-																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
-
-																			보존기간</td>
-																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"><input
-																			type="text" readonly=""
-																			style="vertical-align: middle; width: 100%; border: 0px; box-shadow: inset 0px 0px 0px rgba(150, 150, 150, 0.2)"
-																			data-dsl="{{label:preserveDuration}}"
-																			name="preserveDuration" id="preserveDuration"
-																			value="5년" data-id="preserveDuration"
-																			data-name="preserveDuration" data-require="false"
-																			data-maxlength="" data-width="" data-defaultstr=""
-																			data-editable="false" data-value="5년" placeholder=""><br>
-																		</td>
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
 																	</tr>
 																</tbody>
 															</table></td>
-														<td
-															style="text-align: right; padding-bottom: 0px !important; padding-left: 0px !important; padding-right: 0px !important; background: white; color: black; font-size: 12px; vertical-align: top; font-weight: normal; padding-top: 0px !important"
-															class=""><br>
-														<span class="sign_type1_inline" data-group-seq="0"
-															data-group-name="결재선" data-group-max-count="5"
-															data-group-type="type1" data-is-reception=""
-															style="font-family: &amp; quot; malgun gothic&amp;quot; , dotum , arial, tahoma; font-size: 9pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span
-																class="sign_tit_wrap"><span class="sign_tit"><strong>결재선</strong></span></span><span
-																class="sign_member_wrap" id="activity_15313"><span
-																	class="sign_member"><span class="sign_rank_wrap"><span
-																			class="sign_rank">부장</span></span><span class="sign_wrap"><span
-																			class="sign_name">김지연</span></span><span
-																		class="sign_date_wrap"><span class="sign_date "
-																			id="date_15313"></span></span></span></span></span><br></td>
+														<td>
+															<div class="sign_condition">
+																<span class="sign_type1_inline" data-group-seq="0"
+																	data-group-name="승인" data-group-max-count="1"
+																	data-group-type="type1" data-is-reception=""><span
+																	class="sign_tit_wrap"><span class="sign_tit"><strong>승인</strong></span></span>
+																	<!--  --> <span class="sign_member_wrap"
+																	id="activity_15162"><span class="sign_member"><span
+																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
+																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
+																			class="sign_date_wrap"><span
+																				class="sign_date " id="date_15162"></span></span></span></span> <span
+																	class="sign_member_wrap" id="activity_15162"><span
+																		class="sign_member"><span
+																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
+																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
+																			class="sign_date_wrap"><span
+																				class="sign_date " id="date_15162"></span></span></span></span> <span
+																	class="sign_member_wrap" id="activity_15162"><span
+																		class="sign_member"><span
+																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
+																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
+																			class="sign_date_wrap"><span
+																				class="sign_date " id="date_15162"></span></span></span></span> <!--  --></span>
+
+															</div>
+
+															<div class="sign_condition">
+																<span class="sign_type1_inline" data-group-seq="0"
+																	data-group-name="신청" data-group-max-count="1"
+																	data-group-type="type1" data-is-reception=""><span
+																	class="sign_tit_wrap"><span class="sign_tit"><strong>신청</strong></span></span>
+																	<!--  --> <span class="sign_member_wrap"
+																	id="activity_15162"><span class="sign_member"><span
+																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
+																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
+																			class="sign_date_wrap"><span
+																				class="sign_date " id="date_15162"></span></span></span></span></span>
+															</div>
+
+														</td>
 													</tr>
 												</tbody>
 											</table>
@@ -234,7 +217,7 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"
 														colspan="6"><input type="text" class="ipt_editor"
-														data-dsl="{{text:subject}}" name="subject" id="subject"
+														data-dsl="{{text:subject}}" name="aTitle" id="aTitle"
 														value="" data-id="subject" data-name="subject"
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
@@ -259,7 +242,7 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"
 														rowspan="2"><input type="text" class="ipt_editor"
-														data-dsl="{{text}}" name="editorForm_7" id="editorForm_7"
+														data-dsl="{{text}}" name="oDepartment" id="oDepartment"
 														value="" data-id="" data-name="" data-require="false"
 														data-maxlength="" data-width="" data-defaultstr=""
 														data-editable="false" data-value="" placeholder=""><br>
@@ -271,10 +254,10 @@ desired effect
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"
 														rowspan="2"><input type="text" readonly=""
 														class="ipt_editor ipt_editor_date hasDatepicker"
-														data-dsl="{{calendar}}" id="editorForm_8" data-id=""
+														data-dsl="{{calendar}}" id="oLimit" data-id=""
 														data-name="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
-														name="editorForm_8" data-value="" placeholder="" value=""><br>
+														name="oLimit" data-value="" placeholder="" value=""><br>
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(221, 221, 221); height: 18px; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: bold; border-right: black 1px solid; padding-top: 5px"
@@ -286,8 +269,8 @@ desired effect
 													<td
 														style="text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; padding-top: 5px"
 														class=""><input type="text" class="ipt_editor"
-														data-dsl="{{text}}" name="editorForm_9" id="editorForm_9"
-														value="" data-id="" data-name="" data-require="false"
+														data-dsl="{{text}}" name="oNo" id="oNo" value=""
+														data-id="" data-name="" data-require="false"
 														data-maxlength="" data-width="" data-defaultstr=""
 														data-editable="false" data-value="" placeholder=""><br>
 													</td>
@@ -300,11 +283,10 @@ desired effect
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" readonly=""
 														class="ipt_editor ipt_editor_date hasDatepicker"
-														data-dsl="{{calendar}}" id="editorForm_10" data-id=""
-														data-name="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														name="editorForm_10" data-value="" placeholder="" value=""><br>
-													</td>
+														data-dsl="{{calendar}}" id="oDate" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" name="oDate"
+														data-value="" placeholder="" value=""><br></td>
 												</tr>
 												<tr>
 													<td
@@ -314,11 +296,10 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_11" id="editorForm_11" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="oPayment" id="oPayment" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(221, 221, 221); height: 18px; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: bold; border-right: black 1px solid; padding-top: 5px">
 
@@ -328,12 +309,10 @@ desired effect
 														data-type="period" data-value=""><input type="text"
 															readonly=""
 															class="ipt_editor ipt_editor_date hasDatepicker"
-															data-dsl="{{calendar}}" id="editorForm_12"
-															name="editorForm_12"> ~ <input type="text"
-															readonly=""
+															data-dsl="{{calendar}}" id="oStartdate" name="oStartdate">
+															~ <input type="text" readonly=""
 															class="ipt_editor ipt_editor_date hasDatepicker"
-															data-dsl="{{calendar}}" id="editorForm_13"
-															name="editorForm_13"></span><br></td>
+															data-dsl="{{calendar}}" id="oEnddate" name="oEnddate"></span><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(221, 221, 221); height: 18px; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: bold; border-right: black 1px solid; padding-top: 5px"
 														colspan="2">완납일자</td>
@@ -341,10 +320,10 @@ desired effect
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" readonly=""
 														class="ipt_editor ipt_editor_date hasDatepicker"
-														data-dsl="{{calendar}}" id="editorForm_14" data-id=""
+														data-dsl="{{calendar}}" id="oPayend" data-id=""
 														data-name="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
-														name="editorForm_14" data-value="" placeholder="" value=""><br>
+														name="oPayend" data-value="" placeholder="" value=""><br>
 													</td>
 												</tr>
 												<tr style="height: 32px">
@@ -355,18 +334,17 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"
 														colspan="6"><input type="text" class="ipt_editor"
-														data-dsl="{{text}}" name="editorForm_15"
-														id="editorForm_15" value="" data-id="" data-name=""
-														data-require="false" data-maxlength="" data-width=""
-														data-defaultstr="" data-editable="false" data-value=""
-														placeholder=""><br></td>
+														data-dsl="{{text}}" name="oPurpose" id="oPurpose" value=""
+														data-id="" data-name="" data-require="false"
+														data-maxlength="" data-width="" data-defaultstr=""
+														data-editable="false" data-value="" placeholder=""><br></td>
 												</tr>
 											</tbody>
 										</table>
 
 
 										<table
-											style="border-bottom: 2px solid black; border-left: 2px solid black; width: 800px; border-collapse: collapse; font-family: &amp; quot; malgun gothic&amp;quot; , dotum , arial, tahoma; border-right: 2px solid black; height: 453.636px;">
+											style="border-bottom: 2px solid black; border-left: 2px solid black; width: 800px; border-collapse: collapse; font-family: &amp; amp; quot; malgun gothic&amp;amp; quot; , dotum , arial, tahoma; border-right: 2px solid black; height: 453.636px;">
 											<colgroup>
 												<col width="40">
 												<col width="300">
@@ -1186,20 +1164,19 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"
 														colspan="8"><p
-															style="margin: 0px 0px 10px; font-family: &amp; quot; malgun gothic&amp;quot; , dotum , arial, tahoma; font-size: 9pt; line-height: 18px;">※
-															특기사항</p>
-														<textarea class="txta_editor" data-dsl="{{textarea}}"
-															name="editorForm_100" id="editorForm_100" value=""
-															data-id="" data-name="" data-require="false"
-															data-maxlength="" data-width="" data-defaultstr=""
-															data-editable="false" data-value="" placeholder=""></textarea><br>
-													</td>
+															style="margin: 0px 0px 10px; font-family: &amp; amp; quot; malgun gothic&amp;amp; quot; , dotum , arial, tahoma; font-size: 9pt; line-height: 18px;">※
+															특기사항</p> <textarea class="txta_editor"
+															data-dsl="{{textarea}}" name="editorForm_100"
+															id="editorForm_100" value="" data-id="" data-name=""
+															data-require="false" data-maxlength="" data-width=""
+															data-defaultstr="" data-editable="false" data-value=""
+															placeholder=""></textarea><br></td>
 												</tr>
 											</tbody>
 										</table>
 								</span>
 									<p
-										style="font-family: &amp; quot; 맑은 고딕&amp;quot;; font-size: 10pt; line-height: 20px; margin-top: 0px; margin-bottom: 0px;">&nbsp;</p></span>
+										style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot;; font-size: 10pt; line-height: 20px; margin-top: 0px; margin-bottom: 0px;">&nbsp;</p></span>
 							</form>
 						</div>
 
