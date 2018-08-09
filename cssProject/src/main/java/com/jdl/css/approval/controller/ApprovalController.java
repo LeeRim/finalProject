@@ -1,5 +1,6 @@
 package com.jdl.css.approval.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -88,24 +89,25 @@ public class ApprovalController {
 		return "approval/selectApproverPage";
 	}
 	
-
-	@RequestMapping("selectDraftApprovalList.do")
-	public ModelAndView selectDraftApprovalList(ModelAndView mv,HttpSession session){
-		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
-		List<ApprovalVo> draftList = aService.selectDraftApprovalList(user);
-		System.out.println(draftList);
-		mv.addObject("draftList", draftList);
-		mv.setViewName("");
-		return mv;
-	}
-	
 	@RequestMapping("writeJobPropsal.do")
-	public String writeJobPropsal(ApprovalVo app,JobPropsalVo jobp,HttpSession session){
+	public String writeJobPropsal(ApprovalVo app,JobPropsalVo jobp,@RequestParam("appStr") List<Integer> appStr,HttpSession session){
 		app.setaWriterFk(((EmployeeVo)session.getAttribute("user")).geteKey());
+		app.setcKeyFk(((EmployeeVo)session.getAttribute("user")).getcKeyFk());
+		app.setDivDoctypeFk(1);
 		//Date jpWorkingDate = Date.valueOf(workingDate);
 		//jobp.setJpWorkingDate(jpWorkingDate);
+		System.out.println(appStr);
 		System.out.println(app);
 		System.out.println(jobp);
+		
+		int addAResult= aService.insertApproval(app);
+		//System.out.println("aKey : "+app.getaKey());
+
+		int addAppResult = aService.insertApprovers(app.getaKey(),appStr);
+		//System.out.println(addAppResult);
+		
+		jobp.setaKeyFk(app.getaKey());
+		int addJobPropsalResult = aService.insertJobPropsal(jobp);
 		return null;
 	}
 

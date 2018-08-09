@@ -10,6 +10,7 @@ public class ApprovalVo {
 
 	private int aKey;
 	private int cKeyFk;
+	private int divDoctypeFk;
 	private String aTitle;
 	private String aContent;
 	private int aWriterFk;
@@ -21,15 +22,20 @@ public class ApprovalVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApprovalVo(int aKey, int cKeyFk, String aTitle, int aWriterFk, String aWriteDate,
-			int aCondition) {
+
+	public ApprovalVo(int aKey, int cKeyFk, int divDoctypeFk, String aTitle, String aContent, int aWriterFk,
+			String aWriteDate, int aCondition, List<ApprovalConditionVo> aConList) {
 		this.aKey = aKey;
 		this.cKeyFk = cKeyFk;
+		this.divDoctypeFk = divDoctypeFk;
 		this.aTitle = aTitle;
+		this.aContent = aContent;
 		this.aWriterFk = aWriterFk;
 		this.aWriteDate = aWriteDate;
 		this.aCondition = aCondition;
+		this.aConList = aConList;
 	}
+
 
 	public int getaKey() {
 		return aKey;
@@ -48,6 +54,16 @@ public class ApprovalVo {
 	}
 
 
+	public int getDivDoctypeFk() {
+		return divDoctypeFk;
+	}
+
+
+	public void setDivDoctypeFk(int divDoctypeFk) {
+		this.divDoctypeFk = divDoctypeFk;
+	}
+
+
 	public String getaTitle() {
 		return aTitle;
 	}
@@ -55,6 +71,17 @@ public class ApprovalVo {
 	public void setaTitle(String aTitle) {
 		this.aTitle = aTitle;
 	}
+	
+
+	public String getaContent() {
+		return aContent;
+	}
+
+
+	public void setaContent(String aContent) {
+		this.aContent = aContent;
+	}
+
 
 	public int getaWriterFk() {
 		return aWriterFk;
@@ -79,11 +106,24 @@ public class ApprovalVo {
 	public void setaCondition(int aCondition) {
 		this.aCondition = aCondition;
 	}
+	
+	
+
+	public List<ApprovalConditionVo> getaConList() {
+		return aConList;
+	}
+
+
+	public void setaConList(List<ApprovalConditionVo> aConList) {
+		this.aConList = aConList;
+	}
+
 
 	@Override
 	public String toString() {
-		return "ApprovalVo [aKey=" + aKey + ", cKeyFk=" + cKeyFk + ", aTitle=" + aTitle + ", aWriterFk=" + aWriterFk
-				+ ", aWriteDate=" + aWriteDate + ", aCondition=" + aCondition + ", aConList=" + aConList + "]";
+		return "ApprovalVo [aKey=" + aKey + ", cKeyFk=" + cKeyFk + ", divDoctypeFk=" + divDoctypeFk + ", aTitle="
+				+ aTitle + ", aContent=" + aContent + ", aWriterFk=" + aWriterFk + ", aWriteDate=" + aWriteDate
+				+ ", aCondition=" + aCondition + ", aConList=" + aConList + "]";
 	}
 
 }

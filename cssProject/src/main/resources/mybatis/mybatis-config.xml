@@ -14,6 +14,9 @@
 	<typeAlias type="com.jdl.css.note.model.vo.NoteVo" alias="NoteVo"/>
 	<typeAlias type="com.jdl.css.common.model.vo.AttachmentVo" alias="AttachVo"/>
 	<typeAlias type="com.jdl.css.border.model.vo.BoardCommentVo" alias="Comment" /> 
+	<typeAlias type="com.jdl.css.approval.model.vo.ApprovalVo" alias="ApprovalVo" /> 
+	<typeAlias type="com.jdl.css.approval.model.vo.ApprovalConditionVo" alias="AppConVo" /> 
+	<typeAlias type="com.jdl.css.approval.model.vo.JobPropsalVo" alias="JobPropsalVo" /> 
   </typeAliases>
 
   <mappers>
@@ -21,6 +24,6 @@
 	<mapper resource="mybatis/sql/employeeMapper.xml" /> 
 	<mapper resource="mybatis/sql/adminMapper.xml"/>
 	<mapper resource="mybatis/sql/noteMapper.xml"/>
-
+	<mapper resource="mybatis/sql/approvalMapper.xml"/>	
   </mappers>
 </configuration>

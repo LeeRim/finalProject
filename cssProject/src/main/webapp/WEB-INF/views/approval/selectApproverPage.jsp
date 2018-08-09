@@ -195,7 +195,8 @@ var approvers = new Array();
 	}
 	
 	function addApprovers(){
-		console.log(approvers);
+		//console.log(approvers.join(", "));
+		$("#appStr").val(approvers);
 	}
 	
 </script>
