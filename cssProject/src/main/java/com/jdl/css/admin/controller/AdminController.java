@@ -23,8 +23,11 @@ public class AdminController {
 	AdminService service;
 	
 	@RequestMapping("adminMain.do")
-	public String adminMain(){
-		return "admin/admin_main";
+	public ModelAndView adminMain(ModelAndView mv){
+		List<CompanyVo> list = service.selectMarkList();
+		mv.addObject("list",list);
+		mv.setViewName("admin/admin_main");
+		return mv;
 	}
 	@RequestMapping("companyList.do")
 	public ModelAndView companyList(ModelAndView mv){

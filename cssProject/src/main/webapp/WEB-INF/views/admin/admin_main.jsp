@@ -422,24 +422,15 @@ desired effect
 var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
 //마커를 표시할 위치와 title 객체 배열입니다 
-var positions = [
-  {
-      title: '카카오', 
-      latlng: new daum.maps.LatLng(33.450705, 126.570677)
-  },
-  {
-      title: '생태연못', 
-      latlng: new daum.maps.LatLng(33.450936, 126.569477)
-  },
-  {
-      title: '텃밭', 
-      latlng: new daum.maps.LatLng(33.450879, 126.569940)
-  },
-  {
-      title: '400',
-      latlng: new daum.maps.LatLng(33.451393, 126.570738)
-  }
-];
+var positions = [];
+
+<c:forEach items="${list}" var="c" varStatus="status">
+	positions.push({
+		title: '${c.city} : ${status.count}개', 
+	    latlng: new daum.maps.LatLng(${c.lat}, ${c.lng})
+	});
+</c:forEach>
+
 
 //마커 이미지의 이미지 주소입니다
 var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 

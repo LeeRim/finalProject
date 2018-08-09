@@ -30,6 +30,10 @@ public class AdminDao {
 		
 	}
 
+	public List<CompanyVo> selectMarkList() {
+		return sqlSession.selectList("AdminMapper.selectMarkList");
+	}
+
 	
 
 }

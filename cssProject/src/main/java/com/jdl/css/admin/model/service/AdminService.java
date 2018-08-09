@@ -35,5 +35,9 @@ public class AdminService {
 		return result;
 	}
 
+	public List<CompanyVo> selectMarkList() {
+		return dao.selectMarkList();
+	}
+
 
 }

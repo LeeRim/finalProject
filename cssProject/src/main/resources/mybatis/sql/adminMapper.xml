@@ -24,5 +24,13 @@
 		SET C_LEVEL = #{cLevel}
 		WHERE C_KEY = #{cKey}
 	</update>
+	
+	<select id="selectMarkList" resultType="Company">
+		SELECT COORD_KEY_FK, CITY, LAT, LNG, COUNT
+		FROM (SELECT COORD_KEY_FK, COUNT(*) AS "COUNT"
+			        FROM COMPANY
+			        GROUP BY COORD_KEY_FK)
+		JOIN COORDINATE ON(COORD_KEY_FK = COORD_KEY)
+	</select>
 
 </mapper>
