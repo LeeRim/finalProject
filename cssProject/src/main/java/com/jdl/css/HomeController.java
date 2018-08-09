@@ -12,6 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.jdl.css.calender.model.service.CalenderService;
+import com.jdl.css.calender.model.vo.CalenderVo;
 
 
 /**
@@ -21,16 +26,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	@Autowired
+	CalenderService service;
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 
+
 		
+		//
 		
 		return "home";
 	}

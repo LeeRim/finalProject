@@ -14,6 +14,7 @@
 	<typeAlias type="com.jdl.css.note.model.vo.NoteVo" alias="NoteVo"/>
 	<typeAlias type="com.jdl.css.common.model.vo.AttachmentVo" alias="AttachVo"/>
 	<typeAlias type="com.jdl.css.border.model.vo.BoardCommentVo" alias="Comment" /> 
+	<typeAlias type="com.jdl.css.calender.model.vo.CalenderVo" alias="Calender"/>
   </typeAliases>
 
   <mappers>
@@ -21,6 +22,6 @@
 	<mapper resource="mybatis/sql/employeeMapper.xml" /> 
 	<mapper resource="mybatis/sql/adminMapper.xml"/>
 	<mapper resource="mybatis/sql/noteMapper.xml"/>
-
+	<mapper resource="mybatis/sql/calenderMapper.xml"/>
   </mappers>
 </configuration>

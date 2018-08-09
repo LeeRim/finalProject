@@ -11,11 +11,11 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-			<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-			<property name="username" value="css"/>
-			<property name="password" value="css"/>
-		</bean>
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="css"/>
+		<property name="password" value="css"/>
+	</bean>
 		
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 			<property name="dataSource" ref="dataSource"/>
