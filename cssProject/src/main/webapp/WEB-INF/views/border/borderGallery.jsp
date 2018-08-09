@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>갤러리</h1>
+<form id="BoardGallery"action="BoardGallery.do" method="post" enctype="multipart/form-data">
+<input type="text" name="title"/>
+<input type="file" name="attach"/>
+</form>
 
 </body>
 </html>

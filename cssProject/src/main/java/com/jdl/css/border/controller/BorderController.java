@@ -222,5 +222,11 @@ public class BorderController {
 		return mv;
 	}
 	
+	@RequestMapping("BoardGallery.do")
+	public ModelAndView BoardGallery(ModelAndView mv){
+		
+		
+		return mv;
+	}
 	
 }
