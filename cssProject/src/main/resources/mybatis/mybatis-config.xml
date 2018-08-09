@@ -9,7 +9,6 @@
 	</settings>
   <typeAliases>
 	<typeAlias type="com.jdl.css.border.model.vo.BorderVo" alias="Border" /> 
-
 	<typeAlias type="com.jdl.css.employee.model.vo.EmployeeVo" alias="EmployeeVo" /> 
 	<typeAlias type="com.jdl.css.company.model.vo.CompanyVo" alias="Company"/>
 	<typeAlias type="com.jdl.css.note.model.vo.NoteVo" alias="NoteVo"/>

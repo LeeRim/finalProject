@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
 <!-- DataTables -->
 <script src="resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -40,7 +39,6 @@
 <!-- 	<script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
 	<!-- AdminLTE App -->
 <!-- 	<script src="resources/dist/js/adminlte.min.js"></script> -->
-=======
 	<!-- DataTables -->
 <script src="resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
@@ -54,7 +52,6 @@
   
 <!-- DataTables -->
 <!-- FastClick -->
->>>>>>> refs/heads/master
 	<!-- REQUIRED JS SCRIPTS -->
 <style>
 
@@ -172,16 +169,14 @@ $(function(){
                 </tr>
                 </c:forEach>
               </table>
-
-              	<button class="write"onclick="boardForm();">작성</button>
               <c:if test="${!empty user}">
 	              <c:choose>
 	              	<c:when test="${user.eType eq 1 && bCategory eq 1}">
 		              	<div class="Btn" onclick="boardForm();">공지사항 작성</div>
 	              	</c:when>
-	              	<c:otherwise>
+	              	<c:when test="${bCategory ne 1}">
 		              	<div class="Btn" onclick="boardForm();">작성</div>
-	              	</c:otherwise>
+	              	</c:when>
 	              </c:choose>
               </c:if>
             </div>
@@ -191,11 +186,7 @@ $(function(){
         </div>
       </div>
     <!-- /.content -->
-<<<<<<< HEAD
-=======
 	<div class="page">
-	<button onclick="movePage(1);"> << </button>
->>>>>>> refs/heads/master
     <div class="pageBtnDiv">
 	<div class="pageBtn" onclick="movePage(1);"> << </div>
 	<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}" >

@@ -13,6 +13,9 @@
   	function board(){
   		location.href="borderIndex.do"
   	}
+  	function boardGallery(){
+  		location.href="borderGallery.do"
+  	}
   </script>
 </head>
 <body>
@@ -67,6 +70,7 @@
             <li><a href="#">Link in level 2</a></li>
           </ul>
         </li>
+        <li><a href="#" onclick="boardGallery();"><i class="fa fa-link"></i> <span>갤러리</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

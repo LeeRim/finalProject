@@ -8,37 +8,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-$("#border").click(function(){
-	$.ajax({
-	    url : "Boardcategory.do", 
-	    type : "post",
-	    success : function(data){
-	          console.log(data);
-	          var str = "";
-	          for(index in data){
-	             str += '<div class="w3-container w3-card w3-white w3-round w3-margin"><br>'+
-	               '<table id="fileTb" cellspacing="0" align="center" class="w3-margin-bottom">'+
-	               '    <tr>'+
-	               '        <td>'+
-	               '        </td>'+
-	               '        <td>'+
-	               '        </td>'+
-	               '    </tr>'+
-	               '    <tr>'+
-	               '        <td>'+
-	               '        </td>'+
-	               '        <td>'+
-	               '        </td>'+
-	               '    </tr>'+
-	               '</table>'+
-	           '</div>';
-	          }
-	          $("#contentDiv").append($(str));
-	    },error : function(e){
-	       console.log("요청 실패!!");
-	    }
-	 }); 
-});
 
 </script>
 </head>
@@ -58,7 +27,28 @@ $("#border").click(function(){
       </ol>
     </section>
     <div class="row" style="width:95%; margin-right:auto; margin-left:auto; margin-top:20px;">
-	<button id="border">게시판 불러오기</button>
+	<div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+              	
+                <tr>
+                  <th>번호</th>
+                  <th>작성자</th>
+                  <th>글제목</th>
+                  <th>조회수</th>
+                  <th>작성일</th>
+                </tr>
+              <c:forEach items="${board1}" var="board1">
+                <tr>
+                  <td><c:out value="${board1.boardKey }"/></td>
+                  <td><c:out value="${board1.eName }"/></td>
+                  <td><c:out value="${board1.bTitle }"/></td>
+                  <td><span class="label label-danger"><c:out value="${board1.bCount }"/></span></td>
+                  <td><c:out value="${board1.bDate }"/></td>
+                </tr>
+              </c:forEach>
+              </table>
+            </div>
+	
 	</div>
 </div>
 </div>
