@@ -27,17 +27,20 @@
 	<sql id="selectApproval">
 		SELECT A.A_KEY A_KEY,
 		A.C_KEY_FK C_KEY_FK,
-		A.DIV_DOCTYPE_FK DIV_DOCTYPE_FK,
+		A.DIV_DOCTYPE_FK
+		DIV_DOCTYPE_FK,
 		A.A_TITLE A_TITLE,
 		A.A_WRITER_FK A_WRITER_FK,
 		A.A_WRITE_DATE A_WRITE_DATE,
 		A.A_CONDITION A_CONDITION,
-		AC.AC_KEY AC_KEY,
+		AC.AC_KEY
+		AC_KEY,
 		AC.A_KEY_FK A_KEY_FK,
 		AC.AC_APPROVER_FK AC_APPROVER_FK,
 		AC.AC_CONDITION AC_CONDITION,
 		AC.AC_APPROVAL_DATE AC_APPROVAL_DATE
-		FROM APPROVAL A
+		FROM
+		APPROVAL A
 		JOIN APPROVAL_CONDITION AC ON(AC.A_KEY_FK=A.A_KEY)
 	</sql>
 
@@ -45,8 +48,31 @@
 		resultMap="approvalMap">
 		SELECT *
 		FROM APPROVAL A
-		JOIN APPROVAL_CONDITION AC ON(AC.A_KEY_FK=A.A_KEY)
+		JOIN APPROVAL_CONDITION AC
+		ON(AC.A_KEY_FK=A.A_KEY)
 		WHERE A_WRITER_FK = #{eKey}
 	</select>
+
+	<insert id="insertApproval" parameterType="ApprovalVo" >
+		INSERT INTO APPROVAL VALUES (
+		SEQ_APPROVAL.NEXTVAL,#{cKeyFk},#{divDoctypeFk},#{aTitle},#{aContent},#{aWriterFk},SYSDATE,0
+		)
+
+		<selectKey keyProperty="aKey" resultType="Integer" order="AFTER">
+			SELECT SEQ_APPROVAL.CURRVAL FROM dual
+		</selectKey>
+	</insert>
+	
+	<insert id="insertApprovers" parameterType="hashMap">
+		INSERT INTO APPROVAL_CONDITION VALUES (
+		SEQ_APPROVAL_CONDITION.NEXTVAL,#{aKey},#{acApprovalFk},0,SYSDATE
+		)
+	</insert>
+	
+	<insert id="insertJobpropsal" parameterType="JobPropsalVo">
+		INSERT INTO JOB_PROPSAL VALUES (
+		SEQ_JOB_PROPSAL.NEXTVAL,#{aKeyFk},#{jpWorkingDate},#{jpCooperation}
+		)
+	</insert>
 
 </mapper>

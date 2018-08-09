@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/include/header.jsp" />
+	<c:import url="../selectApproverPage.jsp"/>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -102,7 +103,8 @@ desired effect
 								<div class="approval_import ie9-scroll-fix">
 									<!-- 문서 내용 표시 테스트 -->
 									<form id="document_content" class="form_doc_editor editor_view"
-										action="writeJobPropsal.do" method="get">
+										action="writeJobPropsal.do" method="post">
+										<input type="hidden" id="appStr" name="appStr" value="">
 										<span>
 											<table
 												style="border: 0px solid rgb(0, 0, 0); border-image: none; width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
@@ -264,8 +266,8 @@ desired effect
 														<td
 															style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 350px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: top;"
 															colspan="4" class=""><textarea
-																data-dsl="{{editor:appContent}}" name="jpContent"
-																id="jpContent" style="width: 100%; min-width: 200px;"
+																data-dsl="{{editor:appContent}}" name="aContent"
+																id="aContent" style="width: 100%; min-width: 200px;"
 																value="" class="go-editor"></textarea></td>
 													</tr>
 												</tbody>
@@ -321,7 +323,7 @@ desired effect
 	</div>
 
 
-	<c:import url="../selectApproverPage.jsp"/>
+
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
