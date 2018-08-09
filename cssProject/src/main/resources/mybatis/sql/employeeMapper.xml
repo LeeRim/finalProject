@@ -80,7 +80,7 @@ VALUES (SEQ_EMPLOYEE.NEXTVAL,  #{eNo}, 1, 'A' , #{eId}, #{ePwd},
 	  #{eBirth}, #{eHireDate}, 'aa' )
 </insert>
 	
-	<select id="selectEmployeeList"  resultMap="EmployeeMap">
+	<select id="selectEmployeeList2"  resultMap="EmployeeMap">
 		SELECT
     E.E_ID AS "ID", 
     D.DIV_INFO AS "DEPARTMENT", 
