@@ -17,6 +17,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- 승인table -->
 <link rel="stylesheet" href="resources/dist/css/approval.css">
 
+<script>
+function openSelectApprover(){
+	$('div.modal').modal();
+}
+</script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -65,9 +70,9 @@ desired effect
         | Your Page Content Here |
         -------------------------->
 				<div class="addApprover">
-					<div class="btn btn-app">
+					<a class="btn btn-app" href="#" onclick="openSelectApprover();">
 						<i class="fa fa-user-plus"></i>결재자추가
-					</div>
+					</a>
 				</div>
 				<!-- 3단 레이아웃 멀티클래스 -->
 				<section class="content_wrapper">
@@ -1191,7 +1196,7 @@ desired effect
 	</div>
 
 
-
+	<c:import url="../selectApproverPage.jsp"/>
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

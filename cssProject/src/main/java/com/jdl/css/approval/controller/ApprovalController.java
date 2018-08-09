@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.approval.model.service.ApprovalService;
@@ -31,7 +32,20 @@ public class ApprovalController {
 	}
 	
 	@RequestMapping("jobPropsalPage.do")
-	public String openJobPropsalPage(){
+	public String openJobPropsalPage(HttpSession session,Model model){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		//회사키
+		//int companyK=user.getcKeyFk();
+		int companyK=1;
+//		System.out.println("회사키 = "+ companyK);
+		
+		List<EmployeeVo> employee = nService.selectEmployee(companyK);
+		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		//System.out.println(department);
+		//System.out.println(employee);
+		
+		model.addAttribute("employee",employee);
+		model.addAttribute("department", department);
 		return "approval/approvalForm/jobPropsal";
 	}
 	
@@ -74,12 +88,7 @@ public class ApprovalController {
 		return "approval/selectApproverPage";
 	}
 	
-	@RequestMapping("addApprovers.do")
-	public String addApprovers(HttpSession session,@RequestParam("addArr") Object[] addArr){
-		System.out.println(addArr.length);
-		return null;
-	}
-	
+
 	@RequestMapping("selectDraftApprovalList.do")
 	public ModelAndView selectDraftApprovalList(ModelAndView mv,HttpSession session){
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
