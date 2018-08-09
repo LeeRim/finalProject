@@ -23,6 +23,9 @@
 	function border(){
 		location.href="borderList.do?bCateGory=${board.bCateGory}";
 	}
+	function borderDelete(){
+		location.href="borderDelete.do?boardKey=${board.boardKey}"
+	}
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -45,9 +48,10 @@
 <form action="updateBorder.do" method="post" enctype="multipart/form-data">
 <input type="hidden" name=boardKey value="<c:out value='${board.boardKey }' />">
 제목 : <input type="text" name="bTitle" value="${board.bTitle }"/>
-내용 : <textarea id="summernote" name="bContent">${board.bContent }</textarea>
+<textarea id="summernote" name="bContent">${board.bContent }</textarea>
 <input type="submit" value="수정"/>
 <input type="button" value="취소" onclick="border();"/>
+<input type="button" value="삭제" onclick="borderDelete();"/>
 </form>
 	</div>
 	</div>

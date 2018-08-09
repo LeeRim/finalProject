@@ -141,6 +141,11 @@ $(function(){
                 </c:forEach>
               </table>
               <c:if test="${!empty user}">
+              <c:choose>
+              	<c:when test="${user.eType eq 2}">
+              		<div class="Btn" onclick="boardForm();">공지사항 작성</div>
+              	</c:when>
+              </c:choose>
               	<div class="Btn" onclick="boardForm();">작성</div>
               </c:if>
             </div>

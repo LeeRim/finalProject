@@ -44,6 +44,11 @@
 	function writeComment(){
 		$("#commentForm").submit();
 	}
+	function deleteBoard(){
+		if(confirm("삭제 하시겠습니까?")){
+			location.href="deleteBoard.do?boardKey=${board.boardKey}"
+		}
+	}
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -68,8 +73,9 @@
 작성일 : <c:out value="${board.bDate }"/><br>
 내용 : ${board.bContent }
 <div class="Btns">
-	<c:if test="${user.eId eq null}">
+	<c:if test="${user ne null && user.eId eq board.bWriter}">
 	<div class="Btn" onclick="bModifyPage();">수정하기</div>
+	<div class="Btn" onclick="deleteBoard();">삭제하기</div>
 	</c:if>
 	<div class="Btn" onclick="border();">취소</div>
 </div>
