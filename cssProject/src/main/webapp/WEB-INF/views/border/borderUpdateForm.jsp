@@ -21,53 +21,42 @@
 	  });
 	});
 	function border(){
-		location.href="borderList.do?bCateGory=${board.bCateGory}" + "&currentPage=" + ${currentPage};
+		location.href="borderList.do?bCateGory=${board.bCateGory}";
 	}
-	function writeComment(){
-		$("#commentForm").submit();
+	function borderDelete(){
+		location.href="borderDelete.do?boardKey=${board.boardKey}"
 	}
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
    <c:import url="/WEB-INF/views/include/left_column.jsp"/>
-
-<div class="content-wrapper">
- <!-- Content Header (Page header) -->
-    <section class="content-header">
+	<div class="content-wrapper">
+	<section class="content-header">
       <h1>
-        게시판
-        <small>
-        <c:choose>
-			<c:when test="${bCateGory eq 1}">
-				공지사항
-			</c:when>
-			<c:when test="${bCateGory eq 2}">
-				자유게시판
-			</c:when>
-			<c:when test="${bCateGory eq 3}">
-				경조사
-			</c:when>
-		</c:choose>
-        </small>
+        Data Tables
+        <small>advanced tables</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">게시판</a></li>
-        <li class="active">게시판</li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Data tables</li>
       </ol>
     </section>
 
+<div class="row" style="width:95%; margin-right:auto; margin-left:auto; margin-top:20px;">
 <form action="updateBorder.do" method="post" enctype="multipart/form-data">
 <input type="hidden" name=boardKey value="<c:out value='${board.boardKey }' />">
 제목 : <input type="text" name="bTitle" value="${board.bTitle }"/>
-내용 : <textarea id="summernote" name="bContent">${board.bContent }</textarea>
+<textarea id="summernote" name="bContent">${board.bContent }</textarea>
 <input type="submit" value="수정"/>
 <input type="button" value="취소" onclick="border();"/>
+<input type="button" value="삭제" onclick="borderDelete();"/>
 </form>
+	</div>
+	</div>
+</div>
 
-</div>
-</div>
 <c:import url="../include/footer.jsp"/>
 </body>
 </html>

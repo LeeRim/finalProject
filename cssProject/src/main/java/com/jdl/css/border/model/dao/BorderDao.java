@@ -1,5 +1,6 @@
 package com.jdl.css.border.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,5 +41,23 @@ public class BorderDao {
 		return sqlSession.selectOne("BorderMapper.selectBoardTotalCount", getbCateGory);
 	}
 
-	
+	public int updateBoardCount(int boardKey) {
+		return sqlSession.update("BorderMapper.BorderCountUpdate", boardKey);
+	}
+
+	public List<BoardCommentVo> selectCommentList(int boardKey) {
+		return sqlSession.selectList("BorderMapper.selectCommentList", boardKey);
+	}
+
+	public int insertComment(BoardCommentVo bc) {
+		return sqlSession.insert("BorderMapper.BorderComment", bc);
+	}
+
+
+	public int deleteBoard(BorderVo board) {
+		return sqlSession.delete("BorderMapper.DeleteBoard", board);
+	}
+	public List<BorderVo> selectBoardList() {
+		return sqlSession.selectList("BorderMapper.selectBoardList");
+	}
 }

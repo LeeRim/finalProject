@@ -17,6 +17,14 @@
 		<result property="endRow" column="endRow"/>
 	</resultMap>
 	
+	<resultMap type="Comment" id="CommentMap">
+		<id property="commentKey" column="CO_KEY"/>
+		<result property="boardKeyFk" column="B_KEY_FK"/>
+		<result property="cWriter" column="CO_WRITER_FK"/>
+		<result property="cContent" column="CO_CONTENT"/>
+		<result property="cDate" column="CO_DATE"/>
+	</resultMap>
+	
 	<select id="BorderListSelect" parameterType="Border" resultMap="BorderMap">
 		SELECT b.B_KEY, b.B_TITLE, b.C_KEY_FK, b.B_CONTENT, b.B_COUNT, b.B_DATE, b.B_CATEGORY ,e.E_NAME, b.B_WRITER_FK 
 		FROM BOARD b 
@@ -48,7 +56,7 @@
 	</select>
 	
 	<select id="BorderSelectList" parameterType="Border" resultMap="BorderMap">
-		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY
+		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM ( SELECT ROWNUM RNUM, P.*
 		FROM ( SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
 		FROM BOARD b 
@@ -58,9 +66,30 @@
 		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
-	<insert id="bcInsert" parameterType="Border">
-		INSERT INTO BOARD_COMMENT VALUES(SEQ_COMMENT.NEXTVAL, #{boardKeyFk}, #{cWriter}, #{cContent}, SYSDATE);
+	<update id="BorderCountUpdate">
+		UPDATE BOARD
+		SET B_COUNT = B_COUNT + 1
+		WHERE B_KEY = #{boardKey}
+	</update>
+	
+	<select id="selectCommentList" parameterType="int" resultMap="CommentMap">
+		SELECT CO_KEY, B_KEY_FK, CO_WRITER_FK, CO_CONTENT, CO_DATE, E_NAME, B_KEY
+		FROM BOARD_COMMENT c
+		RIGHT OUTER JOIN BOARD b on (c.B_KEY_FK = b.B_KEY)
+		LEFT OUTER JOIN EMPLOYEE e on (c.CO_WRITER_FK = e.E_KEY)
+		WHERE B_KEY = #{boardKey}
+	</select>
+	
+	<insert id="BorderComment">
+		INSERT INTO BOARD_COMMENT VALUES(SEQ_COMMENT.NEXTVAL, #{boardKeyFk}, #{cWriter}, #{cContent}, SYSDATE)
 	</insert>
+	
+	<delete id="DeleteBoard">
+		DELETE FROM BOARD WHERE B_KEY = #{boardKey}
+	</delete>
+	<select id="selectBoardList">
+		SELECT * FROM BOARD
+	</select>
 	
 	
 </mapper>
