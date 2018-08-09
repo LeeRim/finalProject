@@ -10,10 +10,10 @@ public class ApprovalVo {
 
 	private int aKey;
 	private int cKeyFk;
-	private int divDoctypeFk;
 	private String aTitle;
+	private String aContent;
 	private int aWriterFk;
-	private Date aWriteDate;
+	private String aWriteDate;
 	private int aCondition;
 	private List<ApprovalConditionVo> aConList;
 	
@@ -21,11 +21,10 @@ public class ApprovalVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApprovalVo(int aKey, int cKeyFk, int divDoctypeFk, String aTitle, int aWriterFk, Date aWriteDate,
+	public ApprovalVo(int aKey, int cKeyFk, String aTitle, int aWriterFk, String aWriteDate,
 			int aCondition) {
 		this.aKey = aKey;
 		this.cKeyFk = cKeyFk;
-		this.divDoctypeFk = divDoctypeFk;
 		this.aTitle = aTitle;
 		this.aWriterFk = aWriterFk;
 		this.aWriteDate = aWriteDate;
@@ -48,13 +47,6 @@ public class ApprovalVo {
 		this.cKeyFk = cKeyFk;
 	}
 
-	public int getDivDoctypeFk() {
-		return divDoctypeFk;
-	}
-
-	public void setDivDoctypeFk(int divDoctypeFk) {
-		this.divDoctypeFk = divDoctypeFk;
-	}
 
 	public String getaTitle() {
 		return aTitle;
@@ -72,11 +64,11 @@ public class ApprovalVo {
 		this.aWriterFk = aWriterFk;
 	}
 
-	public Date getaWriteDate() {
+	public String getaWriteDate() {
 		return aWriteDate;
 	}
 
-	public void setaWriteDate(Date aWriteDate) {
+	public void setaWriteDate(String aWriteDate) {
 		this.aWriteDate = aWriteDate;
 	}
 
@@ -90,9 +82,8 @@ public class ApprovalVo {
 
 	@Override
 	public String toString() {
-		return "ApprovalVo [aKey=" + aKey + ", cKeyFk=" + cKeyFk + ", divDoctypeFk=" + divDoctypeFk + ", aTitle="
-				+ aTitle + ", aWriterFk=" + aWriterFk + ", aWriteDate=" + aWriteDate + ", aCondition=" + aCondition
-				+ ", aConList=" + aConList + "]";
+		return "ApprovalVo [aKey=" + aKey + ", cKeyFk=" + cKeyFk + ", aTitle=" + aTitle + ", aWriterFk=" + aWriterFk
+				+ ", aWriteDate=" + aWriteDate + ", aCondition=" + aCondition + ", aConList=" + aConList + "]";
 	}
-	
+
 }

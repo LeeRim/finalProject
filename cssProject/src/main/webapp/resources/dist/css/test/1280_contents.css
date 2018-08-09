@@ -1,0 +1,282 @@
+@charset "UTF-8";
+.separator {margin:20px auto 0;}
+
+.tb_basic_1 thead th {background:#878787; height:60px; text-align: center; color:#fff; font-size: 16px; line-height: 1.3; vertical-align: middle; border-bottom: 1px solid #fff;  border-right: 1px solid #fff;}
+.tb_basic_1 thead th span {margin-top:3px; font-weight: normal; font-size: 13px; color:#dafdff;}
+.tb_basic_1 tbody td {padding:20px; border-width:0 1px 1px 0 ; border-color:#dcdcdc; border-style: solid; text-align: center; vertical-align: middle;}
+.tb_basic_1 tbody td:last-child {border-right: 0;}
+.tb_basic_1 tbody td.check {background: url("http://daouoffice.com/images/ic_check_01.png") no-repeat center; }
+
+
+.sub_top {position: relative; padding-top: 60px}
+.sub_top .sub_tit {width:100%; position: absolute; top:40%; left:0; text-align: center; z-index: 10}
+.sub_top .sub_tit h2 {text-align: center; font-size: 32px; color: #25cad3; font-weight: normal;}
+.sub_top .sub_tit p{margin-top:20px; font-size: 14px; color:#999; line-height: 1.5; text-align: }
+.sub_top .sub_bg img {width: 100%}
+
+.docenter {text-align: center; padding:0 0 150px}
+.docenter h3 {padding-top:60px; font-size: 32px;}
+.docenter h4 {margin-top:50px; font-size:25px; text-align: center; color:#25cad3;}
+.docenter p.desc1 {margin-top:14px; font-size:16px; color:#888;  text-align: center}
+.docenter .docarelounge .step {margin-top: 46px;}
+.docenter .btn_wrap {margin-top:46px;}
+.docenter .btn.btn_normal {width:310px; height: 76px; font-size:21px; line-height: 76px; }
+/* .docenter .docare_info1 {margin-top:100px;} */
+.docenter .docare_info2 {margin-top:66px;}
+.docenter .list_support {margin:75px auto 0; overflow: hidden; width: 80%}
+.docenter .list_support li {float: left; width:49%; height:555px; color:#585654;}
+.docenter .list_support li:last-child {border-right: none}
+.docenter .list_support li h5 {text-align: center; font-size: 30px; font-weight: bold; color: #25cad3; letter-spacing: -2px;}
+.docenter .list_support li.phone h5 {color: #5a749a;}
+.docenter .list_support li p {font-size:15px;}
+.docenter .list_support li .tit {font-size: 20px; font-weight: bold; line-height: 1.2}
+.docenter .list_support li .sub {font-size: 15px; color:#b1b0b0; line-height: 1.2 m}
+.docenter .list_support li .point_mint{color:#b1b0b0;}
+.docenter .list_support li .tit + p {margin:10px 0 20px 0;}
+.docenter .list_support li .hours {color:#888; font-size: 15px}
+.docenter .list_support li .phone_num {font-size:32px; font-weight: bold; letter-spacing: -2px; margin:-5px 0 7px 0;}
+.docenter .list_support li .phone_num span {display: block; font-size:16px; font-weight: normal;}
+.docenter .list_support li .email_add {font-size:20px; color:#25cad3; font-weight: bold}
+.docenter .list_support li .btn {display: block; margin:0 auto; padding-right: 16px; width: 200px; height: 48px; line-height: 48px; border-radius: 24px; font-size: 15px;}
+.docenter .list_support li .btn.do_user {background:#25cad3 url(http://daouoffice.com/images/arrow_btn2.png) no-repeat 180px center; color:#fff;}
+.docenter .list_support li .btn.do_before {margin-top:19px; background: #56759b url(http://daouoffice.com/images/arrow_btn2.png) no-repeat 180px center; color:#fff;}
+.docenter .list_support li .box1 {margin:30px 0 30px 0;}
+.docenter .list_support li.center_line {width:1%; border-right: 1px solid #f0f0f0;}
+.docenter .list_support li .line {width:100%; height: 1px;  background: url(http://daouoffice.com/images/docenter_line_01.png) no-repeat center}
+.docenter .docare_info1 .sub_footer {margin-top:50px;}
+.docenter .docare_info1 .sub_footer p.tit { margin-bottom:10px; font-size:19px;}
+.docenter .docare_info1 .sub_footer p.tit span {color:#25cad3;}
+.docenter .docare_info1 .sub_footer p.sub {font-size:16px; color:#7f7f7f; letter-spacing:-1px;}
+.docenter .docare_info1 .sub_footer p.sub1 {font-size:14px; color:#c9c9c9; letter-spacing:-1px;}
+.docenter .docare_info2 .tb_basic_1 {width: 85%; margin: 65px auto;}
+.docenter .docare_info2 .tb_basic_1 tbody td {padding: 14px 0}
+.docenter .docare_info2 .tb_basic_1 thead .th_bg_1 {background: #25cad3;}
+.docenter .docare_info2 .tb_basic_1 thead .th_bg_2 {background: #7bdfe4; color:#676767; font-size:14px}
+.docenter .docare_info2 .tb_basic_1 thead .fc_ccc {color:#ccc;}
+.docenter .docare_info2 .tb_basic_1 thead .th_bg_3 {background: #ccc; color:#555; font-size:14px;}
+.docenter .docare_info2 .do_user thead th{width:17%;}
+.docenter .docare_info2 .do_user thead th:first-child {width:11%;}
+.docenter .docare_info2 .do_before thead th{width:21%;}
+.docenter .docare_info2 .do_before thead th:first-child {width:18%;}
+.docenter .docare_info2 .do_user thead th.tit {border:1px solid #25cad3; color:#25cad3; background: none; font-size: 19px; font-weight: bold}
+.docenter .docare_info2 .do_before thead th.tit {border:1px solid #56759b; color:#56759b; background: none; font-size: 19px;font-weight: bold}
+.docenter .docare_info2 tbody tr:nth-of-type(even) {background: #f5f5f5}
+
+
+/* changetodo --------------------------------------------------------*/
+.switch.contents {padding-top:0;}
+.switch .row {/* display: inline-block; */ text-align: center; background:#fff;}
+.switch .row:nth-child(even) .wrap_text,
+.switch .row:nth-child(even) .wrap_image{float:right;}
+.switch .row:nth-child(even) {background:#25cad3;}
+.switch .row:nth-child(even) h3 {padding:80px 50px 0 0; text-align:right; color:#fff;}
+.switch .row:nth-child(even) h2 {padding:15px 35px 0 0;text-align:right; color:#fff;}
+.switch .row:nth-child(even) p { padding:100px 50px 100px 10px; color:#fff; text-align: right;}
+.switch .row:nth-child(even) .wrap_image{text-align: left;}
+.switch .row:nth-child(even) .text_box{background:#fff; color:#25cad3;}
+.switch .inner {/* display:inline-block; */padding: 50px 50px 100px; overflow: hidden; word-break: keep-all; }
+.switch .inner:after {display: block; clear: both; content:""}
+.switch .inner .wrap_text{width:50%; float:left;}
+.switch .wrap_image {width:50%; float:left; padding-top: 120px; text-align: right; }
+.switch h3{ padding:80px 0 0 7px; text-align: left; font-size:50px; font-weight:500; color:#25cad3;}
+.switch h2{padding-top:15px; text-align:left; font-size:55px; font-weight:100; line-height:1.2; letter-spacing:-2px}
+.switch p{ padding:100px 10px 100px 5px; font-size:16px; color:#8f8f8f; text-align: left; line-height: 1.6;}
+.switch .text_box { padding: 2px 3px; background: #25cad3; color: #fff;}
+.switch .tit_center{padding-top:80px; text-align:center;}
+.switch .mint_font{color:#25cad3; font-weight:500;}
+.switch p.tit_sub{padding-top:50px; text-align:center;}
+.switch .list_icon img {margin-bottom:-4px;}
+.switch .btn_action {text-align:center;padding-bottom: 50px;}
+.switch .btn_action .btn {display:inline-block; line-height:55px; width:300px; height:56px; font-size:22px; color:#fff; font-weight:400; border-radius:50px;background: #25cad3;}
+.switch .btn_action .btn:hover {background:#23bbc3;}
+
+.list_icon {margin:0 0 150px;text-align: center;}
+.list_icon .separator {background:#585858; width:20px; height:1px; margin:30px auto 30px;}
+.list_icon a {display:inline-block; margin:0 15px;}
+.list_icon .icon {padding:40px 30px 0 30px; display:inline-block; box-sizing:border-box; border:2px solid #dadada; border-radius:5px; cursor:pointer;}
+.list_icon .icon:hover {box-shadow:0 0 10px 2px rgba(0,0,0,0.1); border:2px solid #25cad3;}
+.list_icon h4 {font-size:17px; text-align:center; font-weight:500;}
+
+/* 도입이유 */
+.case_list_wrap {padding-bottom:50px;}
+.case_list_wrap .partner_icon.case .tit{padding:0;}
+.case_list_wrap .partner_icon.case .txt{padding-bottom:20px; font-size: 15px;}
+.case_list_wrap .hashtag_tab{margin: 50px auto; text-align: center;}
+.case_list_wrap .hashtag_tab a{display:inline-block; padding:10px 20px;margin:10px 4px; border-radius: 50px; border:1px solid #dbdbdb; font-size:16px; letter-spacing:-1px; color: #424140; cursor: pointer;}
+.case_list_wrap .hashtag_tab a.on{background:#25cad3; border:1px solid #25cad3; color: #fff; cursor: unset;}
+.case_list_wrap .hashtag_tab a:hover {background:#25cad3; border:1px solid #25cad3; color: #fff;}
+.case_list_wrap .hashtag_wrap{padding-bottom:25px;}
+.case_list_wrap .hashtag_list li{border-top:1px solid #ddd; padding: 23px; position: relative;}
+.case_list_wrap .hashtag_list .name {display: inline-block; font-size:21px; font-weight:bold;}
+.case_list_wrap .hashtag_list .date{display:inline-block; font-size:15px; color:#bbb; word-break: keep-all; margin-left: 10px;}
+.case_list_wrap .hashtag_list .new{ position:absolute; right:25px;padding:3px 8px; font-size: 13px;  border-radius: 50px; border:1px solid #fc6b6b;  color:#fc6b6b;}
+.case_list_wrap .hashtag_list p{margin:15px 70px 0 0; font-size:16px; line-height: 24px;word-break: break-all;}
+.case_list_wrap .hashtag_paging{text-align: center; border-top:1px solid #ddd; padding-top:50px; font-size: 15px; }
+.case_list_wrap .hashtag_paging .page{margin:0 10px;}
+.case_list_wrap .hashtag_paging .page a{border-radius: 100px; border: 1px solid #f5f5f5;padding: 6px 13px;display:inline-block;width:14px;}
+.case_list_wrap .hashtag_paging .page .on{border-radius:100px; border:1px solid #25cad3; padding:6px 8px; }
+.case_list_wrap .hashtag_paging img{vertical-align:bottom;}
+.case_list_wrap .hashtag_paging .ic {display: inline-block; width:20px; height: 13px; margin:-3px 3px 0 3px; background: url("../images/ic_hashtag_paging.png") no-repeat; vertical-align: middle;}
+.case_list_wrap .hashtag_paging .ic_first {background-position: 0 0;}
+.case_list_wrap .hashtag_paging .ic_prev {background-position: -20px 0;}
+.case_list_wrap .hashtag_paging .ic_next {background-position: -40px 0;}
+.case_list_wrap .hashtag_paging .ic_last {background-position: -60px 0;}
+.case_list_wrap .btn_wrap {text-align: center; padding-bottom: 50px;}
+.case_list_wrap .footer_tit {padding:50px 0; font-size:50px; font-weight:100; color:#d6d6d6; letter-spacing: -3px;}
+.case_list_wrap .btn_wrap .btn{display: inline-block; padding:15px 25px; border-bottom:3px solid #25cad3; letter-spacing: -1px; font-size: 18px; color:#fff; background: #25cad3;}
+	
+.case_wrap {background: #f7f7f7} 
+.case_wrap .sub_con {padding-top: 0}
+.case_wrap .sub_con .board_wrap { text-align:center;}
+.case_wrap .sub_con { display: block; max-width: 1000px; margin: 0 auto; padding: 15px 20px 20px 20px;}
+.case_wrap .sub_con .txt { text-align: center; padding-bottom: 50px;}
+.case_wrap .sub_con .partner_icon .tit {padding: 70px 0 0;}
+.case_wrap .sub_con .tit h3 { padding-bottom: 15px;  font-size: 32px; color: #424140;letter-spacing:-2px; background: none}
+.case_wrap .separator { display: block; margin: 10px auto 25px; width: 60px; height: 4px; background: #25cad3;}
+
+/* 제휴상품 */
+.tieproduct .italic {font-style:italic;}
+.tieproduct .sub_con .img_plus { margin: 50px auto 0; width: 38px; height: 38px; background: url("../images/tieproduct_img_plus.png") no-repeat;}
+.tieproduct .sub_con .tit { text-align: center; padding: 30px 0 0;}
+
+.tieproduct .sub_con .partner {background: none; margin-bottom: 100px}
+.tieproduct .sub_con .partner .list_partner{ display: inline-block; margin: 0 auto; /* width: 620px */}
+.tieproduct .sub_con .partner .list_partner li, .case_wrap .sub_con .case .interview li {display: inline-block; text-align: center;float: left; height: 300px; width: 280px; padding-top: 35px; box-sizing: border-box; cursor: pointer; background: #fff; margin: 0 15px 15px; border:1px solid #e6e6e6;}
+.tieproduct .sub_con .partner .list_partner:after {display: block; overflow: hidden; content:''; clear: left}
+.tieproduct .sub_con .partner .list_partner li .tit { margin-bottom: 20px; text-align: center; font-size: 17px; color:#242628; font-weight: bold;}
+.tieproduct .sub_con .partner .list_partner li p,
+.tieproduct .sub_con .partner_icon .list_icon li p { margin-bottom: 20px; color:#888;}
+.tieproduct .sub_con .partner .list_partner li:hover, 
+.case_wrap .sub_con .case .interview li:hover { background-color:#fff; box-shadow: 0 2px 0 0 rgba(0,0,0,0.1); border: 1px solid #cacaca;}
+.tieproduct .sub_con .partner .list_partner li p:last-child {color:#25cad3; font-size: 13px}
+.tieproduct .sub_con .partner .list_partner li:hover p:last-child,
+.case_wrap .sub_con .case .interview li:hover p:last-child {text-decoration:underline;}
+.tieproduct .sub_con .partner_icon .list_icon { display:inline-block; margin: 0 auto; /* width: 1045px */}
+.tieproduct .sub_con .partner_icon .list_icon li { display: inline-block; box-sizing: border-box; text-align: center; float: left; margin:0 14px 60px; padding-top: 10px; width: 265px;}
+.tieproduct .sub_con .partner_icon .list_icon:after {display: block; overflow: hidden; content:''; clear: left}
+.tieproduct .sub_con .partner_icon .list_icon .tit { color: #25cad3; padding-top:40px; font-size: 20px; font-weight: bold;}
+
+
+/* 고객사례*/
+.big_font {font-size: 60px;}
+.case_wrap .sub_con .case .list_icon .tit { color: #25cad3; padding-top:5px; margin-bottom:0; font-size: 20px; font-weight:unset;}
+.case_wrap .sub_con .case .list_icon li{margin:20px 14px 80px;}
+.case_wrap .sub_con .case .interview {display: inline-block; margin: 0 auto;  width: 930px;}
+.case_wrap .sub_con .case .interview li{margin-bottom:30px; padding-top: 0px; background:unset; border:2px solid #e6e6e6;}
+.case_wrap .sub_con .case .interview .tit{font-size:15px; padding-top:20px; margin-bottom:10px; color:#777777;}
+.case_wrap .sub_con .case .interview p{font-size:16px; color:#424140; }
+.case_wrap .sub_con .case .interview .gray{display:block;
+-webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: grayscale(100%);
+  filter: gray; /* IE 6-9 */}
+.case_wrap .sub_con .case .interview .badge {display: block; margin: 0 auto; position: relative; top: -2px;}
+.case_wrap .sub_con .case .interview .partner_logo {padding-top:25px;}
+.case_wrap .sub_con .case .interview li:hover .gray{
+-webkit-filter: grayscale(0%);
+  -moz-filter: grayscale(0%);
+  -ms-filter: grayscale(0%);
+  -o-filter: grayscale(0%);
+  filter: grayscale(0%);
+  filter: none; /* IE 6-9 */}
+.case_wrap .sub_con .case .interview li:hover{background:#fff; border:2px solid #fff;}
+.case_wrap .sub_con .case .interview li p:last-child {margin-top:20px;color:#25cad3; font-size: 13px}
+
+/* 고객사례_인터뷰(상세)*/
+.interview_wrap {background: #fff}
+.interview_wrap .sub_nav h3 {color:#fff; }
+.interview_wrap .interview_con { display: block; max-width: 900px; margin: 0 auto; padding: 15px 20px 100px 20px;}
+.interview_wrap .interview_con .btn_back { padding: 30px 0 20px 5px; opacity: 0.5;}
+.interview_wrap .interview_con .btn_back span { display: inline-block; padding-top: 1px; vertical-align: top; font-size: 17px;}
+.interview_wrap .interview_con .btn_back:hover { opacity: 1;}
+.interview_wrap .interview_con .btn_back img{ margin-right:10px;}
+.interview_wrap .interview_con .tit_area{ padding: 20px 0 50px 0; }
+.interview_wrap .interview_con .tit_area h1 {text-align:left; letter-spacing:-4px; font-size:50px; }
+.interview_wrap .interview_con .info { padding-bottom:40px; border-bottom: 1px solid #dadada;}
+.interview_wrap .interview_con .info .photo { position:absolute;}
+.interview_wrap .interview_con .info img {border-radius: 100%; width: 60px; height: 60px; }
+.interview_wrap .interview_con .info div:last-child {display:inline-block; padding-left:75px; }
+.interview_wrap .interview_con .info .name {display:inline-block; font-size:16px; font-weight:bold; margin-bottom:7px;}
+.interview_wrap .interview_con .info .sub {font-size:14px; color:#888;line-height: 1.4em;}
+.interview_wrap .interview_con .info.photo_none .photo {display: none}
+.interview_wrap .interview_con .info.photo_none div:last-child {padding-left: 0} 
+.interview_wrap .interview_con .qa_con {padding:65px 0 0 0; }
+.interview_wrap .interview_con .qa_con .question { display:inline-block; margin-bottom:15px; font-size:20px; color:#000;}
+.interview_wrap .interview_con .qa_con .answer {margin-bottom:10px; font-size:15px; color:#888; line-height:1.8;}
+.interview_wrap .interview_con .qa_con .answer span {font-weight: bold; color:#424140; }
+.interview_wrap .interview_con .qa_con .answer.func {font-size: 18px; color:#25cad3;}
+.interview_wrap .interview_con .btn_action { margin: 80px 0 0; text-align: center;}
+.interview_wrap .interview_con .btn_action .btn { display: inline-block; margin:5px 5px; border:1px solid #25cad3; border-radius: 5px; width: 250px; height: 60px; line-height: 60px; font-size: 15px; letter-spacing: -1px; color: #25cad3;}
+.interview_wrap .interview_con .btn_action .btn:hover { background:#25cad3; color: #fff;}
+
+.interview_wrap .top_area {width:100%; height:360px; background: url(../img/sub_visual_00.jpg) no-repeat; background-size: cover; box-sizing: border-box}
+.interview_wrap .top_area .inner {position: relative; width:960; margin: 0 auto;}
+.interview_wrap .top_area p{margin-top:20px; text-align: center}
+.interview_wrap .top_area img {display: block; margin:60px auto 0; height:60px;}
+.interview_wrap .top_area p.co_name {font-size: 30px; color:#fff;}
+.interview_wrap .top_area p.tag span{display:inline-block; padding:8px 25px; color:#999; border:1px solid #a3a4a3; border-radius: 25px; margin-right: 15px;}
+.interview_wrap .top_area p.tag span:last-child {margin-right: 0}
+.interview_wrap .top_area p.tag span:last-child {margin-right: 0}
+
+
+@media (min-width:1000px){
+.sub_top .sub_bg {height: 300px; overflow: hidden; box-sizing: border-box;}
+}
+
+
+/* Mobile – 640px 이하 해상도에서 해석하는 코드 */
+@media all and (max-width:640px){
+.switch .inner {/* width:100%; */ padding:0;}
+.switch h2{padding-top: 5px; text-align: center; font-size:40px;}
+.switch h3{text-align:center; padding:70px 0 0 0; font-size:35px;}
+.switch p { padding:25px 15px 0 15px; text-align: center;}
+.switch .inner .wrap_text{width:100%; float: inherit;}
+.switch .wrap_image {width:100%; float: inherit; padding-top:10px; padding-bottom: 60px; text-align: center; }
+.switch .wrap_image img {width:80%; dding: 70px 0 0 0; text-align:center;}
+.switch .row:nth-child(even) h3 {padding:80px 0 0 0; text-align:center;}
+.switch .row:nth-child(even) h2 {padding:15px 0 0 0; text-align:center;}
+.switch .row:nth-child(even) p{padding:25px 15px 0 15px; color:#fff; text-align:center;}
+.switch .row:nth-child(even) .wrap_image{text-align:center;}
+
+.list_icon{margin: 40px 0 65px;}
+.list_icon a {display:block; margin:20px;}
+.list_icon .icon {display:block; padding:30px 20px 0;}
+
+/* 도입이유 */
+.case_list_wrap {padding-top:100px;}
+.interview_wrap .top_area {height:100%;}
+.tieproduct .sub_con .partner .list_partner li,
+.case_wrap  .sub_con .case .interview li{float: none; width: 100%; margin: 10px 0;}
+	
+.tieproduct .sub_con .partner .list_partner,
+.case_wrap  .sub_con .case .interview  {display:block; padding: 0 20px; width:unset;}
+	
+.tieproduct .sub_con .partner_icon .list_icon li {float: none;}
+.tieproduct .sub_con .partner_icon .list_icon { margin: -25px auto;}
+.tieproduct .sub_con .partner_icon .list_icon li { margin: 0 10px 20px;}
+.tieproduct .sub_con .case .list_icon li{margin:30px 0 40px; width: 190px;}
+
+
+.docenter {padding-top:0; background: #f5f5f5; padding:0 0 15px;}
+.docenter .docare_info1 {margin-top:0;}
+.docenter p.desc1 {font-size: 14px; color:#424140; width: 95%; margin:16px auto 0;}
+.docenter .list_support {margin-top: 45px; width:100%;}
+.docenter .list_support li {float: none; width:90%; height: 630px; margin: 0 auto 22px; display: block; border:1px solid #eee; padding-top: 35px;  box-sizing: border-box; background: #fff}
+.docenter .list_support li:nth-child(2) {margin-top:20px;}
+.pc_display,
+.docenter .list_support li.center_line {display:none}
+.docenter .docare_info1 .sub_footer {margin-top:0;}
+.docenter .docare_info1 .sub_footer p.sub {margin: 0 20px;}
+.docenter .docare_info1 .sub_footer p.sub1{margin: 10px 20px;}
+.inner{word-break: keep-all;)
+.sub_top {height: inherit; padding-top: 0}
+.sub_top .sub_tit h2 {font-size: 6.25vw}
+/*
+.sub_top .sub_tit {position: absolute; top:37%; margin:0;}
+.sub_top .sub_tit h2 {margin:0; font-size: 6.25vw}
+*/
+
+
+}

@@ -41,8 +41,9 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li class="active"><a href="organizationChart.do"><i class="fa fa-link"></i> <span>조직도</span></a></li>
+        <li><a href="employeeIndex.do"><i class="fa fa-link"></i> <span>사원 인덱스</span></a></li>
+        <li><a href=""><i class="fa fa-link"></i> <span>사원 정보</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">

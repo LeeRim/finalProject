@@ -18,7 +18,10 @@
 			)	
 	</insert>
 	
-	
-	
+	<insert id="insertAttach" parameterType="AttachVo">
+			INSERT INTO ATTACHMENT VALUES(
+			SEQ_ATTACHMENT.NEXTVAL, #{attaLocation}, #{attaFileName},#{attaFilePath}
+			)
+	</insert>
 
 </mapper>

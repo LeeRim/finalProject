@@ -1,0 +1,15 @@
+-- EMPLOYEE INSERT
+Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (1,'사번',1,'2','admin','admin','관리자',3,1,null,null,null,null,null,null,'N',null);
+Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (2,'사번',1,'2','user01','user01','테스터1',4,2,null,null,null,null,null,null,'N',null);
+Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (3,'사번',1,'2','user02','user02','테스터2',3,1,null,null,null,null,null,null,'N',null);
+Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (4,'사번',1,'2','user03','user03','테스터3',3,1,null,null,null,null,null,null,'N',null);
+
+
+
+--DIVISION INSERT
+
+
+Insert into CSS.DIVISION values (1,1,1,'현장서비스팀',NULL);
+Insert into CSS.DIVISION values (2,1,1,'인프라운영팀',NULL);
+Insert into CSS.DIVISION values (3,1,2,'대리',2);
+Insert into CSS.DIVISION values (4,1,2,'과장',1);
