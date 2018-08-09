@@ -52,11 +52,11 @@ public class BorderDao {
 		return sqlSession.insert("BorderMapper.BorderComment", bc);
 	}
 
+
 	public int deleteBoard(BorderVo board) {
 		return sqlSession.delete("BorderMapper.DeleteBoard", board);
 	}
 	public List<BorderVo> selectBoardList() {
 		return sqlSession.selectList("BorderMapper.selectBoardList");
 	}
-	
 }

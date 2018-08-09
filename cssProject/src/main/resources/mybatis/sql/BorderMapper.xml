@@ -91,4 +91,5 @@
 		SELECT * FROM BOARD
 	</select>
 	
+	
 </mapper>

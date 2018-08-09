@@ -51,12 +51,10 @@ public class BorderService {
 	public int InsertborderComment(BoardCommentVo bc) {
 		return dao.insertComment(bc);
 	}
-
 	public int deleteBoard(BorderVo board) {
 		return dao.deleteBoard(board);
 	}
 	public List<BorderVo> selectBoardList() {
 		return dao.selectBoardList();
 	}
-
 }
