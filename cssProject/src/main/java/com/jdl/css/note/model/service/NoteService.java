@@ -45,5 +45,9 @@ public class NoteService {
 		return result;
 	}
 
+	public List<NoteVo> selectSendNoteList(int ekey) {
+		return dao.selectSendNoteList(ekey);
+	}
+
 
 }

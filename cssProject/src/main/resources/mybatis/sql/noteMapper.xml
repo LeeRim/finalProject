@@ -3,9 +3,50 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="NoteMapper">
+	<resultMap type="NoteVo" id="resultNoteVo">
+		<id property="snKey" column="SN_KEY"/>
+		<result property="snSenderFk" column="SN_KEY"/>
+		<result property="snTitle" column="SN_TITLE"/>
+		<result property="snContent" column="SN_CONTENT"/>
+		<result property="snWriteDate" column="SN_WRITE_DATE" />
+		<result property="snDeleteYn" column="SN_DELETE_YN"/>
+		<result property="snAttachYn" column="SN_ATTACH_YN"/>
+		<collection property="attach" column="SN_KEY" ofType="AttachVo" resultMap="attachMap"/>
+		<collection property="employee" column="SN_KEY" ofType="EmployeeVo" resultMap="employeeMap"/>
+	</resultMap>
+	
+	<resultMap type="AttachVo" id="attachMap">
+		<id property="attaKey" column="ATTA_KEY"/>
+		<result property="attaLocation" column="ATTA_LOCATION"/>
+		<result property="attaFileName" column="ATTA_FILENAME"/>
+		<result property="attaFilePath" column="ATTA_FILEPATH"/>
+	</resultMap>
+	
+	<resultMap type="EmployeeVo" id="employeeMap">
+		<id property="eKey" column="E_KEY"/>
+		<result property="eNo" column="E_NO"/>
+		<result property="cKeyFk" column="C_KEY_FK"/>
+		<result property="eType" column="E_TYPE"/>
+		<result property="eId" column="E_ID"/>
+		<result property="ePwd" column="E_PWD"/>
+		<result property="eName" column="E_NAME"/>
+		<result property="eJobcodeFk" column="E_JOBCODE_FK"/>
+		<result property="eDepartFk" column="E_DEPART_FK"/>
+		<result property="eAddress" column="E_ADDRESS"/>
+		<result property="eExten" column="E_EXTEN"/>
+		<result property="ePhone" column="E_PHONE"/>
+		<result property="eEmail" column="E_EMAIL"/>
+		<result property="eBirth" column="E_BIRTH"/>
+		<result property="eHireDate" column="E_HIRE_DATE"/>
+		<result property="eEntDate" column="E_ENT_DATE"/>
+		<result property="eEntYn" column="E_ENT_YN"/>
+		<result property="ePhoto" column="E_PHOTO"/>
+	</resultMap>
+
+
 	<insert id="insertNote" parameterType="NoteVo">
 		INSERT INTO SENDNOTE VALUES(
-    	SEQ_SENDNOTE.NEXTVAL ,#{snSenderFk} ,#{snTitle},#{snContent},SYSDATE,DEFAULT
+    	SEQ_SENDNOTE.NEXTVAL ,#{snSenderFk} ,#{snTitle},#{snContent},SYSDATE,DEFAULT,#{snAttachYn}
 		)
 		<selectKey keyProperty="snKey" resultType="Integer" order="AFTER">
 				 SELECT SEQ_SENDNOTE.CURRVAL FROM dual 
@@ -23,5 +64,16 @@
 			SEQ_ATTACHMENT.NEXTVAL, #{attaLocation}, #{attaFileName},#{attaFilePath}
 			)
 	</insert>
+	
+	<select id="selectSendNoteList" parameterType="int" resultMap="resultNoteVo">
+		SELECT S.SN_KEY, S.SN_SENDER_FK, S.SN_TITLE,S.SN_CONTENT, S.SN_WRITE_DATE, S.SN_DELETE_YN,S.SN_ATTACH_YN
+		    , E.E_KEY, E.E_NO, E.C_KEY_FK, E.E_TYPE, E.E_ID, E.E_PWD,E.E_NAME
+		    , E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS,E.E_EXTEN,E.E_PHONE,E.E_EMAIL
+		    , E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN, E.E_PHOTO,E.E_BIRTH
+		FROM SENDNOTE S
+		LEFT JOIN RECEIVENOTE R ON(S.SN_KEY = R.RN_NOTE_FK)
+		LEFT JOIN EMPLOYEE E ON(R.RN_RECIPIENT_FK = E.E_KEY)
+		WHERE SN_SENDER_FK = #{employeeK}
+	</select>
 
 </mapper>

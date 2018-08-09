@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.jdl.css.common.model.vo.AttachmentVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Component
 public class NoteVo {
@@ -15,14 +16,17 @@ public class NoteVo {
 	private String snTitle;
 	private String snContent;
 	private Date snWriteDate;
-	private char snDeleteYn;
-	private String snAttach;
+	private String snDeleteYn;
+	private String snAttachYn;
 	
 	private List<String> receive;
 	private List<Integer> receiveNo;
 	private int receiver;
 	
+	//resultMap용
 	private List<AttachmentVo> attach;
+	private List<EmployeeVo> employee;
+	
 	public NoteVo() {
 	}
 
@@ -66,14 +70,6 @@ public class NoteVo {
 		this.snWriteDate = snWriteDate;
 	}
 
-	public char getSnDeleteYn() {
-		return snDeleteYn;
-	}
-
-	public void setSnDeleteYn(char snDeleteYn) {
-		this.snDeleteYn = snDeleteYn;
-	}
-
 	public List<String> getReceive() {
 		return receive;
 	}
@@ -97,16 +93,6 @@ public class NoteVo {
 	public void setReceiver(int receiver) {
 		this.receiver = receiver;
 	}
-	
-	
-	public String getSnAttach() {
-		return snAttach;
-	}
-
-	public void setSnAttach(String snAttach) {
-		this.snAttach = snAttach;
-	}
-	
 
 	public List<AttachmentVo> getAttach() {
 		return attach;
@@ -116,13 +102,39 @@ public class NoteVo {
 		this.attach = attach;
 	}
 
+	public List<EmployeeVo> getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(List<EmployeeVo> employee) {
+		this.employee = employee;
+	}
+	
+	public String getSnDeleteYn() {
+		return snDeleteYn;
+	}
+
+	public void setSnDeleteYn(String snDeleteYn) {
+		this.snDeleteYn = snDeleteYn;
+	}
+
+	public String getSnAttachYn() {
+		return snAttachYn;
+	}
+
+	public void setSnAttachYn(String snAttachYn) {
+		this.snAttachYn = snAttachYn;
+	}
+
 	@Override
 	public String toString() {
 		return "NoteVo [snKey=" + snKey + ", snSenderFk=" + snSenderFk + ", snTitle=" + snTitle + ", snContent="
-				+ snContent + ", snWriteDate=" + snWriteDate + ", snDeleteYn=" + snDeleteYn + ", snAttach=" + snAttach
-				+ ", receive=" + receive + ", receiveNo=" + receiveNo + ", receiver=" + receiver + ", attach=" + attach
-				+ "]";
+				+ snContent + ", snWriteDate=" + snWriteDate + ", snDeleteYn=" + snDeleteYn + ", snAttachYn="
+				+ snAttachYn + ", receive=" + receive + ", receiveNo=" + receiveNo + ", receiver=" + receiver
+				+ ", attach=" + attach + ", employee=" + employee + "]";
 	}
 
+	
+	
 	
 }

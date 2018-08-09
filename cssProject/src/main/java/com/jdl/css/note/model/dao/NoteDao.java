@@ -36,5 +36,9 @@ public class NoteDao {
 		return session.insert("NoteMapper.insertAttach", av);
 	}
 
+	public List<NoteVo> selectSendNoteList(int ekey) {
+		return session.selectList("NoteMapper.selectSendNoteList", ekey);
+	}
+
 
 }

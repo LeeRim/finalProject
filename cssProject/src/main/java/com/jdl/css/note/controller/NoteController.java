@@ -54,6 +54,11 @@ public class NoteController {
 	
 	@RequestMapping("sendNote.do")
 	public ModelAndView sendNote(NoteVo note ,ModelAndView mv, @RequestParam("files") MultipartFile[] files, HttpServletRequest request){
+		if(files[1] !=null){
+			note.setSnAttachYn("Y");
+		}else{
+			note.setSnAttachYn("N");
+		}
 		int resultSend = service.insertNote(note);
 		List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
 		
@@ -110,6 +115,11 @@ public class NoteController {
 		//사원키
 		int ekey = user.geteKey();
 		
+		List<NoteVo> sendNoteList = service.selectSendNoteList(ekey);
+		
+		System.out.println(sendNoteList);
+		
+		mv.addObject("sendNoteList", sendNoteList);
 		mv.setViewName("note/sendNoteList");
 		return mv;
 	}

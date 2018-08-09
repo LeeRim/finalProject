@@ -12,6 +12,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Starter</title>
+  <style>
+  	.table{
+  		cursor: pointer;
+  	}
+	a:link  { text-decoration: none; color: #5E5E5E}
+	a:visited {  text-decoration: none; color: #5E5E5E}
+	a:active {  text-decoration: none; color: #5E5E5E}     
+	a:hover { text-decoration: underline; color:#F36798} 
+  </style>
+  
+  <script>
+  	
+  $(function(){
+	  
+	  
+  	$(".table").click(function(){
+  		
+  	});
+  });
+  
+  </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -66,26 +87,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- /.pull-right -->
               </div>
               <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped">
+                <table class="table table-hover table-striped" >
                   <tbody>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"></td>
-                    <td class="mailbox-date">5 mins ago</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">28 mins ago</td>
-                  </tr>
+                  <c:forEach items="${requestScope.sendNoteList}" var ="sendNote">
+                  	<c:if test="${sendNote.snDeleteYn == 'N'}">
+	                  <tr>
+	                    <td><input type="checkbox"></td>
+	                    <td class="mailbox-star"><i class="fa fa-star text-yellow"></i></a></td>
+		                    <td class="mailbox-name">
+			                    <c:forEach items="${sendNote.employee}" var ="employee" varStatus="st">
+			                    		<c:if test="${st.index < 2}">
+					                    	<c:out value="${employee.eName}"/> 
+					                    </c:if>
+					                    <c:if test="${st.index eq 3}">
+					                    	...
+					                    </c:if>
+			                    </c:forEach>
+		                    </td>
+	                    <td class="mailbox-subject"><a href="writeNote.do" ><c:out value="${sendNote.snTitle}"/></a></td>
+	                    
+	                    <td class="mailbox-attachment">
+	                    	<c:if test="${sendNote.snAttachYn eq 'Y'}">
+	                    		<i class="fa fa-paperclip"></i>
+	                    	</c:if>
+	                    </td>
+	                    <td class="mailbox-date"><c:out value="${sendNote.snWriteDate}"/></td>
+	                  </tr>
+                  	</c:if>
+                  </c:forEach>
                   </tbody>
                 </table>
                 <!-- /.table -->
