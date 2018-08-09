@@ -20,6 +20,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript"
 	src="resources/dist/js/pages/spendingResolution.js"></script>
 
+<script>
+function openSelectApprover(){
+	$('div.modal').modal();
+}
+</script>
+
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -68,9 +74,9 @@ desired effect
         | Your Page Content Here |
         -------------------------->
 				<div class="addApprover">
-					<div class="btn btn-app">
+					<a class="btn btn-app" href="#" onclick="openSelectApprover();">
 						<i class="fa fa-user-plus"></i>결재자추가
-					</div>
+					</a>
 				</div>
 				<div class="form_back">
 					<span
@@ -461,7 +467,7 @@ desired effect
 	</div>
 
 
-
+	<c:import url="../selectApproverPage.jsp"/>
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

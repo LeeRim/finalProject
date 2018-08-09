@@ -23,6 +23,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 <script type="text/javascript">
+	function openSelectApprover() {
+		$('div.modal').modal();
+	}
 	$(function() {
 		$('#vfStartdate,#vfEnddate').datepicker({
 			format : "yyyy/mm/dd",
@@ -81,9 +84,9 @@ desired effect
         | Your Page Content Here |
         -------------------------->
 				<div class="addApprover">
-					<div class="btn btn-app">
+					<a class="btn btn-app" href="#" onclick="openSelectApprover();">
 						<i class="fa fa-user-plus"></i>결재자추가
-					</div>
+					</a>
 				</div>
 				<section class="content_wrapper">
 					<!--전자결제 상세-->
@@ -94,8 +97,8 @@ desired effect
 							<form id="document_content" class="form_doc_editor editor_view"
 								onsubmit="return false;">
 								<span
-									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span
-									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span
+									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span
+									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;"><span
 										style="line-height: normal; font-family: 맑은 고딕; font-size: 10pt; margin-top: 0px; margin-bottom: 0px;"></span></span>
 									<table class="__se_tbl"
 										style="background: white; border: 0px solid black; border-image: none; width: 800px; color: black; font-family: malgun gothic, dotum, arial, tahoma; font-size: 12px; border-collapse: collapse !important;">
@@ -293,8 +296,7 @@ desired effect
 													style="color: rgb(255, 0, 0);">*</b>&nbsp;휴가&nbsp;사유</td>
 												<td
 													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 100px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: top;"><textarea
-														class="txta_editor" name="vfReason" id="vfReason"
-														value=""></textarea></td>
+														class="txta_editor" name="vfReason" id="vfReason" value=""></textarea></td>
 											</tr>
 											<tr>
 												<td
@@ -322,7 +324,7 @@ desired effect
 	</div>
 
 
-
+	<c:import url="../selectApproverPage.jsp"/>
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

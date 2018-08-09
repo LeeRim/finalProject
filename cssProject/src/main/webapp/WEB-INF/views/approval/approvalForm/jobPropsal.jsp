@@ -25,7 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript">
 
 function openSelectApprover(){
-	window.open("openSelectApproverPage.do","_blank","width=1070, height=600,left=350,top=200");
+	$('div.modal').modal();
 }
 
 	$(function() {
@@ -305,7 +305,7 @@ desired effect
 											</div>
 											<div class="file-list"></div>
 										</div>
-										<input type="submit" value="제출">
+										<button onclick="insertApproval();">작성</button>
 									</form>
 								</div>
 
@@ -321,7 +321,7 @@ desired effect
 	</div>
 
 
-
+	<c:import url="../selectApproverPage.jsp"/>
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
