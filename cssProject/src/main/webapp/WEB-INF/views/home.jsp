@@ -58,9 +58,6 @@ desired effect
     <section class="content-header">
 
         <h1>커뮤니티 버튼</h1>
-        <button onclick="boardPage(1);">공지사항</button><br>
-        <button onclick="boardPage(2);">자유게시판</button><br>
-        <button onclick="boardPage(3);">경조사</button><br>
         <button onclick="board();">게시판 인덱스</button>
         <hr>
         <h1>쪽지 버튼</h1>

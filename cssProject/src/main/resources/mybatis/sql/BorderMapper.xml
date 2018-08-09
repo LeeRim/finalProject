@@ -87,9 +87,47 @@
 	<delete id="DeleteBoard">
 		DELETE FROM BOARD WHERE B_KEY = #{boardKey}
 	</delete>
-	<select id="selectBoardList">
-		SELECT * FROM BOARD
+	
+	<update id="updateComment">
+		UPDATE BOARD_COMMENT
+		SET CO_CONTENT = #{cContent} 
+		WHERE CO_KEY = #{commentKey}
+	</update>
+	
+	<delete id="deleteComment">
+		DELETE FROM BOARD_COMMENT WHERE CO_KEY = #{commentKey}
+	</delete>
+	
+	<select id="selectBoardOne" resultType="Border">
+		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
+		FROM 
+		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
+		FROM BOARD b
+		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
+		WHERE B_CATEGORY = 1
+		ORDER BY B_DATE DESC)
+		WHERE ROWNUM BETWEEN 1 AND 5;
 	</select>
 	
+	<select id="selectBoardTwo" resultType="Border">
+		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
+		FROM 
+		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
+		FROM BOARD b
+		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
+		WHERE B_CATEGORY = 2
+		ORDER BY B_DATE DESC)
+		WHERE ROWNUM BETWEEN 1 AND 5;
+	</select>
 	
+	<select id="selectBoardThr" resultType="Border">
+		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
+		FROM 
+		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
+		FROM BOARD b
+		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
+		WHERE B_CATEGORY = 3
+		ORDER BY B_DATE DESC)
+		WHERE ROWNUM BETWEEN 1 AND 5;
+	</select>
 </mapper>

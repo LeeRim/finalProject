@@ -60,8 +60,38 @@
 	}
 	function deleteBoard(){
 		if(confirm("삭제 하시겠습니까?")){
-			location.href="deleteBoard.do?boardKey=${board.boardKey}"
+			location.href="deleteBoard.do?boardKey=${board.boardKey}" + "&bCateGory=${board.bCateGory}"
 		}
+	}
+	function updateCommentForm(obj, flag){
+		var $textArea = $(obj).parent().parent().next().find("textarea");
+		$textArea.prop("readonly", !flag);
+		if(flag){
+			$(obj).hide();
+			$(obj).siblings(".deleteBtn").hide();
+			$(obj).siblings(".updateBtn").show();
+			$(obj).siblings(".cancelBtn").show();
+		}else{
+			$(obj).siblings(".modifyBtn").show();
+			$(obj).siblings(".deleteBtn").show();
+			$(obj).siblings(".updateBtn").hide();
+			$(obj).hide();
+		}
+	}
+	
+	function updateComment(obj, cno){
+		//댓글 작성 -> 댓글 번호, 댓글 내용
+		var commentValue =  $(obj).parent().parent().next().find("textarea").val();
+		var cno = cno;
+		//console.log("updateComment.do?cno=" + cno + "&content=" + commentValue);
+		location.href
+			="updateComment.do?commentKey=" + cno + "&cContent=" + commentValue + "&boardKey=${board.boardKey}";
+	}
+	function deleteComment(cno){
+		var cno = cno;
+		//console.log("updateComment.do?cno=" + cno + "&content=" + commentValue);
+		location.href
+			="deleteComment.do?commentKey=" + cno + "&boardKey=${board.boardKey}";
 	}
 	</script>
 </head>
@@ -103,10 +133,12 @@
 			<tr>
 				<td>${b.eName} ${b.cDate}</td>
 				<td align="right">
+				<c:if test="${user.eKey eq b.cWriter}">
 					<input type="button" class="modifyBtn" value="수정" onclick="updateCommentForm(this, true);"/>
 					<input type="button" class="deleteBtn" value="삭제" onclick="deleteComment(${b.commentKey});"/>
 					<input type="button" class="updateBtn" style="display:none;" value="작성 완료" onclick="updateComment(this,${b.commentKey});"/>
 					<input type="button" class="cancelBtn" style="display:none;" value="취소" onclick="updateCommentForm(this, false);"/>
+				</c:if>
 				</td>
 			</tr>
 			<tr>
@@ -117,7 +149,7 @@
 			</c:forEach>
 		</table>
 	</div>
-	<%-- <c:if test="${!user empty}"> --%>
+	<c:if test="${!empty user}">
 	<div class="commentWriteArea">
 		댓글
 		<form method="post" id="commentForm" action="writeComment.do">
@@ -136,7 +168,7 @@
 			</table>		
 		</form>
 	</div>
-	<%-- </c:if> --%>
+	</c:if>
 	</div>
 	</div>
 </div>

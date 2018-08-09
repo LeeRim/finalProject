@@ -52,12 +52,32 @@ public class BorderDao {
 	public int insertComment(BoardCommentVo bc) {
 		return sqlSession.insert("BorderMapper.BorderComment", bc);
 	}
-
-
 	public int deleteBoard(BorderVo board) {
 		return sqlSession.delete("BorderMapper.DeleteBoard", board);
 	}
 	public List<BorderVo> selectBoardList() {
 		return sqlSession.selectList("BorderMapper.selectBoardList");
 	}
+
+	public int updateComment(BoardCommentVo bc) {
+		return sqlSession.update("BorderMapper.updateComment", bc);
+	}
+
+	public int deleteComment(BoardCommentVo bc) {
+		return sqlSession.delete("BorderMapper.deleteComment", bc);
+	}
+
+	public List<BorderVo> selectBoardOne() {
+		return sqlSession.selectList("BorderMapper.selectBoardOne");
+	}
+
+	public List<BorderVo> selectBoardTwo() {
+		return sqlSession.selectList("BorderMapper.selectBoardTwo");
+	}
+
+	public List<BorderVo> selectBoardThr() {
+		return sqlSession.selectList("BorderMapper.selectBoardThr");
+	}
+	
+	
 }

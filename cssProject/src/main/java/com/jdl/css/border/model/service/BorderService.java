@@ -57,4 +57,24 @@ public class BorderService {
 	public List<BorderVo> selectBoardList() {
 		return dao.selectBoardList();
 	}
+
+	public int updateComment(BoardCommentVo bc) {
+		return dao.updateComment(bc);
+	}
+
+	public int deleteComment(BoardCommentVo bc) {
+		return dao.deleteComment(bc);
+	}
+
+	public List<BorderVo> selectBoardOne() {
+		return dao.selectBoardOne();
+	}
+
+	public List<BorderVo> selectBoardTwo() {
+		return dao.selectBoardTwo();
+	}
+
+	public List<BorderVo> selectBoardThr() {
+		return dao.selectBoardThr();
+	}
 }

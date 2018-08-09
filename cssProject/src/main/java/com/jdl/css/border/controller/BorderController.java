@@ -59,8 +59,6 @@ public class BorderController {
 				startPage = (int)(currentPage / limitPage * limitPage) + 1;
 				//11~20  -> 134 -> 14
 				endPage = startPage + limitPage - 1;
-				System.out.println("startPage : " + startPage);
-				System.out.println("endPage : " + endPage);
 				if(maxPage < endPage){
 					endPage = maxPage;
 				}
@@ -126,9 +124,7 @@ public class BorderController {
 			board.setbCount(board.getbCount() + 1);
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("border/borderDetail");
-			System.out.println("null : " + board);
 		}
-		System.out.println("bList : " +  bList);
 		int result = borderservice.updateBoardCount(b.getBoardKey());
 		return mv;
 	}
@@ -136,7 +132,6 @@ public class BorderController {
 	@RequestMapping("updateBorder.do")
 	public ModelAndView updateBorder(BorderVo border, ModelAndView mv, HttpServletResponse response){
 		
-		System.out.println(border);
 		int result = borderservice.updateBoard(border);
 		if(result > 0){
 			mv.setViewName("redirect:borderList.do?bCateGory="+ border.getbCateGory());
@@ -167,27 +162,68 @@ public class BorderController {
 		bc.setBoardKeyFk(boardKey);
 		bc.setcWriter(cWriter);
 		bc.setcContent(cContent);
-		System.out.println(bc);
 		int result = borderservice.InsertborderComment(bc);
-		System.out.println(result);
 		mv.setViewName("redirect:selectBoard.do?boardKey=" + bc.getBoardKeyFk() + "&currentPage=1");
 		return mv;
 	}
 	
-	@RequestMapping("borderDelete.do")
-	public ModelAndView borderDelete(BorderVo board, ModelAndView mv){
+	@RequestMapping("deleteBoard.do")
+	public ModelAndView deleteBorder(BorderVo board, ModelAndView mv){
 		
 		int result = borderservice.deleteBoard(board);
-		System.out.println("지워짐");
+		System.out.println("delete : " + result);
+		if(0 < result){
+			mv.addObject("board", board);
+			mv.setViewName("redirect:borderList.do?bCateGory="+ board.getbCateGory());
+		}
 		return mv;
 	}
-	  @RequestMapping("Boardcategory.do")
-	  public @ResponseBody List<BorderVo> selectBoardList() {
-	      List<BorderVo> list = new ArrayList<BorderVo>();
-	      list = borderservice.selectBoardList();
-	      System.out.println("category : " + list);
-	      return list;
-	   }
+	
+	@RequestMapping("updateComment.do")
+	public ModelAndView updateComment(String boardKey, BoardCommentVo bc, ModelAndView mv){
+		
+		System.out.println("updateComment : " + bc);
+		int result = borderservice.updateComment(bc);
+		System.out.println("updateComment result : " + result);
+		if(0 < result){
+			mv.setViewName("redirect:selectBoard.do?boardKey="+ boardKey + "&currentPage=1");
+		}
+		return mv;
+	}
+	
+	@RequestMapping("deleteComment.do")
+	public ModelAndView deleteComment(BoardCommentVo bc, ModelAndView mv){
+		
+		int result = borderservice.deleteComment(bc);
+		return mv;
+	}
+	
+	@RequestMapping("borderGallery.do")
+	public ModelAndView borderGallery(ModelAndView mv){
+		
+		mv.setViewName("border/borderGallery");
+		return mv;
+	}
+	
+	
+	@RequestMapping("Boardcategory.do")
+	public ModelAndView allBoardSelect(ModelAndView mv){
+		
+		List<BorderVo> board1 = borderservice.selectBoardOne(); //공지사항
+		List<BorderVo> board2 = borderservice.selectBoardTwo(); //자유
+		List<BorderVo> board3 = borderservice.selectBoardThr(); //경조사
+		System.out.println("Boardcategory.do : " + board1);
+		System.out.println("Boardcategory.do : " + board2);
+		System.out.println("Boardcategory.do : " + board3);
+		
+		mv.addObject("board1", board1);
+		mv.addObject("board2", board2);
+		mv.addObject("board3", board3);
+		mv.setViewName("border/borderIndex");
+		return mv;
+	}
+	
+	
 	
 	
 }
