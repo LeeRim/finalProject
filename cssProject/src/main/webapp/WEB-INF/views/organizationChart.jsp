@@ -87,7 +87,7 @@ td {
 <script type="text/javascript">
 
 
-		var array = new Array();
+		
 
 
 		$(function() {
@@ -144,31 +144,18 @@ td {
 		
 		$("#getCheckedAll").click(function() {
 
-			$("input[name=chk]:checked").each(function() {
-				var nameCheck = true;	
-					
-				console.log($(this).val());
-			
-				for(var i in array){
-					if($(this).val() ==array[i]){
-						nameCheck = false;
-					}
-				}
-					
-				if(nameCheck){
-					array.push($(this).val());
-				}
-				
-				/* location.href="selectEmployee.do?array=" */
-				
-				console.log(array);
-
+			var items = [];
+			$('input[name=chk]:checked').each(function () {
+			    items.push($(this).val());
+			    
 			});
-
-		});
+			console.log(items)
+		})
 		
 		
-
+		
+		
+		
 	});
 		
 		
