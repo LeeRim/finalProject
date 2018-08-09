@@ -106,7 +106,7 @@
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
 		WHERE B_CATEGORY = 1
 		ORDER BY B_DATE DESC)
-		WHERE ROWNUM BETWEEN 1 AND 5;
+		WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 	
 	<select id="selectBoardTwo" resultType="Border">
@@ -117,7 +117,7 @@
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
 		WHERE B_CATEGORY = 2
 		ORDER BY B_DATE DESC)
-		WHERE ROWNUM BETWEEN 1 AND 5;
+		WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 	
 	<select id="selectBoardThr" resultType="Border">
@@ -128,6 +128,6 @@
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
 		WHERE B_CATEGORY = 3
 		ORDER BY B_DATE DESC)
-		WHERE ROWNUM BETWEEN 1 AND 5;
+		WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 </mapper>

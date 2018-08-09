@@ -151,8 +151,25 @@ public class BorderController {
 	}
 	
 	@RequestMapping("borderIndex.do")
-	public String borderIndex(){
-		return "border/borderIndex";
+	public ModelAndView borderIndex(ModelAndView mv){
+		
+		System.out.println("나오냐");
+		List<BorderVo> board1 = borderservice.selectBoardOne(); //공지사항
+		List<BorderVo> board2 = borderservice.selectBoardTwo(); //자유
+		List<BorderVo> board3 = borderservice.selectBoardThr(); //경조사
+		System.out.println("Boardcategory.do : " + board1);
+		System.out.println("Boardcategory.do : " + board2);
+		System.out.println("Boardcategory.do : " + board3);
+		
+		mv.addObject("bo1", 1);
+		mv.addObject("bo2", 2);
+		mv.addObject("bo3", 3);
+		
+		mv.addObject("board1", board1);
+		mv.addObject("board2", board2);
+		mv.addObject("board3", board3);
+		mv.setViewName("border/borderIndex");
+		return mv;
 	}
 	
 	@RequestMapping("writeComment.do")
@@ -204,26 +221,6 @@ public class BorderController {
 		mv.setViewName("border/borderGallery");
 		return mv;
 	}
-	
-	
-	@RequestMapping("Boardcategory.do")
-	public ModelAndView allBoardSelect(ModelAndView mv){
-		
-		List<BorderVo> board1 = borderservice.selectBoardOne(); //공지사항
-		List<BorderVo> board2 = borderservice.selectBoardTwo(); //자유
-		List<BorderVo> board3 = borderservice.selectBoardThr(); //경조사
-		System.out.println("Boardcategory.do : " + board1);
-		System.out.println("Boardcategory.do : " + board2);
-		System.out.println("Boardcategory.do : " + board3);
-		
-		mv.addObject("board1", board1);
-		mv.addObject("board2", board2);
-		mv.addObject("board3", board3);
-		mv.setViewName("border/borderIndex");
-		return mv;
-	}
-	
-	
 	
 	
 }
