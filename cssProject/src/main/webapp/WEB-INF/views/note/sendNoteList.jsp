@@ -36,7 +36,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <section class="content container-fluid">
 <div class="row">
         <div class="col-md-9" style="width: 100%" >
-          <div class="box box-primary" style="width: 100%; margin-top: 50px;">
+          <div class="box box-primary" style="width: 98%; margin-top: 50px; margin-left: 10px;">
             <div class="box-header with-border">
               <h3 class="box-title">보낸쪽지함</h3>
 
