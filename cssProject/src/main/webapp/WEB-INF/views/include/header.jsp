@@ -7,7 +7,6 @@
 <title>Insert title here</title>
  <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="resources/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -18,6 +17,8 @@
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="resources/dist/css/skins/skin-blue.min.css">
+  
+  <link rel="stylesheet" href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
 
   <!-- Google Font -->
   <link rel="stylesheet"
@@ -30,17 +31,35 @@
 	<!-- AdminLTE App -->
 	<script src="resources/dist/js/adminlte.min.js"></script>
 	<!-- REQUIRED JS SCRIPTS -->
+
+  <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+  	 <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="resources/plugins/iCheck/flat/blue.css">
+
+	<script src="resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	
+
+  <script>
+  		function menuHighlight(clickIdx){
+  			sessionStorage.setItem("menu", clickIdx);
+  		}
+  </script>
+
 </head>
 <body>
 <!-- Main Header -->
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="index.do" class="logo" onclick="menuHighlight(1);">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>C</b>SS</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>C</b>SS</span>
     </a>
 
     <!-- Header Navbar -->
@@ -72,7 +91,7 @@
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
-                        Support Team
+                        관리부서
                         <small><i class="fa fa-clock-o"></i> 5 mins</small>
                       </h4>
                       <!-- The message -->
@@ -156,13 +175,12 @@
               <!-- The user image in the navbar-->
               <img src="resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">관리자</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
                 <img src="resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
                 <p>
                   Alexander Pierce - Web Developer
                   <small>Member since Nov. 2012</small>

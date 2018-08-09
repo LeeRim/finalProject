@@ -36,7 +36,21 @@
 	  });
 	});
 	function border(){
-		location.href="borderList.do?bCateGory=${board.bCateGory}";
+		location.href="borderList.do?bCateGory=${board.bCateGory}" + "&currentPage=" + ${currentPage};
+	}
+	function writeComment(){
+		$("#commentForm").submit();
+	}
+	function bModifyPage(){
+		location.href="borderUpdateForm.do?boardKey=${board.boardKey}"
+	}
+	function writeComment(){
+		$("#commentForm").submit();
+	}
+	function deleteBoard(){
+		if(confirm("삭제 하시겠습니까?")){
+			location.href="deleteBoard.do?boardKey=${board.boardKey}"
+		}
 	}
 	function bModifyPage(){
 		location.href="borderUpdateForm.do?boardKey=${board.boardKey}"
@@ -73,7 +87,8 @@
 작성일 : <c:out value="${board.bDate }"/><br>
 내용 : ${board.bContent }
 <div class="Btns">
-	<c:if test="${user ne null && user.eId eq board.bWriter}">
+
+	<c:if test="${user ne null && user.eKey eq board.bWriter}">
 	<div class="Btn" onclick="bModifyPage();">수정하기</div>
 	<div class="Btn" onclick="deleteBoard();">삭제하기</div>
 	</c:if>

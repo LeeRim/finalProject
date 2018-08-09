@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.jdl.css.border.model.dao.BoardCommentDao;
 import com.jdl.css.border.model.dao.BorderDao;
+import com.jdl.css.border.model.vo.BoardCommentVo;
 
 @Service
 public class BoardCommentService {
@@ -13,4 +14,7 @@ public class BoardCommentService {
 	BoardCommentDao dao;
 
 
+	public int insertComment(BoardCommentVo bc) {
+		return dao.insertComment(bc);
+	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/include/header.jsp" />
 <!DOCTYPE html>
 <!--
@@ -15,6 +16,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- 승인table -->
 <link rel="stylesheet" href="resources/dist/css/approval.css">
+
+<!-- datepicker -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+<script type="text/javascript">
+
+function openSelectApprover(){
+	window.open("openSelectApproverPage.do","_blank","width=1070, height=600,left=350,top=200");
+}
+
+	$(function() {
+		$('#jpWorkingDate').datepicker({
+			format : "yyyy/mm/dd",
+			language : "kr",
+			autoclose : true
+		});
+	});
+</script>
+<!--  -->
 
 </head>
 <!--
@@ -63,7 +85,11 @@ desired effect
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-
+				<div class="addApprover">
+					<a class="btn btn-app" href="#" onclick="openSelectApprover();">
+						<i class="fa fa-user-plus"></i>결재자추가
+					</a>
+				</div>
 				<div class="content_page report_detail">
 
 					<div class="wrap_container">
@@ -71,14 +97,13 @@ desired effect
 						<section class="content_wrapper">
 							<!--전자결제 상세-->
 							<div class="report_type approval_type form_back">
-							
+
 								<!--전자결재 내용-->
 								<div class="approval_import ie9-scroll-fix">
 									<!-- 문서 내용 표시 테스트 -->
 									<form id="document_content" class="form_doc_editor editor_view"
-										action="writeDjqanrldks.do" method="get">
+										action="writeJobPropsal.do" method="get">
 										<span>
-
 											<table
 												style="border: 0px solid rgb(0, 0, 0); border-image: none; width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 												<!-- Header -->
@@ -95,11 +120,7 @@ desired effect
 													</tr>
 													<tr>
 														<td
-															style="background: white; padding: 0px !important; border: currentColor; border-image: none; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;"><span
-															class="sign_type1_inline" data-group-seq="3"
-															data-group-name="합의" data-group-max-count="1"
-															data-group-type="type1" data-is-agreement="true"
-															id="agreementWrap"></span> <!-- 에디터 &nbsp; 버그. 개행과 공백을 최소화 시키자. -->
+															style="background: white; padding: 0px !important; border: currentColor; border-image: none; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;">
 															<table
 																style="border: 1px solid rgb(0, 0, 0); border-image: none; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
 																<!-- User -->
@@ -116,6 +137,7 @@ desired effect
 																			기안자</td>
 																		<td
 																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<c:out value="${sessionScope.user.eName}"></c:out>
 																		</td>
 																	</tr>
 																	<tr>
@@ -124,15 +146,24 @@ desired effect
 
 																			소속</td>
 																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<c:out value="${sessionScope.user.department}"></c:out>
+																		</td>
 																	</tr>
 																	<tr>
 																		<td
 																			style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																			기안일</td>
+
 																		<td
-																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
+																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<jsp:useBean id="currentTime" class="java.util.Date" />
+																			<fmt:formatDate value="${currentTime }"
+																				pattern="yyyy-MM-dd" var="currentTime" /> <c:out
+																				value="${currentTime }"></c:out><input type="hidden"
+																			name="aWriteDate" value="${currentTime }">
+																		</td>
 																	</tr>
 																	<tr>
 																		<td
@@ -143,12 +174,11 @@ desired effect
 																			style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
 																	</tr>
 																</tbody>
-															</table></td>
+															</table>
+														</td>
 														<td>
 															<div class="sign_condition">
-																<span class="sign_type1_inline" data-group-seq="0"
-																	data-group-name="승인" data-group-max-count="1"
-																	data-group-type="type1" data-is-reception=""><span
+																<span class="sign_type1_inline"><span
 																	class="sign_tit_wrap"><span class="sign_tit"><strong>승인</strong></span></span>
 																	<!--  --> <span class="sign_member_wrap"
 																	id="activity_15162"><span class="sign_member"><span
@@ -172,9 +202,7 @@ desired effect
 															</div>
 
 															<div class="sign_condition">
-																<span class="sign_type1_inline" data-group-seq="0"
-																	data-group-name="신청" data-group-max-count="1"
-																	data-group-type="type1" data-is-reception=""><span
+																<span class="sign_type1_inline"><span
 																	class="sign_tit_wrap"><span class="sign_tit"><strong>신청</strong></span></span>
 																	<!--  --> <span class="sign_member_wrap"
 																	id="activity_15162"><span class="sign_member"><span
@@ -206,38 +234,22 @@ desired effect
 
 															시행일자</td>
 														<td
-															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"><input
-															type="text" readonly=""
+															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;">
+															<input type="text" readonly=""
 															class="ipt_editor ipt_editor_date hasDatepicker"
-															data-dsl="{{calendar$width:150$}}" id="editorForm_4"
-															data-id="" data-name="" data-require="false"
-															data-maxlength="" data-width="150" data-defaultstr=""
-															data-editable="false" name="a1" data-value=""
-															placeholder="" value="" style="width: 150px;"></td>
+															id="jpWorkingDate" name="jpWorkingDate" value=""
+															style="width: 150px;">
+														</td>
 														<td
 															style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
 
 															협조부서</td>
 														<td
 															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"><input
-															type="text" class="ipt_editor"
-															data-dsl="{{text$defaultstr:111$}}" name="a2"
-															id="editorForm_5" value="" data-id="" data-name=""
-															data-require="false" data-maxlength="" data-width=""
-															data-defaultstr="111" data-editable="false" data-value=""
-															placeholder=""></td>
+															type="text" class="ipt_editor" name="jpCooperation"
+															id="jpCooperation" value=""></td>
 													</tr>
-													<tr>
-														<td
-															style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
 
-															합의</td>
-														<td
-															style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
-															colspan="3" class=""><span class="sign_type2"
-															id="agreementWrap"><span class="sign_member"><span
-																	class="part">|</span><span class="name"> </span></span></span></td>
-													</tr>
 													<tr>
 														<td
 															style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
@@ -246,31 +258,58 @@ desired effect
 														<td
 															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
 															colspan="3"><input type="text" class="ipt_editor"
-															data-dsl="{{text$require$:subject}}" name="a3"
-															id="subject" value="" data-id="subject"
-															data-name="subject" data-require="true" data-maxlength=""
-															data-width="" data-defaultstr="" data-editable="false"
-															data-value="" placeholder=""></td>
+															name="aTitle" id="aTitle" value=""></td>
 													</tr>
 													<tr>
 														<td
 															style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 350px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: top;"
 															colspan="4" class=""><textarea
-																data-dsl="{{editor:appContent}}" name="a4"
-																id="appContent" style="width: 100%; min-width: 200px;"
-																data-id="appContent" data-name="appContent"
-																data-require="false" data-maxlength="" data-width=""
-																data-defaultstr="" data-editable="false" data-value=""
-																placeholder="" value="" data-skintype="detail"
-																class="go-editor"></textarea></td>
+																data-dsl="{{editor:appContent}}" name="jpContent"
+																id="jpContent" style="width: 100%; min-width: 200px;"
+																value="" class="go-editor"></textarea></td>
 													</tr>
 												</tbody>
 											</table>
-										</span> <input type="submit" value="제출">
+										</span>
+
+	<script>
+	$(document)
+	.ready(
+		function() {
+			var fileTarget = $('.form-group .upload-hidden');
+			var filenames ="";
+			fileTarget.on('change',function() { // 값이 변경되면 
+				if (window.FileReader) { // modern browser 
+				
+				for(var i=0;i<$(this)[0].files.length;i++){
+					var file = $(this)[0].files[i];
+					filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove'></i><br>";
+					console.log(filenames);
+				}
+				} else { // old IE
+					var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+				}
+				// 추출한 파일명 삽입 
+				$('.file-list').html(filenames);
+			});
+		});
+	</script>
+
+										<div class="form-group" style="height: 100px;">
+											<div style="float: left; height: 100px; width: 130px;">
+												<div class="btn btn-default btn-file">
+													<i class="fa fa-paperclip"></i> Attachment <input
+														multiple="multiple" type="file" name="attachment" class="upload-hidden">
+												</div>
+												<p class="help-block">Max. 32MB</p>
+											</div>
+											<div class="file-list"></div>
+										</div>
+										<input type="submit" value="제출">
 									</form>
 								</div>
-							
-								
+
+
 							</div>
 						</section>
 					</div>

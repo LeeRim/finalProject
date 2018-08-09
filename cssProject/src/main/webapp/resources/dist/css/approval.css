@@ -76,6 +76,12 @@
 	background: white;
 }
 
+.orderForm_back {
+	height: 1200px;
+	width: 1200px;
+	background: white;
+}
+
 .sign_condition{
 	float: right; margin-right: 15px;
 }

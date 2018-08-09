@@ -6,7 +6,7 @@ import java.sql.Date;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BorderVo{
+public class BorderVo extends PageInfo{
 	
 	private int boardKey; //게시판 기본키
 	private String companyKey; //회사키
@@ -24,9 +24,9 @@ public class BorderVo{
 	public BorderVo(){
 		
 	}
-
+	
 	public BorderVo(int boardKey, String companyKey, String bTitle, String bContent, int bWriter, int bCount,
-			Date bDate, String bCateGory, String eName) {
+			Date bDate, String bCateGory, String eName, int bType, int startRow, int endRow) {
 		this.boardKey = boardKey;
 		this.companyKey = companyKey;
 		this.bTitle = bTitle;
@@ -36,9 +36,11 @@ public class BorderVo{
 		this.bDate = bDate;
 		this.bCateGory = bCateGory;
 		this.eName = eName;
+		this.bType = bType;
+		this.startRow = startRow;
+		this.endRow = endRow;
 	}
 
-	
 	public int getStartRow() {
 		return startRow;
 	}
@@ -139,7 +141,9 @@ public class BorderVo{
 	public String toString() {
 		return "BorderVo [boardKey=" + boardKey + ", companyKey=" + companyKey + ", bTitle=" + bTitle + ", bContent="
 				+ bContent + ", bWriter=" + bWriter + ", bCount=" + bCount + ", bDate=" + bDate + ", bCateGory="
-				+ bCateGory + ", eName=" + eName + "]";
+				+ bCateGory + ", eName=" + eName + ", bType=" + bType + ", startRow=" + startRow + ", endRow=" + endRow
+				+ "]";
 	}
+
 
 }

@@ -30,31 +30,26 @@ public class BorderController {
 	BorderService borderservice;
 	
 	@RequestMapping("borderList.do")
-	public ModelAndView boaderList(HttpServletRequest request, BorderVo board, ModelAndView mv){
+	public ModelAndView boaderList(@RequestParam(value="currentPage", required=false)String currentPagestr, HttpServletRequest request, BorderVo board, ModelAndView mv){
 		
-		System.out.println("borderList.do : " + board);
-		System.out.println(board.getbCateGory());
-//		int currentPage;	//현재 페이지의 번호
+		int currentPage;	//현재 페이지의 번호
 		int limitPage;		//한페이지에 출력할 페이지 갯수
 		//1~10
 		int maxPage;		//가장 마지막 페이지
 		int startPage;		//시작 페이지 변수
 		int endPage;		//마지막 페이지 변수
 		int limit;				//한페이지에 출력할 글에 갯수
-		int currentPage;
 		
 		limit = 10;
 		limitPage = 10;
 		
-		if(request.getParameter("currentPage") != null){
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		if(currentPagestr != null){
+			currentPage = Integer.parseInt(currentPagestr);
 		}else{
 			currentPage = 1;
 		}
-		
 		//게시글의 총 갯수
 		int listCount = borderservice.countBoardList(board.getbCateGory());
-		System.out.println("controller listCount : " + listCount);
 		
 		//134 -> 14
 				maxPage = (int)((double)listCount / limit + 0.9);
@@ -80,16 +75,22 @@ public class BorderController {
 		
 		board.setStartRow(startRow);
 		board.setEndRow(endRow);
+		
+		
+		board.setCurrentPage(currentPage);
+		board.setLimit(limit);
+		
 		List<BorderVo> list = borderservice.getNoticeList(board);
+		
 		if(list != null){
 			mv.addObject("list", list);
 			mv.addObject("bCateGory", board.getbCateGory());
 			mv.addObject("pi", pi);
 			mv.setViewName("border/borderList");
 		}
-		System.out.println("controller pi : " + pi);
-		System.out.println("controller list : " +list);
-		System.out.println("controller board : " +board);
+//		System.out.println("controller pi : " + pi);
+//		System.out.println("controller list : " +list);
+//		System.out.println("controller board : " +board);
 		return mv;
 	}
 
@@ -112,9 +113,9 @@ public class BorderController {
 	}
 
 	@RequestMapping("selectBoard.do")
-	public ModelAndView selectBoard(BorderVo b, ModelAndView mv){
+	public ModelAndView selectBoard(BorderVo b, ModelAndView mv, int currentPage){
 		
-		System.out.println("selectBoard.do : " + b);
+		
 		BorderVo board = borderservice.selectBoard(b.getBoardKey());
 		
 		List<BoardCommentVo> bList = borderservice.selectCommentList(b.getBoardKey());
@@ -122,7 +123,10 @@ public class BorderController {
 			board.setbCount(board.getbCount() + 1);
 			mv.addObject("bList", bList);
 			mv.addObject("board", board);
+			board.setbCount(board.getbCount() + 1);
+			mv.addObject("currentPage", currentPage);
 			mv.setViewName("border/borderDetail");
+			System.out.println("null : " + board);
 		}
 		System.out.println("bList : " +  bList);
 		int result = borderservice.updateBoardCount(b.getBoardKey());

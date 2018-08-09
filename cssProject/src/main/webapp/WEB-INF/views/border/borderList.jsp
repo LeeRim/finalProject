@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
 <!-- DataTables -->
 <script src="resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -39,8 +40,34 @@
 <!-- 	<script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
 	<!-- AdminLTE App -->
 <!-- 	<script src="resources/dist/js/adminlte.min.js"></script> -->
+=======
+	<!-- DataTables -->
+<script src="resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="resources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="resources/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="resources/dist/js/demo.js"></script>
+<script src="resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	
+  
+<!-- DataTables -->
+<!-- FastClick -->
+>>>>>>> refs/heads/master
 	<!-- REQUIRED JS SCRIPTS -->
 <style>
+
+	.page{
+		margin-right:auto;
+		margin-left:auto;
+		text-align:center;
+	}
+	.write{
+		margin-top:10px;
+		margin-left:5px;
+		margin-bottom:10px;
+	}
 	.Btn{
 		border:1px solid #bcbcbc;
 		padding:5px;
@@ -79,6 +106,10 @@ $(function(){
 	});
 });
 
+	$(document).ready(function(){
+   	 $("#gcTable").tablesorter();
+ 	});
+	
 	function boardForm(){
 		location.href="borderForm.do?bCateGory=${bCateGory}";
 	}
@@ -95,6 +126,7 @@ $(function(){
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
    <c:import url="/WEB-INF/views/include/left_column.jsp"/>
+
 	<div class="content-wrapper">
 	 <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -111,7 +143,7 @@ $(function(){
 <!-- /.row -->
       <div class="row" style="width:100%; margin-right:auto; margin-left:auto; margin-top:10px;">
         <div class="col-xs-12">
-          <div class="box">
+          <div class="box" style="margin-top:20px;">
             <div class="box-header">
             
               <h3 class="box-title">
@@ -140,13 +172,17 @@ $(function(){
                 </tr>
                 </c:forEach>
               </table>
+
+              	<button class="write"onclick="boardForm();">작성</button>
               <c:if test="${!empty user}">
-              <c:choose>
-              	<c:when test="${user.eType eq 2}">
-              		<div class="Btn" onclick="boardForm();">공지사항 작성</div>
-              	</c:when>
-              </c:choose>
-              	<div class="Btn" onclick="boardForm();">작성</div>
+	              <c:choose>
+	              	<c:when test="${user.eType eq 1 && bCategory eq 1}">
+		              	<div class="Btn" onclick="boardForm();">공지사항 작성</div>
+	              	</c:when>
+	              	<c:otherwise>
+		              	<div class="Btn" onclick="boardForm();">작성</div>
+	              	</c:otherwise>
+	              </c:choose>
               </c:if>
             </div>
             <!-- /.box-body -->
@@ -155,6 +191,11 @@ $(function(){
         </div>
       </div>
     <!-- /.content -->
+<<<<<<< HEAD
+=======
+	<div class="page">
+	<button onclick="movePage(1);"> << </button>
+>>>>>>> refs/heads/master
     <div class="pageBtnDiv">
 	<div class="pageBtn" onclick="movePage(1);"> << </div>
 	<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}" >

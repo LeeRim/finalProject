@@ -12,6 +12,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Starter</title>
+
+
   
   <script>
   	function boardPage(bType){
@@ -21,6 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   		location.href="borderIndex.do"
   	}
   </script>
+
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -49,18 +52,22 @@ desired effect
   
   
 
-  <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper" style="height: 100%;">
-    <!-- Content Header (Page header) -->
+
     <section class="content-header">
-      <h1>
-        Page Header
-        <!-- <button onclick="boardPage(1);">공지사항</button>
-        <button onclick="boardPage(2);">자유게시판</button>
-        <button onclick="boardPage(3);">경조사</button> -->
+
+        <h1>커뮤니티 버튼</h1>
+        <button onclick="boardPage(1);">공지사항</button><br>
+        <button onclick="boardPage(2);">자유게시판</button><br>
+        <button onclick="boardPage(3);">경조사</button><br>
         <button onclick="board();">게시판 인덱스</button>
-        <small>Optional description</small>
-      </h1>
+        <hr>
+        <h1>쪽지 버튼</h1>
+        <a href="moveNote.do">쪽지 메인 페이지 이동</a>
+        <h1>로그인 버튼</h1>
+        <a href="loginForm.do">로그인 페이지 이동</a>
+
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
@@ -69,10 +76,13 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
-
+	<a href="adminMain.do">관리자페이지</a>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
+        
+        <a href="loginForm.do">로그인</a>
+        <a href="approvalPage.do">전자결재</a>
 
     </section>
     <!-- /.content -->
@@ -86,5 +96,6 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<P>  The time on the server is ${serverTime}. 111</P>
 </body>
 </html>

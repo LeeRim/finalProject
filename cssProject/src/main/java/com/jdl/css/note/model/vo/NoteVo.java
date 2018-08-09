@@ -1,10 +1,11 @@
 package com.jdl.css.note.model.vo;
 
 import java.sql.Date;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import com.jdl.css.common.model.vo.AttachmentVo;
 
 @Component
 public class NoteVo {
@@ -15,10 +16,13 @@ public class NoteVo {
 	private String snContent;
 	private Date snWriteDate;
 	private char snDeleteYn;
+	private String snAttach;
 	
 	private List<String> receive;
 	private List<Integer> receiveNo;
 	private int receiver;
+	
+	private List<AttachmentVo> attach;
 	public NoteVo() {
 	}
 
@@ -93,14 +97,32 @@ public class NoteVo {
 	public void setReceiver(int receiver) {
 		this.receiver = receiver;
 	}
+	
+	
+	public String getSnAttach() {
+		return snAttach;
+	}
+
+	public void setSnAttach(String snAttach) {
+		this.snAttach = snAttach;
+	}
+	
+
+	public List<AttachmentVo> getAttach() {
+		return attach;
+	}
+
+	public void setAttach(List<AttachmentVo> attach) {
+		this.attach = attach;
+	}
 
 	@Override
 	public String toString() {
 		return "NoteVo [snKey=" + snKey + ", snSenderFk=" + snSenderFk + ", snTitle=" + snTitle + ", snContent="
-				+ snContent + ", snWriteDate=" + snWriteDate + ", snDeleteYn=" + snDeleteYn + ", receive=" + receive
-				+ ", receiveNo=" + receiveNo + ", receiver=" + receiver + "]";
+				+ snContent + ", snWriteDate=" + snWriteDate + ", snDeleteYn=" + snDeleteYn + ", snAttach=" + snAttach
+				+ ", receive=" + receive + ", receiveNo=" + receiveNo + ", receiver=" + receiver + ", attach=" + attach
+				+ "]";
 	}
 
-	
 	
 }
