@@ -23,6 +23,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 <script type="text/javascript">
+
+function openSelectApprover(){
+	window.open("openSelectApproverPage.do","_blank","width=1070, height=600,left=350,top=200");
+}
+
 	$(function() {
 		$('#jpWorkingDate').datepicker({
 			format : "yyyy/mm/dd",
@@ -81,9 +86,9 @@ desired effect
         | Your Page Content Here |
         -------------------------->
 				<div class="addApprover">
-					<div class="btn btn-app">
+					<a class="btn btn-app" href="#" onclick="openSelectApprover();">
 						<i class="fa fa-user-plus"></i>결재자추가
-					</div>
+					</a>
 				</div>
 				<div class="content_page report_detail">
 
@@ -272,20 +277,20 @@ desired effect
 	.ready(
 		function() {
 			var fileTarget = $('.form-group .upload-hidden');
+			var filenames ="";
 			fileTarget.on('change',function() { // 값이 변경되면 
 				if (window.FileReader) { // modern browser 
-					var filename = $(this)[0].files[0].name;
-					console.log(filename);
+				
+				for(var i=0;i<$(this)[0].files.length;i++){
+					var file = $(this)[0].files[i];
+					filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove'></i><br>";
+					console.log(filenames);
+				}
 				} else { // old IE
 					var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
 				}
 				// 추출한 파일명 삽입 
-
-				var files = $('.file-list').html();
-				if (files != '') {
-					files += '<br>';
-				}
-				$('.file-list').html(files+ filename+"&nbsp<i class='fa fa-remove'></i>");
+				$('.file-list').html(filenames);
 			});
 		});
 	</script>
@@ -294,7 +299,7 @@ desired effect
 											<div style="float: left; height: 100px; width: 130px;">
 												<div class="btn btn-default btn-file">
 													<i class="fa fa-paperclip"></i> Attachment <input
-														type="file" name="attachment" class="upload-hidden">
+														multiple="multiple" type="file" name="attachment" class="upload-hidden">
 												</div>
 												<p class="help-block">Max. 32MB</p>
 											</div>

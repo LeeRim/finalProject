@@ -162,6 +162,7 @@ desired effect
                     <textarea id="summernote" class="form-control" style="height: 300px" name="snContent">
                     </textarea>
               </div>
+
 	<script>
 	   $(document)
 	   .ready(
@@ -195,6 +196,7 @@ desired effect
 											</div>
 											<div class="file-list"></div>
 										</div>
+
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
