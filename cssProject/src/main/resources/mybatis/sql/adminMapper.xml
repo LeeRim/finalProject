@@ -11,6 +11,18 @@
 
 	<select id="selectCompanyList" resultType="Company">
 		<include refid="select"></include>
+		WHERE C_LEVEL != 0
 	</select>
+	
+	<select id="selectCompanySetList" resultType="Company">
+		<include refid="select"></include>
+		WHERE C_LEVEL = 0
+	</select>
+	
+	<update id="updateCcompanyLevel" parameterType="Company">
+		UPDATE COMPANY
+		SET C_LEVEL = #{cLevel}
+		WHERE C_KEY = #{cKey}
+	</update>
 
 </mapper>

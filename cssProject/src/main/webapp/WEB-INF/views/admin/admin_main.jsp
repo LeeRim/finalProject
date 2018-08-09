@@ -29,7 +29,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
  	margin-top:80px;
  	font-size:17px;
  }
- ul li{
+ .no-padding ul li{
  	margin-bottom:10px;
  }
 .pieChart{
@@ -55,6 +55,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
  
 </style>
+<script>
+  		function menuHighlight(clickIdx){
+  			sessionStorage.setItem("menu", clickIdx);
+  		}
+  </script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -279,7 +284,7 @@ desired effect
                     <li><i class="fa fa-circle-o text-green"></i> 인천광역시</li>
                     <li><i class="fa fa-circle-o text-aqua"></i> 대전광역시</li>
                     <li><i class="fa fa-circle-o text-light-blue"></i> 제주특별자치도</li>
-                    <li><i class="fa fa-circle-o text-gray"></i>경기도 성남시 </li>
+                    <li><i class="fa fa-circle-o text-gray"></i> 경기도 성남시 </li>
                   </ul>
                 </div>
                 <!-- /.col -->

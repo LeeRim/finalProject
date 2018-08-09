@@ -21,6 +21,15 @@ public class AdminDao {
 		return sqlSession.selectList("AdminMapper.selectCompanyList");
 	}
 
+	public List<CompanyVo> selectCompanySetList() {
+		return sqlSession.selectList("AdminMapper.selectCompanySetList");
+	}
+
+	public int updateCompanyLevel(CompanyVo company) {
+		return sqlSession.update("AdminMapper.updateCcompanyLevel",company);
+		
+	}
+
 	
 
 }

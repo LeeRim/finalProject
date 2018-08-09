@@ -29,6 +29,7 @@
 	}
 	.tdBox{
 		text-align:center;
+		border:noen;
 	}
 	
 	.levelCheckbox + label {
@@ -101,8 +102,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        관리자페이지
-        <small>회사관리_회원목록</small>
+        관리자페이지<small>회원관리_회원설정</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -110,23 +110,24 @@
         <li class="active">Data tables</li>
       </ol>
     </section>
-
-    <form id="updateLevel" method="get" action="updateCompanyLevel.do" onsubmit="return validate();">
+	
+	<form id="updateLevel" method="get" action="updateCompanyLevel.do" onsubmit="return validate();">
 	<input type="hidden" name="companyList" id="companyList"/>
 	<input type="hidden" name="cLevel" id="cLevel"/>
-	<input type="hidden" name="listValue" value="list"/>
+	<input type="hidden" name="listValue" value="setList"/>
     <!-- Main content -->
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
-
             <div class="box-body">
-            <div class="selDiv">
-			<div class="levelDiv" id="level0" onclick="submitLevel(0,this);">LEVEL 0</div>
+          <div class="selDiv">
+			<div class="levelDiv" id="level1" onclick="submitLevel(1,this);">LEVEL 1</div>
+			<div class="levelDiv" id="level2" onclick="submitLevel(2,this);">LEVEL 2</div>
+			<div class="levelDiv" id="level3" onclick="submitLevel(3,this);">LEVEL 3</div>
 			<div class="chgDiv" onclick="updateCompanyLevel();">변경</div>
           </div>
-              <table id="example2" class="table table-bordered table-hover">
+              <table id="example2" class="table table-bordered table-hover" >
                 <thead>
                 <tr>
                   <th>레벨</th>
@@ -136,7 +137,7 @@
                   <th>주소</th>
                   <th>마일리지</th>
                   <th>사용 종료일</th>
-                  <th>등급변경</th>
+                  <th>등급 변경</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -173,8 +174,8 @@
       </div>
       <!-- /.row -->
     </section>
+	</form>
     <!-- /.content -->
-    </form>
   </div>
   <!-- /.content-wrapper -->
     
