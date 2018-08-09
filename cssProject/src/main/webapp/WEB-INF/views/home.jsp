@@ -77,6 +77,7 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
 	<a href="adminMain.do">관리자페이지</a>
+	  <a href="calender.do">일정 조회</a>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->

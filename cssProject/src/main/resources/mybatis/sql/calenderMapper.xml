@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CalenderMapper">
+
+	<select id="selectCalender" resultType="Calender">
+		select cal_name as "title",
+				to_number(to_char(cal_startdate, 'yyyy')) as "startYear",
+				to_number(to_char(cal_startdate, 'mm')) as "startMonth",
+				to_number(to_char(cal_startdate, 'dd')) as "startDay",
+				to_number(to_char(cal_enddate, 'yyyy')) as "endYear",
+				to_number(to_char(cal_enddate, 'mm')) as "endMonth",
+				to_number(to_char(cal_enddate, 'dd')) as "endDay"
+		from calender
+	</select>
+
+</mapper>
