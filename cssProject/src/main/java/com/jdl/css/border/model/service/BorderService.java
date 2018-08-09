@@ -52,5 +52,9 @@ public class BorderService {
 		return dao.insertComment(bc);
 	}
 
+	public List<BorderVo> selectBoardList() {
+		return dao.selectBoardList();
+	}
+
 
 }

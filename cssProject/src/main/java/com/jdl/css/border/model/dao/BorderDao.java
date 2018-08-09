@@ -52,5 +52,9 @@ public class BorderDao {
 		return sqlSession.insert("BorderMapper.BorderComment", bc);
 	}
 
+	public List<BorderVo> selectBoardList() {
+		return sqlSession.selectList("BorderMapper.selectBoardList");
+	}
+
 	
 }

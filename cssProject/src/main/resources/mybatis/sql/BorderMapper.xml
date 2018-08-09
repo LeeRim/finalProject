@@ -84,4 +84,8 @@
 		INSERT INTO BOARD_COMMENT VALUES(SEQ_COMMENT.NEXTVAL, #{boardKeyFk}, #{cWriter}, #{cContent}, SYSDATE)
 	</insert>
 	
+	<select id="selectBoardList">
+		SELECT * FROM BOARD
+	</select>
+	
 </mapper>
