@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.employee.model.service.EmployeeService;
@@ -49,7 +50,7 @@ public class EmployeeController {
 		
 		mv.addObject("list", list);
 		mv.addObject("list2", list2);
-		mv.setViewName("memberAdd");
+		mv.setViewName("employee/memberAdd");
 		return mv;
 		
 	}
@@ -75,16 +76,16 @@ public class EmployeeController {
 		int result =eService.insertMember(member);
 		System.out.println(member);
 		
-		return "redirect:organizationChart.do";
+		return "redirect:employee/organizationChart.do";
 	}
 	
 	@RequestMapping("department.do")
 	public String department(){
-		return "department";
+		return "employee/department";
 	}
 	@RequestMapping("jobGrade.do")
 	public String jobGrade(){
-		return "jobGrade";
+		return "employee/jobGrade";
 	}
 	
 
@@ -92,16 +93,61 @@ public class EmployeeController {
 	public ModelAndView employeeList(ModelAndView mv){
 		
 		List<EmployeeVo> list = eService.selectEmployeeList();
-//		System.out.println(list);
+		
 		mv.addObject("list", list);
-		mv.setViewName("organizationChart");
+		mv.setViewName("employee/organizationChart");
 		return mv;
 	}
+	
+	@RequestMapping("organizationChart2.do")
+	public @ResponseBody List<EmployeeVo> employeeList2(String main){
+		System.out.println(main);
+		
+		String[] eNo = main.split(",");
+			
+
+			int[] eNo2 = new int[eNo.length];
+			
+			for(int i=1; i>eNo.length;i++){
+				
+ 
+				eNo2[i] = Integer.parseInt(eNo[i]);
+			}
+		 
+		
+		List<EmployeeVo> list = eService.selectEmployeeList();
+
+		System.out.println(list.get(0).geteKey());
+		
+		int[] arry= new int[list.size()];
+		
+		String[] test = new String[eNo.length];
+		
+		for(int i=1; i>eNo.length;i++){
+		
+			for(int i2=1; i2>list.size();i2++){
+				
+				if(eNo2[i]==list.get(i2).geteKey()){
+					
+					test[i] = list.get(i2).geteName();
+				
+			
+				}
+			}
+		}
+		System.out.println(test[0]+test[1]);
+		
+		
+		return list;
+	}
+	
+	
+	
 	
 	
 		@RequestMapping("employeeIndex.do")
 	public String employeeIndex(){
-		return "employeeIndex";
+		return "employee/employeeIndex";
 	}
 		
 		

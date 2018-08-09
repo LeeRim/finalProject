@@ -147,13 +147,24 @@ td {
 			var items = [];
 			$('input[name=chk]:checked').each(function () {
 			    items.push($(this).val());
-			    
 			});
-			console.log(items)
-		})
-		
-		
-		
+			console.log(items);
+			$.ajax({
+			    type      : 'POST',
+			    url         : 'organizationChart2.do',
+			    traditional : true,
+			    data        : {
+			        'main' : items.join(",")
+			    },
+			    success     : function(data) {
+			        console.log('test : ',data);
+			    },
+			    error       : function(request, status, error) {
+			        alert(error);
+			    }
+			});
+	});
+
 		
 		
 	});
@@ -169,7 +180,7 @@ td {
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 
-		<c:import url="include/left_column.jsp" />
+		<c:import url="../include/left_column.jsp" />
 
 
 
@@ -196,10 +207,10 @@ td {
 									<c:forEach items="${list }" var="e2" varStatus="status">
 										<c:if test="${status.count eq 1 }">
 											<li><label> <input type="checkbox"
-													value="${e2.eDepart }" name="checkDpt"
-													onclick="chkSubCheckbox(${e2.eDepartFk}, this)"> <strong><b>${e2.eDepart}</b></strong>
+													value="${e2.department }" name="checkDpt"
+													onclick="chkSubCheckbox(${e2.eDepartFk}, this)"> <strong><b>${e2.department}</b></strong>
 											</label> <c:forEach items="${list }" var="e3">
-													<c:if test="${e2.eDepart eq e3.eDepart }">
+													<c:if test="${e2.department eq e3.department }">
 														<ul style="display: block;">
 															<li><label> <input type="checkbox"
 																	value="${e3.eKey }" name="chk" class="${e2.eDepartFk}">${e3.eName }
@@ -209,12 +220,12 @@ td {
 												</c:forEach></li>
 										</c:if>
 										<c:if test="${status.count ne 1 }">
-											<c:if test="${list[status.index-1].eDepart ne  e2.eDepart}">
+											<c:if test="${list[status.index-1].department ne  e2.department}">
 												<li><label> <input type="checkbox"
-														value="${e2.eDepart }" name="checkDpt"
-														onclick="chkSubCheckbox(${e2.eDepartFk}, this)"> <strong><b>${e2.eDepart }</b></strong>
+														value="${e2.department }" name="checkDpt"
+														onclick="chkSubCheckbox(${e2.eDepartFk}, this)"> <strong><b>${e2.department }</b></strong>
 												</label> <c:forEach items="${list }" var="e4">
-														<c:if test="${e2.eDepart eq e4.eDepart }">
+														<c:if test="${e2.department eq e4.department }">
 															<ul style="display: block;">
 																<li><label> <input type="checkbox"
 																		value="${e4.eKey }" name="chk" class="${e2.eDepartFk}">${e4.eName }
@@ -276,8 +287,8 @@ td {
 										<td class="employee_list_emp">1</td>
 										<td class="employee_list_emp"><a
 											href="javascript:ef_open(5017)"><b>${e.eId}</b></a></td>
-										<td class="employee_list_emp">${e.eDepart}</td>
-										<td class="employee_list_emp">${e.eJob}</td>
+										<td class="employee_list_emp">${e.department}</td>
+										<td class="employee_list_emp">${e.job}</td>
 										<td class="employee_list_emp"><a
 											href="javascript:ef_open(5017)"><b>${e.eName}</b></a></td>
 										<td class="employee_list_emp">${e.eExten}</td>
@@ -313,7 +324,7 @@ td {
 
 
 
-	<c:import url="include/footer.jsp" />
+	<c:import url="../include/footer.jsp" />
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

@@ -26,7 +26,7 @@ public class EmployeeDao {
 	}
 
 	public List<EmployeeVo> selectEmployeeList() {
-		return sqlSession.selectList("EmployeeMapper.selectEmployeeList");
+		return sqlSession.selectList("EmployeeMapper.selectEmployeeList2");
 	}
 
 	public List<EmployeeVo> selectJobList() {

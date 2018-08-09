@@ -28,8 +28,8 @@
 	
 	<resultMap type="EmployeeVo" id="EmployeeMap">
 		<result property="eId" column="ID"/>
-		<result property="eDepart" column="DEPARTMENT"/>
-		<result property="eJob" column="JOB"/>
+		<result property="department" column="DEPARTMENT"/>
+		<result property="job" column="JOB"/>
 		<result property="eName" column="NAME"/>
 		<result property="eExten" column="EXTEN"/>
 		<result property="ePhone" column="PHONE"/>
@@ -80,7 +80,7 @@ VALUES (SEQ_EMPLOYEE.NEXTVAL,  #{eNo}, 1, 'A' , #{eId}, #{ePwd},
 	  #{eBirth}, #{eHireDate}, 'aa' )
 </insert>
 	
-	<select id="selectEmployeeList"  resultMap="EmployeeMap">
+	<select id="selectEmployeeList2"  resultMap="EmployeeMap">
 		SELECT
     E.E_ID AS "ID", 
     D.DIV_INFO AS "DEPARTMENT", 
