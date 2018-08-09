@@ -55,9 +55,9 @@ desired effect
     <section class="content-header">
       <h1>
         Page Header
-        <button onclick="boardPage(1);">공지사항</button>
+        <!-- <button onclick="boardPage(1);">공지사항</button>
         <button onclick="boardPage(2);">자유게시판</button>
-        <button onclick="boardPage(3);">경조사</button>
+        <button onclick="boardPage(3);">경조사</button> -->
         <button onclick="board();">게시판 인덱스</button>
         <small>Optional description</small>
       </h1>

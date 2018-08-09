@@ -68,7 +68,9 @@
 작성일 : <c:out value="${board.bDate }"/><br>
 내용 : ${board.bContent }
 <div class="Btns">
+	<c:if test="${user.eId eq null}">
 	<div class="Btn" onclick="bModifyPage();">수정하기</div>
+	</c:if>
 	<div class="Btn" onclick="border();">취소</div>
 </div>
 
