@@ -45,24 +45,25 @@
         <!-- Optionally, you can add icons to the links -->
         <li ><a href="writeNote.do" ><i class="fa fa-link"></i> <span>쪽지작성</span></a></li>
          <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>수신쪽지함</span>
+          <a href="#"><i class="fa fa-link"></i> <span>수신쪽지</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
+          	<li><a href="#">수신쪽지함</a></li>
             <li><a href="#">휴지통</a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>보낸쪽지함</span>
+          <a href="#"><i class="fa fa-link"></i> <span>보낸쪽지</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="sendNoteList.do">보낸쪽지함</a></li>
+            <li><a href="#">휴지통</a></li>
           </ul>
         </li>
       </ul>

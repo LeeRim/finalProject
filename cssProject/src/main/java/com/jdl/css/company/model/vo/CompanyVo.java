@@ -13,14 +13,22 @@ public class CompanyVo {
 	private String cLogo;
 	private String cSign;
 	private String cQrcode;
-	private String mileage;
+	private String cMileage;
 	private Date cCloseDay;
-	private String cLevel;
+	private int cLevel;
 	
 	public CompanyVo(){}
 
+	
+	public CompanyVo(int cKey, int cLevel) {
+		super();
+		this.cKey = cKey;
+		this.cLevel = cLevel;
+	}
+
+
 	public CompanyVo(int cKey, String cName, String cOwner, String cAddress, String cLogo, String cSign, String cQrcode,
-			String mileage, Date cCloseDay, String cLevel) {
+			String cMileage, Date cCloseDay, int cLevel) {
 		super();
 		this.cKey = cKey;
 		this.cName = cName;
@@ -29,7 +37,7 @@ public class CompanyVo {
 		this.cLogo = cLogo;
 		this.cSign = cSign;
 		this.cQrcode = cQrcode;
-		this.mileage = mileage;
+		this.cMileage = cMileage;
 		this.cCloseDay = cCloseDay;
 		this.cLevel = cLevel;
 	}
@@ -90,12 +98,12 @@ public class CompanyVo {
 		this.cQrcode = cQrcode;
 	}
 
-	public String getMileage() {
-		return mileage;
+	public String getcMileage() {
+		return cMileage;
 	}
 
-	public void setMileage(String mileage) {
-		this.mileage = mileage;
+	public void setcMileage(String cMileage) {
+		this.cMileage = cMileage;
 	}
 
 	public Date getcCloseDay() {
@@ -106,18 +114,18 @@ public class CompanyVo {
 		this.cCloseDay = cCloseDay;
 	}
 
-	public String getcLevel() {
+	public int getcLevel() {
 		return cLevel;
 	}
 
-	public void setcLevel(String cLevel) {
+	public void setcLevel(int cLevel) {
 		this.cLevel = cLevel;
 	}
 
 	@Override
 	public String toString() {
 		return "CompanyVo [cKey=" + cKey + ", cName=" + cName + ", cOwner=" + cOwner + ", cAddress=" + cAddress
-				+ ", cLogo=" + cLogo + ", cSign=" + cSign + ", cQrcode=" + cQrcode + ", mileage=" + mileage
+				+ ", cLogo=" + cLogo + ", cSign=" + cSign + ", cQrcode=" + cQrcode + ", cMileage=" + cMileage
 				+ ", cCloseDay=" + cCloseDay + ", cLevel=" + cLevel + "]";
 	}
 	
