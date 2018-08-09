@@ -72,7 +72,7 @@ $(function(){
 		$(this).parent().css("background","darkgray");
 		$(this).parent().css("cursor","pointer");
 	}).mouseout(function(){
-		$(this).parent().css("background","#94a1ba");
+		$(this).parent().css("background","white");
 	}).click(function(){
 		var boardNo = $(this).parent().children().eq(0).text();
 		location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=${pi.currentPage}"; 		
@@ -140,7 +140,9 @@ $(function(){
                 </tr>
                 </c:forEach>
               </table>
+              <c:if test="${!empty user}">
               	<div class="Btn" onclick="boardForm();">작성</div>
+              </c:if>
             </div>
             <!-- /.box-body -->
           </div>
