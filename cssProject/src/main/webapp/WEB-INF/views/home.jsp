@@ -13,13 +13,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Starter</title>
 
+
   
   <script>
   	function boardPage(bType){
   		location.href="borderList.do?bCateGory=" + bType;
   	}
   </script>
-
 
 </head>
 <!--
@@ -49,11 +49,9 @@ desired effect
   
   
 
-  <!-- Content Wrapper. Contains page content -->
 
   <div class="content-wrapper" style="height: 100%;">
 
-    <!-- Content Header (Page header) -->
     <section class="content-header">
 
         <h1>커뮤니티 버튼</h1>
@@ -94,5 +92,6 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<P>  The time on the server is ${serverTime}. 111</P>
 </body>
 </html>
