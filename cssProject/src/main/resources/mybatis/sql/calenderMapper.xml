@@ -4,21 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CalenderMapper">
 
-	<resultMap type="CalenderVo" id="calenderlMap">
-		<result property="id" column="CAL_KEY" />
-		<result property="cKeyFk" column="C_KEY_FK" />
-		<result property="title" column="CAL_NAME" />
-		<result property="startDate" column="CAL_STARTDATE" />
-		<result property="endDate" column="CAL_ENDDATE" />
-		<result property="NOT_YET" column="CAL_TYPE" />
-		<result property="NOT_YET" column="CAL_COMTYPE" />
-	</resultMap>
-
-	<sql id="selectCalender" >
-	SELECT CAL_KEY,CAL_NAME,CAL_STARTDATE,CAL_ENDDATE
-	FROM CALENDER
-	</sql>
-
-
+	<select id="selectCalender" resultType="Calender">
+		select cal_name as "title",
+				to_number(to_char(cal_startdate, 'yyyy')) as "startYear",
+				to_number(to_char(cal_startdate, 'mm')) as "startMonth",
+				to_number(to_char(cal_startdate, 'dd')) as "startDay",
+				to_number(to_char(cal_enddate, 'yyyy')) as "endYear",
+				to_number(to_char(cal_enddate, 'mm')) as "endMonth",
+				to_number(to_char(cal_enddate, 'dd')) as "endDay"
+		from calender
+	</select>
 
 </mapper>

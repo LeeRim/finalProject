@@ -12,6 +12,12 @@ public class CalenderVo {
 		//private String cal_comType;
 		private Date startDate;
 		private Date endDate;
+		private int startYear;
+		private int startMonth;
+		private int startDay;
+		private int endYear;
+		private int endMonth;
+		private int endDay;
 		
 		public CalenderVo(){}
 		
@@ -21,7 +27,6 @@ public class CalenderVo {
 			this.startDate = startDate;
 			this.endDate = endDate;
 		}
-		
 		public int getId() {
 			return id;
 		}
@@ -58,12 +63,60 @@ public class CalenderVo {
 		public void setEndDate(Date endDate) {
 			this.endDate = endDate;
 		}
-		
-		
+
+		public int getStartYear() {
+			return startYear;
+		}
+
+		public void setStartYear(int startYear) {
+			this.startYear = startYear;
+		}
+
+		public int getStartMonth() {
+			return startMonth;
+		}
+
+		public void setStartMonth(int startMonth) {
+			this.startMonth = startMonth;
+		}
+
+		public int getStartDay() {
+			return startDay;
+		}
+
+		public void setStartDay(int startDay) {
+			this.startDay = startDay;
+		}
+
+		public int getEndYear() {
+			return endYear;
+		}
+
+		public void setEndYear(int endYear) {
+			this.endYear = endYear;
+		}
+
+		public int getEndMonth() {
+			return endMonth;
+		}
+
+		public void setEndMonth(int endMonth) {
+			this.endMonth = endMonth;
+		}
+
+		public int getEndDay() {
+			return endDay;
+		}
+
+		public void setEndDay(int endDay) {
+			this.endDay = endDay;
+		}
+
 		@Override
 		public String toString() {
-			return "CalenderVo [id=" + id + ", title=" + title + ", startDate=" + startDate + ", endDate=" + endDate
-					+ "]";
+			return "CalenderVo [id=" + id + ", title=" + title + ", startYear=" + startYear + 
+					", startMonth=" + startMonth + ", startDay=" + startDay
+					+ ", endYear=" + endYear + ", endMonth=" + endMonth + ", endDay=" + endDay + "]";
 		}
 		
 }

@@ -8,10 +8,10 @@
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
   <typeAliases>
-<!--   	<typeAlias type="com.jdl.css.test.TestVo" alias="Test"/> -->
+		<typeAlias type="com.jdl.css.calender.model.vo.CalenderVo" alias="Calender"/>
   </typeAliases>
 
   <mappers>
-<!--     <mapper resource="mybatis/sql/testMapper.xml"/> -->
+	<mapper resource="mybatis/sql/calenderMapper.xml"/>
   </mappers>
 </configuration>

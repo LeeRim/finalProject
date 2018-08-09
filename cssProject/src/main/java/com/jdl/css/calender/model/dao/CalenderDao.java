@@ -14,8 +14,10 @@ public class CalenderDao {
 	@Autowired
 	SqlSessionTemplate sqlsession;
 	
-	public CalenderVo showCalender(CalenderVo calender){
-		
-		return sqlsession.selectOne("CalenderMapper", calender);
+
+	public List<CalenderVo> showCalender() {
+		return sqlsession.selectList("CalenderMapper.selectCalender");
 	}
+	
+	
 }

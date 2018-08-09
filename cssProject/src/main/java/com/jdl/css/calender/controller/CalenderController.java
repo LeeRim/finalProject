@@ -1,7 +1,9 @@
 package com.jdl.css.calender.controller;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,24 +25,13 @@ public class CalenderController {
 	CalenderService service;
 	
 	@RequestMapping("calender.do")
-	public ModelAndView calenderDetailAjax(HttpServletRequest request,ModelMap modelMap, @ModelAttribute CalenderVo vo)throws Exception{
-		HashMap resultMap = new HashMap();
-		ModelAndView mav = new ModelAndView();
-		CalenderVo result = new CalenderVo();
-		Calendar c = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"));
-		String saveFilePath = "resources/bower_components/json/"+c.get(c.YEAR)+"/"+(c.get(c.MONTH)+1);
-		try{
-			resultMap.put("id", result.getId());
-			resultMap.put("title", result.getTitle());
-			resultMap.put("startDate", result.getStartDate());
-			resultMap.put("endDate", result.getEndDate());
-			
-			mav.addObject("data",resultMap);
-			mav.setViewName("jsonView");
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+	public ModelAndView showCalender(ModelAndView mav){
+		
+		List<CalenderVo> list = service.showCalender();
+		System.out.println(list);
+		mav.addObject("list", list);
+		
+		mav.setViewName("calender");
 		return mav;
 	}
 }

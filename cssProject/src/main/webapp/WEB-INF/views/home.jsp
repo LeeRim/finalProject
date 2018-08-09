@@ -56,7 +56,7 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
-
+	  <a href="calender.do">일정 조회</a>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->

@@ -30,7 +30,6 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -234,6 +233,7 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+  
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -266,10 +266,6 @@
                   <label for="drop-remove">
                     <input type="checkbox" id="drop-remove">
                     remove after drop
-                  </label>
-                  <label>
-                  	<input type="checkbox" id="delete-schedule">
-                  	delete schedule
                   </label>
                 </div>
               </div>
@@ -574,67 +570,32 @@
      -----------------------------------------------------------------*/
     //Date for the calendar events (dummy data)
     var date = new Date()
-    var d    = date.getDate(),
-        m    = date.getMonth(),
-        y    = date.getFullYear()
+        
+    var dataList = [];
+ 
+    //모든 일정을 받아오는 반복문
+    <c:forEach items="${list}" var="cal">
+    dataList.push({
+    	title   : '${cal.title}',
+        start   : new Date(${cal.startYear}, ${cal.startMonth - 1}, ${cal.startDay} ),
+        end		:  new Date(${cal.endYear}, ${cal.endMonth - 1}, ${cal.endDay+1} ),
+        backgroundColor: '#0073b7', 
+        borderColor    : '#0073b7' 
+    });
+	</c:forEach>
+	
+	
     $('#calendar').fullCalendar({
       header    : {
         left  : 'prev,next today',
-        center: 'title',
-        right : 'month,agendaWeek,agendaDay'
+        center: 'title'
       },
       buttonText: {
-        today: 'today',
-        month: 'month',
-        week : 'week',
-        day  : 'day'
-      },
+          today: 'today'
+        },
       //Random default events
-      events    : [
-        {
-          title          : 'All Day Event',
-          start          : new Date(y, m, 1),
-          backgroundColor: '#f56954', //red
-          borderColor    : '#f56954' //red
-        },
-        {
-          title          : 'Long Event',
-          start          : new Date(y, m, d - 5),
-          end            : new Date(y, m, d - 2),
-          backgroundColor: '#f39c12', //yellow
-          borderColor    : '#f39c12' //yellow
-        },
-        {
-          title          : 'Meeting',
-          start          : new Date(y, m, d, 10, 30),
-          allDay         : false,
-          backgroundColor: '#0073b7', //Blue
-          borderColor    : '#0073b7' //Blue
-        },
-        {
-          title          : 'Lunch',
-          start          : new Date(y, m, d, 12, 0),
-          end            : new Date(y, m, d, 14, 0),
-          allDay         : false,
-          backgroundColor: '#00c0ef', //Info (aqua)
-          borderColor    : '#00c0ef' //Info (aqua)
-        },
-        {
-          title          : 'Birthday Party',
-          start          : new Date(y, m, d + 1, 19, 0),
-          end            : new Date(y, m, d + 1, 22, 30),
-          allDay         : false,
-          backgroundColor: '#00a65a', //Success (green)
-          borderColor    : '#00a65a' //Success (green)
-        },
-        {
-          title          : 'Click for Google',
-          start          : new Date(y, m, 28),
-          end            : new Date(y, m, 29),
-          backgroundColor: '#3c8dbc', //Primary (light-blue)
-          borderColor    : '#3c8dbc' //Primary (light-blue)
-        }
-      ],
+      
+      events    : dataList,
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
       drop      : function (date, allDay) { // this function is called when something is dropped
@@ -660,12 +621,6 @@
           // if so, remove the element from the "Draggable Events" list
           $(this).remove()
         }
-		if($('#delete-schedule').is(':checked')){
-			if(event.click()){
-				event.remove()
-			}
-		}
-		
       }
     })
     

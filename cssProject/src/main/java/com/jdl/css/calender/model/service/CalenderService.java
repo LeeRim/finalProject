@@ -1,5 +1,7 @@
 package com.jdl.css.calender.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,8 @@ public class CalenderService {
 	@Autowired
 	CalenderDao dao;
 	
-	public CalenderVo showCalender(CalenderVo calender){
-		
-		return dao.showCalender(calender);
+
+	public List<CalenderVo> showCalender() {
+		return dao.showCalender();
 	}
 }
