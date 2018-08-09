@@ -84,4 +84,11 @@
 		INSERT INTO BOARD_COMMENT VALUES(SEQ_COMMENT.NEXTVAL, #{boardKeyFk}, #{cWriter}, #{cContent}, SYSDATE)
 	</insert>
 	
+	<delete id="DeleteBoard">
+		DELETE FROM BOARD WHERE B_KEY = #{boardKey}
+	</delete>
+	<select id="selectBoardList">
+		SELECT * FROM BOARD
+	</select>
+	
 </mapper>
