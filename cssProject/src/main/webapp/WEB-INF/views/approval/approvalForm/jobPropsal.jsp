@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/include/header.jsp" />
-	<c:import url="../selectApproverPage.jsp"/>
+<c:import url="../selectApproverPage.jsp" />
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -24,10 +24,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 <script type="text/javascript">
-
-function openSelectApprover(){
-	$('div.modal').modal();
-}
+	function openSelectApprover() {
+		$('div.modal').modal();
+	}
 
 	$(function() {
 		$('#jpWorkingDate').datepicker({
@@ -103,7 +102,8 @@ desired effect
 								<div class="approval_import ie9-scroll-fix">
 									<!-- 문서 내용 표시 테스트 -->
 									<form id="document_content" class="form_doc_editor editor_view"
-										action="writeJobPropsal.do" method="post">
+										action="writeJobPropsal.do" method="post"
+										enctype="multipart/form-data">
 										<input type="hidden" id="appStr" name="appStr" value="">
 										<span>
 											<table
@@ -179,28 +179,7 @@ desired effect
 															</table>
 														</td>
 														<td>
-															<div class="sign_condition">
-																<span class="sign_type1_inline"><span
-																	class="sign_tit_wrap"><span class="sign_tit"><strong>승인</strong></span></span>
-																	<!--  --> <span class="sign_member_wrap"
-																	id="activity_15162"><span class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
-																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span> <span
-																	class="sign_member_wrap" id="activity_15162"><span
-																		class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
-																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span> <span
-																	class="sign_member_wrap" id="activity_15162"><span
-																		class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
-																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span> <!--  --></span>
-
+															<div class="sign_condition" id="sign_condition">
 															</div>
 
 															<div class="sign_condition">
@@ -208,8 +187,8 @@ desired effect
 																	class="sign_tit_wrap"><span class="sign_tit"><strong>신청</strong></span></span>
 																	<!--  --> <span class="sign_member_wrap"
 																	id="activity_15162"><span class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
+																			class="sign_rank_wrap"><span class="sign_rank"><c:out value="${sessionScope.user.job}"></c:out></span></span><span
+																			class="sign_wrap"><span class="sign_name"><c:out value="${sessionScope.user.eName}"></c:out></span></span><span
 																			class="sign_date_wrap"><span
 																				class="sign_date " id="date_15162"></span></span></span></span></span>
 															</div>
@@ -274,34 +253,51 @@ desired effect
 											</table>
 										</span>
 
-	<script>
-	$(document)
-	.ready(
-		function() {
-			var fileTarget = $('.form-group .upload-hidden');
-			var filenames ="";
-			fileTarget.on('change',function() { // 값이 변경되면 
-				if (window.FileReader) { // modern browser 
-				
-				for(var i=0;i<$(this)[0].files.length;i++){
-					var file = $(this)[0].files[i];
-					filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove'></i><br>";
-					console.log(filenames);
-				}
-				} else { // old IE
-					var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
-				}
-				// 추출한 파일명 삽입 
-				$('.file-list').html(filenames);
-			});
-		});
-	</script>
+										<script>
+											$(document)
+													.ready(
+															function() {
+																var fileTarget = $('.form-group .upload-hidden');
+																fileTarget
+																		.on(
+																				'change',
+																				function() { // 값이 변경되면 
+																					var filenames = "";
+																					if (window.FileReader) { // modern browser 
+
+																						for (var i = 0; i < $(this)[0].files.length; i++) {
+																							var file = $(this)[0].files[i];
+																							filenames += $(this)[0].files[i].name
+																									+ "&nbsp<i class='fa fa-remove'></i><br>";
+																							console
+																									.log(filenames);
+																						}
+																					} else { // old IE
+																						var filename = $(
+																								this)
+																								.val()
+																								.split(
+																										'/')
+																								.pop()
+																								.split(
+																										'\\')
+																								.pop(); // 파일명만 추출
+																					}
+																					// 추출한 파일명 삽입 
+																					$(
+																							'.file-list')
+																							.html(
+																									filenames);
+																				});
+															});
+										</script>
 
 										<div class="form-group" style="height: 100px;">
 											<div style="float: left; height: 100px; width: 130px;">
 												<div class="btn btn-default btn-file">
 													<i class="fa fa-paperclip"></i> Attachment <input
-														multiple="multiple" type="file" name="attachment" class="upload-hidden">
+														multiple="multiple" type="file" name="files"
+														class="upload-hidden">
 												</div>
 												<p class="help-block">Max. 32MB</p>
 											</div>
