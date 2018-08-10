@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.border.model.service.BorderService;
+import com.jdl.css.border.model.vo.AttachVo;
 import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
 import com.jdl.css.border.model.vo.PageInfo;
@@ -157,9 +158,6 @@ public class BorderController {
 		List<BorderVo> board1 = borderservice.selectBoardOne(); //공지사항
 		List<BorderVo> board2 = borderservice.selectBoardTwo(); //자유
 		List<BorderVo> board3 = borderservice.selectBoardThr(); //경조사
-		System.out.println("Boardcategory.do : " + board1);
-		System.out.println("Boardcategory.do : " + board2);
-		System.out.println("Boardcategory.do : " + board3);
 		
 		mv.addObject("bo1", 1);
 		mv.addObject("bo2", 2);
@@ -222,11 +220,11 @@ public class BorderController {
 		return mv;
 	}
 	
-	@RequestMapping("BoardGallery.do")
-	public ModelAndView BoardGallery(ModelAndView mv){
+	@RequestMapping("boardGalleryForm.do")
+	public ModelAndView boardGalleryForm(AttachVo av, ModelAndView mv) {
 		
+		List<AttachVo> list = borderservice.selectBoardGalleryForm(av);
 		
 		return mv;
 	}
-	
 }

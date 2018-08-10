@@ -7,6 +7,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<!-- AdminLTE for demo purposes -->
+<script src="resources/dist/js/demo.js"></script>
+<link href="resources/Js/summernote.css" rel="stylesheet">
+<script src="resources/Js/summernote.js"></script>
+<script type="resources/Js/summernote-ko-KR.js"></script>
+<script type="text/javascript">
+	$(function() {
+	  $('#summernote').summernote({
+		  height: 600,
+		  lang: 'ko-KR'
+	  });
+	});
+</script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -28,30 +45,22 @@
 
 <div class="col-md-9">
           <div class="box box-primary">
+              <form id="boardGalleryForm"action="boardGalleryForm.do" method="post" enctype="multipart/form-data">
             <div class="box-header with-border">
               <h3 class="box-title">Compose New Message</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <div class="form-group">
-                <input class="form-control" placeholder="To:">
+                <input type="text" class="form-control" placeholder="제목">
               </div>
+              <!-- <div class="form-group">
+                <input type="file" class="form-control" placeholder="파일">
+              </div> -->
               <div class="form-group">
-                <input class="form-control" placeholder="Subject:">
-              </div>
-              <div class="form-group">
-                    <textarea id="compose-textarea" class="form-control" style="height: 300px">
-                      <h1><u>Heading Of Message</u></h1>
-                      <h4>Subheading</h4>
-                      <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
-                      <ul>
-                        <li>List item one</li>
-                        <li>List item two</li>
-                        <li>List item three</li>
-                        <li>List item four</li>
-                      </ul>
-                      <p>Thank you,</p>
-                      <p>John Doe</p>
+                    <textarea id="summernote" class="form-control" style="height: 300px">
+                    썸머노트
+                    
                     </textarea>
               </div>
               <div class="form-group">
@@ -71,6 +80,7 @@
               <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
             </div>
             <!-- /.box-footer -->
+              </form>
           </div>
           <!-- /. box -->
         </div>
