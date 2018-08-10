@@ -2,8 +2,11 @@ package com.jdl.css.border.model.vo;
 
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import com.jdl.css.common.model.vo.AttachmentVo;
 
 @Component
 public class BorderVo extends PageInfo{
@@ -20,11 +23,29 @@ public class BorderVo extends PageInfo{
 	private int bType;
 	private int startRow;
 	private int endRow;
+	private String bAttach;
+	private List<AttachmentVo> attach;
 	
 	public BorderVo(){
 		
 	}
 	
+	public String getbAttach() {
+		return bAttach;
+	}
+
+	public List<AttachmentVo> getAttach() {
+		return attach;
+	}
+
+	public void setAttach(List<AttachmentVo> attach) {
+		this.attach = attach;
+	}
+
+	public void setbAttach(String bAttach) {
+		this.bAttach = bAttach;
+	}
+
 	public BorderVo(int boardKey, String companyKey, String bTitle, String bContent, int bWriter, int bCount,
 			Date bDate, String bCateGory, String eName, int bType, int startRow, int endRow) {
 		this.boardKey = boardKey;

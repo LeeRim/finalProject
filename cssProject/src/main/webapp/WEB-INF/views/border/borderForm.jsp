@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url ="/WEB-INF/views/include/header.jsp"/>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
@@ -45,11 +45,29 @@
 	function writeBoard(){
 		$("#writeBoard").submit();
 	}
+	
+	/* function(){
+		
+		var bTitle = $("#bTitle").val();
+		if( bTitle == "" || bTitle == null || bTitle == undefined || ( bTitle != null && typeof bTitle == "object" && !Object.keys(bTitle).length ) ){
+			return true; 
+		}else{
+			alert("값이 다 채워지지 않았습니다.");
+			return false;
+		}
+
+		var summernote = $("#summernote").val();
+		if( summernote == "" || summernote == null || summernote == undefined || ( summernote != null && typeof summernote == "object" && !Object.keys(summernote).length ) ){
+			return true; 
+		}else{
+			return false;
+		} */
+		
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-   <c:import url="/WEB-INF/views/include/left_column.jsp"/>
+   <c:import url="/WEB-INF/views/border/left_column_board.jsp"/>
 	<div class="content-wrapper">
 	<section class="content-header">
       <h1>
@@ -64,12 +82,22 @@
     </section>
 		<div class="row" style="width:95%; margin-right:auto; margin-left:auto; margin-top:20px;">
 	 <!-- Content Header (Page header) -->
-		<c:out value="${board.bCateGory}"/>작성<br>
+	 <c:choose>
+	 	<c:when test="${board.bCateGory eq 1}">
+	 		<h1>공지사항 작성</h1>
+	 	</c:when>
+	 	<c:when test="${board.bCateGory eq 2}">
+	 		<h1>자유게시판 작성</h1>
+	 	</c:when>
+	 	<c:when test="${board.bCateGory eq 3}">
+	 		<h1>경조사 작성</h1>
+	 	</c:when>
+	 </c:choose>
 		<form id="writeBoard"action="writeBoard.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="bCateGory" value="<c:out value="${board.bCateGory}"/>"/>
 			<input type="hidden" name="companyKey" value='<c:out value="${user.cKeyFk}"></c:out>'>
 			<input type="hidden" name="bWriter" value='<c:out value="${user.eKey }"></c:out>'>
-			제목 : <input type="text" name="bTitle" class="bTitle"/><br><br>
+			제목 : <input type="text" id="bTitle" name="bTitle" class="bTitle"/><br><br>
 			<textarea id="summernote" name="bContent"></textarea>
 			<div class="Btns">
 				<div class="Btn" onclick="writeBoard();">작성</div>

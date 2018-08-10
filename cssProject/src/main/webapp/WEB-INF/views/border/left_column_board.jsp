@@ -1,15 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE >
 <html>
 <head>
 <meta  charset="UTF-8">
 <title>Insert title here</title>
+<script>
+  	function boardPage(bType){
+  		location.href="borderList.do?bCateGory=" + bType;
+  	}
+  	function board(){
+  		location.href="borderIndex.do"
+  	}
+  	function boardGallery(){
+  		location.href="borderGallery.do"
+  	}
+  </script>
 </head>
 <body>
 	<!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+  <aside class="main-sidebar" style="padding-top: 0 ">
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -39,23 +49,34 @@
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
+      <!-- li에 active 클래스 추가시 클릭으로나옴 -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-
-        <li class="active"><a href="organizationChart.do"><i class="fa fa-link"></i> <span>조직도</span></a></li>
-        <li><a href="employeeIndex.do"><i class="fa fa-link"></i> <span>사원 인덱스</span></a></li>
-        <li><a href=""><i class="fa fa-link"></i> <span>사원 정보</span></a></li>
-        <li class="treeview">
+        <li class="active"><a href="#" onclick="boardPage(1);"><i class="fa fa-link"></i> <span>공지사항</span></a></li>
+         <li class="treeview">
+          <a href="#" onclick="boardPage(2);"><i class="fa fa-link"></i> <span>자유게시판</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
+          <!-- <ul class="treeview-menu">
+          	<li><a href="#">수신쪽지함</a></li>
+            <li><a href="#">휴지통</a></li>
+          </ul> -->
         </li>
+        <li class="treeview">
+          <a href="#" onclick="boardPage(3);"><i class="fa fa-link"></i> <span>경조사</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <!-- <ul class="treeview-menu">
+            <li><a href="sendNoteList.do">보낸쪽지함</a></li>
+            <li><a href="#">휴지통</a></li>
+          </ul> -->
+        </li>
+        <li><a href="#" onclick="boardGallery();"><i class="fa fa-link"></i> <span>갤러리</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

@@ -1,6 +1,7 @@
 package com.jdl.css.border.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.border.model.service.BorderService;
+import com.jdl.css.border.model.vo.AttachVo;
 import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
 import com.jdl.css.border.model.vo.PageInfo;
+import com.jdl.css.common.model.vo.AttachmentVo;
 
 @Controller
 public class BorderController {
@@ -151,8 +154,22 @@ public class BorderController {
 	}
 	
 	@RequestMapping("borderIndex.do")
-	public String borderIndex(){
-		return "border/borderIndex";
+	public ModelAndView borderIndex(ModelAndView mv){
+		
+		List<BorderVo> board1 = borderservice.selectBoardOne(); //공지사항
+		List<BorderVo> board2 = borderservice.selectBoardTwo(); //자유
+		List<BorderVo> board3 = borderservice.selectBoardThr(); //경조사
+		
+		mv.addObject("bo1", 1);
+		mv.addObject("bo2", 2);
+		mv.addObject("bo3", 3);
+		
+		mv.addObject("board1", board1);
+		mv.addObject("board2", board2);
+		mv.addObject("board3", board3);
+		
+		mv.setViewName("border/borderIndex");
+		return mv;
 	}
 	
 	@RequestMapping("writeComment.do")
@@ -192,9 +209,13 @@ public class BorderController {
 	}
 	
 	@RequestMapping("deleteComment.do")
-	public ModelAndView deleteComment(BoardCommentVo bc, ModelAndView mv){
+	public ModelAndView deleteComment(String boardKey, BoardCommentVo bc, ModelAndView mv){
 		
 		int result = borderservice.deleteComment(bc);
+		System.out.println("deleteComment :" +  bc);
+		if(0 < result){
+			mv.setViewName("redirect:selectBoard.do?boardKey="+ boardKey + "&currentPage=1");
+		}
 		return mv;
 	}
 	
@@ -205,25 +226,41 @@ public class BorderController {
 		return mv;
 	}
 	
-	
-	@RequestMapping("Boardcategory.do")
-	public ModelAndView allBoardSelect(ModelAndView mv){
+	@RequestMapping("boardGalleryForm.do")
+	public ModelAndView boardGalleryForm(BorderVo board, HttpServletRequest request, @RequestParam("file") MultipartFile file, ModelAndView mv) {
 		
-		List<BorderVo> board1 = borderservice.selectBoardOne(); //공지사항
-		List<BorderVo> board2 = borderservice.selectBoardTwo(); //자유
-		List<BorderVo> board3 = borderservice.selectBoardThr(); //경조사
-		System.out.println("Boardcategory.do : " + board1);
-		System.out.println("Boardcategory.do : " + board2);
-		System.out.println("Boardcategory.do : " + board3);
 		
-		mv.addObject("board1", board1);
-		mv.addObject("board2", board2);
-		mv.addObject("board3", board3);
-		mv.setViewName("border/borderIndex");
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String path = root + "\\upload\\boardGallery"; //spring에서는 경로가 '/'아니라 '\\'로 경로를 나타냄
+		String filePath = "";
+		
+		
+		File folder = new File(path);
+		if(!folder.exists()){
+			folder.mkdirs();
+		}
+			AttachmentVo attach = new AttachmentVo();
+			filePath = folder + "\\" + file.getOriginalFilename();
+			try {
+				file.transferTo(new File(filePath));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+//			System.out.println("file 명 = "+file.getOriginalFilename());
+			List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
+			attach.setAttaFileName(file.getOriginalFilename());
+			attach.setAttaFilePath(path+"\\");
+			attach.setAttaLocation(board.getBoardKey());
+			attachList.add(attach);
+		
+//		System.out.println(attachList);
+		board.setAttach(attachList);
+		
+		mv.setViewName("note/noteMain");
 		return mv;
 	}
-	
-	
-	
-	
 }

@@ -122,7 +122,7 @@ $(function(){
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-   <c:import url="/WEB-INF/views/include/left_column.jsp"/>
+   <c:import url="/WEB-INF/views/border/left_column_board.jsp"/>
 
 	<div class="content-wrapper">
 	 <!-- Content Header (Page header) -->
@@ -138,9 +138,9 @@ $(function(){
       </ol>
     </section>
 <!-- /.row -->
-      <div class="row" style="width:100%; margin-right:auto; margin-left:auto; margin-top:10px;">
+      <div class="row" style=" margin-right:auto; margin-left:auto; margin-top:10px;">
         <div class="col-xs-12">
-          <div class="box" style="margin-top:20px;">
+          <div class="box" style="margin-top:20px;width:100%;">
             <div class="box-header">
             
               <h3 class="box-title">
@@ -151,6 +151,17 @@ $(function(){
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
+            <c:choose>
+	 			<c:when test="${bCateGory eq 1}">
+	 				<h1>공지사항 게시판</h1>
+	 			</c:when>
+	 			<c:when test="${bCateGory eq 2}">
+	 				<h1>자유게시판 게시판</h1>
+	 			</c:when>
+	 			<c:when test="${bCateGory eq 3}">
+	 				<h1>경조사 게시판</h1>
+	 			</c:when>
+	 		</c:choose>
               <table id="example2" class="table table-hover">
                 <tr>
                   <th>번호</th>
