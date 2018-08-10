@@ -64,7 +64,9 @@
               <div class="form-group">
                 <div class="btn btn-default btn-file">
                   <i class="fa fa-paperclip"></i> Attachment
-                  <input type="file" name="attachment">
+                  <input type="file" name="file">
+                  <input type="hidden" name="companyKey" value='<c:out value="${user.cKeyFk}"></c:out>'>
+				  <input type="hidden" name="bWriter" value='<c:out value="${user.eKey }"></c:out>'>
                 </div>
                 <p class="help-block">Max. 32MB</p>
               </div>

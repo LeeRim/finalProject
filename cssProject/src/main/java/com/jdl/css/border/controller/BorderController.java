@@ -20,10 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.border.model.service.BorderService;
-import com.jdl.css.border.model.vo.AttachVo;
 import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
 import com.jdl.css.border.model.vo.PageInfo;
+import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.vo.AttachmentVo;
 
 @Controller
@@ -31,6 +31,9 @@ public class BorderController {
 
 	@Autowired
 	BorderService borderservice;
+	
+	@Autowired
+	AttachmentService attachservice;
 	
 	@RequestMapping("borderList.do")
 	public ModelAndView boaderList(@RequestParam(value="currentPage", required=false)String currentPagestr, HttpServletRequest request, BorderVo board, ModelAndView mv){
@@ -229,6 +232,9 @@ public class BorderController {
 	@RequestMapping("boardGalleryForm.do")
 	public ModelAndView boardGalleryForm(BorderVo board, HttpServletRequest request, @RequestParam("file") MultipartFile file, ModelAndView mv) {
 		
+		int resultBoard = borderservice.writeBoard(board);
+		System.out.println("board : " + board);
+		System.out.println("resultBoard : " + resultBoard);
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		
@@ -260,7 +266,11 @@ public class BorderController {
 //		System.out.println(attachList);
 		board.setAttach(attachList);
 		
-		mv.setViewName("note/noteMain");
+		int resultAttach = attachservice.insertAttachments(attachList);
+		System.out.println("attachList : " + attachList);
+		System.out.println("attach : " + resultAttach);
+		
+		mv.setViewName("border/borderGalleryList");
 		return mv;
 	}
 }

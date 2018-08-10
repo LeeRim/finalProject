@@ -25,13 +25,6 @@
 		<result property="cDate" column="CO_DATE"/>
 	</resultMap>
 	
-	<resultMap type="Attach" id="AttachMap">
-		<id property="attachKey" column="ATTA_KEY"/>
-		<result property="attachLocation" column="ATTA_LOCATION"/>
-		<result property="attachFileName" column="ATTA_FILENAME"/>
-		<result property="attachFilePath" column="ATTA_FILEPATH"/>
-	</resultMap>
-	
 	<select id="BorderListSelect" parameterType="Border" resultMap="BorderMap">
 		SELECT b.B_KEY, b.B_TITLE, b.C_KEY_FK, b.B_CONTENT, b.B_COUNT, b.B_DATE, b.B_CATEGORY ,e.E_NAME, b.B_WRITER_FK 
 		FROM BOARD b 
@@ -137,16 +130,5 @@
 		ORDER BY B_DATE DESC)
 		WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
-	
-	<select id="BorderGalleryForm" parameterType="Attach" resultMap="AttachMap">
-		SELECT ATTA_KEY, ATTA_LOCATION, ATTA_FILENAME, ATTA_FILEPATH FROM ATTACHMENT A
-		JOIN BOARD B ON (A.ATTA_LOCATION = B.B_KEY)
-	</select>
-	
-	<insert id="Attachinsert" parameterType="AttachVo">
-			INSERT INTO ATTACHMENT VALUES(
-			SEQ_ATTACHMENT.NEXTVAL, #{attaLocation}, #{attaFileName},#{attaFilePath}
-			)
-	</insert>
 	
 </mapper>
