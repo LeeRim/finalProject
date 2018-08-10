@@ -229,7 +229,6 @@ public class BorderController {
 	@RequestMapping("boardGalleryForm.do")
 	public ModelAndView boardGalleryForm(BorderVo board, HttpServletRequest request, @RequestParam("file") MultipartFile file, ModelAndView mv) {
 		
-		List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		
@@ -252,6 +251,7 @@ public class BorderController {
 			}
 			
 //			System.out.println("file 명 = "+file.getOriginalFilename());
+			List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
 			attach.setAttaFileName(file.getOriginalFilename());
 			attach.setAttaFilePath(path+"\\");
 			attach.setAttaLocation(board.getBoardKey());
