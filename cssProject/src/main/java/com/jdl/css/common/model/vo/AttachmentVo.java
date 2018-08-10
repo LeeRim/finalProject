@@ -6,6 +6,7 @@ public class AttachmentVo {
 	private int attaLocation;
 	private String attaFileName;
 	private String attaFilePath;
+	private String attaFilesize;
 	
 	
 	public AttachmentVo() {
@@ -50,13 +51,25 @@ public class AttachmentVo {
 	public void setAttaFilePath(String attaFilePath) {
 		this.attaFilePath = attaFilePath;
 	}
+	
+
+	public String getAttaFilesize() {
+		return attaFilesize;
+	}
+
+
+	public void setAttaFilesize(String attaFilesize) {
+		this.attaFilesize = attaFilesize;
+	}
 
 
 	@Override
 	public String toString() {
 		return "AttachmentVo [attaKey=" + attaKey + ", attaLocation=" + attaLocation + ", attaFileName=" + attaFileName
-				+ ", attaFilePath=" + attaFilePath + "]";
+				+ ", attaFilePath=" + attaFilePath + ", attaFilesize=" + attaFilesize + "]";
 	}
+
+
 	
 	
 }

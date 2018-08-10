@@ -20,17 +20,13 @@ import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 import com.jdl.css.note.model.service.NoteService;
 import com.jdl.css.note.model.vo.NoteVo;
+import com.jdl.css.note.model.vo.ReceivenoteVo;
 
 @Controller
 public class NoteController {
 	
 	@Autowired
 	NoteService service;
-	
-	@RequestMapping("moveNote.do")
-	public String moveNote(){
-		return "note/noteMain";
-	}
 	
 	@RequestMapping("writeNote.do")
 	public String writeNote(HttpSession session,Model model){
@@ -74,7 +70,6 @@ public class NoteController {
 		}
 		MultipartFile file = null;
 		for(int i = 1 ; i < files.length; i++){
-			AttachmentVo attach = new AttachmentVo();
 			file = files[i];
 //			System.out.println("files.length : " + files.length);
 //			System.out.println(file.getOriginalFilename());
@@ -91,9 +86,19 @@ public class NoteController {
 			}
 			
 //			System.out.println("file 명 = "+file.getOriginalFilename());
+			AttachmentVo attach = new AttachmentVo();
+			String fileSize= "";
+			
+			if(file.getSize() > 1000000){
+				fileSize = file.getSize() / 1000000 + "MB";
+			}else if(file.getSize() > 1000){
+				fileSize = file.getSize() / 1000 + "KB"; 
+			}
 			attach.setAttaFileName(file.getOriginalFilename());
 			attach.setAttaFilePath(path+"\\");
 			attach.setAttaLocation(note.getSnKey());
+			attach.setAttaFilesize(fileSize);
+			
 			attachList.add(attach);
 		}
 		
@@ -104,7 +109,7 @@ public class NoteController {
 		System.out.println("receive = "+resultReceive );
 		int resultAttach = service.insertAttach(note);
 		System.out.println("attach = " +resultAttach );
-		mv.setViewName("note/noteMain");
+		mv.setViewName("note/sendNoteDetail");
 		
 		return mv;
 	};
@@ -117,10 +122,23 @@ public class NoteController {
 		
 		List<NoteVo> sendNoteList = service.selectSendNoteList(ekey);
 		
-		System.out.println(sendNoteList);
+//		System.out.println(sendNoteList);
 		
 		mv.addObject("sendNoteList", sendNoteList);
 		mv.setViewName("note/sendNoteList");
+		return mv;
+	}
+	
+	@RequestMapping("sendNoteDetail.do")
+	public ModelAndView sendNoteDetail(ModelAndView mv ,NoteVo note){
+//		System.out.println(note);
+		NoteVo noteDetail = service.selectSendNoteDetail(note);
+//		System.out.println(noteDetail);
+		List<ReceivenoteVo> receiveList = service.selectReceiveList(note);
+//		System.out.println(receiveList);
+		mv.addObject("receiveList", receiveList);
+		mv.addObject("sendDetail", noteDetail);
+		mv.setViewName("note/sendNoteDetail");
 		return mv;
 	}
 }

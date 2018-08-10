@@ -20,6 +20,7 @@
 		<result property="attaLocation" column="ATTA_LOCATION"/>
 		<result property="attaFileName" column="ATTA_FILENAME"/>
 		<result property="attaFilePath" column="ATTA_FILEPATH"/>
+		<result property="attaFilesize" column="ATTA_FILESIZE"/>
 	</resultMap>
 	
 	<resultMap type="EmployeeVo" id="employeeMap">
@@ -42,7 +43,15 @@
 		<result property="eEntYn" column="E_ENT_YN"/>
 		<result property="ePhoto" column="E_PHOTO"/>
 	</resultMap>
-
+	
+	<resultMap type="ReceivenoteVo" id="resultReceivenoteMap">
+		<id property="rnKey" column="RN_KEY"/>
+		<result property="rnNoteFk" column="RN_NOTE_FK"/>
+		<result property="rnRecipienFk" column="RN_RECIPIENT_FK"/>
+		<result property="rnReadYn" column="RN_READ_YN"/>
+		<result property="rnDeleteYn" column="RN_DELETE_YN"/>
+	</resultMap>
+		
 
 	<insert id="insertNote" parameterType="NoteVo">
 		INSERT INTO SENDNOTE VALUES(
@@ -61,7 +70,7 @@
 	
 	<insert id="insertAttach" parameterType="AttachVo">
 			INSERT INTO ATTACHMENT VALUES(
-			SEQ_ATTACHMENT.NEXTVAL, #{attaLocation}, #{attaFileName},#{attaFilePath}
+			SEQ_ATTACHMENT.NEXTVAL, #{attaLocation}, #{attaFileName},#{attaFilePath},#{attaFilesize}
 			)
 	</insert>
 	
@@ -74,6 +83,26 @@
 		LEFT JOIN RECEIVENOTE R ON(S.SN_KEY = R.RN_NOTE_FK)
 		LEFT JOIN EMPLOYEE E ON(R.RN_RECIPIENT_FK = E.E_KEY)
 		WHERE SN_SENDER_FK = #{employeeK}
+	</select>
+	
+	<select id="selectSendDetail" parameterType="NoteVo" resultMap="resultNoteVo">
+		SELECT S.SN_KEY, S.SN_SENDER_FK, S.SN_TITLE,S.SN_CONTENT, S.SN_WRITE_DATE, S.SN_DELETE_YN,S.SN_ATTACH_YN
+		      , A.ATTA_KEY, A.ATTA_LOCATION, A.ATTA_FILENAME,A.ATTA_FILEPATH,A.ATTA_FILESIZE
+		      , E.E_KEY, E.E_NAME
+		FROM SENDNOTE S
+		LEFT JOIN ATTACHMENT A ON(S.SN_KEY= A.ATTA_LOCATION)
+		JOIN EMPLOYEE E ON(S.SN_SENDER_FK=E.E_KEY)
+		WHERE S.SN_KEY = #{snKey}
+	</select>
+	
+	<select id="selectReceiveList" parameterType="NoteVo" resultType="ReceivenoteVo">
+		SELECT R.RN_KEY,R.RN_NOTE_FK,R.RN_RECIPIENT_FK,R.RN_READ_YN,R.RN_DELETE_YN
+		        ,E.E_ID,E.E_NAME AS "name"
+		        ,D.DIV_INFO AS "job"
+			FROM RECEIVENOTE R
+			JOIN EMPLOYEE E ON(R.RN_RECIPIENT_FK = E.E_KEY)
+			JOIN DIVISION D ON(E.E_JOBCODE_FK = D.DIV_KEY)
+			WHERE RN_NOTE_FK = #{snKey}
 	</select>
 
 </mapper>

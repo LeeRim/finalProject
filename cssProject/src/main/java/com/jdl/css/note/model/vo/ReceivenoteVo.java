@@ -1,5 +1,9 @@
 package com.jdl.css.note.model.vo;
 
+import java.util.List;
+
+import com.jdl.css.employee.model.vo.EmployeeVo;
+
 public class ReceivenoteVo {
 	
 	private int rnKey;
@@ -8,6 +12,11 @@ public class ReceivenoteVo {
 	private char rnReadYn;
 	private char rnDeleteYn;
 	
+	private String name;
+	private String job;
+	
+	
+//	resultMap용
 	
 	public ReceivenoteVo() {
 	}
@@ -63,12 +72,30 @@ public class ReceivenoteVo {
 	}
 
 
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getJob() {
+		return job;
+	}
+
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ReceivenoteVo [rnKey=" + rnKey + ", rnNoteFk=" + rnNoteFk + ", rnRecipienFk=" + rnRecipienFk
-				+ ", rnReadYn=" + rnReadYn + ", rnDeleteYn=" + rnDeleteYn + "]";
+				+ ", rnReadYn=" + rnReadYn + ", rnDeleteYn=" + rnDeleteYn + ", name=" + name + ", job=" + job + "]";
 	}
-	
-	
 	
 }
