@@ -301,7 +301,6 @@ COMMENT ON COLUMN BOARD_COMMENT.CO_DATE IS '작성일';
 ---------------------------------------------------------------------김기영
 --일정관리테이블
 CREATE TABLE CALENDER(
-CAL_KEY NUMBER PRIMARY KEY,
 C_KEY_FK NUMBER,
 CAL_NAME VARCHAR2(300) ,
 CAL_STARTDATE DATE,
