@@ -164,41 +164,16 @@ desired effect
 																</tbody>
 															</table></td>
 														<td>
-															<div class="sign_condition">
-																<span class="sign_type1_inline" data-group-seq="0"
-																	data-group-name="승인" data-group-max-count="1"
-																	data-group-type="type1" data-is-reception=""><span
-																	class="sign_tit_wrap"><span class="sign_tit"><strong>승인</strong></span></span>
-																	<!--  --> <span class="sign_member_wrap"
-																	id="activity_15162"><span class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
-																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span> <span
-																	class="sign_member_wrap" id="activity_15162"><span
-																		class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
-																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span> <span
-																	class="sign_member_wrap" id="activity_15162"><span
-																		class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
-																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span> <!--  --></span>
-
+															<div class="sign_condition" id="sign_condition">
 															</div>
 
 															<div class="sign_condition">
-																<span class="sign_type1_inline" data-group-seq="0"
-																	data-group-name="신청" data-group-max-count="1"
-																	data-group-type="type1" data-is-reception=""><span
+																<span class="sign_type1_inline"><span
 																	class="sign_tit_wrap"><span class="sign_tit"><strong>신청</strong></span></span>
 																	<!--  --> <span class="sign_member_wrap"
 																	id="activity_15162"><span class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank">부장</span></span><span
-																			class="sign_wrap"><span class="sign_name">김지연</span></span><span
+																			class="sign_rank_wrap"><span class="sign_rank"><c:out value="${sessionScope.user.job}"></c:out></span></span><span
+																			class="sign_wrap"><span class="sign_name"><c:out value="${sessionScope.user.eName}"></c:out></span></span><span
 																			class="sign_date_wrap"><span
 																				class="sign_date " id="date_15162"></span></span></span></span></span>
 															</div>

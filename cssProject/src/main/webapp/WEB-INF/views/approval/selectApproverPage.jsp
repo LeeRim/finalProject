@@ -197,15 +197,50 @@ var approvers = new Array();
 	function addApprovers(){
 		//console.log(approvers.join(", "));
 		$("#appStr").val(approvers);
+		$("#closeBtn").trigger("click");
+		$.ajax({
+			url:"addApproversTable.do",
+			data:{
+				appStr : approvers.join(", ")
+			},
+			type : "post",
+			success : function(data) {
+				//console.log(data.length);
+				var user;
+				var resultStr = "<span class='sign_type1_inline'>"
+				+"<span class='sign_tit_wrap'>"
+				+"<span class='sign_tit'>"
+				+"<strong>승인</strong>"
+				+"</span>"+
+				"</span>";
+				for(var key in data){
+					user = data[key];
+					resultStr +="<span class='sign_member_wrap' id='activity_15162'><span "+
+					"class='sign_member'><span "+
+					"class='sign_rank_wrap'><span "+
+						"class='sign_rank'>"+user.job+"</span></span><span class='sign_wrap'><span "+
+						"class='sign_name'>"+user.eName+"</span></span><span "+
+					"class='sign_date_wrap'><span "+
+						"class='sign_date ' id='date_15162'></span></span></span></span>";
+				}
+				resultStr+="</span>";
+				$("#sign_condition").html(resultStr);
+				$("#sign_condition").css("width",data.length*80+30);
+			},
+			error : function(e) {
+				console.log(e);
+			}
+		});
 	}
 	
 </script>
 
 
 <!-- 팝업 모달영역 -->
-<div class="modal fade" id="layerpop" style="text-align:center;">
-	<div class="modal-dialog" style="margin-left:370px;">
-		<div class="modal-content" style="width: 1070px; height: 600px; margin-top:150px;">
+<div class="modal fade" id="layerpop" style="text-align: center;">
+	<div class="modal-dialog" style="margin-left: 370px;">
+		<div class="modal-content"
+			style="width: 1070px; height: 600px; margin-top: 150px;">
 			<!-- header -->
 			<!-- <div class="modal-header">
 				닫기(x) 버튼
@@ -221,7 +256,7 @@ var approvers = new Array();
 			<!-- body -->
 			<div class="modal-body">
 
-				<div class="row" style="height: 500px;">
+				<div class="row" style="height: 430px;">
 					<div class="col-md-1"></div>
 					<div class="col-md-3">
 						<label class="btn btn-primary btn-block margin-bottom">수신자
@@ -290,8 +325,10 @@ var approvers = new Array();
 				<hr>
 				<div style="height: 30px;">
 					<div align="center">
-						<button type="button" class="btn btn-success" onclick="addApprovers();">확인</button>
-						<button type="button" class="btn btn-danger" id="closeBtn" data-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-success"
+							onclick="addApprovers();">확인</button>
+						<button type="button" class="btn btn-danger" id="closeBtn"
+							data-dismiss="modal">닫기</button>
 					</div>
 				</div>
 			</div>

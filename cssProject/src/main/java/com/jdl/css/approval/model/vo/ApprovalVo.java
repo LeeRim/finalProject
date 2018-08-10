@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.jdl.css.common.model.vo.AttachmentVo;
+
 @Component
 public class ApprovalVo {
 
@@ -17,14 +19,16 @@ public class ApprovalVo {
 	private String aWriteDate;
 	private int aCondition;
 	private List<ApprovalConditionVo> aConList;
+	private List<AttachmentVo> aAttachList;
 	
 	public ApprovalVo() {
 		// TODO Auto-generated constructor stub
 	}
 
 
+
 	public ApprovalVo(int aKey, int cKeyFk, int divDoctypeFk, String aTitle, String aContent, int aWriterFk,
-			String aWriteDate, int aCondition, List<ApprovalConditionVo> aConList) {
+			String aWriteDate, int aCondition, List<ApprovalConditionVo> aConList, List<AttachmentVo> aAttachList) {
 		this.aKey = aKey;
 		this.cKeyFk = cKeyFk;
 		this.divDoctypeFk = divDoctypeFk;
@@ -34,7 +38,9 @@ public class ApprovalVo {
 		this.aWriteDate = aWriteDate;
 		this.aCondition = aCondition;
 		this.aConList = aConList;
+		this.aAttachList = aAttachList;
 	}
+
 
 
 	public int getaKey() {
@@ -119,11 +125,23 @@ public class ApprovalVo {
 	}
 
 
+	public List<AttachmentVo> getaAttachList() {
+		return aAttachList;
+	}
+
+
+
+	public void setaAttachList(List<AttachmentVo> aAttachList) {
+		this.aAttachList = aAttachList;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "ApprovalVo [aKey=" + aKey + ", cKeyFk=" + cKeyFk + ", divDoctypeFk=" + divDoctypeFk + ", aTitle="
 				+ aTitle + ", aContent=" + aContent + ", aWriterFk=" + aWriterFk + ", aWriteDate=" + aWriteDate
-				+ ", aCondition=" + aCondition + ", aConList=" + aConList + "]";
+				+ ", aCondition=" + aCondition + ", aConList=" + aConList + ", aAttachList=" + aAttachList + "]";
 	}
 
 }

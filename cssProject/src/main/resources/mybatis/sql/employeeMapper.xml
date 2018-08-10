@@ -45,7 +45,12 @@
 
 
 	<select id="selectEmployeeById" parameterType="string" resultType="EmployeeVo">
-		<include refid="select"></include>
+		SELECT E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_PWD,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
+		,E.E_EXTEN, E.E_PHONE,E.E_EMAIL, E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN,E.E_PHOTO
+		,J.DIV_INFO AS "JOB", D.DIV_INFO AS "DEPARTMENT"
+		FROM EMPLOYEE E
+		JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
 		WHERE E_ID = #{eId}
 	</select>
 	
@@ -118,6 +123,20 @@ ORDER BY  E_DEPART_FK ASC , E_JOBCODE_FK ASC
 	
 	</select>
 	
+	<select id="selectEmployeeListByKey" parameterType="ArrayList" resultType="EmployeeVo">
+		SELECT E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
+		,E.E_EXTEN, E.E_PHONE,E.E_EMAIL, E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN,E.E_PHOTO
+		,J.DIV_INFO AS "JOB", D.DIV_INFO AS "DEPARTMENT"
+		FROM EMPLOYEE E
+		JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
+		WHERE E.E_KEY IN 
+		<foreach item="parameter" index="index" collection="array"
+        open="(" separator="," close=")">
+        #{parameter}
+        </foreach>
+		ORDER BY J.DIV_INFOLEVEL,E.E_NAME
+	</select>
 
 
 </mapper>

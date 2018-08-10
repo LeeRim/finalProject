@@ -27,5 +27,6 @@
 	<mapper resource="mybatis/sql/noteMapper.xml"/>
 	<mapper resource="mybatis/sql/calenderMapper.xml"/>
 	<mapper resource="mybatis/sql/approvalMapper.xml"/>	
+	<mapper resource="mybatis/sql/attachmentMapper.xml"/>	
   </mappers>
 </configuration>

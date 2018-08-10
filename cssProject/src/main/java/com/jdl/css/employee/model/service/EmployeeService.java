@@ -34,4 +34,8 @@ public class EmployeeService {
 	public List<EmployeeVo> selectDepartList() {
 		return dao.selectDepartList();
 	}
+
+	public List<EmployeeVo> selectEmployeeListByKeyStr(int[] appKeyArr) {
+		return dao.selectEmployeeListByKeyStr(appKeyArr);
+	}
 }

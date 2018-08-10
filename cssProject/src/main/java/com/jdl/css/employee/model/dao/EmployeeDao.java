@@ -37,4 +37,8 @@ public class EmployeeDao {
 		return sqlSession.selectList("EmployeeMapper.selectDepartList");
 	}
 
+	public List<EmployeeVo> selectEmployeeListByKeyStr(int[] appKeyArr) {
+		return sqlSession.selectList("EmployeeMapper.selectEmployeeListByKey", appKeyArr);
+	}
+
 }
