@@ -1,9 +1,11 @@
 package com.jdl.css.employee.model.vo;
 
 import java.sql.Date;
-
+import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import com.jdl.css.common.model.vo.DivisionVo;
 
 @Component
 public class EmployeeVo {
@@ -32,6 +34,10 @@ public class EmployeeVo {
     
     private String job;
     private String department;
+    
+    
+//    resultMap용
+    private List<DivisionVo> division;
     public EmployeeVo() {
     }
 
@@ -238,6 +244,14 @@ public class EmployeeVo {
 	public void setePhoto(String ePhoto) {
 		this.ePhoto = ePhoto;
 	}
+	
+	public List<DivisionVo> getDivision() {
+		return division;
+	}
+
+	public void setDivision(List<DivisionVo> division) {
+		this.division = division;
+	}
 
 	@Override
 	public String toString() {
@@ -246,8 +260,9 @@ public class EmployeeVo {
 				+ ", eJob=" + eJob + ", eDepart=" + eDepart + ", eAddress=" + eAddress + ", eExten=" + eExten
 				+ ", ePhone=" + ePhone + ", eEmail=" + eEmail + ", eBirth=" + eBirth + ", eHireDate=" + eHireDate
 				+ ", eEntDate=" + eEntDate + ", eEntYn=" + eEntYn + ", ePhoto=" + ePhoto + ", job=" + job
-				+ ", department=" + department + "]";
+				+ ", department=" + department + ", division=" + division + "]";
 	}
-	
+
+
 	
 }

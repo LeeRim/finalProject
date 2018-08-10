@@ -9,6 +9,7 @@ import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 import com.jdl.css.note.model.dao.NoteDao;
 import com.jdl.css.note.model.vo.NoteVo;
+import com.jdl.css.note.model.vo.ReceivenoteVo;
 
 
 @Service
@@ -48,6 +49,15 @@ public class NoteService {
 	public List<NoteVo> selectSendNoteList(int ekey) {
 		return dao.selectSendNoteList(ekey);
 	}
+
+	public NoteVo selectSendNoteDetail(NoteVo note) {
+		return dao.selectSendNoteDetail(note);
+	}
+
+	public List<ReceivenoteVo> selectReceiveList(NoteVo note) {
+		return dao.selectReceiveList(note);
+	}
+
 
 
 }

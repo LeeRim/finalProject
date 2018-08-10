@@ -61,7 +61,7 @@ desired effect
         <button onclick="board();">게시판 인덱스</button>
         <hr>
         <h1>쪽지 버튼</h1>
-        <a href="moveNote.do">쪽지 메인 페이지 이동</a>
+        <a href="sendNoteList.do">쪽지 메인 페이지 이동</a>
         <h1>로그인 버튼</h1>
         <a href="loginForm.do">로그인 페이지 이동</a>
 

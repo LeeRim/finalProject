@@ -55,7 +55,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Main content -->
     <section class="content container-fluid">
-<div class="row">
+	<div class="row">
         <div class="col-md-9" style="width: 100%" >
           <div class="box box-primary" style="width: 98%; margin-top: 50px; margin-left: 10px;">
             <div class="box-header with-border">
@@ -93,7 +93,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   	<c:if test="${sendNote.snDeleteYn == 'N'}">
 	                  <tr>
 	                    <td><input type="checkbox"></td>
-	                    <td class="mailbox-star"><i class="fa fa-star text-yellow"></i></a></td>
+			                    <td class="mailbox-star"><i class="fa fa-envelope-o"></i></a></td>
 		                    <td class="mailbox-name">
 			                    <c:forEach items="${sendNote.employee}" var ="employee" varStatus="st">
 			                    		<c:if test="${st.index < 2}">
@@ -104,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					                    </c:if>
 			                    </c:forEach>
 		                    </td>
-	                    <td class="mailbox-subject"><a href="writeNote.do" ><c:out value="${sendNote.snTitle}"/></a></td>
+	                    <td class="mailbox-subject"><a href="sendNoteDetail.do?snKey=${sendNote.snKey}" ><c:out value="${sendNote.snTitle}"/></a></td>
 	                    
 	                    <td class="mailbox-attachment">
 	                    	<c:if test="${sendNote.snAttachYn eq 'Y'}">
@@ -126,7 +126,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="mailbox-controls">
                 <!-- Check all button -->
                 <div class="btn-group">
-                   	버튼 죄측구역
+                   	
                 </div>
                 <div class="pull-right">
                   1-50/200
@@ -155,8 +155,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 	<c:import url="../include/footer.jsp"/>
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
 </body>
 </html>

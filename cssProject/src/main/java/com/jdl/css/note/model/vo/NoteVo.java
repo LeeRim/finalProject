@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.jdl.css.common.model.vo.AttachmentVo;
+import com.jdl.css.common.model.vo.DivisionVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Component
@@ -26,6 +27,7 @@ public class NoteVo {
 	//resultMap용
 	private List<AttachmentVo> attach;
 	private List<EmployeeVo> employee;
+	
 	
 	public NoteVo() {
 	}
@@ -133,7 +135,9 @@ public class NoteVo {
 				+ snAttachYn + ", receive=" + receive + ", receiveNo=" + receiveNo + ", receiver=" + receiver
 				+ ", attach=" + attach + ", employee=" + employee + "]";
 	}
-
+	
+	
+	
 	
 	
 	

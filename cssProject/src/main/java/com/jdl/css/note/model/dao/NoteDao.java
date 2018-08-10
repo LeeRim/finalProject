@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 import com.jdl.css.note.model.vo.NoteVo;
+import com.jdl.css.note.model.vo.ReceivenoteVo;
 
 
 @Repository
@@ -38,6 +39,14 @@ public class NoteDao {
 
 	public List<NoteVo> selectSendNoteList(int ekey) {
 		return session.selectList("NoteMapper.selectSendNoteList", ekey);
+	}
+
+	public NoteVo selectSendNoteDetail(NoteVo note) {
+		return session.selectOne("NoteMapper.selectSendDetail", note);
+	}
+
+	public List<ReceivenoteVo> selectReceiveList(NoteVo note) {
+		return session.selectList("NoteMapper.selectReceiveList", note);
 	}
 
 
