@@ -16,6 +16,16 @@ public class CompanyVo {
 	private String cMileage;
 	private Date cCloseDay;
 	private int cLevel;
+	private int coordKeyFk;
+	
+	private int coordKey;
+	private String city;
+	private String lat;
+	private String lng;
+	
+	private int count;
+	
+	private int per;
 	
 	public CompanyVo(){}
 
@@ -28,7 +38,8 @@ public class CompanyVo {
 
 
 	public CompanyVo(int cKey, String cName, String cOwner, String cAddress, String cLogo, String cSign, String cQrcode,
-			String cMileage, Date cCloseDay, int cLevel) {
+			String cMileage, Date cCloseDay, int cLevel, int coordKeyFk, int coordKey, String city, String lat,
+			String lng, int count, int per) {
 		super();
 		this.cKey = cKey;
 		this.cName = cName;
@@ -40,7 +51,15 @@ public class CompanyVo {
 		this.cMileage = cMileage;
 		this.cCloseDay = cCloseDay;
 		this.cLevel = cLevel;
+		this.coordKeyFk = coordKeyFk;
+		this.coordKey = coordKey;
+		this.city = city;
+		this.lat = lat;
+		this.lng = lng;
+		this.count = count;
+		this.per = per;
 	}
+
 
 	public int getcKey() {
 		return cKey;
@@ -121,13 +140,100 @@ public class CompanyVo {
 	public void setcLevel(int cLevel) {
 		this.cLevel = cLevel;
 	}
+	
+	
+
+
+	public int getCoordKeyFk() {
+		return coordKeyFk;
+	}
+
+
+	public void setCoordKeyFk(int coordKeyFk) {
+		this.coordKeyFk = coordKeyFk;
+	}
+
+
+	public int getCoordKey() {
+		return coordKey;
+	}
+
+
+	public void setCoordKey(int coordKey) {
+		this.coordKey = coordKey;
+	}
+
+
+	public String getCity() {
+		return city;
+	}
+
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+	public String getLat() {
+		return lat;
+	}
+
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
+
+	public String getLng() {
+		return lng;
+	}
+
+
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+
+	
+
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+
+	public int getPer() {
+		return per;
+	}
+
+
+	public void setPer(int per) {
+		this.per = per;
+	}
+
 
 	@Override
 	public String toString() {
 		return "CompanyVo [cKey=" + cKey + ", cName=" + cName + ", cOwner=" + cOwner + ", cAddress=" + cAddress
 				+ ", cLogo=" + cLogo + ", cSign=" + cSign + ", cQrcode=" + cQrcode + ", cMileage=" + cMileage
-				+ ", cCloseDay=" + cCloseDay + ", cLevel=" + cLevel + "]";
+				+ ", cCloseDay=" + cCloseDay + ", cLevel=" + cLevel + ", coordKeyFk=" + coordKeyFk + ", coordKey="
+				+ coordKey + ", city=" + city + ", lat=" + lat + ", lng=" + lng + ", count=" + count + ", per=" + per
+				+ "]";
 	}
+
+
+	
+
+
+	
+
+
+	
+
+	
 	
 	
 	
