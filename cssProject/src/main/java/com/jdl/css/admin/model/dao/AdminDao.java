@@ -34,6 +34,26 @@ public class AdminDao {
 		return sqlSession.selectList("AdminMapper.selectMarkList");
 	}
 
+	public int selectAllCompanyCount() {
+		return sqlSession.selectOne("AdminMapper.selectAllCompanyCount");
+	}
+	
+	public int selectCountLevel1() {
+		return sqlSession.selectOne("AdminMapper.selectCountLevel1");
+	}
+	
+	public int selectCountLevel2() {
+		return sqlSession.selectOne("AdminMapper.selectCountLevel2");
+	}
+	
+	public int selectCountLevel3() {
+		return sqlSession.selectOne("AdminMapper.selectCountLevel3");
+	}
+
+	public List<CompanyVo> selectTop5CompanyList() {
+		return sqlSession.selectList("AdminMapper.selectTop5List");
+	}
+
 	
 
 }

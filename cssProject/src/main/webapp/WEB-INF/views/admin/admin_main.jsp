@@ -59,6 +59,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   		function menuHighlight(clickIdx){
   			sessionStorage.setItem("menu", clickIdx);
   		}
+  		
   </script>
 </head>
 <!--
@@ -103,13 +104,13 @@ desired effect
     </section>
 	
 	<!-- 상단 위젯 -->
+	
 	<div class="row">
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>150</h3>
-
+            <h3>${allCount }</h3>
               <p>총 인원 수</p>
             </div>
             <div class="icon">
@@ -123,7 +124,7 @@ desired effect
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>53</h3>
+            <h3>${count1 }</h3>
               <p>LEVEL 1</p>
             </div>
             <div class="icon">
@@ -137,7 +138,7 @@ desired effect
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>44</h3>
+              <h3>${count2 }</h3>
 
               <p>LEVEL 2</p>
             </div>
@@ -152,7 +153,7 @@ desired effect
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>65</h3>
+              <h3>${count3 }</h3>
 
               <p>LEVEL 3</p>
             </div>
@@ -266,7 +267,7 @@ desired effect
           <div class="box box-default" style="margin-left:10px; width:48.5%; height:615.09px;">
             <div class="box-header with-border">
             <i class="fa fa-pie-chart"></i>
-              <h3 class="box-title">지역별 분포도 - 그래프</h3>
+              <h3 class="box-title">지역별 분포도(TOP 5) - 그래프</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -280,11 +281,15 @@ desired effect
                 <!-- /.col -->
                 <div class="col-md-4" >
                   <ul class="chart-legend clearfix">
-                    <li><i class="fa fa-circle-o text-red"></i> 서울특별시</li>
-                    <li><i class="fa fa-circle-o text-green"></i> 인천광역시</li>
-                    <li><i class="fa fa-circle-o text-aqua"></i> 대전광역시</li>
-                    <li><i class="fa fa-circle-o text-light-blue"></i> 제주특별자치도</li>
-                    <li><i class="fa fa-circle-o text-gray"></i> 경기도 성남시 </li>
+                  	<c:forEach items="${top5List}" var="t5" varStatus="status">
+                  		<c:choose>
+                  			<c:when test="${status.count == 1}"><li><i class="fa fa-circle-o text-red"></i> ${t5.city }</li></c:when>
+                  			<c:when test="${status.count == 2}"><li><i class="fa fa-circle-o text-green"></i> ${t5.city }</li></c:when>
+                  			<c:when test="${status.count == 3}"><li><i class="fa fa-circle-o text-aqua"></i> ${t5.city }</li></c:when>
+                  			<c:when test="${status.count == 4}"><li><i class="fa fa-circle-o text-light-blue"></i> ${t5.city }</li></c:when>
+                  			<c:otherwise><li><i class="fa fa-circle-o text-light-gray"></i> ${t5.city }</li></c:otherwise>
+                  		</c:choose>
+		          	 </c:forEach>
                   </ul>
                 </div>
                 <!-- /.col -->
@@ -295,14 +300,18 @@ desired effect
             <div class="box-footer no-padding">
             	<div class="box-header with-border">
 		            <i class="fa fa-map-o"></i>
-		              <h3 class="box-title">지역별 분포도 - 백분율</h3>
+		              <h3 class="box-title">지역별 분포도(TOP 5) - 백분율</h3>
 		        </div>
               <ul class="nav nav-pills nav-stacked">
-              	<li><a>서울특별시<span class="pull-right text-red">50%</span></a></li>
-                <li><a>인천광역시<span class="pull-right text-red">12%</span></a></li>
-                <li><a>대전광역시<span class="pull-right text-green">4%</span></a></li>
-                <li><a>제주특별자치도<span class="pull-right text-yellow">0%</span></a></li>
-                <li><a>경기도성남시<span class="pull-right text-yellow">0%</span></a></li>
+              	<c:forEach items="${top5List}" var="t5" varStatus="status">
+                		<c:choose>
+                			<c:when test="${status.count == 1}"><li><a>${t5.city }<span class="pull-right text-red">${t5.per }%</span></a></li></c:when>
+                			<c:when test="${status.count == 2}"><li><a>${t5.city }<span class="pull-right text-green">${t5.per }%</span></a></li></c:when>
+                			<c:when test="${status.count == 3}"><li><a>${t5.city }<span class="pull-right text-aqua">${t5.per }%</span></a></li></c:when>
+                			<c:when test="${status.count == 4}"><li><a>${t5.city }<span class="pull-right text-light-blue">${t5.per }%</span></a></li></c:when>
+                			<c:otherwise><li><a>${t5.city }<span class="pull-right text-gray">${t5.per }%</span></a></li></c:otherwise>
+                		</c:choose>
+		      	</c:forEach>
               </ul>
             </div>
             <!-- /.footer -->
@@ -370,39 +379,28 @@ desired effect
     // Get context with jQuery - using jQuery's .get() method.
     var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
    
-    var PieData        = [
-      {
-        value    : 700,
-        color    : '#f56954',
-        highlight: '#f56954',
-        label    : '서울특별시'
-      },
-      {
-        value    : 500,
-        color    : '#00a65a',
-        highlight: '#00a65a',
-        label    : '인천광역시'
-      },
-      {
-        value    : 600,
-        color    : '#00c0ef',
-        highlight: '#00c0ef',
-        label    : '대전광역시'
-      },
-      {
-        value    : 300,
-        color    : '#3c8dbc',
-        highlight: '#3c8dbc',
-        label    : '제주특별자치도'
-      },
-      {
-        value    : 100,
-        color    : '#d2d6de',
-        highlight: '#d2d6de',
-        label    : '경기도 성남시'
-      }
-    ];
-    
+
+    //var positions = [];
+
+    //<c:forEach items="${markList}" var="c" >
+    	//positions.push({
+    		//title: '${c.city} : ${c.count}개', 
+    	    //latlng: new daum.maps.LatLng(${c.lat}, ${c.lng})
+    	//});
+    //</c:forEach>
+ 
+    var PieData = [];
+    <c:forEach items="${top5List}" var="t5" varStatus="status">
+    	PieData.push({
+    		value    : ${t5.count},
+   	        color    : <c:if test="${status.count == 1}">'#f56954'</c:if><c:if test="${status.count == 2}">'#00a65a'</c:if>
+   	        			 <c:if test="${status.count == 3}">'#00c0ef'</c:if><c:if test="${status.count == 4}">'#3c8dbc'</c:if><c:if test="${status.count == 5}">'#d2d6de'</c:if>,
+   	        highlight: <c:if test="${status.count == 1}">'#f56954'</c:if><c:if test="${status.count == 2}">'#00a65a'</c:if>
+  			 			  <c:if test="${status.count == 3}">'#00c0ef'</c:if><c:if test="${status.count == 4}">'#3c8dbc'</c:if><c:if test="${status.count == 5}">'#d2d6de'</c:if>,
+   	        label    : '${t5.city}'
+    	});
+    </c:forEach>
+ 
     var pieChart       = new Chart(pieChartCanvas).Doughnut(PieData);
     // Create pie or douhnut chart
     // You can switch between pie and douhnut using the method below.
@@ -413,6 +411,8 @@ desired effect
     
   });
   
+  $(function(){
+	  
   var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
   mapOption = { 
       center: new daum.maps.LatLng(35.7568230, 127.7742510), // 지도의 중심좌표 - 대한민국 경상남도 거창군 북상면 창선리
@@ -424,9 +424,9 @@ var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니�
 //마커를 표시할 위치와 title 객체 배열입니다 
 var positions = [];
 
-<c:forEach items="${list}" var="c" varStatus="status">
+<c:forEach items="${markList}" var="c" >
 	positions.push({
-		title: '${c.city} : ${status.count}개', 
+		title: '${c.city} : ${c.count}개', 
 	    latlng: new daum.maps.LatLng(${c.lat}, ${c.lng})
 	});
 </c:forEach>
@@ -451,6 +451,8 @@ for (var i = 0; i < positions.length; i ++) {
       image : markerImage // 마커 이미지 
   });
 }
+});
+
 
 
 

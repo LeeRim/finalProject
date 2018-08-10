@@ -39,5 +39,25 @@ public class AdminService {
 		return dao.selectMarkList();
 	}
 
+	public int selectAllCompanyCount() {
+		return dao.selectAllCompanyCount();
+	}
+	
+	public int selectCountLevel1(){
+		return dao.selectCountLevel1();
+	}
+	
+	public int selectCountLevel2(){
+		return dao.selectCountLevel2();
+	}
+	
+	public int selectCountLevel3(){
+		return dao.selectCountLevel3();
+	}
+
+	public List<CompanyVo> selectTop5CompanyList() {
+		return dao.selectTop5CompanyList();
+	}
+
 
 }

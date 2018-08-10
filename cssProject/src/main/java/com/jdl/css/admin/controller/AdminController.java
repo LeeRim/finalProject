@@ -24,8 +24,20 @@ public class AdminController {
 	
 	@RequestMapping("adminMain.do")
 	public ModelAndView adminMain(ModelAndView mv){
-		List<CompanyVo> list = service.selectMarkList();
-		mv.addObject("list",list);
+		List<CompanyVo> markList = service.selectMarkList();
+		mv.addObject("markList",markList);
+		
+		int allCount = service.selectAllCompanyCount();
+		mv.addObject("allCount",allCount);
+		int countLevel1 = service.selectCountLevel1();
+		mv.addObject("count1",countLevel1);
+		int countLevel2 = service.selectCountLevel2();
+		mv.addObject("count2",countLevel2);
+		int countLevel3 = service.selectCountLevel3();
+		mv.addObject("count3",countLevel3);
+		
+		List<CompanyVo> top5List = service.selectTop5CompanyList();
+		mv.addObject("top5List",top5List);
 		mv.setViewName("admin/admin_main");
 		return mv;
 	}

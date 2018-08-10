@@ -25,12 +25,47 @@
 		WHERE C_KEY = #{cKey}
 	</update>
 	
+	
+	<select id="selectAllCompanyCount" resultType="int">
+		SELECT COUNT(*) AS "COUNT"
+		FROM COMPANY
+		WHERE C_LEVEL != 0
+	</select>
+	
+	<select id="selectCountLevel1" resultType="int">
+		SELECT COUNT(*) AS "COUNT"
+		FROM COMPANY
+		WHERE C_LEVEL = 1
+	</select>
+	
+	<select id="selectCountLevel2" resultType="int">
+		SELECT COUNT(*) AS "COUNT"
+		FROM COMPANY
+		WHERE C_LEVEL = 2
+	</select>
+	
+	<select id="selectCountLevel3" resultType="int">
+		SELECT COUNT(*) AS "COUNT"
+		FROM COMPANY
+		WHERE C_LEVEL = 3
+	</select>
+	
 	<select id="selectMarkList" resultType="Company">
 		SELECT COORD_KEY_FK, CITY, LAT, LNG, COUNT
 		FROM (SELECT COORD_KEY_FK, COUNT(*) AS "COUNT"
 			        FROM COMPANY
 			        GROUP BY COORD_KEY_FK)
 		JOIN COORDINATE ON(COORD_KEY_FK = COORD_KEY)
+	</select>
+	
+	<select id="selectTop5List" resultType="Company">		
+		SELECT CITY,COUNT, PER
+		FROM (SELECT COORD_KEY_FK, COUNT(*) AS "COUNT", trunc(ratio_to_report(count(*)) over() * 100) as "PER"
+		      FROM COMPANY
+		      GROUP BY COORD_KEY_FK
+		      ORDER BY COUNT DESC)
+		JOIN COORDINATE ON(COORD_KEY_FK = COORD_KEY)
+		WHERE ROWNUM <![CDATA[ <= ]]>5
 	</select>
 
 </mapper>
