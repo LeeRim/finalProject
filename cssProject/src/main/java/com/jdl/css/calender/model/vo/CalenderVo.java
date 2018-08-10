@@ -18,7 +18,8 @@ public class CalenderVo {
 		private int endYear;
 		private int endMonth;
 		private int endDay;
-		
+		private String background;
+
 		public CalenderVo(){}
 		
 		public CalenderVo(int id, String title,Date startDate, Date endDate){
@@ -111,12 +112,20 @@ public class CalenderVo {
 		public void setEndDay(int endDay) {
 			this.endDay = endDay;
 		}
+		
+		public String getBackground() {
+			return background;
+		}
+		
+		public void setBackground(String background) {
+			this.background = background;
+		}
 
 		@Override
 		public String toString() {
 			return "CalenderVo [id=" + id + ", title=" + title + ", startYear=" + startYear + 
-					", startMonth=" + startMonth + ", startDay=" + startDay
-					+ ", endYear=" + endYear + ", endMonth=" + endMonth + ", endDay=" + endDay + "]";
+					", startMonth=" + startMonth + ", startDay=" + startDay+ ", endYear=" + endYear + 
+					", endMonth=" + endMonth + ", endDay=" + endDay +", background="+background +"]";
 		}
 		
 }

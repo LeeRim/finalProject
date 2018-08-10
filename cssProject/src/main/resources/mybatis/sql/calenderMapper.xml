@@ -11,8 +11,14 @@
 				to_number(to_char(cal_startdate, 'dd')) as "startDay",
 				to_number(to_char(cal_enddate, 'yyyy')) as "endYear",
 				to_number(to_char(cal_enddate, 'mm')) as "endMonth",
-				to_number(to_char(cal_enddate, 'dd')) as "endDay"
+				to_number(to_char(cal_enddate, 'dd')) as "endDay",
+				background
 		from calender
 	</select>
+	
+	<insert id="createEvent" parameterType="Calender">
+		insert into calender values(1,#{title},#{startDate},#{endDate},2,1,#{background})
+	</insert>
 
+	
 </mapper>

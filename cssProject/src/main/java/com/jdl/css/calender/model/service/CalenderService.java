@@ -18,4 +18,8 @@ public class CalenderService {
 	public List<CalenderVo> showCalender() {
 		return dao.showCalender();
 	}
+	
+	public int createEvent(CalenderVo calender) {
+		return dao.insertCalender(calender);
+	}
 }

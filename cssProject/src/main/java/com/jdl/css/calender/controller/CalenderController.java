@@ -28,10 +28,17 @@ public class CalenderController {
 	public ModelAndView showCalender(ModelAndView mav){
 		
 		List<CalenderVo> list = service.showCalender();
-		System.out.println(list);
 		mav.addObject("list", list);
-		
 		mav.setViewName("calender");
 		return mav;
 	}
+	
+	@RequestMapping("createEvent.do")
+	public ModelAndView createEvent(CalenderVo calender,ModelAndView mav){
+		System.out.println(calender);
+		int calenderResult = service.createEvent(calender);
+		System.out.println(calenderResult);
+		return mav;
+	}
+	
 }

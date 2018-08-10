@@ -252,62 +252,24 @@
         <div class="col-md-3">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h4 class="box-title">Draggable Events</h4>
+              <h4 class="box-title">행사 목록</h4>
             </div>
             <div class="box-body">
               <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-green">Lunch</div>
-                <div class="external-event bg-yellow">Go home</div>
-                <div class="external-event bg-aqua">Do homework</div>
-                <div class="external-event bg-light-blue">Work on UI design</div>
-                <div class="external-event bg-red">Sleep tight</div>
+                <div class="external-event bg-green">점심행사</div>
+                <div class="external-event bg-yellow">회의일정</div>
+                <div class="external-event bg-aqua">개인 업무일정</div>
+                <div class="external-event bg-light-blue">외부일정</div>
+                <div class="external-event bg-red">휴가일정</div>
                 <div class="checkbox">
-                  <label for="drop-remove">
-                    <input type="checkbox" id="drop-remove">
-                    remove after drop
-                  </label>
                 </div>
               </div>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /. box -->
-          <div class="box box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">Create Event</h3>
-            </div>
-            <div class="box-body">
-              <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
-                <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
-                <ul class="fc-color-picker" id="color-chooser">
-                  <li><a class="text-aqua" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-blue" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-teal" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-orange" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-lime" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-purple" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-fuchsia" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-muted" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-navy" href="#"><i class="fa fa-square"></i></a></li>
-                </ul>
-              </div>
-              <!-- /btn-group -->
-              <div class="input-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Event Title">
-
-                <div class="input-group-btn">
-                  <button id="add-new-event" type="button" class="btn btn-primary btn-flat">Add</button>
-                </div>
-                <!-- /btn-group -->
-              </div>
-              <!-- /input-group -->
-            </div>
-          </div>
+		<input type="button" onclick="eventPopup();" value="새 일정 생성">
         </div>
         <!-- /.col -->
         <div class="col-md-9">
@@ -544,9 +506,6 @@
      -----------------------------------------------------------------*/
     function init_events(ele) {
       ele.each(function () {
-
-        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-        // it doesn't need to have a start or end
         var eventObject = {
           title: $.trim($(this).text()) // use the element's text as the event title
         }
@@ -555,11 +514,6 @@
         $(this).data('eventObject', eventObject)
 
         // make the event draggable using jQuery UI
-        $(this).draggable({
-          zIndex        : 1070,
-          revert        : true, // will cause the event to go back to its
-          revertDuration: 0  //  original position after the drag
-        })
 
       })
     }
@@ -579,16 +533,17 @@
     	title   : '${cal.title}',
         start   : new Date(${cal.startYear}, ${cal.startMonth - 1}, ${cal.startDay} ),
         end		:  new Date(${cal.endYear}, ${cal.endMonth - 1}, ${cal.endDay+1} ),
-        backgroundColor: '#0073b7', 
+        backgroundColor: '${cal.background}', 
         borderColor    : '#0073b7' 
-    });
+    })
 	</c:forEach>
 	
-	
+    
     $('#calendar').fullCalendar({
-      header    : {
-        left  : 'prev,next today',
-        center: 'title'
+     	 header    : {
+        left  : '',
+        center: 'title',
+        right : 'prev,next today'
       },
       buttonText: {
           today: 'today'
@@ -613,55 +568,20 @@
         copiedEventObject.borderColor     = $(this).css('border-color')
 
         // render the event on the calendar
-        // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+        
         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
 
         // is the "remove after drop" checkbox checked?
-        if ($('#drop-remove').is(':checked')) {
-          // if so, remove the element from the "Draggable Events" list
-          $(this).remove()
-        }
+
       }
     })
+	  
     
-    
-
-    /* ADDING EVENTS */
-    var currColor = '#3c8dbc' //Red by default
-    //Color chooser button
-    var colorChooser = $('#color-chooser-btn')
-    $('#color-chooser > li > a').click(function (e) {
-      e.preventDefault()
-      //Save color
-      currColor = $(this).css('color')
-      //Add color effect to button
-      $('#add-new-event').css({ 'background-color': currColor, 'border-color': currColor })
-    })
-    $('#add-new-event').click(function (e) {
-      e.preventDefault()
-      //Get value and make sure it is not null
-      var val = $('#new-event').val()
-      if (val.length == 0) {
-        return
-      }
-
-      //Create events
-      var event = $('<div />')
-      event.css({
-        'background-color': currColor,
-        'border-color'    : currColor,
-        'color'           : '#fff'
-      }).addClass('external-event')
-      event.html(val)
-      $('#external-events').prepend(event)
-
-      //Add draggable funtionality
-      init_events(event)
-
-      //Remove event from text input
-      $('#new-event').val('')
-    })
   })
+  
+  
+  
+  function eventPopup(){window.open("/css/createEvent.do","이벤트 생성","width=400, height=400");}
   
   
   

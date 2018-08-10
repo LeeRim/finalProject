@@ -19,5 +19,8 @@ public class CalenderDao {
 		return sqlsession.selectList("CalenderMapper.selectCalender");
 	}
 	
+	public int insertCalender(CalenderVo calender) {
+		return sqlsession.insert("CalenderMapper.createEvent", calender);
+	}
 	
 }
