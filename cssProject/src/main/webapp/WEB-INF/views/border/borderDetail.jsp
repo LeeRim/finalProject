@@ -26,7 +26,36 @@
 		margin-left:auto;
 		text-align:center;
 		margin-bottom:10px;
+		float:right;
 	}
+	.contentT {
+    	width: 100%;
+  		background:white; 
+  	}
+  	.tr1,.tr2{
+  		border-top:1px solid #bcbcbc;
+  		border-bottom:1px solid #bcbcbc;
+  	}
+  	.tr1{
+  		font-weight: bold;
+  	}
+  	td{
+  		padding:5px;
+  	}
+  	.del{
+  		background:#d60c45;
+  		color:white;
+  	}
+  	.mod{
+  		background:#1055cc;
+  		color:white;
+  	}
+  	.boardContent{
+  		background:white;
+  	}
+  	.main{
+  		background:white;
+  	}
 </style>
 	<script type="text/javascript">
 	$(function() {
@@ -97,7 +126,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-   <c:import url="/WEB-INF/views/include/left_column.jsp"/>
+   <c:import url="/WEB-INF/views/border/left_column_board.jsp"/>
 	<div class="content-wrapper">
 	<section class="content-header">
       <h1>
@@ -111,29 +140,55 @@
       </ol>
     </section>
 <div class="row" style="width:95%; margin-right:auto; margin-left:auto; margin-top:20px;">
-제목 : ${board.bTitle }<br>
-조회수 : <span class="label label-danger"><c:out value="${board.bCount }"/></span><br>
-작성자 : <c:out value="${board.eName }"/><br>
-작성일 : <c:out value="${board.bDate }"/><br>
-내용 : ${board.bContent }
+
+	 <c:choose>
+	 	<c:when test="${board.bCateGory eq 1}">
+	 		<h1>공지사항</h1>
+	 	</c:when>
+	 	<c:when test="${board.bCateGory eq 2}">
+	 		<h1>자유게시판</h1>
+	 	</c:when>
+	 	<c:when test="${board.bCateGory eq 3}">
+	 		<h1>경조사</h1>
+	 	</c:when>
+	 </c:choose>
+<div class="main">
+	 <table class="contentT">
+		<tr class="tr1">
+			<td style="width:5px;"></td>
+			<td colspan="3">${board.bTitle }</td>
+		</tr>
+		<tr class="tr2">
+			<td style="width:5px;"></td>
+			<td style="width:200px;"> 작성자 : <c:out value="${board.eName }"/></td>
+			<td style="width:200px;"> 작성일 : <c:out value="${board.bDate }"/></td>
+			<td> 조회수 : <span class="label label-danger"><c:out value="${board.bCount }"/></span></td>
+		</tr>
+	 </table>
+	 <br>
+	 <br>
+</div>
+	<div class="boardContent">
+		${board.bContent}
+	 </div>
+	 </div>
 <div class="Btns">
 
 	<c:if test="${user ne null && user.eKey eq board.bWriter}">
-	<div class="Btn" onclick="bModifyPage();">수정하기</div>
-	<div class="Btn" onclick="deleteBoard();">삭제하기</div>
+	<div class="Btn mod" onclick="bModifyPage();">수정하기</div>
+	<div class="Btn del" onclick="deleteBoard();">삭제하기</div>
 	</c:if>
-	<div class="Btn" onclick="border();">취소</div>
+	<div class="Btn" onclick="border();">돌아가기</div>
 </div>
-
+<br>
+<br>
 <div class="commentArea">
 		<table width="800">
-				<!-- 이름(작성일)  ---------------------<수정하기, 삭제하기> -->
-				<!-- 댓글 내용 															-->
 			<c:forEach items="${bList}" var="b">
 			<tr>
 				<td>${b.eName} ${b.cDate}</td>
 				<td align="right">
-				<c:if test="${user.eKey eq b.cWriter}">
+				<c:if test="${!empty user && user.eKey eq b.cWriter}">
 					<input type="button" class="modifyBtn" value="수정" onclick="updateCommentForm(this, true);"/>
 					<input type="button" class="deleteBtn" value="삭제" onclick="deleteComment(${b.commentKey});"/>
 					<input type="button" class="updateBtn" style="display:none;" value="작성 완료" onclick="updateComment(this,${b.commentKey});"/>
@@ -161,7 +216,6 @@
 						<textarea cols="90" rows="4" name="cContent"></textarea>
 					</td>
 					<td>
-						<!-- <input type="submit" value="댓글작성"/> -->
 						<input type="button" onclick="writeComment();" value="댓글작성"/>
 					</td>
 				</tr>

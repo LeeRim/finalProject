@@ -6,17 +6,6 @@
 <head>
 <meta  charset="UTF-8">
 <title>Insert title here</title>
-<script>
-  	function boardPage(bType){
-  		location.href="borderList.do?bCateGory=" + bType;
-  	}
-  	function board(){
-  		location.href="borderIndex.do"
-  	}
-  	function boardGallery(){
-  		location.href="borderGallery.do"
-  	}
-  </script>
 </head>
 <body>
 	<!-- Left side column. contains the logo and sidebar -->
@@ -57,10 +46,7 @@
         <li class="active"><a href="organizationChart.do"><i class="fa fa-link"></i> <span>조직도</span></a></li>
         <li><a href="employeeIndex.do"><i class="fa fa-link"></i> <span>사원 인덱스</span></a></li>
         <li><a href=""><i class="fa fa-link"></i> <span>사원 정보</span></a></li>
-        <li class="active"><a href="#" onclick="boardPage(1);"><i class="fa fa-link"></i> <span>공지사항</span></a></li>
-        <li><a href="#" onclick="boardPage(2);"><i class="fa fa-link"></i> <span>자유게시판</span></a></li>
         <li class="treeview">
-          <a href="#" onclick="boardPage(3);"><i class="fa fa-link"></i> <span>경조사</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -70,7 +56,6 @@
             <li><a href="#">Link in level 2</a></li>
           </ul>
         </li>
-        <li><a href="#" onclick="boardGallery();"><i class="fa fa-link"></i> <span>갤러리</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

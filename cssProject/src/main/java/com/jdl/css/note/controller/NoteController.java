@@ -97,6 +97,7 @@ public class NoteController {
 		
 		int resultReceive = service.insertReceiveNote(note);
 		System.out.println("receive = "+resultReceive );
+		
 		int resultAttach = service.insertAttach(note);
 		System.out.println("attach = " +resultAttach );
 		mv.setViewName("note/noteMain");

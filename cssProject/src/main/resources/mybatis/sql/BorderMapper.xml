@@ -82,8 +82,8 @@
 	<select id="selectCommentList" parameterType="int" resultMap="CommentMap">
 		SELECT CO_KEY, B_KEY_FK, CO_WRITER_FK, CO_CONTENT, CO_DATE, E_NAME, B_KEY
 		FROM BOARD_COMMENT c
-		RIGHT OUTER JOIN BOARD b on (c.B_KEY_FK = b.B_KEY)
-		LEFT OUTER JOIN EMPLOYEE e on (c.CO_WRITER_FK = e.E_KEY)
+		JOIN BOARD b on (c.B_KEY_FK = b.B_KEY)
+		JOIN EMPLOYEE e on (c.CO_WRITER_FK = e.E_KEY)
 		WHERE B_KEY = #{boardKey}
 	</select>
 	
@@ -105,7 +105,7 @@
 		DELETE FROM BOARD_COMMENT WHERE CO_KEY = #{commentKey}
 	</delete>
 	
-	<select id="selectBoardOne" resultType="Border">
+	<select id="selectBoardOne" resultMap="BorderMap">
 		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM 
 		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
@@ -116,7 +116,7 @@
 		WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 	
-	<select id="selectBoardTwo" resultType="Border">
+	<select id="selectBoardTwo" resultMap="BorderMap">
 		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM 
 		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
@@ -127,7 +127,7 @@
 		WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 	
-	<select id="selectBoardThr" resultType="Border">
+	<select id="selectBoardThr" resultMap="BorderMap">
 		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM 
 		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
@@ -142,4 +142,11 @@
 		SELECT ATTA_KEY, ATTA_LOCATION, ATTA_FILENAME, ATTA_FILEPATH FROM ATTACHMENT A
 		JOIN BOARD B ON (A.ATTA_LOCATION = B.B_KEY)
 	</select>
+	
+	<insert id="Attachinsert" parameterType="AttachVo">
+			INSERT INTO ATTACHMENT VALUES(
+			SEQ_ATTACHMENT.NEXTVAL, #{attaLocation}, #{attaFileName},#{attaFilePath}
+			)
+	</insert>
+	
 </mapper>

@@ -82,4 +82,5 @@ public class BorderService {
 	public List<AttachVo> selectBoardGalleryForm(AttachVo av) {
 		return dao.selectBoardGalleryForm(av);
 	}
+
 }

@@ -34,7 +34,6 @@ public class BorderDao {
 	}
 
 	public List<BorderVo> selectBoardList(BorderVo board) {
-		System.out.println("dao board : " + board);
 		return sqlSession.selectList("BorderMapper.BorderSelectList", board);
 	}
 
@@ -83,6 +82,7 @@ public class BorderDao {
 	public List<AttachVo> selectBoardGalleryForm(AttachVo av) {
 		return sqlSession.selectList("BorderMapper.BorderGalleryForm", av);
 	}
+
 	
 	
 }
