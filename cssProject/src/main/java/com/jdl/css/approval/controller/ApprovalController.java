@@ -41,6 +41,11 @@ public class ApprovalController {
 	public String openApprovalPage() {
 		return "approval/approvalPage";
 	}
+	
+	@RequestMapping("draftedPage.do")
+	public String openDraftedPage(){
+		return "approval/draftedPage";
+	}
 
 	@RequestMapping("jobPropsalPage.do")
 	public String openJobPropsalPage(HttpSession session, Model model) {
