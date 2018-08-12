@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.approval.model.service.ApprovalService;
 import com.jdl.css.approval.model.vo.ApprovalVo;
@@ -40,6 +41,21 @@ public class ApprovalController {
 	@RequestMapping("approvalPage.do")
 	public String openApprovalPage() {
 		return "approval/approvalPage";
+	}
+	
+	@RequestMapping("draftedPage.do")
+	public ModelAndView openDraftedPage(HttpSession session,ModelAndView mv){
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		List<ApprovalVo> allList = aService.selectDraftApprovalAllList(user.geteKey());
+		List<ApprovalVo> ingList = aService.selectDraftApprovalIngList(user.geteKey());
+		List<ApprovalVo> complList = aService.selectDraftApprovalComplList(user.geteKey());
+		List<ApprovalVo> compaList = aService.selectDraftApprovalCompaList(user.geteKey());
+		mv.addObject("allList", allList);
+		mv.addObject("ingList", ingList);
+		mv.addObject("complList", complList);
+		mv.addObject("compaList", compaList);
+		mv.setViewName("approval/draftedPage");
+		return mv;
 	}
 
 	@RequestMapping("jobPropsalPage.do")
@@ -204,7 +220,7 @@ public class ApprovalController {
 		
 			int attachResult = attService.insertAttachments(attachList);
 			//System.out.println(attachResult);
-		return null;
+		return "approval/approvalPage";
 
 	}
 }

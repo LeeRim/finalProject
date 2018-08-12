@@ -17,10 +17,6 @@ public class ApprovalDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
-	public List<ApprovalVo> selectDraftApprovalList(EmployeeVo e) {
-		return sqlSession.selectList("ApprovalMapper.selectDraftApprovalList", 1);
-	}
-
 	public int insertApproval(ApprovalVo app) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("ApprovalMapper.insertApproval", app);
@@ -36,4 +32,22 @@ public class ApprovalDao {
 		return sqlSession.insert("ApprovalMapper.insertJobpropsal", jobp);
 	}
 	
+	public List<ApprovalVo> selectDraftApprovalAllList(int eKey) {
+		return sqlSession.selectList("ApprovalMapper.selectDraftApprovalAllList", eKey);
+	}
+
+	public List<ApprovalVo> selectDraftApprovalIngList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectDraftApprovalIngList", eKey);
+	}
+
+	public List<ApprovalVo> selectDraftApprovalComplList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectDraftApprovalComplList", eKey);
+	}
+	
+	public List<ApprovalVo> selectDraftApprovalCompaList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectDraftApprovalCompaList", eKey);
+	}
 }

@@ -17,10 +17,6 @@ public class ApprovalService {
 	@Autowired
 	ApprovalDao dao;
 
-	public List<ApprovalVo> selectDraftApprovalList(EmployeeVo e) {
-		return dao.selectDraftApprovalList(e);
-	}
-
 	public int insertApproval(ApprovalVo app) {
 		// TODO Auto-generated method stub
 		return dao.insertApproval(app);
@@ -41,6 +37,23 @@ public class ApprovalService {
 		// TODO Auto-generated method stub
 		return dao.insertJobPropsal(jobp);
 	}
-
 	
+	public List<ApprovalVo> selectDraftApprovalAllList(int eKey) {
+		return dao.selectDraftApprovalAllList(eKey);
+	}
+
+	public List<ApprovalVo> selectDraftApprovalIngList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectDraftApprovalIngList(eKey);
+	}
+
+	public List<ApprovalVo> selectDraftApprovalComplList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectDraftApprovalComplList(eKey);
+	}
+
+	public List<ApprovalVo> selectDraftApprovalCompaList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectDraftApprovalCompaList(eKey);
+	}
 }

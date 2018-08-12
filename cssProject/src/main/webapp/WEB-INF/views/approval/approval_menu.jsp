@@ -59,7 +59,7 @@
 				<li><a href="#"><i class="fa fa-link"></i> <span>결재대기</span></a></li>
 				<li><a href="#"><i class="fa fa-link"></i> <span>결재예정</span></a></li>
 				<li class="header">결재문서함</li>
-				<li><a href="#"><i class="fa fa-link"></i> <span>기안문서함</span></a></li>
+				<li><a href="draftedPage.do"><i class="fa fa-link"></i> <span>기안문서함</span></a></li>
 				<li><a href="#"><i class="fa fa-link"></i> <span>결재문서함</span></a></li>
 			</ul>
 			<!-- /.sidebar-menu -->
