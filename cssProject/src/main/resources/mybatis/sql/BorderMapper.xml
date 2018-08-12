@@ -25,7 +25,7 @@
 		<result property="cDate" column="CO_DATE"/>
 	</resultMap>
 	
-	<resultMap type="Attach" id="AttachMap">
+	<resultMap type="AttachVo" id="AttachMap">
 		<id property="attachKey" column="ATTA_KEY"/>
 		<result property="attachLocation" column="ATTA_LOCATION"/>
 		<result property="attachFileName" column="ATTA_FILENAME"/>
@@ -138,7 +138,7 @@
 		WHERE ROWNUM BETWEEN 1 AND 5
 	</select>
 	
-	<select id="BorderGalleryForm" parameterType="Attach" resultMap="AttachMap">
+	<select id="BorderGalleryForm" parameterType="AttachVo" resultMap="AttachMap">
 		SELECT ATTA_KEY, ATTA_LOCATION, ATTA_FILENAME, ATTA_FILEPATH FROM ATTACHMENT A
 		JOIN BOARD B ON (A.ATTA_LOCATION = B.B_KEY)
 	</select>
