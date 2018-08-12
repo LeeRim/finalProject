@@ -57,6 +57,39 @@ public class ApprovalController {
 		mv.setViewName("approval/draftedPage");
 		return mv;
 	}
+	
+	@RequestMapping("receivedPage.do")
+	public ModelAndView openReceivedPage(HttpSession session,ModelAndView mv){
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		List<ApprovalVo> allList = aService.selectReceivedApprovalAllList(user.geteKey());
+		List<ApprovalVo> ingList = aService.selectReceivedApprovalIngList(user.geteKey());
+		List<ApprovalVo> complList = aService.selectReceivedApprovalComplList(user.geteKey());
+		List<ApprovalVo> compaList = aService.selectReceivedApprovalCompaList(user.geteKey());
+		mv.addObject("allList", allList);
+		mv.addObject("ingList", ingList);
+		mv.addObject("complList", complList);
+		mv.addObject("compaList", compaList);
+		mv.setViewName("approval/receivedPage");
+		return mv;
+	}
+	
+	@RequestMapping("waitingPage.do")
+	public ModelAndView openWaitingPage(HttpSession session,ModelAndView mv){
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		List<ApprovalVo> waitingList = aService.selectWaitingApprovalList(user.geteKey());
+		mv.addObject("waitingList", waitingList);
+		mv.setViewName("approval/waitingPage");
+		return mv;
+	}
+	
+	@RequestMapping("expectedPage.do")
+	public ModelAndView openExpectedPage(HttpSession session,ModelAndView mv){
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		List<ApprovalVo> expectedList = aService.selectExpectedApprovalList(user.geteKey());
+		mv.addObject("expectedList", expectedList);
+		mv.setViewName("approval/expectedPage");
+		return mv;
+	}
 
 	@RequestMapping("jobPropsalPage.do")
 	public String openJobPropsalPage(HttpSession session, Model model) {

@@ -50,4 +50,33 @@ public class ApprovalDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("ApprovalMapper.selectDraftApprovalCompaList", eKey);
 	}
+	
+	public List<ApprovalVo> selectReceivedApprovalAllList(int eKey) {
+		return sqlSession.selectList("ApprovalMapper.selectReceivedApprovalAllList", eKey);
+	}
+
+	public List<ApprovalVo> selectReceivedApprovalIngList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectReceivedApprovalIngList", eKey);
+	}
+
+	public List<ApprovalVo> selectReceivedApprovalComplList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectReceivedApprovalComplList", eKey);
+	}
+	
+	public List<ApprovalVo> selectReceivedApprovalCompaList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectReceivedApprovalCompaList", eKey);
+	}
+
+	public List<ApprovalVo> selectWaitingApprovalList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectWaitingApprovalList", eKey);
+	}
+
+	public List<ApprovalVo> selectExpectedApprovalList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectExpectedApprovalList", eKey);
+	}
 }

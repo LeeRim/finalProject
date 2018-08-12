@@ -56,4 +56,33 @@ public class ApprovalService {
 		// TODO Auto-generated method stub
 		return dao.selectDraftApprovalCompaList(eKey);
 	}
+	
+	public List<ApprovalVo> selectReceivedApprovalAllList(int eKey) {
+		return dao.selectReceivedApprovalAllList(eKey);
+	}
+
+	public List<ApprovalVo> selectReceivedApprovalIngList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectReceivedApprovalIngList(eKey);
+	}
+
+	public List<ApprovalVo> selectReceivedApprovalComplList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectReceivedApprovalComplList(eKey);
+	}
+
+	public List<ApprovalVo> selectReceivedApprovalCompaList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectReceivedApprovalCompaList(eKey);
+	}
+
+	public List<ApprovalVo> selectWaitingApprovalList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectWaitingApprovalList(eKey);
+	}
+
+	public List<ApprovalVo> selectExpectedApprovalList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectExpectedApprovalList(eKey);
+	}
 }
