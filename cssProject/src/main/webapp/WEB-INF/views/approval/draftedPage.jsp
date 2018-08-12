@@ -13,8 +13,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>AdminLTE 2 | Starter</title>
 <!-- DataTables -->
-<!-- <link rel="stylesheet"
-	href="resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"> -->
+<link rel="stylesheet"
+	href="resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <!-- DataTables -->
 <script
 	src="resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -29,8 +29,14 @@ AdminLTE for demo purposes
 <script src="resources/dist/js/demo.js"></script> -->
 <!-- page script -->
 <script>
+function hideThead(){
+	$('.thead').hide();
+}
+
 	$(function() {
-		$('#example2').DataTable({
+		$('.thead').hide();
+		
+		$('#allTable').DataTable({
 			'paging' : true,
 			'lengthChange' : false,
 			'searching' : false,
@@ -38,9 +44,29 @@ AdminLTE for demo purposes
 			'info' : true,
 			'autoWidth' : false
 		});
-
-		$('#thead').hide();
-	})
+		$('#ingTable').DataTable({
+			'paging' : true,
+			'lengthChange' : false,
+			'searching' : false,
+			'ordering' : true,
+			'info' : true,
+			'autoWidth' : false
+		});	$('#complTable').DataTable({
+			'paging' : true,
+			'lengthChange' : false,
+			'searching' : false,
+			'ordering' : true,
+			'info' : true,
+			'autoWidth' : false
+		});	$('#compaTable').DataTable({
+			'paging' : true,
+			'lengthChange' : false,
+			'searching' : false,
+			'ordering' : true,
+			'info' : true,
+			'autoWidth' : false
+		});
+	});
 </script>
 </head>
 <!--
@@ -92,22 +118,22 @@ desired effect
 				<div class="row">
 					<div class="col-xs-12">
 						<!-- Nav tabs -->
-						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#home"
-								aria-controls="home" role="tab" data-toggle="tab">전체</a></li>
-							<li role="presentation"><a href="#profile"
-								aria-controls="profile" role="tab" data-toggle="tab">진행</a></li>
-							<li role="presentation"><a href="#messages"
-								aria-controls="messages" role="tab" data-toggle="tab">완료</a></li>
-							<li role="presentation"><a href="#settings"
-								aria-controls="settings" role="tab" data-toggle="tab">반려</a></li>
+						<ul class="nav nav-tabs" role="tablist"  onclick="hideThead();">
+							<li role="presentation" class="active"><a href="#all"
+								aria-controls="all" role="tab" data-toggle="tab">전체</a></li>
+							<li role="presentation"><a href="#ing"
+								aria-controls="ing" role="tab" data-toggle="tab">진행</a></li>
+							<li role="presentation"><a href="#complete"
+								aria-controls="complete" role="tab" data-toggle="tab">완료</a></li>
+							<li role="presentation"><a href="#companion"
+								aria-controls="companion" role="tab" data-toggle="tab">반려</a></li>
 						</ul>
 
 					</div>
 				</div>
 
 				<div class="tab-content">
-					<div role="tabpanel" class="tab-pane active" id="home">
+					<div role="tabpanel" class="tab-pane active" id="all">
 
 						<div class="box">
 							<div class="box-header with-border">
@@ -128,324 +154,231 @@ desired effect
 							</div>
 							<!-- /.box-header -->
 							<div class="box-body">
-										<table id="example2" class="table table-condensed">
-												<thead id="thead">
-													<tr>
-														<th>Rendering engine</th>
-														<th>Browser</th>
-														<th>Platform(s)</th>
-														<th>Engine version</th>
-														<th>CSS grade</th>
-													</tr>
-												</thead>
-												<!-- <tbody> -->
-												<tr>
-													<td>183</td>
-													<td>John Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-success">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>219</td>
-													<td>Alexander Pierce</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-warning">Pending</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>657</td>
-													<td>Bob Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-primary">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>175</td>
-													<td>Mike Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-danger">Denied</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>183</td>
-													<td>John Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-success">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>219</td>
-													<td>Alexander Pierce</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-warning">Pending</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>657</td>
-													<td>Bob Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-primary">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>175</td>
-													<td>Mike Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-danger">Denied</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>183</td>
-													<td>John Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-success">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>219</td>
-													<td>Alexander Pierce</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-warning">Pending</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>657</td>
-													<td>Bob Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-primary">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>175</td>
-													<td>Mike Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-danger">Denied</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>183</td>
-													<td>John Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-success">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>219</td>
-													<td>Alexander Pierce</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-warning">Pending</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>657</td>
-													<td>Bob Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-primary">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>175</td>
-													<td>Mike Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-danger">Denied</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>183</td>
-													<td>John Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-success">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>219</td>
-													<td>Alexander Pierce</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-warning">Pending</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>657</td>
-													<td>Bob Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-primary">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>175</td>
-													<td>Mike Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-danger">Denied</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>183</td>
-													<td>John Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-success">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>219</td>
-													<td>Alexander Pierce</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-warning">Pending</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>657</td>
-													<td>Bob Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-primary">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>175</td>
-													<td>Mike Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-danger">Denied</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>183</td>
-													<td>John Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-success">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>219</td>
-													<td>Alexander Pierce</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-warning">Pending</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>657</td>
-													<td>Bob Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-primary">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>175</td>
-													<td>Mike Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-danger">Denied</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>183</td>
-													<td>John Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-success">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>219</td>
-													<td>Alexander Pierce</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-warning">Pending</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>657</td>
-													<td>Bob Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-primary">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>175</td>
-													<td>Mike Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-danger">Denied</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>183</td>
-													<td>John Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-success">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>219</td>
-													<td>Alexander Pierce</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-warning">Pending</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>657</td>
-													<td>Bob Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-primary">Approved</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<tr>
-													<td>175</td>
-													<td>Mike Doe</td>
-													<td>11-7-2014</td>
-													<td><span class="label label-danger">Denied</span></td>
-													<td>Bacon ipsum dolor sit amet salami venison chicken
-														flank fatback doner.</td>
-												</tr>
-												<!-- </tbody> -->
-												<!-- <tfoot>
-											<tr>
-												<th>Rendering engine</th>
-												<th>Browser</th>
-												<th>Platform(s)</th>
-												<th>Engine version</th>
-												<th>CSS grade</th>
-											</tr>
-										</tfoot> -->
-											</table>
-									</div>
-									<!-- /.box-body -->
-								</div>
-								<!-- /.box -->
-
-
+								<table id="allTable" class="table table-condensed">
+									<thead class="thead">
+										<tr>
+											<th>0</th>
+											<th>기안일</th>
+											<th>결재양식</th>
+											<th>제목</th>
+											<th>문서번호</th>
+											<th>상태</th>
+										</tr>
+									</thead>
+										<tr>
+											<th><p style="visibility: hidden; height:15px;">0</p></th>
+											<th>기안일</th>
+											<th>결재양식</th>
+											<th>제목</th>
+											<th>문서번호</th>
+											<th>상태</th>
+										</tr>
+										
+										<c:forEach var="approval" items="${allList }">
+										<tr>
+											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
+											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.doctype }"></c:out></td>
+											<td><c:out value="${approval.aTitle }"></c:out></td>
+											<td><c:out value="${approval.aKey }"></c:out></td>
+											<c:if test="${approval.aCondition==0 }">
+												<td><span class="label label-warning">진행</span></td>
+											</c:if>
+											<c:if test="${approval.aCondition==1 }">
+												<td><span class="label label-primary">완료</span></td>
+											</c:if>
+											<c:if test="${approval.aCondition==2 }">
+												<td><span class="label label-danger">반려</span></td>
+											</c:if>
+										</tr>
+										</c:forEach>
+								</table>
 							</div>
+							<!-- /.box-body -->
 						</div>
+						<!-- /.box -->
+					</div>
+					<!-- #all -->
+					
+					<div role="tabpanel" class="tab-pane" id="ing">
+
+						<div class="box">
+							<div class="box-header with-border">
+								<h3 class="box-title">진행중인 결재문서</h3>
+
+								<div class="box-tools">
+									<div class="input-group input-group-sm" style="width: 150px;">
+										<input type="text" name="table_search"
+											class="form-control pull-right" placeholder="Search">
+
+										<div class="input-group-btn">
+											<button type="submit" class="btn btn-default">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table id="ingTable" class="table table-condensed">
+									<thead class="thead">
+										<tr>
+											<th>0</th>
+											<th>기안일</th>
+											<th>결재양식</th>
+											<th>제목</th>
+											<th>문서번호</th>
+											<th>상태</th>
+										</tr>
+									</thead>
+										<tr>
+											<th><p style="visibility: hidden; height:15px;">0</p></th>
+											<th>기안일</th>
+											<th>결재양식</th>
+											<th>제목</th>
+											<th>문서번호</th>
+											<th>상태</th>
+										</tr>
+										
+										<c:forEach var="approval" items="${ingList }">
+										<tr>
+											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
+											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.doctype }"></c:out></td>
+											<td><c:out value="${approval.aTitle }"></c:out></td>
+											<td><c:out value="${approval.aKey }"></c:out></td>
+											<td><span class="label label-warning">진행</span></td>
+										</tr>
+										</c:forEach>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- #ing -->
+					
+					<div role="tabpanel" class="tab-pane" id="complete">
+
+						<div class="box">
+							<div class="box-header with-border">
+								<h3 class="box-title">완료된 결재문서</h3>
+
+								<div class="box-tools">
+									<div class="input-group input-group-sm" style="width: 150px;">
+										<input type="text" name="table_search"
+											class="form-control pull-right" placeholder="Search">
+
+										<div class="input-group-btn">
+											<button type="submit" class="btn btn-default">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table id="complTable" class="table table-condensed">
+									<thead class="thead">
+										<tr>
+											<th>0</th>
+											<th>기안일</th>
+											<th>결재양식</th>
+											<th>제목</th>
+											<th>문서번호</th>
+											<th>상태</th>
+										</tr>
+									</thead>
+										<tr>
+											<th><p style="visibility: hidden; height:15px;">0</p></th>
+											<th>기안일</th>
+											<th>결재양식</th>
+											<th>제목</th>
+											<th>문서번호</th>
+											<th>상태</th>
+										</tr>
+										
+										<c:forEach var="approval" items="${complList }">
+										<tr>
+											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
+											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.doctype }"></c:out></td>
+											<td><c:out value="${approval.aTitle }"></c:out></td>
+											<td><c:out value="${approval.aKey }"></c:out></td>
+											<td><span class="label label-primary">완료</span></td>
+										</tr>
+										</c:forEach>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- #complete -->
+					
+					<div role="tabpanel" class="tab-pane" id="companion">
+
+						<div class="box">
+							<div class="box-header with-border">
+								<h3 class="box-title">반려된 결재문서</h3>
+
+								<div class="box-tools">
+									<div class="input-group input-group-sm" style="width: 150px;">
+										<input type="text" name="table_search"
+											class="form-control pull-right" placeholder="Search">
+
+										<div class="input-group-btn">
+											<button type="submit" class="btn btn-default">
+												<i class="fa fa-search"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table id="compaTable" class="table table-condensed">
+									<thead class="thead">
+										<tr>
+											<th>0</th>
+											<th>기안일</th>
+											<th>결재양식</th>
+											<th>제목</th>
+											<th>문서번호</th>
+											<th>상태</th>
+										</tr>
+									</thead>
+										<tr>
+											<th><p style="visibility: hidden; height:15px;">0</p></th>
+											<th>기안일</th>
+											<th>결재양식</th>
+											<th>제목</th>
+											<th>문서번호</th>
+											<th>상태</th>
+										</tr>
+										
+										<c:forEach var="approval" items="${compaList }">
+										<tr>
+											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
+											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.doctype }"></c:out></td>
+											<td><c:out value="${approval.aTitle }"></c:out></td>
+											<td><c:out value="${approval.aKey }"></c:out></td>
+											<td><span class="label label-danger">반려</span></td>
+										</tr>
+										</c:forEach>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</div>
+					<!-- #companion -->
+					
+				</div>
+				<!-- tab-content -->
 			</section>
 			<!-- /.content -->
 		</div>
