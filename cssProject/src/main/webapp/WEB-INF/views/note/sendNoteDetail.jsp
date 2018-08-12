@@ -12,7 +12,15 @@
   
   <script>
   	function sendNoteList(){
-  		location.href="sendNoteList.do";
+  		if("${sendDetail.snDeleteYn}"=="N"){
+  			location.href="sendNoteList.do";
+  		}else{
+  			location.href="sendNoteTrashList.do";
+  		}
+  		
+  	}
+  	function sendNoteDelete(){
+  		location.href="sendNoteDelete.do?snKey=${sendDetail.snKey}&snDeleteYn=${sendDetail.snDeleteYn}";
   	}
   </script>
   
@@ -94,7 +102,10 @@
             <!-- /.box-footer -->
             <div class="box-footer">
               <div class="pull-right">
-              <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> 삭제</button>
+              <c:if test="${sendDetail.snDeleteYn== 'Y'}">
+              	<button type="button" class="btn btn-default" onclick=""><i class="fa fa-trash-o"></i>복구</button>
+              </c:if>
+              <button type="button" class="btn btn-default" onclick="sendNoteDelete();"><i class="fa fa-trash-o"></i> 삭제</button>
               <button type="button" class="btn btn-default" onclick="sendNoteList();"><i class="fa fa-print"></i> 리스트</button>
               </div>
             </div>

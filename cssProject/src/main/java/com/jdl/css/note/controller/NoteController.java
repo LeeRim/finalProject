@@ -110,7 +110,7 @@ public class NoteController {
 		
 		int resultAttach = service.insertAttach(note);
 		System.out.println("attach = " +resultAttach );
-		mv.setViewName("note/sendNoteDetail");
+		mv.setViewName("redirect:sendNoteList.do");
 		
 		return mv;
 	};
@@ -126,6 +126,8 @@ public class NoteController {
 //		System.out.println(sendNoteList);
 		
 		mv.addObject("sendNoteList", sendNoteList);
+		
+		
 		mv.setViewName("note/sendNoteList");
 		return mv;
 	}
@@ -135,6 +137,7 @@ public class NoteController {
 //		System.out.println(note);
 		NoteVo noteDetail = service.selectSendNoteDetail(note);
 //		System.out.println(noteDetail);
+//		System.out.println("삭제 유무 = " +noteDetail.getSnDeleteYn());
 		List<ReceivenoteVo> receiveList = service.selectReceiveList(note);
 //		System.out.println(receiveList);
 		mv.addObject("receiveList", receiveList);
@@ -142,4 +145,31 @@ public class NoteController {
 		mv.setViewName("note/sendNoteDetail");
 		return mv;
 	}
+	
+	@RequestMapping("sendNoteDelete.do")
+	public ModelAndView sendNoteDelete(ModelAndView mv, NoteVo note){
+		int resultUpdate = 0;
+		System.out.println(note);
+		if(note.getSnDeleteYn().equals("N")){
+			resultUpdate = service.updateDelYn(note);
+		}
+		System.out.println(resultUpdate);
+		
+		mv.setViewName("redirect:sendNoteList.do");
+		return mv;
+	}
+	
+	@RequestMapping("sendNoteTrashList.do")
+	public ModelAndView sendNoteTrashList(ModelAndView mv, HttpSession session){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		//사원키
+		int ekey = user.geteKey();
+		
+		List<NoteVo> sendNoteList = service.selectSendNoteList(ekey);
+		
+		mv.addObject("sendNoteList", sendNoteList);
+		mv.setViewName("note/sendNoteTrashList");
+		return mv;
+	}
+	
 }

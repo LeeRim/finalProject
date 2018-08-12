@@ -104,5 +104,11 @@
 			JOIN DIVISION D ON(E.E_JOBCODE_FK = D.DIV_KEY)
 			WHERE RN_NOTE_FK = #{snKey}
 	</select>
+	
+	<update id="updateDeleteYn" parameterType="NoteVo">
+		UPDATE SENDNOTE
+		SET SN_DELETE_YN = 'Y'
+		WHERE SN_KEY = #{snKey}
+	</update>
 
 </mapper>

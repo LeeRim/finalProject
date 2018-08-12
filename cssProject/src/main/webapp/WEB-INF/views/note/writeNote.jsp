@@ -45,6 +45,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			num.push(no);
   		}else{
   			names.splice(names.indexOf(name),1);
+  			num.splice(num.indexOf(no),1);
   		}
   		console.log(names);
   		console.log(num);

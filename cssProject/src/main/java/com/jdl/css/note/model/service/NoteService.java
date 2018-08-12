@@ -58,6 +58,10 @@ public class NoteService {
 		return dao.selectReceiveList(note);
 	}
 
+	public int updateDelYn(NoteVo note) {
+		return dao.updateDelYn(note);
+	}
+
 
 
 }
