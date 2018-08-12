@@ -31,7 +31,7 @@
                 </ul>
               </div>
                 <div class="input-group-btn">
-                  <button id="addEvent" type="button" class="btn btn-primary btn-flat">Add</button>
+                  <button id="addEvent" type="button" class="btn btn-primary btn-flat">작업중</button>
                 </div>
               <!-- /input-group -->
             </div>
