@@ -2,7 +2,7 @@ package com.jdl.css.calender.model.vo;
 
 import org.springframework.stereotype.Component;
 import java.io.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Component
 public class CalenderVo {

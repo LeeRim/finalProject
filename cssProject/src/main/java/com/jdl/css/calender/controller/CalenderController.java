@@ -32,12 +32,15 @@ public class CalenderController {
 		mav.setViewName("calender");
 		return mav;
 	}
-	
-	@RequestMapping("createEvent.do")
+
+
+	@RequestMapping("insertEvent.do")
 	public ModelAndView createEvent(CalenderVo calender,ModelAndView mav){
-		System.out.println(calender);
+		
+		System.out.println("insertEvent : "+calender);
 		int calenderResult = service.createEvent(calender);
 		System.out.println(calenderResult);
+		mav.setViewName("redirect:calender.do");
 		return mav;
 	}
 	
