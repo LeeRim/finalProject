@@ -22,7 +22,67 @@ Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE
 Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (3,'사번',1,'2','user02','user02','테스터2',8,6,null,null,null,null,null,null,'N',null);
 Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (4,'사번',1,'2','user03','user03','테스터3',8,6,null,null,null,null,null,null,'N',null);
 
-
+-- BOARD INSERT
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (121,1,'123214541255',1,0,to_date('18/08/03','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (126,1,'제목입니다',1,10,to_date('18/08/03','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (124,1,'제목입니다',1,0,to_date('18/08/03','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (125,1,'제목입니다',1,0,to_date('18/08/03','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (181,1,'글제목',1,2,to_date('18/08/10','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (128,1,'dsdddff',1,3,to_date('18/08/03','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (129,1,'제목입니다',1,1,to_date('18/08/03','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (130,1,'제목입니다',1,0,to_date('18/08/03','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (131,1,'ㄹㅇㅇㄹㄹㄹㄹㄹ',1,1,to_date('18/08/03','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (182,1,'글제목',1,4,to_date('18/08/10','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (183,1,'글제목',1,5,to_date('18/08/10','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (184,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (141,1,'느려터져죽겠다망할',1,3,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (142,1,'느려터져죽겠다망할',1,7,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (143,1,'느려터져죽겠다망할',1,0,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (144,1,'느려터져죽겠다망할',1,0,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (145,1,'느려터져죽겠다망할',1,3,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (146,1,'느려터져죽겠다망할',1,0,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (147,1,'느려터져죽겠다망할',1,3,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (148,1,'느려터져죽겠다망할',1,2,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (1,1,'느려터져죽겠다망할',1,0,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (2,1,'느려터져죽겠다망할',1,0,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (3,1,'느려터져죽겠다망할',1,0,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (5,1,'느려터져죽겠다망할',1,0,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (4,1,'느려터져죽겠다망할',1,0,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (6,1,'느려터져죽겠다망할',1,0,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (77,1,'느려터져죽겠다망할',1,2,to_date('18/08/06','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (161,1,'수정한 ㄴ마엄나런ㅁㄹ',1,104,to_date('18/08/07','RR/MM/DD'),'1');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (185,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (186,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (187,1,'글제목',1,4,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (188,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (189,1,'글제목',1,4,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (190,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (191,1,'글제목',1,2,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (192,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (193,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (194,1,'글제목',1,5,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (195,1,'글제목',1,2,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (196,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (197,1,'글제목',1,2,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (198,1,'글제목',1,2,to_date('18/08/10','RR/MM/DD'),'3');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (199,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (200,1,'글제목',1,3,to_date('18/08/10','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (201,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (202,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (203,1,'글제목',1,8,to_date('18/08/10','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (204,1,'글제목',1,1,to_date('18/08/10','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (228,1,'제목입니다',1,0,to_date('18/08/13','RR/MM/DD'),'4');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (229,1,'ㄴㅁㅇㄴㅁㅁㅇㄴ',1,0,to_date('18/08/13','RR/MM/DD'),'4');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (230,1,null,1,0,to_date('18/08/13','RR/MM/DD'),'4');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (231,1,null,1,0,to_date('18/08/13','RR/MM/DD'),'4');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (232,1,'수정한 제목',1,2,to_date('18/08/13','RR/MM/DD'),'4');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (233,1,'ㅁㄴㅇㅇㄴㅁ',1,0,to_date('18/08/13','RR/MM/DD'),'4');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (234,1,'ㅇㄹ',1,1,to_date('18/08/13','RR/MM/DD'),'4');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (235,1,'ㄹ',1,2,to_date('18/08/13','RR/MM/DD'),'4');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (226,1,'마지막테스트',1,0,to_date('18/08/13','RR/MM/DD'),'4');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (227,1,'수정한 제목',1,0,to_date('18/08/13','RR/MM/DD'),'4');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (236,1,'수정한 제목',1,0,to_date('18/08/13','RR/MM/DD'),'2');
+Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (237,1,'sadasdas',1,0,to_date('18/08/13','RR/MM/DD'),'4');
 
 --COORDINATE INSERT
 --2018년 1월 31일기준 전국 도시별 인구순위표를 기준으로 작성
