@@ -22,4 +22,24 @@ public class AttachmentService {
 		return result;
 	}
 
+	public List<AttachmentVo> selectAttach() {
+		return dao.selectAttachment();
+	}
+
+	public AttachmentVo selectAttachDetail(AttachmentVo av) {
+		return dao.selectAttachmentDetail(av);
+	}
+
+	public int deleteGallery(AttachmentVo av) {
+		return dao.deleteAttachGallery(av);
+	}
+
+	public int updateGallery(AttachmentVo av) {
+		return dao.updateAttachmentGallery(av);
+	}
+
+	public AttachmentVo selectAttachone(int attaKey) {
+		return dao.selectAttachmentone(attaKey);
+	}
+
 }

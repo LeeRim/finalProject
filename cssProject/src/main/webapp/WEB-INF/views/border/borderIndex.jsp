@@ -19,25 +19,32 @@
 	}
 	.no{
 		width:200px;
-		
 	}
-	.title{
-		width:600px;
+	.bindex{
+		display:inline-block;
+		width:45%;
+		margin-left:60px;
+	}
+	.date,.writer{
+		width:150px;
+	}
+	th{
+		background:gray;
+		color:white;
 	}
 </style>
 <script>
-  $(function(){
-	$(".box-body td").mouseenter(function(){
-		$(this).parent().css("background","darkgray");
-		$(this).parent().css("cursor","pointer");
-	}).mouseout(function(){
-		$(this).parent().css("background","white");
-	}).click(function(){
-		var boardNo = $(this).parent("tr").data("key");
-		console.log(boardNo);
-		//location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1"; 		
-	});
-});  
+$(function(){
+	   $(".box-body td").mouseenter(function(){
+	      $(this).parent().css("background","darkgray");
+	      $(this).parent().css("cursor","pointer");
+	   }).mouseout(function(){
+	      $(this).parent().css("background","white");
+	   }).click(function(){
+	      var boardNo = $(this).parent("tr").data("key");
+	      location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1";       
+	   });
+	});  
 	
 </script>
 </head>
@@ -55,7 +62,8 @@
 					<li class="active">Data tables</li>
 				</ol>
 			</section>
-			<div class="row" style="width: 95%; margin-right: auto; margin-left: auto; margin-top: 20px;">
+			<div class="row" style="width:100%; margin-right:auto; margin-left:auto; margin-top:50px;">
+				<div class="bindex">
 				<div class="box-body table-responsive no-padding">
 					<c:choose>
 						<c:when test="${bo1 eq 1}">
@@ -64,76 +72,89 @@
 					</c:choose>
 					<table class="table table-hover">
 						<tr>
-							<th class="no">번호</th>
 							<th class="title">글제목</th>
-							<th>조회수</th>
-							<th>작성자</th>
-							<th>작성일</th>
+							<th class="writer">작성자</th>
+							<th class="date">작성일</th>
 						</tr>
 						<c:forEach items="${board1}" var="board1" varStatus="status">
 							<tr data-key=${board1.boardKey }>
-								<td class="no"><c:out value="${status.index }" /></a></td>
 								<td class="title"><c:out value="${board1.bTitle }" /></td>
-								<td><span class="label label-danger"><c:out value="${board1.bCount }" /></span></td>
-								<td><c:out value="${board1.eName }" /></td>
-								<td><c:out value="${board1.bDate }" /></td>
+								<td class="writer"><c:out value="${board1.eName }" /></td>
+								<td class="date"><c:out value="${board1.bDate }" /></td>
 							</tr>
 						</c:forEach>
 					</table>
 				</div>
-				<br>
+				<br><br>
+				<div class="box-body table-responsive no-padding">
 				<c:choose>
 					<c:when test="${bo2 eq 2}">
 						<span class="bordName">자유게시판</span>
 					</c:when>
 				</c:choose>
 
-				<div class="box-body table-responsive no-padding">
 					<table class="table table-hover">
 						<tr>
-							<th class="no">번호</th>
 							<th class="title">글제목</th>
-							<th>조회수</th>
-							<th>작성자</th>
-							<th>작성일</th>
+							<th class="writer">작성자</th>
+							<th class="date">작성일</th>
 						</tr>
 						<c:forEach items="${board2}" var="board2" varStatus="status">
 							<tr data-key="${board2.boardKey }">
-								<td class="no"><c:out value="${status.index }" /></td>
 								<td class="title"><c:out value="${board2.bTitle }" /></td>
-								<td><span class="label label-danger"><c:out value="${board2.bCount }" /></span></td>
-								<td><c:out value="${board2.eName }" /></td>
-								<td><c:out value="${board2.bDate }" /></td>
+								<td class="writer"><c:out value="${board2.eName }" /></td>
+								<td class="date"><c:out value="${board2.bDate }" /></td>
 							</tr>
 						</c:forEach>
 					</table>
 				</div>
-				<br>
+			</div>
+			<div class="bindex">
+				<div class="box-body table-responsive no-padding">
 				<c:choose>
 					<c:when test="${bo3 eq 3}">
-						<span class="bordName">경조사게시판</span>
+						<span class="bordName">경조사 게시판</span>
 					</c:when>
 				</c:choose>
 
-				<div class="box-body table-responsive no-padding">
 					<table class="table table-hover">
 						<tr>
-							<th class="no">번호</th>
 							<th class="title">글제목</th>
-							<th>조회수</th>
-							<th>작성자</th>
-							<th>작성일</th>
+							<th class="writer">작성자</th>
+							<th class="date">작성일</th>
 						</tr>
 						<c:forEach items="${board3}" var="board3" varStatus="status">
-							<tr>
-								<td class="no"><c:out value="${status.index }" /></td>
+							 <tr data-key="${board3.boardKey }">
 								<td class="title"><c:out value="${board3.bTitle }" /></td>
-								<td><span class="label label-danger"><c:out value="${board3.bCount }" /></span></td>
-								<td><c:out value="${board3.eName }" /></td>
-								<td><c:out value="${board3.bDate }" /></td>
+								<td class="writer"><c:out value="${board3.eName }" /></td>
+								<td class="date"><c:out value="${board3.bDate }" /></td>
 							</tr>
 						</c:forEach>
 					</table>
+				</div>
+				<br><br>
+				<div class="box-body table-responsive no-padding">
+				<c:choose>
+					<c:when test="${bo4 eq 4}">
+						<span class="bordName">앨범 게시판</span>
+					</c:when>
+				</c:choose>
+				
+					<table class="table table-hover">
+						<tr>
+							<th class="title">글제목</th>
+							<th class="writer">작성자</th>
+							<th class="date">작성일</th>
+						</tr>
+						<c:forEach items="${board4}" var="board4" varStatus="status">
+							 <tr data-key="${board4.boardKey }">
+								<td class="title"><c:out value="${board4.bTitle }" /></td>
+								<td class="writer"><c:out value="${board4.eName }" /></td>
+								<td class="date"><c:out value="${board4.bDate }" /></td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
 				</div>
 			</div>
 		</div>

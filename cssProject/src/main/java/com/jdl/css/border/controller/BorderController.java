@@ -20,10 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.border.model.service.BorderService;
-import com.jdl.css.border.model.vo.AttachVo;
 import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
 import com.jdl.css.border.model.vo.PageInfo;
+import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.vo.AttachmentVo;
 
 @Controller
@@ -31,6 +31,9 @@ public class BorderController {
 
 	@Autowired
 	BorderService borderservice;
+	
+	@Autowired
+	AttachmentService attachservice;
 	
 	@RequestMapping("borderList.do")
 	public ModelAndView boaderList(@RequestParam(value="currentPage", required=false)String currentPagestr, HttpServletRequest request, BorderVo board, ModelAndView mv){
@@ -159,14 +162,18 @@ public class BorderController {
 		List<BorderVo> board1 = borderservice.selectBoardOne(); //공지사항
 		List<BorderVo> board2 = borderservice.selectBoardTwo(); //자유
 		List<BorderVo> board3 = borderservice.selectBoardThr(); //경조사
+		List<BorderVo> board4 = borderservice.selectBoardFor(); //경조사
+		
 		
 		mv.addObject("bo1", 1);
 		mv.addObject("bo2", 2);
 		mv.addObject("bo3", 3);
+		mv.addObject("bo4", 4);
 		
 		mv.addObject("board1", board1);
 		mv.addObject("board2", board2);
 		mv.addObject("board3", board3);
+		mv.addObject("board4", board4);
 		
 		mv.setViewName("border/borderIndex");
 		return mv;
@@ -188,7 +195,6 @@ public class BorderController {
 	public ModelAndView deleteBorder(BorderVo board, ModelAndView mv){
 		
 		int result = borderservice.deleteBoard(board);
-		System.out.println("delete : " + result);
 		if(0 < result){
 			mv.addObject("board", board);
 			mv.setViewName("redirect:borderList.do?bCateGory="+ board.getbCateGory());
@@ -201,7 +207,6 @@ public class BorderController {
 		
 		System.out.println("updateComment : " + bc);
 		int result = borderservice.updateComment(bc);
-		System.out.println("updateComment result : " + result);
 		if(0 < result){
 			mv.setViewName("redirect:selectBoard.do?boardKey="+ boardKey + "&currentPage=1");
 		}
@@ -212,22 +217,31 @@ public class BorderController {
 	public ModelAndView deleteComment(String boardKey, BoardCommentVo bc, ModelAndView mv){
 		
 		int result = borderservice.deleteComment(bc);
-		System.out.println("deleteComment :" +  bc);
 		if(0 < result){
 			mv.setViewName("redirect:selectBoard.do?boardKey="+ boardKey + "&currentPage=1");
 		}
 		return mv;
 	}
 	
-	@RequestMapping("borderGallery.do")
+	@RequestMapping("borderGalleryList.do")
 	public ModelAndView borderGallery(ModelAndView mv){
+		List<AttachmentVo> list = attachservice.selectAttach();
 		
-		mv.setViewName("border/borderGallery");
+		mv.addObject("list", list);
+		mv.setViewName("border/borderGalleryList");
 		return mv;
 	}
 	
 	@RequestMapping("boardGalleryForm.do")
+	public String borderGalleryForm(){
+		return "border/borderGalleryForm";
+	}
+	
+	@RequestMapping("boardGalleryWrite.do")
 	public ModelAndView boardGalleryForm(BorderVo board, HttpServletRequest request, @RequestParam("file") MultipartFile file, ModelAndView mv) {
+		
+		int resultBoard = borderservice.insertBoard(board);
+		
 		
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -250,17 +264,81 @@ public class BorderController {
 				e.printStackTrace();
 			}
 			
-//			System.out.println("file 명 = "+file.getOriginalFilename());
 			List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
 			attach.setAttaFileName(file.getOriginalFilename());
-			attach.setAttaFilePath(path+"\\");
+			attach.setAttaFilePath("boardGallery");
 			attach.setAttaLocation(board.getBoardKey());
 			attachList.add(attach);
 		
-//		System.out.println(attachList);
 		board.setAttach(attachList);
 		
-		mv.setViewName("note/noteMain");
+		int resultAttach = attachservice.insertAttachments(attachList);
+		
+		mv.setViewName("redirect:borderGalleryList.do");
+		return mv;
+	}
+	
+	@RequestMapping("attachDetailPage.do")
+	public ModelAndView attachDetailPage(AttachmentVo av, ModelAndView mv){
+		
+		AttachmentVo attach = attachservice.selectAttachDetail(av);
+		
+		mv.addObject("attach", attach);
+		mv.setViewName("border/borderGalleryDetail");
+		return mv;
+	}
+	
+	@RequestMapping("deleteBoardGallery.do")
+	public ModelAndView attachDeleteGallery(AttachmentVo av, ModelAndView mv){
+		
+		int result = attachservice.deleteGallery(av);
+		mv.setViewName("redirect:borderGalleryList.do");
+		return mv;
+	}
+	
+	@RequestMapping("bGalleryModifyPage.do")
+	public ModelAndView galleryUpdate(AttachmentVo av, ModelAndView mv){
+		
+		AttachmentVo attach = attachservice.selectAttachone(av.getAttaKey());
+		
+		mv.addObject("attaKey", av.getAttaKey());
+		mv.addObject("attach", attach);
+		mv.setViewName("border/borderGalleryModifyPage");
+		return mv;
+	}
+	
+	@RequestMapping("galleryModifyPage.do")
+	public ModelAndView bGalleryModifyPage(HttpServletRequest request, @RequestParam("file") MultipartFile file, AttachmentVo av, ModelAndView mv, BorderVo board){
+		
+		System.out.println("수정할 페이지 : " + board);
+		int boardresult = borderservice.updateBoard(board);
+		//기존 파일 삭제
+				String root = request.getSession().getServletContext().getRealPath("resources");
+				String path = root + "\\upload\\boardGallery";
+				String filePath = "";
+				
+				File folder = new File(path);
+				filePath = folder + "\\" + board.getAttach();
+				
+				File oldFile = new File(filePath);
+				if(oldFile.exists()){
+					oldFile.delete();
+				}
+
+				//새로운 파일 저장
+				String newFilePath = folder + "\\" + file.getOriginalFilename();
+				try {
+					file.transferTo(new File(newFilePath));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				AttachmentVo attach = new AttachmentVo();
+				
+				attach.setAttaFileName(file.getOriginalFilename());
+				attach.setAttaKey(av.getAttaKey());
+				
+		int attresult = attachservice.updateGallery(attach);
+		mv.setViewName("redirect:borderGalleryList.do");
 		return mv;
 	}
 }

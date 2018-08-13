@@ -84,13 +84,13 @@
 	 <!-- Content Header (Page header) -->
 	 <c:choose>
 	 	<c:when test="${board.bCateGory eq 1}">
-	 		<h1>공지사항 작성</h1>
+	 		<h3>공지사항 작성</h3>
 	 	</c:when>
 	 	<c:when test="${board.bCateGory eq 2}">
-	 		<h1>자유게시판 작성</h1>
+	 		<h3>자유게시판 작성</h3>
 	 	</c:when>
 	 	<c:when test="${board.bCateGory eq 3}">
-	 		<h1>경조사 작성</h1>
+	 		<h3>경조사 작성</h3>
 	 	</c:when>
 	 </c:choose>
 		<form id="writeBoard"action="writeBoard.do" method="post" enctype="multipart/form-data">

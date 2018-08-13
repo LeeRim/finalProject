@@ -56,6 +56,11 @@
   	.main{
   		background:white;
   	}
+  	.commentWriteArea{
+  		width:95%;
+  		margin-left:auto;
+  		margin-right:auto;
+  	}
 </style>
 	<script type="text/javascript">
 	$(function() {
@@ -139,7 +144,7 @@
         <li class="active">Data tables</li>
       </ol>
     </section>
-<div class="row" style="width:95%; margin-right:auto; margin-left:auto; margin-top:20px;">
+<div class="row" style="width:95%; margin-right:auto; margin-left:auto;">
 
 	 <c:choose>
 	 	<c:when test="${board.bCateGory eq 1}">
@@ -183,7 +188,7 @@
 <br>
 <br>
 <div class="commentArea">
-		<table width="800">
+		<table>
 			<c:forEach items="${bList}" var="b">
 			<tr>
 				<td>${b.eName} ${b.cDate}</td>
@@ -208,7 +213,7 @@
 	<div class="commentWriteArea">
 		댓글
 		<form method="post" id="commentForm" action="writeComment.do">
-			<table width="800">
+			<table>
 				<input type="hidden" name="boardKey" value='<c:out value="${board.boardKey}"/>'>
 				<input type="hidden" name="cWriter"	value="${board.bWriter }"/> 
 				<tr>

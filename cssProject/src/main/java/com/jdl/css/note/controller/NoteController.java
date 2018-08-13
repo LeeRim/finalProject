@@ -71,12 +71,8 @@ public class NoteController {
 		MultipartFile file = null;
 		for(int i = 1 ; i < files.length; i++){
 			file = files[i];
-//			System.out.println("files.length : " + files.length);
-//			System.out.println(file.getOriginalFilename());
-//			System.out.println("folder : " + folder);
 			filePath = folder + "\\" + file.getOriginalFilename();
 			
-//			System.out.println("filePath : " + filePath);
 			try {
 				file.transferTo(new File(filePath));
 			} catch (IllegalStateException e) {
@@ -102,7 +98,6 @@ public class NoteController {
 			attachList.add(attach);
 		}
 		
-//		System.out.println(attachList);
 		note.setAttach(attachList);
 		
 		int resultReceive = service.insertReceiveNote(note);
