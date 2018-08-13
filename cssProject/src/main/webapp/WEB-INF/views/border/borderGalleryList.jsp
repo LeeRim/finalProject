@@ -7,6 +7,65 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.image-list{
+		width:auto;
+		float:left;
+		margin-right:10px;
+		margin-bottom:10px;
+	}
+</style>
+<script>
+	function attachDetailPage(attaKey){
+		location.href="attachDetailPage.do?attaKey=" + attaKey;
+	}
+</script>
+<script>
+(function(){
+	  // 목록 마지막 요소 흐림처리
+		$('ul.list-a').addClass('infinite-scroll');
+	});
+
+	var count = 2;
+
+	// 스크롤 이벤트
+	$(window).on('scroll',function () {
+		infiniteScroll();
+	});
+
+	// 스크롤 감지 및 호출
+	function infiniteScroll(){
+		var deviceMargin = 0; // 기기별 상단 마진
+		var $scrollTop = $(window).scrollTop();
+		var $contentsHeight = Math.max($('body').height(),$('#body').height());
+		var $screenHeight = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight; // 스크린 높이 구하기
+
+		if($scrollTop ==  $contentsHeight - $screenHeight) {
+			if($('#searchbar').is(':visible')){ return false; }
+			loadArticle(count);
+			count++;
+		}
+	}
+
+	// ajax 로드
+	function loadArticle(pageNumber){
+		preloader('show');
+	    $.ajax({
+			type: 'GET',
+			url: "_ajax.html",
+			data: "page="+pageNumber,
+			cache: false,
+			success: function(html){
+				setTimeout(function(){ // 시간 지연
+					$('#list').append(html);
+					preloader('hide');
+				}, 1000);
+			}
+	    });
+		return false;
+	}
+
+</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -23,9 +82,23 @@
 				</ol>
 			</section>
 			<div class="row" style="width: 95%; margin-right: auto; margin-left: auto; margin-top: 20px;">
-<h1>갤러리 리스트 보여줄 화면입니다.</h1>
+<h1 align="center">앨범 게시판</h1>
+<div class="thumnailArea">
+			<c:forEach items="${list}" var="Attach">
+				<div class="image-list" onclick="attachDetailPage(${Attach.attaKey});" align="center">
+					<div>
+						<img src="resources/upload/boardGallery/${Attach.attaFileName}" 
+									width="510px" height="150px"/>
+					</div>
+				</div>
+			</c:forEach>			
+		</div>
+		
 
 	</div>
+				<c:if test="${!empty user}">
+				<a href="boardGalleryForm.do">갤러리 작성하기</a>
+                </c:if>
 	</div>
 </div>
 

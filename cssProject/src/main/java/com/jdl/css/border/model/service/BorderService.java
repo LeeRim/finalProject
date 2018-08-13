@@ -78,4 +78,12 @@ public class BorderService {
 		return dao.selectBoardThr();
 	}
 
+	public int insertBoard(BorderVo board) {
+		return dao.insertboard(board);
+	}
+
+	public List<BorderVo> selectBoardFor() {
+		return dao.selectBoardFor();
+	}
+
 }

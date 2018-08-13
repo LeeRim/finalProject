@@ -82,6 +82,10 @@ public class BorderDao {
 		return sqlSession.insert("BorderMapper.insertBoard", board);
 	}
 
+	public List<BorderVo> selectBoardFor() {
+		return sqlSession.selectList("BorderMapper.selectBoardFor");
+	}
+
 	
 	
 }

@@ -45,20 +45,20 @@
 
 <div class="col-md-9">
           <div class="box box-primary">
-              <form id="boardGalleryForm"action="boardGalleryForm.do" method="post" enctype="multipart/form-data">
+              <form id="boardGalleryForm"action="boardGalleryWrite.do" method="post" enctype="multipart/form-data">
             <div class="box-header with-border">
               <h3 class="box-title">Compose New Message</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="제목">
+                <input type="text" name="bTitle" class="form-control" placeholder="제목">
               </div>
               <!-- <div class="form-group">
                 <input type="file" class="form-control" placeholder="파일">
               </div> -->
               <div class="form-group">
-                    <textarea id="summernote" class="form-control" style="height: 300px">
+                    <textarea name="bContent" id="summernote" class="form-control" style="height: 300px">
                     </textarea>
               </div>
               <div class="form-group">

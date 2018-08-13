@@ -76,12 +76,8 @@ public class NoteController {
 		for(int i = 1 ; i < files.length; i++){
 			AttachmentVo attach = new AttachmentVo();
 			file = files[i];
-//			System.out.println("files.length : " + files.length);
-//			System.out.println(file.getOriginalFilename());
-//			System.out.println("folder : " + folder);
 			filePath = folder + "\\" + file.getOriginalFilename();
 			
-//			System.out.println("filePath : " + filePath);
 			try {
 				file.transferTo(new File(filePath));
 			} catch (IllegalStateException e) {
@@ -90,14 +86,12 @@ public class NoteController {
 				e.printStackTrace();
 			}
 			
-//			System.out.println("file 명 = "+file.getOriginalFilename());
 			attach.setAttaFileName(file.getOriginalFilename());
 			attach.setAttaFilePath(path+"\\");
 			attach.setAttaLocation(note.getSnKey());
 			attachList.add(attach);
 		}
 		
-//		System.out.println(attachList);
 		note.setAttach(attachList);
 		
 		int resultReceive = service.insertReceiveNote(note);
