@@ -45,6 +45,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			num.push(no);
   		}else{
   			names.splice(names.indexOf(name),1);
+  			num.splice(num.indexOf(no),1);
   		}
   		console.log(names);
   		console.log(num);
@@ -66,29 +67,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
   	function cancel(){
   		location.href="moveNote.do";	
   	};
+  	
+	   $(document).ready(
+	      function() {
+	         var fileTarget = $('.form-group .upload-hidden');
+	         fileTarget.on('change',function() { // 값이 변경되면 
+	         var filenames ="";
+	            if (window.FileReader) { // modern browser 
+	            
+	            for(var i=0;i<$(this)[0].files.length;i++){
+	               var file = $(this)[0].files[i];
+	               filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove'></i><br>";
+	               console.log(filenames);
+	            }
+	            } else { // old IE
+	               var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+	            }
+	            // 추출한 파일명 삽입 
+	            $('.file-list').html(filenames);
+	         });
+	      });
   </script>
  
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 	
@@ -162,41 +163,15 @@ desired effect
                     <textarea id="summernote" class="form-control" style="height: 300px" name="snContent">
                     </textarea>
               </div>
-
-	<script>
-	   $(document)
-	   .ready(
-	      function() {
-	         var fileTarget = $('.form-group .upload-hidden');
-	         fileTarget.on('change',function() { // 값이 변경되면 
-	         var filenames ="";
-	            if (window.FileReader) { // modern browser 
-	            
-	            for(var i=0;i<$(this)[0].files.length;i++){
-	               var file = $(this)[0].files[i];
-	               filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove'></i><br>";
-	               console.log(filenames);
-	            }
-	            } else { // old IE
-	               var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
-	            }
-	            // 추출한 파일명 삽입 
-	            $('.file-list').html(filenames);
-	         });
-	      });
-	</script>
-
-										<div class="form-group" style="height: 100px;">
-											<div style="float: left; height: 100px; width: 130px;">
-												<div class="btn btn-default btn-file">
-													<i class="fa fa-paperclip"></i> Attachment <input
-														multiple="multiple"  type="file" name="files" class="upload-hidden">
+				<div class="form-group" style="height: 100px;">
+					<div style="float: left; height: 100px; width: 130px;">
+						<div class="btn btn-default btn-file">
+							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="files" multiple="multiple" class="upload-hidden">
 												</div>
 												<p class="help-block">Max. 32MB</p>
 											</div>
 											<div class="file-list"></div>
 										</div>
-
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

@@ -50,7 +50,7 @@ public class NoteController {
 	
 	@RequestMapping("sendNote.do")
 	public ModelAndView sendNote(NoteVo note ,ModelAndView mv, @RequestParam("files") MultipartFile[] files, HttpServletRequest request){
-		if(files[1] !=null){
+		if(files[1] !=null && !(files[1].getOriginalFilename().equals(""))){
 			note.setSnAttachYn("Y");
 		}else{
 			note.setSnAttachYn("N");
@@ -69,33 +69,39 @@ public class NoteController {
 			folder.mkdirs();
 		}
 		MultipartFile file = null;
-		for(int i = 1 ; i < files.length; i++){
-			file = files[i];
-			filePath = folder + "\\" + file.getOriginalFilename();
-			
-			try {
-				file.transferTo(new File(filePath));
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
+		if(!(files[1].getOriginalFilename().equals(""))){
+			for(int i = 1 ; i < files.length; i++){
+				file = files[i];
+//			System.out.println("files.length : " + files.length);
+//			System.out.println(file.getOriginalFilename());
+//			System.out.println("folder : " + folder);
+				filePath = folder + "\\" + file.getOriginalFilename();
+				
+//			System.out.println("filePath : " + filePath);
+				try {
+					file.transferTo(new File(filePath));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 //			System.out.println("file 명 = "+file.getOriginalFilename());
-			AttachmentVo attach = new AttachmentVo();
-			String fileSize= "";
-			
-			if(file.getSize() > 1000000){
-				fileSize = file.getSize() / 1000000 + "MB";
-			}else if(file.getSize() > 1000){
-				fileSize = file.getSize() / 1000 + "KB"; 
+				AttachmentVo attach = new AttachmentVo();
+				String fileSize= "";
+				
+				if(file.getSize() > 1000000){
+					fileSize = file.getSize() / 1000000 + "MB";
+				}else if(file.getSize() > 1000){
+					fileSize = file.getSize() / 1000 + "KB"; 
+				}
+				attach.setAttaFileName(file.getOriginalFilename());
+				attach.setAttaFilePath("sendNote");
+				attach.setAttaLocation(note.getSnKey());
+				attach.setAttaFilesize(fileSize);
+				
+				attachList.add(attach);
 			}
-			attach.setAttaFileName(file.getOriginalFilename());
-			attach.setAttaFilePath(path+"\\");
-			attach.setAttaLocation(note.getSnKey());
-			attach.setAttaFilesize(fileSize);
-			
-			attachList.add(attach);
 		}
 		
 		note.setAttach(attachList);
@@ -105,7 +111,7 @@ public class NoteController {
 		
 		int resultAttach = service.insertAttach(note);
 		System.out.println("attach = " +resultAttach );
-		mv.setViewName("note/sendNoteDetail");
+		mv.setViewName("redirect:sendNoteList.do");
 		
 		return mv;
 	};
@@ -121,6 +127,8 @@ public class NoteController {
 //		System.out.println(sendNoteList);
 		
 		mv.addObject("sendNoteList", sendNoteList);
+		
+		
 		mv.setViewName("note/sendNoteList");
 		return mv;
 	}
@@ -130,6 +138,7 @@ public class NoteController {
 //		System.out.println(note);
 		NoteVo noteDetail = service.selectSendNoteDetail(note);
 //		System.out.println(noteDetail);
+//		System.out.println("삭제 유무 = " +noteDetail.getSnDeleteYn());
 		List<ReceivenoteVo> receiveList = service.selectReceiveList(note);
 //		System.out.println(receiveList);
 		mv.addObject("receiveList", receiveList);
@@ -137,4 +146,46 @@ public class NoteController {
 		mv.setViewName("note/sendNoteDetail");
 		return mv;
 	}
+	
+	@RequestMapping("sendNoteDelete.do")
+	public ModelAndView sendNoteDelete(ModelAndView mv, NoteVo note){
+		int resultUpdate = 0;
+		String view="";
+		System.out.println(note);
+		if(note.getSnDeleteYn().equals("N")){
+			resultUpdate = service.updateDelYn(note);
+			view = "redirect:sendNoteList.do";
+		}else{
+			resultUpdate = service.updateTrashDelSendNote(note);
+			view = "redirect:sendNoteTrashList.do";
+		}
+//		System.out.println(resultUpdate);
+		
+		mv.setViewName(view);
+		return mv;
+	}
+	
+	@RequestMapping("sendNoteTrashList.do")
+	public ModelAndView sendNoteTrashList(ModelAndView mv, HttpSession session){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		//사원키
+		int ekey = user.geteKey();
+		
+		List<NoteVo> sendNoteList = service.selectSendNoteList(ekey);
+		
+		mv.addObject("sendNoteList", sendNoteList);
+		mv.setViewName("note/sendNoteTrashList");
+		return mv;
+	}
+	
+	@RequestMapping("sendNoteRestore.do")
+	public ModelAndView sendNoteRestore(ModelAndView mv, NoteVo note){
+		int resultUpdate = service.updateDelYn(note);
+		System.out.println(resultUpdate);
+		
+		mv.setViewName("redirect:sendNoteTrashList.do");
+		return mv;
+	}
+	
+	
 }

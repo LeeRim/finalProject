@@ -63,7 +63,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="sendNoteList.do">보낸쪽지함</a></li>
-            <li><a href="#">휴지통</a></li>
+            <li><a href="sendNoteTrashList.do">휴지통</a></li>
           </ul>
         </li>
       </ul>

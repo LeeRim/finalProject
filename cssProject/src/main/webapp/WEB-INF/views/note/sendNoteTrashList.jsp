@@ -8,18 +8,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Starter</title>
-    <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/plugins/iCheck/flat/blue.css">
     <!-- Slimscroll -->
 	<script src="resources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="resources/bower_components/fastclick/lib/fastclick.js"></script>
 	<script src="resources/plugins/iCheck/icheck.min.js"></script>
-	
-	<!-- DataTables -->
-	<link rel="stylesheet" href="resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-	<!-- DataTables -->
-	<script src="resources/bower_components/datatables.net/js/jquery.dataTables.js"></script>
-	<script src="resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <style>
   	.table{
   		cursor: pointer;
@@ -31,54 +25,58 @@
   </style>
   
   <script>
-  	function checkDelete(){
-  		var checkKey = new Array();
-  		 $('.checkNote:checked').each(function() { 
-  		      console.log($(this).val());
-  		      checkKey.push($(this).val());
-  		 });  		
-  		 console.log(checkKey);
-  		if (confirm("휴지통으로 보내시겠습니까??") == true){    //확인
-	  		 location.href="sendNoteDelete.do?snKeies="+checkKey+"&snDeleteYn=N";
-  		}else{   //취소
-  		    return;
-  		}
-  	}
-	
-  	$(function () {
-  	    //Enable iCheck plugin for checkboxes
-  	    //iCheck for checkbox and radio inputs
-  	    $('.mailbox-messages input[type="checkbox"]').iCheck({
-  	      checkboxClass: 'icheckbox_flat-blue',
-  	      radioClass: 'iradio_flat-blue'
-  	    });
-
-  	    //Enable check and uncheck all functionality
-  	    $(".checkbox-toggle").click(function () {
-  	      var clicks = $(this).data('clicks');
-  	      if (clicks) {
-  	        //Uncheck all checkboxes
-  	        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
-  	        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
-  	      } else {
-  	        //Check all checkboxes
-  	        $(".mailbox-messages input[type='checkbox']").iCheck("check");
-  	        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
-  	      }
-  	      $(this).data("clicks", !clicks);
-  	    });
-  	    
-  	    $(".thead").hide();
-	    $('#allTable').DataTable({
-	         'paging' : true,
-	         'lengthChange' : false,
-	         'searching' : false,
-	         'ordering' : true,
-	         'info' : true,
-	         'autoWidth' : false
+  function checkDelete(){
+		var checkKey = new Array();
+		 $('.checkNote:checked').each(function() { 
+		      console.log($(this).val());
+		      checkKey.push($(this).val());
+		 });  		
+		 console.log(checkKey);
+		if (confirm("정말로 삭제하시겠습니까?") == true){    //확인
+	  		 location.href="sendNoteDelete.do?snKeies="+checkKey+"&snDeleteYn=Y";
+		}else{   //취소
+		    return;
+		}
+	}
+  function checkRestore(){
+		var checkKey = new Array();
+		 $('.checkNote:checked').each(function() { 
+		      console.log($(this).val());
+		      checkKey.push($(this).val());
+		 });  		
+		 console.log(checkKey);
+		if (confirm("복구 하시겠습니까?") == true){    //확인
+	  		 location.href="sendNoteRestore.do?snKeies="+checkKey+"&snDeleteYn=Y";
+		}else{   //취소
+		    return;
+		}
+	} 
+  
+  
+  
+  $(function () {
+	    //Enable iCheck plugin for checkboxes
+	    //iCheck for checkbox and radio inputs
+	    $('.mailbox-messages input[type="checkbox"]').iCheck({
+	      checkboxClass: 'icheckbox_flat-blue',
+	      radioClass: 'iradio_flat-blue'
 	    });
-  	});
 
+	    //Enable check and uncheck all functionality
+	    $(".checkbox-toggle").click(function () {
+	      var clicks = $(this).data('clicks');
+	      if (clicks) {
+	        //Uncheck all checkboxes
+	        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+	        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+	      } else {
+	        //Check all checkboxes
+	        $(".mailbox-messages input[type='checkbox']").iCheck("check");
+	        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+	      }
+	      $(this).data("clicks", !clicks);
+	    });
+	});
   
   </script>
 </head>
@@ -107,7 +105,7 @@
         <div class="col-md-9" style="width: 100%" >
           <div class="box box-primary" style="width: 98%; margin-top: 50px; margin-left: 10px;">
             <div class="box-header with-border">
-              <h3 class="box-title">보낸쪽지함</h3>
+              <h3 class="box-title">보낸쪽지함 휴지통</h3>
 
               <div class="box-tools pull-right">
                 <div class="has-feedback">
@@ -126,6 +124,7 @@
                 <div class="btn-group">
                 	<!--삭제 버튼  -->
                   <button type="button" class="btn btn-default btn-sm" onclick="checkDelete()"><i class="fa fa-trash-o"></i></button>
+                  <button type="button" class="btn btn-default btn-sm" onclick="checkRestore()"><i class="fa fa-refresh"></i></button>
                 </div>
                 <!-- /.btn-group -->
                 <div class="pull-right">
@@ -134,24 +133,14 @@
                 <!-- /.pull-right -->
               </div>
               <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped" id="allTable" >
-                <thead class="thead">
-                	<tr>	
-                		<th></th>
-                		<th></th>
-                		<th></th>
-                		<th></th>
-                		<th></th>
-                		<th></th>
-                	</tr>
-                </thead>
+                <table class="table table-hover table-striped" >
                   <tbody>
                   <c:forEach items="${requestScope.sendNoteList}" var ="sendNote">
-                  	<c:if test="${sendNote.snDeleteYn == 'N'}">
+                  	<c:if test="${sendNote.snDeleteYn == 'Y' && sendNote.snTrashdeleteYn == 'N'}">
 	                  <tr>
-	                    <td><input type="checkbox" class="checkNote" value="${sendNote.snKey}"></td>
+	                    <td style="width: 5%"><input type="checkbox" class="checkNote" value="${sendNote.snKey}"></td>
 			                    <td class="mailbox-star"><i class="fa fa-envelope-o"></i></td>
-		                    <td class="mailbox-name">
+		                    <td class="mailbox-name" style="width: 20%">
 			                    <c:forEach items="${sendNote.employee}" var ="employee" varStatus="st">
 			                    		<c:if test="${st.index < 2}">
 					                    	<c:out value="${employee.eName}"/> 
@@ -161,7 +150,7 @@
 					                    </c:if>
 			                    </c:forEach>
 		                    </td>
-	                    <td class="mailbox-subject"><a href="sendNoteDetail.do?snKey=${sendNote.snKey}" ><c:out value="${sendNote.snTitle}"/></a></td>
+	                    <td class="mailbox-subject" style="width: 50%"><a href="sendNoteDetail.do?snKey=${sendNote.snKey}" ><c:out value="${sendNote.snTitle}"/></a></td>
 	                    
 	                    <td class="mailbox-attachment">
 	                    	<c:if test="${sendNote.snAttachYn eq 'Y'}">
@@ -180,6 +169,21 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer no-padding">
+              <div class="mailbox-controls">
+                <!-- Check all button -->
+                <div class="btn-group">
+                   	
+                </div>
+                <div class="pull-right">
+                  1-50/200
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+                  </div>
+                  <!-- /.btn-group -->
+                </div>
+                <!-- /.pull-right -->
+              </div>
             </div>
           </div>
           <!-- /. box -->
