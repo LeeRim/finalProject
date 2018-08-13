@@ -59,5 +59,13 @@ public class AdminService {
 		return dao.selectTop5CompanyList();
 	}
 
+	public List<CompanyVo> selectCalList(String dateList) {
+		return dao.selectCalList(dateList);
+	}
+	
+	public List<CompanyVo> selectNowCalList(){
+		return dao.selectNowCalList();
+	}
+
 
 }

@@ -52,6 +52,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 .small-box-footer{
 	height:25px;
 }
+.new-col-sm-6{
+	width:50%;
+	float:left;
+}
 
  
 </style>
@@ -194,45 +198,31 @@ desired effect
               
               </div>
             </div>
+            
             <!-- /.box-body -->
-            <div class="box-footer text-black">
+            <div class="box-footer text-black" style="height:117.66px;">
               <div class="row">
                 <div class="col-sm-6">
-                  <!-- Progress bars -->
-                  <div class="clearfix">
-                    <span class="pull-left">유큰별</span>
-                    <small class="pull-right">2018-08-03</small>
-                  </div>
+                  <c:forEach items="${nowCalList}" var="nCList" varStatus="status">
+                  	<c:if test="${status.count <=3}">
+                  		<div class="clearfix">
+							<span class="pull-left">${nCList.cName}</span>
+							<small class="pull-right">${nCList.cCloseDay}</small>
+						</div>
+                  	</c:if>
+                  </c:forEach>
+	            </div>
+				<div class="new-col-sm-6">
+					<c:forEach items="${nowCalList}" var="nCList" varStatus="status">
+                  	<c:if test="${status.count >=4}">
+                  		<div class="clearfix">
+							<span class="pull-left">${nCList.cName}</span>
+							<small class="pull-right">${nCList.cCloseDay}</small>
+						</div>
+                  	</c:if>
+                  </c:forEach>
+				</div>
 
-                  <div class="clearfix">
-                    <span class="pull-left">이유림</span>
-                    <small class="pull-right">2018-08-03</small>
-                  </div>
-                  
-                  <div class="clearfix">
-                    <span class="pull-left">장건희</span>
-                    <small class="pull-right">2018-08-03</small>
-                  </div>
-
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-6">
-                  <div class="clearfix">
-                    <span class="pull-left">전유민</span>
-                    <small class="pull-right">2018-08-03</small>
-                  </div>
-
-				<div class="clearfix">
-                    <span class="pull-left">김기영</span>
-                    <small class="pull-right">2018-08-03</small>
-                  </div>
-
-                  <div class="clearfix">
-                    <span class="pull-left">이원준</span>
-                    <small class="pull-right">2018-08-03</small>
-                  </div>
-
-                </div>
                 <!-- /.col -->
               </div>
               <!-- /.row -->
@@ -335,14 +325,49 @@ desired effect
 <script src="resources/bower_components/raphael/raphael.min.js"></script>
 <script src="resources/bower_components/morris.js/morris.min.js"></script>
 <!-- datepicker -->
-<script src="resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
 <!-- 다음 지도 api -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7d57c0efd2cbfd46572b534f98d014d0"></script>
 <!-- ChartJS -->
 <script src="resources/bower_components/chart.js/Chart.js"></script>
 <script>
  $(function(){
-	 $('#calendar').datepicker(); 
+	 $('#calendar').datepicker().datepicker("setDate", new Date()).on("changeDate", function(event){
+		var date = event.date;
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		var day = date.getDate();
+		var dates = year +"/"+ month +"/"+ day
+		console.log(dates);
+		$.ajax({
+			url : "calendarList.do",
+			type : "get",
+			data : { dateList : dates },
+			success : function(data){
+				var cName = "";
+				var resultHtml = "";
+				var resultHtml2 = "";
+				for(var key in data){
+					cName = data[key].cName;
+					if(key <= 2){
+						resultHtml += "<div class='clearfix'>";
+						resultHtml += "<span class='pull-left'>" + cName + "</span>";
+						resultHtml += "<small class='pull-right'>" + dates + "</small>";
+						resultHtml += "</div>";
+					}else{
+						resultHtml2 += "<div class='clearfix'>";
+						resultHtml2 += "<span class='pull-left'>" + cName + "</span>";
+						resultHtml2 += "<small class='pull-right'>" + dates + "</small>";
+						resultHtml2 += "</div>";
+					}
+				}
+				$(".col-sm-6").html(resultHtml);
+				$(".new-col-sm-6").html(resultHtml2);
+			},error : function(e){
+				console.log("실패 : " + e);
+			}
+		}); 			
+	 });	 
  });
  
   $(function () {

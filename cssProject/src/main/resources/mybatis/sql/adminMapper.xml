@@ -67,5 +67,19 @@
 		JOIN COORDINATE ON(COORD_KEY_FK = COORD_KEY)
 		WHERE ROWNUM <![CDATA[ <= ]]>5
 	</select>
+	
+	<select id="selectCalList" resultType="Company">
+		SELECT C_NAME
+		FROM COMPANY
+		WHERE C_CLOSEDAY = #{dateList} AND ROWNUM <![CDATA[ <= ]]> 6
+		ORDER BY C_NAME ASC
+	</select>
+	
+	<select id="selectNowCalList" resultType="Company">
+		SELECT C_NAME, C_CLOSEDAY
+		FROM COMPANY
+		WHERE C_CLOSEDAY = TO_DATE(TO_CHAR(SYSDATE, 'MM/DD/YYYY'), 'MM/DD/YYYY') AND ROWNUM <![CDATA[ <= ]]> 6
+		ORDER BY C_NAME ASC
+	</select>
 
 </mapper>

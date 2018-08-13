@@ -54,6 +54,15 @@ public class AdminDao {
 		return sqlSession.selectList("AdminMapper.selectTop5List");
 	}
 
+	public List<CompanyVo> selectCalList(String dateList) {
+		return sqlSession.selectList("AdminMapper.selectCalList",dateList);
+	}
+	
+	public List<CompanyVo> selectNowCalList() {
+		return sqlSession.selectList("AdminMapper.selectNowCalList");
+	}
+	
+
 	
 
 }
