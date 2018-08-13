@@ -11466,7 +11466,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": " ",
+//			Showing _START_ to _END_ of _TOTAL_ entries
 	
 	
 			/**
@@ -11487,8 +11488,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
-	
+			"sInfoEmpty": " ",
+//			Showing 0 to 0 of 0 entries
 	
 			/**
 			 * When a user filters the information in a table, this string is appended
@@ -11509,8 +11510,8 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtered from _MAX_ total entries)",
-	
+			"sInfoFiltered": " ",
+//			(filtered from _MAX_ total entries)
 	
 			/**
 			 * If can be useful to append extra information to the info string at times,

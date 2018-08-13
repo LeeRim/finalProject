@@ -50,7 +50,7 @@ public class NoteController {
 	
 	@RequestMapping("sendNote.do")
 	public ModelAndView sendNote(NoteVo note ,ModelAndView mv, @RequestParam("files") MultipartFile[] files, HttpServletRequest request){
-		if(files[1] !=null){
+		if(files[1] !=null && !(files[1].getOriginalFilename().equals(""))){
 			note.setSnAttachYn("Y");
 		}else{
 			note.setSnAttachYn("N");
@@ -69,37 +69,39 @@ public class NoteController {
 			folder.mkdirs();
 		}
 		MultipartFile file = null;
-		for(int i = 1 ; i < files.length; i++){
-			file = files[i];
+		if(!(files[1].getOriginalFilename().equals(""))){
+			for(int i = 1 ; i < files.length; i++){
+				file = files[i];
 //			System.out.println("files.length : " + files.length);
 //			System.out.println(file.getOriginalFilename());
 //			System.out.println("folder : " + folder);
-			filePath = folder + "\\" + file.getOriginalFilename();
-			
+				filePath = folder + "\\" + file.getOriginalFilename();
+				
 //			System.out.println("filePath : " + filePath);
-			try {
-				file.transferTo(new File(filePath));
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
+				try {
+					file.transferTo(new File(filePath));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 //			System.out.println("file 명 = "+file.getOriginalFilename());
-			AttachmentVo attach = new AttachmentVo();
-			String fileSize= "";
-			
-			if(file.getSize() > 1000000){
-				fileSize = file.getSize() / 1000000 + "MB";
-			}else if(file.getSize() > 1000){
-				fileSize = file.getSize() / 1000 + "KB"; 
+				AttachmentVo attach = new AttachmentVo();
+				String fileSize= "";
+				
+				if(file.getSize() > 1000000){
+					fileSize = file.getSize() / 1000000 + "MB";
+				}else if(file.getSize() > 1000){
+					fileSize = file.getSize() / 1000 + "KB"; 
+				}
+				attach.setAttaFileName(file.getOriginalFilename());
+				attach.setAttaFilePath("sendNote");
+				attach.setAttaLocation(note.getSnKey());
+				attach.setAttaFilesize(fileSize);
+				
+				attachList.add(attach);
 			}
-			attach.setAttaFileName(file.getOriginalFilename());
-			attach.setAttaFilePath(path+"\\");
-			attach.setAttaLocation(note.getSnKey());
-			attach.setAttaFilesize(fileSize);
-			
-			attachList.add(attach);
 		}
 		
 //		System.out.println(attachList);
@@ -149,13 +151,18 @@ public class NoteController {
 	@RequestMapping("sendNoteDelete.do")
 	public ModelAndView sendNoteDelete(ModelAndView mv, NoteVo note){
 		int resultUpdate = 0;
+		String view="";
 		System.out.println(note);
 		if(note.getSnDeleteYn().equals("N")){
 			resultUpdate = service.updateDelYn(note);
+			view = "redirect:sendNoteList.do";
+		}else{
+			resultUpdate = service.updateTrashDelSendNote(note);
+			view = "redirect:sendNoteTrashList.do";
 		}
-		System.out.println(resultUpdate);
+//		System.out.println(resultUpdate);
 		
-		mv.setViewName("redirect:sendNoteList.do");
+		mv.setViewName(view);
 		return mv;
 	}
 	
@@ -171,5 +178,15 @@ public class NoteController {
 		mv.setViewName("note/sendNoteTrashList");
 		return mv;
 	}
+	
+	@RequestMapping("sendNoteRestore.do")
+	public ModelAndView sendNoteRestore(ModelAndView mv, NoteVo note){
+		int resultUpdate = service.updateDelYn(note);
+		System.out.println(resultUpdate);
+		
+		mv.setViewName("redirect:sendNoteTrashList.do");
+		return mv;
+	}
+	
 	
 }

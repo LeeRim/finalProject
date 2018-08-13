@@ -19,10 +19,12 @@ public class NoteVo {
 	private Date snWriteDate;
 	private String snDeleteYn;
 	private String snAttachYn;
+	private String snTrashdeleteYn;
 	
 	private List<String> receive;
 	private List<Integer> receiveNo;
 	private int receiver;
+	private List<Integer> snKeies;
 	
 	//resultMap용
 	private List<AttachmentVo> attach;
@@ -127,18 +129,31 @@ public class NoteVo {
 	public void setSnAttachYn(String snAttachYn) {
 		this.snAttachYn = snAttachYn;
 	}
+	
+	public List<Integer> getSnKeies() {
+		return snKeies;
+	}
+
+	public void setSnKeies(List<Integer> snKeies) {
+		this.snKeies = snKeies;
+	}
+	
+	public String getSnTrashdeleteYn() {
+		return snTrashdeleteYn;
+	}
+
+	public void setSnTrashdeleteYn(String snTrashdeleteYn) {
+		this.snTrashdeleteYn = snTrashdeleteYn;
+	}
 
 	@Override
 	public String toString() {
 		return "NoteVo [snKey=" + snKey + ", snSenderFk=" + snSenderFk + ", snTitle=" + snTitle + ", snContent="
 				+ snContent + ", snWriteDate=" + snWriteDate + ", snDeleteYn=" + snDeleteYn + ", snAttachYn="
-				+ snAttachYn + ", receive=" + receive + ", receiveNo=" + receiveNo + ", receiver=" + receiver
-				+ ", attach=" + attach + ", employee=" + employee + "]";
+				+ snAttachYn + ", snTrashdeleteYn=" + snTrashdeleteYn + ", receive=" + receive + ", receiveNo="
+				+ receiveNo + ", receiver=" + receiver + ", snKeies=" + snKeies + ", attach=" + attach + ", employee="
+				+ employee + "]";
 	}
-	
-	
-	
-	
-	
+
 	
 }

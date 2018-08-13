@@ -59,7 +59,30 @@ public class NoteService {
 	}
 
 	public int updateDelYn(NoteVo note) {
-		return dao.updateDelYn(note);
+		int result =0;
+		if(note.getSnKeies() !=null){
+			for(Integer i : note.getSnKeies()){
+				note.setSnKey(i);
+				result += dao.updateDelYn(note);
+			}
+		}else{
+			result = dao.updateDelYn(note);
+		}
+		
+		return result;
+	}
+
+	public int updateTrashDelSendNote(NoteVo note) {
+		int result = 0;
+		if(note.getSnKeies() != null){
+			for(Integer i : note.getSnKeies()){
+				note.setSnKey(i);
+				result += dao.updateTrashDelSendNote(note);
+			}
+		}else{
+			result = dao.updateTrashDelSendNote(note);
+		}
+		return result;
 	}
 
 

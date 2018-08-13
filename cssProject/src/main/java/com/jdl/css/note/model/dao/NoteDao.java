@@ -53,5 +53,9 @@ public class NoteDao {
 		return session.update("NoteMapper.updateDeleteYn", note);
 	}
 
+	public int updateTrashDelSendNote(NoteVo note) {
+		return session.update("NoteMapper.updateTeashDelSendNote", note);
+	}
+
 
 }

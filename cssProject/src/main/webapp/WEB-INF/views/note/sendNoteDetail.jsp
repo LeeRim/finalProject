@@ -20,7 +20,26 @@
   		
   	}
   	function sendNoteDelete(){
-  		location.href="sendNoteDelete.do?snKey=${sendDetail.snKey}&snDeleteYn=${sendDetail.snDeleteYn}";
+		var strMsg = "";
+		
+  		if("${sendDetail.snDeleteYn}" == "N"){
+  			strMsg = "휴지통으로 보내시겠습니까??";
+  		}else{
+  			strMsg = "정말로 삭제하시겠습니까??";
+  		}
+  		
+	  		if (confirm(strMsg) == true){    //확인
+		  		location.href="sendNoteDelete.do?snKey=${sendDetail.snKey}&snDeleteYn=${sendDetail.snDeleteYn}";
+	  		}else{   //취소
+	  		    return;
+	  		}
+  	}
+  	function sendNoteRestore(){
+  		if (confirm("쪽지를 복구하시겠습니까?") == true){    //확인
+  			location.href="sendNoteRestore.do?snKey=${sendDetail.snKey}";
+  		}else{   //취소
+  		    return;
+  		}
   	}
   </script>
   
@@ -103,7 +122,7 @@
             <div class="box-footer">
               <div class="pull-right">
               <c:if test="${sendDetail.snDeleteYn== 'Y'}">
-              	<button type="button" class="btn btn-default" onclick=""><i class="fa fa-trash-o"></i>복구</button>
+              	<button type="button" class="btn btn-default" onclick="sendNoteRestore();"><i class="fa fa-trash-o"></i>복구</button>
               </c:if>
               <button type="button" class="btn btn-default" onclick="sendNoteDelete();"><i class="fa fa-trash-o"></i> 삭제</button>
               <button type="button" class="btn btn-default" onclick="sendNoteList();"><i class="fa fa-print"></i> 리스트</button>
