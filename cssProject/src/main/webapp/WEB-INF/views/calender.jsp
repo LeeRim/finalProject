@@ -296,7 +296,7 @@
                 </ul>
               </div>
                 <div class="input-group-btn">
-                <input type="submit" value="일정 생성" >
+                <input type="submit" value="일정 생성" class="btn btn-primary btn-flat">
                 </div>
               <!-- /input-group -->
             </div>
