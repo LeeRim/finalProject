@@ -269,7 +269,39 @@
             <!-- /.box-body -->
           </div>
           <!-- /. box -->
-		<input type="button" onclick="eventPopup();" value="새 일정 생성">
+		<form method="get" action="insertEvent.do">
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Create Event</h3>
+            </div>
+            <div class="box-body">
+              <div class="btn-group" style="width: 100%; margin-bottom: 10px; margin-left: -40px">
+                <ul style="list-style-type:none">
+               	 <li>일정 이름 입력
+				 	<input name="title" type="text" class="form-control" placeholder="Event Title"/>
+                	</li>
+				 	<li>일정 시작일
+				 	<input name="startDate" type="date"/>
+				 	</li>
+				 	<li>일정 종료일
+				 	<input name="endDate" type="date"/>
+				 	</li>
+				 <li>일정 색
+					<input type="radio" name="background" value="#00a65a">초록
+					<input type="radio" name="background" value="#f39c12">노랑
+					<input type="radio" name="background" value="#00c0ef">하늘
+					<input type="radio" name="background" value="#0073b7">파랑
+					<input type="radio" name="background" value="#f56954">빨강
+				 </li>
+                </ul>
+              </div>
+                <div class="input-group-btn">
+                <input type="submit" value="일정 생성" class="btn btn-primary btn-flat">
+                </div>
+              <!-- /input-group -->
+            </div>
+          </div>
+         </form>
         </div>
         <!-- /.col -->
         <div class="col-md-9">
@@ -553,7 +585,7 @@
       events    : dataList,
       editable  : true,
       droppable : true, // this allows things to be dropped onto the calendar !!!
-      drop      : function (date, allDay) { // this function is called when something is dropped
+      drop      : function (date, allDay) { 
 
         // retrieve the dropped element's stored Event Object
         var originalEventObject = $(this).data('eventObject')
@@ -578,14 +610,10 @@
 	  
     
   })
-  
-  
-  
-  function eventPopup(){window.open("/css/createEvent.do","이벤트 생성","width=400, height=400");}
-  
-  
-  
-  
+    function createEvent(){
+    	//location.href="createEvent.do?";
+    }
+
 </script>
 </body>
 </html>

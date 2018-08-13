@@ -26,17 +26,18 @@
 	}
 </style>
 <script>
-/*  $(function(){
+  $(function(){
 	$(".box-body td").mouseenter(function(){
 		$(this).parent().css("background","darkgray");
 		$(this).parent().css("cursor","pointer");
 	}).mouseout(function(){
 		$(this).parent().css("background","white");
 	}).click(function(){
-		var boardNo = $(this).parent().children().eq(0).text();
-		location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=${pi.currentPage}"; 		
+		var boardNo = $(this).parent("tr").data("key");
+		console.log(boardNo);
+		//location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1"; 		
 	});
-});  */
+});  
 	
 </script>
 </head>
@@ -70,7 +71,7 @@
 							<th>작성일</th>
 						</tr>
 						<c:forEach items="${board1}" var="board1" varStatus="status">
-							<tr>
+							<tr data-key=${board1.boardKey }>
 								<td class="no"><c:out value="${status.index }" /></a></td>
 								<td class="title"><c:out value="${board1.bTitle }" /></td>
 								<td><span class="label label-danger"><c:out value="${board1.bCount }" /></span></td>
@@ -97,7 +98,7 @@
 							<th>작성일</th>
 						</tr>
 						<c:forEach items="${board2}" var="board2" varStatus="status">
-							<tr>
+							<tr data-key="${board2.boardKey }">
 								<td class="no"><c:out value="${status.index }" /></td>
 								<td class="title"><c:out value="${board2.bTitle }" /></td>
 								<td><span class="label label-danger"><c:out value="${board2.bCount }" /></span></td>
