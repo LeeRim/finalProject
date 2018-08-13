@@ -79,4 +79,9 @@ public class ApprovalDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("ApprovalMapper.selectExpectedApprovalList", eKey);
 	}
+
+	public ApprovalVo selectApprovalDetail(ApprovalVo a) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ApprovalMapper.selectApprovalDetail", a);
+	}
 }

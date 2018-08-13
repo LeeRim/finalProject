@@ -171,11 +171,11 @@ public class ApprovalController {
 
 		List<EmployeeVo> employee = nService.selectEmployee(companyK);
 		List<EmployeeVo> department = nService.selectDepartment(companyK);
-		// System.out.println(department);
-		// System.out.println(employee);
+		System.out.println(department);
+		System.out.println(employee);
 
-		model.addAttribute("employee", employee);
-		model.addAttribute("department", department);
+		//model.addAttribute("employee", employee);
+		//model.addAttribute("department", department);
 
 		return "approval/selectApproverPage";
 	}
@@ -244,7 +244,7 @@ public class ApprovalController {
 
 			// System.out.println("file 명 = "+file.getOriginalFilename());
 			 attach.setAttaFileName(file.getOriginalFilename());
-	         attach.setAttaFilePath(path+"\\");
+	         attach.setAttaFilePath("approval");
 	         attach.setAttaLocation(app.getaKey());
 	         attachList.add(attach);
 		}
@@ -254,6 +254,14 @@ public class ApprovalController {
 			int attachResult = attService.insertAttachments(attachList);
 			//System.out.println(attachResult);
 		return "approval/approvalPage";
-
+	}
+	
+	@RequestMapping("openJobPropsalDetail.do")
+	public ModelAndView openJobPropsalDetail(ModelAndView mv,ApprovalVo a){
+		a = aService.selectApprovalDetail(a);
+		System.out.println(a);
+		mv.addObject("approval", a);
+		mv.setViewName("approval/approvalForm/jobPropsalDetail");
+		return mv;
 	}
 }

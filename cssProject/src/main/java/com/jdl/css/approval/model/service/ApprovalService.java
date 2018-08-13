@@ -85,4 +85,9 @@ public class ApprovalService {
 		// TODO Auto-generated method stub
 		return dao.selectExpectedApprovalList(eKey);
 	}
+
+	public ApprovalVo selectApprovalDetail(ApprovalVo a) {
+		// TODO Auto-generated method stub
+		return dao.selectApprovalDetail(a);
+	}
 }
