@@ -53,30 +53,19 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#" onclick="boardPage(1);"><i class="fa fa-link"></i> <span>공지사항</span></a></li>
-         <li class="treeview">
-          <a href="#" onclick="boardPage(2);"><i class="fa fa-link"></i> <span>자유게시판</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <!-- <ul class="treeview-menu">
-          	<li><a href="#">수신쪽지함</a></li>
-            <li><a href="#">휴지통</a></li>
-          </ul> -->
-        </li>
         <li class="treeview">
-          <a href="#" onclick="boardPage(3);"><i class="fa fa-link"></i> <span>경조사</span>
-            <span class="pull-right-container">
+        	<a href="borderIndex.do"><i class="fa fa-link"></i> <span>커뮤니티 게시판</span>
+        		<span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-          </a>
-          <!-- <ul class="treeview-menu">
-            <li><a href="sendNoteList.do">보낸쪽지함</a></li>
-            <li><a href="#">휴지통</a></li>
-          </ul> -->
+        	</a>
+        	<ul class="treeview-menu">
+          		<li><a href="#" onclick="boardPage(1);">공지사항</a></li>
+          		<li><a href="#" onclick="boardPage(2);">자유게시판</a></li>
+            	<li><a href="#" onclick="boardPage(3);">경조사</a></li>
+            	<li><a href="#" onclick="boardGallery();">갤러리</a></li>
+          	</ul>
         </li>
-        <li><a href="#" onclick="boardGallery();"><i class="fa fa-link"></i> <span>갤러리</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

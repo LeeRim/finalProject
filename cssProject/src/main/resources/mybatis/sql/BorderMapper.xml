@@ -150,8 +150,9 @@
 	</select>
 	
 	<select id="listsearch" parameterType="hashmap" resultMap="BorderMap">
-		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY
-		FROM BOARD
+		SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
+		FROM BOARD b
+		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
 		WHERE B_CATEGORY = #{getbCateGory}
 		<include refid="search"></include>
 		ORDER BY B_KEY DESC, B_DATE DESC

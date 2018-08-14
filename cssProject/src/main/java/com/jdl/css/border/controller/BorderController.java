@@ -85,7 +85,6 @@ public class BorderController {
 		board.setLimit(limit);
 		
 		List<BorderVo> list = borderservice.getNoticeList(board);
-		System.out.println("값을 보내줘야 함 : " + board);
 		if(list != null){
 			mv.addObject("list", list);
 			mv.addObject("boardKey", board.getBoardKey());
@@ -119,17 +118,17 @@ public class BorderController {
 		
 		
 		BorderVo board = borderservice.selectBoard(b.getBoardKey());
+		int result = borderservice.updateBoardCount(b.getBoardKey());
 		
 		List<BoardCommentVo> bList = borderservice.selectCommentList(b.getBoardKey());
 		if(board != null){
-			board.setbCount(board.getbCount() + 1);
+			
 			mv.addObject("bList", bList);
 			mv.addObject("board", board);
 			board.setbCount(board.getbCount() + 1);
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("border/borderDetail");
 		}
-		int result = borderservice.updateBoardCount(b.getBoardKey());
 		return mv;
 	}
 	
@@ -280,8 +279,10 @@ public class BorderController {
 	public ModelAndView attachDetailPage(AttachmentVo av, ModelAndView mv){
 		
 		AttachmentVo attach = attachservice.selectAttachDetail(av);
+		List<BoardCommentVo> bList = borderservice.selectCommentList(attach.getBoardKey());
 		
 		mv.addObject("attach", attach);
+		mv.addObject("bList", bList);
 		mv.setViewName("border/borderGalleryDetail");
 		return mv;
 	}
@@ -359,7 +360,8 @@ public class BorderController {
 			currentPage = 1;
 		}
 		//게시글의 총 갯수
-		int listCount = borderservice.countBoardList(board.getbCateGory());
+		int listCount = borderservice.countBoardsearch(condition, keyword, board.getbCateGory());
+//		int listCount = borderservice.countBoardList(board.getbCateGory());
 		
 		//134 -> 14
 				maxPage = (int)((double)listCount / limit + 0.9);
@@ -377,10 +379,9 @@ public class BorderController {
 		//==================페이징 처리의 끝===============
 		
 		List<BorderVo> list = borderservice.listsearch(condition, keyword, board.getbCateGory());
-		int searchresult = borderservice.countBoardsearch(condition, keyword, board.getbCateGory());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		map.put("searchresult", searchresult);
+		map.put("searchresult", listCount);
 		map.put("condition", condition);
 		map.put("keyword", keyword);
 		map.put("bCateGory", board.getbCateGory());

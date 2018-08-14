@@ -68,6 +68,39 @@
 	function border(){
 		location.href="borderGalleryList.do";		
 	}
+	function writeComment(){
+		$("#commentForm").submit();
+	}
+	function updateCommentForm(obj, flag){
+		var $textArea = $(obj).parent().parent().next().find("textarea");
+		$textArea.prop("readonly", !flag);
+		if(flag){
+			$(obj).hide();
+			$(obj).siblings(".deleteBtn").hide();
+			$(obj).siblings(".updateBtn").show();
+			$(obj).siblings(".cancelBtn").show();
+		}else{
+			$(obj).siblings(".modifyBtn").show();
+			$(obj).siblings(".deleteBtn").show();
+			$(obj).siblings(".updateBtn").hide();
+			$(obj).hide();
+		}
+	}
+	
+	function updateComment(obj, cno){
+		//댓글 작성 -> 댓글 번호, 댓글 내용
+		var commentValue =  $(obj).parent().parent().next().find("textarea").val();
+		var cno = cno;
+		//console.log("updateComment.do?cno=" + cno + "&content=" + commentValue);
+		location.href
+			="updateComment.do?commentKey=" + cno + "&cContent=" + commentValue + "&boardKey=${attach.boardKey}";
+	}
+	function deleteComment(cno){
+		var cno = cno;
+		//console.log("updateComment.do?cno=" + cno + "&content=" + commentValue);
+		location.href
+			="deleteComment.do?commentKey=" + cno + "&boardKey=${attach.boardKey}";
+	}
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -117,8 +150,49 @@
 </div>
 <br>
 <br>
+<div class="commentArea">
+		<table>
+			<c:forEach items="${bList}" var="b">
+			<tr>
+				<td>${b.eName} ${b.cDate}</td>
+				<td align="right">
+				<c:if test="${!empty user && user.eKey eq b.cWriter}">
+					<input type="button" class="modifyBtn" value="수정" onclick="updateCommentForm(this, true);"/>
+					<input type="button" class="deleteBtn" value="삭제" onclick="deleteComment(${b.commentKey});"/>
+					<input type="button" class="updateBtn" style="display:none;" value="작성 완료" onclick="updateComment(this,${b.commentKey});"/>
+					<input type="button" class="cancelBtn" style="display:none;" value="취소" onclick="updateCommentForm(this, false);"/>
+				</c:if>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<textarea cols="108" rows="4" readonly><c:out value="${b.cContent}"/></textarea>
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
 	</div>
-</div>
+	<c:if test="${!empty user}">
+	<div class="commentWriteArea">
+		댓글
+		<form method="post" id="commentForm" action="writeComment.do">
+			<table>
+				<input type="hidden" name="boardKey" value='<c:out value="${attach.boardKey}"/>'>
+				<input type="hidden" name="cWriter"	value="${attach.bWriter }"/> 
+				<tr>
+					<td>
+						<textarea cols="90" rows="4" name="cContent"></textarea>
+					</td>
+					<td>
+						<input type="button" onclick="writeComment();" value="댓글작성"/>
+					</td>
+				</tr>
+			</table>		
+		</form>
+	</div>
+	</c:if>
+	</div>
+	</div>
 
 
 <c:import url="/WEB-INF/views/include/footer.jsp"/>

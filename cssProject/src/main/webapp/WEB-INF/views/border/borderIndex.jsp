@@ -32,6 +32,9 @@
 		background:gray;
 		color:white;
 	}
+	.image{
+		display:inline-block;
+	}
 </style>
 <script>
 	$(function(){
@@ -85,7 +88,7 @@
 							<span class="bordName">공지사항</span>
 							<div class="image" onclick="border(1);">
 							<img src="resources/upload/image/image2.png" 
-									width="100px" height="50px"/>
+									width="100px" height="50px" onclick="border(1);"/>
 							</div>
 						</c:when>
 					</c:choose>

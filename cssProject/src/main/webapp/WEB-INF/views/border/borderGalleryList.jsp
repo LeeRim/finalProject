@@ -88,6 +88,9 @@
 					<div>
 						<img src="resources/upload/boardGallery/${Attach.attaFileName}" 
 									width="510px" height="150px"/>
+						<div class="gallerytitle">
+							<p>${Attach.bTitle}</p>
+						</div>
 					</div>
 				</div>
 			</c:forEach>			

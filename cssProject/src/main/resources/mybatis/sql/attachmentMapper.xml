@@ -24,7 +24,11 @@
 	</insert>
 
 	<select id="selectAttachment" resultType="AttachVo">
-		SELECT ATTA_KEY, ATTA_LOCATION, ATTA_FILENAME, ATTA_FILEPATH FROM ATTACHMENT
+		SELECT A.ATTA_KEY, A.ATTA_LOCATION, A.ATTA_FILENAME, A.ATTA_FILEPATH, B_KEY, B_DATE, B_TITLE, B_CONTENT, B_WRITER_FK, E_NAME
+		FROM ATTACHMENT A
+		JOIN BOARD B ON (A.ATTA_LOCATION = B.B_KEY)
+		JOIN EMPLOYEE E ON (B.B_WRITER_FK = E.E_KEY)
+		WHERE B.B_CATEGORY = 4
 	</select>
 	
 	<select id="selectAttachmentDetail" parameterType="AttachVo" resultMap="AttachMap">

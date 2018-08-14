@@ -43,26 +43,18 @@
 		location.href="borderList.do?bCateGory=${board.bCateGory}";
 	}
 	function writeBoard(){
-		$("#writeBoard").submit();
-	}
-	
-	/* function(){
-		
 		var bTitle = $("#bTitle").val();
 		if( bTitle == "" || bTitle == null || bTitle == undefined || ( bTitle != null && typeof bTitle == "object" && !Object.keys(bTitle).length ) ){
-			return true; 
-		}else{
-			alert("값이 다 채워지지 않았습니다.");
-			return false;
+			return;
 		}
-
-		var summernote = $("#summernote").val();
-		if( summernote == "" || summernote == null || summernote == undefined || ( summernote != null && typeof summernote == "object" && !Object.keys(summernote).length ) ){
-			return true; 
-		}else{
-			return false;
-		} */
 		
+		var summernote = $("#summernote").val();
+			if(!(summernote != null && summernote != "")){
+				console.log(2, summernote);
+					return;
+			} 
+		$("#writeBoard").submit();
+	}
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -93,7 +85,7 @@
 	 		<h3>경조사 작성</h3>
 	 	</c:when>
 	 </c:choose>
-		<form id="writeBoard"action="writeBoard.do" method="post" enctype="multipart/form-data">
+		<form id="writeBoard" action="writeBoard.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="bCateGory" value="<c:out value="${board.bCateGory}"/>"/>
 			<input type="hidden" name="companyKey" value='<c:out value="${user.cKeyFk}"></c:out>'>
 			<input type="hidden" name="bWriter" value='<c:out value="${user.eKey }"></c:out>'>
