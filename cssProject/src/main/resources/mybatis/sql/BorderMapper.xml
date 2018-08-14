@@ -148,4 +148,36 @@
 		ORDER BY B_DATE DESC)
 		WHERE ROWNUM BETWEEN 1 AND 7
 	</select>
+	
+	<select id="listsearch" parameterType="hashmap" resultMap="BorderMap">
+		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY
+		FROM BOARD
+		WHERE B_CATEGORY = #{getbCateGory}
+		<include refid="search"></include>
+		ORDER BY B_KEY DESC, B_DATE DESC
+	</select>
+	
+	<select id="listsearchcount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM BOARD
+		WHERE B_CATEGORY = #{getbCateGory}
+		<include refid="search"></include>
+	</select>
+	
+	<sql id="search">
+		<choose>
+			<when test="condition == 'all'">
+				AND B_TITLE like '%' || #{keyword} || '%'
+				OR B_CONTENT like '%' || #{keyword} || '%'
+			</when>
+			<when test="condition == '1'">
+				AND B_TITLE like '%' || #{keyword} || '%'
+			</when>
+			<when test="condition == '2'">
+				AND B_CONTENT like '%' || #{keyword} || '%'
+			</when>
+			<otherwise>
+				AND  B_TITLE like '%' || #{keyword} || '%'
+			</otherwise>
+		</choose>
+	</sql>
 </mapper>

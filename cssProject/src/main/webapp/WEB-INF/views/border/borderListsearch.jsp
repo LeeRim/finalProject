@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<!-- DataTables -->
+<!-- DataTables -->
 <script src="resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
@@ -16,8 +16,45 @@
 <script src="resources/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="resources/dist/js/demo.js"></script>
+<!-- <script type="text/javascript" src="resources/Js/jquery-3.3.1.min.js"></script> -->
+<!-- <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
+  <!-- Font Awesome -->
+<!--   <link rel="stylesheet" href="resources/bower_components/font-awesome/css/font-awesome.min.css"> -->
+  <!-- Ionicons -->
+<!--   <link rel="stylesheet" href="resources/bower_components/Ionicons/css/ionicons.min.css"> -->
+  <!-- Theme style -->
+<!--   <link rel="stylesheet" href="resources/dist/css/AdminLTE.min.css"> -->
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect. -->
+<!--   <link rel="stylesheet" href="resources/dist/css/skins/skin-blue.min.css"> -->
+
+  <!-- Google Font -->
+<!--   <link rel="stylesheet" -->
+<!--         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
+        
+   <!-- jQuery 3 -->
+<!-- 	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script> -->
+	<!-- Bootstrap 3.3.7 -->
+<!-- 	<script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
+	<!-- AdminLTE App -->
+<!-- 	<script src="resources/dist/js/adminlte.min.js"></script> -->
+	<!-- DataTables -->
+<script src="resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="resources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="resources/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="resources/dist/js/demo.js"></script>
 <script src="resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+	
+  
+<!-- DataTables -->
+<!-- FastClick -->
+	<!-- REQUIRED JS SCRIPTS -->
 <style>
+
 	.page{
 		margin-right:auto;
 		margin-left:auto;
@@ -76,16 +113,15 @@ $(function(){
  	});
 	
 	function boardForm(){
-		location.href="borderForm.do?bCateGory=${bCateGory}";
+		location.href="borderForm.do?bCateGory=${map.bCateGory}";
 	}
 	function movePage(pageNum){
-		location.href = "borderList.do?currentPage=" + pageNum + "&bCateGory=${bCateGory}";
+		location.href = "borderList.do?currentPage=" + pageNum + "&bCateGory=${map.bCateGory}";
 	}
 	function searchBoard(){
 		var condition = $("#searchCondition").val();
 		var searchText = $("#searchText").val();
-		location.href = "searchBoard.do?condition=" + condition + "&keyword=" + searchText + "&bCateGory=${bCateGory}"
-				+ "&boardKey=${boardKey}";
+		location.href = "searchBoard.do?condition=" + condition + "&keyword=" + searchText + "&bCateGory=${map.bCateGory}";
 	}
 </script>
 
@@ -113,13 +149,13 @@ $(function(){
           <div class="box" style="margin-top:20px;width:100%;">
             <div class="box-header">
             <c:choose>
-	 			<c:when test="${bCateGory eq 1}">
+	 			<c:when test="${map.bCateGory eq 1}">
 	 				<h1>공지사항 게시판</h1>
 	 			</c:when>
-	 			<c:when test="${bCateGory eq 2}">
+	 			<c:when test="${map.bCateGory eq 2}">
 	 				<h1>자유게시판 게시판</h1>
 	 			</c:when>
-	 			<c:when test="${bCateGory eq 3}">
+	 			<c:when test="${map.bCateGory eq 3}">
 	 				<h1>경조사 게시판</h1>
 	 			</c:when>
 	 		</c:choose>
@@ -134,7 +170,7 @@ $(function(){
                   <th>조회수</th>
                   <th>작성일</th>
                 </tr>
-                <c:forEach items="${list }" var="b">
+                <c:forEach items="${map.list }" var="b">
                 <tr>
                   <td><c:out value="${b.boardKey }"/></td>
                   <td><c:out value="${b.eName }"/></td>
@@ -147,10 +183,10 @@ $(function(){
               </div>
               <c:if test="${!empty user}">
 	              <c:choose>
-	              	<c:when test="${user.eType eq 1 && bCategory eq 1}">
+	              	<c:when test="${user.eType eq 1 && map.bCategory eq 1}">
 		              	<div class="Btn" onclick="boardForm();">공지사항 작성</div>
 	              	</c:when>
-	              	<c:when test="${bCategory ne 1}">
+	              	<c:when test="${map.bCategory ne 1}">
 		              	<div class="Btn" onclick="boardForm();">작성</div>
 	              	</c:when>
 	              </c:choose>
@@ -175,15 +211,22 @@ $(function(){
 		</c:if>
 	</c:forEach>
 	<div class="pageBtn" onclick="movePage(${pi.maxPage});"> >> </div>
-	<div class="searchArea" align="center">
+	
+	 <div class="searchArea" align="center">
 		<select id="searchCondition">
 			<option value="0">전체</option>
-			<option value="1">제목</option>
+			<c:if test="${map.condition eq null}">
+				<option value="1" selected>제목</option>
+			</c:if>
+			<c:if test="${map.condition ne null}">
+				<option value="1">제목</option>
+			</c:if>
 			<option value="2">내용</option>
 		</select>		
-		<input type="text" id="searchText" placeholder="검색어 입력"/>
+		<input type="text" id="searchText" placeholder="검색어 입력" value="${map.keyword}"/>
 		<input type="button" value="검색하기" onclick="searchBoard();"/>
-	</div>
+	</div> 
+	
     </div>
     </div>
 	</div>

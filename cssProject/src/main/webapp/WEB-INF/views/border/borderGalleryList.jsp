@@ -82,7 +82,6 @@
 				</ol>
 			</section>
 			<div class="row" style="width: 95%; margin-right: auto; margin-left: auto; margin-top: 20px;">
-<h1 align="center">앨범 게시판</h1>
 <div class="thumnailArea">
 			<c:forEach items="${list}" var="Attach">
 				<div class="image-list" onclick="attachDetailPage(${Attach.attaKey});" align="center">

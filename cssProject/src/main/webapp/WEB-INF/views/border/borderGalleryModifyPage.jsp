@@ -43,7 +43,7 @@
 <div class="row" style="width:95%; margin-right:auto; margin-left:auto;">
 	<h1>갤러리 수정화면</h1>
 <form action="galleryModifyPage.do" method="post" enctype="multipart/form-data">
-<input type="file" name="file"/>${attach.attaFileName}
+수정할 파일 : <input type="file" name="file"/>현재 파일 : ${attach.attaFileName}
 <input type="hidden" name="attaKey" value='<c:out value="${attach.attaKey}"/>'>
 <input type="hidden" name="boardKey" value='<c:out value="${attach.boardKey}"/>'/>
 제목 : <input type="text" name="bTitle" value="${attach.bTitle }"/>

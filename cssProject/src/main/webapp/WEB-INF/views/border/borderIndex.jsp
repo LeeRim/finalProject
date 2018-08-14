@@ -34,7 +34,7 @@
 	}
 </style>
 <script>
-$(function(){
+	$(function(){
 	   $(".box-body td").mouseenter(function(){
 	      $(this).parent().css("background","darkgray");
 	      $(this).parent().css("cursor","pointer");
@@ -44,8 +44,23 @@ $(function(){
 	      var boardNo = $(this).parent("tr").data("key");
 	      location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1";       
 	   });
-	});  
+	});
 	
+	 $(function(){
+		   $(".Attach td").mouseenter(function(){
+		      $(this).parent().css("background","darkgray");
+		      $(this).parent().css("cursor","pointer");
+		   }).mouseout(function(){
+		      $(this).parent().css("background","white");
+		   }).click(function(){
+		      var attach = $(this).parent("tr").data("key");
+		      location.href = "attachDetailPage.do?attaKey=" + attach;    
+		   });
+		});  
+	
+	function border(b){
+		location.href="borderList.do?bCateGory=" + b;
+	}
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -68,6 +83,10 @@ $(function(){
 					<c:choose>
 						<c:when test="${bo1 eq 1}">
 							<span class="bordName">공지사항</span>
+							<div class="image" onclick="border(1);">
+							<img src="resources/upload/image/image2.png" 
+									width="100px" height="50px"/>
+							</div>
 						</c:when>
 					</c:choose>
 					<table class="table table-hover">
@@ -90,6 +109,10 @@ $(function(){
 				<c:choose>
 					<c:when test="${bo2 eq 2}">
 						<span class="bordName">자유게시판</span>
+							<div class="image" onclick="border(2);">
+							<img src="resources/upload/image/image2.png" 
+									width="100px" height="50px"/>
+							</div>
 					</c:when>
 				</c:choose>
 
@@ -114,6 +137,10 @@ $(function(){
 				<c:choose>
 					<c:when test="${bo3 eq 3}">
 						<span class="bordName">경조사 게시판</span>
+						<div class="image" onclick="border(3);">
+							<img src="resources/upload/image/image2.png" 
+									width="100px" height="50px"/>
+						</div>
 					</c:when>
 				</c:choose>
 
@@ -124,19 +151,24 @@ $(function(){
 							<th class="date">작성일</th>
 						</tr>
 						<c:forEach items="${board3}" var="board3" varStatus="status">
-							 <tr data-key="${board3.boardKey }">
-								<td class="title"><c:out value="${board3.bTitle }" /></td>
-								<td class="writer"><c:out value="${board3.eName }" /></td>
-								<td class="date"><c:out value="${board3.bDate }" /></td>
+							 <tr data-key="${board3.boardKey}">
+								<td class="title"><c:out value="${board3.bTitle}" /></td>
+								<td class="writer"><c:out value="${board3.eName}" /></td>
+								<td class="date"><c:out value="${board3.bDate}" /></td>
 							</tr>
 						</c:forEach>
 					</table>
 				</div>
 				<br><br>
 				<div class="box-body table-responsive no-padding">
+				<div class="Attach">
 				<c:choose>
 					<c:when test="${bo4 eq 4}">
 						<span class="bordName">앨범 게시판</span>
+						<div class="image" onclick="border(4);">
+							<img src="resources/upload/image/image2.png" 
+									width="100px" height="50px"/>
+						</div>
 					</c:when>
 				</c:choose>
 				
@@ -146,14 +178,15 @@ $(function(){
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
-						<c:forEach items="${board4}" var="board4" varStatus="status">
-							 <tr data-key="${board4.boardKey }">
-								<td class="title"><c:out value="${board4.bTitle }" /></td>
-								<td class="writer"><c:out value="${board4.eName }" /></td>
-								<td class="date"><c:out value="${board4.bDate }" /></td>
+						<c:forEach items="${attach}" var="att">
+							 <tr data-key="${att.attaKey}">
+								<td class="title"><c:out value="${att.bTitle}" /></td>
+								<td class="writer"><c:out value="${att.eName}" /></td>
+								<td class="date"><c:out value="${att.bDate}" /></td>
 							</tr>
 						</c:forEach>
 					</table>
+				</div>
 				</div>
 				</div>
 			</div>

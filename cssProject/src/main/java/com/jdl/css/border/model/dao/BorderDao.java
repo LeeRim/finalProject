@@ -1,7 +1,9 @@
 package com.jdl.css.border.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +88,20 @@ public class BorderDao {
 		return sqlSession.selectList("BorderMapper.selectBoardFor");
 	}
 
-	
-	
+	public List<BorderVo> selectsearch(String condition, String keyword, String getbCateGory) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		map.put("getbCateGory", getbCateGory);
+		return sqlSession.selectList("BorderMapper.listsearch", map);
+	}
+
+	public int selectsearchcount(String condition, String keyword, String getbCateGory) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		map.put("getbCateGory", getbCateGory);
+		return sqlSession.selectOne("BorderMapper.listsearchcount", map);
+	}
+
 }
