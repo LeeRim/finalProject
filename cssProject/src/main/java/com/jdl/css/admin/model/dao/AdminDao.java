@@ -28,7 +28,6 @@ public class AdminDao {
 
 	public int updateCompanyLevel(CompanyVo company) {
 		return sqlSession.update("AdminMapper.updateCompanyLevel",company);
-		
 	}
 
 	public List<CompanyVo> selectMarkList() {
@@ -74,6 +73,12 @@ public class AdminDao {
 	public int insertEmployeeAdmin(EmployeeVo employee) {
 		return sqlSession.insert("AdminMapper.insertEmployeeAdmin",employee);
 	}
+
+	public List<EmployeeVo> selectEmployeeCount() {
+		return sqlSession.selectList("AdminMapper.selectEmployeeCount");
+	}
+
+	
 	
 
 	

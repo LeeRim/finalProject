@@ -67,12 +67,16 @@ public class AdminController {
 		
 		List<CompanyVo> nowCalList = service.selectNowCalList();
 		mv.addObject("nowCalList",nowCalList);
+		
 		mv.setViewName("admin/admin_main");
 		return mv;
 	}
 	@RequestMapping("companyList.do")
 	public ModelAndView companyList(ModelAndView mv){
+		List<EmployeeVo> empList = service.selectEmployeeCount();
+		//empList에서 가져온 c_key_fk 를 company에 set해서 조회해올때 where c_key = #{조회한 c_key} 로 불러오기????????????
 		List<CompanyVo> list = service.selectCompanyList();
+		System.out.println(list);
 		mv.addObject("list",list);
 		mv.setViewName("admin/companyList");
 		return mv;

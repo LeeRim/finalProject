@@ -89,7 +89,7 @@ desired effect
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 	
-	<c:import url="admin_side.jsp"/>
+	<c:import url="/WEB-INF/views/admin/admin_side.jsp"/>
   
   
 
@@ -317,7 +317,7 @@ desired effect
 
 
 
-	<c:import url="../include/footer.jsp"/>
+	<c:import url="/WEB-INF/views/include/footer.jsp"/>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
@@ -369,8 +369,10 @@ desired effect
 		}); 			
 	 });	 
  });
+
+ 	$(function(){
+ 		
  
-  $(function () {
     "use strict";
 
     // LINE CHART
@@ -404,20 +406,11 @@ desired effect
     // Get context with jQuery - using jQuery's .get() method.
     var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
    
-
-    //var positions = [];
-
-    //<c:forEach items="${markList}" var="c" >
-    	//positions.push({
-    		//title: '${c.city} : ${c.count}개', 
-    	    //latlng: new daum.maps.LatLng(${c.lat}, ${c.lng})
-    	//});
-    //</c:forEach>
  
     var PieData = [];
     <c:forEach items="${top5List}" var="t5" varStatus="status">
     	PieData.push({
-    		value    : ${t5.count},
+    		value    : ${t5.counts},
    	        color    : <c:if test="${status.count == 1}">'#f56954'</c:if><c:if test="${status.count == 2}">'#00a65a'</c:if>
    	        			 <c:if test="${status.count == 3}">'#00c0ef'</c:if><c:if test="${status.count == 4}">'#3c8dbc'</c:if><c:if test="${status.count == 5}">'#d2d6de'</c:if>,
    	        highlight: <c:if test="${status.count == 1}">'#f56954'</c:if><c:if test="${status.count == 2}">'#00a65a'</c:if>
@@ -433,7 +426,6 @@ desired effect
     // -----------------
     // - END PIE CHART -
     // -----------------
-    
   });
   
   $(function(){
@@ -451,7 +443,7 @@ var positions = [];
 
 <c:forEach items="${markList}" var="c" >
 	positions.push({
-		title: '${c.city} : ${c.count}개', 
+		title: '${c.city} : ${c.counts}개', 
 	    latlng: new daum.maps.LatLng(${c.lat}, ${c.lng})
 	});
 </c:forEach>

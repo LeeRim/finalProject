@@ -23,7 +23,7 @@ public class CompanyVo {
 	private String lat;
 	private String lng;
 	
-	private int count;
+	private int counts;
 	
 	private int per;
 	
@@ -36,10 +36,9 @@ public class CompanyVo {
 		this.cLevel = cLevel;
 	}
 
-
 	public CompanyVo(int cKey, String cName, String cOwner, String cAddress, String cLogo, String cSign, String cQrcode,
 			String cMileage, Date cCloseDay, int cLevel, int coordKeyFk, int coordKey, String city, String lat,
-			String lng, int count, int per) {
+			String lng, int counts, int per) {
 		super();
 		this.cKey = cKey;
 		this.cName = cName;
@@ -56,7 +55,7 @@ public class CompanyVo {
 		this.city = city;
 		this.lat = lat;
 		this.lng = lng;
-		this.count = count;
+		this.counts = counts;
 		this.per = per;
 	}
 
@@ -193,17 +192,16 @@ public class CompanyVo {
 		this.lng = lng;
 	}
 
-	
 
-	public int getCount() {
-		return count;
+	public int getCounts() {
+		return counts;
 	}
 
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setCounts(int counts) {
+		this.counts = counts;
 	}
-	
+
 
 	public int getPer() {
 		return per;
@@ -220,10 +218,11 @@ public class CompanyVo {
 		return "CompanyVo [cKey=" + cKey + ", cName=" + cName + ", cOwner=" + cOwner + ", cAddress=" + cAddress
 				+ ", cLogo=" + cLogo + ", cSign=" + cSign + ", cQrcode=" + cQrcode + ", cMileage=" + cMileage
 				+ ", cCloseDay=" + cCloseDay + ", cLevel=" + cLevel + ", coordKeyFk=" + coordKeyFk + ", coordKey="
-				+ coordKey + ", city=" + city + ", lat=" + lat + ", lng=" + lng + ", count=" + count + ", per=" + per
+				+ coordKey + ", city=" + city + ", lat=" + lat + ", lng=" + lng + ", counts=" + counts + ", per=" + per
 				+ "]";
 	}
 
+	
 
 	
 

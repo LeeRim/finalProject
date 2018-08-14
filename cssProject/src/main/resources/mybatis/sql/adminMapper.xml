@@ -9,14 +9,20 @@
 		FROM COMPANY
 	</sql>
 
+	<select id="selectEmployeeCount" resultType="EmployeeVo">
+		SELECT C_KEY_FK,COUNT(*) AS "COUNTS" 
+		FROM EMPLOYEE 
+		GROUP BY C_KEY_FK
+	</select>
+
 	<select id="selectCompanyList" resultType="Company">
-		SELECT C_NAME, C_ADDRESS, C_MILEAGE, C_CLOSEDAY, C_LEVEL, C_OWNER, (SELECT COUNT(*) FROM EMPLOYEE) AS COUNT
+		SELECT C_KEY, C_NAME, C_OWNER, C_ADDRESS, C_LOGO, C_SIGN, C_QRCODE, C_MILEAGE, C_CLOSEDAY, C_LEVEL, (SELECT COUNT(*) FROM EMPLOYEE) AS "COUNTS"
 		FROM COMPANY
 		WHERE C_LEVEL != 0
 	</select>
 	
 	<select id="selectCompanySetList" resultType="Company">
-		SELECT C_NAME, C_ADDRESS, C_MILEAGE, C_CLOSEDAY, C_LEVEL, C_OWNER, (SELECT COUNT(*) FROM EMPLOYEE) AS COUNT
+		SELECT C_KEY, C_NAME, C_OWNER, C_ADDRESS, C_LOGO, C_SIGN, C_QRCODE, C_MILEAGE, C_CLOSEDAY, C_LEVEL, (SELECT COUNT(*) FROM EMPLOYEE) AS "COUNTS"
 		FROM COMPANY
 		WHERE C_LEVEL = 0
 	</select>
@@ -28,33 +34,33 @@
 	</update>
 	
 	
-	<select id="selectAllCompanyCount" resultType="int">
-		SELECT COUNT(*) AS "COUNT"
+	<select id="selectAllCompanyCount" resultType="Integer">
+		SELECT COUNT(*) AS "COUNTS"
 		FROM COMPANY
 		WHERE C_LEVEL != 0
 	</select>
 	
-	<select id="selectCountLevel1" resultType="int">
-		SELECT COUNT(*) AS "COUNT"
+	<select id="selectCountLevel1" resultType="Integer">
+		SELECT COUNT(*) AS "COUNTS"
 		FROM COMPANY
 		WHERE C_LEVEL = 1
 	</select>
 	
-	<select id="selectCountLevel2" resultType="int">
-		SELECT COUNT(*) AS "COUNT"
+	<select id="selectCountLevel2" resultType="Integer">
+		SELECT COUNT(*) AS "COUNTS"
 		FROM COMPANY
 		WHERE C_LEVEL = 2
 	</select>
 	
-	<select id="selectCountLevel3" resultType="int">
-		SELECT COUNT(*) AS "COUNT"
+	<select id="selectCountLevel3" resultType="Integer">
+		SELECT COUNT(*) AS "COUNTS"
 		FROM COMPANY
 		WHERE C_LEVEL = 3
 	</select>
 	
 	<select id="selectMarkList" resultType="Company">
-		SELECT COORD_KEY_FK, CITY, LAT, LNG, COUNT
-		FROM (SELECT COORD_KEY_FK, COUNT(*) AS "COUNT"
+		SELECT COORD_KEY_FK, CITY, LAT, LNG, COUNTS
+		FROM (SELECT COORD_KEY_FK, COUNT(*) AS "COUNTS"
 			        FROM COMPANY
 			        WHERE C_LEVEL != 0
 			        GROUP BY COORD_KEY_FK)
@@ -62,12 +68,12 @@
 	</select>
 	
 	<select id="selectTop5List" resultType="Company">		
-		SELECT CITY,COUNT, PER
-		FROM (SELECT COORD_KEY_FK, COUNT(*) AS "COUNT", trunc(ratio_to_report(count(*)) over() * 100) as "PER"
+		SELECT CITY,COUNTS, PER
+		FROM (SELECT COORD_KEY_FK, COUNT(*) AS "COUNTS", TRUNC(RATIO_TO_REPORT(COUNT(*)) OVER() * 100) AS "PER"
 		      FROM COMPANY
 		      WHERE C_LEVEL != 0
 		      GROUP BY COORD_KEY_FK
-		      ORDER BY COUNT DESC)
+		      ORDER BY COUNTS DESC)
 		JOIN COORDINATE ON(COORD_KEY_FK = COORD_KEY)
 		WHERE ROWNUM <![CDATA[ <= ]]>5
 	</select>

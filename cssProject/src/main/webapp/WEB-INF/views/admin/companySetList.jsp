@@ -151,7 +151,7 @@
 	                <tr>
 	                  <td>LEVEL ${n.cLevel }</td>
 	                  <td>${n.cName }</td>
-	                  <td>${n.count }</td>
+	                  <td>${n.counts }</td>
 	                  <td>${n.cOwner }</td>
 	                  <td>${n.cAddress }</td>
 	                  <td>${n.cMileage }</td>

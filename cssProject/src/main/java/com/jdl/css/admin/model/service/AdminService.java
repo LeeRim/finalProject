@@ -80,6 +80,12 @@ public class AdminService {
 		return dao.insertEmployeeAdmin(employee);
 	}
 
+	public List<EmployeeVo> selectEmployeeCount() {
+		return dao.selectEmployeeCount();
+	}
+
+	
+
 
 
 }
