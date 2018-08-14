@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.approval.model.service.ApprovalService;
+import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
 import com.jdl.css.common.model.service.AttachmentService;
@@ -76,7 +77,9 @@ public class ApprovalController {
 	@RequestMapping("waitingPage.do")
 	public ModelAndView openWaitingPage(HttpSession session,ModelAndView mv){
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		System.out.println(user);
 		List<ApprovalVo> waitingList = aService.selectWaitingApprovalList(user.geteKey());
+		System.out.println(waitingList);
 		mv.addObject("waitingList", waitingList);
 		mv.setViewName("approval/waitingPage");
 		return mv;
@@ -161,7 +164,7 @@ public class ApprovalController {
 		return "approval/approvalForm/orderForm";
 	}
 
-	@RequestMapping("openSelectApproverPage.do")
+/*	@RequestMapping("openSelectApproverPage.do")
 	public String openSelectApproverPage(HttpSession session, Model model) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 		// 회사키
@@ -178,7 +181,7 @@ public class ApprovalController {
 		//model.addAttribute("department", department);
 
 		return "approval/selectApproverPage";
-	}
+	}*/
 	
 	@RequestMapping("addApproversTable.do")
 	public @ResponseBody List<EmployeeVo> addApproversTable(String appStr){
@@ -194,9 +197,9 @@ public class ApprovalController {
 	@RequestMapping("writeJobPropsal.do")
 	public String writeJobPropsal(ApprovalVo app, JobPropsalVo jobp, @RequestParam("appStr") List<Integer> appStr,
 			@RequestParam("files") MultipartFile[] files, HttpSession session, HttpServletRequest request) {
-		app.setaWriterFk(((EmployeeVo) session.getAttribute("user")).geteKey());
+		/*app.setaWriterFk(((EmployeeVo) session.getAttribute("user")).geteKey());
 		app.setcKeyFk(((EmployeeVo) session.getAttribute("user")).getcKeyFk());
-		app.setDivDoctypeFk(1);
+		app.setDivDoctypeFk(1);*/
 		// Date jpWorkingDate = Date.valueOf(workingDate);
 		// jobp.setJpWorkingDate(jpWorkingDate);
 	/*	System.out.println(appStr);
@@ -259,9 +262,33 @@ public class ApprovalController {
 	@RequestMapping("openJobPropsalDetail.do")
 	public ModelAndView openJobPropsalDetail(ModelAndView mv,ApprovalVo a){
 		a = aService.selectApprovalDetail(a);
-		System.out.println(a);
+		JobPropsalVo jp = aService.selectJobPropsal(a.getaKey());
+		ApprovalConditionVo cApprover = aService.selectCurrentApprover(a.getaKey());
 		mv.addObject("approval", a);
+		mv.addObject("cApprover", cApprover);
+		mv.addObject("jp", jp);
 		mv.setViewName("approval/approvalForm/jobPropsalDetail");
 		return mv;
+	}
+	
+	
+	@RequestMapping("updateApprovalCondition.do")
+	public String updateApprovalCondition(int doctype,int aKey,int acKey,String approvalType,String condition){
+		String result="";
+		switch(doctype){
+		case 1:result="redirect:openJobPropsalDetail.do?aKey="+aKey; break;
+		case 2:result="redirect:openJobPropsalDetail.do?aKey="+aKey; break;
+		case 3:result="redirect:openJobPropsalDetail.do?aKey="+aKey; break;
+		case 4:result="redirect:openJobPropsalDetail.do?aKey="+aKey; break;
+		case 5:result="redirect:openJobPropsalDetail.do?aKey="+aKey; break;
+		}
+		
+		ApprovalConditionVo ac = new ApprovalConditionVo();
+		ac.setAcKey(acKey);
+		ac.setAcCondition(approvalType+"/"+condition);
+		
+		int updateResult = aService.updateApprovalCondition(ac);
+		System.out.println(updateResult);
+		return result;
 	}
 }

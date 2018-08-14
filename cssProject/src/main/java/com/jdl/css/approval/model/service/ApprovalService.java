@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jdl.css.approval.model.dao.ApprovalDao;
+import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
@@ -89,5 +90,20 @@ public class ApprovalService {
 	public ApprovalVo selectApprovalDetail(ApprovalVo a) {
 		// TODO Auto-generated method stub
 		return dao.selectApprovalDetail(a);
+	}
+
+	public ApprovalConditionVo selectCurrentApprover(int aKey) {
+		// TODO Auto-generated method stub
+		return dao.selectCurrentApprover(aKey);
+	}
+
+	public JobPropsalVo selectJobPropsal(int aKey) {
+		// TODO Auto-generated method stub
+		return dao.selectJobPropsal(aKey);
+	}
+
+	public int updateApprovalCondition(ApprovalConditionVo ac) {
+		// TODO Auto-generated method stub
+		return dao.updateApprovalCondition(ac);
 	}
 }

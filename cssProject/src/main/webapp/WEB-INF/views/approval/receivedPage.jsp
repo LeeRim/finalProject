@@ -29,8 +29,18 @@ AdminLTE for demo purposes
 <script src="resources/dist/js/demo.js"></script> -->
 <!-- page script -->
 <script>
+
 function hideThead(){
 	$('.thead').hide();
+}
+function openDetail(aKey,divDoctypeFk){
+	switch(divDoctypeFk){
+	case 1: location.href="openJobPropsalDetail.do?aKey="+aKey; break;
+	case 2: location.href="openOrderFormDetail.do?aKey="+aKey; break;
+	case 3: location.href="openSpendingResolutionDetail.do?aKey="+aKey; break;
+	case 4: location.href="openRoundRobinDetail.do?aKey="+aKey; break;
+	case 5: location.href="openVacationFormDetail.do?aKey="+aKey; break;
+	}
 }
 
 	$(function() {
@@ -177,12 +187,12 @@ desired effect
 										</tr>
 										
 										<c:forEach var="approval" items="${allList }">
-										<tr>
+										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
 											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
-											<td><c:out value="${approval.writer }"></c:out></td>
+											<td><c:out value="${approval.writer.eName }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
 											<c:if test="${approval.aCondition==0 }">
 												<td><span class="label label-warning">진행</span></td>

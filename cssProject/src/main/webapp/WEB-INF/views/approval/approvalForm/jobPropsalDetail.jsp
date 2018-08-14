@@ -24,13 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 <script type="text/javascript">
-	function openDoApproval() {
-		$('div.modal').modal();
-	}
 
-	$(function() {
-	
-	});
 </script>
 <!--  -->
 
@@ -182,8 +176,8 @@ desired effect
 																					class='sign_rank'><c:out
 																							value="${appCon.approver.job }"></c:out></span></span><span
 																				class='sign_wrap'><span class='sign_name'><c:out
-																							value="${appCon.acCondition }"></c:out>
-																						<c:out value="${appCon.approver.eName }"></c:out></span></span><span
+																							value="${appCon.condition }"></c:out>
+																						<c:out value="${appCon.approver.eName }"></c:out><c:out value="${appCon.acType}"></c:out></span></span><span
 																				class='sign_date_wrap'><span
 																					class='sign_date ' id='date_15162'>${appCon.acApprovalDate }</span></span></span></span>
 
@@ -228,7 +222,7 @@ desired effect
 															시행일자</td>
 														<td
 															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;">
-															<c:out value="${approval.jp.jpWorkingDate }"></c:out>
+															<c:out value="${jp.jpWorkingDate }"></c:out>
 														</td>
 														<td
 															style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
@@ -236,7 +230,7 @@ desired effect
 															협조부서</td>
 														<td
 															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;">
-															<c:out value="${approval.jp.jpCooperation }"></c:out>
+															<c:out value="${jp.jpCooperation }"></c:out>
 														</td>
 													</tr>
 

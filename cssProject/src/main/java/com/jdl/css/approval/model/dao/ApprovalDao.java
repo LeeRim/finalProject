@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
@@ -83,5 +84,20 @@ public class ApprovalDao {
 	public ApprovalVo selectApprovalDetail(ApprovalVo a) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("ApprovalMapper.selectApprovalDetail", a);
+	}
+
+	public ApprovalConditionVo selectCurrentApprover(int aKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ApprovalMapper.selectCurrentApprover", aKey);
+	}
+
+	public JobPropsalVo selectJobPropsal(int aKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ApprovalMapper.selectJobPropsal", aKey);
+	}
+
+	public int updateApprovalCondition(ApprovalConditionVo ac) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ApprovalMapper.updateApprovalCondition", ac);
 	}
 }

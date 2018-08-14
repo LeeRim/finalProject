@@ -147,7 +147,7 @@ desired effect
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
-											<td><c:out value="${approval.writer }"></c:out></td>
+											<td><c:out value="${approval.writer.eName }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
 											<c:if test="${approval.aCondition==0 }">
 												<td><span class="label label-warning">진행</span></td>
