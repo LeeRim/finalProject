@@ -34,4 +34,8 @@ public class EmployeeService {
 	public List<EmployeeVo> selectDepartList() {
 		return dao.selectDepartList();
 	}
+
+	public EmployeeVo selectEmployeeInfo(int eKey) {
+		return dao.selectEmployeeInfo(eKey);
+	}
 }

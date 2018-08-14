@@ -1,7 +1,13 @@
+<%@page import="java.util.List"%>
+<%@page import="com.jdl.css.employee.model.vo.EmployeeVo"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.jdl.css.employee.controller.EmployeeController"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:import url="/WEB-INF/views/include/header.jsp" />
+
+
 <!DOCTYPE html>
 
 <html>
@@ -28,38 +34,49 @@
 <style>
 .frame {
 	padding: 0 20px;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	width: 1500px;
 }
 
 .org_map {
 	float: left;
 	width: 340px;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 }
 
 .org_map1 {
 	float: left;
 	width: 340px;
 	height: 400px;
-	border: 1px solid black;
+	border-top: 3px solid #3c8dbc;
+	border-bottom: 2px solid #3c8dbc;
 	overflow: auto;
 	background: white;
-	font-size: 11px;
+	font-size: 12px;
+	color:#585858;
+	border-right: 1px #BDBDBD solid;
+	border-top-left-radius: 3px;
+	
 }
 
 .org_map2 {
 	float: left;
 	width: 340px;
-	min-height: 300px;
-	border: 1px solid black;
+	padding:20px 0;
+	background: #E6E6E6;
+	border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: 3px solid #3c8dbc;
 }
 
 .employee_list {
 	float: left;
 	width: 900px;
-	height: 100%;
-	border: 1px solid black;
+	
+    border-top-right-radius: 3px;
+/* 	border: 1px solid #848484; */
+	border-top: 3px solid #3c8dbc;
+	border-bottom: 1px solid #3c8dbc;
 	font-size: 15px !important;
 }
 
@@ -73,6 +90,7 @@
 .employee_list_emp {
 	padding: 2px 7px 0 7px;
 	border-bottom: 1px #eaeaea solid;
+	text-align:center;
 }
 
 tr {
@@ -82,14 +100,214 @@ tr {
 td {
 	font-size: 15px;
 }
+
+
+
+.setDiv {
+            padding-top: 100px;
+            text-align: center;
+        }
+        .mask {
+            position:absolute;
+            left:0;
+            top:0;
+            z-index:9999;
+            background: rgba(0,0,0,0.6);
+            display:none;
+        }
+        .window {
+        
+            display: none;
+            background-color: #ffffff;
+            width:550px;
+            z-index:99999;
+            border-radius: 3px;
+            
+        }
+        .window_title{
+        display:block;
+        width:550px;
+        font-size: 16px !important;
+       
+        border-bottom : 1px solid #A4A4A4;
+        padding:5px;
+       background: #E6E6E6;
+        color:#585858;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        }
+        
+        .window_info{
+       
+        border: 1px solid #A4A4A4;
+        
+        }
+        
+        
+		.window_pic{
+		display:inline-block;
+		float:left;
+		width:200px;
+		height:300px;
+		padding: 23px 30px;
+		/* border-bottom : 1px solid #A4A4A4; */
+		}   
+		.window_pic2{
+		display:block;
+		width:150px;
+		height:150px;
+		border: 1px solid #A4A4A4;
+		}
+		
+		.window_content{
+		display:inline-block;
+		float:left;
+		width:350px;
+		height:300px;
+		padding:20px;
+/* 		border-bottom : 1px solid #A4A4A4;  */		
+		}   
+		
+		.window_content_left{
+		background: #E6E6E6;
+		width: 100px;
+		padding:5px;
+		border: 1px solid #A4A4A4;
+		color:#585858;
+		}
+		
+		.window_content_right{
+		width: 200px;
+		padding:5px;
+		border: 1px solid #A4A4A4;
+		color:#585858;
+		}
+
+
+
+
+
+
+
+
 </style>
 
 <script type="text/javascript">
 
-
+	function addwindowEvent(){
+	
+	    $('.showMask').click(function(e){
+	        e.preventDefault();
+	        wrapWindowByMask();
+	    });
 		
+	}
+	
+	
+	// 사원 정보 띄우는 메소드
+	function callFunction(obj) {
+		
+		console.log(obj);
+		
+		$.ajax({
+		    type      : 'POST',
+		    url         : 'selectEmployeeInfo.do',
+		    traditional : true,
+		    dataType : "json",
+		    data        : { 'main' : obj},
+		    success     : function(data) {
+		    	
+		    	$("#empInfoTitle").empty();
+		    	$("#empInfoView").empty();
+		    	
+		    	var html1 = $("#empInfoTitle").html()+"'"+data.department+" "+data.eName+" "+data.job+"'님의 신상정보"
+		    	
+		    	
+	    		
+		    	var html2 = $("#empInfoView").html()+
+		    	
+		    	"<tr><td class='window_content_left'>사원번호</td>"
+			    +"<td class='window_content_right'>"+data.eNo+"</td>"
+			    +"</tr><tr><td class='window_content_left'>아이디</td>"
+			    +"<td class='window_content_right'>"+data.eId+"</td>"
+			    +"</tr> <tr><td class='window_content_left'>이름</td>"
+			    +"<td class='window_content_right'>"+data.eName+"</td>"
+			    +"</tr><tr><td class='window_content_left'>핸드폰</td>"
+			    +"<td class='window_content_right'>"+data.ePhone+"</td>"
+			    +"</tr><tr><td class='window_content_left'>이메일</td>"
+			    +"<td class='window_content_right'>"+data.eEmail+"</td>"
+			    +"</tr><tr><td class='window_content_left'>소속부서</td>"
+			    +"<td class='window_content_right'>"+data.department+"</td>"
+			    +"</tr><tr> <td class='window_content_left'>직급</td>"
+			    +"<td class='window_content_right'>"+data.job+"</td>"
+			    +"</tr><tr><td class='window_content_left'>사내번호</td>"
+			    +"<td class='window_content_right'>"+data.eExten+"</td></tr>"
+		    	
+			    
+			    $("#empInfoTitle").html(html1); 
+			    $("#empInfoView").html(html2); 
+		    	
+			    
+			    
+			    
+		    },
+		    error       : function(request, status, error) {
+		        alert(error);
+		    }
+		});
+		
+		
+		
+		
+	}
+
+	$(document).ready(function(){
+		
+		addwindowEvent();
+		
+		// 사원 정보 띄우는 메소드
+		
+		
+	
+	    $('.window .close2').click(function (e) {
+	        e.preventDefault();
+	        $('.mask, .window').hide();
+	    });
+	
+	    $('.mask').click(function () {
+	        $(this).hide();
+	        $('.window').hide();
+	    });
+	});
+
+	// 사원 정보 띄우는 메소드
+	function wrapWindowByMask(){
+		
+	    var maskHeight = $(document).height();
+	    var maskWidth = $(window).width();
+	
+	    $('.mask').css({'width':maskWidth,'height':maskHeight});
+	
+	    
+	    
+	    $('.mask').show();
+	
+	    var left = ( $(window).scrollLeft() + ( $(window).width() - $('.window').width()) / 2 );
+	    var top = ( $(window).scrollTop() + ( $(window).height() - $('.window').height()) / 2 );
+	
+	    
+	    $('.window').css({'left':left,'top':top, 'position':'absolute'});
+	
+	    $('.window').show();
+	}
+	
+	
 
 
+
+
+
+		//체크박스 트리메뉴
 		$(function() {
 			$("#tree").treeview({
 				collapsed: true,
@@ -99,6 +317,17 @@ td {
 				
 			});
 		})
+		
+		
+		// 날짜 포맷 변환 메소드
+		function dateToYYYYMMDD(date){
+	    function pad(num) {
+	        num = num + '';
+	        return num.length < 2 ? '0' + num : num;
+	    }
+	    return date.getFullYear() + '-' + pad(date.getMonth()+1) + '-' + pad(date.getDate());
+		}
+
 		
 		    
        
@@ -142,8 +371,36 @@ td {
 			});		
 		});
 		
+		
+		// 전체검색
+		$("#allListView").click(function() {
+			
+			$("#ddd").empty();
+			$("#listView").show(); 
+			
+			$("input[name=checkDpt]:checkbox").each(function() {
+
+				$(this).attr("checked", false);
+
+			});
+			
+			$("input[name=chk]:checkbox").each(function() {
+
+				$(this).attr("checked", false);
+
+			});		
+			
+		});
+		
+		
+		
+		
+		
 		$("#getCheckedAll").click(function() {
 
+			
+			
+			
 			var items = [];
 			$('input[name=chk]:checked').each(function () {
 			    items.push($(this).val());
@@ -153,14 +410,43 @@ td {
 			    type      : 'POST',
 			    url         : 'organizationChart2.do',
 			    traditional : true,
+			    dataType : "json",
 			    data        : {
 			        'main' : items.join(",")
 			    },
 			    success     : function(data) {
-			        console.log('test : ',data);
+			    	
+			    	$("#listView").hide(); 
+			    	$("#ddd").empty();
+			    	
+			    	for(var i in data){
+			    		
+			    	var no =parseInt(i)+1;
+				    	
+				    	var date = dateToYYYYMMDD(new Date(data[i].eHireDate));
+				    	
+			    		
+			    	var html = $("#ddd").html()
+					+ "<tr bgcolor='#FFFFFF' height='26'>"+
+
+										"<td class='employee_list_emp'>"+no+"</td>"
+										+"<td class='employee_list_emp'><a href='javascript:void(0);' onclick='callFunction("+data[i].eKey+");' class='showMask' >"
+										+"<b>"+data[i].eId+"</b></a></td>"
+										+"<td class='employee_list_emp'>"+data[i].department+"</td>"
+										+"<td class='employee_list_emp'>"+data[i].job+"</td>"
+										+"<td class='employee_list_emp'><a href='javascript:void(0);' onclick='callFunction("+data[i].eKey+");' class='showMask' >"
+										+"<b>"+data[i].eName+"</b></a></td>"
+										+"<td class='employee_list_emp'>"+data[i].eExten+"</td>"
+										+"<td class='employee_list_emp'>"+data[i].ePhone+"</td>"
+										+"<td class='employee_list_emp'>"+date+"</td></tr>";
+										
+			 $("#ddd").html(html); 
+			    	}
+			    	addwindowEvent();
+			    	
 			    },
 			    error       : function(request, status, error) {
-			        alert(error);
+			        alert("사원을 체크해주세요.");
 			    }
 			});
 	});
@@ -168,6 +454,15 @@ td {
 		
 		
 	});
+		
+		
+		function checkUser(){
+			
+		}
+		
+		
+		
+		
 		
 		
 		
@@ -193,7 +488,7 @@ td {
 				</ol>
 			</section>
 
-			<section style="height: 100%; max-height: 3000px !important;">
+			<section style="height: 100%; ">
 				<div class="frame">
 					<div class="org_map">
 						<div class="org_map1">
@@ -208,12 +503,12 @@ td {
 										<c:if test="${status.count eq 1 }">
 											<li><label> <input type="checkbox"
 													value="${e2.department }" name="checkDpt"
-													onclick="chkSubCheckbox(${e2.eDepartFk}, this)"> <strong><b>${e2.department}</b></strong>
+													onclick="chkSubCheckbox(${e2.eDepartFk}, this)"> <strong><b style="color:black;">${e2.department}</b></strong>
 											</label> <c:forEach items="${list }" var="e3">
 													<c:if test="${e2.department eq e3.department }">
 														<ul style="display: block;">
 															<li><label> <input type="checkbox"
-																	value="${e3.eKey }" name="chk" class="${e2.eDepartFk}">${e3.eName }
+																	value="${e3.eKey }" name="chk" class="${e2.eDepartFk}"> ${e3.eName } ${e3.job }
 															</label></li>
 														</ul>
 													</c:if>
@@ -223,12 +518,12 @@ td {
 											<c:if test="${list[status.index-1].department ne  e2.department}">
 												<li><label> <input type="checkbox"
 														value="${e2.department }" name="checkDpt"
-														onclick="chkSubCheckbox(${e2.eDepartFk}, this)"> <strong><b>${e2.department }</b></strong>
+														onclick="chkSubCheckbox(${e2.eDepartFk}, this)"> <strong><b style="color:black;">${e2.department }</b></strong>
 												</label> <c:forEach items="${list }" var="e4">
 														<c:if test="${e2.department eq e4.department }">
 															<ul style="display: block;">
 																<li><label> <input type="checkbox"
-																		value="${e4.eKey }" name="chk" class="${e2.eDepartFk}">${e4.eName }
+																		value="${e4.eKey }" name="chk" class="${e2.eDepartFk}"> ${e4.eName } ${e4.job }
 																</label></li>
 															</ul>
 														</c:if>
@@ -238,7 +533,12 @@ td {
 									</c:forEach>
 
 								</ul>
+								
 							</div>
+							<%
+							
+							%>
+							
 
 
 						</div>
@@ -249,7 +549,10 @@ td {
 							<button type="button" class="btn bg-orange margin" id="checkAll">전체선택</button>
 							<button type="button" class="btn bg-orange margin"
 								id="uncheckAll">전체해제</button>
+								
 							<div id="sidetreecontrol">
+							<button type="button" class="btn bg-maroon margin"
+								id="allListView">전체검색</button>
 								<a href="?#"><button type="button"
 										class="btn bg-orange margin">전체닫기</button></a> <a href="?#"><button
 										type="button" class="btn bg-orange margin">전체열기</button></a>
@@ -262,16 +565,16 @@ td {
 									href="memberAdd.do"><button type="button"
 										class="btn bg-purple margin">사원등록</button></a>
 							</div>
-							<a href=""><button type="button" class="btn bg-olive margin">쪽지보내기</button></a>
+							<button type="button" class="btn bg-olive margin" onclick="checkUser();">쪽지보내기</button>
 						</div>
 
 					</div>
 
 					<div class="employee_list">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0"
-							class="tbl_board1">
+							class="tbl_board1" style="color:#585858;">
 							<tbody>
-								<tr height="24">
+								<tr height="24" style="text-align:center;">
 									<td class="employee_list_tab">No</td>
 									<td class="employee_list_tab">아이디</td>
 									<td class="employee_list_tab">부서</td>
@@ -281,28 +584,57 @@ td {
 									<td class="employee_list_tab">핸드폰</td>
 									<td class="employee_list_tab">입사일</td>
 								</tr>
-								<c:forEach items="${list }" var="e">
+								</tbody>
+								<tbody id="listView">
+								<c:forEach items="${list }" var="e" varStatus="status">
 									<tr bgcolor="#FFFFFF" height="26">
 
-										<td class="employee_list_emp">1</td>
-										<td class="employee_list_emp"><a
-											href="javascript:ef_open(5017)"><b>${e.eId}</b></a></td>
+										<td class="employee_list_emp">${status.index+1}</td>
+										<td class="employee_list_emp"><a href="javascript:void(0);" onclick="callFunction(${e.eKey});" class="showMask">
+										<b>${e.eId}</b></a></td>
 										<td class="employee_list_emp">${e.department}</td>
 										<td class="employee_list_emp">${e.job}</td>
-										<td class="employee_list_emp"><a
-											href="javascript:ef_open(5017)"><b>${e.eName}</b></a></td>
+										<td class="employee_list_emp"><a href="javascript:void(0);" onclick="callFunction(${e.eKey});" class="showMask">
+										<b>${e.eName}</b></a></td>
 										<td class="employee_list_emp">${e.eExten}</td>
 										<td class="employee_list_emp">${e.ePhone}</td>
 										<td class="employee_list_emp">${e.eHireDate}</td>
 									</tr>
 								</c:forEach>
-							</tbody>
+								</tbody>
+								<tbody id="ddd">
+								</tbody>
 						</table>
 
 
 					</div>
-
-
+					<div class="setDiv">
+					<div class="mask"></div>
+				    <div class="window">
+				    <div class="window_title" id="empInfoTitle">
+				   
+				    </div>
+				    <div class="window_pic">
+				    <div class="window_pic2">
+				    </div>
+				    </div>
+				    <div class="window_content">
+				    <table>
+				    <tbody id="empInfoView"> 
+				    </tbody>
+				    </table>
+				    </div>
+				    
+				    
+				    
+				    <button class="close2 btn btn-primary" id="joinBtn"  style="margin-bottom:10px; padding: 6px 20px;">닫기</button>
+				     <!-- <input type="button" href="#" class="close" style="margin-right:235px;" value="닫기"/> -->
+				     
+				       
+				        
+				        
+				    </div>
+					</div>
 
 
 
@@ -329,4 +661,21 @@ td {
      Both of these plugins are recommended to enhance the
      user experience. -->
 </body>
+
+<script type="text/javascript">
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </html>

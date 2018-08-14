@@ -37,7 +37,8 @@
 		<result property="eDepartFk" column="DEPARTKEY"/>
 		<result property="eJobcodeFk" column="JOBKEY"/>
 		<result property="eKey" column="EKEY"/>
-		
+		<result property="eNo" column="ENO"/>
+		<result property="eEmail" column="EMAIL"/>
 	</resultMap>
 	
 	
@@ -80,6 +81,9 @@ VALUES (SEQ_EMPLOYEE.NEXTVAL,  #{eNo}, 1, 'A' , #{eId}, #{ePwd},
 	  #{eBirth}, #{eHireDate}, 'aa' )
 </insert>
 	
+	
+	
+	<!-- 조직도 select 사원 리스트 출력 쿼리문-->
 	<select id="selectEmployeeList2"  resultMap="EmployeeMap">
 		SELECT
     E.E_ID AS "ID", 
@@ -98,6 +102,8 @@ JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
 ORDER BY  E_DEPART_FK ASC , E_JOBCODE_FK ASC
 	</select>
 	
+	
+	<!-- 사원등록 직급정보 출력 쿼리문-->
 	<select id="selectJobList"  resultMap="EmployeeMap">
 	SELECT
     DIV_INFO AS "JOB", 
@@ -108,6 +114,7 @@ ORDER BY  E_DEPART_FK ASC , E_JOBCODE_FK ASC
 	
 	</select>
 	
+	<!-- 사원등록 부서정보 출력 쿼리문-->
 	<select id="selectDepartList"  resultMap="EmployeeMap">
 	SELECT
     DIV_INFO AS "DEPARTMENT"  ,
@@ -116,6 +123,29 @@ ORDER BY  E_DEPART_FK ASC , E_JOBCODE_FK ASC
 	WHERE DIV_TYPE =2
 	ORDER BY DIV_KEY ASC
 	
+	</select>
+	
+	
+	<!-- 조직도 select 사원정보 팝업창 출력 쿼리문-->
+	<select id="selectEmployeeInfo" parameterType="int" resultMap="EmployeeMap">
+		SELECT
+    E.E_ID AS "ID", 
+    D.DIV_INFO AS "DEPARTMENT", 
+    J.DIV_INFO  AS "JOB", 
+    E.E_NAME AS "NAME", 
+    E.E_EXTEN AS "EXTEN", 
+    E.E_PHONE AS "PHONE", 
+    E.E_HIRE_DATE AS "HIREDATE",
+    D.DIV_KEY AS "DEPARTKEY",
+    J.DIV_KEY AS "JOBKEY",
+    E.E_KEY AS "EKEY",
+    E.E_NO AS "ENO",
+    E.E_EMAIL AS "EMAIL"
+    
+	FROM EMPLOYEE E
+	JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+	JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
+		WHERE E.E_KEY = #{eKey}
 	</select>
 	
 

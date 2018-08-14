@@ -1,6 +1,7 @@
 package com.jdl.css.employee.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,10 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeService eService;
+	
+	
+
+	
 
 	@RequestMapping("loginForm.do")
 	public String openLoginForm(){
@@ -38,10 +43,7 @@ public class EmployeeController {
 		return "redirect:index.do";
 	}
 	
-//	@RequestMapping("organizationChart.do")
-//	public String organizationChart(){	
-//		return "organizationChart";
-//	}
+	
 	
 	@RequestMapping("memberAdd.do")
 	public ModelAndView memberAdd(ModelAndView mv){
@@ -56,10 +58,10 @@ public class EmployeeController {
 	}
 	
 	
-	
+	//사원 등록
 	@RequestMapping("insertMember.do" )
 	public String memberJoin(@RequestParam("eBirth1") String eBirth1, @RequestParam("eHireDate1") String eHireDate1, EmployeeVo member){
-//		int result =eService.insertMember(member);
+
 		
 		String birth=eBirth1;
 		String hire=eHireDate1;
@@ -79,16 +81,22 @@ public class EmployeeController {
 		return "redirect:employee/organizationChart.do";
 	}
 	
+	
+	
 	@RequestMapping("department.do")
 	public String department(){
 		return "employee/department";
 	}
+	
+	
 	@RequestMapping("jobGrade.do")
 	public String jobGrade(){
 		return "employee/jobGrade";
 	}
 	
 
+	
+	//사원 정보 리스트 출력
 	@RequestMapping("organizationChart.do")
 	public ModelAndView employeeList(ModelAndView mv){
 		
@@ -99,85 +107,80 @@ public class EmployeeController {
 		return mv;
 	}
 	
+	
+	
+	
+	//select 사원 정보 리스트 출력
 	@RequestMapping("organizationChart2.do")
 	public @ResponseBody List<EmployeeVo> employeeList2(String main){
 		System.out.println(main);
 		
 		String[] eNo = main.split(",");
 			
-
+		
 			int[] eNo2 = new int[eNo.length];
-			
-			for(int i=1; i>eNo.length;i++){
+			int aa;
+			for(int i=0; i<eNo2.length;i++){
 				
  
-				eNo2[i] = Integer.parseInt(eNo[i]);
+				aa = Integer.parseInt(eNo[i]);
+				eNo2[i] = aa;
+				
 			}
-		 
 		
 		List<EmployeeVo> list = eService.selectEmployeeList();
-
-		System.out.println(list.get(0).geteKey());
+		List<EmployeeVo> selectList= new ArrayList<EmployeeVo>(list.size());
 		
-		int[] arry= new int[list.size()];
+		for(int i=0; i<eNo2.length;i++){
 		
-		String[] test = new String[eNo.length];
-		
-		for(int i=1; i>eNo.length;i++){
-		
-			for(int i2=1; i2>list.size();i2++){
+			for(int i2=0; i2<list.size();i2++){
 				
 				if(eNo2[i]==list.get(i2).geteKey()){
 					
-					test[i] = list.get(i2).geteName();
-				
+					selectList.add(list.get(i2));
 			
 				}
 			}
 		}
-		System.out.println(test[0]+test[1]);
 		
 		
-		return list;
+		
+		return selectList;
+	}
+	
+	
+	//select 사원 정보 팝업 출력
+	@RequestMapping("selectEmployeeInfo.do")
+	public @ResponseBody EmployeeVo selectEmployeeInfo(String main){
+		System.out.println(main);
+		
+		int eKey;
+		eKey = Integer.parseInt(main);
+		
+		EmployeeVo list = eService.selectEmployeeInfo(eKey);
+		
+		System.out.println(list);
+			return list;
 	}
 	
 	
 	
 	
-	
-		@RequestMapping("employeeIndex.do")
-	public String employeeIndex(){
-		return "employee/employeeIndex";
-	}
-		
-		
-//		@RequestMapping("selectEmployee.do")
-//		public ModelAndView selectEmployee(ModelAndView mv){
-//			
-//			List<EmployeeVo> list3 = eService.selectEmployee();
-////			System.out.println(list);
-//			mv.addObject("list3", list3);
-//			mv.setViewName("organizationChart");
-//			return mv;
-//		}
-//		
-		
-		
-		
-	
-	
-	
-//	@RequestMapping("insertMember.do" )
-//	public String memberJoin(@RequestParam("eExten") int eExten, @RequestParam("ePhone") String ePhone){
-//		
-//		
-//		
-//		System.out.println(eExten);
-//		System.out.println(ePhone);
-//		
-//		
-//		return "redirect:organizationChart.do";
+//		@RequestMapping("employeeIndex.do")
+//	public String employeeIndex(){
+//		return "employee/employeeIndex";
 //	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	
 	

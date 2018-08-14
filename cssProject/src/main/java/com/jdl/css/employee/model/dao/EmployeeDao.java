@@ -37,4 +37,8 @@ public class EmployeeDao {
 		return sqlSession.selectList("EmployeeMapper.selectDepartList");
 	}
 
+	public EmployeeVo selectEmployeeInfo(int eKey) {
+		return sqlSession.selectOne("EmployeeMapper.selectEmployeeInfo", eKey);
+	}
+
 }
