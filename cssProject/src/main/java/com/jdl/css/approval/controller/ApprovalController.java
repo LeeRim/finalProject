@@ -57,6 +57,39 @@ public class ApprovalController {
 		mv.setViewName("approval/draftedPage");
 		return mv;
 	}
+	
+	@RequestMapping("receivedPage.do")
+	public ModelAndView openReceivedPage(HttpSession session,ModelAndView mv){
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		List<ApprovalVo> allList = aService.selectReceivedApprovalAllList(user.geteKey());
+		List<ApprovalVo> ingList = aService.selectReceivedApprovalIngList(user.geteKey());
+		List<ApprovalVo> complList = aService.selectReceivedApprovalComplList(user.geteKey());
+		List<ApprovalVo> compaList = aService.selectReceivedApprovalCompaList(user.geteKey());
+		mv.addObject("allList", allList);
+		mv.addObject("ingList", ingList);
+		mv.addObject("complList", complList);
+		mv.addObject("compaList", compaList);
+		mv.setViewName("approval/receivedPage");
+		return mv;
+	}
+	
+	@RequestMapping("waitingPage.do")
+	public ModelAndView openWaitingPage(HttpSession session,ModelAndView mv){
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		List<ApprovalVo> waitingList = aService.selectWaitingApprovalList(user.geteKey());
+		mv.addObject("waitingList", waitingList);
+		mv.setViewName("approval/waitingPage");
+		return mv;
+	}
+	
+	@RequestMapping("expectedPage.do")
+	public ModelAndView openExpectedPage(HttpSession session,ModelAndView mv){
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		List<ApprovalVo> expectedList = aService.selectExpectedApprovalList(user.geteKey());
+		mv.addObject("expectedList", expectedList);
+		mv.setViewName("approval/expectedPage");
+		return mv;
+	}
 
 	@RequestMapping("jobPropsalPage.do")
 	public String openJobPropsalPage(HttpSession session, Model model) {
@@ -138,11 +171,11 @@ public class ApprovalController {
 
 		List<EmployeeVo> employee = nService.selectEmployee(companyK);
 		List<EmployeeVo> department = nService.selectDepartment(companyK);
-		// System.out.println(department);
-		// System.out.println(employee);
+		System.out.println(department);
+		System.out.println(employee);
 
-		model.addAttribute("employee", employee);
-		model.addAttribute("department", department);
+		//model.addAttribute("employee", employee);
+		//model.addAttribute("department", department);
 
 		return "approval/selectApproverPage";
 	}
@@ -211,7 +244,7 @@ public class ApprovalController {
 
 			// System.out.println("file 명 = "+file.getOriginalFilename());
 			 attach.setAttaFileName(file.getOriginalFilename());
-	         attach.setAttaFilePath(path+"\\");
+	         attach.setAttaFilePath("approval");
 	         attach.setAttaLocation(app.getaKey());
 	         attachList.add(attach);
 		}
@@ -221,6 +254,14 @@ public class ApprovalController {
 			int attachResult = attService.insertAttachments(attachList);
 			//System.out.println(attachResult);
 		return "approval/approvalPage";
-
+	}
+	
+	@RequestMapping("openJobPropsalDetail.do")
+	public ModelAndView openJobPropsalDetail(ModelAndView mv,ApprovalVo a){
+		a = aService.selectApprovalDetail(a);
+		System.out.println(a);
+		mv.addObject("approval", a);
+		mv.setViewName("approval/approvalForm/jobPropsalDetail");
+		return mv;
 	}
 }

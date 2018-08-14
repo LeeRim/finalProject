@@ -23,6 +23,10 @@
 	<typeAlias type="com.jdl.css.approval.model.vo.ApprovalVo" alias="ApprovalVo" /> 
 	<typeAlias type="com.jdl.css.approval.model.vo.ApprovalConditionVo" alias="AppConVo" /> 
 	<typeAlias type="com.jdl.css.approval.model.vo.JobPropsalVo" alias="JobPropsalVo" />
+	<typeAlias type="com.jdl.css.approval.model.vo.OrderFormVo" alias="OrderFormVo" />
+	<typeAlias type="com.jdl.css.approval.model.vo.OrderTableLinkedVo" alias="OrderTableLinkedVo" />
+	<typeAlias type="com.jdl.css.approval.model.vo.SpendingResolutionVo" alias="SpendingResolutionVo" />
+	<typeAlias type="com.jdl.css.approval.model.vo.VacationFormVo" alias="VacationFormVo" />
   </typeAliases>
 
   <mappers>
