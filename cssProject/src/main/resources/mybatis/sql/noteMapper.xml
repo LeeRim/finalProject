@@ -128,5 +128,60 @@
 	    SET SN_TRASHDELETE_YN = 'Y'
 	    WHERE SN_KEY = #{snKey}
 	</delete>
+	
+	<select id="selectSearchSendNote" parameterType="NoteVo" resultMap="resultNoteVo">
+		SELECT S.SN_KEY, S.SN_SENDER_FK, S.SN_TITLE,S.SN_CONTENT, S.SN_WRITE_DATE, S.SN_DELETE_YN,S.SN_ATTACH_YN, S.SN_TRASHDELETE_YN
+		    , E.E_KEY, E.E_NO, E.C_KEY_FK, E.E_TYPE, E.E_ID, E.E_PWD,E.E_NAME
+		    , E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS,E.E_EXTEN,E.E_PHONE,E.E_EMAIL
+		    , E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN, E.E_PHOTO,E.E_BIRTH
+        FROM SENDNOTE S
+        LEFT JOIN RECEIVENOTE R ON(S.SN_KEY = R.RN_NOTE_FK)
+        LEFT JOIN EMPLOYEE E ON(R.RN_RECIPIENT_FK = E.E_KEY)
+        WHERE SN_SENDER_FK = #{snSenderFk}
+        AND S.SN_TITLE LIKE '%'||#{keyword}||'%'
+        OR S.SN_CONTENT LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="selectReceiveNote" parameterType="int" resultType="ReceivenoteVo">
+		SELECT R.RN_KEY, R.RN_NOTE_FK, R.RN_RECIPIENT_FK, R.RN_READ_YN, R.RN_DELETE_YN
+	        ,S.SN_KEY, S.SN_TITLE, S.SN_WRITE_DATE,S.SN_ATTACH_YN
+	        ,E.E_NAME
+		FROM RECEIVENOTE R
+		JOIN SENDNOTE S ON (R.RN_NOTE_FK = S.SN_KEY)
+		JOIN EMPLOYEE E ON (S.SN_SENDER_FK = E.E_KEY)
+		WHERE RN_RECIPIENT_FK =#{eKey}
+	</select>
+	
+	<update id="updateReadYnReceive" parameterType="ReceivenoteVo">
+		UPDATE RECEIVENOTE
+		 SET RN_READ_YN = 'Y'
+	    WHERE RN_KEY = #{rnKey}
+	</update>
+	
+	<select id="selectReceiveNoteDetail" parameterType="ReceivenoteVo" resultType="ReceivenoteVo">
+		SELECT RN_KEY, RN_NOTE_FK, RN_RECIPIENT_FK, RN_READ_YN, RN_DELETE_YN
+		FROM RECEIVENOTE
+		WHERE RN_KEY = #{rnKey}
+	</select>
+	
+	<update id="updateReceiveDeleteYn" parameterType="ReceivenoteVo">
+		UPDATE RECEIVENOTE
+		SET RN_DELETE_YN = 
+		<choose>
+			<when test="rnDeleteYn eq 'N'.toString()">
+				'Y'
+			</when>
+			<otherwise>
+				'N'
+			</otherwise>
+		</choose>
+		WHERE RN_KEY = #{rnKey}
+	</update>
+	
+	<update id ="updateReceiveNoteDel" parameterType="ReceivenoteVo">
+		UPDATE RECEIVENOTE
+		SET RN_DELETE_YN = 'X'
+		WHERE RN_KEY =#{rnKey}
+	</update>
 
 </mapper>

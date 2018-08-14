@@ -135,12 +135,9 @@ public class NoteController {
 	
 	@RequestMapping("sendNoteDetail.do")
 	public ModelAndView sendNoteDetail(ModelAndView mv ,NoteVo note){
-//		System.out.println(note);
 		NoteVo noteDetail = service.selectSendNoteDetail(note);
-//		System.out.println(noteDetail);
-//		System.out.println("삭제 유무 = " +noteDetail.getSnDeleteYn());
 		List<ReceivenoteVo> receiveList = service.selectReceiveList(note);
-//		System.out.println(receiveList);
+		
 		mv.addObject("receiveList", receiveList);
 		mv.addObject("sendDetail", noteDetail);
 		mv.setViewName("note/sendNoteDetail");
@@ -184,6 +181,27 @@ public class NoteController {
 		System.out.println(resultUpdate);
 		
 		mv.setViewName("redirect:sendNoteTrashList.do");
+		return mv;
+	}
+	
+	@RequestMapping("searchSendNote.do")
+	public ModelAndView searchSendNote(ModelAndView mv, NoteVo note ,HttpSession session){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		//사원키 객체에 저장
+		note.setSnSenderFk(user.geteKey());
+		
+		List<NoteVo> searchList = service.selectSearchSendNote(note);
+		
+		mv.addObject("sendNoteList", searchList);
+		String viewName = "";
+		
+		if(note.getSnDeleteYn().equals("N")){
+			viewName="note/sendNoteList";
+		}else if(note.getSnDeleteYn().equals("Y")){
+			viewName="note/sendNoteTrashList";
+		}
+		
+		mv.setViewName(viewName);
 		return mv;
 	}
 	

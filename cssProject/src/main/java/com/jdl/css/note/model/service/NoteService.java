@@ -85,6 +85,10 @@ public class NoteService {
 		return result;
 	}
 
+	public List<NoteVo> selectSearchSendNote(NoteVo note) {
+		return dao.selectSearchSendNote(note);
+	}
+
 
 
 }

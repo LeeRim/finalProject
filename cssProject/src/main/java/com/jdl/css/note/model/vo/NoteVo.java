@@ -31,6 +31,9 @@ public class NoteVo {
 	private List<EmployeeVo> employee;
 	
 	
+	//search용
+	private String keyword;
+	
 	public NoteVo() {
 	}
 
@@ -144,6 +147,14 @@ public class NoteVo {
 
 	public void setSnTrashdeleteYn(String snTrashdeleteYn) {
 		this.snTrashdeleteYn = snTrashdeleteYn;
+	}
+	
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	@Override

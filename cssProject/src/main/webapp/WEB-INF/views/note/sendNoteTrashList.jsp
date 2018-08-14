@@ -14,6 +14,12 @@
 	<script src="resources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="resources/bower_components/fastclick/lib/fastclick.js"></script>
 	<script src="resources/plugins/iCheck/icheck.min.js"></script>
+	
+	<!-- DataTables 페이징 관련-->
+	<link rel="stylesheet" href="resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+	<!-- DataTables -->
+	<script src="resources/bower_components/datatables.net/js/jquery.dataTables.js"></script>
+	<script src="resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <style>
   	.table{
   		cursor: pointer;
@@ -76,7 +82,19 @@
 	      }
 	      $(this).data("clicks", !clicks);
 	    });
+
+	    
+	  $(".thead").hide();
+	  $('#allTable').DataTable({
+	       'paging' : true,
+	       'lengthChange' : false,
+	       'searching' : false,
+	       'ordering' : true,
+	       'info' : true,
+	       'autoWidth' : false
+	  });
 	});
+  
   
   </script>
 </head>
@@ -109,8 +127,11 @@
 
               <div class="box-tools pull-right">
                 <div class="has-feedback">
-                  <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                <form action="searchSendNote.do" method="get">
+                  <input type="text" class="form-control input-sm" placeholder="Search Mail" name="keyword">
+                  <input type="hidden" name="snDeleteYn" value="Y"/>
                   <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  </form>
                 </div>
               </div>
               <!-- /.box-tools -->
@@ -133,7 +154,17 @@
                 <!-- /.pull-right -->
               </div>
               <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped" >
+                <table class="table table-hover table-striped" id="allTable"  >
+                <thead class="thead">
+                	<tr>	
+                		<th></th>
+                		<th></th>
+                		<th></th>
+                		<th></th>
+                		<th></th>
+                		<th></th>
+                	</tr>
+                </thead>
                   <tbody>
                   <c:forEach items="${requestScope.sendNoteList}" var ="sendNote">
                   	<c:if test="${sendNote.snDeleteYn == 'Y' && sendNote.snTrashdeleteYn == 'N'}">
@@ -168,23 +199,6 @@
               <!-- /.mail-box-messages -->
             </div>
             <!-- /.box-body -->
-            <div class="box-footer no-padding">
-              <div class="mailbox-controls">
-                <!-- Check all button -->
-                <div class="btn-group">
-                   	
-                </div>
-                <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.pull-right -->
-              </div>
-            </div>
           </div>
           <!-- /. box -->
         </div>
