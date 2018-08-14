@@ -39,11 +39,24 @@
   		      checkKey.push($(this).val());
   		 });  		
   		 console.log(checkKey);
-  		if (confirm("휴지통으로 보내시겠습니까??") == true){    //확인
-	  		 location.href="sendNoteDelete.do?snKeies="+checkKey+"&snDeleteYn=N";
+  		if (confirm("정말로 삭제하시겠습니까?") == true){    //확인
+	  		 location.href="receiveNoteDelete.do?rnKeies="+checkKey+"&rnDeleteYn=Y";
   		}else{   //취소
   		    return;
   		}
+  	}
+  	function checkRestore(){
+  		var checkKey = new Array();
+		 $('.checkNote:checked').each(function() { 
+		      console.log($(this).val());
+		      checkKey.push($(this).val());
+		 });  		
+		 console.log(checkKey);
+		if (confirm("복구 하시겠습니까?") == true){    //확인
+	  		 location.href="receiveNoteRestore.do?rnKeies="+checkKey+"&rnDeleteYn=Y";
+		}else{   //취소
+		    return;
+		}
   	}
 	
   	$(function () {
@@ -106,7 +119,7 @@
         <div class="col-md-9" style="width: 100%" >
           <div class="box box-primary" style="width: 98%; margin-top: 50px; margin-left: 10px;">
             <div class="box-header with-border">
-              <h3 class="box-title">보낸쪽지함</h3>
+              <h3 class="box-title">보낸쪽지함 휴지통</h3>
 
               <div class="box-tools pull-right">
                 <div class="has-feedback">
@@ -128,6 +141,7 @@
                 <div class="btn-group">
                 	<!--삭제 버튼  -->
                   <button type="button" class="btn btn-default btn-sm" onclick="checkDelete()"><i class="fa fa-trash-o"></i></button>
+                  <button type="button" class="btn btn-default btn-sm" onclick="checkRestore()"><i class="fa fa-refresh"></i></button>
                 </div>
                 <!-- /.btn-group -->
                 <div class="pull-right">
@@ -148,29 +162,27 @@
                 	</tr>
                 </thead>
                   <tbody>
-                  <c:forEach items="${requestScope.sendNoteList}" var ="sendNote">
-                  	<c:if test="${sendNote.snDeleteYn == 'N'}">
+                  <c:forEach items="${requestScope.receiveNoteList}" var ="receiveNote">
+                  	<c:if test="${receiveNote.rnDeleteYn == 'Y'}">
 	                  <tr>
-	                    <td style="width: 5%"><input type="checkbox" class="checkNote" value="${sendNote.snKey}"></td>
-			                    <td class="mailbox-star"><i class="fa fa-envelope-o"></i></td>
-		                    <td class="mailbox-name" style="width: 20%">
-			                    <c:forEach items="${sendNote.employee}" var ="employee" varStatus="st">
-			                    		<c:if test="${st.index < 2}">
-					                    	<c:out value="${employee.eName}"/> 
-					                    </c:if>
-					                    <c:if test="${st.index eq 3}">
-					                    	...
-					                    </c:if>
-			                    </c:forEach>
-		                    </td>
-	                    <td class="mailbox-subject" style="width: 50%"><a href="sendNoteDetail.do?snKey=${sendNote.snKey}" ><c:out value="${sendNote.snTitle}"/></a></td>
+	                    <td style="width: 5%"><input type="checkbox" class="checkNote" value="${receiveNote.rnKey}" /></td>
+	                    	<c:choose>
+	                    		<c:when test="${receiveNote.rnReadYn == 'N'}">
+				                    <td class="mailbox-star"><i class="fa  fa-envelope"></i></td>
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<td class="mailbox-star"><i class="fa  fa-envelope-o"></i></td>
+	                    		</c:otherwise>
+	                    	</c:choose>
+		                    <td class="mailbox-name" style="width: 20%"><c:out value="${receiveNote.eName}"/></td>
+	                    <td class="mailbox-subject" style="width: 50%"><a href="receiveNoteDetail.do?snKey=${receiveNote.snKey}&rnKey=${receiveNote.rnKey}" ><c:out value="${receiveNote.snTitle}"/></a></td>
 	                    
 	                    <td class="mailbox-attachment">
-	                    	<c:if test="${sendNote.snAttachYn eq 'Y'}">
+	                    	<c:if test="${receiveNote.snAttachYn eq 'Y'}">
 	                    		<i class="fa fa-paperclip"></i>
 	                    	</c:if>
 	                    </td>
-	                    <td class="mailbox-date"><c:out value="${sendNote.snWriteDate}"/></td>
+	                    <td class="mailbox-date"><c:out value="${receiveNote.snWriteDate}"/></td>
 	                  </tr>
                   	</c:if>
                   </c:forEach>

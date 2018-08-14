@@ -57,5 +57,8 @@ public class NoteDao {
 		return session.update("NoteMapper.updateTeashDelSendNote", note);
 	}
 
+	public List<NoteVo> selectSearchSendNote(NoteVo note) {
+		return session.selectList("NoteMapper.selectSearchSendNote", note);
+	}
 
 }

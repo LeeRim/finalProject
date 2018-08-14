@@ -87,6 +87,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	            $('.file-list').html(filenames);
 	         });
 	      });
+	   
+	   function check(){
+		   if($("#receiveNo").val() == ""){
+			   alert("받는 사람을 입력해주세요.");
+			   return false;
+		   }else if($("#title").val() == ""){
+			   alert("제목을 입력해주세요.");
+			   return false;
+		   }else{
+			   return true;
+		   }
+			   
+	   }
   </script>
  
 </head>
@@ -157,7 +170,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <input class="form-control" placeholder="To:" id="to"  name="receive" readonly >
               </div>
               <div class="form-group">
-                <input class="form-control" placeholder="Subject:" name="snTitle">
+                <input class="form-control" placeholder="Subject:" name="snTitle" id="title">
               </div>
               <div class="form-group">
                     <textarea id="summernote" class="form-control" style="height: 300px" name="snContent">
@@ -176,7 +189,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.box-body -->
             <div class="box-footer">
               <div class="pull-right">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-envelope-o"></i> 전송</button>
+                <button type="submit" class="btn btn-primary" onclick="return check()"><i class="fa fa-envelope-o"></i> 전송</button>
               </div>
               <button onclick="cancel();" class="btn btn-default"><i class="fa fa-times"></i> 취소</button>
             </div>
