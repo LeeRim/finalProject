@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jdl.css.company.model.vo.CompanyVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 
 
@@ -26,7 +27,7 @@ public class AdminDao {
 	}
 
 	public int updateCompanyLevel(CompanyVo company) {
-		return sqlSession.update("AdminMapper.updateCcompanyLevel",company);
+		return sqlSession.update("AdminMapper.updateCompanyLevel",company);
 		
 	}
 
@@ -60,6 +61,18 @@ public class AdminDao {
 	
 	public List<CompanyVo> selectNowCalList() {
 		return sqlSession.selectList("AdminMapper.selectNowCalList");
+	}
+
+	public EmployeeVo companyIdCheck(String id) {
+		return sqlSession.selectOne("AdminMapper.selectCompanyIdCheck",id);
+	}
+
+	public int insertCompany(CompanyVo company) {
+		return sqlSession.insert("AdminMapper.insertCompany",company);
+	}
+
+	public int insertEmployeeAdmin(EmployeeVo employee) {
+		return sqlSession.insert("AdminMapper.insertEmployeeAdmin",employee);
 	}
 	
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jdl.css.admin.model.dao.AdminDao;
 import com.jdl.css.company.model.vo.CompanyVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 
 
@@ -66,6 +67,19 @@ public class AdminService {
 	public List<CompanyVo> selectNowCalList(){
 		return dao.selectNowCalList();
 	}
+
+	public EmployeeVo companyIdCheck(String id) {
+		return dao.companyIdCheck(id);
+	}
+
+	public int insertCompany(CompanyVo company) {
+		return dao.insertCompany(company);
+	}
+
+	public int insertEmployeeAdmin(EmployeeVo employee) {
+		return dao.insertEmployeeAdmin(employee);
+	}
+
 
 
 }

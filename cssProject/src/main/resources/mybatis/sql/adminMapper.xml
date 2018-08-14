@@ -10,16 +10,18 @@
 	</sql>
 
 	<select id="selectCompanyList" resultType="Company">
-		<include refid="select"></include>
+		SELECT C_NAME, C_ADDRESS, C_MILEAGE, C_CLOSEDAY, C_LEVEL, C_OWNER, (SELECT COUNT(*) FROM EMPLOYEE) AS COUNT
+		FROM COMPANY
 		WHERE C_LEVEL != 0
 	</select>
 	
 	<select id="selectCompanySetList" resultType="Company">
-		<include refid="select"></include>
+		SELECT C_NAME, C_ADDRESS, C_MILEAGE, C_CLOSEDAY, C_LEVEL, C_OWNER, (SELECT COUNT(*) FROM EMPLOYEE) AS COUNT
+		FROM COMPANY
 		WHERE C_LEVEL = 0
 	</select>
 	
-	<update id="updateCcompanyLevel" parameterType="Company">
+	<update id="updateCompanyLevel" parameterType="Company">
 		UPDATE COMPANY
 		SET C_LEVEL = #{cLevel}
 		WHERE C_KEY = #{cKey}
@@ -54,6 +56,7 @@
 		SELECT COORD_KEY_FK, CITY, LAT, LNG, COUNT
 		FROM (SELECT COORD_KEY_FK, COUNT(*) AS "COUNT"
 			        FROM COMPANY
+			        WHERE C_LEVEL != 0
 			        GROUP BY COORD_KEY_FK)
 		JOIN COORDINATE ON(COORD_KEY_FK = COORD_KEY)
 	</select>
@@ -62,6 +65,7 @@
 		SELECT CITY,COUNT, PER
 		FROM (SELECT COORD_KEY_FK, COUNT(*) AS "COUNT", trunc(ratio_to_report(count(*)) over() * 100) as "PER"
 		      FROM COMPANY
+		      WHERE C_LEVEL != 0
 		      GROUP BY COORD_KEY_FK
 		      ORDER BY COUNT DESC)
 		JOIN COORDINATE ON(COORD_KEY_FK = COORD_KEY)
@@ -81,5 +85,24 @@
 		WHERE C_CLOSEDAY = TO_DATE(TO_CHAR(SYSDATE, 'MM/DD/YYYY'), 'MM/DD/YYYY') AND ROWNUM <![CDATA[ <= ]]> 6
 		ORDER BY C_NAME ASC
 	</select>
+	
+	<select id="selectCompanyIdCheck" resultType="EmployeeVo">
+		SELECT E_ID
+		FROM EMPLOYEE
+		WHERE E_ID = #{id}
+	</select>
+	
+	<insert id="insertCompany" parameterType="Company">
+		INSERT INTO COMPANY(C_KEY, C_NAME, C_OWNER, C_ADDRESS, C_LEVEL, COORD_KEY_FK)
+		VALUES(SEQ_COMPANY.NEXTVAL, #{cName}, #{cOwner}, #{cAddress}, 0, (SELECT COORD_KEY FROM COORDINATE WHERE CITY = #{city}))
+		<selectKey keyProperty="cKey" resultType="Integer" order="AFTER">
+             SELECT SEQ_COMPANY.CURRVAL FROM dual 
+      </selectKey>
+	</insert>
+	
+	<insert id="insertEmployeeAdmin" parameterType="EmployeeVo">
+		INSERT INTO EMPLOYEE(E_KEY, C_KEY_FK, E_TYPE, E_ID, E_PWD)
+		VALUES(SEQ_EMPLOYEE.NEXTVAL, #{cKeyFk},1, #{eId}, #{ePwd})
+	</insert>
 
 </mapper>

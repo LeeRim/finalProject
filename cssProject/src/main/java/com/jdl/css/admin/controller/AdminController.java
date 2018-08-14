@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.admin.model.service.AdminService;
 import com.jdl.css.company.model.vo.CompanyVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 
 
@@ -23,9 +24,28 @@ public class AdminController {
 	@Autowired
 	AdminService service;
 	
+	@RequestMapping("companyJoinForm.do")
+	public String companyJoinForm(){
+		return "admin/companyJoinForm";
+	}
+	
+	@RequestMapping(value="companyIdCheck.do", produces="application/text; charset=utf-8")
+	public @ResponseBody String companyIdCheck(String id){
+		EmployeeVo employee = service.companyIdCheck(id);
+		String msg = "";
+		if(employee != null){
+			msg = "중복 된 아이디 입니다.";
+		}
+		return msg;
+	}
+	
 	@RequestMapping("companyJoin.do")
-	public String companyJoin(){
-		return "admin/companyJoin";
+	public String comapnyJoin(CompanyVo company, EmployeeVo employee){
+		service.insertCompany(company);
+		
+		employee.setcKeyFk(company.getcKey());
+		service.insertEmployeeAdmin(employee);
+		return "redirect:index.do";
 	}
 	
 	@RequestMapping("adminMain.do")
