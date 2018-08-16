@@ -63,21 +63,21 @@
 	float: left;
 	width: 340px;
 	padding:20px 0;
-	background: #E6E6E6;
+	background: #F2F2F2;
 	border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
     border-bottom: 3px solid #3c8dbc;
 }
 
 .employee_list {
 	float: left;
 	width: 900px;
-	
+	height: 619px;
+	background:white;
     border-top-right-radius: 3px;
 /* 	border: 1px solid #848484; */
 	border-top: 3px solid #3c8dbc;
-	border-bottom: 1px solid #3c8dbc;
 	font-size: 15px !important;
+	border-bottom: 3px solid #3c8dbc;
 }
 
 .employee_list_tab {
@@ -153,11 +153,18 @@ td {
 		/* border-bottom : 1px solid #A4A4A4; */
 		}   
 		.window_pic2{
+		
 		display:block;
-		width:150px;
-		height:150px;
+		width:152px;
+		height:152px;
 		border: 1px solid #A4A4A4;
 		}
+		.emp_photo{
+		width:150px;
+		height:150px;
+		
+		}
+		
 		
 		.window_content{
 		display:inline-block;
@@ -218,13 +225,14 @@ td {
 		    success     : function(data) {
 		    	
 		    	$("#empInfoTitle").empty();
+		    	$("#empInfoPhoto").empty();
 		    	$("#empInfoView").empty();
 		    	
 		    	var html1 = $("#empInfoTitle").html()+"'"+data.department+" "+data.eName+" "+data.job+"'님의 신상정보"
-		    	
-		    	
-	    		
-		    	var html2 = $("#empInfoView").html()+
+
+		    	var html2 = $("#empInfoPhoto").html()+"<img class='emp_photo' src='resources/dist/img/"+data.ePhoto+"'/>"
+		    		
+		    	var html3 = $("#empInfoView").html()+
 		    	
 		    	"<tr><td class='window_content_left'>사원번호</td>"
 			    +"<td class='window_content_right'>"+data.eNo+"</td>"
@@ -245,7 +253,8 @@ td {
 		    	
 			    
 			    $("#empInfoTitle").html(html1); 
-			    $("#empInfoView").html(html2); 
+			    $("#empInfoPhoto").html(html2); 
+			    $("#empInfoView").html(html3); 
 		    	
 			    
 			    
@@ -574,7 +583,7 @@ td {
 						<table width="100%" border="0" cellspacing="0" cellpadding="0"
 							class="tbl_board1" style="color:#585858;">
 							<tbody>
-								<tr height="24" style="text-align:center;">
+								<tr height="24" style="text-align:center; background: #F2F2F2;">
 									<td class="employee_list_tab">No</td>
 									<td class="employee_list_tab">아이디</td>
 									<td class="employee_list_tab">부서</td>
@@ -615,7 +624,7 @@ td {
 				   
 				    </div>
 				    <div class="window_pic">
-				    <div class="window_pic2">
+				    <div class="window_pic2" id="empInfoPhoto">
 				    </div>
 				    </div>
 				    <div class="window_content">

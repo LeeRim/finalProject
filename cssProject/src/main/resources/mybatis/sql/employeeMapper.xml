@@ -39,6 +39,7 @@
 		<result property="eKey" column="EKEY"/>
 		<result property="eNo" column="ENO"/>
 		<result property="eEmail" column="EMAIL"/>
+		<result property="ePhoto" column="PHOTO"/>
 	</resultMap>
 	
 	
@@ -140,7 +141,8 @@ ORDER BY  E_DEPART_FK ASC , E_JOBCODE_FK ASC
     J.DIV_KEY AS "JOBKEY",
     E.E_KEY AS "EKEY",
     E.E_NO AS "ENO",
-    E.E_EMAIL AS "EMAIL"
+    E.E_EMAIL AS "EMAIL",
+    E.E_PHOTO AS "PHOTO"
     
 	FROM EMPLOYEE E
 	JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
