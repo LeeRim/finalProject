@@ -26,6 +26,9 @@
 	<script src="resources/dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="resources/dist/js/demo.js"></script>
+	<script>
+	
+	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -281,17 +284,17 @@
 				 	<input name="title" type="text" class="form-control" placeholder="Event Title"/>
                 	</li>
 				 	<li>일정 시작일
-				 	<input name="startDate" type="date"/>
+				 	<input name="startDate" type="date" class="form-control"/>
 				 	</li>
 				 	<li>일정 종료일
-				 	<input name="endDate" type="date"/>
+				 	<input name="endDate" type="date" class="form-control"/>
 				 	</li>
-				 <li>일정 색
-					<input type="radio" name="background" value="#00a65a">초록
-					<input type="radio" name="background" value="#f39c12">노랑
-					<input type="radio" name="background" value="#00c0ef">하늘
-					<input type="radio" name="background" value="#0073b7">파랑
-					<input type="radio" name="background" value="#f56954">빨강
+				 <li>일정 색<br/>
+					<input type="radio" name="background" value="#00a65a"><a class="text-green"><i class="fa fa-square"></i></a> 
+					<input type="radio" name="background" value="#f39c12"><a class="text-yellow"><i class="fa fa-square"></i></a> 
+					<input type="radio" name="background" value="#00c0ef"><a class="text-aqua"><i class="fa fa-square"></i></a>
+					<input type="radio" name="background" value="#0073b7"><a class="text-blue"><i class="fa fa-square"></i></a>
+					<input type="radio" name="background" value="#f56954"><a class="text-red"><i class="fa fa-square"></i></a>
 				 </li>
                 </ul>
               </div>
@@ -569,7 +572,7 @@
         borderColor    : '#0073b7' 
     })
 	</c:forEach>
-	
+    
     
     $('#calendar').fullCalendar({
      	 header    : {
@@ -583,8 +586,8 @@
       //Random default events
       
       events    : dataList,
-      editable  : true,
-      droppable : true, // this allows things to be dropped onto the calendar !!!
+      editable  : false,
+      droppable : false, // this allows things to be dropped onto the calendar !!!
       drop      : function (date, allDay) { 
 
         // retrieve the dropped element's stored Event Object
@@ -610,9 +613,7 @@
 	  
     
   })
-    function createEvent(){
-    	//location.href="createEvent.do?";
-    }
+
 
 </script>
 </body>
