@@ -19,9 +19,11 @@
 <script src="resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
 
-<script src="resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
 
+<script src="resources/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 <style>
 
 .frame{
@@ -64,7 +66,26 @@ function validate(){
 	$("#eAddress").val($("#eAddress1").val()+","+$("#eAddress2").val())
 
 }
-
+	
+$(document).ready(
+	      function() {
+	         var fileTarget = $('.form-group .upload-hidden');
+	         fileTarget.on('change',function() { // 값이 변경되면 
+	         var filenames ="";
+	            if (window.FileReader) { // modern browser 
+	            
+	            for(var i=0;i<$(this)[0].files.length;i++){
+	               var file = $(this)[0].files[i];
+	               filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove'></i><br>";
+	               console.log(filenames);
+	            }
+	            } else { // old IE
+	               var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+	            }
+	            // 추출한 파일명 삽입 
+	            $('.file-list').html(filenames);
+	         });
+	      });
 </script>
 
 
@@ -99,30 +120,25 @@ function validate(){
               <div class="box-body">
               
               <div class="form-group" style="width:200px">
-              
                   <label>사원번호</label>
                   <input type="text" class="form-control"  name="eNo" >
-                 
-                
                 </div>
+                
                 <div class="form-group" style="width:200px">
-              
                   <label>아이디</label>
                   <input type="text" class="form-control"  name="eId" >
-                 
-                
                 </div>
-                
+                <!-- 성공 할때 -->
+<!--                   <div class="form-group has-success" style="width:200px"> -->
+<!--                   <label>아이디</label> -->
+<!--                   <input type="text" class="form-control"  name="eId" >  -->
+<!-- 					<label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> </label> -->
+<!--                   <input type="text" class="form-control" id="inputSuccess" placeholder="Enter ..."> -->
+<!--                 </div> -->
                 
                <div class="form-group"style="width:200px;">
-               
-       
                   <label>사원이름</label>
                   <input type="text" class="form-control" name="eName" >
-                
-              
-                  
-                  
                 </div>
                 
                 
@@ -130,6 +146,11 @@ function validate(){
                 <div class="form-group"style="width:200px;">
                   <label for="exampleInputPassword1">비밀번호</label>
                   <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"  name="ePwd" >
+                </div>
+                
+                <div class="form-group"style="width:200px;">
+                  <label for="exampleInputPassword1">비밀번호 확인</label>
+                  <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"  name="ePwd" >
                 </div>
                 
                 <div class="form-group"style="width:200px;">
@@ -141,7 +162,7 @@ function validate(){
                   </c:forEach>
                 </select>
               </div>
-                <div class="form-group"style="width:200px;">
+                <div class="form-group"style="width:200px; margin-bottom: 100px;">
                 <label>직급</label>
                  
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="eJobcodeFk">
@@ -151,15 +172,9 @@ function validate(){
                   
                 </select>
               </div>
-                
-  				<div class="form-group">
-                  <label for="exampleInputFile">사원 사진</label>
-                 <input type="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png"/ name="ePhoto" >
-
-                </div>
              
-              
-              
+           
+                
               <label>사원주소</label>
               <div class="input-group"style="width:400px;">
               
@@ -197,10 +212,12 @@ function validate(){
                 <!-- /.input group -->
               </div>
               
-              <div class="input-group" style="margin-bottom:15px;">
                   <label for="exampleInputEmail1">이메일 주소</label>
+              <div class="input-group" style="margin-bottom:15px;">
+                  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                   <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="eEmail" >
                 </div>
+
                 
                 <div class="form-group" style="width:250px;">
                 <label>생년월일</label>
@@ -226,6 +243,15 @@ function validate(){
                 </div>
                 <!-- /.input group -->
               </div>
+              
+                  <label for="exampleInputFile">사원 사진</label>
+              <div class="form-group">
+						<div class="btn btn-default btn-file">
+							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="ePhoto" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
+																								onchange="fileCheck(this)"/>
+						</div>
+					<div class="file-list"></div>
+                </div>
               
               
                </div>
@@ -280,16 +306,16 @@ function fileCheck(obj) {
     }
 }
 
-//Date picker
-$('#datepicker').datepicker({
-	format: 'yyyy-mm-dd',
-  autoclose: true
-})
+// //Date picker
+// $('#datepicker').datepicker({
+// 	format: 'yyyy-mm-dd',
+//   autoclose: true
+// })
 
-$('#datepicker2').datepicker({
-	format: 'yyyy-mm-dd',
-  autoclose: true
-})
+// $('#datepicker2').datepicker({
+// 	format: 'yyyy-mm-dd',
+//   autoclose: true
+// })
 
 
 
