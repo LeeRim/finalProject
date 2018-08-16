@@ -60,5 +60,9 @@ public class ReceivenoteService {
 		return totalResult ;
 	}
 
+	public List<ReceivenoteVo> selectSearchReceiveNote(ReceivenoteVo receiveNote) {
+		return dao.selectSearchReceiveNote(receiveNote);
+	}
+
 
 }

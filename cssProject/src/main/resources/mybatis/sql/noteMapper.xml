@@ -138,8 +138,8 @@
         LEFT JOIN RECEIVENOTE R ON(S.SN_KEY = R.RN_NOTE_FK)
         LEFT JOIN EMPLOYEE E ON(R.RN_RECIPIENT_FK = E.E_KEY)
         WHERE SN_SENDER_FK = #{snSenderFk}
-        AND S.SN_TITLE LIKE '%'||#{keyword}||'%'
-        OR S.SN_CONTENT LIKE '%'||#{keyword}||'%'
+        AND (S.SN_TITLE LIKE '%'||#{keyword}||'%'
+        OR S.SN_CONTENT LIKE '%'||#{keyword}||'%')
 	</select>
 	
 	<select id="selectReceiveNote" parameterType="int" resultType="ReceivenoteVo">
@@ -183,5 +183,17 @@
 		SET RN_DELETE_YN = 'X'
 		WHERE RN_KEY =#{rnKey}
 	</update>
+	
+	<select id ="selectSearchReceiveNote" parameterType="ReceivenoteVo" resultType="ReceivenoteVo">
+		SELECT R.RN_KEY, R.RN_NOTE_FK, R.RN_RECIPIENT_FK, R.RN_READ_YN, R.RN_DELETE_YN
+	        ,S.SN_KEY, S.SN_TITLE, S.SN_WRITE_DATE,S.SN_ATTACH_YN
+	        ,E.E_NAME
+		FROM RECEIVENOTE R
+		JOIN SENDNOTE S ON (R.RN_NOTE_FK = S.SN_KEY)
+		JOIN EMPLOYEE E ON (S.SN_SENDER_FK = E.E_KEY)
+		WHERE RN_RECIPIENT_FK =#{rnRecipientFk}
+		 AND (S.SN_TITLE LIKE '%'||#{keyword}||'%'
+        OR S.SN_CONTENT LIKE '%'||#{keyword}||'%')
+	</select>
 
 </mapper>

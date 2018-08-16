@@ -89,4 +89,24 @@ System.out.println(receiveNote);
 		
 		return mv;
 	}
+	
+	@RequestMapping("searchReceiveNote.do")
+	public ModelAndView searchReceiveNote(ModelAndView mv, ReceivenoteVo receiveNote, HttpSession session){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		//받은 사원번호키 저장
+		receiveNote.setRnRecipientFk(user.geteKey());
+		
+		List<ReceivenoteVo> receiveNoteList = service.selectSearchReceiveNote(receiveNote);
+		mv.addObject("receiveNoteList",receiveNoteList);
+		
+		String viewName= "";
+		
+		if(receiveNote.getRnDeleteYn().equals("N")){
+			viewName = "note/receiveNoteList";
+		}else{
+			viewName = "note/receiveNoteTrashList";
+		}
+		mv.setViewName(viewName);
+		return mv;
+	}
 }
