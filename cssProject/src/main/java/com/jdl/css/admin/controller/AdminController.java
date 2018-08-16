@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.admin.model.service.AdminService;
 import com.jdl.css.company.model.vo.CompanyVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 
 
@@ -21,6 +23,35 @@ import com.jdl.css.company.model.vo.CompanyVo;
 public class AdminController {
 	@Autowired
 	AdminService service;
+	
+	@RequestMapping("companyPayment.do")
+	public String companyPayment(){
+		return "admin/companyPayment";
+	}
+	
+	@RequestMapping("companyJoinForm.do")
+	public String companyJoinForm(){
+		return "admin/companyJoinForm";
+	}
+	
+	@RequestMapping(value="companyIdCheck.do", produces="application/text; charset=utf-8")
+	public @ResponseBody String companyIdCheck(String id){
+		EmployeeVo employee = service.companyIdCheck(id);
+		String msg = "";
+		if(employee != null){
+			msg = "중복 된 아이디 입니다.";
+		}
+		return msg;
+	}
+	
+	@RequestMapping("companyJoin.do")
+	public String comapnyJoin(CompanyVo company, EmployeeVo employee){
+		service.insertCompany(company);
+		
+		employee.setcKeyFk(company.getcKey());
+		service.insertEmployeeAdmin(employee);
+		return "redirect:index.do";
+	}
 	
 	@RequestMapping("adminMain.do")
 	public ModelAndView adminMain(ModelAndView mv){
@@ -38,6 +69,10 @@ public class AdminController {
 		
 		List<CompanyVo> top5List = service.selectTop5CompanyList();
 		mv.addObject("top5List",top5List);
+		
+		List<CompanyVo> nowCalList = service.selectNowCalList();
+		mv.addObject("nowCalList",nowCalList);
+		
 		mv.setViewName("admin/admin_main");
 		return mv;
 	}
@@ -72,5 +107,11 @@ public class AdminController {
 	@RequestMapping("qnaList.do")
 	public String qnaList(){
 		return "admin/qnaList";
+	}
+	
+	@RequestMapping("calendarList.do")
+	public @ResponseBody List<CompanyVo> calList(String dateList){
+		List<CompanyVo> calList = service.selectCalList(dateList);
+		return calList;
 	}
 }
