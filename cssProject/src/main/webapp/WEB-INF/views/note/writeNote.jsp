@@ -180,11 +180,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<div style="float: left; height: 100px; width: 130px;">
 						<div class="btn btn-default btn-file">
 							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="files" multiple="multiple" class="upload-hidden">
-												</div>
-												<p class="help-block">Max. 32MB</p>
-											</div>
-											<div class="file-list"></div>
-										</div>
+						</div>
+					<p class="help-block">Max. 32MB</p>
+				</div>
+				<div class="file-list"></div>
+			</div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
@@ -209,8 +209,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 	<c:import url="../include/footer.jsp"/>
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
 </body>
 </html>

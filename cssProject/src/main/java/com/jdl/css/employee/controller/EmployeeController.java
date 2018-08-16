@@ -32,10 +32,10 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("login.do")
-	public String login(EmployeeVo e,HttpSession session){
-		EmployeeVo user = eService.selectEmployeeById(e.geteId());
+	public String login(EmployeeVo employee,HttpSession session){
+		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
 		System.out.println(user);
-		if(user.getePwd().equals(e.getePwd())){
+		if(user.getePwd().equals(employee.getePwd())){
 			session.setAttribute("user", user);
 		}else{
 			System.out.println("비밀번호 오류");
@@ -78,7 +78,7 @@ public class EmployeeController {
 		int result =eService.insertMember(member);
 		System.out.println(member);
 		
-		return "redirect:employee/organizationChart.do";
+		return "redirect:organizationChart.do";
 	}
 	
 	
@@ -166,10 +166,10 @@ public class EmployeeController {
 	
 	
 	
-//		@RequestMapping("employeeIndex.do")
-//	public String employeeIndex(){
-//		return "employee/employeeIndex";
-//	}
+		@RequestMapping("employeeIndex.do")
+		public String employeeIndex(){
+		return "employee/employeeIndex";
+	}
 		
 		
 		
