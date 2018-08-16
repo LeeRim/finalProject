@@ -42,4 +42,8 @@ public class AttachmentService {
 		return dao.selectAttachmentone(attaKey);
 	}
 
+	public List<AttachmentVo> selectAttachSev() {
+		return dao.selectAttachmentSev();
+	}
+
 }

@@ -85,16 +85,13 @@ public class BorderController {
 		board.setLimit(limit);
 		
 		List<BorderVo> list = borderservice.getNoticeList(board);
-		
 		if(list != null){
 			mv.addObject("list", list);
+			mv.addObject("boardKey", board.getBoardKey());
 			mv.addObject("bCateGory", board.getbCateGory());
 			mv.addObject("pi", pi);
 			mv.setViewName("border/borderList");
 		}
-//		System.out.println("controller pi : " + pi);
-//		System.out.println("controller list : " +list);
-//		System.out.println("controller board : " +board);
 		return mv;
 	}
 
@@ -121,17 +118,17 @@ public class BorderController {
 		
 		
 		BorderVo board = borderservice.selectBoard(b.getBoardKey());
+		int result = borderservice.updateBoardCount(b.getBoardKey());
 		
 		List<BoardCommentVo> bList = borderservice.selectCommentList(b.getBoardKey());
 		if(board != null){
-			board.setbCount(board.getbCount() + 1);
+			
 			mv.addObject("bList", bList);
 			mv.addObject("board", board);
 			board.setbCount(board.getbCount() + 1);
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("border/borderDetail");
 		}
-		int result = borderservice.updateBoardCount(b.getBoardKey());
 		return mv;
 	}
 	
@@ -163,13 +160,14 @@ public class BorderController {
 		List<BorderVo> board2 = borderservice.selectBoardTwo(); //자유
 		List<BorderVo> board3 = borderservice.selectBoardThr(); //경조사
 		List<BorderVo> board4 = borderservice.selectBoardFor(); //경조사
-		
+		List<AttachmentVo> attach = attachservice.selectAttachSev();
 		
 		mv.addObject("bo1", 1);
 		mv.addObject("bo2", 2);
 		mv.addObject("bo3", 3);
 		mv.addObject("bo4", 4);
 		
+		mv.addObject("attach", attach);
 		mv.addObject("board1", board1);
 		mv.addObject("board2", board2);
 		mv.addObject("board3", board3);
@@ -205,7 +203,6 @@ public class BorderController {
 	@RequestMapping("updateComment.do")
 	public ModelAndView updateComment(String boardKey, BoardCommentVo bc, ModelAndView mv){
 		
-		System.out.println("updateComment : " + bc);
 		int result = borderservice.updateComment(bc);
 		if(0 < result){
 			mv.setViewName("redirect:selectBoard.do?boardKey="+ boardKey + "&currentPage=1");
@@ -282,8 +279,10 @@ public class BorderController {
 	public ModelAndView attachDetailPage(AttachmentVo av, ModelAndView mv){
 		
 		AttachmentVo attach = attachservice.selectAttachDetail(av);
+		List<BoardCommentVo> bList = borderservice.selectCommentList(attach.getBoardKey());
 		
 		mv.addObject("attach", attach);
+		mv.addObject("bList", bList);
 		mv.setViewName("border/borderGalleryDetail");
 		return mv;
 	}
@@ -310,7 +309,6 @@ public class BorderController {
 	@RequestMapping("galleryModifyPage.do")
 	public ModelAndView bGalleryModifyPage(HttpServletRequest request, @RequestParam("file") MultipartFile file, AttachmentVo av, ModelAndView mv, BorderVo board){
 		
-		System.out.println("수정할 페이지 : " + board);
 		int boardresult = borderservice.updateBoard(board);
 		//기존 파일 삭제
 				String root = request.getSession().getServletContext().getRealPath("resources");
@@ -341,4 +339,58 @@ public class BorderController {
 		mv.setViewName("redirect:borderGalleryList.do");
 		return mv;
 	}
+	
+	@RequestMapping("searchBoard.do")
+	public ModelAndView searchBoard(@RequestParam(value="currentPage", required=false)String currentPagestr, BorderVo board, String condition, String keyword, ModelAndView mv){
+		int currentPage;	//현재 페이지의 번호
+		int limitPage;		//한페이지에 출력할 페이지 갯수
+		//1~10
+		int maxPage;		//가장 마지막 페이지
+		int startPage;		//시작 페이지 변수
+		int endPage;		//마지막 페이지 변수
+		int limit;				//한페이지에 출력할 글에 갯수
+		
+		limit = 10;
+		limitPage = 10;
+		
+		if(currentPagestr != null){
+			currentPage = Integer.parseInt(currentPagestr);
+		}else{
+			currentPage = 1;
+		}
+		//게시글의 총 갯수
+		int listCount = borderservice.countBoardsearch(condition, keyword, board.getbCateGory());
+//		int listCount = borderservice.countBoardList(board.getbCateGory());
+		
+		//134 -> 14
+				maxPage = (int)((double)listCount / limit + 0.9);
+				
+				//현재 페이지 번호
+				//12 - 10
+				startPage = (int)(currentPage / limitPage * limitPage) + 1;
+				//11~20  -> 134 -> 14
+				endPage = startPage + limitPage - 1;
+				if(maxPage < endPage){
+					endPage = maxPage;
+				}
+		PageInfo pi = new PageInfo(currentPage, limitPage, maxPage,
+						startPage, endPage, listCount);
+		//==================페이징 처리의 끝===============
+		
+		List<BorderVo> list = borderservice.listsearch(condition, keyword, board.getbCateGory());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("searchresult", listCount);
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		map.put("bCateGory", board.getbCateGory());
+		
+		mv.addObject("map", map);
+		mv.addObject("pi", pi);
+		mv.setViewName("border/borderListsearch");
+		System.out.println("search : " + condition);
+		return mv;
+	}
+	
+	
 }

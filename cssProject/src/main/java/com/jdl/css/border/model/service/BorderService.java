@@ -86,4 +86,13 @@ public class BorderService {
 		return dao.selectBoardFor();
 	}
 
+	public List<BorderVo> listsearch(String condition, String keyword, String getbCateGory) {
+		return dao.selectsearch(condition, keyword, getbCateGory);
+	}
+
+	public int countBoardsearch(String condition, String keyword, String getbCateGory) {
+		return dao.selectsearchcount(condition, keyword, getbCateGory);
+	}
+
+
 }

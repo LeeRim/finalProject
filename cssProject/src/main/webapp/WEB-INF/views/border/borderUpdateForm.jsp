@@ -23,6 +23,20 @@
 	function border(){
 		location.href="borderList.do?bCateGory=${board.bCateGory}";
 	}
+	/* function validate(){
+		var bTitle = $("#bTitle").val();
+		if( bTitle == "" || bTitle == null){
+			console.log(111111111111111);
+			return false;
+		}
+		var summernote = $("#summernote").val();
+		if(!(summernote != null && summernote != "")){
+			console.log(2, summernote);
+				return false;
+		}
+		
+		return true;
+	}  */
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -42,10 +56,10 @@
     </section>
 
 <div class="row" style="width:95%; margin-right:auto; margin-left:auto; margin-top:20px;">
-<form action="updateBorder.do" method="post" enctype="multipart/form-data">
+<form action="updateBorder.do" onsubmit="return validate();" method="post" enctype="multipart/form-data">
 <input type="hidden" name="bCateGory" value='<c:out value="${board.bCateGory}"/>'>
 <input type="hidden" name=boardKey value="<c:out value='${board.boardKey }' />">
-제목 : <input type="text" name="bTitle" value="${board.bTitle }"/>
+제목 : <input type="text" id="bTitle" name="bTitle" value="${board.bTitle }"/>
 <textarea id="summernote" name="bContent">${board.bContent }</textarea>
 <input type="submit" value="수정"/>
 <input type="button" value="취소" onclick="border();"/>

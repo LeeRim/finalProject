@@ -23,6 +23,26 @@
 	function border(){
 		location.href="attachDetailPage.do?attaKey=${attach.attaKey}";
 	}
+	/* function validate(){
+		var bTitle = $("#bTitle").val();
+		if( bTitle == "" || bTitle == null){
+			console.log(111111111111111);
+			return false;
+		}
+		var summernote = $("#summernote").val();
+		if(!(summernote != null && summernote != "")){
+			console.log(2, summernote);
+				return false;
+		}
+		
+		var file = $("#file").val();
+		if( file == "" || file == null || file == undefined || ( file != null && typeof file == "object" && !Object.keys(file).length ) ){
+			console.log(3333333333333333333333333);
+			return false;
+		}
+		
+		return true;
+	}  */
 	</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -42,11 +62,12 @@
     </section>
 <div class="row" style="width:95%; margin-right:auto; margin-left:auto;">
 	<h1>갤러리 수정화면</h1>
-<form action="galleryModifyPage.do" method="post" enctype="multipart/form-data">
-<input type="file" name="file"/>${attach.attaFileName}
+<form action="galleryModifyPage.do" onsubmit="return validate();" method="post" enctype="multipart/form-data">
+수정할 파일<input type="file" id="file" name="file"/>현재 파일 : ${attach.attaFileName}
 <input type="hidden" name="attaKey" value='<c:out value="${attach.attaKey}"/>'>
 <input type="hidden" name="boardKey" value='<c:out value="${attach.boardKey}"/>'/>
-제목 : <input type="text" name="bTitle" value="${attach.bTitle }"/>
+<br>
+제목 : <input type="text" id="bTitle" name="bTitle" value="${attach.bTitle }"/>
 <textarea id="summernote" name="bContent">${attach.bContent }</textarea>
 <input type="submit" value="수정"/>
 <input type="button" value="취소" onclick="border();"/>

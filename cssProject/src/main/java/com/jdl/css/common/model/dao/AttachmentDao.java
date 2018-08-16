@@ -37,4 +37,8 @@ public class AttachmentDao {
 	public AttachmentVo selectAttachmentone(int attaKey) {
 		return session.selectOne("AttachmentMapper.selectAttach", attaKey);
 	}
+
+	public List<AttachmentVo> selectAttachmentSev() {
+		return session.selectList("AttachmentMapper.selectSev");
+	}
 }
