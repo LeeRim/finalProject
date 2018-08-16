@@ -39,12 +39,17 @@
 	}
 	.select{
 		height:27px;
-		width:70px;
+		width:75px;
 	}
 	td{
 		padding:10px;
 	}
 </style>
+<script>
+function kakaopay(){
+	
+}
+</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -99,6 +104,9 @@
                   <td>
                   	<select class="select">
                   		<option >1개월</option>
+                  		<option >3개월</option>
+                  		<option >6개월</option>
+                  		<option >12개월</option>
                   	</select>
                   </td>
                   <td>선택</td>
@@ -113,7 +121,7 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-      <div class="payment">결제하기</div>
+      <div class="payment" onclick="kakaopay();">결제하기</div>
     </section>
     <!-- /.content -->
     </form>
