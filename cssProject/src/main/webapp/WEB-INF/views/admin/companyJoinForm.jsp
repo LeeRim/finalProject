@@ -21,9 +21,6 @@
 	<script src="resources/joinCss/vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <style>
-	.contact100-header-logo{
-		cursor:pointer;
-	}
 	.zipBtn{
 		text-align:center;
 		vertical-align:middle;
@@ -58,7 +55,7 @@
 	            if(chk) {
 	               $("#checkDiv").html("");
 	            } else {
-	            	$("#checkDiv").html("4~13자의 영문 소문자+숫자만 가능합니다.");
+	            	$("#checkDiv").html("5~13자의 영문 소문자+숫자만 가능합니다.");
 	            	return;
 	            }
 	            
@@ -150,6 +147,10 @@
 			$("#joinForm").submit();	
 		}
 	}
+	
+	function indexMain(){
+		location.href="index.do";
+	}
 </script>
 
 </head>
@@ -158,9 +159,8 @@
 	<div class="bg-container-contact100" style="background-image: url(resources/joinCss/images/bg-01.jpg);">
 		<div class="contact100-header flex-sb-m">
 			<a href="index.do" class="contact100-header-logo">
-				<img src="resources/joinCss/images/icons/logo.png" alt="LOGO">
+				<img src="resources/joinCss/images/icons/logo.png" alt="LOGO" >
 			</a>
-
 			<div>
 				<button class="btn-show-contact100">
 					Join Us
@@ -248,7 +248,11 @@
 					<button class="contact100-form-btn" onclick="companyJoin();">
 						신청하기
 					</button>
+					<button class="contact100-form-btn" onclick="indexMain();" style="margin-left:10px;">
+						메인으로
+					</button>
 				</div>
+				
 			</form>
 		</div>
 	</div>

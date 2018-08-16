@@ -74,6 +74,7 @@ desired effect
     <section class="content container-fluid">
 	<a href="adminMain.do">관리자페이지</a>
 	<a href="companyJoinForm.do">회사회원가입</a>
+	<a href="companyPayment.do">결제하기</a>
       <!--------------------------
         | Your Page Content Here |
         -------------------------->

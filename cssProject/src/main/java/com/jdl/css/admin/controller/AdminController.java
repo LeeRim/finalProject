@@ -24,6 +24,11 @@ public class AdminController {
 	@Autowired
 	AdminService service;
 	
+	@RequestMapping("companyPayment.do")
+	public String companyPayment(){
+		return "admin/companyPayment";
+	}
+	
 	@RequestMapping("companyJoinForm.do")
 	public String companyJoinForm(){
 		return "admin/companyJoinForm";
@@ -73,10 +78,7 @@ public class AdminController {
 	}
 	@RequestMapping("companyList.do")
 	public ModelAndView companyList(ModelAndView mv){
-		List<EmployeeVo> empList = service.selectEmployeeCount();
-		//empList에서 가져온 c_key_fk 를 company에 set해서 조회해올때 where c_key = #{조회한 c_key} 로 불러오기????????????
 		List<CompanyVo> list = service.selectCompanyList();
-		System.out.println(list);
 		mv.addObject("list",list);
 		mv.setViewName("admin/companyList");
 		return mv;
