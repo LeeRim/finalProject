@@ -1,5 +1,7 @@
 package com.jdl.css.common.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,7 +15,26 @@ public class AttachmentDao {
 	SqlSessionTemplate session;
 
 	public int insertAttachments(AttachmentVo av) {
-		// TODO Auto-generated method stub
 		return session.insert("AttachmentMapper.insertAttachment",av);
+	}
+
+	public List<AttachmentVo> selectAttachment() {
+		return session.selectList("AttachmentMapper.selectAttachment");
+	}
+
+	public AttachmentVo selectAttachmentDetail(AttachmentVo av) {
+		return session.selectOne("AttachmentMapper.selectAttachmentDetail", av);
+	}
+
+	public int deleteAttachGallery(AttachmentVo av) {
+		return session.delete("AttachmentMapper.deleteAttachment", av);
+	}
+
+	public int updateAttachmentGallery(AttachmentVo av) {
+		return session.update("AttachmentMapper.updateAttachment", av);
+	}
+
+	public AttachmentVo selectAttachmentone(int attaKey) {
+		return session.selectOne("AttachmentMapper.selectAttach", attaKey);
 	}
 }

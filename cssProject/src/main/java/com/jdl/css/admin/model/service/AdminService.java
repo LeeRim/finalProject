@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jdl.css.admin.model.dao.AdminDao;
+import com.jdl.css.common.model.vo.PaymentVo;
 import com.jdl.css.company.model.vo.CompanyVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 
 
@@ -58,6 +60,42 @@ public class AdminService {
 	public List<CompanyVo> selectTop5CompanyList() {
 		return dao.selectTop5CompanyList();
 	}
+
+	public List<CompanyVo> selectCalList(String dateList) {
+		return dao.selectCalList(dateList);
+	}
+	
+	public List<CompanyVo> selectNowCalList(){
+		return dao.selectNowCalList();
+	}
+
+	public EmployeeVo companyIdCheck(String id) {
+		return dao.companyIdCheck(id);
+	}
+
+	public int insertCompany(CompanyVo company) {
+		return dao.insertCompany(company);
+	}
+
+	public int insertEmployeeAdmin(EmployeeVo employee) {
+		return dao.insertEmployeeAdmin(employee);
+	}
+
+	public List<EmployeeVo> selectEmployeeCount() {
+		return dao.selectEmployeeCount();
+	}
+
+	public CompanyVo selectComapnyPayment(int cKeyFk) {
+		return dao.selectComapnyPayment(cKeyFk);
+	}
+
+	public int insertCompanyPayment(PaymentVo paymentVo) {
+		System.out.println("service : " + paymentVo);
+		return dao.insertCompanyPayment(paymentVo);
+	}
+
+	
+
 
 
 }
