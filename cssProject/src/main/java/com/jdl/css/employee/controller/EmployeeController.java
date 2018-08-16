@@ -1,9 +1,13 @@
 package com.jdl.css.employee.controller;
 
+import java.io.File;
+
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jdl.css.common.model.service.AttachmentService;
+import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
@@ -22,7 +29,8 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService eService;
 	
-	
+	@Autowired
+	AttachmentService attachservice;
 
 	
 
@@ -60,12 +68,13 @@ public class EmployeeController {
 	
 	//사원 등록
 	@RequestMapping("insertMember.do" )
-	public String memberJoin(@RequestParam("eBirth1") String eBirth1, @RequestParam("eHireDate1") String eHireDate1, EmployeeVo member){
+	public String memberJoin(@RequestParam("eBirth1") String eBirth1, @RequestParam("eHireDate1") String eHireDate1,  HttpServletRequest request,
+			@RequestParam("ePhoto1") MultipartFile ePhoto, EmployeeVo member){
 
+		System.out.println(ePhoto);
 		
 		String birth=eBirth1;
 		String hire=eHireDate1;
-		
 
 		
 		Date birth2 = Date.valueOf(eBirth1);
@@ -75,10 +84,40 @@ public class EmployeeController {
 		member.seteBirth(birth2);
 		member.seteHireDate(hire2);
 		
-		int result =eService.insertMember(member);
-		System.out.println(member);
 		
-		return "redirect:employee/organizationChart.do";
+		
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String path = root + "\\upload\\empPhoto"; 
+		String filePath = "";
+		
+		
+		File folder = new File(path);
+		if(!folder.exists()){
+			folder.mkdirs();
+		}
+			
+			filePath = folder + "\\" + ePhoto.getOriginalFilename();
+			try {
+				ePhoto.transferTo(new File(filePath));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+			member.setePhoto(ePhoto.getOriginalFilename());
+			
+
+			int result =eService.insertMember(member);
+			System.out.println(member);
+
+		
+		
+		
+		return "redirect:organizationChart.do";
 	}
 	
 	
@@ -98,9 +137,13 @@ public class EmployeeController {
 	
 	//사원 정보 리스트 출력
 	@RequestMapping("organizationChart.do")
-	public ModelAndView employeeList(ModelAndView mv){
+	public ModelAndView employeeList(ModelAndView mv, HttpSession session){
 		
-		List<EmployeeVo> list = eService.selectEmployeeList();
+		EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+		//회사키
+		int cKey = employee.getcKeyFk();
+		
+		List<EmployeeVo> list = eService.selectEmployeeList(cKey);
 		
 		mv.addObject("list", list);
 		mv.setViewName("employee/organizationChart");

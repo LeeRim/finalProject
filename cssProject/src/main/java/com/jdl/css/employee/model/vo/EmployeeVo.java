@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.common.model.vo.DivisionVo;
 
 @Component
@@ -22,7 +23,7 @@ public class EmployeeVo {
     private String eJob;
     private String eDepart;
     private String eAddress;
-    private int eExten;
+    private String eExten;
     private String ePhone;
     private String eEmail;
     private Date eBirth;
@@ -36,13 +37,14 @@ public class EmployeeVo {
     private String department;
     
     
+    
 //    resultMap용
     private List<DivisionVo> division;
     public EmployeeVo() {
     }
 
 	public EmployeeVo(int eKey, String eNo, int cKeyFk, char eType, String eId, String ePwd, String eName,
-			int eJobcodeFk, int eDepartFk, String eJob, String eDepart, String eAddress, int eExten, String ePhone,
+			int eJobcodeFk, int eDepartFk, String eJob, String eDepart, String eAddress, String eExten, String ePhone,
 			String eEmail, Date eBirth, Date eHireDate, Date eEntDate, char eEntYn, String ePhoto) {
 		super();
 		this.eKey = eKey;
@@ -163,11 +165,11 @@ public class EmployeeVo {
 		this.eAddress = eAddress;
 	}
 
-	public int geteExten() {
+	public String geteExten() {
 		return eExten;
 	}
 
-	public void seteExten(int eExten) {
+	public void seteExten(String eExten) {
 		this.eExten = eExten;
 	}
 
@@ -263,6 +265,4 @@ public class EmployeeVo {
 				+ ", department=" + department + ", division=" + division + "]";
 	}
 
-
-	
 }

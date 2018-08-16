@@ -70,7 +70,7 @@
 
 .employee_list {
 	float: left;
-	width: 900px;
+	width: 950px;
 	height: 619px;
 	background:white;
     border-top-right-radius: 3px;
@@ -230,7 +230,7 @@ td {
 		    	
 		    	var html1 = $("#empInfoTitle").html()+"'"+data.department+" "+data.eName+" "+data.job+"'님의 신상정보"
 
-		    	var html2 = $("#empInfoPhoto").html()+"<img class='emp_photo' src='resources/dist/img/"+data.ePhoto+"'/>"
+		    	var html2 = $("#empInfoPhoto").html()+"<img class='emp_photo' src='resources/upload/empPhoto/"+data.ePhoto+"'/>"
 		    		
 		    	var html3 = $("#empInfoView").html()+
 		    	
