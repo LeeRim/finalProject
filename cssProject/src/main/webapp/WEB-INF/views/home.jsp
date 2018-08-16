@@ -58,7 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	  <a href="calender.do">일정 조회</a>
 
 	<a href="companyJoinForm.do">회사회원가입</a>
-	<a href="companyPayment.do">결제하기</a>
+	<a href="companyPayment.do?cKeyFk=${user.cKeyFk }">결제하기</a>
 
         
         <a href="loginForm.do">로그인</a>

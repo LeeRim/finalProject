@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jdl.css.common.model.vo.PaymentVo;
 import com.jdl.css.company.model.vo.CompanyVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
@@ -76,6 +77,16 @@ public class AdminDao {
 
 	public List<EmployeeVo> selectEmployeeCount() {
 		return sqlSession.selectList("AdminMapper.selectEmployeeCount");
+	}
+
+	public CompanyVo selectComapnyPayment(int cKeyFk) {
+		return sqlSession.selectOne("AdminMapper.selectCompanyPayment",cKeyFk);
+	}
+
+
+	public int insertCompanyPayment(PaymentVo paymentVo) {
+		System.out.println("dao : " + paymentVo);
+		return sqlSession.insert("AdminMapper.insertCompanyPayment",paymentVo);
 	}
 
 	

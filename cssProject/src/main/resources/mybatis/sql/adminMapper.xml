@@ -116,5 +116,19 @@
 		INSERT INTO EMPLOYEE(E_KEY, C_KEY_FK, E_TYPE, E_ID, E_PWD)
 		VALUES(SEQ_EMPLOYEE.NEXTVAL, #{cKeyFk},1, #{eId}, #{ePwd})
 	</insert>
+	
+	<select id="selectCompanyPayment" resultType="Company">
+		SELECT C_KEY,C_NAME, C_OWNER,COUNTS
+		FROM (SELECT C_KEY_FK,COUNT(*) AS "COUNTS"
+			      FROM EMPLOYEE
+			      GROUP BY C_KEY_FK)
+		RIGHT JOIN COMPANY ON (C_KEY = C_KEY_FK)
+		WHERE C_KEY = #{cKeyFk}
+	</select>
+	
+	<insert id="insertCompanyPayment" parameterType="PaymentVo">
+		INSERT INTO PAYMENT
+		VALUES(SEQ_PAYMENT.NEXTVAL,#{cKeyFk},#{payMileage}, SYSDATE)
+	</insert>
 
 </mapper>

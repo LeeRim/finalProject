@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.admin.model.service.AdminService;
+import com.jdl.css.common.model.vo.PaymentVo;
 import com.jdl.css.company.model.vo.CompanyVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
@@ -25,8 +26,12 @@ public class AdminController {
 	AdminService service;
 	
 	@RequestMapping("companyPayment.do")
-	public String companyPayment(){
-		return "admin/companyPayment";
+	public ModelAndView companyPayment(ModelAndView mv,int cKeyFk){
+		System.out.println(cKeyFk);
+		CompanyVo company = service.selectComapnyPayment(cKeyFk);
+		mv.addObject("company",company);
+		mv.setViewName("admin/companyPayment");
+		return mv;
 	}
 	
 	@RequestMapping("companyJoinForm.do")
@@ -113,5 +118,17 @@ public class AdminController {
 	public @ResponseBody List<CompanyVo> calList(String dateList){
 		List<CompanyVo> calList = service.selectCalList(dateList);
 		return calList;
+	}
+	
+	@RequestMapping(value="companyPaymentS.do", produces="application/text; charset=utf-8")
+	public @ResponseBody String companyPaymentS(HttpServletRequest request){
+		int cKeyFk = Integer.parseInt(request.getParameter("cKeyFk"));
+		String payMileage = request.getParameter("payMileage");
+		System.out.println("1 : "+cKeyFk);
+		System.out.println("2 : "+payMileage);
+		PaymentVo paymentVo = new PaymentVo(cKeyFk, payMileage); 
+		service.insertCompanyPayment(paymentVo);
+		String mmmm = "companyPayment.do?cKeyFk="+cKeyFk;
+		return mmmm;
 	}
 }
