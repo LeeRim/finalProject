@@ -35,6 +35,15 @@ public class CompanyVo {
 		this.cKey = cKey;
 		this.cLevel = cLevel;
 	}
+	
+
+	public CompanyVo(int cKey, String cMileage, int cLevel) {
+		super();
+		this.cKey = cKey;
+		this.cMileage = cMileage;
+		this.cLevel = cLevel;
+	}
+
 
 	public CompanyVo(int cKey, String cName, String cOwner, String cAddress, String cLogo, String cSign, String cQrcode,
 			String cMileage, Date cCloseDay, int cLevel, int coordKeyFk, int coordKey, String city, String lat,

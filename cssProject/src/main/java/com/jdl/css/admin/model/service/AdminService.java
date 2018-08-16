@@ -89,9 +89,13 @@ public class AdminService {
 		return dao.selectComapnyPayment(cKeyFk);
 	}
 
-	public int insertCompanyPayment(PaymentVo paymentVo) {
-		System.out.println("service : " + paymentVo);
-		return dao.insertCompanyPayment(paymentVo);
+	public int insertCompanyPaymentP(PaymentVo paymentVo) {
+		return dao.insertCompanyPaymentP(paymentVo);
+	}
+
+	public int insertCompanyPaymentC(CompanyVo company) {
+		return dao.insertCompanyPaymentC(company);
+		
 	}
 
 	

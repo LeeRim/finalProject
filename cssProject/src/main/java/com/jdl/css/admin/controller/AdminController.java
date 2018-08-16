@@ -120,15 +120,21 @@ public class AdminController {
 		return calList;
 	}
 	
-	@RequestMapping(value="companyPaymentS.do", produces="application/text; charset=utf-8")
-	public @ResponseBody String companyPaymentS(HttpServletRequest request){
+	@RequestMapping(value="companyPaymentP.do", produces="application/text; charset=utf-8")
+	public @ResponseBody String companyPaymentP(HttpServletRequest request){
 		int cKeyFk = Integer.parseInt(request.getParameter("cKeyFk"));
 		String payMileage = request.getParameter("payMileage");
-		System.out.println("1 : "+cKeyFk);
-		System.out.println("2 : "+payMileage);
 		PaymentVo paymentVo = new PaymentVo(cKeyFk, payMileage); 
-		service.insertCompanyPayment(paymentVo);
-		String mmmm = "companyPayment.do?cKeyFk="+cKeyFk;
+		service.insertCompanyPaymentP(paymentVo);
+		int cLevel = Integer.parseInt(request.getParameter("cLevel"));
+		
+		
+		CompanyVo company = new CompanyVo(cKeyFk, payMileage, cLevel);
+		company.setcKey(cKeyFk);
+		company.setcMileage(payMileage);
+		company.setcLevel(cLevel);
+		service.insertCompanyPaymentC(company);
+		String mmmm = "redirect:companyPayment.do?cKeyFk="+cKeyFk;
 		return mmmm;
 	}
 }

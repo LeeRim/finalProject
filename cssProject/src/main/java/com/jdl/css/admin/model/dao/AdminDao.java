@@ -84,9 +84,12 @@ public class AdminDao {
 	}
 
 
-	public int insertCompanyPayment(PaymentVo paymentVo) {
-		System.out.println("dao : " + paymentVo);
-		return sqlSession.insert("AdminMapper.insertCompanyPayment",paymentVo);
+	public int insertCompanyPaymentP(PaymentVo paymentVo) {
+		return sqlSession.insert("AdminMapper.insertCompanyPaymentP",paymentVo);
+	}
+
+	public int insertCompanyPaymentC(CompanyVo company) {
+		return sqlSession.insert("AdminMapper.insertCompanyPaymentC",company);
 	}
 
 	
