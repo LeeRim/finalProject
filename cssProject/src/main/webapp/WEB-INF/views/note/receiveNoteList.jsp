@@ -106,13 +106,13 @@
         <div class="col-md-9" style="width: 100%" >
           <div class="box box-primary" style="width: 98%; margin-top: 50px; margin-left: 10px;">
             <div class="box-header with-border">
-              <h3 class="box-title">보낸쪽지함</h3>
+              <h3 class="box-title">수신쪽지함</h3>
 
               <div class="box-tools pull-right">
                 <div class="has-feedback">
-                <form action="searchSendNote.do" method="get">
+                <form action="searchReceiveNote.do" method="get">
                   <input type="text" class="form-control input-sm" placeholder="Search Mail" name="keyword">
-                  <input type="hidden" name="snDeleteYn" value="N"/>
+                  <input type="hidden" name="rnDeleteYn" value="N"/>
                   <span class="glyphicon glyphicon-search form-control-feedback" ></span>
                 </form>
                 </div>

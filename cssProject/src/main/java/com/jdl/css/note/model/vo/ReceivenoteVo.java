@@ -25,6 +25,9 @@ public class ReceivenoteVo {
 	private String snAttachYn;
 	private String eName;
 	
+	//search용
+	private String keyword;
+	
 	public ReceivenoteVo() {
 	}
 
@@ -140,14 +143,20 @@ public class ReceivenoteVo {
 		this.rnKeies = rnKeies;
 	}
 
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 
 	@Override
 	public String toString() {
 		return "ReceivenoteVo [rnKey=" + rnKey + ", rnNoteFk=" + rnNoteFk + ", rnRecipientFk=" + rnRecipientFk
 				+ ", rnReadYn=" + rnReadYn + ", rnDeleteYn=" + rnDeleteYn + ", name=" + name + ", job=" + job
 				+ ", rnKeies=" + rnKeies + ", snKey=" + snKey + ", snTitle=" + snTitle + ", snWriteDate=" + snWriteDate
-				+ ", snAttachYn=" + snAttachYn + ", eName=" + eName + "]";
+				+ ", snAttachYn=" + snAttachYn + ", eName=" + eName + ", keyword=" + keyword + "]";
 	}
-
 	
 }

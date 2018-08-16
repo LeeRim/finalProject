@@ -42,4 +42,8 @@ public class ReceivenoteDao {
 		return session.update("NoteMapper.updateReceiveNoteDel", receiveNote);
 	}
 
+	public List<ReceivenoteVo> selectSearchReceiveNote(ReceivenoteVo receiveNote) {
+		return session.selectList("NoteMapper.selectSearchReceiveNote", receiveNote);
+	}
+
 }
