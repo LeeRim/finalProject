@@ -16,14 +16,22 @@
 	<typeAlias type="com.jdl.css.border.model.vo.BorderVo" alias="Border" /> 
 	<typeAlias type="com.jdl.css.employee.model.vo.EmployeeVo" alias="EmployeeVo" /> 
 	<typeAlias type="com.jdl.css.company.model.vo.CompanyVo" alias="Company"/>
+	
 	<typeAlias type="com.jdl.css.common.model.vo.AttachmentVo" alias="AttachVo"/>
-	<typeAlias type="com.jdl.css.common.model.vo.DivisionVo" alias="DivisionVo"/>
+	<typeAlias type="com.jdl.css.common.model.vo.PaymentVo" alias="PaymentVo"/>
+	
 	<typeAlias type="com.jdl.css.border.model.vo.BoardCommentVo" alias="Comment" /> 
 	<typeAlias type="com.jdl.css.calender.model.vo.CalenderVo" alias="Calender"/>
 	<typeAlias type="com.jdl.css.approval.model.vo.ApprovalVo" alias="ApprovalVo" /> 
 	<typeAlias type="com.jdl.css.approval.model.vo.ApprovalConditionVo" alias="AppConVo" /> 
 	<typeAlias type="com.jdl.css.approval.model.vo.JobPropsalVo" alias="JobPropsalVo" />
+	<typeAlias type="com.jdl.css.approval.model.vo.OrderFormVo" alias="OrderFormVo" />
+	<typeAlias type="com.jdl.css.approval.model.vo.OrderTableLinkedVo" alias="OrderTableLinkedVo" />
+	<typeAlias type="com.jdl.css.approval.model.vo.SpendingResolutionVo" alias="SpendingResolutionVo" />
+	<typeAlias type="com.jdl.css.approval.model.vo.VacationFormVo" alias="VacationFormVo" />
+	<typeAlias type="com.jdl.css.commuteCheck.model.commuteCheckVo.CommuteCheckVo" alias="Commute" />
   </typeAliases>
+
 
   <mappers>
 	<mapper resource="mybatis/sql/BorderMapper.xml" /> 
@@ -32,6 +40,7 @@
 	<mapper resource="mybatis/sql/noteMapper.xml"/>
 	<mapper resource="mybatis/sql/calenderMapper.xml"/>
 	<mapper resource="mybatis/sql/approvalMapper.xml"/>	
-	<mapper resource="mybatis/sql/attachmentMapper.xml"/>	
+	<mapper resource="mybatis/sql/attachmentMapper.xml"/>
+	<mapper resource="mybatis/sql/commuteCheckMapper.xml"/>	
   </mappers>
 </configuration>

@@ -29,7 +29,7 @@ public class CalenderController {
 		
 		List<CalenderVo> list = service.showCalender();
 		mav.addObject("list", list);
-		mav.setViewName("calender");
+		mav.setViewName("calender/calender");
 		return mav;
 	}
 

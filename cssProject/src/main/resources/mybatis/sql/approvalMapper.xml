@@ -9,19 +9,98 @@
 		<result property="cKeyFk" column="C_KEY_FK" />
 		<result property="divDoctypeFk" column="DIV_DOCTYPE_FK" />
 		<result property="aTitle" column="A_TITLE" />
+		<result property="aContent" column="A_CONTENT" />
 		<result property="aWriterFk" column="A_WRITER_FK" />
 		<result property="aWriteDate" column="A_WRITE_DATE" />
+		<result property="aCompleteDate" column="A_COMPLETE_DATE" />
 		<result property="aCondition" column="A_CONDITION" />
+		<result property="doctype" column="DOCTYPE" />
+		<association property="writer" javaType="EmployeeVo">
+			<id property="eKey" column="E_KEY" />
+			<result property="eNo" column="E_NO" />
+			<result property="cKeyFk" column="C_KEY_FK" />
+			<result property="eType" column="E_TYPE" />
+			<result property="eId" column="E_ID" />
+			<result property="ePwd" column="E_PWD" />
+			<result property="eName" column="E_NAME" />
+			<result property="eJobcodeFk" column="E_JOBCODE_FK" />
+			<result property="eDepartFk" column="E_DEPART_FK" />
+			<result property="eAddress" column="E_ADDRESS" />
+			<result property="eExten" column="E_EXTEN" />
+			<result property="ePhone" column="E_PHONE" />
+			<result property="eEmail" column="E_EMAIL" />
+			<result property="eBirth" column="E_BIRTH" />
+			<result property="eHireDate" column="E_HIRE_DATE" />
+			<result property="eEntDate" column="E_ENT_DATE" />
+			<result property="eEntYn" column="E_ENT_YN" />
+			<result property="ePhoto" column="E_PHOTO" />
+			<result property="job" column="JOB" />
+			<result property="department" column="DEPARTMENT" />
+		</association>
 		<collection property="aConList" column="A_KEY" ofType="AppConVo"
 			resultMap="appConMap"></collection>
+		<collection property="aAttachList" column="A_KEY" ofType="AttachVo"
+			resultMap="attachMap"></collection>
 	</resultMap>
 
 	<resultMap type="AppConVo" id="appConMap">
 		<id property="acKey" column="AC_KEY" />
 		<result property="aKeyFk" column="A_KEY_FK" />
-		<result property="acApprovalFk" column="AC_APPROVER_FK" />
+		<result property="acApproverFk" column="AC_APPROVER_FK" />
 		<result property="acCondition" column="AC_CONDITION" />
 		<result property="acApprovalDate" column="AC_APPROVAL_DATE" />
+		<association property="approver" javaType="EmployeeVo">
+			<id property="eKey" column="E_KEY" />
+			<result property="eNo" column="E_NO" />
+			<result property="cKeyFk" column="C_KEY_FK" />
+			<result property="eType" column="E_TYPE" />
+			<result property="eId" column="E_ID" />
+			<result property="ePwd" column="E_PWD" />
+			<result property="eName" column="E_NAME" />
+			<result property="eJobcodeFk" column="E_JOBCODE_FK" />
+			<result property="eDepartFk" column="E_DEPART_FK" />
+			<result property="eAddress" column="E_ADDRESS" />
+			<result property="eExten" column="E_EXTEN" />
+			<result property="ePhone" column="E_PHONE" />
+			<result property="eEmail" column="E_EMAIL" />
+			<result property="eBirth" column="E_BIRTH" />
+			<result property="eHireDate" column="E_HIRE_DATE" />
+			<result property="eEntDate" column="E_ENT_DATE" />
+			<result property="eEntYn" column="E_ENT_YN" />
+			<result property="ePhoto" column="E_PHOTO" />
+			<result property="job" column="JOB" />
+			<result property="department" column="DEPARTMENT" />
+		</association>
+	</resultMap>
+
+
+	<resultMap type="AttachVo" id="attachMap">
+		<id property="attaKey" column="ATTA_KEY" />
+		<result property="attaLocation" column="ATTA_LOCATION" />
+		<result property="attaFileName" column="ATTA_FILENAME" />
+		<result property="attaFilePath" column="ATTA_FILEPATH" />
+		<result property="attaFilesize" column="ATTA_FILESIZE" />
+	</resultMap>
+
+	<resultMap type="EmployeeVo" id="employeeMap">
+		<id property="eKey" column="E_KEY" />
+		<result property="eNo" column="E_NO" />
+		<result property="cKeyFk" column="C_KEY_FK" />
+		<result property="eType" column="E_TYPE" />
+		<result property="eId" column="E_ID" />
+		<result property="ePwd" column="E_PWD" />
+		<result property="eName" column="E_NAME" />
+		<result property="eJobcodeFk" column="E_JOBCODE_FK" />
+		<result property="eDepartFk" column="E_DEPART_FK" />
+		<result property="eAddress" column="E_ADDRESS" />
+		<result property="eExten" column="E_EXTEN" />
+		<result property="ePhone" column="E_PHONE" />
+		<result property="eEmail" column="E_EMAIL" />
+		<result property="eBirth" column="E_BIRTH" />
+		<result property="eHireDate" column="E_HIRE_DATE" />
+		<result property="eEntDate" column="E_ENT_DATE" />
+		<result property="eEntYn" column="E_ENT_YN" />
+		<result property="ePhoto" column="E_PHOTO" />
 	</resultMap>
 
 	<sql id="selectApproval">
@@ -45,75 +124,271 @@
 	</sql>
 
 	<select id="selectDraftApprovalAllList" parameterType="int"
-		resultType="ApprovalVo">
+		resultMap="approvalMap">
 		SELECT A_KEY ,
 		A.C_KEY_FK ,
 		DIV_DOCTYPE_FK ,
 		A_TITLE ,
 		A_CONTENT ,
 		A_WRITER_FK ,
-		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') AS A_WRITE_DATE,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') AS
+		A_WRITE_DATE,
+		TO_CHAR(A_COMPLETE_DATE,'YYYY-MM-DD') A_COMPLETE_DATE,
 		A_CONDITION ,
 		D.DIV_INFO AS DOCTYPE
 		FROM APPROVAL A
-		JOIN DIVISION D ON(A.DIV_DOCTYPE_FK = D.DIV_KEY)
+		JOIN
+		DIVISION D
+		ON(A.DIV_DOCTYPE_FK = D.DIV_KEY)
 		WHERE A_WRITER_FK = #{eKey}
 	</select>
-	
+
 	<select id="selectDraftApprovalIngList" parameterType="int"
-		resultType="ApprovalVo">
+		resultMap="approvalMap">
 		SELECT A_KEY ,
 		A.C_KEY_FK ,
 		DIV_DOCTYPE_FK ,
 		A_TITLE ,
 		A_CONTENT ,
 		A_WRITER_FK ,
-		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') AS A_WRITE_DATE,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') AS
+		A_WRITE_DATE,
+		TO_CHAR(A_COMPLETE_DATE,'YYYY-MM-DD') A_COMPLETE_DATE,
 		A_CONDITION ,
 		D.DIV_INFO AS DOCTYPE
 		FROM APPROVAL A
-		JOIN DIVISION D ON(A.DIV_DOCTYPE_FK = D.DIV_KEY)
+		JOIN
+		DIVISION D
+		ON(A.DIV_DOCTYPE_FK = D.DIV_KEY)
 		WHERE A_WRITER_FK = #{eKey}
+		AND
+		A_CONDITION = 0
+	</select>
+
+	<select id="selectDraftApprovalComplList" parameterType="int"
+		resultMap="approvalMap">
+		SELECT A_KEY ,
+		A.C_KEY_FK ,
+		DIV_DOCTYPE_FK ,
+		A_TITLE ,
+		A_CONTENT ,
+		A_WRITER_FK ,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') AS
+		A_WRITE_DATE,
+		TO_CHAR(A_COMPLETE_DATE,'YYYY-MM-DD') A_COMPLETE_DATE,
+		A_CONDITION ,
+		D.DIV_INFO AS DOCTYPE
+		FROM APPROVAL A
+		JOIN
+		DIVISION D
+		ON(A.DIV_DOCTYPE_FK = D.DIV_KEY)
+		WHERE A_WRITER_FK = #{eKey}
+		AND
+		A_CONDITION = 1
+	</select>
+
+	<select id="selectDraftApprovalCompaList" parameterType="int"
+		resultMap="approvalMap">
+		SELECT A_KEY ,
+		A.C_KEY_FK ,
+		DIV_DOCTYPE_FK ,
+		A_TITLE ,
+		A_CONTENT ,
+		A_WRITER_FK ,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') AS
+		A_WRITE_DATE,
+		TO_CHAR(A_COMPLETE_DATE,'YYYY-MM-DD') A_COMPLETE_DATE,
+		A_CONDITION ,
+		D.DIV_INFO AS DOCTYPE
+		FROM APPROVAL A
+		JOIN
+		DIVISION D
+		ON(A.DIV_DOCTYPE_FK = D.DIV_KEY)
+		WHERE A_WRITER_FK = #{eKey}
+		AND
+		A_CONDITION = 2
+	</select>
+
+	<select id="selectReceivedApprovalAllList" parameterType="int"
+		resultMap="approvalMap">
+		SELECT A.A_KEY A_KEY,
+		A.C_KEY_FK C_KEY_FK,
+		A.DIV_DOCTYPE_FK
+		DIV_DOCTYPE_FK,
+		A.A_TITLE A_TITLE,
+		A.A_CONTENT A_CONTENT,
+		A.A_WRITER_FK
+		A_WRITER_FK,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') A_WRITE_DATE,
+		TO_CHAR(A_COMPLETE_DATE,'YYYY-MM-DD') A_COMPLETE_DATE,
+		A.A_CONDITION
+		A_CONDITION,
+		D.DIV_INFO DOCTYPE,
+		E.E_NAME
+		FROM APPROVAL A
+		JOIN
+		APPROVAL_CONDITION AC ON (A.A_KEY=AC.A_KEY_FK)
+		JOIN EMPLOYEE E ON
+		(A.A_WRITER_FK=E.E_KEY)
+		JOIN DIVISION D ON (A.DIV_DOCTYPE_FK=D.DIV_KEY)
+		WHERE AC.AC_APPROVER_FK=#{eKey}
+	</select>
+
+	<select id="selectReceivedApprovalIngList" parameterType="int"
+		resultMap="approvalMap">
+		SELECT A.A_KEY A_KEY,
+		A.C_KEY_FK C_KEY_FK,
+		A.DIV_DOCTYPE_FK
+		DIV_DOCTYPE_FK,
+		A.A_TITLE A_TITLE,
+		A.A_CONTENT A_CONTENT,
+		A.A_WRITER_FK
+		A_WRITER_FK,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') A_WRITE_DATE,
+		TO_CHAR(A_COMPLETE_DATE,'YYYY-MM-DD') A_COMPLETE_DATE,
+		A.A_CONDITION
+		A_CONDITION,
+		D.DIV_INFO DOCTYPE,
+		E.E_NAME
+		FROM APPROVAL A
+		JOIN
+		APPROVAL_CONDITION AC ON (A.A_KEY=AC.A_KEY_FK)
+		JOIN EMPLOYEE E ON
+		(A.A_WRITER_FK=E.E_KEY)
+		JOIN DIVISION D ON (A.DIV_DOCTYPE_FK=D.DIV_KEY)
+		WHERE AC.AC_APPROVER_FK=#{eKey}
 		AND A_CONDITION = 0
 	</select>
-	
-	<select id="selectDraftApprovalComplList" parameterType="int"
-		resultType="ApprovalVo">
-		SELECT A_KEY ,
-		A.C_KEY_FK ,
-		DIV_DOCTYPE_FK ,
-		A_TITLE ,
-		A_CONTENT ,
-		A_WRITER_FK ,
-		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') AS A_WRITE_DATE,
-		A_CONDITION ,
-		D.DIV_INFO AS DOCTYPE
+
+	<select id="selectReceivedApprovalComplList" parameterType="int"
+		resultMap="approvalMap">
+		SELECT A.A_KEY A_KEY,
+		A.C_KEY_FK C_KEY_FK,
+		A.DIV_DOCTYPE_FK
+		DIV_DOCTYPE_FK,
+		A.A_TITLE A_TITLE,
+		A.A_CONTENT A_CONTENT,
+		A.A_WRITER_FK
+		A_WRITER_FK,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') A_WRITE_DATE,
+		TO_CHAR(A_COMPLETE_DATE,'YYYY-MM-DD') A_COMPLETE_DATE,
+		A.A_CONDITION
+		A_CONDITION,
+		D.DIV_INFO DOCTYPE,
+		E.E_NAME
 		FROM APPROVAL A
-		JOIN DIVISION D ON(A.DIV_DOCTYPE_FK = D.DIV_KEY)
-		WHERE A_WRITER_FK = #{eKey}
+		JOIN
+		APPROVAL_CONDITION AC ON (A.A_KEY=AC.A_KEY_FK)
+		JOIN EMPLOYEE E ON
+		(A.A_WRITER_FK=E.E_KEY)
+		JOIN DIVISION D ON (A.DIV_DOCTYPE_FK=D.DIV_KEY)
+		WHERE AC.AC_APPROVER_FK=#{eKey}
 		AND A_CONDITION = 1
 	</select>
-	
-	<select id="selectDraftApprovalCompaList" parameterType="int"
-		resultType="ApprovalVo">
-		SELECT A_KEY ,
-		A.C_KEY_FK ,
-		DIV_DOCTYPE_FK ,
-		A_TITLE ,
-		A_CONTENT ,
-		A_WRITER_FK ,
-		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') AS A_WRITE_DATE,
-		A_CONDITION ,
-		D.DIV_INFO AS DOCTYPE
+
+	<select id="selectReceivedApprovalCompaList" parameterType="int"
+		resultMap="approvalMap">
+		SELECT A.A_KEY A_KEY,
+		A.C_KEY_FK C_KEY_FK,
+		A.DIV_DOCTYPE_FK
+		DIV_DOCTYPE_FK,
+		A.A_TITLE A_TITLE,
+		A.A_CONTENT A_CONTENT,
+		A.A_WRITER_FK
+		A_WRITER_FK,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') A_WRITE_DATE,
+		TO_CHAR(A_COMPLETE_DATE,'YYYY-MM-DD') A_COMPLETE_DATE,
+		A.A_CONDITION
+		A_CONDITION,
+		D.DIV_INFO DOCTYPE,
+		E.E_NAME
 		FROM APPROVAL A
-		JOIN DIVISION D ON(A.DIV_DOCTYPE_FK = D.DIV_KEY)
-		WHERE A_WRITER_FK = #{eKey}
-		AND A_CONDITION = 2
+		JOIN
+		APPROVAL_CONDITION AC ON (A.A_KEY=AC.A_KEY_FK)
+		JOIN
+		EMPLOYEE E ON
+		(A.A_WRITER_FK=E.E_KEY)
+		JOIN DIVISION D ON
+		(A.DIV_DOCTYPE_FK=D.DIV_KEY)
+		WHERE AC.AC_APPROVER_FK=#{eKey}
+		AND
+		A_CONDITION = 2
+	</select>
+
+	<select id="selectWaitingApprovalList" parameterType="int"
+		resultMap="approvalMap">
+		SELECT DISTINCT A.A_KEY A_KEY,
+		A.C_KEY_FK C_KEY_FK,
+		A.DIV_DOCTYPE_FK DIV_DOCTYPE_FK,
+		A.A_TITLE A_TITLE,
+		A.A_CONTENT
+		A_CONTENT,
+		A.A_WRITER_FK A_WRITER_FK,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') A_WRITE_DATE,
+		A.A_COMPLETE_DATE
+		A_COMPLETE_DATE,
+		A.A_CONDITION A_CONDITION,
+		E.E_NAME
+		E_NAME,
+		D.DIV_INFO
+		DOCTYPE
+		FROM APPROVAL A
+		JOIN EMPLOYEE E ON
+		(A.A_WRITER_FK=E.E_KEY)
+		JOIN
+		DIVISION D ON(A.DIV_DOCTYPE_FK =
+		D.DIV_KEY)
+		WHERE A_KEY IN (SELECT
+		A_KEY_FK
+		FROM
+		(SELECT ROW_NUMBER() OVER(PARTITION
+		BY A_KEY_FK ORDER BY
+		A_KEY_FK,DIV_INFOLEVEL
+		DESC)RNUM,A_KEY_FK,AC_APPROVER_FK
+		FROM
+		APPROVAL_CONDITION AC
+		JOIN
+		EMPLOYEE E ON (AC.AC_APPROVER_FK=E.E_KEY)
+		JOIN DIVISION D ON
+		(E.E_JOBCODE_FK=D.DIV_KEY)
+		WHERE A_KEY_FK IN (SELECT
+		A_KEY
+		FROM APPROVAL
+		WHERE A_CONDITION=0) AND AC_CONDITION=0
+		GROUP BY
+		A_KEY_FK,AC_APPROVER_FK,DIV_INFOLEVEL)
+		WHERE RNUM=1 AND
+		AC_APPROVER_FK=#{eKey})
+	</select>
+
+	<select id="selectExpectedApprovalList" parameterType="int"
+		resultMap="approvalMap">
+		SELECT A.A_KEY A_KEY,
+		A.C_KEY_FK C_KEY_FK,
+		A.DIV_DOCTYPE_FK
+		DIV_DOCTYPE_FK,
+		A.A_TITLE A_TITLE,
+		A.A_CONTENT A_CONTENT,
+		A.A_WRITER_FK,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') A_WRITE_DATE,
+		A.A_CONDITION
+		A_CONDITION,
+		AC.AC_APPROVER_FK AC_APPROVER_FK,
+		D.DIV_INFO
+		DOCTYPE,
+		E.E_NAME
+		FROM APPROVAL A
+		JOIN APPROVAL_CONDITION AC ON
+		(A.A_KEY=AC.A_KEY_FK)
+		JOIN DIVISION D ON (A.DIV_DOCTYPE_FK=D.DIV_KEY)
+		JOIN EMPLOYEE E ON (A.A_WRITER_FK=E.E_KEY)
+		WHERE A.A_CONDITION=0 AND
+		AC.AC_APPROVER_FK =#{eKey} AND AC.AC_CONDITION=0
 	</select>
 
 	<insert id="insertApproval" parameterType="ApprovalVo">
 		INSERT INTO APPROVAL VALUES (
-		SEQ_APPROVAL.NEXTVAL,#{cKeyFk},#{divDoctypeFk},#{aTitle},#{aContent},#{aWriterFk},SYSDATE,0
+		SEQ_APPROVAL.NEXTVAL,#{cKeyFk},#{divDoctypeFk},#{aTitle},#{aContent},#{aWriterFk},SYSDATE,null,0
 		)
 
 		<selectKey keyProperty="aKey" resultType="Integer" order="AFTER">
@@ -124,7 +399,7 @@
 	<insert id="insertApprovers" parameterType="hashMap">
 		INSERT INTO
 		APPROVAL_CONDITION VALUES (
-		SEQ_APPROVAL_CONDITION.NEXTVAL,#{aKey},#{acApprovalFk},0,SYSDATE
+		SEQ_APPROVAL_CONDITION.NEXTVAL,#{aKey},#{acApprovalFk},0,null,null
 		)
 	</insert>
 
@@ -135,4 +410,209 @@
 		)
 	</insert>
 
+	<select id="selectApprovalDetail" resultMap="approvalMap"
+		parameterType="ApprovalVo">
+		SELECT A.A_KEY A_KEY,
+		A.C_KEY_FK C_KEY_FK,
+		A.DIV_DOCTYPE_FK DIV_DOCTYPE_FK,
+		A.A_TITLE A_TITLE,
+		A.A_CONTENT
+		A_CONTENT,
+		A.A_WRITER_FK A_WRITER_FK,
+		TO_CHAR(A_WRITE_DATE,'YYYY-MM-DD') A_WRITE_DATE,
+		A.A_COMPLETE_DATE
+		A_COMPLETE_DATE,
+		A.A_CONDITION A_CONDITION,
+		AC.AC_KEY AC_KEY,
+		AC.A_KEY_FK,
+		AC.AC_APPROVER_FK
+		AC_APPROVER_FK,
+		AC.AC_CONDITION
+		AC_CONDITION,
+		TO_CHAR(AC_APPROVAL_DATE,'YYYY-MM-DD')
+		AC_APPROVAL_DATE,
+		E.E_NAME E_NAME,
+		DIV.DIV_INFO JOB,
+		DIV2.DIV_INFO
+		DEPARTMENT,
+		E2.E_NAME
+		E_NAME,
+		DIV3.DIV_INFO JOB,
+		DIV4.DIV_INFO
+		DEPARTMENT,
+		ATTA.ATTA_KEY
+		ATTA_KEY,
+		ATTA.ATTA_LOCATION ATTA_LOCATION,
+		ATTA.ATTA_FILENAME
+		ATTA_FILENAME,
+		ATTA.ATTA_FILEPATH ATTA_FILEPATH,
+		ATTA.ATTA_FILESIZE
+		ATTA_FILESIZE
+		FROM APPROVAL A
+		JOIN APPROVAL_CONDITION AC ON
+		(A.A_KEY=AC.A_KEY_FK)
+		JOIN EMPLOYEE E ON (AC.AC_APPROVER_FK=E.E_KEY)
+		JOIN EMPLOYEE E2 ON (A.A_WRITER_FK=E2.E_KEY)
+		LEFT JOIN DIVISION DIV ON
+		(E.E_JOBCODE_FK=DIV.DIV_KEY)
+		LEFT JOIN DIVISION DIV2 ON
+		(E.E_DEPART_FK=DIV2.DIV_KEY)
+		LEFT JOIN DIVISION DIV3 ON
+		(E2.E_JOBCODE_FK=DIV3.DIV_KEY)
+		LEFT JOIN DIVISION DIV4 ON
+		(E2.E_DEPART_FK=DIV4.DIV_KEY)
+		LEFT JOIN (SELECT * FROM ATTACHMENT WHERE
+		ATTA_FILEPATH='approval') ATTA
+		ON (A.A_KEY=ATTA.ATTA_LOCATION)
+		WHERE
+		A.A_KEY=#{aKey}
+		ORDER BY DIV.DIV_INFOLEVEL DESC
+	</select>
+
+	<select id="selectCurrentApprover" parameterType="int"
+		resultMap="appConMap">
+		SELECT *
+		FROM
+		(SELECT *
+		FROM
+		(SELECT
+		AC.AC_KEY AC_KEY,
+		AC.A_KEY_FK A_KEY_FK,
+		AC.AC_APPROVER_FK AC_APPROVER_FK,
+		AC.AC_CONDITION
+		AC_CONDITION,
+		AC.AC_APPROVAL_DATE AC_APPROVAL_DATE,
+		E.E_KEY E_KEY,
+		E.E_NO E_NO,
+		E.C_KEY_FK C_KEY_FK,
+		E.E_TYPE E_TYPE,
+		E.E_ID
+		E_ID,
+		E.E_PWD
+		E_PWD,
+		E.E_NAME E_NAME,
+		E.E_JOBCODE_FK E_JOBCODE_FK,
+		E.E_DEPART_FK
+		E_DEPART_FK,
+		E.E_ADDRESS E_ADDRESS,
+		E.E_EXTEN E_EXTEN,
+		E.E_PHONE E_PHONE,
+		E.E_EMAIL
+		E_EMAIL,
+		E.E_BIRTH E_BIRTH,
+		E.E_HIRE_DATE
+		E_HIRE_DATE,
+		E.E_ENT_DATE
+		E_ENT_DATE,
+		E.E_ENT_YN E_ENT_YN,
+		E.E_PHOTO
+		E_PHOTO,
+		DIV.DIV_INFO JOB,
+		DIV.DIV_INFOLEVEL,
+		DIV2.DIV_INFO DEPARTMENT
+		FROM
+		APPROVAL_CONDITION AC
+		JOIN EMPLOYEE E ON
+		(AC.AC_APPROVER_FK=E.E_KEY)
+		JOIN DIVISION DIV ON
+		(E.E_JOBCODE_FK=DIV.DIV_KEY)
+		JOIN DIVISION DIV2 ON
+		(E.E_DEPART_FK=DIV2.DIV_KEY)
+		WHERE A_KEY_FK =3 AND AC_CONDITION=0)
+		ORDER BY DIV_INFOLEVEL DESC)
+		WHERE ROWNUM =1
+	</select>
+
+	<select id="selectLastApprover" parameterType="int" resultMap="appConMap">
+		SELECT *
+		FROM
+		(SELECT *
+		FROM
+		(SELECT
+		AC.AC_KEY AC_KEY,
+		AC.A_KEY_FK A_KEY_FK,
+		AC.AC_APPROVER_FK AC_APPROVER_FK,
+		AC.AC_CONDITION AC_CONDITION,
+		AC.AC_APPROVAL_DATE AC_APPROVAL_DATE,
+		E.E_KEY E_KEY,
+		E.E_NO E_NO,
+		E.C_KEY_FK C_KEY_FK,
+		E.E_TYPE E_TYPE,
+		E.E_ID
+		E_ID,
+		E.E_PWD E_PWD,
+		E.E_NAME
+		E_NAME,
+		E.E_JOBCODE_FK E_JOBCODE_FK,
+		E.E_DEPART_FK E_DEPART_FK,
+		E.E_ADDRESS E_ADDRESS,
+		E.E_EXTEN E_EXTEN,
+		E.E_PHONE E_PHONE,
+		E.E_EMAIL
+		E_EMAIL,
+		E.E_BIRTH E_BIRTH,
+		E.E_HIRE_DATE
+		E_HIRE_DATE,
+		E.E_ENT_DATE
+		E_ENT_DATE,
+		E.E_ENT_YN E_ENT_YN,
+		E.E_PHOTO
+		E_PHOTO,
+		DIV.DIV_INFO JOB,
+		DIV.DIV_INFOLEVEL,
+		DIV2.DIV_INFO DEPARTMENT
+		FROM APPROVAL_CONDITION AC
+		JOIN EMPLOYEE E ON
+		(AC.AC_APPROVER_FK=E.E_KEY)
+		JOIN DIVISION DIV ON
+		(E.E_JOBCODE_FK=DIV.DIV_KEY)
+		JOIN DIVISION DIV2 ON
+		(E.E_DEPART_FK=DIV2.DIV_KEY)
+		WHERE A_KEY_FK =3 AND AC_CONDITION=0)
+		ORDER BY DIV_INFOLEVEL)
+		WHERE ROWNUM =1
+	</select>
+
+	<select id="selectIngAcList" parameterType="int" resultMap="appConMap">
+		SELECT AC.AC_KEY AC_KEY,
+		AC.A_KEY_FK A_KEY_FK,
+		AC.AC_APPROVER_FK AC_APPROVER_FK,
+		AC.AC_CONDITION AC_CONDITION,
+		AC.AC_APPROVAL_TYPE AC_APPROVAL_TYPE,
+		AC.AC_APPROVAL_DATE AC_APPROVAL_DATE,
+		E.E_KEY E_KEY,
+		E.E_NAME E_NAME,
+		J.DIV_INFO JOB,
+		J.DIV_INFOLEVEL DIV_INFOLEVEL,
+		D.DIV_INFO DEPARTMENT
+		FROM APPROVAL_CONDITION AC
+		JOIN EMPLOYEE E ON (AC.AC_APPROVER_FK=E.E_KEY)
+		JOIN DIVISION J ON (E.E_JOBCODE_FK=J.DIV_KEY)
+		JOIN DIVISION D ON (E.E_DEPART_FK=D.DIV_KEY)
+		WHERE A_KEY_FK=#{aKey} AND
+		AC_CONDITION=0
+	</select>
+
+	<select id="selectJobPropsal" parameterType="int" resultType="JobPropsalVo">
+		SELECT JP_KEY ,
+		A_KEY_FK ,
+		TO_CHAR(JP_WORKING_DATE,'YYYY-MM-DD')
+		JP_WORKING_DATE ,
+		JP_COOPERATION
+		FROM JOB_PROPSAL
+		WHERE A_KEY_FK=#{aKey}
+	</select>
+
+	<update id="updateApprovalCondition" parameterType="AppConVo">
+		UPDATE
+		APPROVAL_CONDITION SET AC_CONDITION=#{acCondition},
+		AC_APPROVAL_TYPE=#{acApprovalType}, AC_APPROVAL_DATE=SYSDATE WHERE
+		AC_KEY=#{acKey}
+	</update>
+
+	<update id="updateApproval" parameterType="ApprovalVo">
+		UPDATE APPROVAL SET
+		A_CONDITION=#{aCondition}, A_COMPLETE_DATE=SYSDATE WHERE
+		A_KEY=#{aKey}
+	</update>
 </mapper>

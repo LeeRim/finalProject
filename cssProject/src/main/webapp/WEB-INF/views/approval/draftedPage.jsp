@@ -29,6 +29,16 @@ AdminLTE for demo purposes
 <script src="resources/dist/js/demo.js"></script> -->
 <!-- page script -->
 <script>
+function openDetail(aKey,divDoctypeFk){
+	switch(divDoctypeFk){
+	case 1: location.href="openJobPropsalDetail.do?aKey="+aKey; break;
+	case 2: location.href="openOrderFormDetail.do?aKey="+aKey; break;
+	case 3: location.href="openSpendingResolutionDetail.do?aKey="+aKey; break;
+	case 4: location.href="openRoundRobinDetail.do?aKey="+aKey; break;
+	case 5: location.href="openVacationFormDetail.do?aKey="+aKey; break;
+	}
+}
+
 function hideThead(){
 	$('.thead').hide();
 }
@@ -159,6 +169,7 @@ desired effect
 										<tr>
 											<th>0</th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>문서번호</th>
@@ -168,6 +179,7 @@ desired effect
 										<tr>
 											<th><p style="visibility: hidden; height:15px;">0</p></th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>문서번호</th>
@@ -175,9 +187,10 @@ desired effect
 										</tr>
 										
 										<c:forEach var="approval" items="${allList }">
-										<tr>
+										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
 											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
@@ -226,6 +239,7 @@ desired effect
 										<tr>
 											<th>0</th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>문서번호</th>
@@ -235,6 +249,7 @@ desired effect
 										<tr>
 											<th><p style="visibility: hidden; height:15px;">0</p></th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>문서번호</th>
@@ -245,6 +260,7 @@ desired effect
 										<tr>
 											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
@@ -285,6 +301,7 @@ desired effect
 										<tr>
 											<th>0</th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>문서번호</th>
@@ -294,6 +311,7 @@ desired effect
 										<tr>
 											<th><p style="visibility: hidden; height:15px;">0</p></th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>문서번호</th>
@@ -304,6 +322,7 @@ desired effect
 										<tr>
 											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
@@ -344,6 +363,7 @@ desired effect
 										<tr>
 											<th>0</th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>문서번호</th>
@@ -353,6 +373,7 @@ desired effect
 										<tr>
 											<th><p style="visibility: hidden; height:15px;">0</p></th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>문서번호</th>
@@ -363,6 +384,7 @@ desired effect
 										<tr>
 											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>

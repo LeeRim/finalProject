@@ -11,6 +11,7 @@
 		<result property="snWriteDate" column="SN_WRITE_DATE" />
 		<result property="snDeleteYn" column="SN_DELETE_YN"/>
 		<result property="snAttachYn" column="SN_ATTACH_YN"/>
+		<result property="snTrashdeleteYn" column="SN_TRASHDELETE_YN"/>
 		<collection property="attach" column="SN_KEY" ofType="AttachVo" resultMap="attachMap"/>
 		<collection property="employee" column="SN_KEY" ofType="EmployeeVo" resultMap="employeeMap"/>
 	</resultMap>
@@ -55,7 +56,7 @@
 
 	<insert id="insertNote" parameterType="NoteVo">
 		INSERT INTO SENDNOTE VALUES(
-    	SEQ_SENDNOTE.NEXTVAL ,#{snSenderFk} ,#{snTitle},#{snContent},SYSDATE,DEFAULT,#{snAttachYn}
+    	SEQ_SENDNOTE.NEXTVAL ,#{snSenderFk} ,#{snTitle},#{snContent},SYSDATE,DEFAULT,#{snAttachYn},DEFAULT
 		)
 		<selectKey keyProperty="snKey" resultType="Integer" order="AFTER">
 				 SELECT SEQ_SENDNOTE.CURRVAL FROM dual 
@@ -75,7 +76,7 @@
 	</insert>
 	
 	<select id="selectSendNoteList" parameterType="int" resultMap="resultNoteVo">
-		SELECT S.SN_KEY, S.SN_SENDER_FK, S.SN_TITLE,S.SN_CONTENT, S.SN_WRITE_DATE, S.SN_DELETE_YN,S.SN_ATTACH_YN
+		SELECT S.SN_KEY, S.SN_SENDER_FK, S.SN_TITLE,S.SN_CONTENT, S.SN_WRITE_DATE, S.SN_DELETE_YN,S.SN_ATTACH_YN, S.SN_TRASHDELETE_YN
 		    , E.E_KEY, E.E_NO, E.C_KEY_FK, E.E_TYPE, E.E_ID, E.E_PWD,E.E_NAME
 		    , E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS,E.E_EXTEN,E.E_PHONE,E.E_EMAIL
 		    , E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN, E.E_PHOTO,E.E_BIRTH
@@ -86,11 +87,14 @@
 	</select>
 	
 	<select id="selectSendDetail" parameterType="NoteVo" resultMap="resultNoteVo">
-		SELECT S.SN_KEY, S.SN_SENDER_FK, S.SN_TITLE,S.SN_CONTENT, S.SN_WRITE_DATE, S.SN_DELETE_YN,S.SN_ATTACH_YN
+		SELECT S.SN_KEY, S.SN_SENDER_FK, S.SN_TITLE,S.SN_CONTENT, S.SN_WRITE_DATE, S.SN_DELETE_YN,S.SN_ATTACH_YN,S.SN_TRASHDELETE_YN
 		      , A.ATTA_KEY, A.ATTA_LOCATION, A.ATTA_FILENAME,A.ATTA_FILEPATH,A.ATTA_FILESIZE
 		      , E.E_KEY, E.E_NAME
 		FROM SENDNOTE S
-		LEFT JOIN ATTACHMENT A ON(S.SN_KEY= A.ATTA_LOCATION)
+		LEFT JOIN (SELECT ATTA_KEY,ATTA_LOCATION,ATTA_FILENAME,ATTA_FILEPATH,ATTA_FILESIZE 
+                    FROM ATTACHMENT
+                    WHERE ATTA_FILEPATH = 'sendNote')
+        A ON(S.SN_KEY= A.ATTA_LOCATION)
 		JOIN EMPLOYEE E ON(S.SN_SENDER_FK=E.E_KEY)
 		WHERE S.SN_KEY = #{snKey}
 	</select>
@@ -103,6 +107,93 @@
 			JOIN EMPLOYEE E ON(R.RN_RECIPIENT_FK = E.E_KEY)
 			JOIN DIVISION D ON(E.E_JOBCODE_FK = D.DIV_KEY)
 			WHERE RN_NOTE_FK = #{snKey}
+	</select>
+	
+	<update id="updateDeleteYn" parameterType="NoteVo">
+		UPDATE SENDNOTE
+		SET SN_DELETE_YN = 
+		<choose>
+			<when test="snDeleteYn eq 'N'.toString()">
+				'Y'
+			</when>
+			<otherwise>
+				'N'
+			</otherwise>
+		</choose>
+		WHERE SN_KEY = #{snKey}
+	</update>
+	
+	<delete id="updateTeashDelSendNote" parameterType="NoteVo">
+	    UPDATE SENDNOTE
+	    SET SN_TRASHDELETE_YN = 'Y'
+	    WHERE SN_KEY = #{snKey}
+	</delete>
+	
+	<select id="selectSearchSendNote" parameterType="NoteVo" resultMap="resultNoteVo">
+		SELECT S.SN_KEY, S.SN_SENDER_FK, S.SN_TITLE,S.SN_CONTENT, S.SN_WRITE_DATE, S.SN_DELETE_YN,S.SN_ATTACH_YN, S.SN_TRASHDELETE_YN
+		    , E.E_KEY, E.E_NO, E.C_KEY_FK, E.E_TYPE, E.E_ID, E.E_PWD,E.E_NAME
+		    , E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS,E.E_EXTEN,E.E_PHONE,E.E_EMAIL
+		    , E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN, E.E_PHOTO,E.E_BIRTH
+        FROM SENDNOTE S
+        LEFT JOIN RECEIVENOTE R ON(S.SN_KEY = R.RN_NOTE_FK)
+        LEFT JOIN EMPLOYEE E ON(R.RN_RECIPIENT_FK = E.E_KEY)
+        WHERE SN_SENDER_FK = #{snSenderFk}
+        AND (S.SN_TITLE LIKE '%'||#{keyword}||'%'
+        OR S.SN_CONTENT LIKE '%'||#{keyword}||'%')
+	</select>
+	
+	<select id="selectReceiveNote" parameterType="int" resultType="ReceivenoteVo">
+		SELECT R.RN_KEY, R.RN_NOTE_FK, R.RN_RECIPIENT_FK, R.RN_READ_YN, R.RN_DELETE_YN
+	        ,S.SN_KEY, S.SN_TITLE, S.SN_WRITE_DATE,S.SN_ATTACH_YN
+	        ,E.E_NAME
+		FROM RECEIVENOTE R
+		JOIN SENDNOTE S ON (R.RN_NOTE_FK = S.SN_KEY)
+		JOIN EMPLOYEE E ON (S.SN_SENDER_FK = E.E_KEY)
+		WHERE RN_RECIPIENT_FK =#{eKey}
+	</select>
+	
+	<update id="updateReadYnReceive" parameterType="ReceivenoteVo">
+		UPDATE RECEIVENOTE
+		 SET RN_READ_YN = 'Y'
+	    WHERE RN_KEY = #{rnKey}
+	</update>
+	
+	<select id="selectReceiveNoteDetail" parameterType="ReceivenoteVo" resultType="ReceivenoteVo">
+		SELECT RN_KEY, RN_NOTE_FK, RN_RECIPIENT_FK, RN_READ_YN, RN_DELETE_YN
+		FROM RECEIVENOTE
+		WHERE RN_KEY = #{rnKey}
+	</select>
+	
+	<update id="updateReceiveDeleteYn" parameterType="ReceivenoteVo">
+		UPDATE RECEIVENOTE
+		SET RN_DELETE_YN = 
+		<choose>
+			<when test="rnDeleteYn eq 'N'.toString()">
+				'Y'
+			</when>
+			<otherwise>
+				'N'
+			</otherwise>
+		</choose>
+		WHERE RN_KEY = #{rnKey}
+	</update>
+	
+	<update id ="updateReceiveNoteDel" parameterType="ReceivenoteVo">
+		UPDATE RECEIVENOTE
+		SET RN_DELETE_YN = 'X'
+		WHERE RN_KEY =#{rnKey}
+	</update>
+	
+	<select id ="selectSearchReceiveNote" parameterType="ReceivenoteVo" resultType="ReceivenoteVo">
+		SELECT R.RN_KEY, R.RN_NOTE_FK, R.RN_RECIPIENT_FK, R.RN_READ_YN, R.RN_DELETE_YN
+	        ,S.SN_KEY, S.SN_TITLE, S.SN_WRITE_DATE,S.SN_ATTACH_YN
+	        ,E.E_NAME
+		FROM RECEIVENOTE R
+		JOIN SENDNOTE S ON (R.RN_NOTE_FK = S.SN_KEY)
+		JOIN EMPLOYEE E ON (S.SN_SENDER_FK = E.E_KEY)
+		WHERE RN_RECIPIENT_FK =#{rnRecipientFk}
+		 AND (S.SN_TITLE LIKE '%'||#{keyword}||'%'
+        OR S.SN_CONTENT LIKE '%'||#{keyword}||'%')
 	</select>
 
 </mapper>

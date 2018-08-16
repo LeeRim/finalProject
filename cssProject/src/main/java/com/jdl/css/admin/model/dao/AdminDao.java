@@ -6,7 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jdl.css.common.model.vo.PaymentVo;
 import com.jdl.css.company.model.vo.CompanyVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 
 
@@ -26,8 +28,7 @@ public class AdminDao {
 	}
 
 	public int updateCompanyLevel(CompanyVo company) {
-		return sqlSession.update("AdminMapper.updateCcompanyLevel",company);
-		
+		return sqlSession.update("AdminMapper.updateCompanyLevel",company);
 	}
 
 	public List<CompanyVo> selectMarkList() {
@@ -53,6 +54,43 @@ public class AdminDao {
 	public List<CompanyVo> selectTop5CompanyList() {
 		return sqlSession.selectList("AdminMapper.selectTop5List");
 	}
+
+	public List<CompanyVo> selectCalList(String dateList) {
+		return sqlSession.selectList("AdminMapper.selectCalList",dateList);
+	}
+	
+	public List<CompanyVo> selectNowCalList() {
+		return sqlSession.selectList("AdminMapper.selectNowCalList");
+	}
+
+	public EmployeeVo companyIdCheck(String id) {
+		return sqlSession.selectOne("AdminMapper.selectCompanyIdCheck",id);
+	}
+
+	public int insertCompany(CompanyVo company) {
+		return sqlSession.insert("AdminMapper.insertCompany",company);
+	}
+
+	public int insertEmployeeAdmin(EmployeeVo employee) {
+		return sqlSession.insert("AdminMapper.insertEmployeeAdmin",employee);
+	}
+
+	public List<EmployeeVo> selectEmployeeCount() {
+		return sqlSession.selectList("AdminMapper.selectEmployeeCount");
+	}
+
+	public CompanyVo selectComapnyPayment(int cKeyFk) {
+		return sqlSession.selectOne("AdminMapper.selectCompanyPayment",cKeyFk);
+	}
+
+
+	public int insertCompanyPayment(PaymentVo paymentVo) {
+		System.out.println("dao : " + paymentVo);
+		return sqlSession.insert("AdminMapper.insertCompanyPayment",paymentVo);
+	}
+
+	
+	
 
 	
 

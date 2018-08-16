@@ -51,8 +51,8 @@
               </span>
           </a>
           <ul class="treeview-menu">
-          	<li><a href="#">수신쪽지함</a></li>
-            <li><a href="#">휴지통</a></li>
+          	<li><a href="receiveNoteList.do">수신쪽지함</a></li>
+            <li><a href="receiveNoteTrashList.do">휴지통</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -63,7 +63,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="sendNoteList.do">보낸쪽지함</a></li>
-            <li><a href="#">휴지통</a></li>
+            <li><a href="sendNoteTrashList.do">휴지통</a></li>
           </ul>
         </li>
       </ul>

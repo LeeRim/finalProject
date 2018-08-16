@@ -49,5 +49,16 @@ public class NoteDao {
 		return session.selectList("NoteMapper.selectReceiveList", note);
 	}
 
+	public int updateDelYn(NoteVo note) {
+		return session.update("NoteMapper.updateDeleteYn", note);
+	}
+
+	public int updateTrashDelSendNote(NoteVo note) {
+		return session.update("NoteMapper.updateTeashDelSendNote", note);
+	}
+
+	public List<NoteVo> selectSearchSendNote(NoteVo note) {
+		return session.selectList("NoteMapper.selectSearchSendNote", note);
+	}
 
 }

@@ -25,26 +25,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </script>
 
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 	
@@ -61,7 +41,7 @@ desired effect
         <button onclick="board();">게시판 인덱스</button>
         <hr>
         <h1>쪽지 버튼</h1>
-        <a href="sendNoteList.do">쪽지 메인 페이지 이동</a>
+        <a href="receiveNoteList.do">쪽지 메인 페이지 이동</a>
         <h1>로그인 버튼</h1>
         <a href="loginForm.do">로그인 페이지 이동</a>
 
@@ -74,10 +54,12 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
 	<a href="adminMain.do">관리자페이지</a>
+
 	  <a href="calender.do">일정 조회</a>
-      <!--------------------------
-        | Your Page Content Here |
-        -------------------------->
+
+	<a href="companyJoinForm.do">회사회원가입</a>
+	<a href="companyPayment.do?cKeyFk=${user.cKeyFk }">결제하기</a>
+
         
         <a href="loginForm.do">로그인</a>
         <a href="approvalPage.do">전자결재</a>
@@ -91,9 +73,6 @@ desired effect
 
 
 	<c:import url="include/footer.jsp"/>
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
 <P>  The time on the server is ${serverTime}. 111</P>
 </body>
 </html>

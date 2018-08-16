@@ -56,11 +56,11 @@
 						<li><a href="vacationFormPage.do">휴가계</a></li>
 					</ul></li>
 				<li class="header">결재하기</li>
-				<li><a href="#"><i class="fa fa-link"></i> <span>결재대기</span></a></li>
-				<li><a href="#"><i class="fa fa-link"></i> <span>결재예정</span></a></li>
+				<li><a href="waitingPage.do"><i class="fa fa-link"></i> <span>결재대기</span></a></li>
+				<li><a href="expectedPage.do"><i class="fa fa-link"></i> <span>결재예정</span></a></li>
 				<li class="header">결재문서함</li>
 				<li><a href="draftedPage.do"><i class="fa fa-link"></i> <span>기안문서함</span></a></li>
-				<li><a href="#"><i class="fa fa-link"></i> <span>결재문서함</span></a></li>
+				<li><a href="receivedPage.do"><i class="fa fa-link"></i> <span>결재문서함</span></a></li>
 			</ul>
 			<!-- /.sidebar-menu -->
 		</section>

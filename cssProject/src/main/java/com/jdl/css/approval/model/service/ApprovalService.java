@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jdl.css.approval.model.dao.ApprovalDao;
+import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
@@ -56,4 +57,69 @@ public class ApprovalService {
 		// TODO Auto-generated method stub
 		return dao.selectDraftApprovalCompaList(eKey);
 	}
+	
+	public List<ApprovalVo> selectReceivedApprovalAllList(int eKey) {
+		return dao.selectReceivedApprovalAllList(eKey);
+	}
+
+	public List<ApprovalVo> selectReceivedApprovalIngList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectReceivedApprovalIngList(eKey);
+	}
+
+	public List<ApprovalVo> selectReceivedApprovalComplList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectReceivedApprovalComplList(eKey);
+	}
+
+	public List<ApprovalVo> selectReceivedApprovalCompaList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectReceivedApprovalCompaList(eKey);
+	}
+
+	public List<ApprovalVo> selectWaitingApprovalList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectWaitingApprovalList(eKey);
+	}
+
+	public List<ApprovalVo> selectExpectedApprovalList(int eKey) {
+		// TODO Auto-generated method stub
+		return dao.selectExpectedApprovalList(eKey);
+	}
+
+	public ApprovalVo selectApprovalDetail(ApprovalVo a) {
+		// TODO Auto-generated method stub
+		return dao.selectApprovalDetail(a);
+	}
+
+	public ApprovalConditionVo selectCurrentApprover(int aKey) {
+		// TODO Auto-generated method stub
+		return dao.selectCurrentApprover(aKey);
+	}
+
+	public ApprovalConditionVo selectLastApprover(int aKey) {
+		// TODO Auto-generated method stub
+		return dao.selectLastApprover(aKey);
+	}
+
+	public JobPropsalVo selectJobPropsal(int aKey) {
+		// TODO Auto-generated method stub
+		return dao.selectJobPropsal(aKey);
+	}
+
+	public int updateApprovalCondition(ApprovalConditionVo ac) {
+		// TODO Auto-generated method stub
+		return dao.updateApprovalCondition(ac);
+	}
+
+	public int updateApproval(ApprovalVo app) {
+		// TODO Auto-generated method stub
+		return dao.updateApproval(app);
+	}
+
+	public List<ApprovalConditionVo> selectIngAcList(int aKey) {
+		// TODO Auto-generated method stub
+		return dao.selectIngAcList(aKey);
+	}
+
 }
