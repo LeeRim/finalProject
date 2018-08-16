@@ -100,7 +100,7 @@ function validate(){
 
 <div class="wrapper">
 	
-	<c:import url="include/left_column.jsp"/>
+	<c:import url="../include/left_column.jsp"/>
   
   
 
@@ -120,7 +120,7 @@ function validate(){
 		
 		<div class="box box-primary" style="margin-top:50px; width:1000px;">
             <div class="box-header with-border">
-              <h3 class="box-title">부서관리 </h3>
+              <h3 class="box-title">직위관리 </h3>
               
             </div>
             <!-- /.box-header -->
@@ -129,7 +129,7 @@ function validate(){
             
             <div style="padding: 30px;">
               <table>
-              <tr> <th></th><th>부서명</th> <th>부서설명</th>  </tr>
+              <tr> <th></th><th>직위명</th> <th>직위설명</th>  </tr>
               <tr>
               <td>1.</td>
               
@@ -198,7 +198,7 @@ function validate(){
 
 
 
-	<c:import url="include/footer.jsp"/>
+	<c:import url="../include/footer.jsp"/>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

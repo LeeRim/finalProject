@@ -70,7 +70,7 @@ function validate(){
 
 <div class="wrapper">
 	
-	<c:import url="include/left_column.jsp"/>
+	<c:import url="../include/left_column.jsp"/>
   
   
 
@@ -137,7 +137,7 @@ function validate(){
                  
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true"  name="eDepartFk">
                   <c:forEach items="${list2 }" var="e2" >
-                  <option value="${e2.eDepartFk}">${e2.eDepart}</option>
+                  <option value="${e2.eDepartFk}">${e2.department}</option>
                   </c:forEach>
                 </select>
               </div>
@@ -146,7 +146,7 @@ function validate(){
                  
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="eJobcodeFk">
                  <c:forEach items="${list }" var="e" >
-                  <option value="${e.eJobcodeFk}">${e.eJob}</option>
+                  <option value="${e.eJobcodeFk}">${e.job}</option>
                   </c:forEach>
                   
                 </select>
@@ -305,7 +305,7 @@ $('#datepicker2').datepicker({
 
 
 
-	<c:import url="include/footer.jsp"/>
+	<c:import url="../include/footer.jsp"/>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
