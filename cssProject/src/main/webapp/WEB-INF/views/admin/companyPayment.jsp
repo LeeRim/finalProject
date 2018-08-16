@@ -12,7 +12,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- DataTables -->
   <link rel="stylesheet" href="resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
-  
+  <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.7.js"></script>
 <style>
 	.row,.table-striped{
 		margin-left:auto;
@@ -44,11 +44,101 @@
 	td{
 		padding:10px;
 	}
+	.choiceBtn{
+		border:1px solid #bcbcbc;
+		cursor:pointer;
+	}
 </style>
 <script>
-function kakaopay(){
+var returnCal = 0;
+
+function pay(){
+	var level = 0;
+	var pay = 0;
+	<c:if test="${company.counts <=100 }">
+		level = 1;
+		pay = 7000;
+	</c:if>
+	<c:if test="${company.counts > 100 && company.counts <=200 }">
+		level = 2;
+		pay = 6000;
+	</c:if>
+	<c:if test="${company.counts > 200 }">
+		level = 3;
+		pay = 5000;
+	</c:if>
+	console.log(level);
+	console.log(pay);
 	
+	
+	if($("#month").val() == "1m"){
+		returnCal = level * pay * 1;	
+	}else if($("#month").val() == "3m"){
+		returnCal = level * pay * 3;	
+	}else if($("#month").val() == "6m"){
+		returnCal = level * pay * 6;	
+	}else{
+		returnCal = level * pay * 12;	
+	}
+	
+	$("#amount").html(returnCal);
 }
+
+function kakaopay(){
+	IMP.init("imp21823697");
+	IMP.request_pay({
+	    pg : 'kakaopay',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : '마일리지 결제',
+	    amount : returnCal,
+	    buyer_name : '${company.cName}',
+	    kakaoOpenApp : true
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	    	jQuery.ajax({
+	    		url: "companyPaymentS.do", //cross-domain error가 발생하지 않도록 주의해주세요
+	    		type: 'POST',
+	    		data: {
+	    			imp_uid : rsp.imp_uid,
+	                cKeyFk : '${company.cKey}',
+	                payMileage : rsp.paid_amount
+	                //기타 필요한 데이터가 있으면 추가 전달
+	    		},success:function(data) {
+	                 //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+	                 var msg = '결제가 완료되었습니다.';
+	                 msg += '\n고유ID : ' + rsp.imp_uid;
+	                 msg += '\결제 금액 : ' + rsp.paid_amount;
+	                 msg += '카드 승인번호 : ' + rsp.apply_num;
+	                 alert("결제완료");
+	                 opener.location.href=data;
+	                 window.close();
+	                 
+	           	},error:function(e){
+	           		alert("error");
+	           	}
+	          }).done(function(data) {
+	             //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+//	                 var msg = '결제가 완료되었습니다.';
+//	                 msg += '\n고유ID : ' + rsp.imp_uid;
+//	                 msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+//	                 msg += '\결제 금액 : ' + rsp.paid_amount;
+//	                 msg += '카드 승인번호 : ' + rsp.apply_num;
+	                
+//	                 alert(data);
+	          });
+	       } else {
+	           var msg = '결제에 실패하였습니다.';
+	           msg += '에러내용 : ' + rsp.error_msg;
+	           
+	           alert(msg);
+
+	       }
+	   });
+}
+
+
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -96,21 +186,31 @@ function kakaopay(){
                   <th>금액</th>
                 </tr>
                 <tr>
-                  <td>CSS</td>
-                  <td>장건희</td>
-                  <td>3</td>
-                  <td>1</td>
-                  <td>7000</td>
+                  <td>${company.cName }</td>
+                  <td>${company.cOwner }</td>
+                  <td>${company.counts }</td>
+                  <c:if test="${company.counts <=100 }">
+	                  <td>1</td>
+	                  <td>7000</td>
+                  </c:if>
+                  <c:if test="${company.counts > 100 && company.counts <=200 }">
+	                  <td>2</td>
+	                  <td>6000</td>
+                  </c:if>
+                  <c:if test="${company.counts > 200 }">
+	                  <td>3</td>
+	                  <td>5000</td>
+                  </c:if>
                   <td>
-                  	<select class="select">
-                  		<option >1개월</option>
-                  		<option >3개월</option>
-                  		<option >6개월</option>
-                  		<option >12개월</option>
+                  	<select class="select" id="month">
+                  		<option value="1m">1개월</option>
+                  		<option value="3m">3개월</option>
+                  		<option value="6m">6개월</option>
+                  		<option value="12m">12개월</option>
                   	</select>
                   </td>
-                  <td>선택</td>
-                  <td>21,000원</td>
+                  <td><div class="choiceBtn" onclick="pay();">선택</div></td>
+                  <td id="amount"></td>
                 </tr>
               </table>
             </div>
