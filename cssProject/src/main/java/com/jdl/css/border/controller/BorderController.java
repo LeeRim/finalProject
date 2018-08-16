@@ -342,7 +342,6 @@ public class BorderController {
 	
 	@RequestMapping("searchBoard.do")
 	public ModelAndView searchBoard(@RequestParam(value="currentPage", required=false)String currentPagestr, BorderVo board, String condition, String keyword, ModelAndView mv){
-		System.out.println("searchBoard : " + board);
 		int currentPage;	//현재 페이지의 번호
 		int limitPage;		//한페이지에 출력할 페이지 갯수
 		//1~10
@@ -389,6 +388,9 @@ public class BorderController {
 		mv.addObject("map", map);
 		mv.addObject("pi", pi);
 		mv.setViewName("border/borderListsearch");
+		System.out.println("search : " + condition);
 		return mv;
 	}
+	
+	
 }

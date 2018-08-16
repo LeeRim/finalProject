@@ -72,7 +72,7 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="form-group">
-                <input type="text" id="bTitle" name="bTitle" class="form-control" placeholder="제목">
+                <input type="text" maxlength="30" id="bTitle" name="bTitle" class="form-control" placeholder="제목">
               </div>
               <!-- <div class="form-group">
                 <input type="file" class="form-control" placeholder="파일">

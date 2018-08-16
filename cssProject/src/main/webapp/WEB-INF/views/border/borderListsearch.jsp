@@ -94,6 +94,9 @@
 		margin-left:20px;
 		margin-top:-10px;
 	}
+	.searchArea{
+		margin-top:30px;
+	}
 </style>
 <script>
 $(function(){
@@ -123,6 +126,9 @@ $(function(){
 		var searchText = $("#searchText").val();
 		location.href = "searchBoard.do?condition=" + condition + "&keyword=" + searchText + "&bCateGory=${map.bCateGory}";
 	}
+	$(function(){
+		$("#searchCondition").val(${map.condition});
+	})
 </script>
 
 </head>
@@ -149,14 +155,14 @@ $(function(){
           <div class="box" style="margin-top:20px;width:100%;">
             <div class="box-header">
             <c:choose>
-	 			<c:when test="${map.bCateGory eq 1}">
-	 				<h1>공지사항 게시판</h1>
+	 			<c:when test="${bCateGory eq 1}">
+	 				<h3 class="box-title">공지사항</h3>
 	 			</c:when>
-	 			<c:when test="${map.bCateGory eq 2}">
-	 				<h1>자유게시판 게시판</h1>
+	 			<c:when test="${bCateGory eq 2}">
+	 				<h3 class="box-title">자유 게시판</h3>
 	 			</c:when>
-	 			<c:when test="${map.bCateGory eq 3}">
-	 				<h1>경조사 게시판</h1>
+	 			<c:when test="${bCateGory eq 3}">
+	 				<h3 class="box-title">경조사</h3>
 	 			</c:when>
 	 		</c:choose>
 			</div>
@@ -201,7 +207,9 @@ $(function(){
 	
 	<div class="page">
     <div class="pageBtnDiv">
-	<div class="pageBtn" onclick="movePage(1);"> << </div>
+    <c:if test="${pi.startPage ne pi.currentPage}">
+		<div class="pageBtn" onclick="movePage(1);"> << </div>
+    </c:if>
 	<c:forEach var="i" begin="${pi.startPage}" end="${pi.endPage}" >
 		<c:if test="${pi.currentPage eq i}">
 			<div class="pageBtn" disabled>${i}</div>
@@ -210,17 +218,15 @@ $(function(){
 			<div class="pageBtn" onclick="movePage(${i});">${i}</div>
 		</c:if>
 	</c:forEach>
-	<div class="pageBtn" onclick="movePage(${pi.maxPage});"> >> </div>
+	
+    <c:if test="${pi.endPage ne pi.currentPage}">
+		<div class="pageBtn" onclick="movePage(${pi.maxPage});"> >> </div>
+    </c:if>
 	
 	 <div class="searchArea" align="center">
 		<select id="searchCondition">
 			<option value="0">전체</option>
-			<c:if test="${map.condition eq null}">
-				<option value="1" selected>제목</option>
-			</c:if>
-			<c:if test="${map.condition ne null}">
-				<option value="1">제목</option>
-			</c:if>
+			<option value="1" selected>제목</option>
 			<option value="2">내용</option>
 		</select>		
 		<input type="text" id="searchText" placeholder="검색어 입력" value="${map.keyword}"/>

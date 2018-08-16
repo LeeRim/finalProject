@@ -72,7 +72,14 @@
 		$("#commentForm").submit();
 	}
 	function updateCommentForm(obj, flag){
-		var $textArea = $(obj).parent().parent().next().find("textarea");
+		var bcot = $("#bcot").text().trim();
+		console.log(bcot);
+		
+		
+		$("#bcot").html("<input type='text' id='replyUpdate'/>");
+		$("#replyUpdate").val(bcot);
+		
+		var $textArea = $(".form-control");
 		$textArea.prop("readonly", !flag);
 		if(flag){
 			$(obj).hide();
@@ -89,7 +96,7 @@
 	
 	function updateComment(obj, cno){
 		//댓글 작성 -> 댓글 번호, 댓글 내용
-		var commentValue =  $(obj).parent().parent().next().find("textarea").val();
+		var commentValue =  $("#replyUpdate").val();
 		var cno = cno;
 		//console.log("updateComment.do?cno=" + cno + "&content=" + commentValue);
 		location.href
@@ -121,78 +128,89 @@
 <div class="row" style="width:95%; margin-right:auto; margin-left:auto;">
 
 <h1>갤러리 디테일 화면</h1>
-<div class="main">
-	 <table class="contentT">
-		<tr class="tr1">
-			<td style="width:5px;"></td>
-			<td colspan="3">${attach.bTitle }</td>
-		</tr>
-		<tr class="tr2">
-			<td style="width:5px;"></td>
-			<td style="width:200px;"> 작성자 : <c:out value="${attach.eName }"/></td>
-			<td style="width:200px;"> 작성일 : <c:out value="${attach.bDate }"/></td>
-		</tr>
-	 </table>
-	 <br>
-	 <br>
-</div>
-	<div class="boardContent">
-		${attach.bContent}
-	 </div>
-	 </div>
-<div class="Btns">
+<!-- Main content -->
+    <section class="content container-fluid">
+       <div class="row" >
+        <div class="col-md-6" style="width: 90%; ">
+          <!-- Box Comment -->
+          <div class="box box-widget">
+            <div class="box-header with-border">
+              <div class="user-block">
+                <img class="img-circle" src="resources/dist/img/user1-128x128.jpg" alt="User Image">
+                <span class="username">${attach.bTitle}</span>
+                <span class="description"><c:out value="${attach.eName }"/></span>
+              </div>
+              <!-- /.user-block -->
+              <div class="box-tools">
+                    <br><br>
+                    <span class="text-muted pull-right">작성일 : <c:out value="${attach.bDate }"/></span>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              ${attach.bContent}
+              <button type="button" onclick="border();" class="btn btn-default btn-xs"><i class="fa fa-share"></i> 리스트</button>
+              <c:if test="${user ne null && user.eKey eq attach.bWriter}">
+              <button type="button" onclick="bModifyPage();" class="btn btn-default btn-xs"><i class="fa fa-share"></i> 수정</button>
+              <button type="button" onclick="deleteBoard();"class="btn btn-default btn-xs"><i class="fa fa-remove"></i> 삭제</button>
+              </c:if>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer box-comments">
+            <c:forEach items="${bList}" var="b">
+            <!-- 이부분 반복 -->
+              <div class="box-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="resources/dist/img/user3-128x128.jpg" alt="User Image">
 
-	<c:if test="${user ne null && user.eKey eq attach.bWriter}">
-		<div class="Btn mod" onclick="bGalleryModifyPage();">수정하기</div>
-		<div class="Btn del" onclick="deleteGalleryBoard();">삭제하기</div>
-	</c:if>
-	<div class="Btn" onclick="border();">돌아가기</div>
-</div>
-<br>
-<br>
-<div class="commentArea">
-		<table>
-			<c:forEach items="${bList}" var="b">
-			<tr>
-				<td>${b.eName} ${b.cDate}</td>
-				<td align="right">
-				<c:if test="${!empty user && user.eKey eq b.cWriter}">
-					<input type="button" class="modifyBtn" value="수정" onclick="updateCommentForm(this, true);"/>
-					<input type="button" class="deleteBtn" value="삭제" onclick="deleteComment(${b.commentKey});"/>
-					<input type="button" class="updateBtn" style="display:none;" value="작성 완료" onclick="updateComment(this,${b.commentKey});"/>
-					<input type="button" class="cancelBtn" style="display:none;" value="취소" onclick="updateCommentForm(this, false);"/>
-				</c:if>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<textarea cols="108" rows="4" readonly><c:out value="${b.cContent}"/></textarea>
-				</td>
-			</tr>
-			</c:forEach>
-		</table>
-	</div>
-	<c:if test="${!empty user}">
-	<div class="commentWriteArea">
-		댓글
-		<form method="post" id="commentForm" action="writeComment.do">
-			<table>
-				<input type="hidden" name="boardKey" value='<c:out value="${attach.boardKey}"/>'>
-				<input type="hidden" name="cWriter"	value="${attach.bWriter }"/> 
-				<tr>
-					<td>
-						<textarea cols="90" rows="4" name="cContent"></textarea>
-					</td>
-					<td>
-						<input type="button" onclick="writeComment();" value="댓글작성"/>
-					</td>
-				</tr>
-			</table>		
-		</form>
-	</div>
-	</c:if>
-	</div>
-	</div>
+                <div class="comment-text">
+                      <span class="username">
+                        ${b.eName} 사원
+                        <span class="text-muted pull-right">${b.cDate}</span>
+                        	<span class="text-muted pull-right">
+                        		<button type="button" onclick="updateCommentForm(this, true);" class="btn btn-default btn-xs modifyBtn""><i class="fa fa-share"></i> 수정</button>
+              					<button type="button" onclick="deleteComment(${b.commentKey});" class="btn btn-default btn-xs deleteBtn"><i class="fa fa-remove"></i> 삭제</button>
+              					<button type="button" class="btn btn-default btn-xs updateBtn" style="display:none;" onclick="updateComment(this,${b.commentKey});"><i class="fa fa-share"></i>작성 완료</button>
+								<button type="button" class="btn btn-default btn-xs cancelBtn" style="display:none;" onclick="updateCommentForm(this, false);"><i class="fa fa-share"></i>취소</button>
+              				</span>
+                      </span><!-- /.username -->
+                  <span id="bcot">
+                  	<c:out value="${b.cContent}"/>
+                  </span>
+                </div>
+                <!-- /.comment-text -->
+              </div>
+              <!-- 이부분 반복 -->
+              <!-- /.box-comment -->
+            </c:forEach>
+            </div>
+            <!-- /.box-footer -->
+            <c:if test="${!empty user}">
+            <div class="box-footer">
+              <form action="writeComment.do" method="post">
+                <img class="img-responsive img-circle img-sm" src="resources/dist/img/user4-128x128.jpg" alt="Alt Text">
+                <!-- .img-push is used to add margin to elements next to floating images -->
+                <div class="img-push">
+                  <input type="text" name="cContent" class="form-control input-sm" placeholder="댓글 작성후 Enter시 등록됩니다.">
+                  <input type="hidden" name="boardKey" value='<c:out value="${attach.boardKey}"/>'>
+				  <input type="hidden" name="cWriter"	value="${attach.bWriter }"/>
+                </div>
+              </form>
+            </div>
+            </c:if>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+       
+      </div>
+      <!-- /.row -->
+    </section>
+    
+    </div>
+ </div>
+ </div>
 
 
 <c:import url="/WEB-INF/views/include/footer.jsp"/>

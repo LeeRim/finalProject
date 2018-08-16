@@ -33,7 +33,12 @@
 		color:white;
 	}
 	.image{
+		cursor:pointer;
+		float:right;
 		display:inline-block;
+	}
+	.img{
+		opacity:0.5;
 	}
 </style>
 <script>
@@ -87,8 +92,8 @@
 						<c:when test="${bo1 eq 1}">
 							<span class="bordName">공지사항</span>
 							<div class="image" onclick="border(1);">
-							<img src="resources/upload/image/image2.png" 
-									width="100px" height="50px" onclick="border(1);"/>
+							<img src="resources/upload/image/more.png" 
+									class="img" width="100px" height="50px" onclick="border(1);"/>
 							</div>
 						</c:when>
 					</c:choose>
@@ -113,8 +118,8 @@
 					<c:when test="${bo2 eq 2}">
 						<span class="bordName">자유게시판</span>
 							<div class="image" onclick="border(2);">
-							<img src="resources/upload/image/image2.png" 
-									width="100px" height="50px"/>
+							<img src="resources/upload/image/more.png" 
+									class="img" width="100px" height="50px"/>
 							</div>
 					</c:when>
 				</c:choose>
@@ -141,8 +146,8 @@
 					<c:when test="${bo3 eq 3}">
 						<span class="bordName">경조사 게시판</span>
 						<div class="image" onclick="border(3);">
-							<img src="resources/upload/image/image2.png" 
-									width="100px" height="50px"/>
+							<img src="resources/upload/image/more.png" 
+									class="img" width="100px" height="50px"/>
 						</div>
 					</c:when>
 				</c:choose>
@@ -169,8 +174,8 @@
 					<c:when test="${bo4 eq 4}">
 						<span class="bordName">앨범 게시판</span>
 						<div class="image" onclick="border(4);">
-							<img src="resources/upload/image/image2.png" 
-									width="100px" height="50px"/>
+							<img src="resources/upload/image/more.png" 
+									class="img" width="100px" height="50px"/>
 						</div>
 					</c:when>
 				</c:choose>

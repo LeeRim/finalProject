@@ -89,7 +89,7 @@
 			<input type="hidden" name="bCateGory" value="<c:out value="${board.bCateGory}"/>"/>
 			<input type="hidden" name="companyKey" value='<c:out value="${user.cKeyFk}"></c:out>'>
 			<input type="hidden" name="bWriter" value='<c:out value="${user.eKey }"></c:out>'>
-			제목 : <input type="text" id="bTitle" name="bTitle" class="bTitle"/><br><br>
+			제목 : <input type="text" id="bTitle" name="bTitle" maxlength="30" class="bTitle"/><br><br>
 			<textarea id="summernote" name="bContent"></textarea>
 			<div class="Btns">
 				<div class="Btn" onclick="writeBoard();">작성</div>
