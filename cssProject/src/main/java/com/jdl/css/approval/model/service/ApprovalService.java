@@ -97,6 +97,11 @@ public class ApprovalService {
 		return dao.selectCurrentApprover(aKey);
 	}
 
+	public ApprovalConditionVo selectLastApprover(int aKey) {
+		// TODO Auto-generated method stub
+		return dao.selectLastApprover(aKey);
+	}
+
 	public JobPropsalVo selectJobPropsal(int aKey) {
 		// TODO Auto-generated method stub
 		return dao.selectJobPropsal(aKey);
@@ -106,4 +111,15 @@ public class ApprovalService {
 		// TODO Auto-generated method stub
 		return dao.updateApprovalCondition(ac);
 	}
+
+	public int updateApproval(ApprovalVo app) {
+		// TODO Auto-generated method stub
+		return dao.updateApproval(app);
+	}
+
+	public List<ApprovalConditionVo> selectIngAcList(int aKey) {
+		// TODO Auto-generated method stub
+		return dao.selectIngAcList(aKey);
+	}
+
 }

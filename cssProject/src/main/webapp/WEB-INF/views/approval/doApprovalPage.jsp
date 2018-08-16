@@ -7,7 +7,7 @@
 function openDoApproval() {
 	var beforeFlag=false;
 
-	if(${sessionScope.user.eKey != requestSession.cApprover.acApproverFk}){
+	if(${sessionScope.user.eKey != cApprover.acApproverFk}){
 		beforeFlag=confirm("결재 대상자가 아닙니다. 선결하시겠습니까?");
 	}else{
 		$('div.modal').modal();

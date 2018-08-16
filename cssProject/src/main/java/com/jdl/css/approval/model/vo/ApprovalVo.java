@@ -17,6 +17,7 @@ public class ApprovalVo {
 	private String aContent;
 	private int aWriterFk;
 	private String aWriteDate;
+	private String aCompleteDate;
 	private int aCondition;
 	private List<ApprovalConditionVo> aConList;
 	private List<AttachmentVo> aAttachList;
@@ -106,6 +107,19 @@ public class ApprovalVo {
 		this.aWriteDate = aWriteDate;
 	}
 
+	
+	public String getaCompleteDate() {
+		return aCompleteDate;
+	}
+
+
+
+	public void setaCompleteDate(String aCompleteDate) {
+		this.aCompleteDate = aCompleteDate;
+	}
+
+
+
 	public int getaCondition() {
 		return aCondition;
 	}
@@ -152,8 +166,8 @@ public class ApprovalVo {
 	public String toString() {
 		return "ApprovalVo [aKey=" + aKey + ", cKeyFk=" + cKeyFk + ", divDoctypeFk=" + divDoctypeFk + ", aTitle="
 				+ aTitle + ", aContent=" + aContent + ", aWriterFk=" + aWriterFk + ", aWriteDate=" + aWriteDate
-				+ ", aCondition=" + aCondition + ", aConList=" + aConList + ", aAttachList=" + aAttachList
-				+ ", doctype=" + doctype + ", writer=" + writer + "]";
+				+ ", aCompleteDate=" + aCompleteDate + ", aCondition=" + aCondition + ", aConList=" + aConList
+				+ ", aAttachList=" + aAttachList + ", doctype=" + doctype + ", writer=" + writer + "]";
 	}
-	
+
 }

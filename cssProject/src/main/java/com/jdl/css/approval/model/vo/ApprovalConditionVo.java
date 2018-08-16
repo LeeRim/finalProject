@@ -13,7 +13,8 @@ public class ApprovalConditionVo {
 	private int acKey;
 	private int aKeyFk;
 	private int acApproverFk;
-	private String acCondition;
+	private int acCondition;
+	private String acApprovalType;
 	private Date acApprovalDate;
 	private EmployeeVo approver;
 
@@ -24,14 +25,17 @@ public class ApprovalConditionVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ApprovalConditionVo(int acKey, int aKeyFk, int acApproverFk, String acCondition, Date acApprovalDate,
-			EmployeeVo approver) {
+	public ApprovalConditionVo(int acKey, int aKeyFk, int acApproverFk, int acCondition, String acApprovalType,
+			Date acApprovalDate, EmployeeVo approver, String acType, String condition) {
 		this.acKey = acKey;
 		this.aKeyFk = aKeyFk;
 		this.acApproverFk = acApproverFk;
 		this.acCondition = acCondition;
+		this.acApprovalType = acApprovalType;
 		this.acApprovalDate = acApprovalDate;
 		this.approver = approver;
+		this.acType = acType;
+		this.condition = condition;
 	}
 
 	public int getAcKey() {
@@ -58,24 +62,34 @@ public class ApprovalConditionVo {
 		this.acApproverFk = acApproverFk;
 	}
 
-	public String getAcCondition() {
+	public int getAcCondition() {
 		return acCondition;
 	}
 
-	public void setAcCondition(String acCondition) {
+	public void setAcCondition(int acCondition) {
 		this.acCondition = acCondition;
-		if (acCondition!=null) {
-			this.condition = acCondition.split("/")[1];
-			String[] arr = acCondition.split("/")[0].split(",");
-			for (int i = 0; i < arr.length; i++) {
-				if (arr[i] == "3") {
-					this.acType += "(전결)";
-				} else if (arr[i] == "4") {
-					this.acType += "(선결)";
-				} else if (arr[i] == "5") {
-					this.acType += "(대결)";
-				} else {
-					this.acType = "";
+		if(acCondition==1){
+			this.condition="승인";
+		}else if(acCondition==2){
+			this.condition="반려";
+		}
+	}
+
+	public String getAcApprovalType() {
+		return acApprovalType;
+	}
+
+	public void setAcApprovalType(String acApprovalType) {
+		this.acApprovalType = acApprovalType;
+		if(acApprovalType!=null){
+			String[] arr = acApprovalType.split(",");
+			for(String a:arr){
+				if(a.equals("3")){
+					this.acType+="(전결)";
+				}else if(a.equals("4")){
+					this.acType+="(선결)";
+				}else if(a.equals("5")){
+					this.acType+="(대결)";
 				}
 			}
 		}
@@ -97,7 +111,6 @@ public class ApprovalConditionVo {
 		this.approver = approver;
 	}
 
-	
 	public String getAcType() {
 		return acType;
 	}
@@ -117,9 +130,8 @@ public class ApprovalConditionVo {
 	@Override
 	public String toString() {
 		return "ApprovalConditionVo [acKey=" + acKey + ", aKeyFk=" + aKeyFk + ", acApproverFk=" + acApproverFk
-				+ ", acCondition=" + acCondition + ", acApprovalDate=" + acApprovalDate + ", approver=" + approver
-				+ ", acType=" + acType + ", condition=" + condition + "]";
+				+ ", acCondition=" + acCondition + ", acApprovalType=" + acApprovalType + ", acApprovalDate="
+				+ acApprovalDate + ", approver=" + approver + ", acType=" + acType + ", condition=" + condition + "]";
 	}
-
 
 }

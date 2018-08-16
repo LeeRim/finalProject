@@ -169,6 +169,7 @@ desired effect
 										<tr>
 											<th>0</th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>기안자</th>
@@ -179,6 +180,7 @@ desired effect
 										<tr>
 											<th><p style="visibility: hidden; height:15px;">0</p></th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>기안자</th>
@@ -190,6 +192,7 @@ desired effect
 										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
 											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
 											<td><c:out value="${approval.writer.eName }"></c:out></td>
@@ -239,6 +242,7 @@ desired effect
 										<tr>
 											<th>0</th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>기안자</th>
@@ -249,6 +253,7 @@ desired effect
 										<tr>
 											<th><p style="visibility: hidden; height:15px;">0</p></th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>기안자</th>
@@ -260,9 +265,10 @@ desired effect
 										<tr>
 											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
-											<td><c:out value="${approval.writer }"></c:out></td>
+											<td><c:out value="${approval.writer.eName }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
 											<td><span class="label label-warning">진행</span></td>
 										</tr>
@@ -301,6 +307,7 @@ desired effect
 										<tr>
 											<th>0</th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>기안자</th>
@@ -311,6 +318,7 @@ desired effect
 										<tr>
 											<th><p style="visibility: hidden; height:15px;">0</p></th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>기안자</th>
@@ -322,9 +330,10 @@ desired effect
 										<tr>
 											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
-											<td><c:out value="${approval.writer }"></c:out></td>
+											<td><c:out value="${approval.writer.eName }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
 											<td><span class="label label-primary">완료</span></td>
 										</tr>
@@ -363,6 +372,7 @@ desired effect
 										<tr>
 											<th>0</th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>기안자</th>
@@ -373,6 +383,7 @@ desired effect
 										<tr>
 											<th><p style="visibility: hidden; height:15px;">0</p></th>
 											<th>기안일</th>
+											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
 											<th>기안자</th>
@@ -384,9 +395,10 @@ desired effect
 										<tr>
 											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
+											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
-											<td><c:out value="${approval.writer }"></c:out></td>
+											<td><c:out value="${approval.writer.eName }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
 											<td><span class="label label-danger">반려</span></td>
 										</tr>

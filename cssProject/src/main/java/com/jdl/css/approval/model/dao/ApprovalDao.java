@@ -91,6 +91,11 @@ public class ApprovalDao {
 		return sqlSession.selectOne("ApprovalMapper.selectCurrentApprover", aKey);
 	}
 
+	public ApprovalConditionVo selectLastApprover(int aKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ApprovalMapper.selectLastApprover", aKey);
+	}
+
 	public JobPropsalVo selectJobPropsal(int aKey) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("ApprovalMapper.selectJobPropsal", aKey);
@@ -100,4 +105,15 @@ public class ApprovalDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("ApprovalMapper.updateApprovalCondition", ac);
 	}
+
+	public int updateApproval(ApprovalVo app) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ApprovalMapper.updateApproval", app);
+	}
+
+	public List<ApprovalConditionVo> selectIngAcList(int aKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectIngAcList", aKey);
+	}
+
 }
