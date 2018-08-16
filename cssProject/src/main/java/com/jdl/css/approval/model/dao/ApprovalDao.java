@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
@@ -50,4 +51,69 @@ public class ApprovalDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("ApprovalMapper.selectDraftApprovalCompaList", eKey);
 	}
+	
+	public List<ApprovalVo> selectReceivedApprovalAllList(int eKey) {
+		return sqlSession.selectList("ApprovalMapper.selectReceivedApprovalAllList", eKey);
+	}
+
+	public List<ApprovalVo> selectReceivedApprovalIngList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectReceivedApprovalIngList", eKey);
+	}
+
+	public List<ApprovalVo> selectReceivedApprovalComplList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectReceivedApprovalComplList", eKey);
+	}
+	
+	public List<ApprovalVo> selectReceivedApprovalCompaList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectReceivedApprovalCompaList", eKey);
+	}
+
+	public List<ApprovalVo> selectWaitingApprovalList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectWaitingApprovalList", eKey);
+	}
+
+	public List<ApprovalVo> selectExpectedApprovalList(int eKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectExpectedApprovalList", eKey);
+	}
+
+	public ApprovalVo selectApprovalDetail(ApprovalVo a) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ApprovalMapper.selectApprovalDetail", a);
+	}
+
+	public ApprovalConditionVo selectCurrentApprover(int aKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ApprovalMapper.selectCurrentApprover", aKey);
+	}
+
+	public ApprovalConditionVo selectLastApprover(int aKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ApprovalMapper.selectLastApprover", aKey);
+	}
+
+	public JobPropsalVo selectJobPropsal(int aKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ApprovalMapper.selectJobPropsal", aKey);
+	}
+
+	public int updateApprovalCondition(ApprovalConditionVo ac) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ApprovalMapper.updateApprovalCondition", ac);
+	}
+
+	public int updateApproval(ApprovalVo app) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ApprovalMapper.updateApproval", app);
+	}
+
+	public List<ApprovalConditionVo> selectIngAcList(int aKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectIngAcList", aKey);
+	}
+
 }

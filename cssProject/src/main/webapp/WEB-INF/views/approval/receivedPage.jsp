@@ -29,6 +29,10 @@ AdminLTE for demo purposes
 <script src="resources/dist/js/demo.js"></script> -->
 <!-- page script -->
 <script>
+
+function hideThead(){
+	$('.thead').hide();
+}
 function openDetail(aKey,divDoctypeFk){
 	switch(divDoctypeFk){
 	case 1: location.href="openJobPropsalDetail.do?aKey="+aKey; break;
@@ -37,10 +41,6 @@ function openDetail(aKey,divDoctypeFk){
 	case 4: location.href="openRoundRobinDetail.do?aKey="+aKey; break;
 	case 5: location.href="openVacationFormDetail.do?aKey="+aKey; break;
 	}
-}
-
-function hideThead(){
-	$('.thead').hide();
 }
 
 	$(function() {
@@ -172,6 +172,7 @@ desired effect
 											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
+											<th>기안자</th>
 											<th>문서번호</th>
 											<th>상태</th>
 										</tr>
@@ -182,6 +183,7 @@ desired effect
 											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
+											<th>기안자</th>
 											<th>문서번호</th>
 											<th>상태</th>
 										</tr>
@@ -193,6 +195,7 @@ desired effect
 											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
+											<td><c:out value="${approval.writer.eName }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
 											<c:if test="${approval.aCondition==0 }">
 												<td><span class="label label-warning">진행</span></td>
@@ -242,6 +245,7 @@ desired effect
 											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
+											<th>기안자</th>
 											<th>문서번호</th>
 											<th>상태</th>
 										</tr>
@@ -252,6 +256,7 @@ desired effect
 											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
+											<th>기안자</th>
 											<th>문서번호</th>
 											<th>상태</th>
 										</tr>
@@ -263,6 +268,7 @@ desired effect
 											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
+											<td><c:out value="${approval.writer.eName }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
 											<td><span class="label label-warning">진행</span></td>
 										</tr>
@@ -304,6 +310,7 @@ desired effect
 											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
+											<th>기안자</th>
 											<th>문서번호</th>
 											<th>상태</th>
 										</tr>
@@ -314,6 +321,7 @@ desired effect
 											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
+											<th>기안자</th>
 											<th>문서번호</th>
 											<th>상태</th>
 										</tr>
@@ -325,6 +333,7 @@ desired effect
 											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
+											<td><c:out value="${approval.writer.eName }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
 											<td><span class="label label-primary">완료</span></td>
 										</tr>
@@ -366,6 +375,7 @@ desired effect
 											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
+											<th>기안자</th>
 											<th>문서번호</th>
 											<th>상태</th>
 										</tr>
@@ -376,6 +386,7 @@ desired effect
 											<th>완료일</th>
 											<th>결재양식</th>
 											<th>제목</th>
+											<th>기안자</th>
 											<th>문서번호</th>
 											<th>상태</th>
 										</tr>
@@ -387,6 +398,7 @@ desired effect
 											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
+											<td><c:out value="${approval.writer.eName }"></c:out></td>
 											<td><c:out value="${approval.aKey }"></c:out></td>
 											<td><span class="label label-danger">반려</span></td>
 										</tr>
