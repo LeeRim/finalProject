@@ -3,35 +3,82 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url ="../include/header.jsp"/>
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Starter</title>
+    <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/plugins/iCheck/flat/blue.css">
+    <!-- Slimscroll -->
+	<script src="resources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="resources/bower_components/fastclick/lib/fastclick.js"></script>
+	<script src="resources/plugins/iCheck/icheck.min.js"></script>
+	
+	<!-- DataTables -->
+	<link rel="stylesheet" href="resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+	<!-- DataTables -->
+	<script src="resources/bower_components/datatables.net/js/jquery.dataTables.js"></script>
+	<script src="resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <style>
-  	.table{
+  	.table {
   		cursor: pointer;
   	}
 	a:link  { text-decoration: none; color: #5E5E5E}
 	a:visited {  text-decoration: none; color: #5E5E5E}
 	a:active {  text-decoration: none; color: #5E5E5E}     
-	a:hover { text-decoration: underline; color:#F36798} 
+	a:hover { text-decoration: underline; color:#F36798}
+	
   </style>
   
   <script>
-  	
-  $(function(){
-	  
-	  
-  	$(".table").click(function(){
-  		
+  	function checkDelete(){
+  		var checkKey = new Array();
+  		 $('.checkNote:checked').each(function() { 
+  		      console.log($(this).val());
+  		      checkKey.push($(this).val());
+  		 });  		
+  		 console.log(checkKey);
+  		if (confirm("휴지통으로 보내시겠습니까??") == true){    //확인
+	  		 location.href="sendNoteDelete.do?snKeies="+checkKey+"&snDeleteYn=N";
+  		}else{   //취소
+  		    return;
+  		}
+  	}
+	
+  	$(function () {
+  	    //Enable iCheck plugin for checkboxes
+  	    //iCheck for checkbox and radio inputs
+  	    $('.mailbox-messages input[type="checkbox"]').iCheck({
+  	      checkboxClass: 'icheckbox_flat-blue',
+  	      radioClass: 'iradio_flat-blue'
+  	    });
+
+  	    //Enable check and uncheck all functionality
+  	    $(".checkbox-toggle").click(function () {
+  	      var clicks = $(this).data('clicks');
+  	      if (clicks) {
+  	        //Uncheck all checkboxes
+  	        $(".mailbox-messages input[type='checkbox']").iCheck("uncheck");
+  	        $(".fa", this).removeClass("fa-check-square-o").addClass('fa-square-o');
+  	      } else {
+  	        //Check all checkboxes
+  	        $(".mailbox-messages input[type='checkbox']").iCheck("check");
+  	        $(".fa", this).removeClass("fa-square-o").addClass('fa-check-square-o');
+  	      }
+  	      $(this).data("clicks", !clicks);
+  	    });
+  	    
+  	    $(".thead").hide();
+	    $('#allTable').DataTable({
+	         'paging' : true,
+	         'lengthChange' : false,
+	         'searching' : false,
+	         'ordering' : true,
+	         'info' : true,
+	         'autoWidth' : false
+	    });
   	});
-  });
-  
   </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -63,8 +110,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
               <div class="box-tools pull-right">
                 <div class="has-feedback">
-                  <input type="text" class="form-control input-sm" placeholder="Search Mail">
-                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                <form action="searchSendNote.do" method="get">
+                  <input type="text" class="form-control input-sm" placeholder="Search Mail" name="keyword">
+                  <input type="hidden" name="snDeleteYn" value="N"/>
+                  <span class="glyphicon glyphicon-search form-control-feedback" ></span>
+                </form>
                 </div>
               </div>
               <!-- /.box-tools -->
@@ -77,24 +127,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </button>
                 <div class="btn-group">
                 	<!--삭제 버튼  -->
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                  <button type="button" class="btn btn-default btn-sm" onclick="checkDelete()"><i class="fa fa-trash-o"></i></button>
                 </div>
                 <!-- /.btn-group -->
                 <div class="pull-right">
 					<!-- 화면 오른쪽위에 버튼 추가시 -->
-
                 </div>
                 <!-- /.pull-right -->
               </div>
               <div class="table-responsive mailbox-messages">
-                <table class="table table-hover table-striped" >
+                <table class="table table-hover table-striped" id="allTable" >
+                <thead class="thead">
+                	<tr>	
+                		<th></th>
+                		<th></th>
+                		<th></th>
+                		<th></th>
+                		<th></th>
+                		<th></th>
+                	</tr>
+                </thead>
                   <tbody>
                   <c:forEach items="${requestScope.sendNoteList}" var ="sendNote">
                   	<c:if test="${sendNote.snDeleteYn == 'N'}">
 	                  <tr>
-	                    <td><input type="checkbox"></td>
-			                    <td class="mailbox-star"><i class="fa fa-envelope-o"></i></a></td>
-		                    <td class="mailbox-name">
+	                    <td style="width: 5%"><input type="checkbox" class="checkNote" value="${sendNote.snKey}"></td>
+			                    <td class="mailbox-star"><i class="fa fa-envelope-o"></i></td>
+		                    <td class="mailbox-name" style="width: 20%">
 			                    <c:forEach items="${sendNote.employee}" var ="employee" varStatus="st">
 			                    		<c:if test="${st.index < 2}">
 					                    	<c:out value="${employee.eName}"/> 
@@ -104,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					                    </c:if>
 			                    </c:forEach>
 		                    </td>
-	                    <td class="mailbox-subject"><a href="sendNoteDetail.do?snKey=${sendNote.snKey}" ><c:out value="${sendNote.snTitle}"/></a></td>
+	                    <td class="mailbox-subject" style="width: 50%"><a href="sendNoteDetail.do?snKey=${sendNote.snKey}" ><c:out value="${sendNote.snTitle}"/></a></td>
 	                    
 	                    <td class="mailbox-attachment">
 	                    	<c:if test="${sendNote.snAttachYn eq 'Y'}">
@@ -123,21 +182,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <!-- /.box-body -->
             <div class="box-footer no-padding">
-              <div class="mailbox-controls">
-                <!-- Check all button -->
-                <div class="btn-group">
-                   	
-                </div>
-                <div class="pull-right">
-                  1-50/200
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                  </div>
-                  <!-- /.btn-group -->
-                </div>
-                <!-- /.pull-right -->
-              </div>
             </div>
           </div>
           <!-- /. box -->

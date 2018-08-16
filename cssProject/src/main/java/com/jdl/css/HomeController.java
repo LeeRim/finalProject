@@ -27,8 +27,7 @@ public class HomeController {
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String home(Locale locale, Model model,HttpSession session) {
 
-		EmployeeVo user = new EmployeeVo(1,"사번",1,'2',"admin","admin","관리자",3,1,"","","",0,"","",new Date(938291839221L),new Date(938291839221L),new Date(938291839221L),'N',"");
-		session.setAttribute("user", user);
+		
 		
 		return "home";
 	}

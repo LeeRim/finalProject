@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jdl.css.border.model.dao.BorderDao;
-import com.jdl.css.border.model.vo.AttachVo;
 import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
 
@@ -79,8 +78,12 @@ public class BorderService {
 		return dao.selectBoardThr();
 	}
 
-	public List<AttachVo> selectBoardGalleryForm(AttachVo av) {
-		return dao.selectBoardGalleryForm(av);
+	public int insertBoard(BorderVo board) {
+		return dao.insertboard(board);
+	}
+
+	public List<BorderVo> selectBoardFor() {
+		return dao.selectBoardFor();
 	}
 
 }

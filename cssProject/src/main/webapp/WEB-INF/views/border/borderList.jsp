@@ -89,6 +89,11 @@
 	table, table tr th{
 		text-align:center;
 	}
+	.box-header{
+		padding:0;
+		margin-left:20px;
+		margin-top:-10px;
+	}
 </style>
 <script>
 $(function(){
@@ -142,15 +147,6 @@ $(function(){
         <div class="col-xs-12">
           <div class="box" style="margin-top:20px;width:100%;">
             <div class="box-header">
-            
-              <h3 class="box-title">
-              </h3>
-            
-
-
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
             <c:choose>
 	 			<c:when test="${bCateGory eq 1}">
 	 				<h1>공지사항 게시판</h1>
@@ -162,6 +158,9 @@ $(function(){
 	 				<h1>경조사 게시판</h1>
 	 			</c:when>
 	 		</c:choose>
+			</div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
               <table id="example2" class="table table-hover">
                 <tr>
                   <th>번호</th>
@@ -180,6 +179,7 @@ $(function(){
                 </tr>
                 </c:forEach>
               </table>
+              </div>
               <c:if test="${!empty user}">
 	              <c:choose>
 	              	<c:when test="${user.eType eq 1 && bCategory eq 1}">
@@ -190,7 +190,6 @@ $(function(){
 	              	</c:when>
 	              </c:choose>
               </c:if>
-            </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

@@ -40,5 +40,9 @@ public class EmployeeDao {
 	public List<EmployeeVo> selectEmployeeListByKeyStr(int[] appKeyArr) {
 		return sqlSession.selectList("EmployeeMapper.selectEmployeeListByKey", appKeyArr);
 	}
+	public EmployeeVo selectEmployeeInfo(int eKey) {
+		return sqlSession.selectOne("EmployeeMapper.selectEmployeeInfo", eKey);
+
+	}
 
 }

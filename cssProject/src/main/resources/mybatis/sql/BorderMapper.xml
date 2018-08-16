@@ -113,7 +113,7 @@
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
 		WHERE B_CATEGORY = 1
 		ORDER BY B_DATE DESC)
-		WHERE ROWNUM BETWEEN 1 AND 5
+		WHERE ROWNUM BETWEEN 1 AND 7
 	</select>
 	
 	<select id="selectBoardTwo" resultMap="BorderMap">
@@ -124,7 +124,7 @@
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
 		WHERE B_CATEGORY = 2
 		ORDER BY B_DATE DESC)
-		WHERE ROWNUM BETWEEN 1 AND 5
+		WHERE ROWNUM BETWEEN 1 AND 7
 	</select>
 	
 	<select id="selectBoardThr" resultMap="BorderMap">
@@ -135,7 +135,7 @@
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
 		WHERE B_CATEGORY = 3
 		ORDER BY B_DATE DESC)
-		WHERE ROWNUM BETWEEN 1 AND 5
+		WHERE ROWNUM BETWEEN 1 AND 7
 	</select>
 	
 	<select id="BorderGalleryForm" parameterType="AttachVo" resultMap="AttachMap">
@@ -143,10 +143,21 @@
 		JOIN BOARD B ON (A.ATTA_LOCATION = B.B_KEY)
 	</select>
 	
-	<insert id="Attachinsert" parameterType="AttachVo">
-			INSERT INTO ATTACHMENT VALUES(
-			SEQ_ATTACHMENT.NEXTVAL, #{attaLocation}, #{attaFileName},#{attaFilePath}
-			)
+	<insert id="insertBoard">
+		INSERT INTO BOARD VALUES (BOARD_SEQ.NEXTVAL, #{companyKey}, #{bTitle}, #{bContent}, #{bWriter}, 0, SYSDATE, 4)
+		<selectKey keyProperty="boardKey" resultType="Integer" order="AFTER">
+				 SELECT BOARD_SEQ.CURRVAL FROM DUAL 
+		</selectKey>
 	</insert>
 	
+	<select id="selectBoardFor" resultMap="BorderMap">
+		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
+		FROM 
+		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
+		FROM BOARD b
+		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
+		WHERE B_CATEGORY = 4
+		ORDER BY B_DATE DESC)
+		WHERE ROWNUM BETWEEN 1 AND 7
+	</select>
 </mapper>

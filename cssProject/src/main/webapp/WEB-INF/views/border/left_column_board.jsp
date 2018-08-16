@@ -13,7 +13,7 @@
   		location.href="borderIndex.do"
   	}
   	function boardGallery(){
-  		location.href="borderGallery.do"
+  		location.href="borderGalleryList.do"
   	}
   </script>
 </head>

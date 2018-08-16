@@ -3,10 +3,51 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AttachmentMapper">
+
+	<resultMap type="AttachVo" id="AttachMap">
+		<id property="attaKey" column="ATTA_KEY"/>
+		<result property="attaLocation" column="ATTA_LOCATION"/>
+		<result property="attaFileName" column="ATTA_FILENAME"/>
+		<result property="attaFilePath" column="ATTA_FILEPATH"/>
+		<result property="boardKey" column="B_KEY"/>
+		<result property="bDate" column="B_DATE"/>
+		<result property="bTitle" column="B_TITLE"/>
+		<result property="bContent" column="B_CONTENT"/>
+		<result property="eName" column="E_NAME"/>
+		<result property="bWriter" column="B_WRITER_FK"/>
+	</resultMap>
+
 	<insert id="insertAttachment" parameterType="AttachVo">
 		INSERT INTO ATTACHMENT VALUES(
 		SEQ_ATTACHMENT.NEXTVAL,#{attaLocation},#{attaFileName},#{attaFilePath},null
 		)
 	</insert>
 
+	<select id="selectAttachment" resultType="AttachVo">
+		SELECT ATTA_KEY, ATTA_LOCATION, ATTA_FILENAME, ATTA_FILEPATH FROM ATTACHMENT
+	</select>
+	
+	<select id="selectAttachmentDetail" parameterType="AttachVo" resultMap="AttachMap">
+		SELECT A.ATTA_KEY, A.ATTA_LOCATION, A.ATTA_FILENAME, A.ATTA_FILEPATH, B_KEY, B_DATE, B_TITLE, B_CONTENT, B_WRITER_FK, E_NAME
+		FROM ATTACHMENT A
+		JOIN BOARD B ON (A.ATTA_LOCATION = B.B_KEY)
+		JOIN EMPLOYEE E ON (B.B_WRITER_FK = E.E_KEY)
+		WHERE A.ATTA_KEY = #{attaKey} AND B.B_CATEGORY = 4
+	</select>
+	
+	<delete id="deleteAttachment">
+		DELETE FROM ATTACHMENT WHERE ATTA_KEY = #{attaKey}
+	</delete>
+	
+	<update id="updateAttachment" parameterType="AttachVo">
+		UPDATE ATTACHMENT SET ATTA_FILENAME = #{attaFileName} WHERE ATTA_KEY = #{attaKey}
+	</update>
+	
+	<select id="selectAttach" parameterType="int" resultMap="AttachMap">
+		SELECT A.ATTA_KEY, A.ATTA_LOCATION, A.ATTA_FILENAME, A.ATTA_FILEPATH, B_KEY, B_DATE, B_TITLE, B_CONTENT, B_WRITER_FK, E_NAME, B_KEY
+		FROM ATTACHMENT A
+		JOIN BOARD B ON (A.ATTA_LOCATION = B.B_KEY)
+		JOIN EMPLOYEE E ON (B.B_WRITER_FK = E.E_KEY)
+		WHERE A.ATTA_KEY = #{attaKey} AND B.B_CATEGORY = 4
+	</select>
 </mapper>
