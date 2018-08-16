@@ -23,6 +23,7 @@
 	<typeAlias type="com.jdl.css.approval.model.vo.ApprovalVo" alias="ApprovalVo" /> 
 	<typeAlias type="com.jdl.css.approval.model.vo.ApprovalConditionVo" alias="AppConVo" /> 
 	<typeAlias type="com.jdl.css.approval.model.vo.JobPropsalVo" alias="JobPropsalVo" />
+	<typeAlias type="com.jdl.css.commuteCheck.model.commuteCheckVo.CommuteCheckVo" alias="Commute" />
   </typeAliases>
 
   <mappers>
@@ -32,6 +33,7 @@
 	<mapper resource="mybatis/sql/noteMapper.xml"/>
 	<mapper resource="mybatis/sql/calenderMapper.xml"/>
 	<mapper resource="mybatis/sql/approvalMapper.xml"/>	
-	<mapper resource="mybatis/sql/attachmentMapper.xml"/>	
+	<mapper resource="mybatis/sql/attachmentMapper.xml"/>
+	<mapper resource="mybatis/sql/commuteCheckMapper.xml"/>	
   </mappers>
 </configuration>

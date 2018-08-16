@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="commuteCheckMapper">
+  
+  	<select id="selectCommute" resultType="Commute">
+  		select to_number(to_char(comm_date, 'yyyy')) as "inYear",
+  			to_number(to_char(comm_date, 'mm')) as "inMonth",
+  			to_number(to_char(comm_date, 'dd')) as "inDate",
+  			comm_intime as "inTime",
+  			comm_outtime as "outTime"
+  		from commute
+  	</select>
+  
+  </mapper>
