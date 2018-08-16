@@ -100,7 +100,7 @@ function validate(){
 
 <div class="wrapper">
 	
-	<c:import url="include/left_column.jsp"/>
+	<c:import url="../include/left_column.jsp"/>
   
   
 
@@ -198,7 +198,7 @@ function validate(){
 
 
 
-	<c:import url="include/footer.jsp"/>
+	<c:import url="../include/footer.jsp"/>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
