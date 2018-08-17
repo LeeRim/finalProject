@@ -26,7 +26,7 @@
 		FROM EMPLOYEE
 	</sql>
 
-	<resultMap type="EmployeeVo" id="EmployeeMap">
+<!-- 	<resultMap type="EmployeeVo" id="EmployeeMap">
 		<result property="eId" column="ID" />
 		<result property="department" column="DEPARTMENT" />
 		<result property="job" column="JOB" />
@@ -40,9 +40,9 @@
 		<result property="eNo" column="ENO" />
 		<result property="eEmail" column="EMAIL" />
 		<result property="ePhoto" column="PHOTO" />
-	</resultMap>
+	</resultMap> -->
 	
-	<resultMap type="EmployeeVo" id="employeeMap2">
+	<resultMap type="EmployeeVo" id="EmployeeMap">
 		<id property="eKey" column="E_KEY"/>
 		<result property="eNo" column="E_NO"/>
 		<result property="cKeyFk" column="C_KEY_FK"/>
@@ -77,7 +77,7 @@
 	
 
 
-	<select id="selectEmployeeById" parameterType="string" resultMap="employeeMap2">
+	<select id="selectEmployeeById" parameterType="string" resultMap="EmployeeMap">
 		SELECT E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_PWD,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
 		,E.E_EXTEN, E.E_PHONE,E.E_EMAIL, E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN,E.E_PHOTO, E.E_BIRTH, E.E_INSTEAD,E.E_STATE
 		,J.DIV_INFO AS "JOB", D.DIV_INFO AS "DEPARTMENT" ,J.DIV_INFOLEVEL
@@ -138,7 +138,7 @@
 
 	<!-- 조직도 select 사원 리스트 출력 쿼리문 -->
 
-	<select id="selectEmployeeList2" resultMap="employeeMap2"
+	<select id="selectEmployeeList2" resultMap="EmployeeMap"
 		parameterType="int">
 		SELECT E.E_KEY E_KEY,
 		E.E_NO E_NO,
@@ -170,7 +170,7 @@
 
 
 	<!-- 사원등록 직급정보 출력 쿼리문 -->
-	<select id="selectJobList" resultMap="employeeMap2">
+	<select id="selectJobList" resultMap="EmployeeMap">
 		SELECT
 		DIV_INFO AS "JOB",
 		DIV_KEY AS"E_JOBCODE_FK"
@@ -212,19 +212,19 @@
 	<!-- 조직도 select 사원정보 팝업창 출력 쿼리문 -->
 	<select id="selectEmployeeInfo" parameterType="int" resultMap="EmployeeMap">
 		SELECT
-		E.E_ID AS "ID",
+		E.E_ID AS "E_ID",
 		D.DIV_INFO AS "DEPARTMENT",
 		J.DIV_INFO AS "JOB",
-		E.E_NAME AS "NAME",
-		E.E_EXTEN AS "EXTEN",
-		E.E_PHONE AS "PHONE",
-		E.E_HIRE_DATE AS "HIREDATE",
+		E.E_NAME AS "E_NAME",
+		E.E_EXTEN AS "E_EXTEN",
+		E.E_PHONE AS "E_PHONE",
+		E.E_HIRE_DATE AS "E_HIRE_DATE",
 		D.DIV_KEY AS "E_DEPART_FK",
 		J.DIV_KEY AS "E_JOBCODE_FK",
-		E.E_KEY AS "EKEY",
-		E.E_NO AS "ENO",
-		E.E_EMAIL AS "EMAIL",
-		E.E_PHOTO AS "PHOTO"
+		E.E_KEY AS "E_KEY",
+		E.E_NO AS "E_NO",
+		E.E_EMAIL AS "E_MAIL",
+		E.E_PHOTO AS "E_PHOTO"
 
 		FROM EMPLOYEE E
 		JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
