@@ -158,9 +158,9 @@
 <!-- Main content -->
     <section class="content container-fluid">
        <div class="row" >
-        <div class="col-md-6" style="width: 90%; ">
+        <div class="col-md-6" style="width: 100%; ">
           <!-- Box Comment -->
-          <div class="box box-widget">
+          <div class="box box-widget" style="width:100%;">
             <div class="box-header with-border">
               <div class="user-block">
                 <img class="img-circle" src="resources/dist/img/user1-128x128.jpg" alt="User Image">

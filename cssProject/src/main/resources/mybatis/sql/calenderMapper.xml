@@ -19,4 +19,5 @@
 	<insert id="createEvent" parameterType="Calender">
 		insert into calender values(SEQ_CALENDER.NEXTVAL,1,#{title},#{startDate},#{endDate},2,1,#{background})
 	</insert>
+	
 </mapper>
