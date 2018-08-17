@@ -41,6 +41,7 @@ public class EmployeeController {
 	
 	@RequestMapping("login.do")
 	public String login(EmployeeVo employee,HttpSession session){
+		System.out.println(employee);
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
 		System.out.println(user);
 		if(user.getePwd().equals(employee.getePwd())){

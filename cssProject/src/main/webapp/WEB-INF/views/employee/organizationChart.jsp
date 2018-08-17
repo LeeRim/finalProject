@@ -17,8 +17,7 @@
 <title>AdminLTE 2 | Starter</title>
 
 
-<link rel="stylesheet"
-	href="resources/dist/test/css/jquery.treeview.css" />
+<link rel="stylesheet" href="resources/dist/test/css/jquery.treeview.css" />
 <link rel="stylesheet" href="resources/dist/test/css/screen.css" />
 
 <script src="resources/dist/test/lib/jquery.js" type="text/javascript"></script>

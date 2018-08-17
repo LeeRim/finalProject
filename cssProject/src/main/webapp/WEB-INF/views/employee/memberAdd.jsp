@@ -17,6 +17,7 @@
 <script src="resources/bower_components/select2/dist/js/select2.full.min.js"></script>
   
 <script src="resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="resources/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.kr.min.js"></script>
 
 <link rel="stylesheet" href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
 
@@ -24,9 +25,6 @@
 
 
 
-<script src="resources/bower_components/fastclick/lib/fastclick.js"></script>
-<script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 <style>
 
 .frame{
@@ -184,11 +182,6 @@ $(document).ready(
                 </select>
               </div>
                 
-  				<div class="form-group">
-                  <label for="exampleInputFile">사원 사진</label>
-                 <input type="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png" name="ePhoto1" />
-
-                </div>
              
            
                 
@@ -269,7 +262,7 @@ $(document).ready(
                   <label for="exampleInputFile">사원 사진</label>
               <div class="form-group">
 						<div class="btn btn-default btn-file">
-							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="ePhoto" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
+							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="ePhoto1" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
 																								onchange="fileCheck(this)"/>
 						</div>
 					<div class="file-list"></div>
@@ -328,16 +321,18 @@ function fileCheck(obj) {
     }
 }
 
-// //Date picker
-// $('#datepicker').datepicker({
-// 	format: 'yyyy-mm-dd',
-//   autoclose: true
-// })
+//Date picker
+ $('#datepicker').datepicker({
+ 	format: 'yyyy-mm-dd',
+ 	language: "kr",
+  autoclose: true
+ })
 
-// $('#datepicker2').datepicker({
-// 	format: 'yyyy-mm-dd',
-//   autoclose: true
-// })
+$('#datepicker2').datepicker({
+ 	format: 'yyyy-mm-dd',
+ 	language: "kr",
+  autoclose: true
+ })
 
 
 
