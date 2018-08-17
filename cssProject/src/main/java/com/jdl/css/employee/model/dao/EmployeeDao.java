@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Repository
@@ -25,8 +26,8 @@ public class EmployeeDao {
 		return sqlSession.insert("EmployeeMapper.insertEmployee",member);
 	}
 
-	public List<EmployeeVo> selectEmployeeList() {
-		return sqlSession.selectList("EmployeeMapper.selectEmployeeList2");
+	public List<EmployeeVo> selectEmployeeList(int cKey) {
+		return sqlSession.selectList("EmployeeMapper.selectEmployeeList2",cKey);
 	}
 
 	public List<EmployeeVo> selectJobList() {
@@ -44,5 +45,6 @@ public class EmployeeDao {
 		return sqlSession.selectOne("EmployeeMapper.selectEmployeeInfo", eKey);
 
 	}
+
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.common.model.vo.DivisionVo;
 
 @Component
@@ -20,7 +21,7 @@ public class EmployeeVo {
     private int eJobcodeFk;
     private int eDepartFk;
     private String eAddress;
-    private int eExten;
+    private String eExten;
     private String ePhone;
     private String eEmail;
     private Date eBirth;
@@ -30,46 +31,20 @@ public class EmployeeVo {
     private String ePhoto;
     private int eInstead;
     private int eState;
-    private int divInfolevel;
-    
-    private String eJob;
-    private String eDepart;
     
     private String job;
     private String department;
     
     //association 용
+    private int divInfolevel;
     private EmployeeVo instead;
+    
 //    resultMap용
     private List<DivisionVo> division;
     public EmployeeVo() {
     }
 
-	public EmployeeVo(int eKey, String eNo, int cKeyFk, char eType, String eId, String ePwd, String eName,
-			int eJobcodeFk, int eDepartFk, String eJob, String eDepart, String eAddress, int eExten, String ePhone,
-			String eEmail, Date eBirth, Date eHireDate, Date eEntDate, char eEntYn, String ePhoto) {
-		super();
-		this.eKey = eKey;
-		this.eNo = eNo;
-		this.cKeyFk = cKeyFk;
-		this.eType = eType;
-		this.eId = eId;
-		this.ePwd = ePwd;
-		this.eName = eName;
-		this.eJobcodeFk = eJobcodeFk;
-		this.eDepartFk = eDepartFk;
-		this.eJob = eJob;
-		this.eDepart = eDepart;
-		this.eAddress = eAddress;
-		this.eExten = eExten;
-		this.ePhone = ePhone;
-		this.eEmail = eEmail;
-		this.eBirth = eBirth;
-		this.eHireDate = eHireDate;
-		this.eEntDate = eEntDate;
-		this.eEntYn = eEntYn;
-		this.ePhoto = ePhoto;
-	}
+
 
 	public int geteKey() {
 		return eKey;
@@ -143,21 +118,6 @@ public class EmployeeVo {
 		this.eDepartFk = eDepartFk;
 	}
 
-	public String geteJob() {
-		return eJob;
-	}
-
-	public void seteJob(String eJob) {
-		this.eJob = eJob;
-	}
-
-	public String geteDepart() {
-		return eDepart;
-	}
-
-	public void seteDepart(String eDepart) {
-		this.eDepart = eDepart;
-	}
 
 	public String geteAddress() {
 		return eAddress;
@@ -167,11 +127,11 @@ public class EmployeeVo {
 		this.eAddress = eAddress;
 	}
 
-	public int geteExten() {
+	public String geteExten() {
 		return eExten;
 	}
 
-	public void seteExten(int eExten) {
+	public void seteExten(String eExten) {
 		this.eExten = eExten;
 	}
 
@@ -272,18 +232,25 @@ public class EmployeeVo {
 		this.eState = eState;
 	}
 
-	
+
+
 	public int getDivInfolevel() {
 		return divInfolevel;
 	}
+
+
 
 	public void setDivInfolevel(int divInfolevel) {
 		this.divInfolevel = divInfolevel;
 	}
 
+
+
 	public EmployeeVo getInstead() {
 		return instead;
 	}
+
+
 
 	public void setInstead(EmployeeVo instead) {
 		this.instead = instead;
@@ -295,12 +262,11 @@ public class EmployeeVo {
 				+ ", ePwd=" + ePwd + ", eName=" + eName + ", eJobcodeFk=" + eJobcodeFk + ", eDepartFk=" + eDepartFk
 				+ ", eAddress=" + eAddress + ", eExten=" + eExten + ", ePhone=" + ePhone + ", eEmail=" + eEmail
 				+ ", eBirth=" + eBirth + ", eHireDate=" + eHireDate + ", eEntDate=" + eEntDate + ", eEntYn=" + eEntYn
-				+ ", ePhoto=" + ePhoto + ", eInstead=" + eInstead + ", eState=" + eState + ", divInfolevel="
-				+ divInfolevel + ", eJob=" + eJob + ", eDepart=" + eDepart + ", job=" + job + ", department="
-				+ department + ", instead=" + instead + ", division=" + division + "]";
+				+ ", ePhoto=" + ePhoto + ", eInstead=" + eInstead + ", eState=" + eState + ", job=" + job
+				+ ", department=" + department + ", divInfolevel=" + divInfolevel + ", instead=" + instead
+				+ ", division=" + division + "]";
 	}
 
-	
 
-	
+
 }

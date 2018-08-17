@@ -11,12 +11,15 @@
   <title>AdminLTE 2 | Starter</title>
 </head>
 
+
+<script src="resources/plugins/input-mask/jquery.inputmask.js"></script>
+
+<script src="resources/bower_components/select2/dist/js/select2.full.min.js"></script>
+  
+<script src="resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
 <link rel="stylesheet" href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
 
-<!-- InputMask -->
-<script src="resources/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="resources/plugins/input-mask/jquery.inputmask.phone.extensions.js"></script>
-<script src="resources/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
 
 
@@ -53,6 +56,11 @@ padding: 0 100px;
 
 <script type="text/javascript">
 
+//전화번호 입력
+$(function () {
+  $('[data-mask]').inputmask()
+})
+
 
 function memberJoin(){
 	$("#joinForm").submit();	
@@ -65,6 +73,9 @@ function validate(){
 	
 	$("#eAddress").val($("#eAddress1").val()+","+$("#eAddress2").val())
 
+	
+
+	
 }
 	
 $(document).ready(
@@ -115,7 +126,7 @@ $(document).ready(
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="insertMember.do"  onsubmit="return validate();">
+            <form role="form" action="insertMember.do"  onsubmit="return validate();" method="post" enctype="multipart/form-data">
             
               <div class="box-body">
               
@@ -172,6 +183,12 @@ $(document).ready(
                   
                 </select>
               </div>
+                
+  				<div class="form-group">
+                  <label for="exampleInputFile">사원 사진</label>
+                 <input type="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png" name="ePhoto1" />
+
+                </div>
              
            
                 
@@ -195,8 +212,10 @@ $(document).ready(
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 9999-9999&quot;" data-mask="" name="eExten"  value="11">
                   
+                  <input type="text" class="form-control"  name="eExten"  data-inputmask='"mask": "999-9999-9999"' data-mask>
+<!--                   <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 9999-9999&quot;" data-mask="" name="eExten"  value="11">
+ -->                  
                 </div>
                 <!-- /.input group -->
               </div>
@@ -207,7 +226,10 @@ $(document).ready(
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 9999-9999&quot;" data-mask="" name="ePhone" >
+                  <input type="text" class="form-control"  name="ePhone"  data-inputmask='"mask": "999-999-9999"' data-mask>
+                   <!-- <input type="text" class="form-control"data-inputmask="'mask': ['999-999-9999', '+099 99 99 9999[9]-9999']" data-mask> -->
+<!--                   <input type="text" class="form-control" data-inputmask="'phone': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="phone" name="ePhone" >
+ -->                  
                 </div>
                 <!-- /.input group -->
               </div>
@@ -331,7 +353,8 @@ function fileCheck(obj) {
 
 
 
-	<c:import url="../include/footer.jsp"/>
+
+<c:import url="../include/footer.jsp"/>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
