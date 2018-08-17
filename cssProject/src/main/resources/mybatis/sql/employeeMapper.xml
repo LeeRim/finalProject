@@ -170,10 +170,10 @@
 
 
 	<!-- 사원등록 직급정보 출력 쿼리문 -->
-	<select id="selectJobList" resultMap="EmployeeMap">
+	<select id="selectJobList" resultMap="employeeMap2">
 		SELECT
 		DIV_INFO AS "JOB",
-		DIV_KEY AS"JOBKEY"
+		DIV_KEY AS"E_JOBCODE_FK"
 		FROM DIVISION
 		WHERE DIV_TYPE =1
 		ORDER BY DIV_KEY DESC
@@ -184,7 +184,7 @@
 	<select id="selectDepartList" resultMap="EmployeeMap">
 		SELECT
 		DIV_INFO AS "DEPARTMENT" ,
-		DIV_KEY AS"DEPARTKEY"
+		DIV_KEY AS"E_DEPART_FK"
 		FROM DIVISION
 		WHERE DIV_TYPE =2
 		ORDER BY DIV_KEY ASC
@@ -219,8 +219,8 @@
 		E.E_EXTEN AS "EXTEN",
 		E.E_PHONE AS "PHONE",
 		E.E_HIRE_DATE AS "HIREDATE",
-		D.DIV_KEY AS "DEPARTKEY",
-		J.DIV_KEY AS "JOBKEY",
+		D.DIV_KEY AS "E_DEPART_FK",
+		J.DIV_KEY AS "E_JOBCODE_FK",
 		E.E_KEY AS "EKEY",
 		E.E_NO AS "ENO",
 		E.E_EMAIL AS "EMAIL",
