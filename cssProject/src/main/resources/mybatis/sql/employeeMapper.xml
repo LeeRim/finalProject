@@ -41,6 +41,41 @@
 		<result property="eEmail" column="EMAIL" />
 		<result property="ePhoto" column="PHOTO" />
 	</resultMap>
+	
+	
+	
+	<resultMap type="EmployeeVo" id="employeeMap2">
+      <id property="eKey" column="E_KEY"/>
+      <result property="eNo" column="E_NO"/>
+      <result property="cKeyFk" column="C_KEY_FK"/>
+      <result property="eType" column="E_TYPE"/>
+      <result property="eId" column="E_ID"/>
+      <result property="ePwd" column="E_PWD"/>
+      <result property="eName" column="E_NAME"/>
+      <result property="eJobcodeFk" column="E_JOBCODE_FK"/>
+      <result property="eDepartFk" column="E_DEPART_FK"/>
+      <result property="eAddress" column="E_ADDRESS"/>
+      <result property="eExten" column="E_EXTEN"/>
+      <result property="ePhone" column="E_PHONE"/>
+      <result property="eEmail" column="E_EMAIL"/>
+      <result property="eBirth" column="E_BIRTH"/>
+      <result property="eHireDate" column="E_HIRE_DATE"/>
+      <result property="eEntDate" column="E_ENT_DATE"/>
+      <result property="eEntYn" column="E_ENT_YN"/>
+      <result property="ePhoto" column="E_PHOTO"/>
+      <result property="eInstead" column="E_INSTEAD"/>
+      <result property="eState" column="E_STATE"/>
+      <result property="job" column="JOB"/>
+      <result property="department" column="DEPARTMENT"/>
+      <result property="divInfolevel" column="DIV_INFOLEVER"/>
+      <association property="instead" javaType="EmployeeVo">
+         <id property="eKey" column="E_KEY_1"/>
+         <result property="eName" column="INSTEAD_NAME"/>
+         <result property="job" column="INSTEAD_JOB"/>
+         <result property="department" column="INSTEAD_DEPART"/>
+      </association>
+   </resultMap>
+	
 
 
 
@@ -94,7 +129,7 @@
 		(E_KEY, E_NO, C_KEY_FK, E_TYPE, E_ID, E_PWD,
 		E_NAME, E_JOBCODE_FK , E_DEPART_FK ,E_ADDRESS, E_EXTEN, E_PHONE, E_EMAIL,
 		E_BIRTH, E_HIRE_DATE, E_PHOTO)
-		VALUES (SEQ_EMPLOYEE.NEXTVAL, #{eNo}, 1, 'A' , #{eId}, #{ePwd},
+		VALUES (SEQ_EMPLOYEE.NEXTVAL, #{eNo}, #{cKeyFk}, 'A' , #{eId}, #{ePwd},
 		#{eName}, #{eJobcodeFk}, #{eDepartFk}, #{eAddress} , #{eExten}, #{ePhone},
 		#{eEmail},
 		#{eBirth}, #{eHireDate}, #{ePhoto} )
@@ -103,7 +138,7 @@
 
 	<!-- 조직도 select 사원 리스트 출력 쿼리문 -->
 
-	<select id="selectEmployeeList2" resultMap="EmployeeMap"
+	<select id="selectEmployeeList2" resultMap="employeeMap2"
 		parameterType="int">
 		SELECT E.E_KEY E_KEY,
 		E.E_NO E_NO,

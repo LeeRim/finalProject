@@ -32,42 +32,18 @@ public class EmployeeVo {
     private char eEntYn;
     private String ePhoto;
     
-    
     private String job;
     private String department;
     
-    
+    private int divInfolevel;
+    private EmployeeVo instead;
     
 //    resultMap용
     private List<DivisionVo> division;
     public EmployeeVo() {
     }
 
-	public EmployeeVo(int eKey, String eNo, int cKeyFk, char eType, String eId, String ePwd, String eName,
-			int eJobcodeFk, int eDepartFk, String eJob, String eDepart, String eAddress, String eExten, String ePhone,
-			String eEmail, Date eBirth, Date eHireDate, Date eEntDate, char eEntYn, String ePhoto) {
-		super();
-		this.eKey = eKey;
-		this.eNo = eNo;
-		this.cKeyFk = cKeyFk;
-		this.eType = eType;
-		this.eId = eId;
-		this.ePwd = ePwd;
-		this.eName = eName;
-		this.eJobcodeFk = eJobcodeFk;
-		this.eDepartFk = eDepartFk;
-		this.eJob = eJob;
-		this.eDepart = eDepart;
-		this.eAddress = eAddress;
-		this.eExten = eExten;
-		this.ePhone = ePhone;
-		this.eEmail = eEmail;
-		this.eBirth = eBirth;
-		this.eHireDate = eHireDate;
-		this.eEntDate = eEntDate;
-		this.eEntYn = eEntYn;
-		this.ePhoto = ePhoto;
-	}
+
 
 	public int geteKey() {
 		return eKey;
@@ -255,6 +231,27 @@ public class EmployeeVo {
 		this.division = division;
 	}
 
+	
+	
+	
+	public int getDivInfolevel() {
+		return divInfolevel;
+	}
+
+
+
+	public void setDivInfolevel(int divInfolevel) {
+		this.divInfolevel = divInfolevel;
+	}
+
+	public EmployeeVo getInstead() {
+		return instead;
+	}
+
+	public void setInstead(EmployeeVo instead) {
+		this.instead = instead;
+	}
+
 	@Override
 	public String toString() {
 		return "EmployeeVo [eKey=" + eKey + ", eNo=" + eNo + ", cKeyFk=" + cKeyFk + ", eType=" + eType + ", eId=" + eId
@@ -262,7 +259,10 @@ public class EmployeeVo {
 				+ ", eJob=" + eJob + ", eDepart=" + eDepart + ", eAddress=" + eAddress + ", eExten=" + eExten
 				+ ", ePhone=" + ePhone + ", eEmail=" + eEmail + ", eBirth=" + eBirth + ", eHireDate=" + eHireDate
 				+ ", eEntDate=" + eEntDate + ", eEntYn=" + eEntYn + ", ePhoto=" + ePhoto + ", job=" + job
-				+ ", department=" + department + ", division=" + division + "]";
+				+ ", department=" + department + ", divInfolevel=" + divInfolevel + ", instead=" + instead
+				+ ", division=" + division + "]";
 	}
+
+	
 
 }

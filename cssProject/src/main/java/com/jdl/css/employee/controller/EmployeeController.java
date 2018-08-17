@@ -69,8 +69,10 @@ public class EmployeeController {
 	//사원 등록
 	@RequestMapping("insertMember.do" )
 	public String memberJoin(@RequestParam("eBirth1") String eBirth1, @RequestParam("eHireDate1") String eHireDate1,  HttpServletRequest request,
-			@RequestParam("ePhoto1") MultipartFile ePhoto, EmployeeVo member){
-
+			@RequestParam("ePhoto1") MultipartFile ePhoto, EmployeeVo member, HttpSession session){
+		EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+		int cKey = employee.getcKeyFk();
+		
 		System.out.println(ePhoto);
 		
 		String birth=eBirth1;
@@ -109,8 +111,8 @@ public class EmployeeController {
 			
 			
 			member.setePhoto(ePhoto.getOriginalFilename());
+			member.setcKeyFk(cKey);
 			
-
 			int result =eService.insertMember(member);
 			System.out.println(member);
 
@@ -143,7 +145,9 @@ public class EmployeeController {
 		//회사키
 		int cKey = employee.getcKeyFk();
 		
+		
 		List<EmployeeVo> list = eService.selectEmployeeList(cKey);
+		System.out.println(list);
 		
 		mv.addObject("list", list);
 		mv.setViewName("employee/organizationChart");
@@ -155,9 +159,11 @@ public class EmployeeController {
 	
 	//select 사원 정보 리스트 출력
 	@RequestMapping("organizationChart2.do")
-	public @ResponseBody List<EmployeeVo> employeeList2(String main){
+	public @ResponseBody List<EmployeeVo> employeeList2(String main, HttpSession session){
 		System.out.println(main);
-		
+		EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+		//회사키
+		int cKey = employee.getcKeyFk();
 		String[] eNo = main.split(",");
 			
 		
@@ -171,7 +177,7 @@ public class EmployeeController {
 				
 			}
 		
-		List<EmployeeVo> list = eService.selectEmployeeList();
+		List<EmployeeVo> list = eService.selectEmployeeList(cKey);
 		List<EmployeeVo> selectList= new ArrayList<EmployeeVo>(list.size());
 		
 		for(int i=0; i<eNo2.length;i++){
