@@ -319,7 +319,7 @@ public class ApprovalController {
 					ingAcList.get(j).setAcType("-1");
 					updateAcResult = aService.updateApprovalCondition(ingAcList.get(j));
 				}
-			} else if (arr[i].equals("4")) {
+			} else if (arr[i].equals("4")) {//선결일때
 				for (int j = 0; j < ingAcList.size(); j++) {
 					if (user.getDivInfolevel() < ingAcList.get(j).getApprover().getDivInfolevel()) {
 						ingAcList.get(j).setAcCondition(-1);
@@ -327,7 +327,7 @@ public class ApprovalController {
 						updateAcResult = aService.updateApprovalCondition(ingAcList.get(j));
 					}
 				}
-			} else if (arr[i].equals("5")) {
+			} else if (arr[i].equals("5")) {//대결일때
 				
 			}
 		}
