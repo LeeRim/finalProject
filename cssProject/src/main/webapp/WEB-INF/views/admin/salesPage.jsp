@@ -10,6 +10,8 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!-- Morris charts -->
+  <link rel="stylesheet" href="resources/bower_components/morris.js/morris.css">
 <script>
 	google.charts.load('current', {packages:['corechart']});
 </script>
@@ -41,11 +43,12 @@
               <h3 class="box-title">2018년 월 별 매출</h3>
 
               <div class="box-tools pull-right">
+               <button type="button" class="btn btn-box-tool"  onclick="chart_options.isStacked=false; drawChart()">false(기본값)</button>
+				<button type="button" class="btn btn-box-tool" onclick="chart_options.isStacked=true; drawChart()">true</button>
+				<button type="button" class="btn btn-box-tool" onclick="chart_options.isStacked='percent'; drawChart()">'percent' (문자열)</button>
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-wrench"></i></button>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
@@ -54,7 +57,6 @@
                     <li><a href="#">Separated link</a></li>
                   </ul>
                 </div>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
               </div>
             </div>
             <!-- /.box-header -->
@@ -65,17 +67,17 @@
                     <strong>매출: 1 JAN, 2018 - 31 AUG, 2018</strong>
                   </p>
 
-                  <div class="chart">
+                  <div class="chart" style="margin-top:-10px;">
                     <!-- Sales Chart Canvas -->
                   		 <div id="chart_div"></div>
                   </div>
                   <!-- /.chart-responsive -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-4">
-                  <p class="text-center">
+                  <p class="text-center" >
                     <strong>이용권 별 현황</strong>
                   </p>
+                <div class="col-md-4" style="margin-top:55px;">
 
                   <div class="progress-group">
                     <span class="progress-text">1개월 이용권</span>
@@ -119,47 +121,7 @@
               <!-- /.row -->
             </div>
             <!-- ./box-body -->
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 27%</span>
-                    <h5 class="description-header">￦35,210.43</h5>
-                    <span class="description-text">카카오페이</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-yellow"><i class="fa fa-caret-down"></i> 10%</span>
-                    <h5 class="description-header">￦10,390.90</h5>
-                    <span class="description-text">삼성페이</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                    <h5 class="description-header">￦24,813.53</h5>
-                    <span class="description-text">KG 이니시스</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block">
-                    <span class="description-percentage text-red"><i class="fa fa-caret-left"></i> 0%</span>
-                    <h5 class="description-header">￦1200</h5>
-                    <span class="description-text">무통장입금</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
+            
           </div>
           <!-- /.box -->
         </div>
@@ -167,7 +129,25 @@
       </div>
       <!-- /.row -->
     
-    
+    	<div class="row" style="margin-left:auto; margin-right:auto;">
+    	<!-- DONUT CHART -->
+          <div class="box box-danger" style="width:30%; margin-left:15px;">
+            <div class="box-header with-border">
+              <h3 class="box-title">결제수단</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body chart-responsive">
+              <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+    	</div>
+      <!-- /.row -->
     
     
     
@@ -175,12 +155,7 @@
     
     
 
-	<div style="text-align:center;">
-		isStacked 설정 바꿔보기<br>
-		<button type="button" onclick="chart_options.isStacked=false; drawChart()">false(기본값)</button>
-		<button type="button" onclick="chart_options.isStacked=true; drawChart()">true</button>
-		<button type="button" onclick="chart_options.isStacked='percent'; drawChart()">'percent' (문자열)</button>
-	</div>
+	
 
 
 
@@ -190,7 +165,9 @@
 	
 	</div>
 <c:import url="../include/footer.jsp"/>
-
+<!-- Morris.js charts -->
+<script src="resources/bower_components/raphael/raphael.min.js"></script>
+<script src="resources/bower_components/morris.js/morris.min.js"></script>
 <script>
 
 	// 로딩 완료시 함수 실행하여 차트 생성
@@ -199,7 +176,7 @@
 	// 차트 옵션을 전역으로 설정했습니다. 설정을 바꿔보는 예제를 만들기 위해서요.
 	var chart_options = {
 		width : 950,
-		height : 200,
+		height : 300,
 		colors: ['#f15628', '#5b6777', '#ffc81b'],
 		bar : {
 			groupWidth : '50%'
@@ -229,7 +206,24 @@
 		var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
 		chart.draw(data, chart_options);
 	}
-
+     
+	 $(function () {
+	    "use strict";
+	    
+	  //DONUT CHART
+	    var donut = new Morris.Donut({
+	      element: 'sales-chart',
+	      resize: true,
+	      colors: ["#3c8dbc", "#f56954", "#00a65a"],
+	      data: [
+	        {label: "카카오페이", value: 42},
+	        {label: "삼성페이", value: 30},
+	        {label: "KG이니시스", value: 17}
+	      ],
+	      hideHover: 'auto'
+	    });
+	 });
+		   
 </script>
 </body>
 </html>
