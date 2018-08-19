@@ -172,6 +172,12 @@ var total = new Array();
 	function select(index,eKey,name, job, department,eState,iKey,iName,iJob,iDepartment) {
 		var html="";
 		
+		for(var i=0;i<total.length;i++){
+			if(total[i]==eKey || total[i]==iKey){				
+				return;
+			}
+		}
+		
 		if(eState==0){
 			if(iKey==-1){
 				alert("현재 "+name+" "+job+"님께서 결재가 불가능한 상태입니다.");
