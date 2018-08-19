@@ -175,9 +175,9 @@ desired effect
 																				class='sign_rank_wrap'><span
 																					class='sign_rank'><c:out
 																							value="${appCon.approver.job }"></c:out></span></span><span
-																				class='sign_wrap'><span class='sign_name'><c:out
+																				class='sign_wrap'><span class='sign_name'><c:out value="${appCon.acType}"></c:out><br><c:out
 																							value="${appCon.condition }"></c:out>
-																						<c:out value="${appCon.approver.eName }"></c:out><c:out value="${appCon.acType}"></c:out></span></span><span
+																						<c:out value="${appCon.approver.eName }"></c:out></span></span><span
 																				class='sign_date_wrap'><span
 																					class='sign_date ' id='date_15162'>${appCon.acApprovalDate }</span></span></span></span>
 
@@ -255,15 +255,11 @@ desired effect
 										</span>
 
 										<div class="form-group" style="height: 100px;">
-											<div style="float: left; height: 100px; width: 130px;">
-												<div class="btn btn-default btn-file">
-													<i class="fa fa-paperclip"></i> Attachment <input
-														multiple="multiple" type="file" name="files"
-														class="upload-hidden">
-												</div>
-												<p class="help-block">Max. 32MB</p>
+											<div class="file-list">
+											<c:forEach var="attach" items="${approval.aAttachList}">
+												<br><a href="/css/resources/upload/approval/<c:out value="${attach.attaFileName}"/>" download><i class="fa fa-paperclip"></i>&nbsp<c:out value="${attach.attaFileName}"></c:out></a>
+											</c:forEach>
 											</div>
-											<div class="file-list"></div>
 										</div>
 								
 								</div>

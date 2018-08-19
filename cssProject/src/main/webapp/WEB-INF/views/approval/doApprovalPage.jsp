@@ -17,6 +17,7 @@ function openDoApproval() {
 		$("#before").attr( "checked","checked");
 		$('div.modal').modal();
 	}
+	
 }
 
 function submitCondition(){
@@ -24,7 +25,7 @@ function submitCondition(){
 }
 
 $(function() {
-	if(${sessionScope.user.eKey == requestSession.approval.aWriterFk}){
+	if(${sessionScope.user.eKey == requestSession.approval.aWriterFk || approval.aCondition !=0 }){
 		$(".doApproval").hide();
 	}
 	
@@ -34,6 +35,14 @@ $(function() {
 <c:forEach items="${approval.aConList}" var="aCon">
 	<c:if test="${aCon.acApproverFk == sessionScope.user.eKey}">
 		<c:set var="ac" value="${aCon}"></c:set>
+	</c:if>
+	<c:if
+		test="${aCon.acApproverFk == sessionScope.user.eKey && aCon.acCondition==0 && aCon.acApprovalType == '5'}">
+		<script>
+		$(function () {
+			$("#instead").attr( "checked","checked");
+		});
+	</script>
 	</c:if>
 </c:forEach>
 
@@ -50,21 +59,26 @@ $(function() {
 			</div>
 			<!-- body -->
 			<div class="modal-body">
-				<form id="conditionType" action="updateApprovalCondition.do" method="post">
+				<form id="conditionType" action="updateApprovalCondition.do"
+					method="post">
 					<input type="hidden" name="doctype" value="${approval.divDoctypeFk}">
-					<input type="hidden" name="aKey" value="${approval.aKey}">
-					<input type="hidden" name="acKey" value="${ac.acKey}">
-					<input type="checkbox" name="approvalType" class="approvalType" value="3" id="after">전결
-					<input type="checkbox" name="approvalType" class="approvalType" value="4" disabled id="before">선결
-					<input type="checkbox" name="approvalType" class="approvalType" value="5" id="instead">대결
+					<input type="hidden" name="aKey" value="${approval.aKey}"> <input
+						type="hidden" name="acKey" value="${ac.acKey}"> <input
+						type="checkbox" name="approvalType" class="approvalType" value="3"
+						id="after">전결 <input type="checkbox" name="approvalType"
+						class="approvalType" value="4" disabled id="before">선결 <input
+						type="checkbox" name="approvalType" class="approvalType" value="5"
+						id="instead">대결
 					<hr>
-					<input type="radio" name="condition" id="ok" value="1" checked="checked">승인
-					<input type="radio" name="condition" id="companion" value="2">반려
+					<input type="radio" name="condition" id="ok" value="1"
+						checked="checked">승인 <input type="radio" name="condition"
+						id="companion" value="2">반려
 				</form>
 			</div>
 			<!-- Footer -->
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="submitCondition();">결재하기</button>
+				<button type="button" class="btn btn-primary"
+					onclick="submitCondition();">결재하기</button>
 			</div>
 		</div>
 	</div>

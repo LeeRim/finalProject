@@ -77,9 +77,9 @@ public class ApprovalController {
 	@RequestMapping("waitingPage.do")
 	public ModelAndView openWaitingPage(HttpSession session, ModelAndView mv) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
-		System.out.println(user);
+		// System.out.println(user);
 		List<ApprovalVo> waitingList = aService.selectWaitingApprovalList(user.geteKey());
-		System.out.println(waitingList);
+		// System.out.println(waitingList);
 		mv.addObject("waitingList", waitingList);
 		mv.setViewName("approval/waitingPage");
 		return mv;
@@ -100,9 +100,16 @@ public class ApprovalController {
 		// 회사키
 		int companyK = user.getcKeyFk();
 
-		List<EmployeeVo> employee = nService.selectEmployee(companyK);
-		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
 
+		// System.out.println(employee);
 		model.addAttribute("employee", employee);
 		model.addAttribute("department", department);
 		return "approval/approvalForm/jobPropsal";
@@ -114,8 +121,14 @@ public class ApprovalController {
 		// 회사키
 		int companyK = user.getcKeyFk();
 
-		List<EmployeeVo> employee = nService.selectEmployee(companyK);
-		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
 
 		model.addAttribute("employee", employee);
 		model.addAttribute("department", department);
@@ -128,8 +141,14 @@ public class ApprovalController {
 		// 회사키
 		int companyK = user.getcKeyFk();
 
-		List<EmployeeVo> employee = nService.selectEmployee(companyK);
-		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
 
 		model.addAttribute("employee", employee);
 		model.addAttribute("department", department);
@@ -142,8 +161,14 @@ public class ApprovalController {
 		// 회사키
 		int companyK = user.getcKeyFk();
 
-		List<EmployeeVo> employee = nService.selectEmployee(companyK);
-		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
 
 		model.addAttribute("employee", employee);
 		model.addAttribute("department", department);
@@ -156,8 +181,14 @@ public class ApprovalController {
 		// 회사키
 		int companyK = user.getcKeyFk();
 
-		List<EmployeeVo> employee = nService.selectEmployee(companyK);
-		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
 
 		model.addAttribute("employee", employee);
 		model.addAttribute("department", department);
@@ -194,12 +225,13 @@ public class ApprovalController {
 
 	@RequestMapping("writeJobPropsal.do")
 	public String writeJobPropsal(ApprovalVo app, JobPropsalVo jobp, @RequestParam("appStr") List<Integer> appStr,
-			@RequestParam("files") MultipartFile[] files, HttpSession session, HttpServletRequest request) {
-		/*
-		 * app.setaWriterFk(((EmployeeVo)
-		 * session.getAttribute("user")).geteKey()); app.setcKeyFk(((EmployeeVo)
-		 * session.getAttribute("user")).getcKeyFk()); app.setDivDoctypeFk(1);
-		 */
+			@RequestParam("insteads") List<Integer> insteads, @RequestParam("files") MultipartFile[] files,
+			HttpSession session, HttpServletRequest request) {
+
+		app.setaWriterFk(((EmployeeVo) session.getAttribute("user")).geteKey());
+		app.setcKeyFk(((EmployeeVo) session.getAttribute("user")).getcKeyFk());
+		app.setDivDoctypeFk(1);
+
 		// Date jpWorkingDate = Date.valueOf(workingDate);
 		// jobp.setJpWorkingDate(jpWorkingDate);
 		/*
@@ -210,7 +242,22 @@ public class ApprovalController {
 		int addAResult = aService.insertApproval(app);
 		// System.out.println("aKey : "+app.getaKey());
 
-		int addAppResult = aService.insertApprovers(app.getaKey(), appStr);
+		List<ApprovalConditionVo> acList = new ArrayList<ApprovalConditionVo>();
+		for (int i = 0; i < appStr.size(); i++) {
+			ApprovalConditionVo ac = new ApprovalConditionVo();
+			ac.setaKeyFk(app.getaKey());
+			ac.setAcApproverFk(appStr.get(i));
+			acList.add(ac);
+		}
+		for (int i = 0; i < insteads.size(); i++) {
+			ApprovalConditionVo ac = new ApprovalConditionVo();
+			ac.setaKeyFk(app.getaKey());
+			ac.setAcApproverFk(insteads.get(i));
+			ac.setAcApprovalType("5");
+			acList.add(ac);
+		}
+
+		int addAppResult = aService.insertApprovers(acList);
 		// System.out.println(addAppResult);
 
 		jobp.setaKeyFk(app.getaKey());
@@ -230,27 +277,29 @@ public class ApprovalController {
 		}
 		MultipartFile file = null;
 		for (int i = 0; i < files.length; i++) {
-			AttachmentVo attach = new AttachmentVo();
-			file = files[i];
-			// System.out.println("files.length : " + files.length);
-			// System.out.println(file.getOriginalFilename());
-			// System.out.println("folder : " + folder);
-			filePath = folder + "\\" + file.getOriginalFilename();
+			if (!files[i].getOriginalFilename().equals("")) {
+				AttachmentVo attach = new AttachmentVo();
+				file = files[i];
+				// System.out.println("files.length : " + files.length);
+				// System.out.println(file.getOriginalFilename());
+				// System.out.println("folder : " + folder);
+				filePath = folder + "\\" + file.getOriginalFilename();
 
-			// System.out.println("filePath : " + filePath);
-			try {
-				file.transferTo(new File(filePath));
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				// System.out.println("filePath : " + filePath);
+				try {
+					file.transferTo(new File(filePath));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				// System.out.println("file 명 = "+file.getOriginalFilename());
+				attach.setAttaFileName(file.getOriginalFilename());
+				attach.setAttaFilePath("approval");
+				attach.setAttaLocation(app.getaKey());
+				attachList.add(attach);
 			}
-
-			// System.out.println("file 명 = "+file.getOriginalFilename());
-			attach.setAttaFileName(file.getOriginalFilename());
-			attach.setAttaFilePath("approval");
-			attach.setAttaLocation(app.getaKey());
-			attachList.add(attach);
 		}
 
 		// System.out.println(attachList);
@@ -295,6 +344,8 @@ public class ApprovalController {
 			result = "redirect:openJobPropsalDetail.do?aKey=" + aKey;
 			break;
 		}
+		
+		ApprovalConditionVo last = aService.selectLastApprover(aKey);
 
 		ApprovalConditionVo ac = new ApprovalConditionVo();
 		ac.setAcKey(acKey);
@@ -306,34 +357,33 @@ public class ApprovalController {
 
 		ApprovalVo app = new ApprovalVo();
 		app.setaKey(aKey);
-		ApprovalConditionVo last = aService.selectLastApprover(aKey);
+		app.setaCondition(condition);
+
 		int updateAResult = -1;
 		List<ApprovalConditionVo> ingAcList = aService.selectIngAcList(aKey);
-		String[] arr = approvalType.split(",");
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i].equals("3")) {// 전결일때
-				app.setaCondition(condition);
-				updateAResult = aService.updateApproval(app);
-				for (int j = 0; j < ingAcList.size(); j++) {
-					ingAcList.get(j).setAcCondition(-1);
-					ingAcList.get(j).setAcType("-1");
-					updateAcResult = aService.updateApprovalCondition(ingAcList.get(j));
-				}
-			} else if (arr[i].equals("4")) {//선결일때
-				for (int j = 0; j < ingAcList.size(); j++) {
-					if (user.getDivInfolevel() < ingAcList.get(j).getApprover().getDivInfolevel()) {
+		if (approvalType != null) {
+			String[] arr = approvalType.split(",");
+			for (int i = 0; i < arr.length; i++) {
+				if (arr[i].equals("3")) {// 전결일때
+					updateAResult = aService.updateApproval(app);
+					for (int j = 0; j < ingAcList.size(); j++) {
 						ingAcList.get(j).setAcCondition(-1);
-						ingAcList.get(j).setAcType("-1");
+						ingAcList.get(j).setAcApprovalType("-1");
 						updateAcResult = aService.updateApprovalCondition(ingAcList.get(j));
 					}
+				} else if (arr[i].equals("4")) {// 선결일때
+					for (int j = 0; j < ingAcList.size(); j++) {
+						if (user.getDivInfolevel() < ingAcList.get(j).getApprover().getDivInfolevel()) {
+							ingAcList.get(j).setAcCondition(-1);
+							ingAcList.get(j).setAcApprovalType("-1");
+							updateAcResult = aService.updateApprovalCondition(ingAcList.get(j));
+						}
+					}
 				}
-			} else if (arr[i].equals("5")) {//대결일때
-				
 			}
 		}
 
 		if (last.getAcKey() == acKey || condition == 2) {
-			app.setaCondition(condition);
 			updateAResult = aService.updateApproval(app);
 		}
 		return result;
