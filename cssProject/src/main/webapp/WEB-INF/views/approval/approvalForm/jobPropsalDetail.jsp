@@ -255,15 +255,11 @@ desired effect
 										</span>
 
 										<div class="form-group" style="height: 100px;">
-											<div style="float: left; height: 100px; width: 130px;">
-												<div class="btn btn-default btn-file">
-													<i class="fa fa-paperclip"></i> Attachment <input
-														multiple="multiple" type="file" name="files"
-														class="upload-hidden">
-												</div>
-												<p class="help-block">Max. 32MB</p>
+											<div class="file-list">
+											<c:forEach var="attach" items="${approval.aAttachList}">
+												<br><a href="/css/resources/upload/approval/<c:out value="${attach.attaFileName}"/>" download><i class="fa fa-paperclip"></i>&nbsp<c:out value="${attach.attaFileName}"></c:out></a>
+											</c:forEach>
 											</div>
-											<div class="file-list"></div>
 										</div>
 								
 								</div>

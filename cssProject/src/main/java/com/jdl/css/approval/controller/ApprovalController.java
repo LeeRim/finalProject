@@ -121,8 +121,14 @@ public class ApprovalController {
 		// 회사키
 		int companyK = user.getcKeyFk();
 
-		List<EmployeeVo> employee = nService.selectEmployee(companyK);
-		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
 
 		model.addAttribute("employee", employee);
 		model.addAttribute("department", department);
@@ -135,8 +141,14 @@ public class ApprovalController {
 		// 회사키
 		int companyK = user.getcKeyFk();
 
-		List<EmployeeVo> employee = nService.selectEmployee(companyK);
-		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
 
 		model.addAttribute("employee", employee);
 		model.addAttribute("department", department);
@@ -149,8 +161,14 @@ public class ApprovalController {
 		// 회사키
 		int companyK = user.getcKeyFk();
 
-		List<EmployeeVo> employee = nService.selectEmployee(companyK);
-		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
 
 		model.addAttribute("employee", employee);
 		model.addAttribute("department", department);
@@ -163,8 +181,14 @@ public class ApprovalController {
 		// 회사키
 		int companyK = user.getcKeyFk();
 
-		List<EmployeeVo> employee = nService.selectEmployee(companyK);
-		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
 
 		model.addAttribute("employee", employee);
 		model.addAttribute("department", department);
@@ -203,11 +227,11 @@ public class ApprovalController {
 	public String writeJobPropsal(ApprovalVo app, JobPropsalVo jobp, @RequestParam("appStr") List<Integer> appStr,
 			@RequestParam("insteads") List<Integer> insteads, @RequestParam("files") MultipartFile[] files,
 			HttpSession session, HttpServletRequest request) {
-		/*
-		 * app.setaWriterFk(((EmployeeVo)
-		 * session.getAttribute("user")).geteKey()); app.setcKeyFk(((EmployeeVo)
-		 * session.getAttribute("user")).getcKeyFk()); app.setDivDoctypeFk(1);
-		 */
+
+		app.setaWriterFk(((EmployeeVo) session.getAttribute("user")).geteKey());
+		app.setcKeyFk(((EmployeeVo) session.getAttribute("user")).getcKeyFk());
+		app.setDivDoctypeFk(1);
+
 		// Date jpWorkingDate = Date.valueOf(workingDate);
 		// jobp.setJpWorkingDate(jpWorkingDate);
 		/*
@@ -253,27 +277,29 @@ public class ApprovalController {
 		}
 		MultipartFile file = null;
 		for (int i = 0; i < files.length; i++) {
-			AttachmentVo attach = new AttachmentVo();
-			file = files[i];
-			// System.out.println("files.length : " + files.length);
-			// System.out.println(file.getOriginalFilename());
-			// System.out.println("folder : " + folder);
-			filePath = folder + "\\" + file.getOriginalFilename();
+			if (!files[i].getOriginalFilename().equals("")) {
+				AttachmentVo attach = new AttachmentVo();
+				file = files[i];
+				// System.out.println("files.length : " + files.length);
+				// System.out.println(file.getOriginalFilename());
+				// System.out.println("folder : " + folder);
+				filePath = folder + "\\" + file.getOriginalFilename();
 
-			// System.out.println("filePath : " + filePath);
-			try {
-				file.transferTo(new File(filePath));
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+				// System.out.println("filePath : " + filePath);
+				try {
+					file.transferTo(new File(filePath));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				// System.out.println("file 명 = "+file.getOriginalFilename());
+				attach.setAttaFileName(file.getOriginalFilename());
+				attach.setAttaFilePath("approval");
+				attach.setAttaLocation(app.getaKey());
+				attachList.add(attach);
 			}
-
-			// System.out.println("file 명 = "+file.getOriginalFilename());
-			attach.setAttaFileName(file.getOriginalFilename());
-			attach.setAttaFilePath("approval");
-			attach.setAttaLocation(app.getaKey());
-			attachList.add(attach);
 		}
 
 		// System.out.println(attachList);
@@ -300,8 +326,6 @@ public class ApprovalController {
 			int condition) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 
-		System.out.println(approvalType);
-
 		String result = "";
 		switch (doctype) {
 		case 1:
@@ -320,6 +344,8 @@ public class ApprovalController {
 			result = "redirect:openJobPropsalDetail.do?aKey=" + aKey;
 			break;
 		}
+		
+		ApprovalConditionVo last = aService.selectLastApprover(aKey);
 
 		ApprovalConditionVo ac = new ApprovalConditionVo();
 		ac.setAcKey(acKey);
@@ -332,7 +358,6 @@ public class ApprovalController {
 		ApprovalVo app = new ApprovalVo();
 		app.setaKey(aKey);
 		app.setaCondition(condition);
-		ApprovalConditionVo last = aService.selectLastApprover(aKey);
 
 		int updateAResult = -1;
 		List<ApprovalConditionVo> ingAcList = aService.selectIngAcList(aKey);

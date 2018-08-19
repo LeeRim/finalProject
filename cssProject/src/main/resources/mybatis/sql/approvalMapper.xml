@@ -35,6 +35,7 @@
 			<result property="eEntYn" column="E_ENT_YN" />
 			<result property="ePhoto" column="E_PHOTO" />
 			<result property="job" column="JOB" />
+			<result property="divInfolevel" column="DIV_INFOLEVEL"/>
 			<result property="department" column="DEPARTMENT" />
 		</association>
 		<collection property="aConList" column="A_KEY" ofType="AppConVo"
@@ -70,6 +71,7 @@
 			<result property="eEntYn" column="E_ENT_YN" />
 			<result property="ePhoto" column="E_PHOTO" />
 			<result property="job" column="JOB" />
+			<result property="divInfolevel" column="DIV_INFOLEVEL"/>
 			<result property="department" column="DEPARTMENT" />
 		</association>
 	</resultMap>
@@ -345,7 +347,7 @@
 		(SELECT ROW_NUMBER() OVER(PARTITION
 		BY A_KEY_FK ORDER BY
 		A_KEY_FK,DIV_INFOLEVEL
-		DESC)RNUM,A_KEY_FK,AC_APPROVER_FK
+		DESC,E_NAME)RNUM,A_KEY_FK,AC_APPROVER_FK
 		FROM
 		APPROVAL_CONDITION AC
 		JOIN
@@ -357,7 +359,7 @@
 		FROM APPROVAL
 		WHERE A_CONDITION=0) AND AC_CONDITION=0
 		GROUP BY
-		A_KEY_FK,AC_APPROVER_FK,DIV_INFOLEVEL)
+		A_KEY_FK,AC_APPROVER_FK,DIV_INFOLEVEL,E_NAME)
 		WHERE RNUM=1 AND
 		AC_APPROVER_FK=#{eKey})
 	</select>
@@ -520,8 +522,8 @@
 		(E.E_JOBCODE_FK=DIV.DIV_KEY)
 		JOIN DIVISION DIV2 ON
 		(E.E_DEPART_FK=DIV2.DIV_KEY)
-		WHERE A_KEY_FK =3 AND AC_CONDITION=0)
-		ORDER BY DIV_INFOLEVEL DESC)
+		WHERE A_KEY_FK =#{aKeyFk} AND AC_CONDITION=0)
+		ORDER BY DIV_INFOLEVEL DESC,E_NAME)
 		WHERE ROWNUM =1
 	</select>
 
@@ -570,8 +572,8 @@
 		(E.E_JOBCODE_FK=DIV.DIV_KEY)
 		JOIN DIVISION DIV2 ON
 		(E.E_DEPART_FK=DIV2.DIV_KEY)
-		WHERE A_KEY_FK =3 AND AC_CONDITION=0)
-		ORDER BY DIV_INFOLEVEL)
+		WHERE A_KEY_FK =#{aKeyFk} AND AC_CONDITION=0)
+		ORDER BY DIV_INFOLEVEL,E_NAME)
 		WHERE ROWNUM =1
 	</select>
 

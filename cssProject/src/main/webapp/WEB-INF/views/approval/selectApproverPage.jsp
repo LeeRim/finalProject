@@ -175,8 +175,8 @@ var total = new Array();
 		if(eState==0){
 			if(iKey==-1){
 				alert("현재 "+name+" "+job+"님께서 결재가 불가능한 상태입니다.");
-			}
-			alert("현재 "+name+job+"님께서 결재가 불가능한 상태입니다. 따라서 대결자인 "+iName+iJob+"님에게 결재요청됩니다.");
+			}else{
+				alert("현재 "+name+job+"님께서 결재가 불가능한 상태입니다. 따라서 대결자인 "+iName+iJob+"님에게 결재요청됩니다.");
 			html = $("#approverList").html()
 			+ "<tr>"
 			+ "<td>"
@@ -192,6 +192,7 @@ var total = new Array();
 	"</tr>";
 	insteads.push(iKey);
 	total.push(iKey);
+			}
 		}else{
 			html = $("#approverList").html()
 			+ "<tr>"
