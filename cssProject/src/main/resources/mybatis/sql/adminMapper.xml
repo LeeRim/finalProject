@@ -133,7 +133,7 @@
 	
 	<insert id="insertCompanyPaymentC" parameterType="Company">
 		UPDATE COMPANY
-		SET C_MILEAGE = #{cMileage}, C_CLOSEDAY = TO_DATE(TO_CHAR(SYSDATE + 31, 'MM/DD/YYYY'), 'MM/DD/YYYY'), C_LEVEL = #{cLevel}
+		SET C_MILEAGE = #{cMileage}, C_CLOSEDAY = TO_DATE(TO_CHAR(SYSDATE + 30, 'MM/DD/YYYY'), 'MM/DD/YYYY'), C_LEVEL = #{cLevel}
 		WHERE C_KEY = #{cKey}
 	</insert>
 

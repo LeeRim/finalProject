@@ -137,4 +137,9 @@ public class AdminController {
 		String mmmm = "redirect:companyPayment.do?cKeyFk="+cKeyFk;
 		return mmmm;
 	}
+	
+	@RequestMapping("salesPage.do")
+	public String salesPage(){
+		return "admin/salesPage";
+	}
 }
