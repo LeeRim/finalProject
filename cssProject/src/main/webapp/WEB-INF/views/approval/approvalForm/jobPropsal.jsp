@@ -101,10 +101,11 @@ desired effect
 								<!--전자결재 내용-->
 								<div class="approval_import ie9-scroll-fix">
 									<!-- 문서 내용 표시 테스트 -->
-									<form id="document_content" class="form_doc_editor editor_view"
+									<form id="form" class="form_doc_editor editor_view"
 										action="writeJobPropsal.do" method="post"
 										enctype="multipart/form-data">
 										<input type="hidden" id="appStr" name="appStr" value="">
+										<input type="hidden" id="insteads" name="insteads" value="">
 										<span>
 											<table
 												style="border: 0px solid rgb(0, 0, 0); border-image: none; width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">

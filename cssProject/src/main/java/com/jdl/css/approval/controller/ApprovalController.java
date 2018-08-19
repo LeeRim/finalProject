@@ -77,9 +77,9 @@ public class ApprovalController {
 	@RequestMapping("waitingPage.do")
 	public ModelAndView openWaitingPage(HttpSession session, ModelAndView mv) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
-		System.out.println(user);
+		// System.out.println(user);
 		List<ApprovalVo> waitingList = aService.selectWaitingApprovalList(user.geteKey());
-		System.out.println(waitingList);
+		// System.out.println(waitingList);
 		mv.addObject("waitingList", waitingList);
 		mv.setViewName("approval/waitingPage");
 		return mv;
@@ -100,9 +100,16 @@ public class ApprovalController {
 		// 회사키
 		int companyK = user.getcKeyFk();
 
-		List<EmployeeVo> employee = nService.selectEmployee(companyK);
-		List<EmployeeVo> department = nService.selectDepartment(companyK);
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
 
+		// System.out.println(employee);
 		model.addAttribute("employee", employee);
 		model.addAttribute("department", department);
 		return "approval/approvalForm/jobPropsal";
@@ -194,7 +201,8 @@ public class ApprovalController {
 
 	@RequestMapping("writeJobPropsal.do")
 	public String writeJobPropsal(ApprovalVo app, JobPropsalVo jobp, @RequestParam("appStr") List<Integer> appStr,
-			@RequestParam("files") MultipartFile[] files, HttpSession session, HttpServletRequest request) {
+			@RequestParam("insteads") List<Integer> insteads, @RequestParam("files") MultipartFile[] files,
+			HttpSession session, HttpServletRequest request) {
 		/*
 		 * app.setaWriterFk(((EmployeeVo)
 		 * session.getAttribute("user")).geteKey()); app.setcKeyFk(((EmployeeVo)
@@ -210,7 +218,22 @@ public class ApprovalController {
 		int addAResult = aService.insertApproval(app);
 		// System.out.println("aKey : "+app.getaKey());
 
-		int addAppResult = aService.insertApprovers(app.getaKey(), appStr);
+		List<ApprovalConditionVo> acList = new ArrayList<ApprovalConditionVo>();
+		for (int i = 0; i < appStr.size(); i++) {
+			ApprovalConditionVo ac = new ApprovalConditionVo();
+			ac.setaKeyFk(app.getaKey());
+			ac.setAcApproverFk(appStr.get(i));
+			acList.add(ac);
+		}
+		for (int i = 0; i < insteads.size(); i++) {
+			ApprovalConditionVo ac = new ApprovalConditionVo();
+			ac.setaKeyFk(app.getaKey());
+			ac.setAcApproverFk(insteads.get(i));
+			ac.setAcApprovalType("5");
+			acList.add(ac);
+		}
+
+		int addAppResult = aService.insertApprovers(acList);
 		// System.out.println(addAppResult);
 
 		jobp.setaKeyFk(app.getaKey());
@@ -277,6 +300,8 @@ public class ApprovalController {
 			int condition) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 
+		System.out.println(approvalType);
+
 		String result = "";
 		switch (doctype) {
 		case 1:
@@ -306,34 +331,34 @@ public class ApprovalController {
 
 		ApprovalVo app = new ApprovalVo();
 		app.setaKey(aKey);
+		app.setaCondition(condition);
 		ApprovalConditionVo last = aService.selectLastApprover(aKey);
+
 		int updateAResult = -1;
 		List<ApprovalConditionVo> ingAcList = aService.selectIngAcList(aKey);
-		String[] arr = approvalType.split(",");
-		for (int i = 0; i < arr.length; i++) {
-			if (arr[i].equals("3")) {// 전결일때
-				app.setaCondition(condition);
-				updateAResult = aService.updateApproval(app);
-				for (int j = 0; j < ingAcList.size(); j++) {
-					ingAcList.get(j).setAcCondition(-1);
-					ingAcList.get(j).setAcType("-1");
-					updateAcResult = aService.updateApprovalCondition(ingAcList.get(j));
-				}
-			} else if (arr[i].equals("4")) {//선결일때
-				for (int j = 0; j < ingAcList.size(); j++) {
-					if (user.getDivInfolevel() < ingAcList.get(j).getApprover().getDivInfolevel()) {
+		if (approvalType != null) {
+			String[] arr = approvalType.split(",");
+			for (int i = 0; i < arr.length; i++) {
+				if (arr[i].equals("3")) {// 전결일때
+					updateAResult = aService.updateApproval(app);
+					for (int j = 0; j < ingAcList.size(); j++) {
 						ingAcList.get(j).setAcCondition(-1);
-						ingAcList.get(j).setAcType("-1");
+						ingAcList.get(j).setAcApprovalType("-1");
 						updateAcResult = aService.updateApprovalCondition(ingAcList.get(j));
 					}
+				} else if (arr[i].equals("4")) {// 선결일때
+					for (int j = 0; j < ingAcList.size(); j++) {
+						if (user.getDivInfolevel() < ingAcList.get(j).getApprover().getDivInfolevel()) {
+							ingAcList.get(j).setAcCondition(-1);
+							ingAcList.get(j).setAcApprovalType("-1");
+							updateAcResult = aService.updateApprovalCondition(ingAcList.get(j));
+						}
+					}
 				}
-			} else if (arr[i].equals("5")) {//대결일때
-				
 			}
 		}
 
 		if (last.getAcKey() == acKey || condition == 2) {
-			app.setaCondition(condition);
 			updateAResult = aService.updateApproval(app);
 		}
 		return result;

@@ -48,6 +48,7 @@
 		<result property="aKeyFk" column="A_KEY_FK" />
 		<result property="acApproverFk" column="AC_APPROVER_FK" />
 		<result property="acCondition" column="AC_CONDITION" />
+		<result property="acApprovalType" column="AC_APPROVAL_TYPE" />
 		<result property="acApprovalDate" column="AC_APPROVAL_DATE" />
 		<association property="approver" javaType="EmployeeVo">
 			<id property="eKey" column="E_KEY" />
@@ -399,7 +400,7 @@
 	<insert id="insertApprovers" parameterType="hashMap">
 		INSERT INTO
 		APPROVAL_CONDITION VALUES (
-		SEQ_APPROVAL_CONDITION.NEXTVAL,#{aKey},#{acApprovalFk},0,null,null
+		SEQ_APPROVAL_CONDITION.NEXTVAL,#{aKey},#{acApprovalFk},0,#{acApprovalType},null
 		)
 	</insert>
 
@@ -429,6 +430,7 @@
 		AC_APPROVER_FK,
 		AC.AC_CONDITION
 		AC_CONDITION,
+		AC.AC_APPROVAL_TYPE,
 		TO_CHAR(AC_APPROVAL_DATE,'YYYY-MM-DD')
 		AC_APPROVAL_DATE,
 		E.E_NAME E_NAME,

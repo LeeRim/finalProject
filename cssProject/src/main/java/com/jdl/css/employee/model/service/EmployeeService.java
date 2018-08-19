@@ -28,12 +28,12 @@ public class EmployeeService {
 		return dao.selectEmployeeList(cKey);
 	}
 
-	public List<EmployeeVo> selectJobList() {
-		return dao.selectJobList();
+	public List<EmployeeVo> selectJobList(int cKey) {
+		return dao.selectJobList(cKey);
 	}
 
-	public List<EmployeeVo> selectDepartList() {
-		return dao.selectDepartList();
+	public List<EmployeeVo> selectDepartList(int cKey) {
+		return dao.selectDepartList(cKey);
 	}
 
 

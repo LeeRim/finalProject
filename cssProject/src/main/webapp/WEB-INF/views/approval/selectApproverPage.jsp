@@ -167,22 +167,50 @@ var approvers = new Array();
 
 <script>
 var approvers = new Array();
-	function select(index,eKey,name, job, department) {
-		var html = $("#approverList").html()
-				+ "<tr>"
-				+ "<td>"
-				+ name
-				+ "</td>"
-				+ "<td>"
-				+ job
-				+ "</td>"
-				+ "<td style='text-align:center;'>"
-				+ department
-				+ "</td>"
-				+ "<td class='removeBtn' onclick='removeApprover("+eKey+",this);'><i class='fa fa-remove'></i></td>"
-		"</tr>";
+var insteads = new Array();
+var total = new Array();
+	function select(index,eKey,name, job, department,eState,iKey,iName,iJob,iDepartment) {
+		var html="";
+		
+		if(eState==0){
+			if(iKey==-1){
+				alert("현재 "+name+" "+job+"님께서 결재가 불가능한 상태입니다.");
+			}
+			alert("현재 "+name+job+"님께서 결재가 불가능한 상태입니다. 따라서 대결자인 "+iName+iJob+"님에게 결재요청됩니다.");
+			html = $("#approverList").html()
+			+ "<tr>"
+			+ "<td>"
+			+ iName
+			+ "</td>"
+			+ "<td>"
+			+ iJob
+			+ "</td>"
+			+ "<td style='text-align:center;'>"
+			+ iDepartment
+			+ "</td>"
+			+ "<td class='removeBtn' onclick='removeApprover("+iKey+",this);'><i class='fa fa-remove'></i></td>"
+	"</tr>";
+	insteads.push(iKey);
+	total.push(iKey);
+		}else{
+			html = $("#approverList").html()
+			+ "<tr>"
+			+ "<td>"
+			+ name
+			+ "</td>"
+			+ "<td>"
+			+ job
+			+ "</td>"
+			+ "<td style='text-align:center;'>"
+			+ department
+			+ "</td>"
+			+ "<td class='removeBtn' onclick='removeApprover("+eKey+",this);'><i class='fa fa-remove'></i></td>"
+	"</tr>";
+	approvers.push(eKey);
+	total.push(eKey);
+		}
+		
 		$("#approverList").html(html);
-		approvers.push(eKey);
 	}
 
 	function removeApprover(eKey,obj) {
@@ -192,16 +220,27 @@ var approvers = new Array();
 				approvers.splice(i,1);
 			}
 		}
+		for(var i=0;i<total.length;i++){
+			if(total[i]==eKey){				
+				total.splice(i,1);
+			}
+		}
+		for(var i=0;i<insteads.length;i++){
+			if(insteads[i]==eKey){				
+				insteads.splice(i,1);
+			}
+		}
 	}
 	
 	function addApprovers(){
 		//console.log(approvers.join(", "));
 		$("#appStr").val(approvers);
+		$("#insteads").val(insteads);
 		$("#closeBtn").trigger("click");
 		$.ajax({
 			url:"addApproversTable.do",
 			data:{
-				appStr : approvers.join(", ")
+				appStr : total.join(", ")
 			},
 			type : "post",
 			success : function(data) {
@@ -281,7 +320,7 @@ var approvers = new Array();
 										<c:forEach items="${employee}" var="employee" varStatus="st">
 											<c:if test="${employee.department == department.department}">
 												<li><a
-													onclick="select(${st.index},${employee.eKey},'${employee.eName}','${employee.job}','${employee.department}');"><i
+													onclick="select(${st.index},${employee.eKey},'${employee.eName}','${employee.job}','${employee.department}',${employee.eState},${employee.instead.eKey},'${employee.instead.eName}','${employee.instead.job}','${employee.instead.department}');"><i
 														class="fa fa-circle-o text-red"></i> <c:out
 															value="${employee.eName}" /></a></li>
 											</c:if>

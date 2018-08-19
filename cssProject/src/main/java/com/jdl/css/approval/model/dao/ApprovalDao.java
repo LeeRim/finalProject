@@ -23,9 +23,9 @@ public class ApprovalDao {
 		return sqlSession.insert("ApprovalMapper.insertApproval", app);
 	}
 
-	public int insertApprovers(HashMap<String, Integer> params) {
+	public int insertApprovers(ApprovalConditionVo ac) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("ApprovalMapper.insertApprovers",params);
+		return sqlSession.insert("ApprovalMapper.insertApprovers",ac);
 	}
 
 	public int insertJobPropsal(JobPropsalVo jobp) {

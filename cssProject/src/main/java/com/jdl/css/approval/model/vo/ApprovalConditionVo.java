@@ -81,6 +81,7 @@ public class ApprovalConditionVo {
 
 	public void setAcApprovalType(String acApprovalType) {
 		this.acApprovalType = acApprovalType;
+		this.acType="";
 		if(acApprovalType!=null){
 			String[] arr = acApprovalType.split(",");
 			for(String a:arr){
@@ -90,6 +91,8 @@ public class ApprovalConditionVo {
 					this.acType+="(선결)";
 				}else if(a.equals("5")){
 					this.acType+="(대결)";
+				}else if(a.equals("-1")){
+					this.acType+="(후열)";
 				}
 			}
 		}
