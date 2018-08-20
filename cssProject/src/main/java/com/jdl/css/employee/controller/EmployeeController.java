@@ -54,9 +54,10 @@ public class EmployeeController {
 	
 	
 	@RequestMapping("memberAdd.do")
-	public ModelAndView memberAdd(ModelAndView mv){
-		List<EmployeeVo> list = eService.selectJobList();
-		List<EmployeeVo> list2 = eService.selectDepartList();
+	public ModelAndView memberAdd(ModelAndView mv,HttpSession session){
+		EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+		List<EmployeeVo> list = eService.selectJobList(employee.getcKeyFk());
+		List<EmployeeVo> list2 = eService.selectDepartList(employee.getcKeyFk());
 		
 		mv.addObject("list", list);
 		mv.addObject("list2", list2);
