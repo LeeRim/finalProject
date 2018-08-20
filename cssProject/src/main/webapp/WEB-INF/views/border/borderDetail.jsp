@@ -192,7 +192,7 @@
 
                 <div class="comment-text">
                       <span class="username">
-                        ${b.eName} 사원
+                        ${sessionScope.user.eName} 사원
                         <span class="text-muted pull-right">${b.cDate}</span>
                         	<span class="text-muted pull-right">
                         		<button type="button" onclick="updateCommentForm(this, true);" class="btn btn-default btn-xs modifyBtn""><i class="fa fa-share"></i> 수정</button>

@@ -68,7 +68,7 @@ $(function() {
 						id="after">전결 <input type="checkbox" name="approvalType"
 						class="approvalType" value="4" disabled id="before">선결 <input
 						type="checkbox" name="approvalType" class="approvalType" value="5"
-						id="instead">대결
+						id="instead" disabled>대결
 					<hr>
 					<input type="radio" name="condition" id="ok" value="1"
 						checked="checked">승인 <input type="radio" name="condition"
