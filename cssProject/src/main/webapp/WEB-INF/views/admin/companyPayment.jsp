@@ -51,9 +51,9 @@
 </style>
 <script>
 var returnCal = 0;
-
+var level = 0;
+var voucher = 0;
 function pay(){
-	var level = 0;
 	var pay = 0;
 	<c:if test="${company.counts <=100 }">
 		level = 1;
@@ -69,18 +69,23 @@ function pay(){
 	</c:if>
 	console.log(level);
 	console.log(pay);
+
 	
 	
 	if($("#month").val() == "1m"){
-		returnCal = level * pay * 1;	
+		voucher = 1;
+		returnCal = level * pay * voucher;	
 	}else if($("#month").val() == "3m"){
-		returnCal = level * pay * 3;	
+		voucher = 3;
+		returnCal = level * pay *  voucher;	
 	}else if($("#month").val() == "6m"){
-		returnCal = level * pay * 6;	
+		voucher = 6;
+		returnCal = level * pay * voucher;	
 	}else{
-		returnCal = level * pay * 12;	
+		voucher = 12;
+		returnCal = level * pay * voucher;	
 	}
-	
+	console.log(voucher);
 	$("#amount").html(returnCal);
 }
 
@@ -98,12 +103,14 @@ function kakaopay(){
 	    if ( rsp.success ) {
 	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 	    	jQuery.ajax({
-	    		url: "companyPaymentS.do", //cross-domain error가 발생하지 않도록 주의해주세요
+	    		url: "companyPaymentP.do", //cross-domain error가 발생하지 않도록 주의해주세요
 	    		type: 'POST',
 	    		data: {
 	    			imp_uid : rsp.imp_uid,
 	                cKeyFk : '${company.cKey}',
-	                payMileage : rsp.paid_amount
+	                payMileage : rsp.paid_amount,
+	                cLevel : level,
+	                payVoucher : voucher
 	                //기타 필요한 데이터가 있으면 추가 전달
 	    		},success:function(data) {
 	                 //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
@@ -112,9 +119,6 @@ function kakaopay(){
 	                 msg += '\결제 금액 : ' + rsp.paid_amount;
 	                 msg += '카드 승인번호 : ' + rsp.apply_num;
 	                 alert("결제완료");
-	                 opener.location.href=data;
-	                 window.close();
-	                 
 	           	},error:function(e){
 	           		alert("error");
 	           	}
@@ -159,11 +163,6 @@ function kakaopay(){
         <li class="active">Data tables</li>
       </ol>
     </section>
-
-    <form id="updateLevel" method="get" action="updateCompanyLevel.do" onsubmit="return validate();">
-	<input type="hidden" name="companyList" id="companyList"/>
-	<input type="hidden" name="cLevel" id="cLevel"/>
-	<input type="hidden" name="listValue" value="list"/>
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -224,7 +223,6 @@ function kakaopay(){
       <div class="payment" onclick="kakaopay();">결제하기</div>
     </section>
     <!-- /.content -->
-    </form>
   </div>
   <!-- /.content-wrapper -->
     

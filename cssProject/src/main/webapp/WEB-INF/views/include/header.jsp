@@ -12,7 +12,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="resources/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="resources/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="resources/dist/css/AdminLTE.css">
   <link rel="stylesheet" href="resources/dist/css/skins/skin-blue.min.css">
   
   <link rel="stylesheet" href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">

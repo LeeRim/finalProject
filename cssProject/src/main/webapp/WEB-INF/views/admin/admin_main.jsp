@@ -189,7 +189,7 @@ desired effect
             <div class="box-header">
               <i class="fa fa-calendar"></i>
 
-              <h3 class="box-title">Calendar</h3>
+              <h3 class="box-title">종료일</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">

@@ -120,15 +120,48 @@ public class AdminController {
 		return calList;
 	}
 	
-	@RequestMapping(value="companyPaymentS.do", produces="application/text; charset=utf-8")
-	public @ResponseBody String companyPaymentS(HttpServletRequest request){
+	@RequestMapping(value="companyPaymentP.do", produces="application/text; charset=utf-8")
+	public @ResponseBody String companyPaymentP(HttpServletRequest request){
 		int cKeyFk = Integer.parseInt(request.getParameter("cKeyFk"));
 		String payMileage = request.getParameter("payMileage");
-		System.out.println("1 : "+cKeyFk);
-		System.out.println("2 : "+payMileage);
-		PaymentVo paymentVo = new PaymentVo(cKeyFk, payMileage); 
-		service.insertCompanyPayment(paymentVo);
-		String mmmm = "companyPayment.do?cKeyFk="+cKeyFk;
+		int payVoucher = Integer.parseInt(request.getParameter("payVoucher"));
+		PaymentVo paymentVo = new PaymentVo(cKeyFk, payMileage,payVoucher); 
+		service.insertCompanyPaymentP(paymentVo);
+		int cLevel = Integer.parseInt(request.getParameter("cLevel"));
+		
+		CompanyVo company = new CompanyVo(cKeyFk, payMileage, cLevel);
+		company.setcKey(cKeyFk);
+		company.setcMileage(payMileage);
+		company.setcLevel(cLevel);
+		service.insertCompanyPaymentC(company);
+		String mmmm = "redirect:companyPayment.do?cKeyFk="+cKeyFk;
 		return mmmm;
+	}
+	
+	
+	@RequestMapping("salesPage.do")
+	public ModelAndView salesPage(ModelAndView mv){
+		List<PaymentVo> monthSumAll = service.selectMonthSumSales();
+		mv.addObject("monthSumAll",monthSumAll);
+		
+		List<PaymentVo> levelCountPer = service.selectLevelCountPer();
+		mv.addObject("levelCountPer",levelCountPer);
+		
+		List<PaymentVo> monthSumLevel = service.selectMonthSumLevel();
+		mv.addObject("monthSumLevel",monthSumLevel);
+		
+		PaymentVo paymentVo = service.selectAllCount();
+		mv.addObject("paymentVo",paymentVo);
+		
+		mv.setViewName("admin/salesPage");
+		return mv;
+	}
+	
+	@RequestMapping("companyPaymentList.do")
+	public ModelAndView companyPaymentList(ModelAndView mv){
+		List<CompanyVo> companyPaymentList = service.selectCompanyPaymentList();
+		mv.addObject("companyPaymentList",companyPaymentList);
+		mv.setViewName("admin/companyPaymentList");
+		return mv;
 	}
 }

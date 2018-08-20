@@ -36,7 +36,7 @@
 </head>
 <body>
 	<!-- Left side column. contains the logo and sidebar -->
-	<aside class="main-sidebar">
+	<aside class="main-sidebar" style="padding-top:0px;">
 
 		<!-- sidebar: style can be found in sidebar.less -->
 		<section class="sidebar">
@@ -86,7 +86,18 @@
 					</ul>
 				</li>
 				<li><a href="qnaList.do" onclick="menuHighlight(3);"><i class="fa fa-question"></i> <span>문의사항</span></a></li>
-				<li><a href="#" onclick="menuHighlight(4);"><i class="fa fa-krw"></i> <span>결제현황</span></a></li>
+				<li class="treeview">
+					<a href="#" ><i class="fa fa-krw"></i>
+						<span>매출현황</span>
+						<span class="pull-right-container">
+					 		 <i class="fa fa-angle-left pull-right"></i>
+						</span>
+					</a>
+					<ul class="treeview-menu">
+						<li><a href="salesPage.do" onclick="menuHighlight(4);">기간 별 매출</a></li>
+						<li><a href="companyPaymentList.do" onclick="menuHighlight(4);">결제 목록 조회</a></li>
+					</ul>
+				</li>
 			</ul>
 			<!-- /.sidebar-menu -->
 		</section>

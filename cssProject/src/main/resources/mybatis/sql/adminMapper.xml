@@ -126,9 +126,61 @@
 		WHERE C_KEY = #{cKeyFk}
 	</select>
 	
-	<insert id="insertCompanyPayment" parameterType="PaymentVo">
+	<insert id="insertCompanyPaymentP" parameterType="PaymentVo">
 		INSERT INTO PAYMENT
-		VALUES(SEQ_PAYMENT.NEXTVAL,#{cKeyFk},#{payMileage}, SYSDATE)
+		VALUES(SEQ_PAYMENT.NEXTVAL,#{cKeyFk},#{payMileage}, SYSDATE, #{payVoucher})
 	</insert>
+	
+	<update id="insertCompanyPaymentC" parameterType="Company">
+		UPDATE COMPANY
+		SET C_MILEAGE = #{cMileage}, C_CLOSEDAY = TO_DATE(TO_CHAR(SYSDATE + 31, 'MM/DD/YYYY'), 'MM/DD/YYYY'), C_LEVEL = #{cLevel}
+		WHERE C_KEY = #{cKey}
+	</update>
+	
+	<select id="selectMonthSumSales" resultType="PaymentVo">
+		SELECT TO_CHAR(P.PAY_DATE,'MM') AS "ALLMONTH",SUM(P.PAY_MILEAGE) AS "SUMSALES"
+		FROM PAYMENT P
+		JOIN COMPANY C ON (P.C_KEY_FK = C.C_KEY)
+		WHERE TO_CHAR(P.PAY_DATE,'YYYYMM') BETWEEN '201801' AND '201812' 
+		GROUP BY TO_CHAR(P.PAY_DATE,'MM')
+		ORDER BY TO_CHAR(P.PAY_DATE,'MM') ASC
+	</select>
+	
+	<select id="selectLevelCountPer" resultType="PaymentVo">
+		SELECT PAY_VOUCHER,COUNT(*) AS "COUNT", (SELECT COUNT(*)FROM PAYMENT) AS "ALLCOUNT", TRUNC(RATIO_TO_REPORT(COUNT(*)) OVER() * 100) AS "PER"
+		FROM PAYMENT
+		GROUP BY PAY_VOUCHER
+		ORDER BY PAY_VOUCHER
+	</select>
+	
+	<select id="selectMonthSumLevel" resultType="PaymentVo">
+		SELECT TO_CHAR(OP.PAY_DATE,'MM')  AS "ALLMONTH",
+		NVL((SELECT SUM(PAY_MILEAGE)
+				FROM PAYMENT P
+				JOIN COMPANY C ON (P.C_KEY_FK = C.C_KEY)
+				WHERE C.C_LEVEL = 1 AND TO_CHAR(P.PAY_DATE,'MM') = TO_CHAR(OP.PAY_DATE,'MM')), 0) AS LEVEL1,
+		NVL((SELECT SUM(PAY_MILEAGE)
+				FROM PAYMENT P
+				JOIN COMPANY C ON (P.C_KEY_FK = C.C_KEY)
+				WHERE C.C_LEVEL = 2 AND TO_CHAR(P.PAY_DATE,'MM') = TO_CHAR(OP.PAY_DATE,'MM')), 0) AS LEVEL2,
+		NVL((SELECT SUM(PAY_MILEAGE)
+				FROM PAYMENT P
+				JOIN COMPANY C ON (P.C_KEY_FK = C.C_KEY)
+				WHERE C.C_LEVEL = 3 AND TO_CHAR(P.PAY_DATE,'MM') = TO_CHAR(OP.PAY_DATE,'MM')), 0) AS LEVEL3
+		FROM PAYMENT OP
+		GROUP BY TO_CHAR(OP.PAY_DATE,'MM')
+		ORDER BY TO_CHAR(OP.PAY_DATE,'MM')
+	</select>
+	
+	<select id="selectAllCount" resultType="PaymentVo">
+		SELECT COUNT(*) AS "COUNT"
+		FROM PAYMENT
+	</select>
+	
+	<select id="selectCompanyPaymentList" resultType="Company">
+		SELECT C_LEVEL, C_NAME, C_OWNER, PAY_DATE, PAY_MILEAGE, PAY_VOUCHER
+		FROM COMPANY
+		JOIN PAYMENT ON (C_KEY = C_KEY_FK)
+	</select>
 
 </mapper>
