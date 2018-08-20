@@ -180,16 +180,17 @@ desired effect
 															</table>
 														</td>
 														<td>
-															<div class="sign_condition" id="sign_condition">
-															</div>
+															<div class="sign_condition" id="sign_condition"></div>
 
 															<div class="sign_condition">
 																<span class="sign_type1_inline"><span
 																	class="sign_tit_wrap"><span class="sign_tit"><strong>신청</strong></span></span>
 																	<!--  --> <span class="sign_member_wrap"
 																	id="activity_15162"><span class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank"><c:out value="${sessionScope.user.job}"></c:out></span></span><span
-																			class="sign_wrap"><span class="sign_name"><c:out value="${sessionScope.user.eName}"></c:out></span></span><span
+																			class="sign_rank_wrap"><span class="sign_rank"><c:out
+																						value="${sessionScope.user.job}"></c:out></span></span><span
+																			class="sign_wrap"><span class="sign_name"><c:out
+																						value="${sessionScope.user.eName}"></c:out></span></span><span
 																			class="sign_date_wrap"><span
 																				class="sign_date " id="date_15162"></span></span></span></span></span>
 															</div>
@@ -254,45 +255,6 @@ desired effect
 											</table>
 										</span>
 
-										<script>
-											$(document)
-													.ready(
-															function() {
-																var fileTarget = $('.form-group .upload-hidden');
-																fileTarget
-																		.on(
-																				'change',
-																				function() { // 값이 변경되면 
-																					var filenames = "";
-																					if (window.FileReader) { // modern browser 
-
-																						for (var i = 0; i < $(this)[0].files.length; i++) {
-																							var file = $(this)[0].files[i];
-																							filenames += $(this)[0].files[i].name
-																									+ "&nbsp<i class='fa fa-remove'></i><br>";
-																							console
-																									.log(filenames);
-																						}
-																					} else { // old IE
-																						var filename = $(
-																								this)
-																								.val()
-																								.split(
-																										'/')
-																								.pop()
-																								.split(
-																										'\\')
-																								.pop(); // 파일명만 추출
-																					}
-																					// 추출한 파일명 삽입 
-																					$(
-																							'.file-list')
-																							.html(
-																									filenames);
-																				});
-															});
-										</script>
-
 										<div class="form-group" style="height: 100px;">
 											<div style="float: left; height: 100px; width: 130px;">
 												<div class="btn btn-default btn-file">
@@ -304,7 +266,9 @@ desired effect
 											</div>
 											<div class="file-list"></div>
 										</div>
-										<button onclick="insertApproval();">작성</button>
+										<button class="btn btn-primary">
+											<i class="fa fa-edit"></i>작성
+										</button>
 									</form>
 								</div>
 

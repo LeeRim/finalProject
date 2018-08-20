@@ -10,6 +10,7 @@ import com.jdl.css.approval.model.dao.ApprovalDao;
 import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
+import com.jdl.css.approval.model.vo.OrderFormVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Service
@@ -117,6 +118,11 @@ public class ApprovalService {
 			result+=dao.insertApprovers(acList.get(i));
 		}
 		return result;
+	}
+
+	public int insertOrderForm(OrderFormVo order) {
+		// TODO Auto-generated method stub
+		return dao.insertOrderForm(order);
 	}
 
 }

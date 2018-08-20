@@ -18,9 +18,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <link rel="stylesheet" href="resources/dist/css/approval.css">
 
 <script>
-function openSelectApprover(){
-	$('div.modal').modal();
-}
+	function writeOrderForm() {
+		$("#form").submit();
+	}
+
+	function validate() {
+		//console.log($("#orderList").children());
+		var count = 0;
+		//for (var i = 1; i < 6; i++) {
+		for (var j = 1; j < 8; j++) {
+			if ($("#orderList").children().eq(1).children().eq(j).children().val() != "") {
+				count+=1;
+				console.log(count);				
+			}
+		}
+		if(count!=0){
+			console.log($("#orderList").children().eq(1).children().eq(0).children().val()+"번째 물품의 ");
+		}
+		//}
+		return false;
+	}
+
+	function openSelectApprover() {
+		$('div.modal').modal();
+	}
+
+	$(function() {
+		$('#oLimit, #oDate, #oStartdate, #oEnddate, #oPayend').datepicker({
+			format : "yyyy/mm/dd",
+			language : "kr",
+			autoclose : true
+		});
+	});
 </script>
 </head>
 <!--
@@ -81,12 +110,15 @@ desired effect
 						<!--전자결재 내용-->
 						<div class="approval_import ie9-scroll-fix">
 							<!-- 문서 내용 표시 테스트 -->
-							<form id="document_content" class="form_doc_editor editor_view"
-								onsubmit="return false;">
+							<form id="form" class="form_doc_editor editor_view"
+								action="writeOrderForm.do" method="post"
+								enctype="multipart/form-data" onsubmit="return validate();">
+								<input type="hidden" id="appStr" name="appStr" value="">
+								<input type="hidden" id="insteads" name="insteads" value="">
 								<span><span
-									style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
 										<!-- default copy start --> <span
-										style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+										style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
 
 											<table
 												style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
@@ -164,16 +196,17 @@ desired effect
 																</tbody>
 															</table></td>
 														<td>
-															<div class="sign_condition" id="sign_condition">
-															</div>
+															<div class="sign_condition" id="sign_condition"></div>
 
 															<div class="sign_condition">
 																<span class="sign_type1_inline"><span
 																	class="sign_tit_wrap"><span class="sign_tit"><strong>신청</strong></span></span>
 																	<!--  --> <span class="sign_member_wrap"
 																	id="activity_15162"><span class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank"><c:out value="${sessionScope.user.job}"></c:out></span></span><span
-																			class="sign_wrap"><span class="sign_name"><c:out value="${sessionScope.user.eName}"></c:out></span></span><span
+																			class="sign_rank_wrap"><span class="sign_rank"><c:out
+																						value="${sessionScope.user.job}"></c:out></span></span><span
+																			class="sign_wrap"><span class="sign_name"><c:out
+																						value="${sessionScope.user.eName}"></c:out></span></span><span
 																			class="sign_date_wrap"><span
 																				class="sign_date " id="date_15162"></span></span></span></span></span>
 															</div>
@@ -324,7 +357,7 @@ desired effect
 
 
 										<table
-											style="border-bottom: 2px solid black; border-left: 2px solid black; width: 800px; border-collapse: collapse; font-family: &amp; amp; quot; malgun gothic&amp;amp; quot; , dotum , arial, tahoma; border-right: 2px solid black; height: 453.636px;">
+											style="border-bottom: 2px solid black; border-left: 2px solid black; width: 800px; border-collapse: collapse; font-family: &amp; amp; amp; amp; amp; amp; amp; amp; quot; malgun gothic&amp;amp; amp; amp; amp; amp; amp; amp; quot; , dotum , arial, tahoma; border-right: 2px solid black; height: 453.636px;">
 											<colgroup>
 												<col width="40">
 												<col width="300">
@@ -337,7 +370,7 @@ desired effect
 												<col>
 											</colgroup>
 
-											<tbody>
+											<tbody id="orderList">
 												<tr>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(221, 221, 221); height: 18px; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: bold; border-right: black 1px solid; padding-top: 5px">
@@ -376,44 +409,43 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
 
-														1</td>
-													<td
-														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_16" id="editorForm_16" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
+														<input type="hidden" id="olCulno1" name="olCulno"
+														value="1"> 1
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_17" id="editorForm_17" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olProduct" id="olProduct1" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_18" id="editorForm_18" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olSize" id="olSize1" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion1" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_19"
-														id="editorForm_19" value="" data-id="" data-name=""
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount1" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_20"
-														id="editorForm_20" value="" data-autotype="false"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice1" value="" data-autotype="false"
 														data-value="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
 														placeholder="" style="text-align: right;"><br>
@@ -421,127 +453,60 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_21"
-														id="editorForm_21" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice1"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_22" id="editorForm_22" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-												</tr>
-												<tr>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: center; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 32.9091px;">
-
-														2</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 32.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_23" id="editorForm_23" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 32.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_24" id="editorForm_24" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 32.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_25" id="editorForm_25" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 32.9091px;"><input
-														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_26"
-														id="editorForm_26" value="" data-id="" data-name=""
+														name="olEtc" id="olEtc1" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 32.9091px;"><input
-														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_27"
-														id="editorForm_27" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 32.9091px;"><input
-														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_28"
-														id="editorForm_28" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 32.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_29" id="editorForm_29" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
 												</tr>
 												<tr>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
 
-														3</td>
-													<td
-														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_30" id="editorForm_30" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
+														<input type="hidden" id="olCulno2" name="olCulno"
+														value="2"> 2
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_31" id="editorForm_31" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olProduct" id="olProduct2" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_32" id="editorForm_32" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olSize" id="olSize2" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion2" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_33"
-														id="editorForm_33" value="" data-id="" data-name=""
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount2" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_34"
-														id="editorForm_34" value="" data-autotype="false"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice2" value="" data-autotype="false"
 														data-value="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
 														placeholder="" style="text-align: right;"><br>
@@ -549,63 +514,60 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_35"
-														id="editorForm_35" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice2"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_36" id="editorForm_36" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olEtc" id="olEtc2" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
 												</tr>
 												<tr>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
 
-														4</td>
-													<td
-														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_37" id="editorForm_37" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
+														<input type="hidden" id="olCulno3" name="olCulno"
+														value="3"> 3
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_38" id="editorForm_38" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olProduct" id="olProduct3" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_39" id="editorForm_39" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olSize" id="olSize3" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion3" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_40"
-														id="editorForm_40" value="" data-id="" data-name=""
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount3" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_41"
-														id="editorForm_41" value="" data-autotype="false"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice3" value="" data-autotype="false"
 														data-value="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
 														placeholder="" style="text-align: right;"><br>
@@ -613,191 +575,60 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_42"
-														id="editorForm_42" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice3"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_43" id="editorForm_43" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-												</tr>
-												<tr>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: center; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 31.9091px;">
-
-														5</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 31.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_44" id="editorForm_44" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 31.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_45" id="editorForm_45" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 31.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_46" id="editorForm_46" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 31.9091px;"><input
-														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_47"
-														id="editorForm_47" value="" data-id="" data-name=""
+														name="olEtc" id="olEtc3" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 31.9091px;"><input
-														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_48"
-														id="editorForm_48" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 31.9091px;"><input
-														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_49"
-														id="editorForm_49" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 31.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_50" id="editorForm_50" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-												</tr>
-												<tr>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: center; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 27.9091px;">
-
-														6</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 27.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_51" id="editorForm_51" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 27.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_52" id="editorForm_52" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 27.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_53" id="editorForm_53" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 27.9091px;"><input
-														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_54"
-														id="editorForm_54" value="" data-id="" data-name=""
-														data-require="false" data-maxlength="" data-width=""
-														data-defaultstr="" data-editable="false" data-value=""
-														placeholder=""><br></td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 27.9091px;"><input
-														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_55"
-														id="editorForm_55" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 27.9091px;"><input
-														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_56"
-														id="editorForm_56" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
-													<td
-														style="border-width: 1px; border-style: solid; border-color: black; text-align: left; padding: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; height: 27.9091px;"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_57" id="editorForm_57" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
 												</tr>
 												<tr>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
 
-														7</td>
-													<td
-														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_58" id="editorForm_58" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
+														<input type="hidden" id="olCulno4" name="olCulno"
+														value="4"> 4
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_59" id="editorForm_59" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olProduct" id="olProduct4" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_60" id="editorForm_60" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olSize" id="olSize4" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion4" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_61"
-														id="editorForm_61" value="" data-id="" data-name=""
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount4" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_62"
-														id="editorForm_62" value="" data-autotype="false"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice4" value="" data-autotype="false"
 														data-value="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
 														placeholder="" style="text-align: right;"><br>
@@ -805,63 +636,60 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_63"
-														id="editorForm_63" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice4"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_64" id="editorForm_64" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olEtc" id="olEtc4" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
 												</tr>
 												<tr>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
 
-														8</td>
-													<td
-														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_65" id="editorForm_65" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
+														<input type="hidden" id="olCulno5" name="olCulno"
+														value="5"> 5
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_66" id="editorForm_66" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olProduct" id="olProduct5" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_67" id="editorForm_67" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olSize" id="olSize5" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion5" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_68"
-														id="editorForm_68" value="" data-id="" data-name=""
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount5" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_69"
-														id="editorForm_69" value="" data-autotype="false"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice5" value="" data-autotype="false"
 														data-value="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
 														placeholder="" style="text-align: right;"><br>
@@ -869,63 +697,60 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_70"
-														id="editorForm_70" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice5"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_71" id="editorForm_71" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olEtc" id="olEtc5" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
 												</tr>
 												<tr>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
 
-														9</td>
-													<td
-														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_72" id="editorForm_72" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
+														<input type="hidden" id="olCulno" name="olCulno" value="6">
+														6
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_73" id="editorForm_73" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olProduct" id="olProduct" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_74" id="editorForm_74" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olSize" id="olSize" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_75"
-														id="editorForm_75" value="" data-id="" data-name=""
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_76"
-														id="editorForm_76" value="" data-autotype="false"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice" value="" data-autotype="false"
 														data-value="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
 														placeholder="" style="text-align: right;"><br>
@@ -933,63 +758,60 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_77"
-														id="editorForm_77" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_78" id="editorForm_78" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olEtc" id="olEtc" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
 												</tr>
 												<tr>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
 
-														10</td>
-													<td
-														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_79" id="editorForm_79" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
+														<input type="hidden" id="olCulno" name="olCulno" value="7">
+														7
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_80" id="editorForm_80" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olProduct" id="olProduct" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_81" id="editorForm_81" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olSize" id="olSize" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_82"
-														id="editorForm_82" value="" data-id="" data-name=""
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_83"
-														id="editorForm_83" value="" data-autotype="false"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice" value="" data-autotype="false"
 														data-value="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
 														placeholder="" style="text-align: right;"><br>
@@ -997,63 +819,60 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_84"
-														id="editorForm_84" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_85" id="editorForm_85" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olEtc" id="olEtc" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
 												</tr>
 												<tr>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
 
-														11</td>
-													<td
-														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_86" id="editorForm_86" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
+														<input type="hidden" id="olCulno" name="olCulno" value="8">
+														8
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_87" id="editorForm_87" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olProduct" id="olProduct" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_88" id="editorForm_88" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olSize" id="olSize" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_89"
-														id="editorForm_89" value="" data-id="" data-name=""
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_90"
-														id="editorForm_90" value="" data-autotype="false"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice" value="" data-autotype="false"
 														data-value="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
 														placeholder="" style="text-align: right;"><br>
@@ -1061,63 +880,60 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_91"
-														id="editorForm_91" value="" data-autotype="false"
-														data-value="" data-require="false" data-maxlength=""
-														data-width="" data-defaultstr="" data-editable="false"
-														placeholder="" style="text-align: right;"><br>
-													</td>
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_92" id="editorForm_92" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olEtc" id="olEtc" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
 												</tr>
 												<tr>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
 
-														12</td>
-													<td
-														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
-														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_93" id="editorForm_93" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
+														<input type="hidden" id="olCulno" name="olCulno" value="9">
+														9
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_94" id="editorForm_94" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olProduct" id="olProduct" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_95" id="editorForm_95" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olSize" id="olSize" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_num"
-														data-dsl="{{number}}" name="editorForm_96"
-														id="editorForm_96" value="" data-id="" data-name=""
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount" value="" data-id="" data-name=""
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
 														placeholder=""><br></td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_97"
-														id="editorForm_97" value="" data-autotype="false"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice" value="" data-autotype="false"
 														data-value="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
 														placeholder="" style="text-align: right;"><br>
@@ -1125,38 +941,233 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor ipt_editor_currency"
-														data-dsl="{{currency_0}}" name="editorForm_98"
-														id="editorForm_98" value="" data-autotype="false"
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olEtc" id="olEtc" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+												</tr>
+												<tr>
+													<td
+														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
+
+														<input type="hidden" id="olCulno" name="olCulno"
+														value="10"> 10
+													</td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olProduct" id="olProduct" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olSize" id="olSize" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor ipt_editor_num"
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor ipt_editor_currency"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice" value="" data-autotype="false"
 														data-value="" data-require="false" data-maxlength=""
 														data-width="" data-defaultstr="" data-editable="false"
 														placeholder="" style="text-align: right;"><br>
 													</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor ipt_editor_currency"
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
 														type="text" class="ipt_editor" data-dsl="{{text}}"
-														name="editorForm_99" id="editorForm_99" value=""
-														data-id="" data-name="" data-require="false"
-														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br>
-													</td>
+														name="olEtc" id="olEtc" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
 												</tr>
+												<tr>
+													<td
+														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
+
+														<input type="hidden" id="olCulno" name="olCulno"
+														value="11"> 11
+													</td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olProduct" id="olProduct" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olSize" id="olSize" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor ipt_editor_num"
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor ipt_editor_currency"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice" value="" data-autotype="false"
+														data-value="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														placeholder="" style="text-align: right;"><br>
+													</td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor ipt_editor_currency"
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olEtc" id="olEtc" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+												</tr>
+												<tr>
+													<td
+														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px">
+
+														<input type="hidden" id="olCulno" name="olCulno"
+														value="12"> 12
+													</td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olProduct" id="olProduct" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olSize" id="olSize" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olUnion" id="olUnion" value="" data-id=""
+														data-name="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														data-value="" placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor ipt_editor_num"
+														data-dsl="{{number}}" name="olProductcount"
+														id="olProductcount" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor ipt_editor_currency"
+														data-dsl="{{currency_0}}" name="olOrizinprice"
+														id="olOrizinprice" value="" data-autotype="false"
+														data-value="" data-require="false" data-maxlength=""
+														data-width="" data-defaultstr="" data-editable="false"
+														placeholder="" style="text-align: right;"><br>
+													</td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor ipt_editor_currency"
+														data-dsl="{{currency_0}}" name="olPrice" id="olPrice"
+														value="" data-autotype="false" data-value=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" placeholder=""
+														style="text-align: right;"><br></td>
+													<td
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><input
+														type="text" class="ipt_editor" data-dsl="{{text}}"
+														name="olEtc" id="olEtc" value="" data-id="" data-name=""
+														data-require="false" data-maxlength="" data-width=""
+														data-defaultstr="" data-editable="false" data-value=""
+														placeholder=""><br></td>
+												</tr>
+
 												<tr>
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"
 														colspan="8"><p
-															style="margin: 0px 0px 10px; font-family: &amp; amp; quot; malgun gothic&amp;amp; quot; , dotum , arial, tahoma; font-size: 9pt; line-height: 18px;">※
+															style="margin: 0px 0px 10px; font-family: &amp; amp; amp; amp; amp; amp; amp; amp; quot; malgun gothic&amp;amp; amp; amp; amp; amp; amp; amp; quot; , dotum , arial, tahoma; font-size: 9pt; line-height: 18px;">※
 															특기사항</p> <textarea class="txta_editor"
-															data-dsl="{{textarea}}" name="editorForm_100"
-															id="editorForm_100" value="" data-id="" data-name=""
-															data-require="false" data-maxlength="" data-width=""
-															data-defaultstr="" data-editable="false" data-value=""
-															placeholder=""></textarea><br></td>
+															data-dsl="{{textarea}}" name="aContent" id="aContent"
+															value="" data-id="" data-name="" data-require="false"
+															data-maxlength="" data-width="" data-defaultstr=""
+															data-editable="false" data-value="" placeholder=""></textarea><br></td>
 												</tr>
 											</tbody>
 										</table>
-								</span>
-									<p
-										style="font-family: &amp; amp; quot; 맑은 고딕&amp;amp; quot;; font-size: 10pt; line-height: 20px; margin-top: 0px; margin-bottom: 0px;">&nbsp;</p></span>
+								</span> </span>
+
+								<div class="form-group" style="height: 100px;">
+									<div style="float: left; height: 100px; width: 130px;">
+										<div class="btn btn-default btn-file">
+											<i class="fa fa-paperclip"></i> Attachment <input
+												multiple="multiple" type="file" name="files"
+												class="upload-hidden">
+										</div>
+										<p class="help-block">Max. 32MB</p>
+									</div>
+									<div class="file-list"></div>
+								</div>
+								<div class="btn btn-primary" onclick="writeOrderForm();">
+									<i class="fa fa-edit"></i>작성
+								</div>
+
 							</form>
 						</div>
 
@@ -1171,7 +1182,7 @@ desired effect
 	</div>
 
 
-	<c:import url="../selectApproverPage.jsp"/>
+	<c:import url="../selectApproverPage.jsp" />
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

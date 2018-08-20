@@ -21,6 +21,7 @@ import com.jdl.css.approval.model.service.ApprovalService;
 import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
+import com.jdl.css.approval.model.vo.OrderFormVo;
 import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.service.EmployeeService;
@@ -43,6 +44,8 @@ public class ApprovalController {
 	public String openApprovalPage() {
 		return "approval/approvalPage";
 	}
+
+	// 좌측메뉴
 
 	@RequestMapping("draftedPage.do")
 	public ModelAndView openDraftedPage(HttpSession session, ModelAndView mv) {
@@ -93,6 +96,8 @@ public class ApprovalController {
 		mv.setViewName("approval/expectedPage");
 		return mv;
 	}
+
+	// 문서작성폼이동
 
 	@RequestMapping("jobPropsalPage.do")
 	public String openJobPropsalPage(HttpSession session, Model model) {
@@ -212,6 +217,7 @@ public class ApprovalController {
 	 * return "approval/selectApproverPage"; }
 	 */
 
+	// 결재자칸 추가
 	@RequestMapping("addApproversTable.do")
 	public @ResponseBody List<EmployeeVo> addApproversTable(String appStr) {
 		// System.out.println(appStr);
@@ -222,6 +228,8 @@ public class ApprovalController {
 		}
 		return eService.selectEmployeeListByKeyStr(appKeyArr);
 	}
+
+	// 문서작성
 
 	@RequestMapping("writeJobPropsal.do")
 	public String writeJobPropsal(ApprovalVo app, JobPropsalVo jobp, @RequestParam("appStr") List<Integer> appStr,
@@ -306,8 +314,104 @@ public class ApprovalController {
 
 		int attachResult = attService.insertAttachments(attachList);
 		// System.out.println(attachResult);
+		return "redirect:openJobPropsalDetail.do?aKey=" + app.getaKey();
+	}
+
+	@RequestMapping("writeOrderForm.do")
+	public String writeOrderForm(ApprovalVo app, OrderFormVo order, @RequestParam("appStr") List<Integer> appStr,
+			@RequestParam("insteads") List<Integer> insteads, @RequestParam("files") MultipartFile[] files,
+			String olCulno, String olProduct, String olSize, String olUnion, String olProductcount,
+			String olOrizinprice, String olPrice, String olEtc, HttpSession session, HttpServletRequest request) {
+
+		app.setaWriterFk(((EmployeeVo) session.getAttribute("user")).geteKey());
+		app.setcKeyFk(((EmployeeVo) session.getAttribute("user")).getcKeyFk());
+		app.setDivDoctypeFk(2);
+
+		System.out.println("app / " + app);
+		System.out.println("order / " + order);
+
+		//int addAResult = aService.insertApproval(app);
+		// System.out.println("aKey : "+app.getaKey());
+
+		List<ApprovalConditionVo> acList = new ArrayList<ApprovalConditionVo>();
+		for (int i = 0; i < appStr.size(); i++) {
+			ApprovalConditionVo ac = new ApprovalConditionVo();
+			ac.setaKeyFk(app.getaKey());
+			ac.setAcApproverFk(appStr.get(i));
+			acList.add(ac);
+		}
+		for (int i = 0; i < insteads.size(); i++) {
+			ApprovalConditionVo ac = new ApprovalConditionVo();
+			ac.setaKeyFk(app.getaKey());
+			ac.setAcApproverFk(insteads.get(i));
+			ac.setAcApprovalType("5");
+			acList.add(ac);
+		}
+
+		//int addAppResult = aService.insertApprovers(acList);
+		// System.out.println(addAppResult);
+
+		order.setaKeyFk(app.getaKey());
+		//int addOrderFormResult = aService.insertOrderForm(order);
+		
+		
+		
+		
+		String[] arr = olCulno.split(",");
+		System.out.println("olProduct" + arr.length);
+
+		
+		
+		
+		
+		List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
+
+		String root = request.getSession().getServletContext().getRealPath("resources");
+
+		String path = root + "\\upload\\approval"; // spring에서는 경로가 '/'아니라 '\\'로
+													// 경로를 나타냄
+		String filePath = "";
+
+		File folder = new File(path);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		MultipartFile file = null;
+		for (int i = 0; i < files.length; i++) {
+			if (!files[i].getOriginalFilename().equals("")) {
+				AttachmentVo attach = new AttachmentVo();
+				file = files[i];
+				// System.out.println("files.length : " + files.length);
+				// System.out.println(file.getOriginalFilename());
+				// System.out.println("folder : " + folder);
+				filePath = folder + "\\" + file.getOriginalFilename();
+
+				// System.out.println("filePath : " + filePath);
+				try {
+					file.transferTo(new File(filePath));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				// System.out.println("file 명 = "+file.getOriginalFilename());
+				attach.setAttaFileName(file.getOriginalFilename());
+				attach.setAttaFilePath("approval");
+				attach.setAttaLocation(app.getaKey());
+				attachList.add(attach);
+			}
+		}
+
+		// System.out.println(attachList);
+
+		int attachResult = attService.insertAttachments(attachList);
+		// System.out.println(attachResult);
+
 		return "approval/approvalPage";
 	}
+
+	// 문서디테일열람
 
 	@RequestMapping("openJobPropsalDetail.do")
 	public ModelAndView openJobPropsalDetail(ModelAndView mv, ApprovalVo a) {
@@ -321,11 +425,12 @@ public class ApprovalController {
 		return mv;
 	}
 
+	// 결재하기
 	@RequestMapping("updateApprovalCondition.do")
 	public String updateApprovalCondition(HttpSession session, int doctype, int aKey, int acKey, String approvalType,
 			int condition) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
-		
+
 		String result = "";
 		switch (doctype) {
 		case 1:
@@ -344,7 +449,7 @@ public class ApprovalController {
 			result = "redirect:openJobPropsalDetail.do?aKey=" + aKey;
 			break;
 		}
-		
+
 		ApprovalConditionVo last = aService.selectLastApprover(aKey);
 
 		ApprovalConditionVo ac = new ApprovalConditionVo();

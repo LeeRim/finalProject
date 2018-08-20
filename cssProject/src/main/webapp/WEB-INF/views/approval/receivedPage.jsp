@@ -190,7 +190,7 @@ desired effect
 										
 										<c:forEach var="approval" items="${allList }">
 										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
-											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
+											<td><p style="visibility: hidden; height:15px;"><c:out value="${9999999-approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
 											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
@@ -262,8 +262,8 @@ desired effect
 										</tr>
 										
 										<c:forEach var="approval" items="${ingList }">
-										<tr>
-											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
+										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
+											<td><p style="visibility: hidden; height:15px;"><c:out value="${9999999-approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
 											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
@@ -327,8 +327,8 @@ desired effect
 										</tr>
 										
 										<c:forEach var="approval" items="${complList }">
-										<tr>
-											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
+										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
+											<td><p style="visibility: hidden; height:15px;"><c:out value="${9999999-approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
 											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
@@ -392,8 +392,8 @@ desired effect
 										</tr>
 										
 										<c:forEach var="approval" items="${compaList }">
-										<tr>
-											<td><p style="visibility: hidden; height:15px;"><c:out value="${approval.aKey }"></c:out></p></td>
+										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
+											<td><p style="visibility: hidden; height:15px;"><c:out value="${9999999-approval.aKey }"></c:out></p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
 											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>

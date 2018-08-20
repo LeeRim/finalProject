@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
+import com.jdl.css.approval.model.vo.OrderFormVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Repository
@@ -114,6 +115,11 @@ public class ApprovalDao {
 	public List<ApprovalConditionVo> selectIngAcList(int aKey) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("ApprovalMapper.selectIngAcList", aKey);
+	}
+
+	public int insertOrderForm(OrderFormVo order) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("ApprovalMapper.insertOrderForm", order);
 	}
 
 }
