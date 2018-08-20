@@ -412,6 +412,11 @@
 		SEQ_JOB_PROPSAL.NEXTVAL,#{aKeyFk},#{jpWorkingDate},#{jpCooperation}
 		)
 	</insert>
+	
+	<insert id="insertVacation" parameterType="VacationFormVo">
+		INSERT INTO VACATION_FORM
+		VALUES(SEQ_VACATION_FORM.NEXTVAL,#{aKeyFk},#{vfType},#{vfStartdate},#{vfEnddate},#{vfHalfflag},#{vfReason})
+	</insert>
 
 	<select id="selectApprovalDetail" resultMap="approvalMap"
 		parameterType="ApprovalVo">
@@ -605,6 +610,12 @@
 		JP_COOPERATION
 		FROM JOB_PROPSAL
 		WHERE A_KEY_FK=#{aKey}
+	</select>
+	
+	<select id="selectVacationForm" parameterType="int" resultType="VacationFormVo">
+		SELECT VF_KEY, A_KEY_FK, VF_TYPE, VF_STARTDATE, VF_ENDDATE, VF_HALFFLAG, VF_REASON
+		FROM VACATION_FORM
+		WHERE A_KEY_FK = #{aKey}
 	</select>
 
 	<update id="updateApprovalCondition" parameterType="AppConVo">

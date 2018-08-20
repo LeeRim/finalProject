@@ -234,7 +234,7 @@
 			open="(" separator="," close=")">
 			#{parameter}
 		</foreach>
-		ORDER BY J.DIV_INFOLEVEL DESC,E.E_NAME
+		ORDER BY J.DIV_INFOLEVEL DESC,E.E_NAME DESC
 	</select>
 
 	<!-- 조직도 select 사원정보 팝업창 출력 쿼리문 -->
