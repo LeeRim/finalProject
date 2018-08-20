@@ -40,7 +40,7 @@
 	</select>
 	
 	<insert id="WriteBoard" parameterType="Border">
-		INSERT INTO BOARD VALUES (BOARD_SEQ.NEXTVAL, #{companyKey}, #{bTitle}, #{bContent}, #{bWriter}, 0, SYSDATE, #{bCateGory})
+		INSERT INTO BOARD VALUES (SEQ_BOARD.NEXTVAL, #{companyKey}, #{bTitle}, #{bContent}, #{bWriter}, 0, SYSDATE, #{bCateGory})
 	</insert>
 	
 	<select id="BorderSelect" parameterType="int" resultMap="BorderMap">
@@ -144,9 +144,9 @@
 	</select>
 	
 	<insert id="insertBoard">
-		INSERT INTO BOARD VALUES (BOARD_SEQ.NEXTVAL, #{companyKey}, #{bTitle}, #{bContent}, #{bWriter}, 0, SYSDATE, 4)
+		INSERT INTO BOARD VALUES (SEQ_BOARD.NEXTVAL, #{companyKey}, #{bTitle}, #{bContent}, #{bWriter}, 0, SYSDATE, 4)
 		<selectKey keyProperty="boardKey" resultType="Integer" order="AFTER">
-				 SELECT BOARD_SEQ.CURRVAL FROM DUAL 
+				 SELECT SEQ_BOARD.CURRVAL FROM DUAL 
 		</selectKey>
 	</insert>
 	

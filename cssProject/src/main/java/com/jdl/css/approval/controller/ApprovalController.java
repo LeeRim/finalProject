@@ -325,7 +325,7 @@ public class ApprovalController {
 	public String updateApprovalCondition(HttpSession session, int doctype, int aKey, int acKey, String approvalType,
 			int condition) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
-
+		
 		String result = "";
 		switch (doctype) {
 		case 1:
