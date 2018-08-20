@@ -21,6 +21,7 @@ import com.jdl.css.approval.model.service.ApprovalService;
 import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
+import com.jdl.css.approval.model.vo.VacationFormVo;
 import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.service.EmployeeService;
@@ -308,6 +309,81 @@ public class ApprovalController {
 		// System.out.println(attachResult);
 		return "approval/approvalPage";
 	}
+	
+	@RequestMapping("writeVacation.do")
+	public String writeVacation(ApprovalVo app, VacationFormVo vForm, @RequestParam("appStr") List<Integer> appStr,
+			@RequestParam("insteads") List<Integer> insteads, @RequestParam("files") MultipartFile[] files,
+			HttpSession session, HttpServletRequest request) {
+
+		app.setaWriterFk(((EmployeeVo) session.getAttribute("user")).geteKey());
+		app.setcKeyFk(((EmployeeVo) session.getAttribute("user")).getcKeyFk());
+		app.setDivDoctypeFk(5);
+
+		aService.insertApproval(app);
+
+		List<ApprovalConditionVo> acList = new ArrayList<ApprovalConditionVo>();
+		for (int i = 0; i < appStr.size(); i++) {
+			ApprovalConditionVo ac = new ApprovalConditionVo();
+			ac.setaKeyFk(app.getaKey());
+			ac.setAcApproverFk(appStr.get(i));
+			acList.add(ac);
+		}
+		for (int i = 0; i < insteads.size(); i++) {
+			ApprovalConditionVo ac = new ApprovalConditionVo();
+			ac.setaKeyFk(app.getaKey());
+			ac.setAcApproverFk(insteads.get(i));
+			ac.setAcApprovalType("5");
+			acList.add(ac);
+		}
+
+		aService.insertApprovers(acList);
+		// System.out.println(addAppResult);
+
+		vForm.setaKeyFk(app.getaKey());
+		System.out.println("aKeyFk : " + vForm.getaKeyFk());
+		System.out.println("vForm : " + vForm);
+		aService.insertVacation(vForm);
+
+		List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
+
+		String root = request.getSession().getServletContext().getRealPath("resources");
+
+		String path = root + "\\upload\\approval"; // spring에서는 경로가 '/'아니라 '\\'로
+													// 경로를 나타냄
+		String filePath = "";
+
+		File folder = new File(path);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+		MultipartFile file = null;
+		for (int i = 0; i < files.length; i++) {
+			if (!files[i].getOriginalFilename().equals("")) {
+				AttachmentVo attach = new AttachmentVo();
+				file = files[i];
+				filePath = folder + "\\" + file.getOriginalFilename();
+
+				try {
+					file.transferTo(new File(filePath));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				attach.setAttaFileName(file.getOriginalFilename());
+				attach.setAttaFilePath("approval");
+				attach.setAttaLocation(app.getaKey());
+				attachList.add(attach);
+			}
+		}
+
+		// System.out.println(attachList);
+
+		attService.insertAttachments(attachList);
+		// System.out.println(attachResult);
+		return "approval/approvalPage";
+	}
 
 	@RequestMapping("openJobPropsalDetail.do")
 	public ModelAndView openJobPropsalDetail(ModelAndView mv, ApprovalVo a) {
@@ -318,6 +394,22 @@ public class ApprovalController {
 		mv.addObject("cApprover", cApprover);
 		mv.addObject("jp", jp);
 		mv.setViewName("approval/approvalForm/jobPropsalDetail");
+		return mv;
+	}
+	
+	@RequestMapping("openVacationFormDetail.do")
+	public ModelAndView openVacationFormDetail(ModelAndView mv, ApprovalVo a) {
+		a = aService.selectApprovalDetail(a);
+		//아래부분 다 수정해야함
+		//JobPropsalVo jp = aService.selectJobPropsal(a.getaKey());
+		System.out.println("vf aKey : " + a.getaKey());
+		VacationFormVo vf = aService.selectVacationForm(a.getaKey());
+		ApprovalConditionVo cApprover = aService.selectCurrentApprover(a.getaKey());
+		mv.addObject("approval", a);
+		mv.addObject("cApprover", cApprover);
+		mv.addObject("vf", vf);
+		System.out.println("vf : " + vf);
+		mv.setViewName("approval/approvalForm/vacationFormDetail");
 		return mv;
 	}
 

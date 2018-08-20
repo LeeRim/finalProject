@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
+import com.jdl.css.approval.model.vo.VacationFormVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Repository
@@ -31,6 +32,10 @@ public class ApprovalDao {
 	public int insertJobPropsal(JobPropsalVo jobp) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("ApprovalMapper.insertJobpropsal", jobp);
+	}
+	
+	public int insertVacation(VacationFormVo vForm) {
+		return sqlSession.insert("ApprovalMapper.insertVacation",vForm);
 	}
 	
 	public List<ApprovalVo> selectDraftApprovalAllList(int eKey) {
@@ -100,6 +105,10 @@ public class ApprovalDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("ApprovalMapper.selectJobPropsal", aKey);
 	}
+	
+	public VacationFormVo selectVacationForm(int aKey) {
+		return sqlSession.selectOne("ApprovalMapper.selectVacationForm",aKey);
+	}
 
 	public int updateApprovalCondition(ApprovalConditionVo ac) {
 		// TODO Auto-generated method stub
@@ -115,5 +124,9 @@ public class ApprovalDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("ApprovalMapper.selectIngAcList", aKey);
 	}
+
+	
+
+	
 
 }

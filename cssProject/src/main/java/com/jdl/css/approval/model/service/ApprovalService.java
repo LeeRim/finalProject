@@ -10,6 +10,7 @@ import com.jdl.css.approval.model.dao.ApprovalDao;
 import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
+import com.jdl.css.approval.model.vo.VacationFormVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Service
@@ -26,6 +27,10 @@ public class ApprovalService {
 	public int insertJobPropsal(JobPropsalVo jobp) {
 		// TODO Auto-generated method stub
 		return dao.insertJobPropsal(jobp);
+	}
+	
+	public int insertVacation(VacationFormVo vForm) {
+		return dao.insertVacation(vForm);
 	}
 	
 	public List<ApprovalVo> selectDraftApprovalAllList(int eKey) {
@@ -95,6 +100,10 @@ public class ApprovalService {
 		// TODO Auto-generated method stub
 		return dao.selectJobPropsal(aKey);
 	}
+	
+	public VacationFormVo selectVacationForm(int aKey) {
+		return dao.selectVacationForm(aKey);
+	}
 
 	public int updateApprovalCondition(ApprovalConditionVo ac) {
 		// TODO Auto-generated method stub
@@ -118,5 +127,10 @@ public class ApprovalService {
 		}
 		return result;
 	}
+
+	
+
+	
+
 
 }

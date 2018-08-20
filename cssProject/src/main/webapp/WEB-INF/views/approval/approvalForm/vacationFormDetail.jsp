@@ -106,7 +106,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 																	기안자</td>
 																<td
 																	style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																	<c:out value="${sessionScope.user.eName}"></c:out>
+																	<c:out value="${approval.writer.eName}"></c:out>
 																</td>
 															</tr>
 															<tr>
@@ -116,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 																	소속</td>
 																<td
 																	style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																	<c:out value="${sessionScope.user.department}"></c:out>
+																	<c:out value="${approval.writer.department}"></c:out>
 																</td>
 															</tr>
 															<tr>
@@ -125,13 +125,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 																	기안일</td>
 
-																<td
-																	style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
-																	<jsp:useBean id="currentTime" class="java.util.Date" />
-																	<fmt:formatDate value="${currentTime }"
-																		pattern="yyyy-MM-dd" var="currentTime" /> <c:out
-																		value="${currentTime }"></c:out><input type="hidden"
-																	name="aWriteDate" value="${currentTime }">
+																<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																	<c:out value="${approval.aWriteDate }"></c:out>
 																</td>
 															</tr>
 															<tr>
@@ -139,14 +134,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
 																	style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;">
 
 																	문서번호</td>
-																<td
-																	style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;"></td>
-															</tr>
+																	<td style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;">
+																			<fmt:formatNumber value="${approval.aKey}" pattern='000000'/>
+																		</td>
+																</tr>
 														</tbody>
 													</table>
 												</td>
 												<td>
 															<div class="sign_condition" id="sign_condition">
+																<span class='sign_type1_inline'> <span
+																	class='sign_tit_wrap'> <span class='sign_tit'>
+																			<strong>승인</strong>
+																	</span>
+																</span> <c:forEach items="${approval.aConList}" var="appCon">
+																		<span class='sign_member_wrap' id='activity_15162'><span
+																			class='sign_member'><span
+																				class='sign_rank_wrap'><span
+																					class='sign_rank'><c:out
+																							value="${appCon.approver.job }"></c:out></span></span><span
+																				class='sign_wrap'><span class='sign_name'><c:out value="${appCon.acType}"></c:out><br><c:out
+																							value="${appCon.condition }"></c:out>
+																						<c:out value="${appCon.approver.eName }"></c:out></span></span><span
+																				class='sign_date_wrap'><span
+																					class='sign_date ' id='date_15162'>${appCon.acApprovalDate }</span></span></span></span>
+
+																	</c:forEach>
+																</span>
 															</div>
 
 															<div class="sign_condition">
@@ -154,10 +168,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 																	class="sign_tit_wrap"><span class="sign_tit"><strong>신청</strong></span></span>
 																	<!--  --> <span class="sign_member_wrap"
 																	id="activity_15162"><span class="sign_member"><span
-																			class="sign_rank_wrap"><span class="sign_rank"><c:out value="${sessionScope.user.job}"></c:out></span></span><span
-																			class="sign_wrap"><span class="sign_name"><c:out value="${sessionScope.user.eName}"></c:out></span></span><span
+																			class="sign_rank_wrap"><span class="sign_rank"><c:out
+																						value="${approval.writer.job}"></c:out></span></span><span
+																			class="sign_wrap"><span class="sign_name"><c:out
+																						value="${approval.writer.eName}"></c:out></span></span><span
 																			class="sign_date_wrap"><span
-																				class="sign_date " id="date_15162"></span></span></span></span></span>
+																				class="sign_date " id="date_15162"><c:out
+																						value="${approval.aWriteDate }"></c:out></span></span></span></span></span>
 															</div>
 
 														</td>
@@ -172,29 +189,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<td
 													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
 
-													휴가&nbsp;종류</td>
+													휴가 종류</td>
 												<td
-													style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"><span
-													id="vacationTypeArea"
-													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; margin-top: 0px; margin-bottom: 0px;"
-													name="select"> <!-- SELECT  -->
-													 <select class="editor_slt" name="vfType">
-															<option value="연차">연차</option>
-															<option value="조퇴">조퇴</option>
-															<option value="지각">지각</option>
-															<option value="경조">경조</option>
-															<option value="공가">공가</option>
-															<option value="질병휴가">질병휴가</option>
-													</select>
-												</span></td>
+													style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;">
+													<span id="vacationTypeArea" style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; margin-top: 0px; margin-bottom: 0px;"
+													name="select"> 
+													 <c:out value="${vf.vfType }"></c:out>
+												</span>
+												</td>
 											</tr>
 											<tr>
 												<td style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
 													기간 및 일시</td>
 												<td
 													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 22px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle;">
-													<input type="text" readonly class="ipt_editor ipt_editor_date hasDatepicker" id="vfStartdate" name="vfStartdate" value="">~
-													<input type="text" readonly class="ipt_editor ipt_editor_date hasDatepicker" id="vfEnddate" name="vfEnddate" value=""> 
+													<c:out value="${vf.vfStartdate }"></c:out>~<c:out value="${vf.vfEnddate }"></c:out>
 													<span id="usingPointArea"
 													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>사용일수
 															: </b> <input type="text" class="ipt_editor ipt_editor_num"
@@ -248,8 +257,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 80px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;"><b
 													style="color: rgb(255, 0, 0);">*</b>휴가 사유</td>
 												<td
-													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 100px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: top;"><textarea
-														class="txta_editor" name="vfReason" id="vfReason" value=""></textarea></td>
+													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 100px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: top;">
+													<c:out value="${vf.vfReason }"></c:out></td>
 											</tr>
 											<tr>
 												<td
