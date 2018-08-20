@@ -279,8 +279,43 @@ var total = new Array();
 		});
 	}
 	
-</script>
+											$(document)
+													.ready(
+															function() {
+																var fileTarget = $('.form-group .upload-hidden');
+																fileTarget
+																		.on(
+																				'change',
+																				function() { // 값이 변경되면 
+																					var filenames = "";
+																					if (window.FileReader) { // modern browser 
 
+																						for (var i = 0; i < $(this)[0].files.length; i++) {
+																							var file = $(this)[0].files[i];
+																							filenames += $(this)[0].files[i].name
+																									+ "&nbsp<i class='fa fa-remove'></i><br>";
+																							console
+																									.log(filenames);
+																						}
+																					} else { // old IE
+																						var filename = $(
+																								this)
+																								.val()
+																								.split(
+																										'/')
+																								.pop()
+																								.split(
+																										'\\')
+																								.pop(); // 파일명만 추출
+																					}
+																					// 추출한 파일명 삽입 
+																					$(
+																							'.file-list')
+																							.html(
+																									filenames);
+																				});
+															});
+										</script>
 
 <!-- 팝업 모달영역 -->
 <div class="modal fade" id="layerpop" style="text-align: center;">

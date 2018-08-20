@@ -35,7 +35,7 @@
 			<result property="eEntYn" column="E_ENT_YN" />
 			<result property="ePhoto" column="E_PHOTO" />
 			<result property="job" column="JOB" />
-			<result property="divInfolevel" column="DIV_INFOLEVEL"/>
+			<result property="divInfolevel" column="DIV_INFOLEVEL" />
 			<result property="department" column="DEPARTMENT" />
 		</association>
 		<collection property="aConList" column="A_KEY" ofType="AppConVo"
@@ -71,7 +71,7 @@
 			<result property="eEntYn" column="E_ENT_YN" />
 			<result property="ePhoto" column="E_PHOTO" />
 			<result property="job" column="JOB" />
-			<result property="divInfolevel" column="DIV_INFOLEVEL"/>
+			<result property="divInfolevel" column="DIV_INFOLEVEL" />
 			<result property="department" column="DEPARTMENT" />
 		</association>
 	</resultMap>
@@ -389,6 +389,7 @@
 		AC.AC_APPROVER_FK =#{eKey} AND AC.AC_CONDITION=0
 	</select>
 
+
 	<insert id="insertApproval" parameterType="ApprovalVo">
 		INSERT INTO APPROVAL VALUES (
 		SEQ_APPROVAL.NEXTVAL,#{cKeyFk},#{divDoctypeFk},#{aTitle},#{aContent},#{aWriterFk},SYSDATE,null,0
@@ -418,6 +419,7 @@
 		VALUES(SEQ_VACATION_FORM.NEXTVAL,#{aKeyFk},#{vfType},#{vfStartdate},#{vfEnddate},#{vfHalfflag},#{vfReason})
 	</insert>
 
+
 	<select id="selectApprovalDetail" resultMap="approvalMap"
 		parameterType="ApprovalVo">
 		SELECT A.A_KEY A_KEY,
@@ -440,7 +442,8 @@
 		AC.AC_APPROVAL_TYPE,
 		TO_CHAR(AC_APPROVAL_DATE,'YYYY-MM-DD')
 		AC_APPROVAL_DATE,
-		E.E_NAME E_NAME,
+		E.E_NAME
+		E_NAME,
 		DIV.DIV_INFO JOB,
 		DIV2.DIV_INFO
 		DEPARTMENT,
@@ -457,11 +460,14 @@
 		ATTA.ATTA_FILEPATH ATTA_FILEPATH,
 		ATTA.ATTA_FILESIZE
 		ATTA_FILESIZE
-		FROM APPROVAL A
+		FROM
+		APPROVAL A
 		JOIN APPROVAL_CONDITION AC ON
 		(A.A_KEY=AC.A_KEY_FK)
-		JOIN EMPLOYEE E ON (AC.AC_APPROVER_FK=E.E_KEY)
-		JOIN EMPLOYEE E2 ON (A.A_WRITER_FK=E2.E_KEY)
+		JOIN
+		EMPLOYEE E ON (AC.AC_APPROVER_FK=E.E_KEY)
+		JOIN EMPLOYEE E2 ON
+		(A.A_WRITER_FK=E2.E_KEY)
 		LEFT JOIN DIVISION DIV ON
 		(E.E_JOBCODE_FK=DIV.DIV_KEY)
 		LEFT JOIN DIVISION DIV2 ON
@@ -527,7 +533,8 @@
 		(E.E_JOBCODE_FK=DIV.DIV_KEY)
 		JOIN DIVISION DIV2 ON
 		(E.E_DEPART_FK=DIV2.DIV_KEY)
-		WHERE A_KEY_FK =#{aKeyFk} AND AC_CONDITION=0)
+		WHERE A_KEY_FK =#{aKeyFk} AND
+		AC_CONDITION=0)
 		ORDER BY DIV_INFOLEVEL DESC,E_NAME)
 		WHERE ROWNUM =1
 	</select>
@@ -577,7 +584,8 @@
 		(E.E_JOBCODE_FK=DIV.DIV_KEY)
 		JOIN DIVISION DIV2 ON
 		(E.E_DEPART_FK=DIV2.DIV_KEY)
-		WHERE A_KEY_FK =#{aKeyFk} AND AC_CONDITION=0)
+		WHERE A_KEY_FK =#{aKeyFk} AND
+		AC_CONDITION=0)
 		ORDER BY DIV_INFOLEVEL,E_NAME)
 		WHERE ROWNUM =1
 	</select>
@@ -585,9 +593,11 @@
 	<select id="selectIngAcList" parameterType="int" resultMap="appConMap">
 		SELECT AC.AC_KEY AC_KEY,
 		AC.A_KEY_FK A_KEY_FK,
-		AC.AC_APPROVER_FK AC_APPROVER_FK,
+		AC.AC_APPROVER_FK
+		AC_APPROVER_FK,
 		AC.AC_CONDITION AC_CONDITION,
-		AC.AC_APPROVAL_TYPE AC_APPROVAL_TYPE,
+		AC.AC_APPROVAL_TYPE
+		AC_APPROVAL_TYPE,
 		AC.AC_APPROVAL_DATE AC_APPROVAL_DATE,
 		E.E_KEY E_KEY,
 		E.E_NAME E_NAME,
@@ -595,8 +605,10 @@
 		J.DIV_INFOLEVEL DIV_INFOLEVEL,
 		D.DIV_INFO DEPARTMENT
 		FROM APPROVAL_CONDITION AC
-		JOIN EMPLOYEE E ON (AC.AC_APPROVER_FK=E.E_KEY)
-		JOIN DIVISION J ON (E.E_JOBCODE_FK=J.DIV_KEY)
+		JOIN EMPLOYEE E ON
+		(AC.AC_APPROVER_FK=E.E_KEY)
+		JOIN DIVISION J ON
+		(E.E_JOBCODE_FK=J.DIV_KEY)
 		JOIN DIVISION D ON (E.E_DEPART_FK=D.DIV_KEY)
 		WHERE A_KEY_FK=#{aKey} AND
 		AC_CONDITION=0
@@ -630,4 +642,42 @@
 		A_CONDITION=#{aCondition}, A_COMPLETE_DATE=SYSDATE WHERE
 		A_KEY=#{aKey}
 	</update>
+
+	<insert id="insertApproval" parameterType="ApprovalVo">
+		INSERT INTO APPROVAL VALUES (
+		SEQ_APPROVAL.NEXTVAL,#{cKeyFk},#{divDoctypeFk},#{aTitle},#{aContent},#{aWriterFk},SYSDATE,null,0
+		)
+
+		<selectKey keyProperty="aKey" resultType="Integer" order="AFTER">
+			SELECT SEQ_APPROVAL.CURRVAL FROM dual
+		</selectKey>
+	</insert>
+
+	<insert id="insertApprovers" parameterType="hashMap">
+		INSERT INTO
+		APPROVAL_CONDITION VALUES (
+		SEQ_APPROVAL_CONDITION.NEXTVAL,#{aKeyFk},#{acApproverFk},0,#{acApprovalType},null
+		)
+	</insert>
+
+	<insert id="insertJobpropsal" parameterType="JobPropsalVo">
+		INSERT INTO
+		JOB_PROPSAL VALUES (
+		SEQ_JOB_PROPSAL.NEXTVAL,#{aKeyFk},#{jpWorkingDate},#{jpCooperation}
+		)
+	</insert>
+
+	<insert id="insertOrderForm" parameterType="OrderFormVo">
+		INSERT INTO
+		ORDERTABLE VALUES (SEQ_ORDERTABLE.NEXTVAL, #{aKeyFk}, #{oDepartment},
+		#{oLimit}, #{oNo},
+		#{oDate}, #{oPayment},
+		#{oStartdate},
+		#{oEnddate},
+		#{oPayend}, #{oPurpose})
+		
+		<selectKey keyProperty="oKey" resultType="Integer" order="AFTER">
+			SELECT SEQ_ORDERTABLE.CURRVAL FROM dual
+		</selectKey>
+	</insert>
 </mapper>

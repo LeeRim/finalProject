@@ -11,6 +11,7 @@ import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
 import com.jdl.css.approval.model.vo.VacationFormVo;
+import com.jdl.css.approval.model.vo.OrderFormVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Service
@@ -128,9 +129,9 @@ public class ApprovalService {
 		return result;
 	}
 
-	
-
-	
-
+	public int insertOrderForm(OrderFormVo order) {
+		// TODO Auto-generated method stub
+		return dao.insertOrderForm(order);
+	}
 
 }
