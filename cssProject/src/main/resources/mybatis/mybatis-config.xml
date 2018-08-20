@@ -30,6 +30,7 @@
 	<typeAlias type="com.jdl.css.approval.model.vo.SpendingResolutionVo" alias="SpendingResolutionVo" />
 	<typeAlias type="com.jdl.css.approval.model.vo.VacationFormVo" alias="VacationFormVo" />
 	<typeAlias type="com.jdl.css.commuteCheck.model.commuteCheckVo.CommuteCheckVo" alias="Commute" />
+	<typeAlias type="com.jdl.css.common.model.vo.DivisionVo" alias="DivisionVo"/>
   </typeAliases>
 
 

@@ -30,12 +30,12 @@ public class EmployeeDao {
 		return sqlSession.selectList("EmployeeMapper.selectEmployeeList2",cKey);
 	}
 
-	public List<EmployeeVo> selectJobList() {
-		return sqlSession.selectList("EmployeeMapper.selectJobList");
+	public List<EmployeeVo> selectJobList(int cKey) {
+		return sqlSession.selectList("EmployeeMapper.selectJobList",cKey);
 	}
 
-	public List<EmployeeVo> selectDepartList() {
-		return sqlSession.selectList("EmployeeMapper.selectDepartList");
+	public List<EmployeeVo> selectDepartList(int cKey) {
+		return sqlSession.selectList("EmployeeMapper.selectDepartList",cKey);
 	}
 
 	public List<EmployeeVo> selectEmployeeListByKeyStr(int[] appKeyArr) {

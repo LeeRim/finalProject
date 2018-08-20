@@ -26,71 +26,76 @@
 		FROM EMPLOYEE
 	</sql>
 
+	<!-- <resultMap type="EmployeeVo" id="EmployeeMap"> <result property="eId" 
+		column="ID" /> <result property="department" column="DEPARTMENT" /> <result 
+		property="job" column="JOB" /> <result property="eName" column="NAME" /> 
+		<result property="eExten" column="EXTEN" /> <result property="ePhone" column="PHONE" 
+		/> <result property="eHireDate" column="HIREDATE" /> <result property="eDepartFk" 
+		column="DEPARTKEY" /> <result property="eJobcodeFk" column="JOBKEY" /> <result 
+		property="eKey" column="EKEY" /> <result property="eNo" column="ENO" /> <result 
+		property="eEmail" column="EMAIL" /> <result property="ePhoto" column="PHOTO" 
+		/> </resultMap> -->
+
 	<resultMap type="EmployeeVo" id="EmployeeMap">
-		<result property="eId" column="ID" />
-		<result property="department" column="DEPARTMENT" />
+		<id property="eKey" column="E_KEY" />
+		<result property="eNo" column="E_NO" />
+		<result property="cKeyFk" column="C_KEY_FK" />
+		<result property="eType" column="E_TYPE" />
+		<result property="eId" column="E_ID" />
+		<result property="ePwd" column="E_PWD" />
+		<result property="eName" column="E_NAME" />
+		<result property="eJobcodeFk" column="E_JOBCODE_FK" />
+		<result property="eDepartFk" column="E_DEPART_FK" />
+		<result property="eAddress" column="E_ADDRESS" />
+		<result property="eExten" column="E_EXTEN" />
+		<result property="ePhone" column="E_PHONE" />
+		<result property="eEmail" column="E_EMAIL" />
+		<result property="eBirth" column="E_BIRTH" />
+		<result property="eHireDate" column="E_HIRE_DATE" />
+		<result property="eEntDate" column="E_ENT_DATE" />
+		<result property="eEntYn" column="E_ENT_YN" />
+		<result property="ePhoto" column="E_PHOTO" />
+		<result property="eInstead" column="E_INSTEAD" />
+		<result property="eState" column="E_STATE" />
 		<result property="job" column="JOB" />
-		<result property="eName" column="NAME" />
-		<result property="eExten" column="EXTEN" />
-		<result property="ePhone" column="PHONE" />
-		<result property="eHireDate" column="HIREDATE" />
-		<result property="eDepartFk" column="DEPARTKEY" />
-		<result property="eJobcodeFk" column="JOBKEY" />
-		<result property="eKey" column="EKEY" />
-		<result property="eNo" column="ENO" />
-		<result property="eEmail" column="EMAIL" />
-		<result property="ePhoto" column="PHOTO" />
-	</resultMap>
-	
-	<resultMap type="EmployeeVo" id="employeeMap2">
-		<id property="eKey" column="E_KEY"/>
-		<result property="eNo" column="E_NO"/>
-		<result property="cKeyFk" column="C_KEY_FK"/>
-		<result property="eType" column="E_TYPE"/>
-		<result property="eId" column="E_ID"/>
-		<result property="ePwd" column="E_PWD"/>
-		<result property="eName" column="E_NAME"/>
-		<result property="eJobcodeFk" column="E_JOBCODE_FK"/>
-		<result property="eDepartFk" column="E_DEPART_FK"/>
-		<result property="eAddress" column="E_ADDRESS"/>
-		<result property="eExten" column="E_EXTEN"/>
-		<result property="ePhone" column="E_PHONE"/>
-		<result property="eEmail" column="E_EMAIL"/>
-		<result property="eBirth" column="E_BIRTH"/>
-		<result property="eHireDate" column="E_HIRE_DATE"/>
-		<result property="eEntDate" column="E_ENT_DATE"/>
-		<result property="eEntYn" column="E_ENT_YN"/>
-		<result property="ePhoto" column="E_PHOTO"/>
-		<result property="eInstead" column="E_INSTEAD"/>
-		<result property="eState" column="E_STATE"/>
-		<result property="job" column="JOB"/>
-		<result property="department" column="DEPARTMENT"/>
-		<result property="divInfolevel" column="DIV_INFOLEVER"/>
+		<result property="department" column="DEPARTMENT" />
+		<result property="divInfolevel" column="DIV_INFOLEVER" />
 		<association property="instead" javaType="EmployeeVo">
-			<id property="eKey" column="E_KEY_1"/>
-			<result property="eName" column="INSTEAD_NAME"/>
-			<result property="job" column="INSTEAD_JOB"/>
-			<result property="department" column="INSTEAD_DEPART"/>
+			<id property="eKey" column="INSTEAD_KEY" />
+			<result property="eName" column="INSTEAD_NAME" />
+			<result property="job" column="INSTEAD_JOB" />
+			<result property="divInfolevel" column="INSTEAD_INFOLEVEL" />
+			<result property="department" column="INSTEAD_DEPART" />
 		</association>
 	</resultMap>
-	
-	
 
 
-	<select id="selectEmployeeById" parameterType="string" resultMap="employeeMap2">
-		SELECT E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_PWD,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
-		,E.E_EXTEN, E.E_PHONE,E.E_EMAIL, E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN,E.E_PHOTO, E.E_BIRTH, E.E_INSTEAD,E.E_STATE
-		,J.DIV_INFO AS "JOB", D.DIV_INFO AS "DEPARTMENT" ,J.DIV_INFOLEVEL
-        , EI.E_KEY, EI.E_NAME AS INSTEAD_NAME, EJ.DIV_INFO AS "INSTEAD_JOB", ED.DIV_INFO AS "INSTEAD_DEPART"
+
+
+	<select id="selectEmployeeById" parameterType="string"
+		resultMap="EmployeeMap">
+		SELECT
+		E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_PWD,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
+		,E.E_EXTEN, E.E_PHONE,E.E_EMAIL,
+		E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN,E.E_PHOTO, E.E_BIRTH,
+		E.E_INSTEAD,E.E_STATE
+		,J.DIV_INFO AS "JOB", D.DIV_INFO AS "DEPARTMENT"
+		,J.DIV_INFOLEVEL
+		, EI.E_KEY AS INSTEAD_KEY, EI.E_NAME AS INSTEAD_NAME, EJ.DIV_INFO AS
+		"INSTEAD_JOB",
+		ED.DIV_INFO AS "INSTEAD_DEPART"
 		FROM EMPLOYEE E
-		JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
-		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
-        LEFT JOIN EMPLOYEE EI ON(EI.E_KEY = E.E_INSTEAD)
-        LEFT JOIN DIVISION EJ ON(EI.E_JOBCODE_FK = EJ.DIV_KEY)
-        LEFT JOIN DIVISION ED ON(EI.E_DEPART_FK = ED.DIV_KEY)
-		WHERE E.E_ID = #{eId}
+		JOIN
+		DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		JOIN DIVISION D
+		ON(E.E_DEPART_FK = D.DIV_KEY)
+		LEFT JOIN EMPLOYEE EI ON(EI.E_KEY =
+		E.E_INSTEAD)
+		LEFT JOIN DIVISION EJ ON(EI.E_JOBCODE_FK = EJ.DIV_KEY)
+		LEFT JOIN DIVISION ED ON(EI.E_DEPART_FK = ED.DIV_KEY)
+		WHERE E.E_ID =
+		#{eId}
 	</select>
-	
 
 
 	<!-- 쪽지 직원 불러오는 쿼리문 -->
@@ -126,18 +131,23 @@
 	<insert id="insertEmployee" parameterType="EmployeeVo">
 		INSERT INTO EMPLOYEE
 		(E_KEY, E_NO, C_KEY_FK, E_TYPE, E_ID, E_PWD,
-		E_NAME, E_JOBCODE_FK , E_DEPART_FK ,E_ADDRESS, E_EXTEN, E_PHONE, E_EMAIL,
-		E_BIRTH, E_HIRE_DATE, E_PHOTO)
-		VALUES (SEQ_EMPLOYEE.NEXTVAL, #{eNo}, #{cKeyFk}, 'A' , #{eId}, #{ePwd},
-		#{eName}, #{eJobcodeFk}, #{eDepartFk}, #{eAddress} , #{eExten}, #{ePhone},
+		E_NAME, E_JOBCODE_FK ,
+		E_DEPART_FK ,E_ADDRESS, E_EXTEN, E_PHONE, E_EMAIL,
+		E_BIRTH,
+		E_HIRE_DATE, E_PHOTO)
+		VALUES (SEQ_EMPLOYEE.NEXTVAL, #{eNo}, #{cKeyFk},
+		'A' , #{eId}, #{ePwd},
+		#{eName}, #{eJobcodeFk}, #{eDepartFk},
+		#{eAddress} , #{eExten}, #{ePhone},
 		#{eEmail},
-		#{eBirth}, #{eHireDate}, #{ePhoto} )
+		#{eBirth}, #{eHireDate},
+		#{ePhoto} )
 	</insert>
 
 
 	<!-- 조직도 select 사원 리스트 출력 쿼리문 -->
 
-	<select id="selectEmployeeList2" resultMap="employeeMap2"
+	<select id="selectEmployeeList2" resultMap="EmployeeMap"
 		parameterType="int">
 		SELECT E.E_KEY E_KEY,
 		E.E_NO E_NO,
@@ -148,7 +158,8 @@
 		E.E_NAME E_NAME,
 		E.E_JOBCODE_FK E_JOBCODE_FK,
 		E.E_DEPART_FK E_DEPART_FK,
-		E.E_ADDRESS E_ADDRESS,
+		E.E_ADDRESS
+		E_ADDRESS,
 		E.E_EXTEN E_EXTEN,
 		E.E_PHONE E_PHONE,
 		E.E_EMAIL E_EMAIL,
@@ -157,35 +168,52 @@
 		E.E_ENT_DATE E_ENT_DATE,
 		E.E_ENT_YN E_ENT_YN,
 		E.E_PHOTO E_PHOTO,
+        E.E_STATE,
 		J.DIV_INFO JOB,
 		J.DIV_INFOLEVEL,
-		D.DIV_INFO DEPARTMENT
+		D.DIV_INFO DEPARTMENT,
+		EI.E_KEY AS INSTEAD_KEY, EI.E_NAME AS INSTEAD_NAME, IJ.DIV_INFO AS "INSTEAD_JOB",
+		IJ.DIV_INFOLEVEL AS "INSTEAD_INFOLEVEL",
+		ID.DIV_INFO AS
+		"INSTEAD_DEPART"
 		FROM EMPLOYEE E
-		JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		JOIN DIVISION J ON(E.E_JOBCODE_FK
+		=
+		J.DIV_KEY)
 		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
-		WHERE E.C_KEY_FK =#{cKey}
-		ORDER BY E_DEPART_FK ASC , E_JOBCODE_FK ASC
+		LEFT JOIN
+		EMPLOYEE EI ON (E.E_INSTEAD=EI.E_KEY)
+		LEFT JOIN DIVISION IJ ON
+		(EI.E_JOBCODE_FK=IJ.DIV_KEY)
+		LEFT JOIN DIVISION ID ON
+		(EI.E_DEPART_FK=ID.DIV_KEY)
+		WHERE
+		E.C_KEY_FK =#{cKey}
+		ORDER BY
+		E_DEPART_FK ASC , J.DIV_INFOLEVEL ASC,E.E_NAME
 	</select>
 
 
 	<!-- 사원등록 직급정보 출력 쿼리문 -->
-	<select id="selectJobList" resultMap="EmployeeMap">
+	<select id="selectJobList" parameterType="int" resultMap="EmployeeMap">
 		SELECT
 		DIV_INFO AS "JOB",
-		DIV_KEY AS"JOBKEY"
+		DIV_KEY AS"E_JOBCODE_FK"
 		FROM DIVISION
-		WHERE DIV_TYPE =1
-		ORDER BY DIV_KEY DESC
+		WHERE DIV_TYPE =2 AND C_KEY_FK = #{cKey}
+		ORDER BY DIV_KEY
+		DESC
 
 	</select>
 
 	<!-- 사원등록 부서정보 출력 쿼리문 -->
-	<select id="selectDepartList" resultMap="EmployeeMap">
+	<select id="selectDepartList" parameterType="int" resultMap="EmployeeMap">
 		SELECT
-		DIV_INFO AS "DEPARTMENT" ,
-		DIV_KEY AS"DEPARTKEY"
+		DIV_INFO AS
+		"DEPARTMENT" ,
+		DIV_KEY AS"E_DEPART_FK"
 		FROM DIVISION
-		WHERE DIV_TYPE =2
+		WHERE DIV_TYPE =1 AND C_KEY_FK = #{cKey}
 		ORDER BY DIV_KEY ASC
 
 	</select>
@@ -196,38 +224,45 @@
 		E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
 		,E.E_EXTEN, E.E_PHONE,E.E_EMAIL,
 		E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN,E.E_PHOTO
-		,J.DIV_INFO AS "JOB", D.DIV_INFO AS "DEPARTMENT"
+		,J.DIV_INFO AS "JOB",
+		D.DIV_INFO AS "DEPARTMENT"
 		FROM EMPLOYEE E
-		JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
-		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
+		JOIN DIVISION J
+		ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		JOIN DIVISION D ON(E.E_DEPART_FK =
+		D.DIV_KEY)
 		WHERE E.E_KEY IN
 		<foreach item="parameter" index="index" collection="array"
 			open="(" separator="," close=")">
 			#{parameter}
 		</foreach>
-		ORDER BY J.DIV_INFOLEVEL,E.E_NAME
+		ORDER BY J.DIV_INFOLEVEL DESC,E.E_NAME
 	</select>
 
 	<!-- 조직도 select 사원정보 팝업창 출력 쿼리문 -->
 	<select id="selectEmployeeInfo" parameterType="int" resultMap="EmployeeMap">
 		SELECT
-		E.E_ID AS "ID",
+		E.E_ID AS "E_ID",
 		D.DIV_INFO AS "DEPARTMENT",
 		J.DIV_INFO AS "JOB",
-		E.E_NAME AS "NAME",
-		E.E_EXTEN AS "EXTEN",
-		E.E_PHONE AS "PHONE",
-		E.E_HIRE_DATE AS "HIREDATE",
-		D.DIV_KEY AS "DEPARTKEY",
-		J.DIV_KEY AS "JOBKEY",
-		E.E_KEY AS "EKEY",
-		E.E_NO AS "ENO",
-		E.E_EMAIL AS "EMAIL",
-		E.E_PHOTO AS "PHOTO"
+		E.E_NAME AS "E_NAME",
+		E.E_EXTEN AS "E_EXTEN",
+		E.E_PHONE AS "E_PHONE",
+		E.E_HIRE_DATE AS "E_HIRE_DATE",
+		D.DIV_KEY AS "E_DEPART_FK",
+		J.DIV_KEY AS
+		"E_JOBCODE_FK",
+		E.E_KEY AS "E_KEY",
+		E.E_NO AS "E_NO",
+		E.E_EMAIL AS
+		"E_MAIL",
+		E.E_PHOTO AS "E_PHOTO"
 
 		FROM EMPLOYEE E
-		JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
-		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
+		JOIN DIVISION J
+		ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		JOIN DIVISION D ON(E.E_DEPART_FK =
+		D.DIV_KEY)
 		WHERE E.E_KEY = #{eKey}
 	</select>
 

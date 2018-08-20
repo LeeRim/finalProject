@@ -23,17 +23,6 @@ public class ApprovalService {
 		return dao.insertApproval(app);
 	}
 
-	public int insertApprovers(int aKey, List<Integer> appStr) {
-		int result=0;
-		HashMap<String, Integer> params = new HashMap<String, Integer>();
-		params.put("aKey", aKey);
-		for(int i=0;i<appStr.size();i++){
-			params.put("acApprovalFk", appStr.get(i));
-			result+=dao.insertApprovers(params);
-		}
-		return result;
-	}
-
 	public int insertJobPropsal(JobPropsalVo jobp) {
 		// TODO Auto-generated method stub
 		return dao.insertJobPropsal(jobp);
@@ -120,6 +109,14 @@ public class ApprovalService {
 	public List<ApprovalConditionVo> selectIngAcList(int aKey) {
 		// TODO Auto-generated method stub
 		return dao.selectIngAcList(aKey);
+	}
+
+	public int insertApprovers(List<ApprovalConditionVo> acList) {
+		int result=0;
+		for(int i=0;i<acList.size();i++){
+			result+=dao.insertApprovers(acList.get(i));
+		}
+		return result;
 	}
 
 }
