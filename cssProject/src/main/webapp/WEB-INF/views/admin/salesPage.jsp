@@ -36,27 +36,20 @@
       </ol>
     </section>
     
+    
+    
     <div class="row" style="margin-left:auto; margin-right:auto; margin-top:20px;">
         <div class="col-md-12">
           <div class="box" style="width:100%; ">
             <div class="box-header with-border">
-              <h3 class="box-title">2018년 월 별 매출</h3>
+              <h3 class="box-title">총 매출액</h3>
 
               <div class="box-tools pull-right">
                <button type="button" class="btn btn-box-tool"  onclick="chart_options.isStacked=false; drawChart()">false(기본값)</button>
 				<button type="button" class="btn btn-box-tool" onclick="chart_options.isStacked=true; drawChart()">true</button>
 				<button type="button" class="btn btn-box-tool" onclick="chart_options.isStacked='percent'; drawChart()">'percent' (문자열)</button>
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <div class="btn-group">
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
-                  </ul>
-                </div>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
               </div>
             </div>
             <!-- /.box-header -->
@@ -78,43 +71,52 @@
                     <strong>이용권 별 현황</strong>
                   </p>
                 <div class="col-md-4" style="margin-top:55px;">
-
+				<c:forEach items="${levelCountPer}" var="lcp" >
+				<c:if test="${lcp.payVoucher == 1 }">
                   <div class="progress-group">
                     <span class="progress-text">1개월 이용권</span>
-                    <span class="progress-number"><b>160</b>/200</span>
+                    <span class="progress-number"><b>${lcp.count }</b>/${lcp.allcount }</span>
 
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-aqua" style="width: 80%; background-color:#00c0ef;"></div>
+                      <div class="progress-bar progress-bar-aqua" style="width: ${lcp.per}%; background-color:#00c0ef;"></div>
                     </div>
                   </div>
+                  </c:if>
                   <!-- /.progress-group -->
+                  <c:if test="${lcp.payVoucher == 3 }">
                   <div class="progress-group">
                     <span class="progress-text">3개월 이용권</span>
-                    <span class="progress-number"><b>310</b>/400</span>
+                    <span class="progress-number"><b>${lcp.count }</b>/${lcp.allcount }</span>
 
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-red" style="width: 50%; background-color:#dd4b39;"></div>
+                      <div class="progress-bar progress-bar-red" style="width: ${lcp.per}%; background-color:#dd4b39;"></div>
                     </div>
                   </div>
+                  </c:if>
                   <!-- /.progress-group -->
+                  <c:if test="${lcp.payVoucher == 6 }">
                   <div class="progress-group">
                     <span class="progress-text">6개월 이용권</span>
-                    <span class="progress-number"><b>480</b>/800</span>
+                    <span class="progress-number"><b>${lcp.count }</b>/${lcp.allcount }</span>
 
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-green" style="width: 80%; background-color:#00a65a;"></div>
+                      <div class="progress-bar progress-bar-green" style="width: ${lcp.per}%; background-color:#00a65a;"></div>
                     </div>
                   </div>
+                  </c:if>
                   <!-- /.progress-group -->
+                  <c:if test="${lcp.payVoucher == 12 }">
                   <div class="progress-group">
                     <span class="progress-text">12개월 이용권</span>
-                    <span class="progress-number"><b>250</b>/500</span>
+                    <span class="progress-number"><b>${lcp.count }</b>/${lcp.allcount }</span>
 
                     <div class="progress sm">
-                      <div class="progress-bar progress-bar-yellow" style="width: 30%; background-color:#f39c12;"></div>
+                      <div class="progress-bar progress-bar-yellow" style="width: ${lcp.per}%; background-color:#f39c12;"></div>
                     </div>
                   </div>
+                  </c:if>
                   <!-- /.progress-group -->
+                  </c:forEach>
                 </div>
                 <!-- /.col -->
               </div>
@@ -128,12 +130,13 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-    
-    	<div class="row" style="margin-left:auto; margin-right:auto;">
+      
+      
+       <div class="row" style="margin-left:auto; margin-right:auto; ">
     	<!-- DONUT CHART -->
-          <div class="box box-danger" style="width:30%; margin-left:15px;">
+          <div class="box box-danger" style="margin-left:15px;">
             <div class="box-header with-border">
-              <h3 class="box-title">결제수단</h3>
+              <h3 class="box-title">레벨 별 월 매출액</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -141,26 +144,27 @@
               </div>
             </div>
             <div class="box-body chart-responsive">
-              <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
+              <div id="level_chart_div"></div>
             </div>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+          <div class="box box-danger" style="width:30%; margin-left:15px;">
+            <div class="box-header with-border">
+              <h3 class="box-title">결제수단(추가예정)</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body chart-responsive">
+              <div class="chart" id="sales-chart" style="height: 300px; position: relative; "></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
     	</div>
       <!-- /.row -->
-    
-    
-    
-    
-    
-    
-
-	
-
-
-
-<!-- 예제 종료 -->
-    
   </div>
 	
 	</div>
@@ -177,6 +181,19 @@
 	var chart_options = {
 		width : 950,
 		height : 300,
+		colors: ["#6ca9ae"],
+		bar : {
+			groupWidth : '80%' // 예제에서 이 값을 수정
+		},
+		legend : {
+			position : 'right' // 이걸 주석처리 해보면 ..
+		}
+	};
+	
+	
+	var chart_options2 = {
+		width : 1005,
+		height : 300,
 		colors: ['#f15628', '#5b6777', '#ffc81b'],
 		bar : {
 			groupWidth : '50%'
@@ -185,26 +202,29 @@
 	};
 
 	function drawChart(){
-
-		// 차트 데이터
-		var data = new google.visualization.arrayToDataTable([
-			['월', '레벨 1', '레벨 2', '레벨 3'], // 제목 그리고 항목들
-			['1월', 18790, 20000, 10000], // 제목과 항목수를 맞춰주어야 합니다.
-			['2월', 15790, 30000, 3500],
-			['3월', 20790, 25000, 4000],
-			['4월', 10790, 30000, 2000],
-			['5월', 57900, 10000, 25000],
-			['6월', 15790, 10000, 5000],
-			['7월', 27900, 20000, 25000],
-			['8월', 57900, 10000, 12500],
-			['9월', 0 ,0 ,0 ],
-			['10월', 0 ,0 ,0 ],
-			['11월', 0 ,0 ,0 ],
-			['12월', 0 ,0 ,0 ]
+	
+		var data = google.visualization.arrayToDataTable([
+			['월', '금액'],
+			<c:forEach items="${monthSumAll}" var="msa" varStatus="status">
+				<c:if test="${!status.last}">['${msa.allmonth}월',${msa.sumsales}],</c:if>
+				<c:if test="${status.last}">['${msa.allmonth}월',${msa.sumsales}]</c:if>
+			</c:forEach>
 		]);
 
 		var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
 		chart.draw(data, chart_options);
+		
+		// 차트 데이터
+		var data2 = new google.visualization.arrayToDataTable([
+			['월', '레벨 1', '레벨 2', '레벨 3'], // 제목 그리고 항목들
+			<c:forEach items="${monthSumLevel}" var="msl" varStatus="status">
+				<c:if test="${!status.last}">['${msl.allmonth}월',${msl.level1},${msl.level2},${msl.level3}],</c:if>
+				<c:if test="${status.last}">['${msl.allmonth}월',${msl.level1},${msl.level2},${msl.level3}]</c:if>
+			</c:forEach>
+		]);
+
+		var chart = new google.visualization.ColumnChart(document.getElementById('level_chart_div'));
+		chart.draw(data2, chart_options2);
 	}
      
 	 $(function () {
@@ -214,11 +234,9 @@
 	    var donut = new Morris.Donut({
 	      element: 'sales-chart',
 	      resize: true,
-	      colors: ["#3c8dbc", "#f56954", "#00a65a"],
+	      colors: ["#ff9763"],
 	      data: [
-	        {label: "카카오페이", value: 42},
-	        {label: "삼성페이", value: 30},
-	        {label: "KG이니시스", value: 17}
+	       	 {label: "카카오페이", value: ${paymentVo.count}}
 	      ],
 	      hideHover: 'auto'
 	    });

@@ -95,7 +95,7 @@
 					</a>
 					<ul class="treeview-menu">
 						<li><a href="salesPage.do" onclick="menuHighlight(4);">기간 별 매출</a></li>
-						<li><a href="companySet.do" onclick="menuHighlight(4);">결제 목록 조회</a></li>
+						<li><a href="companyPaymentList.do" onclick="menuHighlight(4);">결제 목록 조회</a></li>
 					</ul>
 				</li>
 			</ul>

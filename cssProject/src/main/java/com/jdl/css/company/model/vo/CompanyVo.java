@@ -4,6 +4,10 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * @author xosle
+ *
+ */
 @Component
 public class CompanyVo {
 	private int cKey;
@@ -27,6 +31,10 @@ public class CompanyVo {
 	
 	private int per;
 	
+	private Date payDate;
+	private int payMileage;
+	private int payVoucher;
+	
 	public CompanyVo(){}
 
 	
@@ -44,10 +52,12 @@ public class CompanyVo {
 		this.cLevel = cLevel;
 	}
 
+	
+
 
 	public CompanyVo(int cKey, String cName, String cOwner, String cAddress, String cLogo, String cSign, String cQrcode,
 			String cMileage, Date cCloseDay, int cLevel, int coordKeyFk, int coordKey, String city, String lat,
-			String lng, int counts, int per) {
+			String lng, int counts, int per, Date payDate, int payMileage, int payVoucher) {
 		super();
 		this.cKey = cKey;
 		this.cName = cName;
@@ -66,6 +76,9 @@ public class CompanyVo {
 		this.lng = lng;
 		this.counts = counts;
 		this.per = per;
+		this.payDate = payDate;
+		this.payMileage = payMileage;
+		this.payVoucher = payVoucher;
 	}
 
 
@@ -220,6 +233,35 @@ public class CompanyVo {
 	public void setPer(int per) {
 		this.per = per;
 	}
+	
+	public Date getPayDate() {
+		return payDate;
+	}
+
+
+	public void setPayDate(Date payDate) {
+		this.payDate = payDate;
+	}
+
+
+	public int getPayMileage() {
+		return payMileage;
+	}
+
+
+	public void setPayMileage(int payMileage) {
+		this.payMileage = payMileage;
+	}
+
+
+	public int getPayVoucher() {
+		return payVoucher;
+	}
+
+
+	public void setPayVoucher(int payVoucher) {
+		this.payVoucher = payVoucher;
+	}
 
 
 	@Override
@@ -228,8 +270,14 @@ public class CompanyVo {
 				+ ", cLogo=" + cLogo + ", cSign=" + cSign + ", cQrcode=" + cQrcode + ", cMileage=" + cMileage
 				+ ", cCloseDay=" + cCloseDay + ", cLevel=" + cLevel + ", coordKeyFk=" + coordKeyFk + ", coordKey="
 				+ coordKey + ", city=" + city + ", lat=" + lat + ", lng=" + lng + ", counts=" + counts + ", per=" + per
-				+ "]";
+				+ ", payDate=" + payDate + ", payMileage=" + payMileage + ", payVoucher=" + payVoucher + "]";
 	}
+
+
+	
+
+
+	
 
 	
 

@@ -98,6 +98,25 @@ public class AdminService {
 		
 	}
 
+	public List<PaymentVo> selectMonthSumSales() {
+		return dao.selectMonthSumSales();
+	}
+
+	public List<PaymentVo> selectLevelCountPer() {
+		return dao.selectLevelCountPer();
+	}
+
+	public List<PaymentVo> selectMonthSumLevel() {
+		return dao.selectMonthSumLevel();
+	}
+	public PaymentVo selectAllCount(){
+		return dao.selectAllCount();
+	}
+
+	public List<CompanyVo> selectCompanyPaymentList() {
+		return dao.selectCompanyPaymentList();
+	}
+
 	
 
 

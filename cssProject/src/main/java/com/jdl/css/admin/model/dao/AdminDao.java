@@ -89,7 +89,27 @@ public class AdminDao {
 	}
 
 	public int insertCompanyPaymentC(CompanyVo company) {
-		return sqlSession.insert("AdminMapper.insertCompanyPaymentC",company);
+		return sqlSession.update("AdminMapper.insertCompanyPaymentC",company);
+	}
+
+	public List<PaymentVo> selectMonthSumSales() {
+		return sqlSession.selectList("AdminMapper.selectMonthSumSales");
+	}
+
+	public List<PaymentVo> selectLevelCountPer() {
+		return sqlSession.selectList("AdminMapper.selectLevelCountPer");
+	}
+
+	public List<PaymentVo> selectMonthSumLevel() {
+		return sqlSession.selectList("AdminMapper.selectMonthSumLevel");
+	}
+	
+	public PaymentVo selectAllCount(){
+		return sqlSession.selectOne("AdminMapper.selectAllCount");
+	}
+
+	public List<CompanyVo> selectCompanyPaymentList() {
+		return sqlSession.selectList("AdminMapper.selectCompanyPaymentList");
 	}
 
 	

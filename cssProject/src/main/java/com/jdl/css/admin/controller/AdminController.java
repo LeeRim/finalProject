@@ -124,10 +124,10 @@ public class AdminController {
 	public @ResponseBody String companyPaymentP(HttpServletRequest request){
 		int cKeyFk = Integer.parseInt(request.getParameter("cKeyFk"));
 		String payMileage = request.getParameter("payMileage");
-		PaymentVo paymentVo = new PaymentVo(cKeyFk, payMileage); 
+		int payVoucher = Integer.parseInt(request.getParameter("payVoucher"));
+		PaymentVo paymentVo = new PaymentVo(cKeyFk, payMileage,payVoucher); 
 		service.insertCompanyPaymentP(paymentVo);
 		int cLevel = Integer.parseInt(request.getParameter("cLevel"));
-		
 		
 		CompanyVo company = new CompanyVo(cKeyFk, payMileage, cLevel);
 		company.setcKey(cKeyFk);
@@ -138,8 +138,30 @@ public class AdminController {
 		return mmmm;
 	}
 	
+	
 	@RequestMapping("salesPage.do")
-	public String salesPage(){
-		return "admin/salesPage";
+	public ModelAndView salesPage(ModelAndView mv){
+		List<PaymentVo> monthSumAll = service.selectMonthSumSales();
+		mv.addObject("monthSumAll",monthSumAll);
+		
+		List<PaymentVo> levelCountPer = service.selectLevelCountPer();
+		mv.addObject("levelCountPer",levelCountPer);
+		
+		List<PaymentVo> monthSumLevel = service.selectMonthSumLevel();
+		mv.addObject("monthSumLevel",monthSumLevel);
+		
+		PaymentVo paymentVo = service.selectAllCount();
+		mv.addObject("paymentVo",paymentVo);
+		
+		mv.setViewName("admin/salesPage");
+		return mv;
+	}
+	
+	@RequestMapping("companyPaymentList.do")
+	public ModelAndView companyPaymentList(ModelAndView mv){
+		List<CompanyVo> companyPaymentList = service.selectCompanyPaymentList();
+		mv.addObject("companyPaymentList",companyPaymentList);
+		mv.setViewName("admin/companyPaymentList");
+		return mv;
 	}
 }
