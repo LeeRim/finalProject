@@ -71,7 +71,6 @@
 
 
 
-
 	<select id="selectEmployeeById" parameterType="string"
 		resultMap="EmployeeMap">
 		SELECT
@@ -96,8 +95,6 @@
 		WHERE E.E_ID =
 		#{eId}
 	</select>
-
-
 
 	<!-- 쪽지 직원 불러오는 쿼리문 -->
 	<select id="selectEmployeeList" parameterType="int" resultType="EmployeeVo">

@@ -122,8 +122,8 @@ $(function(){
 		location.href = "borderList.do?currentPage=" + pageNum + "&bCateGory=${map.bCateGory}";
 	}
 	function searchBoard(){
-		var condition = $("#searchCondition").val();
-		var searchText = $("#searchText").val();
+		var condition = $("#searchCondition").val().trim();
+		var searchText = $("#searchText").val().trim();
 		location.href = "searchBoard.do?condition=" + condition + "&keyword=" + searchText + "&bCateGory=${map.bCateGory}";
 	}
 	$(function(){

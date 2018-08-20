@@ -22,26 +22,28 @@
 		  lang: 'ko-KR'
 	  });
 	});
-	 /* function validate(){
+	  function validate(){
+		  console.log("호출");
+		  
 		var bTitle = $("#bTitle").val();
-		if( bTitle == "" || bTitle == null){
+		if(bTitle == "" || bTitle == null){
 			console.log(111111111111111);
 			return false;
 		}
 		var summernote = $("#summernote").val();
-		if(!(summernote != null && summernote != "")){
+		if(summernote == null && summernote == ""){
 			console.log(2, summernote);
-				return false;
+			return false;
 		}
 		
 		var file = $("#file").val();
-		if( file == "" || file == null || file == undefined || ( file != null && typeof file == "object" && !Object.keys(file).length ) ){
+		if(file == "" || file == null){
 			console.log(3333333333333333333333333);
 			return false;
 		}
 		
-		return true;
-	}  */
+		return false;
+	}  
 </script>
 
 </head>
