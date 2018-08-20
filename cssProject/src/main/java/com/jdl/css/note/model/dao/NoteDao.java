@@ -61,4 +61,10 @@ public class NoteDao {
 		return session.selectList("NoteMapper.selectSearchSendNote", note);
 	}
 
+
+
+	public List<NoteVo> selectIndexNote(int geteKey) {
+		return session.selectList("NoteMapper.selectIndexNote", geteKey);
+	}
+
 }

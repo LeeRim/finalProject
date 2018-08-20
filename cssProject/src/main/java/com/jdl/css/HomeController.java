@@ -15,9 +15,6 @@ import com.jdl.css.calender.model.service.CalenderService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class HomeController {
 	

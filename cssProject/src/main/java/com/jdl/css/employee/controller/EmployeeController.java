@@ -22,16 +22,21 @@ import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
+import com.jdl.css.note.model.service.NoteService;
+import com.jdl.css.note.model.vo.NoteVo;
 
 @Controller
 public class EmployeeController {
 	
 	@Autowired
 	EmployeeService eService;
-	
 	@Autowired
 	AttachmentService attachservice;
-
+	@Autowired
+	NoteService nService;
+	
+	
+	
 	
 
 	@RequestMapping("loginForm.do")
@@ -40,15 +45,23 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("login.do")
-	public String login(EmployeeVo employee,HttpSession session){
+	public ModelAndView login(EmployeeVo employee,HttpSession session, ModelAndView mv){
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
-		System.out.println(user);
-		if(user.getePwd().equals(employee.getePwd())){
+//		System.out.println(user.geteKey());
+		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
+		System.out.println(indexNote);
+//		System.out.println("instead = " + user.getInstead());
+		if(user == null){
+			System.out.println("아이디 오류");
+		}else if(user.getePwd().equals(employee.getePwd())){
 			session.setAttribute("user", user);
+			session.setAttribute("indexNote", indexNote);
 		}else{
 			System.out.println("비밀번호 오류");
 		}
-		return "redirect:index.do";
+		
+		mv.setViewName("redirect:index.do");
+		return mv;
 	}
 	
 	
@@ -57,6 +70,9 @@ public class EmployeeController {
 	public ModelAndView memberAdd(ModelAndView mv){
 		List<EmployeeVo> list = eService.selectJobList();
 		List<EmployeeVo> list2 = eService.selectDepartList();
+		
+		System.out.println("list"+list);
+		System.out.println("list2"+list2);
 		
 		mv.addObject("list", list);
 		mv.addObject("list2", list2);
@@ -73,7 +89,8 @@ public class EmployeeController {
 		EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
 		int cKey = employee.getcKeyFk();
 		
-		System.out.println(ePhoto);
+//		System.out.println(ePhoto);
+		System.out.println("부서키 = "+member.geteDepartFk());
 		
 		String birth=eBirth1;
 		String hire=eHireDate1;
@@ -219,22 +236,12 @@ public class EmployeeController {
 		return "employee/employeeIndex";
 	}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-	
-	
-	
-	
-	
-	
+		@RequestMapping("logout.do")
+		public String employeeLogout(HttpSession session){
+			if(session !=null){
+				session.invalidate();
+			}
+			return "mainPage";
+		}
 	
 }

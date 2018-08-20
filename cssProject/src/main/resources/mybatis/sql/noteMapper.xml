@@ -195,5 +195,22 @@
 		 AND (S.SN_TITLE LIKE '%'||#{keyword}||'%'
         OR S.SN_CONTENT LIKE '%'||#{keyword}||'%')
 	</select>
+	
+	<select id="selectIndexNote" parameterType="int" resultType="NoteVo">
+		SELECT RN_KEY, SN_KEY, SN_TITLE, SN_WRITE_DATE
+	       ,E_NAME, E_PHOTO, JOB, DEPARTMENT
+		FROM (
+		SELECT ROWNUM AS "NUM",R.RN_KEY, S.SN_KEY, S.SN_TITLE, S.SN_WRITE_DATE
+		       ,E.E_NAME, E.E_PHOTO, J.DIV_INFO AS "JOB", D.DIV_INFO AS "DEPARTMENT"
+		FROM RECEIVENOTE R
+		JOIN SENDNOTE S ON(R.RN_NOTE_FK = S.SN_KEY)
+		JOIN EMPLOYEE E ON(S.SN_SENDER_FK = E.E_KEY)
+		JOIN DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
+		WHERE RN_RECIPIENT_FK = #{geteKey}
+		AND R.RN_READ_YN = 'N'
+		AND R.RN_DELETE_YN = 'N'
+		ORDER BY NUM DESC)
+	</select>
 
 </mapper>

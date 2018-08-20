@@ -89,6 +89,10 @@ public class NoteService {
 		return dao.selectSearchSendNote(note);
 	}
 
+	public List<NoteVo> selectIndexNote(int geteKey) {
+		return dao.selectIndexNote(geteKey);
+	}
+
 
 
 }
