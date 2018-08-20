@@ -43,7 +43,30 @@
 		}
 		
 		return false;
-	}  
+	} 
+	  
+	  $(document).ready(
+		      function() {
+		         var fileTarget = $('.form-group .upload-hidden');
+		         fileTarget.on('change',function() { // 값이 변경되면 
+		         var filenames ="";
+		            if (window.FileReader) { // modern browser 
+		            console.log($(this)[0].files[0].name);
+		             /* for(var i=0;i<$(this)[0].files.length;i++){
+		               var file = $(this)[0].files[i];
+		               filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove'></i><br>";
+		               console.log(filenames);
+		            } */
+		            } else { // old IE
+		               var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+		            } 
+		            // 추출한 파일명 삽입 
+		            filenames += $(this)[0].files[0].name+"&nbsp<i class='fa fa-remove'></i><br>";
+		            $('.file-list').html(filenames);
+		         });
+		});
+	  
+	  
 </script>
 
 </head>
@@ -84,13 +107,16 @@
                     </textarea>
               </div>
               <div class="form-group">
+              <div style="float: left; height: 100px; width: 130px;">
                 <div class="btn btn-default btn-file">
                   <i class="fa fa-paperclip"></i> Attachment
-                  <input type="file" name="file" id="file">
+                  <input type="file" name="file" id="file" class="upload-hidden">
                   <input type="hidden" name="companyKey" value='<c:out value="${user.cKeyFk}"/>'>
 				  <input type="hidden" name="bWriter" value='<c:out value="${user.eKey }"/>'>
                 </div>
                 <p class="help-block">Max. 32MB</p>
+                </div>
+              	<div class="file-list"></div>
               </div>
             </div>
             <!-- /.box-body -->

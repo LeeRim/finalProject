@@ -107,7 +107,6 @@ public class BorderController {
 	@RequestMapping("writeBoard.do")
 	public ModelAndView writeBoard(BorderVo board, ModelAndView mv, HttpServletResponse response){
 			int result = borderservice.writeBoard(board);
-			
 			if(result > 0){
 				mv.setViewName("redirect:borderList.do?bCateGory="+ board.getbCateGory());
 			}
@@ -137,8 +136,9 @@ public class BorderController {
 	public ModelAndView updateBorder(BorderVo border, ModelAndView mv, HttpServletResponse response){
 		
 		int result = borderservice.updateBoard(border);
+		System.out.println("업데이트할 내용 : " + border);
 		if(result > 0){
-			mv.setViewName("redirect:borderList.do?bCateGory="+ border.getbCateGory());
+			mv.setViewName("redirect:selectBoard.do?boardKey="+ border.getBoardKey() + "&currentPage=1");
 		}
 		return mv;
 	}

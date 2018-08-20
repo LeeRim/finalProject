@@ -14,10 +14,20 @@
 		margin-right:10px;
 		margin-bottom:10px;
 	}
+	.Btn{
+		border:1px solid #bcbcbc;
+		padding:5px;
+		margin-left:5px;
+		margin-bottom:5px;
+		background:white;
+	}
 </style>
 <script>
 	function attachDetailPage(attaKey){
 		location.href="attachDetailPage.do?attaKey=" + attaKey;
+	}
+	function boardGalleryForm(){
+		location.href="boardGalleryForm.do";
 	}
 </script>
 <script>
@@ -83,6 +93,10 @@
 			</section>
 			<div class="row" style="width: 95%; margin-right: auto; margin-left: auto; margin-top: 20px;">
 <div class="thumnailArea">
+	<c:if test="${list.size() == 0}">
+		<h1>사진이 없습니다.</h1>
+	</c:if>
+	<c:if test="${list.size() != 0}">
 			<c:forEach items="${list}" var="Attach">
 				<div class="image-list" onclick="attachDetailPage(${Attach.attaKey});" align="center">
 					<div>
@@ -94,12 +108,13 @@
 					</div>
 				</div>
 			</c:forEach>			
+	</c:if>
 		</div>
 		
 
 	</div>
 				<c:if test="${!empty user}">
-				<a href="boardGalleryForm.do">갤러리 작성하기</a>
+				<div class="Btn" onclick="boardGalleryForm();">앨범 작성</div>
                 </c:if>
 	</div>
 </div>

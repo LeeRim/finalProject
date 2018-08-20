@@ -137,15 +137,22 @@ $(function(){
                   <th>조회수</th>
                   <th>작성일</th>
                 </tr>
-                <c:forEach items="${list }" var="b">
-                <tr>
-                  <td><c:out value="${b.boardKey }"/></td>
-                  <td class="bt"><c:out value="${b.eName }"/></td>
-                  <td><c:out value="${b.bTitle }"/></td>
-                  <td><span class="label label-danger"><c:out value="${b.bCount }"/></span></td>
-                  <td><c:out value="${b.bDate }"/></td>
-                </tr>
-                </c:forEach>
+                <c:if test="${list.size() == 0}">
+    	            <tr>
+                		<td colspan="5">조회 된 게시글이 없습니다.</td>
+ 	               </tr>
+                </c:if>
+                <c:if test="${list.size() != 0}">
+                	<c:forEach items="${list}" var="b">
+               	 		<tr>
+                  			<td><c:out value="${b.boardKey }"/></td>
+                  			<td class="bt"><c:out value="${b.eName }"/></td>
+                  			<td><c:out value="${b.bTitle }"/></td>
+                  			<td><span class="label label-danger"><c:out value="${b.bCount }"/></span></td>
+                  			<td><c:out value="${b.bDate }"/></td>
+                		</tr>
+                	</c:forEach>
+                </c:if>
               </table>
               </div>
               <c:if test="${!empty user}">
