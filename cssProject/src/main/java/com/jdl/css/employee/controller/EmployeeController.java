@@ -51,6 +51,7 @@ public class EmployeeController {
 	
 	@RequestMapping("login.do")
 	public String login(EmployeeVo employee,HttpSession session){
+		System.out.println(employee);
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
 		System.out.println(user);
 		if(user.getePwd().equals(employee.getePwd())){
@@ -237,6 +238,16 @@ public class EmployeeController {
 			mav.setViewName("employee/employeeIndex");
 			return mav;
 		}
+		
+		@RequestMapping("adminIndex.do")
+		public ModelAndView adminIndex(ModelAndView mav){
+			
+			List<BorderVo> board1 = borderservice.selectBoardOneEmp(); //공지사항
+			mav.addObject("board1", board1);
+			
+			mav.setViewName("employee/adminIndex");
+			return mav;
+	}
 		
 		
 		

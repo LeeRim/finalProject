@@ -206,8 +206,8 @@
 		var data = google.visualization.arrayToDataTable([
 			['월', '금액'],
 			<c:forEach items="${monthSumAll}" var="msa" varStatus="status">
-				<c:if test="${!status.last}">['${msa.allmonth}월',${msa.sumsales}원],</c:if>
-				<c:if test="${status.last}">['${msa.allmonth}월',${msa.sumsales}원]</c:if>
+				<c:if test="${!status.last}">['${msa.allmonth}월',${msa.sumsales}],</c:if>
+				<c:if test="${status.last}">['${msa.allmonth}월',${msa.sumsales}]</c:if>
 			</c:forEach>
 		]);
 
@@ -218,9 +218,9 @@
 		var data2 = new google.visualization.arrayToDataTable([
 			['월', '레벨 1', '레벨 2', '레벨 3'], // 제목 그리고 항목들
 			<c:forEach items="${monthSumLevel}" var="msl" varStatus="status">
-				<c:if test="${!status.last}">['${msl.allmonth}월',${msl.level1}원,${msl.level2}원,${msl.level3}원],</c:if>
-				<c:if test="${status.last}">['${msl.allmonth}월',${msl.level1}원,${msl.level2}원,${msl.level3}원]</c:if>
-			</c:forEach>
+				<c:if test="${!status.last}">['${msl.allmonth}월',${msl.level1},${msl.level2},${msl.level3}],</c:if>
+				<c:if test="${status.last}">['${msl.allmonth}월',${msl.level1},${msl.level2},${msl.level3}]</c:if>
+		</c:forEach>
 		]);
 
 		var chart = new google.visualization.ColumnChart(document.getElementById('level_chart_div'));
