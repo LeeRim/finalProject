@@ -389,37 +389,6 @@
 		AC.AC_APPROVER_FK =#{eKey} AND AC.AC_CONDITION=0
 	</select>
 
-
-	<insert id="insertApproval" parameterType="ApprovalVo">
-		INSERT INTO APPROVAL VALUES (
-		SEQ_APPROVAL.NEXTVAL,#{cKeyFk},#{divDoctypeFk},#{aTitle},#{aContent},#{aWriterFk},SYSDATE,null,0
-		)
-
-		<selectKey keyProperty="aKey" resultType="Integer" order="AFTER">
-			SELECT SEQ_APPROVAL.CURRVAL FROM dual
-		</selectKey>
-	</insert>
-
-	<insert id="insertApprovers" parameterType="hashMap">
-		INSERT INTO
-		APPROVAL_CONDITION VALUES (
-		SEQ_APPROVAL_CONDITION.NEXTVAL,#{aKeyFk},#{acApproverFk},0,#{acApprovalType},null
-		)
-	</insert>
-
-	<insert id="insertJobpropsal" parameterType="JobPropsalVo">
-		INSERT INTO
-		JOB_PROPSAL VALUES (
-		SEQ_JOB_PROPSAL.NEXTVAL,#{aKeyFk},#{jpWorkingDate},#{jpCooperation}
-		)
-	</insert>
-	
-	<insert id="insertVacation" parameterType="VacationFormVo">
-		INSERT INTO VACATION_FORM
-		VALUES(SEQ_VACATION_FORM.NEXTVAL,#{aKeyFk},#{vfType},#{vfStartdate},#{vfEnddate},#{vfHalfflag},#{vfReason})
-	</insert>
-
-
 	<select id="selectApprovalDetail" resultMap="approvalMap"
 		parameterType="ApprovalVo">
 		SELECT A.A_KEY A_KEY,
@@ -623,9 +592,10 @@
 		FROM JOB_PROPSAL
 		WHERE A_KEY_FK=#{aKey}
 	</select>
-	
+
 	<select id="selectVacationForm" parameterType="int" resultType="VacationFormVo">
-		SELECT VF_KEY, A_KEY_FK, VF_TYPE, VF_STARTDATE, VF_ENDDATE, VF_HALFFLAG, VF_REASON
+		SELECT VF_KEY, A_KEY_FK, VF_TYPE, VF_STARTDATE, VF_ENDDATE,
+		VF_HALFFLAG, VF_REASON
 		FROM VACATION_FORM
 		WHERE A_KEY_FK = #{aKey}
 	</select>
@@ -666,7 +636,13 @@
 		SEQ_JOB_PROPSAL.NEXTVAL,#{aKeyFk},#{jpWorkingDate},#{jpCooperation}
 		)
 	</insert>
-
+	
+	<insert id="insertVacation" parameterType="VacationFormVo">
+		INSERT INTO
+		VACATION_FORM
+		VALUES(SEQ_VACATION_FORM.NEXTVAL,#{aKeyFk},#{vfType},#{vfStartdate},#{vfEnddate},#{vfHalfflag},#{vfReason})
+	</insert>
+	
 	<insert id="insertOrderForm" parameterType="OrderFormVo">
 		INSERT INTO
 		ORDERTABLE VALUES (SEQ_ORDERTABLE.NEXTVAL, #{aKeyFk}, #{oDepartment},
@@ -675,9 +651,6 @@
 		#{oStartdate},
 		#{oEnddate},
 		#{oPayend}, #{oPurpose})
-		
-		<selectKey keyProperty="oKey" resultType="Integer" order="AFTER">
-			SELECT SEQ_ORDERTABLE.CURRVAL FROM dual
-		</selectKey>
+
 	</insert>
 </mapper>
