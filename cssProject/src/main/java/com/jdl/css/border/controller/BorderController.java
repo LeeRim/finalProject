@@ -160,7 +160,7 @@ public class BorderController {
 		List<BorderVo> board1 = borderservice.selectBoardOne(); //공지사항
 		List<BorderVo> board2 = borderservice.selectBoardTwo(); //자유
 		List<BorderVo> board3 = borderservice.selectBoardThr(); //경조사
-		List<BorderVo> board4 = borderservice.selectBoardFor(); //경조사
+		List<BorderVo> board4 = borderservice.selectBoardFor(); //앨범
 		List<AttachmentVo> attach = attachservice.selectAttachSev();
 		
 		mv.addObject("bo1", 1);

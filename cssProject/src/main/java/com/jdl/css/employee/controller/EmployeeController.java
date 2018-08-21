@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jdl.css.border.model.service.BorderService;
+import com.jdl.css.border.model.vo.BorderVo;
+import com.jdl.css.calender.model.service.CalenderService;
+import com.jdl.css.calender.model.vo.CalenderVo;
 import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.service.EmployeeService;
@@ -31,6 +35,12 @@ public class EmployeeController {
 	
 	@Autowired
 	AttachmentService attachservice;
+	
+	@Autowired
+	CalenderService cservice;
+	
+	@Autowired
+	BorderService borderservice;
 
 	
 
@@ -211,14 +221,22 @@ public class EmployeeController {
 		System.out.println(list);
 			return list;
 	}
-	
-	
-	
-	
 		@RequestMapping("employeeIndex.do")
-		public String employeeIndex(){
-		return "employee/employeeIndex";
-	}
+		public ModelAndView employeeIndex(ModelAndView mav){
+			List<CalenderVo> list = cservice.showCalender();
+			mav.addObject("list", list);
+			
+			List<BorderVo> board1 = borderservice.selectBoardOneEmp(); //공지사항
+			List<BorderVo> board2 = borderservice.selectBoardTwoEmp(); //자유
+			List<BorderVo> board3 = borderservice.selectBoardThrEmp(); //경조사
+			mav.addObject("board1", board1);
+			mav.addObject("board2", board2);
+			mav.addObject("board3", board3);
+			
+			
+			mav.setViewName("employee/employeeIndex");
+			return mav;
+		}
 		
 		
 		

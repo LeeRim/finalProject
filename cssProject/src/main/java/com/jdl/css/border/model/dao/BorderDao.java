@@ -79,6 +79,18 @@ public class BorderDao {
 	public List<BorderVo> selectBoardThr() {
 		return sqlSession.selectList("BorderMapper.selectBoardThr");
 	}
+	
+	public List<BorderVo> selectBoardOneEmp() {
+		return sqlSession.selectList("BorderMapper.selectBoardOneEmp");
+	}
+
+	public List<BorderVo> selectBoardTwoEmp() {
+		return sqlSession.selectList("BorderMapper.selectBoardTwoEmp");
+	}
+
+	public List<BorderVo> selectBoardThrEmp() {
+		return sqlSession.selectList("BorderMapper.selectBoardThrEmp");
+	}
 
 	public int insertboard(BorderVo board) {
 		return sqlSession.insert("BorderMapper.insertBoard", board);

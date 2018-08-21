@@ -550,7 +550,7 @@
 
         // make the event draggable using jQuery UI
 
-      })
+      });
     }
 
     init_events($('#external-events div.external-event'))

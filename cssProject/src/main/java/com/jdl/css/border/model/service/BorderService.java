@@ -77,6 +77,18 @@ public class BorderService {
 	public List<BorderVo> selectBoardThr() {
 		return dao.selectBoardThr();
 	}
+	
+	public List<BorderVo> selectBoardOneEmp() {
+		return dao.selectBoardOneEmp();
+	}
+
+	public List<BorderVo> selectBoardTwoEmp() {
+		return dao.selectBoardTwoEmp();
+	}
+
+	public List<BorderVo> selectBoardThrEmp() {
+		return dao.selectBoardThrEmp();
+	}
 
 	public int insertBoard(BorderVo board) {
 		return dao.insertboard(board);
