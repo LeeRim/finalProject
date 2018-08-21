@@ -41,6 +41,10 @@ public class EmployeeVo {
     
 //    resultMap용
     private List<DivisionVo> division;
+    
+    //vacation 용
+    private int totalVacation;				//총휴가
+    private int remainingVacation;      //남은휴가
     public EmployeeVo() {
     }
 
@@ -255,6 +259,24 @@ public class EmployeeVo {
 	public void setInstead(EmployeeVo instead) {
 		this.instead = instead;
 	}
+	
+	public int getTotalVacation() {
+		return totalVacation;
+	}
+
+	public void setTotalVacation(int totalVacation) {
+		this.totalVacation = totalVacation;
+	}
+
+	public int getRemainingVacation() {
+		return remainingVacation;
+	}
+
+	public void setRemainingVacation(int remainingVacation) {
+		this.remainingVacation = remainingVacation;
+	}
+
+
 
 	@Override
 	public String toString() {
@@ -264,8 +286,12 @@ public class EmployeeVo {
 				+ ", eBirth=" + eBirth + ", eHireDate=" + eHireDate + ", eEntDate=" + eEntDate + ", eEntYn=" + eEntYn
 				+ ", ePhoto=" + ePhoto + ", eInstead=" + eInstead + ", eState=" + eState + ", job=" + job
 				+ ", department=" + department + ", divInfolevel=" + divInfolevel + ", instead=" + instead
-				+ ", division=" + division + "]";
+				+ ", division=" + division + ", totalVacation=" + totalVacation + ", remainingVacation="
+				+ remainingVacation + "]";
 	}
+
+	
+	
 
 
 

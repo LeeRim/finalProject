@@ -24,14 +24,10 @@
 
 
 
-<script src="resources/bower_components/fastclick/lib/fastclick.js"></script>
-<script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 <style>
 
 .frame{
 padding:0 20px;
-/* border: 1px solid black;  */
 width:100%;
 height:100%;
 }
@@ -49,8 +45,6 @@ padding: 0 100px;
   
 
 }
-
-
 </style>
 <body class="hold-transition skin-blue sidebar-mini">
 
@@ -161,14 +155,14 @@ $(document).ready(
                 
                 <div class="form-group"style="width:200px;">
                   <label for="exampleInputPassword1">비밀번호 확인</label>
-                  <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"  name="ePwd" >
+                  <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"  name="ePwd2" >
                 </div>
                 
                 <div class="form-group"style="width:200px;">
                 <label>부서</label>
                  
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true"  name="eDepartFk">
-                  <c:forEach items="${list2 }" var="e2" >
+                  <c:forEach items="${list2}" var="e2" >
                   <option value="${e2.eDepartFk}">${e2.department}</option>
                   </c:forEach>
                 </select>
@@ -184,13 +178,6 @@ $(document).ready(
                 </select>
               </div>
                 
-  				<div class="form-group">
-                  <label for="exampleInputFile">사원 사진</label>
-                 <input type="file" onchange="fileCheck(this)" accept="image/gif, image/jpeg, image/png" name="ePhoto1" />
-
-                </div>
-             
-           
                 
               <label>사원주소</label>
               <div class="input-group"style="width:400px;">
@@ -213,9 +200,8 @@ $(document).ready(
                     <i class="fa fa-phone"></i>
                   </div>
                   
-                  <input type="text" class="form-control"  name="eExten"  data-inputmask='"mask": "999-9999-9999"' data-mask>
-<!--                   <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 9999-9999&quot;" data-mask="" name="eExten"  value="11">
- -->                  
+                  <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="" name="eExten"  value="">
+                 
                 </div>
                 <!-- /.input group -->
               </div>
@@ -226,10 +212,7 @@ $(document).ready(
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="text" class="form-control"  name="ePhone"  data-inputmask='"mask": "999-999-9999"' data-mask>
-                   <!-- <input type="text" class="form-control"data-inputmask="'mask': ['999-999-9999', '+099 99 99 9999[9]-9999']" data-mask> -->
-<!--                   <input type="text" class="form-control" data-inputmask="'phone': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="phone" name="ePhone" >
- -->                  
+                  <input type="text" class="form-control"  name="ePhone"  data-inputmask='"mask": "999-9999-9999"' data-mask>
                 </div>
                 <!-- /.input group -->
               </div>
@@ -269,7 +252,7 @@ $(document).ready(
                   <label for="exampleInputFile">사원 사진</label>
               <div class="form-group">
 						<div class="btn btn-default btn-file">
-							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="ePhoto" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
+							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="ePhoto1" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
 																								onchange="fileCheck(this)"/>
 						</div>
 					<div class="file-list"></div>
@@ -328,25 +311,15 @@ function fileCheck(obj) {
     }
 }
 
-// //Date picker
-// $('#datepicker').datepicker({
-// 	format: 'yyyy-mm-dd',
-//   autoclose: true
-// })
-
-// $('#datepicker2').datepicker({
-// 	format: 'yyyy-mm-dd',
-//   autoclose: true
-// })
-
-
-
-
-
-
-
-
-
+//Date picker
+$('#datepicker').datepicker({
+	format: 'yyyy-mm-dd',
+autoclose: true
+})
+$('#datepicker2').datepicker({
+	format: 'yyyy-mm-dd',
+autoclose: true
+})
 
 
 </script>
@@ -355,8 +328,5 @@ function fileCheck(obj) {
 
 
 <c:import url="../include/footer.jsp"/>
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
 </body>
 </html>

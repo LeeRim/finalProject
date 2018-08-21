@@ -34,6 +34,12 @@ public class NoteVo {
 	//search용
 	private String keyword;
 	
+	//index page 용
+	private int rnKey;
+	private String eName;
+	private String ePhoto;
+	private String job;
+	private String department;
 	public NoteVo() {
 	}
 
@@ -156,6 +162,46 @@ public class NoteVo {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+	
+	public int getRnKey() {
+		return rnKey;
+	}
+
+	public void setRnKey(int rnKey) {
+		this.rnKey = rnKey;
+	}
+
+	public String geteName() {
+		return eName;
+	}
+
+	public void seteName(String eName) {
+		this.eName = eName;
+	}
+
+	public String getePhoto() {
+		return ePhoto;
+	}
+
+	public void setePhoto(String ePhoto) {
+		this.ePhoto = ePhoto;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
 
 	@Override
 	public String toString() {
@@ -163,8 +209,10 @@ public class NoteVo {
 				+ snContent + ", snWriteDate=" + snWriteDate + ", snDeleteYn=" + snDeleteYn + ", snAttachYn="
 				+ snAttachYn + ", snTrashdeleteYn=" + snTrashdeleteYn + ", receive=" + receive + ", receiveNo="
 				+ receiveNo + ", receiver=" + receiver + ", snKeies=" + snKeies + ", attach=" + attach + ", employee="
-				+ employee + "]";
+				+ employee + ", keyword=" + keyword + ", rnKey=" + rnKey + ", eName=" + eName + ", ePhoto=" + ePhoto
+				+ ", job=" + job + ", department=" + department + "]";
 	}
 
+	
 	
 }
