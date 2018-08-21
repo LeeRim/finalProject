@@ -45,11 +45,12 @@ public class CompanyVo {
 	}
 	
 
-	public CompanyVo(int cKey, String cMileage, int cLevel) {
+	public CompanyVo(int cKey, String cMileage, int cLevel,int payVoucher) {
 		super();
 		this.cKey = cKey;
 		this.cMileage = cMileage;
 		this.cLevel = cLevel;
+		this.payVoucher = payVoucher;
 	}
 
 	

@@ -129,10 +129,19 @@ public class AdminController {
 		service.insertCompanyPaymentP(paymentVo);
 		int cLevel = Integer.parseInt(request.getParameter("cLevel"));
 		
-		CompanyVo company = new CompanyVo(cKeyFk, payMileage, cLevel);
+		CompanyVo company = new CompanyVo(cKeyFk, payMileage, cLevel,payVoucher);
 		company.setcKey(cKeyFk);
 		company.setcMileage(payMileage);
 		company.setcLevel(cLevel);
+		if(payVoucher == 1){
+			company.setPayVoucher(31);
+		}else if(payVoucher == 3){
+			company.setPayVoucher(93);
+		}else if(payVoucher == 6){
+			company.setPayVoucher(186);
+		}else{
+			company.setPayVoucher(365);
+		}
 		service.insertCompanyPaymentC(company);
 		String mmmm = "redirect:companyPayment.do?cKeyFk="+cKeyFk;
 		return mmmm;

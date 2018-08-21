@@ -8,9 +8,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Starter</title>
-  <!-- fullCalendar -->
-  <link rel="stylesheet" href="resources/bower_components/fullcalendar/dist/fullcalendar.min.css">
-  <link rel="stylesheet" href="resources/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
  <style>
  	.row{
  		margin-left:auto;
@@ -221,7 +218,9 @@
 	          <!-- /.box -->
 	           </div>
 	        </div>
-	        
+	  </div>     
+	  
+	  <div class="row">
 	         <div class="col-md-4" style="margin-top:-9px; width:41%;">
 				<div class="box-body table-responsive no-padding">
 							<h4>공지사항</h4>
@@ -241,63 +240,7 @@
 					</table>
 				</div>
 			</div>
-	        
-	  </div>      
-	  
-	  <div class="row">
-     	<div class="col-md-9" style="width:58.3%;">
-          <div class="box box-primary">
-            <div class="box-body no-padding">
-              <!-- THE CALENDAR -->
-              <div id="calendar"></div>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /. box -->
-        </div>
-        
-        <div class="row">
-				<div class="col-md-4" style="margin-top:-15px; margin-bottom:7px; width:41%">
-					<div class="box-body table-responsive no-padding">
-								<h4>경조사 게시판</h4>
-						<table class="table table-hover">
-							<tr>
-								<th class="title">글제목</th>
-								<th class="writer">작성자</th>
-								<th class="date">작성일</th>
-							</tr>
-							<c:forEach items="${board3}" var="board3" varStatus="status">
-							 <tr data-key="${board3.boardKey}">
-								<td class="title"><c:out value="${board3.bTitle}" /></td>
-								<td class="writer"><c:out value="${board3.eName}" /></td>
-								<td class="date"><c:out value="${board3.bDate}" /></td>
-							</tr>
-						</c:forEach>
-						</table>
-					</div>
-				</div>
-				 <div class="col-md-4" style="margin-top:-11px; width:41%">
-					<div class="box-body table-responsive no-padding">
-								<h4>자유게시판</h4>
-						<table class="table table-hover">
-							<tr>
-								<th class="title">글제목</th>
-								<th class="writer">작성자</th>
-								<th class="date">작성일</th>
-							</tr>
-							<c:forEach items="${board2}" var="board2" varStatus="status">
-								<tr data-key="${board2.boardKey }">
-									<td class="title"><c:out value="${board2.bTitle }" /></td>
-									<td class="writer"><c:out value="${board2.eName }" /></td>
-									<td class="date"><c:out value="${board2.bDate }" /></td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-				</div>
-			</div>
-        
-     </div>
+	  </div> 
     </section>
     <!-- /.content -->
   </div>
@@ -307,88 +250,5 @@
 
 
 	<c:import url="../include/footer.jsp"/>
-	<!-- fullCalendar -->
-<script src="resources/bower_components/moment/moment.js"></script>
-<script src="resources/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-<!-- Page specific script -->
-<script>
-  $(function () {
-
-    /* initialize the external events
-     -----------------------------------------------------------------*/
-    function init_events(ele) {
-      ele.each(function () {
-        var eventObject = {
-          title: $.trim($(this).text()) // use the element's text as the event title
-        }
-
-        // store the Event Object in the DOM element so we can get to it later
-        $(this).data('eventObject', eventObject)
-
-        // make the event draggable using jQuery UI
-
-      });
-    }
-
-    init_events($('#external-events div.external-event'))
-
-    /* initialize the calendar
-     -----------------------------------------------------------------*/
-    //Date for the calendar events (dummy data)
-    var date = new Date()
-        
-    var dataList = [];
- 
-    //모든 일정을 받아오는 반복문
-    <c:forEach items="${list}" var="cal">
-    dataList.push({
-    	title   : '${cal.title}',
-        start   : new Date(${cal.startYear}, ${cal.startMonth - 1}, ${cal.startDay} ),
-        end		:  new Date(${cal.endYear}, ${cal.endMonth - 1}, ${cal.endDay+1} ),
-        backgroundColor: '${cal.background}', 
-        borderColor    : '${cal.background}' 
-    });
-	</c:forEach>
-    
-    
-    $('#calendar').fullCalendar({
-    	height: 520, 
-    	header    : {
-        left  : '',
-        center: 'title',
-        right : 'prev,next today'
-      },
-      buttonText: {
-          today: 'today'
-        },
-      //Random default events
-      
-      events    : dataList,
-      editable  : false,
-      droppable : false, // this allows things to be dropped onto the calendar !!!
-      drop      : function (date, allDay) { 
-
-        // retrieve the dropped element's stored Event Object
-        var originalEventObject = $(this).data('eventObject')
-
-        // we need to copy it, so that multiple events don't have a reference to the same object
-        var copiedEventObject = $.extend({}, originalEventObject)
-
-        // assign it the date that was reported
-        copiedEventObject.start           = date
-        copiedEventObject.allDay          = allDay
-        copiedEventObject.backgroundColor = $(this).css('background-color')
-        copiedEventObject.borderColor     = $(this).css('border-color')
-
-        // render the event on the calendar
-        
-        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
-
-        // is the "remove after drop" checkbox checked?
-
-      }
-    });
-  });
-</script>
 </body>
 </html>
