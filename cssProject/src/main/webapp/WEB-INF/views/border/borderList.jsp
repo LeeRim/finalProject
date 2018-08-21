@@ -69,8 +69,30 @@
 	}
 </style>
 <script>
-$(document).bind("contextmenu", function(event) { 
+$(function(){
+    $(".writerTd").contextmenu(function(e){
+       $writerTd = $(e.target);
+       console.log($writerTd.text());
+    });
+ })
+
+ $(document).bind("contextmenu", function(event) {
+/*
+	 var cursorX;
+	var cursorY;
+	document.onmousemove = function(e){
+	    cursorX = e.pageX;
+	    cursorY = e.pageY;
+	}
+	setInterval(checkCursor, 1000);
+	function checkCursor(){
+	    alert("Cursor at: " + cursorX + ", " + cursorY);
+	}
+ */	
+	console.log(event);
+ 	console.log(event.target);
     event.preventDefault();
+    $("div.custom-menu:visible").hide();
     $("<div class='custom-menu'>Custom menu</div>")
         .appendTo("body")
         .css({top: event.pageY + "px", left: event.pageX + "px"});

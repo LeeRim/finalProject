@@ -1,37 +1,47 @@
 package com.jdl.css.givevacation.model.vo;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class GivevacationVo {
 	
-	private int gv_key; //기본키
+	private int gvKey; //기본키
 	private int cKeyFk; //회사키
 	private int gvYear; //근속년수
 	private int gvVacaDate;//지급할 일수
-	private Date gvDate;//휴가를 지급할 날짜
+	private String gvDate;//휴가를 지급할 날짜
 
 	public GivevacationVo(){
 		
 	}
 
-	public GivevacationVo(int gv_key, int cKeyFk, int gvYear, int gvVacaDate, Date gvDate) {
-		this.gv_key = gv_key;
+	
+
+	public GivevacationVo(int gvKey, int cKeyFk, int gvYear, int gvVacaDate, String gvDate) {
+		this.gvKey = gvKey;
 		this.cKeyFk = cKeyFk;
 		this.gvYear = gvYear;
 		this.gvVacaDate = gvVacaDate;
 		this.gvDate = gvDate;
 	}
 
-	public int getGv_key() {
-		return gv_key;
+
+
+
+	public int getGvKey() {
+		return gvKey;
 	}
 
-	public void setGv_key(int gv_key) {
-		this.gv_key = gv_key;
+
+
+	public void setGvKey(int gvKey) {
+		this.gvKey = gvKey;
 	}
+
+
 
 	public int getcKeyFk() {
 		return cKeyFk;
@@ -57,19 +67,26 @@ public class GivevacationVo {
 		this.gvVacaDate = gvVacaDate;
 	}
 
-	public Date getGvDate() {
+
+	public String getGvDate() {
 		return gvDate;
 	}
 
-	public void setGvDate(Date gvDate) {
+
+
+	public void setGvDate(String gvDate) {
 		this.gvDate = gvDate;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "GivevacationVo [gv_key=" + gv_key + ", cKeyFk=" + cKeyFk + ", gvYear=" + gvYear + ", gvVacaDate="
+		return "GivevacationVo [gvKey=" + gvKey + ", cKeyFk=" + cKeyFk + ", gvYear=" + gvYear + ", gvVacaDate="
 				+ gvVacaDate + ", gvDate=" + gvDate + "]";
 	}
+
+
 	
 	
 }

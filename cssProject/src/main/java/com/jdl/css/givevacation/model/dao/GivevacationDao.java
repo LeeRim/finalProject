@@ -14,8 +14,12 @@ public class GivevacationDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
-	public int insertGive(GivevacationVo gv) {
-		return sqlSession.insert("GiveMapper.Giveinsert", gv);
+	public int insertGive(GivevacationVo giv) {
+		return sqlSession.insert("GiveMapper.Giveinsert", giv);
+	}
+
+	public List<GivevacationVo> selectGive(int getcKeyFk) {
+		return sqlSession.selectList("GiveMapper.GiveSelect", getcKeyFk);
 	}
 	
 	

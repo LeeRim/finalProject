@@ -3,7 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="GiveMapper">
+
 	<insert id="Giveinsert" parameterType="Give">
-		INSERT INTO GIVEVACATION VALUES(SEQ_VICEVACATION.NEXTVAL, 1, 1, 15, SYSDATE)
+		MERGE INTO GIVEVACATION G
+            USING DUAL
+            ON (GV_KEY = #{gvKey})
+            WHEN MATCHED THEN
+                      UPDATE SET
+                      GV_YEAR = #{gvYear},
+                      GV_VACADATE = #{gvVacaDate},
+                      GV_DATE = #{gvDate}
+            WHEN NOT MATCHED THEN
+                     INSERT (GV_KEY, C_KEY_FK, GV_YEAR, GV_VACADATE, GV_DATE) VALUES(SEQ_VICEVACATION.NEXTVAL, #{cKeyFk}, #{gvYear}, #{gvVacaDate}, #{gvDate})
 	</insert>
+	
+	<select id="GiveSelect" parameterType="int" resultType="Give">
+		SELECT GV_KEY, C_KEY_FK, GV_YEAR, GV_VACADATE, TO_CHAR(GV_DATE,'YYYY-MM-DD') GV_DATE FROM GIVEVACATION
+		WHERE C_KEY_FK = #{cKeyFk}
+	</select>
+	
 </mapper>
