@@ -76,6 +76,7 @@ public class NoteController {
 //			System.out.println("files.length : " + files.length);
 //			System.out.println(file.getOriginalFilename());
 //			System.out.println("folder : " + folder);
+				
 				filePath = folder + "\\" + file.getOriginalFilename();
 				
 //			System.out.println("filePath : " + filePath);
