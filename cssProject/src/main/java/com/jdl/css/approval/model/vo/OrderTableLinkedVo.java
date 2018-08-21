@@ -19,6 +19,19 @@ public class OrderTableLinkedVo {
 		// TODO Auto-generated constructor stub
 	}
 
+	public OrderTableLinkedVo(int aKeyFk, int olCulno, String olProduct, String olSize, String olUnion,
+			int olProductcount, int olOrizinprice, int olPrice, String olEtc) {
+		this.aKeyFk = aKeyFk;
+		this.olCulno = olCulno;
+		this.olProduct = olProduct;
+		this.olSize = olSize;
+		this.olUnion = olUnion;
+		this.olProductcount = olProductcount;
+		this.olOrizinprice = olOrizinprice;
+		this.olPrice = olPrice;
+		this.olEtc = olEtc;
+	}
+	
 	public OrderTableLinkedVo(int olKey, int aKeyFk, int olCulno, String olProduct, String olSize, String olUnion,
 			int olProductcount, int olOrizinprice, int olPrice, String olEtc) {
 		this.olKey = olKey;

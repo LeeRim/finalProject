@@ -12,6 +12,7 @@ import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
 import com.jdl.css.approval.model.vo.VacationFormVo;
 import com.jdl.css.approval.model.vo.OrderFormVo;
+import com.jdl.css.approval.model.vo.OrderTableLinkedVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Repository
@@ -110,6 +111,16 @@ public class ApprovalDao {
 	public VacationFormVo selectVacationForm(int aKey) {
 		return sqlSession.selectOne("ApprovalMapper.selectVacationForm",aKey);
 	}
+	
+	public OrderFormVo selectOrderForm(int aKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ApprovalMapper.selectOrderForm", aKey);
+	}
+	
+	public List<OrderTableLinkedVo> selectOrderLinked(int aKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("ApprovalMapper.selectOrderLinked", aKey);
+	}
 
 	public int updateApprovalCondition(ApprovalConditionVo ac) {
 		// TODO Auto-generated method stub
@@ -129,6 +140,11 @@ public class ApprovalDao {
 	public int insertOrderForm(OrderFormVo order) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("ApprovalMapper.insertOrderForm", order);
+	}
+
+	public int insertOrderLinked(OrderTableLinkedVo orderTableLinkedVo) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("ApprovalMapper.insertOrderLinked", orderTableLinkedVo);
 	}
 
 }

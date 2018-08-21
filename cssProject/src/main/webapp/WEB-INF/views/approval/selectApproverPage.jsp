@@ -169,6 +169,14 @@ var approvers = new Array();
 var approvers = new Array();
 var insteads = new Array();
 var total = new Array();
+function validate(){
+	if(total.length==0){
+		alert("선택된 결재자가 없습니다.");
+		return false;
+	}else{
+		return true;
+	}
+}
 	function select(index,eKey,name, job, department,eState,iKey,iName,iJob,iDepartment) {
 		var html="";
 		

@@ -12,6 +12,7 @@ import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
 import com.jdl.css.approval.model.vo.VacationFormVo;
 import com.jdl.css.approval.model.vo.OrderFormVo;
+import com.jdl.css.approval.model.vo.OrderTableLinkedVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Service
@@ -106,6 +107,16 @@ public class ApprovalService {
 		return dao.selectVacationForm(aKey);
 	}
 
+	public OrderFormVo selectOrderForm(int aKey) {
+		// TODO Auto-generated method stub
+		return dao.selectOrderForm(aKey);
+	}
+	
+	public List<OrderTableLinkedVo> selectOrderLinked(int aKey) {
+		// TODO Auto-generated method stub
+		return dao.selectOrderLinked(aKey);
+	}
+
 	public int updateApprovalCondition(ApprovalConditionVo ac) {
 		// TODO Auto-generated method stub
 		return dao.updateApprovalCondition(ac);
@@ -132,6 +143,14 @@ public class ApprovalService {
 	public int insertOrderForm(OrderFormVo order) {
 		// TODO Auto-generated method stub
 		return dao.insertOrderForm(order);
+	}
+
+	public int insertOrderLinked(List<OrderTableLinkedVo> otlList) {
+		int result=0;
+		for(int i=0;i<otlList.size();i++){
+			result+=dao.insertOrderLinked(otlList.get(i));
+		}
+		return result;
 	}
 
 }
