@@ -12,5 +12,19 @@
   			comm_outtime as "outTime"
   		from commute
   	</select>
-  
+  	
+  	<update id="insertOutCommute" parameterType="Commute">
+  	UPDATE COMMUTE SET COMM_OUTTIME= SYSDATE
+	WHERE to_number(to_char(comm_date, 'dd')) = to_number(to_char(sysdate, 'dd'))
+  	</update>
+  	
+  	<insert id="insertInner" parameterType="date">
+  		INSERT INTO COMMUTE VALUES(SEQ_COMMUTE.NEXTVAL, 1, 1, SYSDATE, SYSDATE, NULL)
+  	</insert>
+  	
+  	<select id="selectOneCommute" resultType="Commute">
+  		select comm_intime as " inTime"
+		from commute
+		where to_number(to_char(comm_date, 'dd'))=to_number(to_char(sysdate, 'dd'))
+  	</select>
   </mapper>

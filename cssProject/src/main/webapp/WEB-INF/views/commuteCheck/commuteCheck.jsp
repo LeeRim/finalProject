@@ -12,50 +12,82 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | Starter</title>
-
-
-  
-  <style>
- 	.timeInput{
-	  font-size: 4em;
-	  border:1 #fff;
-	  color:#684816;
-	  text-align: center;
-	  padding: 30px;
-	  border-radius: 5px;
-	  background: #000;
-	  font-weight: bold
+	<script>
+	function startTime() {
+	    var today = new Date();
+	    var year = today.getFullYear();
+		var month = today.getMonth();
+		var date = today.getDate();
+	    var h = today.getHours();
+	    var m = today.getMinutes();
+	    var s = today.getSeconds();
+	    m = checkTime(m);
+	    s = checkTime(s);
+	    document.getElementById('clock').innerHTML =
+	   year+ "년" + month + "월" + date + "일" + h + ":" + m + ":" + s;
+	    var t = setTimeout(startTime, 500);
 	}
-  </style>
+	function checkTime(i) {
+	    if (i < 10) {i = "0" + i}; // 숫자가 10보다 작을 경우 앞에 0을 붙여줌
+	    return i;
+	}
+	
+	function inTime(){
+	    var today = new Date();
+		year = today.getFullYear(); 
+		month = today.getMonth();
+		date = today.getDate();
+	    h = today.getHours();
+	    m = today.getMinutes();
+	    s = today.getSeconds();
+    	var sum = new Date(year, month, date);
+    	var timeSum = new Date(h,m,s);
+		$.ajax({
+			type:"post",
+	        url:"commuteone.do",
+	        data : {inHour:h, inMinute:m},
+	        success: function(data){
+	        	 document.getElementById('inTime').innerHTML =
+	        		 h + "시" + m+ "분"+ s + "초"
+	        },
+	        error: function(error) {
+	            alert(error);
+	        }
+		});
+	}
+	
+	function outTime(){
+		    var today = new Date();
+			year = today.getFullYear(); 
+			month = today.getMonth();
+			date = today.getDate();
+		    h = today.getHours();
+		    m = today.getMinutes();
+		    s = today.getSeconds();
+	    	var sum = new Date(year, month, date);
+	    	var timeSum = new Date(h,m,s);
+			$.ajax({
+				type:"post",
+		        url:"commuteOut.do",
+		        data : {inHour:h, inMinute:m},
+		        success: function(data){
+		        	 document.getElementById('outTime').innerHTML =
+		        		 h + "시" + m+ "분"+ s + "초"
+		        },
+		        error: function(error) {
+		            alert(error);
+		        }
+			});
+		}
 
+	</script>
 </head>
-<!--
-BODY TAG OPTIONS:
-=================
-Apply one or more of the following classes to get the
-desired effect
-|---------------------------------------------------------|
-| SKINS         | skin-blue                               |
-|               | skin-black                              |
-|               | skin-purple                             |
-|               | skin-yellow                             |
-|               | skin-red                                |
-|               | skin-green                              |
-|---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
-|               | layout-boxed                            |
-|               | layout-top-nav                          |
-|               | sidebar-collapse                        |
-|               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
-<body class="hold-transition skin-blue sidebar-mini">
+
+<body class="hold-transition skin-blue sidebar-mini" onload="startTime()">
 <div class="wrapper">
 	
-	<c:import url="include/left_column.jsp"/>
+	<c:import url="/WEB-INF/views/include/left_column.jsp"/>
   
-  
-
 
   <div class="content-wrapper" style="height: 100%;">
 
@@ -70,25 +102,18 @@ desired effect
     <section class="content container-fluid">
 		
 		<h1>현재시간</h1><br/>
-		<form name="timeForm" style="width: 100%; text-align: center; margin:40px">
-  		<input type="text" name="timeInput" class="timeInput" readonly="readonly">
+		<form name="timeForm" style="width: 20%; text-align: center; margin:20px">
+  		<div id="clock"></div>
 		</form>
-		<br/>
+		<div id="date"></div>
+		<h1>현재 IP주소</h1>
+		<div><c:out value="${ipLocation}"></c:out></div>
 		<h1>출근시간</h1><br/>
-		<h1 id="inTime"></h1>
-		여기에 출근시간이 찍힘
+		<div id="inTime"></div>
+		<input type="submit" value="출근" onclick="inTime();">
 		<h1>퇴근시간</h1><br/>
-		<h1 id="outTime"></h1>
-		안눌럿을떈 00시00분00초 하고 누르면 나오게<br/>
-		<br/>
-		<br/>
-		<br/>
-		<input type="submit" value="출근" >
-		<input type="submit" value="퇴근" >
-		<input type="submit" value="외근 전용 출근" >
-		출근버튼 넣고            퇴근버튼 넣고(아니면 출근 퇴근 switching되게?)
-		출장지에서 출근하기를 통해 ip무시하고 넣기도 가능?
-
+		<div id="outTime"></div>
+		<input type="submit" value="퇴근" onclick="outTime();">
     </section>
     <!-- /.content -->
   </div>
@@ -97,44 +122,11 @@ desired effect
 
 
 
-	<c:import url="include/footer.jsp"/>
+	<c:import url="/WEB-INF/views/include/footer.jsp"/>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
 <P>  The time on the server is ${serverTime}. 111</P>
-	<script>
-	function realtimeClock() {
-		  document.timeForm.timeInput.value = getTimeStamp();
-		  setTimeout("realtimeClock()", 1000);
-		}
-		 
-		 
-		function getTimeStamp() { // 24시간제
-		  var date = new Date();
-		 
-		  var f_date =
-		    //년-월-일  시:분:초
-		    leadingZeros(date.getFullYear(), 4) + '-' +
-		    leadingZeros(date.getMonth() + 1, 2) + '-' +
-		    leadingZeros(date.getDate(), 2) + ' ' +
-		    leadingZeros(date.getHours(), 2) + ':' +
-		    leadingZeros(date.getMinutes(), 2) + ':' +
-		    leadingZeros(date.getSeconds(), 2);
-		 
-		  return f_date;
-		}
-		 
-		//숫자 두자리 ex) 1이면 01 앞에 0을 붙임
-		function leadingZeros(date, digits) {
-		  var zero = '';
-		  date = date.toString();
-		 
-		  if (date.length < digits) {
-		    for (i = 0; i < digits - date.length; i++)
-		      zero += '0';
-		  }
-		  return zero + date;
-		}
-	</script>
+
 </body>
 </html>
