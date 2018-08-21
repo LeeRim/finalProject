@@ -76,7 +76,7 @@
 		$("#commentForm").submit();
 	}
 	function bModifyPage(){
-		location.href="borderUpdateForm.do?boardKey=${board.boardKey}"
+		location.href="borderUpdateForm.do?boardKey=${board.boardKey}" + "&currentPage=" + ${currentPage};
 	}
 	function deleteBoard(){
 		if(confirm("삭제 하시겠습니까?")){

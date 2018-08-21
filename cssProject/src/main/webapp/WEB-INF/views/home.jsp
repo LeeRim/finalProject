@@ -18,6 +18,9 @@
   	function board(){
   		location.href="borderIndex.do"
   	}
+  	function givevacation(){
+  		location.href="givevacation.do"
+  	}
   </script>
 
 </head>
@@ -35,6 +38,7 @@
 
         <h1>커뮤니티 버튼</h1>
         <button onclick="board();">게시판 인덱스</button>
+        <button onclick="givevacation();">휴가 주기(회사)</button>
         <hr>
         <h1>쪽지 버튼</h1>
         <a href="receiveNoteList.do">쪽지 메인 페이지 이동</a>
