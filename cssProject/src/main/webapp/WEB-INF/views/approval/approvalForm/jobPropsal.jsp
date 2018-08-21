@@ -101,7 +101,7 @@ desired effect
 								<!--전자결재 내용-->
 								<div class="approval_import ie9-scroll-fix">
 									<!-- 문서 내용 표시 테스트 -->
-									<form id="form" class="form_doc_editor editor_view" action="writeJobPropsal.do" method="post" enctype="multipart/form-data">
+									<form id="form" class="form_doc_editor editor_view" action="writeJobPropsal.do" method="post" enctype="multipart/form-data" onsubmit="return validate();">
 										<input type="hidden" id="appStr" name="appStr" value="">
 										<input type="hidden" id="insteads" name="insteads" value="">
 										<span>

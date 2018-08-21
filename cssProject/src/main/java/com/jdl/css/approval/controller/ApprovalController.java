@@ -21,8 +21,9 @@ import com.jdl.css.approval.model.service.ApprovalService;
 import com.jdl.css.approval.model.vo.ApprovalConditionVo;
 import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.approval.model.vo.JobPropsalVo;
-import com.jdl.css.approval.model.vo.VacationFormVo;
 import com.jdl.css.approval.model.vo.OrderFormVo;
+import com.jdl.css.approval.model.vo.OrderTableLinkedVo;
+import com.jdl.css.approval.model.vo.VacationFormVo;
 import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.employee.model.service.EmployeeService;
@@ -331,7 +332,7 @@ public class ApprovalController {
 		System.out.println("app / " + app);
 		System.out.println("order / " + order);
 
-		//int addAResult = aService.insertApproval(app);
+		int addAResult = aService.insertApproval(app);
 		// System.out.println("aKey : "+app.getaKey());
 
 		List<ApprovalConditionVo> acList = new ArrayList<ApprovalConditionVo>();
@@ -349,21 +350,30 @@ public class ApprovalController {
 			acList.add(ac);
 		}
 
-		//int addAppResult = aService.insertApprovers(acList);
+		int addAppResult = aService.insertApprovers(acList);
 		// System.out.println(addAppResult);
 
 		order.setaKeyFk(app.getaKey());
-		//int addOrderFormResult = aService.insertOrderForm(order);
+		int addOrderFormResult = aService.insertOrderForm(order);
+		//System.out.println("addOrderFormResult / "+addOrderFormResult);
 		
 		
-		
-		
-		String[] arr = olCulno.split(",");
-		System.out.println("olProduct" + arr.length);
+		List<OrderTableLinkedVo> otlList = new ArrayList<OrderTableLinkedVo>();
+		String[] olCulnos = olCulno.split(",");
+		String[] olProducts = olProduct.split(",");
+		String[] olSizes = olSize.split(",");
+		String[] olUnions = olUnion.split(",");
+		String[] olProductcounts = olProductcount.split(",");
+		String[] olOrizinprices = olOrizinprice.split(",");
+		String[] olPrices = olPrice.split(",");
+		String[] olEtcs = olEtc.split(",");
+		for(int i=0;i<olProducts.length;i++){
+			OrderTableLinkedVo otl = new OrderTableLinkedVo(app.getaKey(),Integer.parseInt(olCulnos[i]),olProducts[i],olSizes[i],olUnions[i],Integer.parseInt(olProductcounts[i]),Integer.parseInt(olOrizinprices[i]),Integer.parseInt(olPrices[i]),olEtcs[i]);
+			otlList.add(otl);
+		}
 
-		
-		
-		
+		int addOrderLinkedResult = aService.insertOrderLinked(otlList);
+		//System.out.println("addOrderLinkedResult / "+addOrderLinkedResult);
 		
 		List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
 
@@ -409,7 +419,7 @@ public class ApprovalController {
 		int attachResult = attService.insertAttachments(attachList);
 		// System.out.println(attachResult);
 
-		return "approval/approvalPage";
+		return "redirect:openOrderFormDetail.do?aKey=" + app.getaKey();
 	}
 
 	
@@ -517,6 +527,25 @@ public class ApprovalController {
 		mv.setViewName("approval/approvalForm/vacationFormDetail");
 		return mv;
 	}
+	
+	@RequestMapping("openOrderFormDetail.do")
+	public ModelAndView openOrderFormDetail(ModelAndView mv, ApprovalVo a) {
+		a = aService.selectApprovalDetail(a);
+		OrderFormVo of = aService.selectOrderForm(a.getaKey());
+		List<OrderTableLinkedVo> otlList = aService.selectOrderLinked(a.getaKey());
+		ApprovalConditionVo cApprover = aService.selectCurrentApprover(a.getaKey());
+		
+		System.out.println(a);
+		System.out.println(of);
+		System.out.println(otlList);
+		
+		mv.addObject("approval", a);
+		mv.addObject("cApprover", cApprover);
+		mv.addObject("of", of);
+		mv.addObject("otlList", otlList);
+		mv.setViewName("approval/approvalForm/orderFormDetail");
+		return mv;
+	}
 
 	// 결재하기
 	@RequestMapping("updateApprovalCondition.do")
@@ -530,7 +559,7 @@ public class ApprovalController {
 			result = "redirect:openJobPropsalDetail.do?aKey=" + aKey;
 			break;
 		case 2:
-			result = "redirect:openJobPropsalDetail.do?aKey=" + aKey;
+			result = "redirect:openOrderFormDetail.do?aKey=" + aKey;
 			break;
 		case 3:
 			result = "redirect:openJobPropsalDetail.do?aKey=" + aKey;

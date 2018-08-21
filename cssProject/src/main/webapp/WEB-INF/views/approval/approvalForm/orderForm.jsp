@@ -25,18 +25,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	function validate() {
 		//console.log($("#orderList").children());
 		var count = 0;
-		//for (var i = 1; i < 6; i++) {
-		for (var j = 1; j < 8; j++) {
-			if ($("#orderList").children().eq(1).children().eq(j).children().val() != "") {
-				count+=1;
-				console.log(count);				
+		for (var i = 1; i < 6; i++) {
+			for (var j = 1; j < 7; j++) {
+				if ($("#orderList").children().eq(i).children().eq(j).children().val() != "") {
+					count+=1;
+				}
+			}
+			if(count!=0){
+			for (var j = 1; j < 7; j++) {
+				if ($("#orderList").children().eq(i).children().eq(j).children().val() == "") {
+					var text = $("#orderList").children().eq(0).children().eq(j).text();
+					alert(i + "번째 물품의 " + text + "을(를) 작성해 주세요");
+					return false;
+				}
+			}
+			count=0;
+			if ($("#orderList").children().eq(i).children().eq(7).children().val() == ""){
+				$("#orderList").children().eq(i).children().eq(7).children().val("/");
+			}
 			}
 		}
-		if(count!=0){
-			console.log($("#orderList").children().eq(1).children().eq(0).children().val()+"번째 물품의 ");
-		}
-		//}
-		return false;
+		return true;
 	}
 
 	function openSelectApprover() {
@@ -116,9 +125,9 @@ desired effect
 								<input type="hidden" id="appStr" name="appStr" value="">
 								<input type="hidden" id="insteads" name="insteads" value="">
 								<span><span
-									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
 										<!-- default copy start --> <span
-										style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+										style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
 
 											<table
 												style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
@@ -357,7 +366,7 @@ desired effect
 
 
 										<table
-											style="border-bottom: 2px solid black; border-left: 2px solid black; width: 800px; border-collapse: collapse; font-family: &amp; amp; amp; amp; amp; amp; amp; amp; quot; malgun gothic&amp;amp; amp; amp; amp; amp; amp; amp; quot; , dotum , arial, tahoma; border-right: 2px solid black; height: 453.636px;">
+											style="border-bottom: 2px solid black; border-left: 2px solid black; width: 800px; border-collapse: collapse; font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; malgun gothic&amp;amp; amp; amp; amp; amp; amp; amp; amp; quot; , dotum , arial, tahoma; border-right: 2px solid black; height: 453.636px;">
 											<colgroup>
 												<col width="40">
 												<col width="300">
@@ -379,11 +388,11 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(221, 221, 221); height: 18px; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: bold; border-right: black 1px solid; padding-top: 5px">
 
-														품&nbsp;&nbsp;&nbsp;&nbsp;명</td>
+														품명</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(221, 221, 221); height: 18px; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: bold; border-right: black 1px solid; padding-top: 5px">
 
-														규&nbsp;&nbsp;&nbsp;&nbsp;격</td>
+														규격</td>
 													<td
 														style="border-bottom: black 1px solid; text-align: center; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(221, 221, 221); height: 18px; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: bold; border-right: black 1px solid; padding-top: 5px">
 
@@ -1142,7 +1151,7 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"
 														colspan="8"><p
-															style="margin: 0px 0px 10px; font-family: &amp; amp; amp; amp; amp; amp; amp; amp; quot; malgun gothic&amp;amp; amp; amp; amp; amp; amp; amp; quot; , dotum , arial, tahoma; font-size: 9pt; line-height: 18px;">※
+															style="margin: 0px 0px 10px; font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; malgun gothic&amp;amp; amp; amp; amp; amp; amp; amp; amp; quot; , dotum , arial, tahoma; font-size: 9pt; line-height: 18px;">※
 															특기사항</p> <textarea class="txta_editor"
 															data-dsl="{{textarea}}" name="aContent" id="aContent"
 															value="" data-id="" data-name="" data-require="false"
