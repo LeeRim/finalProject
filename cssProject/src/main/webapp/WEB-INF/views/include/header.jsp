@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE >
 <html>
 <head>
@@ -72,7 +73,7 @@
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success"><c:out value="${fn:length(sessionScope.indexNote)}"/></span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">안읽은 쪽지</li>
@@ -92,7 +93,7 @@
                         <small><i class="fa fa-clock-o"></i><c:out value="${note.snWriteDate}"/></small>
                       </h4>
                       <!-- The message -->
-                      <p><c:out value="${note.snTitle}"/></p>
+                      <p><c:out value="제목 :  ${note.snTitle}"/></p>
                     </a>
                   </li>
                 
@@ -101,7 +102,7 @@
                 </ul>
                 <!-- /.menu -->
               </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
+              <li class="footer"><a href="receiveNoteList.do">받은 쪽지 함</a></li>
             </ul>
           </li>
           

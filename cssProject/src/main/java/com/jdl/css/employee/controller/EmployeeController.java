@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.common.model.service.AttachmentService;
+import com.jdl.css.common.model.service.VacationService;
 import com.jdl.css.common.model.vo.AttachmentVo;
+import com.jdl.css.common.model.vo.VacationVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 import com.jdl.css.note.model.service.NoteService;
@@ -34,6 +36,8 @@ public class EmployeeController {
 	AttachmentService attachservice;
 	@Autowired
 	NoteService nService;
+	@Autowired
+	VacationService vService;
 	
 	
 	
@@ -47,10 +51,19 @@ public class EmployeeController {
 	@RequestMapping("login.do")
 	public ModelAndView login(EmployeeVo employee,HttpSession session, ModelAndView mv){
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
-//		System.out.println(user.geteKey());
 		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
-		System.out.println(indexNote);
-//		System.out.println("instead = " + user.getInstead());
+		
+		//근속년수에 따른 총 휴가 값 가지고오기
+		VacationVo giveVacation = vService.selectTotalVacation(user);
+		//휴가 사용일 가져오기
+		List<VacationVo> usedVacation = vService.selectUsedVacation(user);
+		int totalUsedVacation = 0;
+		for(VacationVo vacation : usedVacation){
+			totalUsedVacation += vacation.getvUseddate();
+		}
+		user.setTotalVacation(giveVacation.getGvVacadate());
+		user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
+		
 		if(user == null){
 			System.out.println("아이디 오류");
 		}else if(user.getePwd().equals(employee.getePwd())){
