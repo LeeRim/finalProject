@@ -176,6 +176,19 @@
 		<include refid="search"></include>
 	</select>
 	
+	<select id="searchEmp" parameterType="hashmap" resultMap="BorderMap">
+		SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
+		FROM BOARD b
+		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
+		WHERE B_CATEGORY = 1 AND e.E_NAME = '관리자'
+	</select>
+	
+	<select id="Empsearchcount" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM BOARD b
+		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
+		WHERE B_CATEGORY = 1 AND e.E_NAME = '관리자'
+	</select>
+	
 	<sql id="search">
 		<choose>
 			<when test="condition == 'all'">

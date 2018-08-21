@@ -26,6 +26,7 @@ import com.jdl.css.border.model.vo.BorderVo;
 import com.jdl.css.border.model.vo.PageInfo;
 import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.vo.AttachmentVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Controller
 public class BorderController {
@@ -393,5 +394,54 @@ public class BorderController {
 		return mv;
 	}
 	
+	@RequestMapping("read.do")
+	public ModelAndView employeeRead(@RequestParam(value="currentPage", required=false)String currentPagestr, String eName, ModelAndView mv, BorderVo board) {
+		int currentPage;	//현재 페이지의 번호
+		int limitPage;		//한페이지에 출력할 페이지 갯수
+		//1~10
+		int maxPage;		//가장 마지막 페이지
+		int startPage;		//시작 페이지 변수
+		int endPage;		//마지막 페이지 변수
+		int limit;				//한페이지에 출력할 글에 갯수
+		
+		limit = 10;
+		limitPage = 10;
+		
+		if(currentPagestr != null){
+			currentPage = Integer.parseInt(currentPagestr);
+		}else{
+			currentPage = 1;
+		}
+		//게시글의 총 갯수
+		int listCount = borderservice.countEmpsearch(eName, board.getbCateGory());
+//		int listCount = borderservice.countBoardList(board.getbCateGory());
+		
+		//134 -> 14
+				maxPage = (int)((double)listCount / limit + 0.9);
+				
+				//현재 페이지 번호
+				//12 - 10
+				startPage = (int)(currentPage / limitPage * limitPage) + 1;
+				//11~20  -> 134 -> 14
+				endPage = startPage + limitPage - 1;
+				if(maxPage < endPage){
+					endPage = maxPage;
+				}
+		PageInfo pi = new PageInfo(currentPage, limitPage, maxPage,
+						startPage, endPage, listCount);
+		//==================페이징 처리의 끝===============
+		
+		List<EmployeeVo> list = borderservice.empsearch(eName, board.getbCateGory());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("bCateGory", board.getbCateGory());
+		map.put("eName", eName);
+		
+		mv.addObject("map", map);
+		mv.addObject("pi", pi);
+		mv.setViewName("border/borderEmp");
+		return mv;
+	}
 	
 }

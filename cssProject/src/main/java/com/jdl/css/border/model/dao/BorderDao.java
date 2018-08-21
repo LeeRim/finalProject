@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Repository
 public class BorderDao {
@@ -102,6 +103,20 @@ public class BorderDao {
 		map.put("keyword", keyword);
 		map.put("getbCateGory", getbCateGory);
 		return sqlSession.selectOne("BorderMapper.listsearchcount", map);
+	}
+
+	public List<EmployeeVo> selectsearchEmp(String eName, String getbCateGory) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("eName", eName);
+		map.put("getbCateGory", getbCateGory);
+		return sqlSession.selectList("BorderMapper.searchEmp", map);
+	}
+
+	public int selectEmpsearchccount(String eName, String getbCateGory) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("eName", eName);
+		map.put("getbCateGory", getbCateGory);
+		return sqlSession.selectOne("BorderMapper.Empsearchcount", map);
 	}
 
 }

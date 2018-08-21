@@ -31,10 +31,12 @@
 	<typeAlias type="com.jdl.css.approval.model.vo.VacationFormVo" alias="VacationFormVo" />
 	<typeAlias type="com.jdl.css.commuteCheck.model.commuteCheckVo.CommuteCheckVo" alias="Commute" />
 	<typeAlias type="com.jdl.css.common.model.vo.DivisionVo" alias="DivisionVo"/>
+	<typeAlias type="com.jdl.css.givevacation.model.vo.GivevacationVo" alias="Give"/>
   </typeAliases>
 
 
   <mappers>
+  	<mapper resource="mybatis/sql/GiveVactionMapper.xml"/>
 	<mapper resource="mybatis/sql/BorderMapper.xml" /> 
 	<mapper resource="mybatis/sql/employeeMapper.xml" /> 
 	<mapper resource="mybatis/sql/adminMapper.xml"/>

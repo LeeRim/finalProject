@@ -9,31 +9,24 @@
 <title>Insert title here</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 <script>
-$(document).ready(function(){
-    // 옵션추가 버튼 클릭시
-    $("#table1").click(function(){
-        // item 의 최대번호 구하기
-        var lastItemNo = $("#table1 tr:last").attr("class").replace("item", "");
-
-        var newitem = $("#table1 tr:eq(1)").clone();
-        newitem.removeClass();
-        newitem.find("td:eq(0)").attr("rowspan", "1");
-        newitem.addClass("item"+(parseInt(lastItemNo)+1));
-
-        $("#table1").append(newitem);
-    });
-
+	function addRow(){
+		var ta = $("#table1");
+		console.log(ta);
+	}
 </script>
 </head>
 <body>
+<div>
+<form action="writeGiveVaction.do" method="post">
+<input type="hidden" name="" value=""/>
 	<table id="table1" border="1">
 		<tr>
 			<td>근로년수</td>
 			<td>지급일수</td>
 		</tr>
 		<tr class="item1">
-			<td><input type="text" value="1" readonly/></td>
-			<td><input type="text" value="12"/></td>
+			<td><input type="text" name="gvYear" value="1" readonly/></td>
+			<td><input type="text" name="gvVacaDate" value="12"/></td>
 		</tr>
 		<tr class="item2">
 			<td><input type="text" value="2" readonly/></td>
@@ -57,6 +50,8 @@ $(document).ready(function(){
 		</tr>
 	</table>
 	<button onclick="addRow();">근로년수 추가</button>
+</form>
+</div>
 	
 	
 	

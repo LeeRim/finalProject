@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.jdl.css.border.model.dao.BorderDao;
 import com.jdl.css.border.model.vo.BoardCommentVo;
 import com.jdl.css.border.model.vo.BorderVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Service
 public class BorderService {
@@ -92,6 +93,14 @@ public class BorderService {
 
 	public int countBoardsearch(String condition, String keyword, String getbCateGory) {
 		return dao.selectsearchcount(condition, keyword, getbCateGory);
+	}
+
+	public List<EmployeeVo> empsearch(String eName, String getbCateGory) {
+		return dao.selectsearchEmp(eName, getbCateGory);
+	}
+
+	public int countEmpsearch(String eName, String getbCateGory) {
+		return dao.selectEmpsearchccount(eName, getbCateGory);
 	}
 
 
