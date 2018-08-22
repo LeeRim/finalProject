@@ -61,8 +61,7 @@
 		width:150px;
 	}
 	th{
-		background:#4f6891;
-		color:white;
+		font-weight:bold;
 	}
  </style>
  <script>
@@ -82,6 +81,7 @@
 		location.href="borderList.do?bCateGory=" + b;
 	}
 </script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -224,8 +224,10 @@
 	        
 	         <div class="col-md-4" style="margin-top:-9px; width:41%;">
 				<div class="box-body table-responsive no-padding">
-							<h4>공지사항</h4>
 					<table class="table table-hover">
+						<tr>
+							<th colspan="3" style="background:#bcbcbc;">공지사항</th>
+						</tr>
 						<tr>
 							<th class="title">글제목</th>
 							<th class="writer">작성자</th>
@@ -259,8 +261,10 @@
         <div class="row">
 				<div class="col-md-4" style="margin-top:-15px; margin-bottom:7px; width:41%">
 					<div class="box-body table-responsive no-padding">
-								<h4>경조사 게시판</h4>
 						<table class="table table-hover">
+							<tr>
+								<th colspan="3" style="background:#bcbcbc;">경조사 게시판</th>
+							</tr>
 							<tr>
 								<th class="title">글제목</th>
 								<th class="writer">작성자</th>
@@ -278,8 +282,10 @@
 				</div>
 				 <div class="col-md-4" style="margin-top:-11px; width:41%">
 					<div class="box-body table-responsive no-padding">
-								<h4>자유게시판</h4>
 						<table class="table table-hover">
+							<tr>
+								<th colspan="3" style="background:#bcbcbc;">자유게시판</th>
+							</tr>
 							<tr>
 								<th class="title">글제목</th>
 								<th class="writer">작성자</th>
@@ -298,6 +304,7 @@
 			</div>
         
      </div>
+
     </section>
     <!-- /.content -->
   </div>

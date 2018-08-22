@@ -45,9 +45,22 @@ public class EmployeeService {
 
 	}
 
+
 	public int updateInstead(EmployeeVo user) {
 		// TODO Auto-generated method stub
 		return dao.updateInstead(user);
+	}
+	public int stateUpdate(EmployeeVo employee) {
+		return dao.stateUpdate(employee);
+	}
+
+	public int updateEmployee(EmployeeVo member) {
+		return dao.updateEmployee(member);
+	}
+
+	public int empIdCheck(EmployeeVo chekEmployee) {
+		return dao.empIdCheck(chekEmployee);
+
 	}
 
 }

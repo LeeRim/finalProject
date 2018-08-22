@@ -86,9 +86,9 @@
 		, EI.E_KEY AS INSTEAD_KEY, EI.E_NAME AS INSTEAD_NAME,
 		EJ.DIV_INFO AS
 		"INSTEAD_JOB",
-		ED.DIV_INFO AS "INSTEAD_DEPART"
-		FROM
-		EMPLOYEE E
+		ED.DIV_INFO AS "INSTEAD_DEPART",
+		C.C_LEVEL
+		FROM EMPLOYEE E
 		LEFT JOIN
 		DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
 		LEFT JOIN
@@ -97,12 +97,10 @@
 		LEFT JOIN EMPLOYEE EI
 		ON(EI.E_KEY =
 		E.E_INSTEAD)
-		LEFT JOIN DIVISION EJ ON(EI.E_JOBCODE_FK =
-		EJ.DIV_KEY)
+		LEFT JOIN DIVISION EJ ON(EI.E_JOBCODE_FK = EJ.DIV_KEY)
 		LEFT JOIN DIVISION ED ON(EI.E_DEPART_FK = ED.DIV_KEY)
-		WHERE
-		E.E_ID =
-		#{eId}
+		LEFT JOIN COMPANY C ON(E.C_KEY_FK = C.C_KEY)
+		WHERE E.E_ID = 	#{eId}
 	</select>
 
 	<!-- 쪽지 직원 불러오는 쿼리문 -->
@@ -120,6 +118,7 @@
 		D.DIV_KEY)
 		WHERE E.C_KEY_FK = #{companyK}
 	</select>
+	
 	<!-- 부서 불러오기 -->
 	<select id="selectDepartment" parameterType="int" resultType="EmployeeVo">
 		SELECT D.DIV_INFO AS "DEPARTMENT"
@@ -150,10 +149,54 @@
 		#{eBirth}, #{eHireDate},
 		#{ePhoto} )
 	</insert>
+	
+	<!-- 사원등록 아이디 유효성 검사 -->
+	<select id="empAddIdCheck" parameterType="EmployeeVo"
+		resultType="int">
+		SELECT
+    	COUNT(*)
+		FROM EMPLOYEE	
+		WHERE E_ID = #{eId} AND C_KEY_FK = #{cKeyFk}
+		
+
+	</select>
+	
+	
+	
+	
+	
+	<update id="updateEmployee" parameterType="EmployeeVo">
+  			UPDATE EMPLOYEE 
+		 	SET E_NO = #{eNo},
+				  E_ID = #{eId},
+				  E_PWD = #{ePwd},
+				  E_NAME = #{eName},
+				  E_JOBCODE_FK = #{eJobcodeFk}, 
+				  E_DEPART_FK = #{eDepartFk}, 
+				  E_ADDRESS = #{eAddress},
+				  E_EXTEN = #{eExten},
+				  E_PHONE = #{ePhone}, 
+				  E_EMAIL = #{eEmail}, 
+				  E_BIRTH = #{eBirth},
+				  E_HIRE_DATE = #{eHireDate}, 
+				  E_ENT_DATE = #{eEntDate},
+				  <choose>
+				  <when test="eEntDate !=null">
+				  E_ENT_YN =  'Y',
+				  </when>
+				  <when test="eEntDate ==null">
+				  E_ENT_YN =  'N',
+				  </when>
+				  </choose>
+				  E_PHOTO = #{ePhoto}
+			WHERE E_KEY = #{eKey} 
+  	</update>
+	
+	
 
 
 	<!-- 조직도 select 사원 리스트 출력 쿼리문 -->
-
+	
 	<select id="selectEmployeeList2" resultMap="EmployeeMap"
 		parameterType="int">
 		SELECT E.E_KEY E_KEY,
@@ -208,24 +251,22 @@
 		SELECT
 		DIV_INFO AS "JOB",
 		DIV_KEY AS"E_JOBCODE_FK"
-		FROM DIVISION WHERE DIV_TYPE
-		=2 AND C_KEY_FK = #{cKey}
+		FROM DIVISION
+		WHERE DIV_TYPE =1 AND C_KEY_FK = #{cKey}
 		ORDER BY DIV_KEY
 		DESC
 
 	</select>
 
 	<!-- 사원등록 부서정보 출력 쿼리문 -->
-
 	<select id="selectDepartList" parameterType="int" resultMap="EmployeeMap">
 		SELECT
 		DIV_INFO AS
 		"DEPARTMENT" ,
 		DIV_KEY AS"E_DEPART_FK"
 		FROM DIVISION
-		WHERE DIV_TYPE =1 AND C_KEY_FK = #{cKey}
+		WHERE DIV_TYPE =2 AND C_KEY_FK = #{cKey}
 		ORDER BY DIV_KEY ASC
-
 	</select>
 
 	<select id="selectEmployeeListByKey" parameterType="ArrayList"
@@ -253,6 +294,8 @@
 	<!-- 조직도 select 사원정보 팝업창 출력 쿼리문 -->
 	<select id="selectEmployeeInfo" parameterType="int" resultMap="EmployeeMap">
 		SELECT
+        E.E_KEY AS "E_KEY",
+        E.E_NO AS "E_NO",
 		E.E_ID AS "E_ID",
 		D.DIV_INFO AS "DEPARTMENT",
 		J.DIV_INFO AS "JOB",
@@ -260,13 +303,12 @@
 		E.E_EXTEN AS "E_EXTEN",
 		E.E_PHONE AS "E_PHONE",
 		E.E_HIRE_DATE AS "E_HIRE_DATE",
+        E.E_BIRTH AS "E_BIRTH",
+        E.E_ENT_DATE AS "E_ENT_DATE",
 		D.DIV_KEY AS "E_DEPART_FK",
-		J.DIV_KEY AS
-		"E_JOBCODE_FK",
-		E.E_KEY AS "E_KEY",
-		E.E_NO AS "E_NO",
-		E.E_EMAIL AS
-		"E_MAIL",
+		J.DIV_KEY AS "E_JOBCODE_FK",
+        E.E_ADDRESS AS "E_ADDRESS",
+		E.E_EMAIL AS "E_EMAIL",
 		E.E_PHOTO AS "E_PHOTO"
 
 		FROM EMPLOYEE E
@@ -281,6 +323,12 @@
 		UPDATE EMPLOYEE
 		SET E_INSTEAD = #{eInstead}
 		WHERE E_KEY=#{eKey}
+	</update>
+	
+	<update id="updateState" parameterType="EmployeeVo">
+		UPDATE EMPLOYEE
+        SET E_STATE = #{eState}
+        WHERE E_KEY = #{eKey}
 	</update>
 
 </mapper>

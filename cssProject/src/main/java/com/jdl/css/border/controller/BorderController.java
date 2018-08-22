@@ -87,6 +87,7 @@ public class BorderController {
 		board.setLimit(limit);
 		
 		List<BorderVo> list = borderservice.getNoticeList(board);
+		System.out.println(board.getbCateGory());
 		if(list != null){
 			mv.addObject("list", list);
 			mv.addObject("boardKey", board.getBoardKey());
@@ -107,7 +108,8 @@ public class BorderController {
 	
 	@RequestMapping("writeBoard.do")
 	public ModelAndView writeBoard(BorderVo board, ModelAndView mv, HttpServletResponse response){
-			int result = borderservice.writeBoard(board);
+		System.out.println("작성자 : " + board);	
+		int result = borderservice.writeBoard(board);
 			if(result > 0){
 				mv.setViewName("redirect:borderList.do?bCateGory="+ board.getbCateGory());
 			}
@@ -395,7 +397,9 @@ public class BorderController {
 	}
 	
 	@RequestMapping("read.do")
-	public ModelAndView employeeRead(@RequestParam(value="currentPage", required=false)String currentPagestr, String eName, ModelAndView mv, BorderVo board) {
+	public ModelAndView employeeRead(String text, @RequestParam(value="currentPage", required=false)String currentPagestr, String eName, ModelAndView mv, BorderVo board) {
+		
+		System.out.println("서버전송 확인 : " + text);
 		int currentPage;	//현재 페이지의 번호
 		int limitPage;		//한페이지에 출력할 페이지 갯수
 		//1~10

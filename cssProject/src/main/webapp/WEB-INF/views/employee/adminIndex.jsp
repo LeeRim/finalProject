@@ -20,11 +20,11 @@
 		height:82px;
 	}
 	.box-footer{
-		height:80px; 
-		padding-top:11px;
+		height:81px; 
+		padding-top:13px;
 	}
 	.empInfo{
-		margin-left:40px;
+		margin-left:30px;
 		margin-top:10px;
 	}
 	.widget-user-2 .widget-user-image > img{
@@ -32,7 +32,7 @@
 	}
 	.widget-user-image{
 		margin-top:-13px;
-		padding:7px;
+		padding:9px;
 	}
 	#calendar{
 		height:520px;
@@ -58,8 +58,21 @@
 		width:150px;
 	}
 	th{
-		background:#4f6891;
-		color:white;
+		text-weight:bold;
+	}
+	.cProfile{
+		width:630px;
+	}
+	.cProfileBody{
+		height:270px;
+	}
+	.cLogo{
+		width:128px;
+		height:128px;
+	}
+	.birthPhoto{
+		width:100px;
+		height:100px;
 	}
  </style>
  <script>
@@ -88,7 +101,7 @@
   
 
 
-  <div class="content-wrapper" style="height: 100%;">
+  <div class="content-wrapper" style="height: 980px;">
 
     <section class="content-header">
 
@@ -97,9 +110,53 @@
     <!-- Main content -->
     <section class="content ">
     <div class="row">
-		<div class="col-md-4">
+        <div class="col-md-4 cProfile" >
+          <div class="box box-widget widget-user-2 cProfileBody">
+          	<table class="table pfTable">
+          				<tr>
+							<th colspan="6" style="background:#bcbcbc; color:white; ">회사정보</th>
+						</tr>
+						<tr>
+							<td colspan="2" rowspan="5"><img class="cLogo" src="resources/dist/img/photo1.png" ></td>
+						</tr>
+						<tr >
+							<th>회사명</th>
+							<td colspan="3">CSS</td>
+						</tr>
+						<tr>
+							<th >대표</th>
+							<td >장건희</td>
+							<th >사원수</th>
+							<td >6명</td>
+						</tr>
+						<tr >
+							<th>내선번호</th>
+							<td>1234</td>
+							<th >개인번호</th>
+							<td >5678</td>
+						</tr>
+						<tr >
+							<th >가입일</th>
+							<td >2018-08-22</td>
+							<th >레벨</th>
+							<td >1</td>
+						</tr>
+						<tr >
+							<th colspan="2">회사주소</th>
+							<td colspan="4">서울특별시 테헤란로41 빌딩 4층</td>
+						</tr>
+						<tr >
+							<th colspan="2">결제수단</th>
+							<td colspan="4">카카오페이</td>
+						</tr>
+					</table>
+          </div>
+        </div>
+        
+        
+        <div class="col-md-4">
           <!-- Widget: user widget style 1 -->
-          <div class="box box-widget widget-user-2">
+          <div class="box box-widget widget-user-2 cProfileBody">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
               <div class="widget-user-image">
@@ -173,6 +230,8 @@
           <!-- /.widget-user -->
         </div>
         
+        
+        
 	        <div class="col-md-3">
 	        <div class="box box-default" style="height:150px; text-align:center;">
 	            <div class="box-header with-border">
@@ -189,7 +248,7 @@
 	          </div>
 	          
 	          <div class="row">
-	          <div class="box box-default" style="width:48.5%; height:106.5px;">
+	          <div class="box box-default" style="width:48.5%; height:112px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">출근시간</h3>
 				  <button type="button" class="btn btn-box-tool" >출근</button>
@@ -203,7 +262,7 @@
 	          </div>
 	          <!-- /.box -->
 	          
-	          <div class="box box-default" style="width:48.5%; height:106.5px; margin-left:10px;">
+	          <div class="box box-default" style="width:48.5%; height:112px; margin-left:10px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">퇴근시간</h3>
 					<button type="button" class="btn btn-box-tool" >퇴근</button>
@@ -220,11 +279,96 @@
 	        </div>
 	  </div>     
 	  
-	  <div class="row">
-	         <div class="col-md-4" style="margin-top:-9px; width:41%;">
+	  <div class="row" style="margin-top:10px;">
+	  	<div class="col-md-6" >
+              <!-- USERS LIST -->
+              <div class="box box-danger">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Happy Birthday</h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding" >
+                  <ul class="users-list clearfix">
+                    <li>
+                      <img class="birthPhoto" src="resources/dist/img/user1-128x128.jpg" alt="User Image">
+                      <a class="users-list-name" href="#">이름</a>
+                      <span class="users-list-date">부서</span>
+                    </li>
+                    <li>
+                      <img class="birthPhoto"  src="resources/dist/img/user8-128x128.jpg" alt="User Image">
+                      <a class="users-list-name" href="#">Norman</a>
+                      <span class="users-list-date">Yesterday</span>
+                    </li>
+                    <li>
+                      <img class="birthPhoto"  src="resources/dist/img/user7-128x128.jpg" alt="User Image">
+                      <a class="users-list-name" href="#">Jane</a>
+                      <span class="users-list-date">12 Jan</span>
+                    </li>
+                    <li>
+                      <img class="birthPhoto"  src="resources/dist/img/user6-128x128.jpg" alt="User Image">
+                      <a class="users-list-name" href="#">John</a>
+                      <span class="users-list-date">12 Jan</span>
+                    </li>
+                    <li>
+                      <img class="birthPhoto"  src="resources/dist/img/user6-128x128.jpg" alt="User Image">
+                      <a class="users-list-name" href="#">Alexander</a>
+                      <span class="users-list-date">13 Jan</span>
+                    </li>
+                    <li>
+                      <img class="birthPhoto"  src="resources/dist/img/user5-128x128.jpg" alt="User Image">
+                      <a class="users-list-name" href="#">Sarah</a>
+                      <span class="users-list-date">14 Jan</span>
+                    </li>
+                    <li>
+                      <img class="birthPhoto"  src="resources/dist/img/user4-128x128.jpg" alt="User Image">
+                      <a class="users-list-name" href="#">Nora</a>
+                      <span class="users-list-date">15 Jan</span>
+                    </li>
+                    <li>
+                      <img class="birthPhoto"  src="resources/dist/img/user3-128x128.jpg" alt="User Image">
+                      <a class="users-list-name" href="#">Nadia</a>
+                      <span class="users-list-date">15 Jan</span>
+                    </li>
+                  </ul>
+                  <!-- /.users-list -->
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!--/.box -->
+            </div>
+            <!-- /.col -->
+            
+            <div class="col-md-6">
+            	<!-- Donut chart -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <i class="fa fa-bar-chart-o"></i>
+
+              <h3 class="box-title">부서 별 인원</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div id="donut-chart" style="height: 287px;"></div>
+            </div>
+            <!-- /.box-body-->
+          </div>
+          <!-- /.box -->
+            </div>
+	  </div>
+	  
+	  <div class="row" style="margin-top:10px;">
+	  	<div class="col-md-6" >
 				<div class="box-body table-responsive no-padding">
-							<h4>공지사항</h4>
 					<table class="table table-hover">
+						<tr>
+							<th colspan="3" style="background:#bcbcbc;">공지사항</th>
+						</tr>
 						<tr>
 							<th class="title">글제목</th>
 							<th class="writer">작성자</th>
@@ -240,7 +384,30 @@
 					</table>
 				</div>
 			</div>
-	  </div> 
+			
+			<div class="col-md-6" >
+				<div class="box-body table-responsive no-padding">
+					<table class="table table-hover">
+						<tr>
+							<th colspan="3" style="background:#bcbcbc;">문의사항</th>
+						</tr>
+						<tr>
+							<th class="title">글제목</th>
+							<th class="writer">작성자</th>
+							<th class="date">작성일</th>
+						</tr>
+						<c:forEach items="${board1}" var="board1" varStatus="status">
+							<tr data-key=${board1.boardKey }>
+								<td class="title"><c:out value="${board1.bTitle }" /></td>
+								<td class="writer"><c:out value="${board1.eName }" /></td>
+								<td class="date"><c:out value="${board1.bDate }" /></td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+	  </div>
+	  
     </section>
     <!-- /.content -->
   </div>
@@ -249,6 +416,59 @@
 
 
 
-	<c:import url="../include/footer.jsp"/>
+<c:import url="../include/footer.jsp"/>
+<!-- FLOT CHARTS -->
+<script src="resources/bower_components/Flot/jquery.flot.js"></script>
+<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+<script src="resources/bower_components/Flot/jquery.flot.pie.js"></script>
+<script>
+  $(function () {
+    /*
+     * DONUT CHART
+     * -----------
+     */
+
+    var donutData = [
+      { label: '인사부', data: 30, color: '#3c8dbc' },
+      { label: '개발부', data: 20, color: '#0073b7' },
+      { label: '영업부', data: 20, color: '#3c8dbc' },
+      { label: '마케팅부', data: 50, color: '#00c0ef' }
+    ]
+    $.plot('#donut-chart', donutData, {
+      series: {
+        pie: {
+          show       : true,
+          radius     : 1,
+          innerRadius: 0.5,
+          label      : {
+            show     : true,
+            radius   : 2 / 3,
+            formatter: labelFormatter,
+            threshold: 0.1
+          }
+
+        }
+      },
+      legend: {
+        show: false
+      }
+    })
+    /*
+     * END DONUT CHART
+     */
+
+  })
+
+  /*
+   * Custom Label formatter
+   * ----------------------
+   */
+  function labelFormatter(label, series) {
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+      + label
+      + '<br>'
+      + Math.round(series.percent) + '%</div>'
+  }
+</script>
 </body>
 </html>
