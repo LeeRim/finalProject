@@ -1,70 +1,101 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE >
 <html>
 <head>
-<meta  charset="UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
- <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="resources/bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="resources/bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="resources/dist/css/AdminLTE.css">
-  <link rel="stylesheet" href="resources/dist/css/skins/skin-blue.min.css">
-  
-  <link rel="stylesheet" href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
+<!-- Tell the browser to be responsive to screen width -->
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="resources/bower_components/font-awesome/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="resources/bower_components/Ionicons/css/ionicons.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="resources/dist/css/AdminLTE.css">
+<link rel="stylesheet" href="resources/dist/css/skins/skin-blue.min.css">
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-        
-   <!-- jQuery 3 -->
-	<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
-	<!-- Bootstrap 3.3.7 -->
-	<script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- AdminLTE App -->
-	<script src="resources/dist/js/adminlte.min.js"></script>
-	<!-- REQUIRED JS SCRIPTS -->
+<link rel="stylesheet"
+	href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
 
-  <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+<!-- Google Font -->
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-  <link rel="stylesheet" href="resources/dist/css/skins/_all-skins.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="resources/plugins/iCheck/flat/blue.css">
+<!-- jQuery 3 -->
+<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script
+	src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- AdminLTE App -->
+<script src="resources/dist/js/adminlte.min.js"></script>
+<!-- REQUIRED JS SCRIPTS -->
 
-	<script src="resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-	
+<link rel="stylesheet"
+	href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
 
-  <script>
-  		function menuHighlight(clickIdx){
-  			sessionStorage.setItem("menu", clickIdx);
-  		}
-  </script>
+<link rel="stylesheet"
+	href="resources/dist/css/skins/_all-skins.min.css">
+<!-- iCheck -->
+<link rel="stylesheet" href="resources/plugins/iCheck/flat/blue.css">
+
+<script
+	src="resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+
+<script>
+	function menuHighlight(clickIdx) {
+		sessionStorage.setItem("menu", clickIdx);
+	}
+</script>
 
 </head>
 <body>
-<!-- Main Header -->
-  <header class="main-header">
+	<!-- Main Header -->
+	<header class="main-header">
 
-    <!-- Logo -->
-    <a href="index.do" class="logo" onclick="menuHighlight(1);">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>C</b>SS</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>C</b>SS</span>
-    </a>
+		<!-- Logo -->
+		<a href="index.do" class="logo" onclick="menuHighlight(1);"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<span class="logo-mini"><b>C</b>SS</span> <!-- logo for regular state and mobile devices -->
+			<span class="logo-lg"><b>C</b>SS</span>
+		</a>
 
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
+      <div class="btn-group">
+					<a class="sidebar-toggle"
+						data-toggle="dropdown">
+					</a>
+					<c:if test="${sessionScope.user.eType=='2' }"><!-- 사원 -->
+					<ul class="dropdown-menu">
+						<li><a href="#">회원정보</a></li>
+						<li><a href="commuteCheck.do">근태관리</a></li>
+						<li><a href="calender.do">일정관리</a></li>
+						<li><a href="waitingPage.do">전자결재</a></li>
+						<li><a href="receiveNoteList.do">쪽지</a></li>
+						<li><a href="borderIndex.do">커뮤니티</a></li>
+					</ul>
+					</c:if>
+					<c:if test="${sessionScope.user.eType=='1' }"><!-- 회사관리자 -->
+					<ul class="dropdown-menu">
+						<li><a href="#">회원정보</a></li>
+						<li><a href="#">사원관리</a></li>
+						<li><a href="commuteCheck.do">근태관리</a></li>
+						<li><a href="calender.do">일정관리</a></li>
+						<li><a href="waitingPage.do">전자결재</a></li>
+						<li><a href="receiveNoteList.do">쪽지</a></li>
+						<li><a href="borderIndex.do">커뮤니티</a></li>
+						<li><a href="#">문의하기</a></li>
+					</ul>
+					</c:if> 
+				</div>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -203,8 +234,11 @@
 <!--             <a href="javascript:;"> -->
 <!--               <i class="menu-icon fa fa-birthday-cake bg-red"></i> -->
 
+
 <!--               <div class="menu-info"> -->
 <!--                 <h4 class="control-sidebar-subheading">Langdon's Birthday</h4> -->
+
+
 
 <!--                 <p>Will be 23 on April 24th</p> -->
 <!--               </div> -->
@@ -212,6 +246,7 @@
 <!--           </li> -->
 <!--         </ul> -->
 <!--         /.control-sidebar-menu -->
+
 
 <!--         <h3 class="control-sidebar-heading">Tasks Progress</h3> -->
 <!--         <ul class="control-sidebar-menu"> -->
@@ -223,6 +258,7 @@
 <!--                     <span class="label label-danger pull-right">70%</span> -->
 <!--                   </span> -->
 <!--               </h4> -->
+
 
 <!--               <div class="progress progress-xxs"> -->
 <!--                 <div class="progress-bar progress-bar-danger" style="width: 70%"></div> -->
@@ -241,11 +277,14 @@
 <!--         <form method="post"> -->
 <!--           <h3 class="control-sidebar-heading">General Settings</h3> -->
 
+
 <!--           <div class="form-group"> -->
 <!--             <label class="control-sidebar-subheading"> -->
 <!--               Report panel usage -->
 <!--               <input type="checkbox" class="pull-right" checked> -->
 <!--             </label> -->
+
+
 
 <!--             <p> -->
 <!--               Some information about this general settings option -->
@@ -259,9 +298,10 @@
 <!--   </aside> -->
   <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
+
   immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-<!-- ./wrapper -->
+	<div class="control-sidebar-bg"></div>
+	<!-- ./wrapper -->
 
 </body>
 </html>
