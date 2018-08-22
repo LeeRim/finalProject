@@ -83,4 +83,21 @@ public class GivevacationController {
 		return mv;
 	}
 
+	
+	@RequestMapping("empGive.do")
+	public String empGive(){
+		return "GIVEVACATION/empGiveLookup";
+	}
+	
+	@RequestMapping("selectEmpGive.do")
+	public ModelAndView EmpSearchGive(HttpSession session, ModelAndView mv){
+		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
+		
+		System.out.println("사원정보 조회 : " + employee);
+		
+		mv.addObject("total", employee.getTotalVacation());
+		mv.addObject("remain", employee.getRemainingVacation());
+		mv.setViewName("GIVEVACATION/empGiveEsc");
+		return mv;
+	}
 }

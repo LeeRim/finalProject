@@ -63,6 +63,9 @@ public class EmployeeController {
 		VacationVo giveVacation = vService.selectTotalVacation(user);
 		//휴가 사용일 가져오기
 		List<VacationVo> usedVacation = vService.selectUsedVacation(user);
+		
+		System.out.println(giveVacation);
+		System.out.println(usedVacation);
 		int totalUsedVacation = 0;
 		for(VacationVo vacation : usedVacation){
 			totalUsedVacation += vacation.getvUseddate();

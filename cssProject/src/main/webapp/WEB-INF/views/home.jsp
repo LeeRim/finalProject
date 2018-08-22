@@ -16,10 +16,13 @@
   		location.href="borderList.do?bCateGory=" + bType;
   	}
   	function board(){
-  		location.href="borderIndex.do"
+  		location.href="borderIndex.do";
   	}
   	function givevacation(){
-  		location.href="givevacation.do"
+  		location.href="givevacation.do";
+  	}
+  	function empGive(){
+  		location.href="empGive.do";
   	}
   </script>
 
@@ -39,6 +42,7 @@
         <h1>커뮤니티 버튼</h1>
         <button onclick="board();">게시판 인덱스</button>
         <button onclick="givevacation();">휴가 주기(회사)</button>
+        <button onclick="empGive();">사원 휴가 정보 조회</button>
         <hr>
         <h1>쪽지 버튼</h1>
         <a href="receiveNoteList.do">쪽지 메인 페이지 이동</a>

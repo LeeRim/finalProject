@@ -6,7 +6,7 @@
 	<select id="selectTotalVacation" parameterType="EmployeeVo" resultType="VacationVo">
 		SELECT GV_YEAR ,GV_VACADATE
 		FROM GIVEVACATION 
-		WHERE GV_YEAR = (SELECT TRUNC(MONTHS_BETWEEN(SYSDATE,E_HIRE_DATE)/12,0)
+		WHERE GV_YEAR = (SELECT TRUNC(MONTHS_BETWEEN(SYSDATE,E_HIRE_DATE)/12+1,0)
 		                FROM EMPLOYEE
 		                WHERE E_KEY = #{eKey})
 		AND C_KEY_FK = #{cKeyFk}
