@@ -12,6 +12,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>AdminLTE 2 | Starter</title>
+<script type="text/javascript">
+function select(key,no,name,job,depart,state,photo){
+	$("#updateTag").attr("href","updateInstead.do?iKey="+key);
+	$("#profileImg").attr("src","resources/upload/empPhoto/"+photo);
+	$("#name").html(name);
+	if(state==0){
+	$("#state").html("(휴가/출장으로 인한)결재불가능");
+	}else{
+		$("#state").html("결재가능");
+	}
+	$("#depart").html(depart);
+	$("#job").html(job);
+	$("#no").html(no);
+}
+</script>
+
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -60,7 +76,9 @@ desired effect
         | Your Page Content Here |
         -------------------------->
 				<div class="col-md-3">
-					<label class="btn btn-primary btn-block margin-bottom">대결자
+					<label class="callout callout-info
+"
+						style="width: 100%; height: 45px; margin-bottom: 10px; text-align: center;">대결자
 						선택</label>
 
 					<c:forEach items="${department}" var="department">
@@ -82,7 +100,7 @@ desired effect
 									<c:forEach items="${employee}" var="employee" varStatus="st">
 										<c:if test="${employee.department == department.department}">
 											<li><a
-												onclick="select(${st.index},${employee.eKey},'${employee.eName}','${employee.job}','${employee.department}',${employee.eState},${employee.instead.eKey},'${employee.instead.eName}','${employee.instead.job}','${employee.instead.department}');"><i
+												onclick="select(${employee.eKey},'${employee.eNo}','${employee.eName}','${employee.job}','${employee.department}',${employee.eState},${employee.ePhoto});"><i
 													class="fa fa-circle-o text-red"></i> <c:out
 														value="${employee.eName}" /></a></li>
 										</c:if>
@@ -97,40 +115,114 @@ desired effect
 				<!-- /.col -->
 
 				<div class="col-md-9">
-					<%-- <c:if test="${insteadList.size() == 0}">
-						<h4>설정된 대결자가 없습니다.</h4>
-					</c:if> --%>
-					<c:if test="${insteadList.size() != 0 }">
-						<c:forEach var="instead" items="${insteadList }">
-							<!-- Profile Image -->
-							<div class="box box-primary" style="width: 600px;">
-								<div class="box-body box-profile">
-									<img class="profile-user-img img-responsive img-circle"
-										src="resources/upload/approval/KakaoTalk_20170331_022521650.jpg"
-										alt="User profile picture"
-										style="width: 150px; height: 150px;">
+					<c:if test="${instead == null }">
+						<!-- Profile Image -->
+						<div class="box box-primary" style="width: 600px;">
+							<div class="box-body box-profile">
+								<img id="profileImg"
+									class="profile-user-img img-responsive img-circle"
+									src="resources/upload/"
+									alt="User profile picture" style="width: 150px; height: 150px;">
 
-									<h3 class="profile-username text-center">
-										<c:out value="${instead.eName }"></c:out>
-									</h3>
+								<h3 id="name" class="profile-username text-center">
+								</h3>
 
-									<p class="text-muted text-center">Software Engineer</p>
+								<p id="state" class="text-muted text-center">
+									설정된 대결자가 없습니다.
+								</p>
 
-									<ul class="list-group list-group-unbordered">
-										<li class="list-group-item"><b>Followers</b> <a
-											class="pull-right">1,322</a></li>
-										<li class="list-group-item"><b>Following</b> <a
-											class="pull-right">543</a></li>
-										<li class="list-group-item"><b>Friends</b> <a
-											class="pull-right">13,287</a></li>
-									</ul>
-									<!-- 
-								<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
-								</div>
-								<!-- /.box-body -->
+								<ul class="list-group list-group-unbordered">
+									<li class="list-group-item"><div class="row">
+											<div class="col-md-2"></div>
+											<div class="col-md-4" style="text-align: center;">
+												<b>사원번호</b>
+											</div>
+											<div class="col-md-4" style="text-align: center;">
+												<span id="no"></span>
+											</div>
+										</div></li>
+									<li class="list-group-item"><div class="row">
+											<div class="col-md-2"></div>
+											<div class="col-md-4" style="text-align: center;">
+												<b>부서</b>
+											</div>
+											<div class="col-md-4" style="text-align: center;">
+												<span id="depart"></span>
+											</div>
+										</div></li>
+									<li class="list-group-item"><div class="row">
+											<div class="col-md-2"></div>
+											<div class="col-md-4" style="text-align: center;">
+												<b>직급</b>
+											</div>
+											<div class="col-md-4" style="text-align: center;">
+												<span id="job"></span>
+											</div>
+										</div></li>
+								</ul>
+
+								<a id="updateTag" href="#"
+									class="btn btn-primary btn-block"><b>대결자 선택</b></a>
 							</div>
-							<!-- /.box -->
-						</c:forEach>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
+					</c:if>
+					<c:if test="${instead != null }">
+						<!-- Profile Image -->
+						<div class="box box-primary" style="width: 600px;">
+							<div class="box-body box-profile">
+								<img id="profileImg"
+									class="profile-user-img img-responsive img-circle"
+									src="resources/upload/approval/KakaoTalk_20170331_022521650.jpg"
+									alt="User profile picture" style="width: 150px; height: 150px;">
+
+								<h3 id="name" class="profile-username text-center">
+									<c:out value="${instead.eName }"></c:out>
+								</h3>
+
+								<p id="state" class="text-muted text-center">
+									<c:if test="${instead.eState ==1}">결재가능</c:if>
+									<c:if test="${instead.eState ==0}">(휴가/출장으로 인한)결재불가능</c:if>
+								</p>
+
+								<ul class="list-group list-group-unbordered">
+									<li class="list-group-item"><div class="row">
+											<div class="col-md-2"></div>
+											<div class="col-md-4" style="text-align: center;">
+												<b>사원번호</b>
+											</div>
+											<div class="col-md-4" style="text-align: center;">
+												<span id="no"><c:out value="${instead.eNo }"></c:out></span>
+											</div>
+										</div></li>
+									<li class="list-group-item"><div class="row">
+											<div class="col-md-2"></div>
+											<div class="col-md-4" style="text-align: center;">
+												<b>부서</b>
+											</div>
+											<div class="col-md-4" style="text-align: center;">
+												<span id="depart"><c:out
+														value="${instead.department }"></c:out></span>
+											</div>
+										</div></li>
+									<li class="list-group-item"><div class="row">
+											<div class="col-md-2"></div>
+											<div class="col-md-4" style="text-align: center;">
+												<b>직급</b>
+											</div>
+											<div class="col-md-4" style="text-align: center;">
+												<span id="job"><c:out value="${instead.job }"></c:out></span>
+											</div>
+										</div></li>
+								</ul>
+
+								<a id="updateTag" href="updateInstead.do?iKey=${instead.eKey}"
+									class="btn btn-primary btn-block"><b>대결자 선택</b></a>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
 					</c:if>
 				</div>
 				<!-- /.col -->

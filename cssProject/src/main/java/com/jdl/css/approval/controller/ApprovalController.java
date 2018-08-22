@@ -121,8 +121,9 @@ public class ApprovalController {
 		int[] key = new int[1];
 		key[0] = user.geteInstead();
 		List<EmployeeVo> instead = eService.selectEmployeeListByKeyStr(key);
-		System.out.println("instead / " + instead);
-		mv.addObject("insteadList", instead);
+		if(instead.size()!=0){
+		mv.addObject("instead", instead.get(0));
+		}
 		mv.setViewName("approval/approvalSystemPage");
 		return mv;
 	}
@@ -643,4 +644,13 @@ public class ApprovalController {
 		}
 		return result;
 	}
+	
+	@RequestMapping("updateInstead.do")
+	public String updateInstead(HttpSession session,int iKey){
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		user.seteInstead(iKey);
+		int result = eService.updateInstead(user);
+		return "redirect:setApprovalSystemPage.do";
+	}
+	
 }

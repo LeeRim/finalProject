@@ -46,5 +46,10 @@ public class EmployeeDao {
 
 	}
 
+	public int updateInstead(EmployeeVo user) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("EmployeeMapper.updateInstead", user);
+	}
+
 
 }
