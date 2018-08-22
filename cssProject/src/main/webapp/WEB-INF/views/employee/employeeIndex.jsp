@@ -81,6 +81,7 @@
 		location.href="borderList.do?bCateGory=" + b;
 	}
 </script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -303,6 +304,7 @@
 			</div>
         
      </div>
+
     </section>
     <!-- /.content -->
   </div>

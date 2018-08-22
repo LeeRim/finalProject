@@ -46,6 +46,7 @@ public class EmployeeDao {
 
 	}
 
+
 	public int updateInstead(EmployeeVo user) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("EmployeeMapper.updateInstead", user);
@@ -53,6 +54,15 @@ public class EmployeeDao {
 	
 	public int stateUpdate(EmployeeVo employee) {
 		return sqlSession.update("EmployeeMapper.updateState", employee);
+	}
+
+	public int updateEmployee(EmployeeVo member) {
+		return sqlSession.update("EmployeeMapper.updateEmployee", member);
+	}
+
+	public int empIdCheck(EmployeeVo chekEmployee) {
+		
+		return sqlSession.selectOne("EmployeeMapper.empAddIdCheck", chekEmployee);
 	}
 
 
