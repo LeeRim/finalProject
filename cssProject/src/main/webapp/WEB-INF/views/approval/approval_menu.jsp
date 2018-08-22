@@ -62,7 +62,7 @@
 				<li><a href="draftedPage.do"><i class="fa fa-link"></i> <span>기안문서함</span></a></li>
 				<li><a href="receivedPage.do"><i class="fa fa-link"></i> <span>결재문서함</span></a></li>
 				<li class="header">결재환경설정</li>
-				<li><a href="setApprovalSystemPage.do"><i class="fa fa-link"></i> <span>기안문서함</span></a></li>
+				<li><a href="setApprovalSystemPage.do"><i class="fa fa-link"></i> <span>대결자설정</span></a></li>
 			</ul>
 			<!-- /.sidebar-menu -->
 		</section>

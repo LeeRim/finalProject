@@ -99,7 +99,7 @@ desired effect
         -------------------------->
 				
 				
-						<div class="box">
+						<div class="box" style="width:100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">결재예정문서</h3>
 
