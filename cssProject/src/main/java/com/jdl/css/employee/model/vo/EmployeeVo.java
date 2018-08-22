@@ -14,7 +14,7 @@ public class EmployeeVo {
 	private int eKey;
     private String eNo;
     private int cKeyFk;
-    private char eType;
+    private String eType;
     private String eId;
     private String ePwd;
     private String eName;
@@ -70,13 +70,19 @@ public class EmployeeVo {
 		this.cKeyFk = cKeyFk;
 	}
 
-	public char geteType() {
+	
+
+	public String geteType() {
 		return eType;
 	}
 
-	public void seteType(char eType) {
+
+
+	public void seteType(String eType) {
 		this.eType = eType;
 	}
+
+
 
 	public String geteId() {
 		return eId;
