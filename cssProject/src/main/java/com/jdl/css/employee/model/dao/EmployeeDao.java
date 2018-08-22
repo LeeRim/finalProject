@@ -46,5 +46,14 @@ public class EmployeeDao {
 
 	}
 
+	public int updateEmployee(EmployeeVo member) {
+		return sqlSession.update("EmployeeMapper.updateEmployee", member);
+	}
+
+	public int empIdCheck(EmployeeVo chekEmployee) {
+		
+		return sqlSession.selectOne("EmployeeMapper.empAddIdCheck", chekEmployee);
+	}
+
 
 }

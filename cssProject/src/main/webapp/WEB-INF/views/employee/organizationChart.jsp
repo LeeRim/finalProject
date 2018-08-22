@@ -157,8 +157,7 @@ td {
 		width:152px;
 		height:152px;
 		border: 1px solid #A4A4A4;
-		}
-		.emp_photo{
+		}		.emp_photo{
 		width:150px;
 		height:150px;
 		
@@ -448,7 +447,7 @@ td {
 										+"<td class='employee_list_emp'>"+data[i].ePhone+"</td>"
 										+"<td class='employee_list_emp'>"+date+"</td></tr>";
 										
-			 $("#ddd").html(html); 
+			 $("#ddd").html(html);
 			    	}
 			    	addwindowEvent();
 			    	

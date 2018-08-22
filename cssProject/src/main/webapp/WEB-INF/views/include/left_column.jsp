@@ -45,7 +45,8 @@
 
         <li class="active"><a href="organizationChart.do"><i class="fa fa-link"></i> <span>조직도</span></a></li>
         <li><a href="employeeIndex.do"><i class="fa fa-link"></i> <span>사원 인덱스</span></a></li>
-        <li><a href=""><i class="fa fa-link"></i> <span>사원 정보</span></a></li>
+        <li><a href="employeeInfo.do"><i class="fa fa-link"></i> <span>사원 정보</span></a></li>
+        <li><a href="myPageUpdate.do"><i class="fa fa-link"></i> <span>마이페이지 수정</span></a></li>
         <li class="treeview">
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>

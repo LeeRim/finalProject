@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+
 <c:import url ="/WEB-INF/views/include/header.jsp"/>
 <!DOCTYPE html>
 
@@ -21,11 +24,13 @@
 
 <link rel="stylesheet" href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
 
-
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 
 
 
 <style>
+
+
 
 .frame{
 padding:0 20px;
@@ -34,19 +39,58 @@ width:100%;
 height:100%;
 }
 
-.org_map{
-float:left;
-width:400px;
-}
 
 .box-body{
 display:inline-block;
-
+width:60%;
 column-count: 2;
-padding: 0 100px;
+padding: 0 50px;
   
 
 }
+.emp_picture{
+display:inline-block;
+width:25%;
+height: 577.5px;
+border-right: 1px solid #f4f4f4;
+float:left;
+
+}
+
+.emp_picture2{
+display:table;
+border: 1px solid #D8D8D8;
+margin-top:50px;
+margin-left :62px;
+margin-bottom :10px;
+ width: 151px;
+ height: 151px;
+}
+.emp_picture2_1{
+display:table-cell; 
+text-align:center; 
+vertical-align:middle;
+color:#BDBDBD;
+font-size:16px;
+}
+
+.emp_picture3{
+text-align:center;
+margin :0 80px;
+}
+
+.emp_photo{
+		width:150px;
+		height:150px;
+		
+		}
+
+.file-list{
+margin-left:-80px;
+width:275px;
+text-align:center;
+}
+
 
 
 </style>
@@ -60,7 +104,7 @@ $(function () {
 })
 
 
-function memberJoin(){
+function memberUpdate(){
 	$("#joinForm").submit();	
 	
 }
@@ -69,7 +113,8 @@ function memberJoin(){
 
 function validate(){
 	
-	$("#eAddress").val($("#eAddress1").val()+","+$("#eAddress2").val())
+	
+	$("#eAddress").val($("#eAddress1").val()+"/"+$.trim($("#eAddress2").val()))
 
 	
 
@@ -80,12 +125,16 @@ $(document).ready(
 	      function() {
 	         var fileTarget = $('.form-group .upload-hidden');
 	         fileTarget.on('change',function() { // 값이 변경되면 
+	        
+	        	 
 	         var filenames ="";
+	         var filenames2 ="";
 	            if (window.FileReader) { // modern browser 
 	            
 	            for(var i=0;i<$(this)[0].files.length;i++){
 	               var file = $(this)[0].files[i];
-	               filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove'></i><br>";
+	               filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove' onclick='photoDelete();'></i><br>";
+	               filenames2 +=$(this)[0].files[i].name;
 	               console.log(filenames);
 	            }
 	            } else { // old IE
@@ -93,8 +142,71 @@ $(document).ready(
 	            }
 	            // 추출한 파일명 삽입 
 	            $('.file-list').html(filenames);
+	            $('#file-list2').val(filenames2);
+	            
+	            
+ 
+	            
+	            
+	            
+	            
+	            
 	         });
 	      });
+	      
+	      
+function openAddressPopup(){
+	new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
+
+            // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            //data.zonecode; //5자리 새우편번호 사용
+            $("#eAddress1").val(fullAddr);
+
+            // 커서를 상세주소 필드로 이동한다.
+            $("#eAddress2").focus();
+        }
+    }).open();
+}
+
+
+ function photoDelete() {
+	 $('.file-list').empty();
+	 $('#file-list2').val(null);
+}
+	      
+	      
+	      
+	      
+	      
 </script>
 
 
@@ -118,24 +230,57 @@ $(document).ready(
     <section>
 		<div class="frame">
 		
-		<div class="box box-primary" style="margin-top:50px; width:1000px;">
+		<div class="box box-primary" style="margin-top:50px; width:1100px;">
             <div class="box-header with-border">
-              <h3 class="box-title">사원등록</h3>
+              <h3 class="box-title">사원정보 수정</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="insertMember.do"  onsubmit="return validate();" method="post" enctype="multipart/form-data">
+            <form role="form" action="updateEmployee.do"  onsubmit="return validate();" method="post" enctype="multipart/form-data">
+            	<div class="emp_picture">
+            	<div class="emp_picture2">
+            	<c:if test="${ select.ePhoto ne null }">
+            
+            	<img class='emp_photo' src='resources/upload/empPhoto/${select.ePhoto }'>
+            	</c:if>
+				<c:if test="${select.ePhoto eq null }">
+            	 <p class="emp_picture2_1" >사&emsp;진</p>
+            	 </c:if>
+            	</div>
+            	<div class="emp_picture3">
+            	<label for="exampleInputFile">사원 사진</label>
+              <div class="form-group">
+						<div class="btn btn-default btn-file">
+							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="ePhoto1" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
+																								onchange="fileCheck(this)" />
+						</div>
+						
+					<input type="hidden" name="ePhoto2" id="file-list2" value="${select.ePhoto}"/>
+					
+					<div class="file-list">${select.ePhoto}
+					<c:if test="${ null ne select.ePhoto }">
+					<i class='fa fa-remove' onclick='photoDelete();'></i>
+					</c:if>
+					</div>
+                </div>
+                
+                </div>
+            	
+            	
+            	</div>
+            	
+            
             
               <div class="box-body">
-              
+              <input type="hidden" name="eKey" value="${select.eKey}"/>
               <div class="form-group" style="width:200px">
                   <label>사원번호</label>
-                  <input type="text" class="form-control"  name="eNo" >
+                  <input type="text" class="form-control"  name="eNo" value="${select.eNo}">
                 </div>
                 
                 <div class="form-group" style="width:200px">
                   <label>아이디</label>
-                  <input type="text" class="form-control"  name="eId" >
+                  <input type="text" class="form-control"  name="eId" value="${select.eId}">
                 </div>
                 <!-- 성공 할때 -->
 <!--                   <div class="form-group has-success" style="width:200px"> -->
@@ -147,19 +292,19 @@ $(document).ready(
                 
                <div class="form-group"style="width:200px;">
                   <label>사원이름</label>
-                  <input type="text" class="form-control" name="eName" >
+                  <input type="text" class="form-control" name="eName"  value="${select.eName}">
                 </div>
                 
                 
                 
                 <div class="form-group"style="width:200px;">
                   <label for="exampleInputPassword1">비밀번호</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"  name="ePwd" >
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"  name="ePwd" value="1234">
                 </div>
                 
                 <div class="form-group"style="width:200px;">
                   <label for="exampleInputPassword1">비밀번호 확인</label>
-                  <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"  name="ePwd" >
+                  <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"  >
                 </div>
                 
                 <div class="form-group"style="width:200px;">
@@ -167,7 +312,12 @@ $(document).ready(
                  
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true"  name="eDepartFk">
                   <c:forEach items="${list2 }" var="e2" >
+                  <c:if test="${ e2.department eq select.department }">
+                  <option selected="selected" value="${e2.eDepartFk}">${e2.department}</option>
+                  </c:if>
+                  <c:if test="${ e2.department ne select.department }">
                   <option value="${e2.eDepartFk}">${e2.department}</option>
+                  </c:if>
                   </c:forEach>
                 </select>
               </div>
@@ -176,7 +326,12 @@ $(document).ready(
                  
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="eJobcodeFk">
                  <c:forEach items="${list }" var="e" >
+                 <c:if test="${ e.job eq select.job }">
+                  <option selected="selected" value="${e.eJobcodeFk}">${e.job}</option>
+                  </c:if>
+                  <c:if test="${ e.job ne select.job }">
                   <option value="${e.eJobcodeFk}">${e.job}</option>
+                  </c:if>
                   </c:forEach>
                   
                 </select>
@@ -189,14 +344,21 @@ $(document).ready(
               <div class="input-group"style="width:400px;">
               
               <input type="hidden" name="eAddress" id="eAddress" />
-              
-                <input type="text" class="form-control" id="eAddress1"/>
+              	<c:set var="adrr" value="${fn:split(select.eAddress,'/')}" />
+              				
+                <input type="text" class="form-control" id="eAddress1" 
+                value="<c:forEach var="adrr2" items="${adrr}" varStatus="a"><c:if test="${a.count == 1}">${adrr2}</c:if></c:forEach>"/>
+                
                     <span class="input-group-btn">
-                      <button type="button" class="btn btn-block btn-default">주소찾기</button>
+                      <button type="button" class="btn btn-block btn-default" onclick="openAddressPopup();">주소찾기</button>
                     </span>
                     </div>
                     <div class="input-group" style="width:300px; margin-bottom:15px;">
-                  <input type="text" class="form-control"id="eAddress2"/>
+                   
+                  <input type="text" class="form-control"id="eAddress2" 
+                 value="<c:forEach var="adrr2" items="${adrr}" varStatus="a"><c:if test="${a.count == 2}">${adrr2}</c:if></c:forEach> "/>
+               
+
                   </div>
                 <div class="form-group" style="width:250px;">
                 <label>내선번호</label>
@@ -206,9 +368,8 @@ $(document).ready(
                     <i class="fa fa-phone"></i>
                   </div>
                   
-                  <input type="text" class="form-control"  name="eExten"  data-inputmask='"mask": "999-9999-9999"' data-mask>
-<!--                   <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 9999-9999&quot;" data-mask="" name="eExten"  value="11">
- -->                  
+                  <input type="text" class="form-control"  name="eExten"  data-inputmask='"mask": "999-9999-9999"'  value="${select.eExten}"  data-mask>
+
                 </div>
                 <!-- /.input group -->
               </div>
@@ -219,10 +380,8 @@ $(document).ready(
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="text" class="form-control"  name="ePhone"  data-inputmask='"mask": "999-999-9999"' data-mask>
-                   <!-- <input type="text" class="form-control"data-inputmask="'mask': ['999-999-9999', '+099 99 99 9999[9]-9999']" data-mask> -->
-<!--                   <input type="text" class="form-control" data-inputmask="'phone': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="phone" name="ePhone" >
- -->                  
+                  <input type="text" class="form-control"  name="ePhone"  data-inputmask='"mask": "999-9999-9999"'  value="${select.ePhone}"  data-mask>
+                  
                 </div>
                 <!-- /.input group -->
               </div>
@@ -230,7 +389,7 @@ $(document).ready(
                   <label for="exampleInputEmail1">이메일 주소</label>
               <div class="input-group" style="margin-bottom:15px;">
                   <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="eEmail" >
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="eEmail"  value="${select.eEmail}">
                 </div>
 
                 
@@ -241,7 +400,7 @@ $(document).ready(
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name="eBirth1">
+                  <input type="text" class="form-control pull-right" id="datepicker" name="eBirth1" value="${select.eBirth}">
                   
                 </div>
                 <!-- /.input group -->
@@ -254,19 +413,23 @@ $(document).ready(
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker2" name="eHireDate1" >
+                  <input type="text" class="form-control pull-right" id="datepicker2" name="eHireDate1" value="${select.eHireDate}">
+                </div>
+                <!-- /.input group -->
+              </div>
+              <div class="form-group" style="width:250px;">
+                <label>퇴사일</label>
+
+                <div class="input-group date">
+                  <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </div>
+                  <input type="text" class="form-control pull-right" id="datepicker3" name="eEntDate1"  value="${select.eEntDate}" >
                 </div>
                 <!-- /.input group -->
               </div>
               
-                  <label for="exampleInputFile">사원 사진</label>
-              <div class="form-group">
-						<div class="btn btn-default btn-file">
-							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="ePhoto1" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
-																								onchange="fileCheck(this)"/>
-						</div>
-					<div class="file-list"></div>
-                </div>
+                  
               
               
                </div>
@@ -276,7 +439,7 @@ $(document).ready(
               <!-- /.box-body -->
 
               <div class="box-footer" style="text-align:center;">
-                <button class="btn btn-primary" id="joinBtn" onclick="memberJoin();" >등록하기</button>
+                <button class="btn btn-primary" id="joinBtn" onclick="memberUpdate();" >수정하기</button>
                 
               </div>
             </form>
@@ -307,7 +470,7 @@ function fileCheck(obj) {
 
         // 정상적인 이미지 확장자 파일일 경우 ...
 
-    } else {
+    } else if(filetype!='jpg' || filetype!='gif' || filetype!='png' || filetype!='jpeg' || filetype!='bmp') {
         alert('이미지 파일만 선택할 수 있습니다.');
 
         parentObj  = obj.parentNode
@@ -325,15 +488,32 @@ function fileCheck(obj) {
  $('#datepicker').datepicker({
  	format: 'yyyy-mm-dd',
  	language: "kr",
+ 	clearBtn :true,
+ 	maxViewMode : 2,
+ 	startDate: '1910-01-01',
+ 	endDate: 'today',
   autoclose: true
  })
 
 $('#datepicker2').datepicker({
  	format: 'yyyy-mm-dd',
  	language: "kr",
+ 	clearBtn :true,
+ 	maxViewMode : 2,
+ 	startDate: '1910-01-01',
+ 	endDate: 'today',
   autoclose: true
  })
 
+ $('#datepicker3').datepicker({
+ 	format: 'yyyy-mm-dd',
+ 	language: "kr",
+ 	clearBtn :true,
+ 	maxViewMode : 2,
+ 	startDate: '1910-01-01',
+ 	endDate: 'today',
+  autoclose: true
+ })
 
 
 

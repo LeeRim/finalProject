@@ -45,4 +45,12 @@ public class EmployeeService {
 
 	}
 
+	public int updateEmployee(EmployeeVo member) {
+		return dao.updateEmployee(member);
+	}
+
+	public int empIdCheck(EmployeeVo chekEmployee) {
+		return dao.empIdCheck(chekEmployee);
+	}
+
 }
