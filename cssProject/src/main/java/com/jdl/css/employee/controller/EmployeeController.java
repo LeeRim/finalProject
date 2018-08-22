@@ -68,8 +68,8 @@ public class EmployeeController {
 			totalUsedVacation += vacation.getvUseddate();
 		}
 		try{
-		user.setTotalVacation(giveVacation.getGvVacadate());
-		user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
+			user.setTotalVacation(giveVacation.getGvVacadate());
+			user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
 		}catch (NullPointerException e) {
 			// TODO: handle exception
 		}
