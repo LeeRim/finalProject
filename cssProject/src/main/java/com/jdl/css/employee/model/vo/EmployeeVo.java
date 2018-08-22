@@ -14,7 +14,7 @@ public class EmployeeVo {
 	private int eKey;
     private String eNo;
     private int cKeyFk;
-    private char eType;
+    private String eType;
     private String eId;
     private String ePwd;
     private String eName;
@@ -74,11 +74,12 @@ public class EmployeeVo {
 		this.cKeyFk = cKeyFk;
 	}
 
-	public char geteType() {
+	
+	public String geteType() {
 		return eType;
 	}
 
-	public void seteType(char eType) {
+	public void seteType(String eType) {
 		this.eType = eType;
 	}
 
@@ -276,8 +277,6 @@ public class EmployeeVo {
 		this.remainingVacation = remainingVacation;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "EmployeeVo [eKey=" + eKey + ", eNo=" + eNo + ", cKeyFk=" + cKeyFk + ", eType=" + eType + ", eId=" + eId
@@ -289,9 +288,6 @@ public class EmployeeVo {
 				+ ", division=" + division + ", totalVacation=" + totalVacation + ", remainingVacation="
 				+ remainingVacation + "]";
 	}
-
-	
-	
 
 
 

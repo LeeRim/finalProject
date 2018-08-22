@@ -69,7 +69,7 @@
 	}
 </style>
 <script>
-$(function(){
+/* $(function(){
     $(".writerTd").contextmenu(function(e){
        $writerTd = $(e.target);
        console.log($writerTd.text());
@@ -89,17 +89,26 @@ $(function(){
 	    alert("Cursor at: " + cursorX + ", " + cursorY);
 	}
  */	
-	console.log(event);
+	/* console.log(event);
  	console.log(event.target);
+ 	
+ 	
+ 	
     event.preventDefault();
     $("div.custom-menu:visible").hide();
     $("<div class='custom-menu'>Custom menu</div>")
         .appendTo("body")
         .css({top: event.pageY + "px", left: event.pageX + "px"});
-}).bind("click", function(event) {
-	location.href="read.do";
+	}).bind("click", function(event) {
+	var bt = $(event.target);
+	var btText = bt.text();
+	
+ 	console.log(bt.text());
+ 	console.log(btText);
+ 	
+	location.href="read.do?text=" + btText;
     $("div.custom-menu").hide();
-});
+}); */
 
 $(function(){
 	$(".box-body td").mouseenter(function(){
@@ -196,10 +205,10 @@ $(function(){
               </div>
               <c:if test="${!empty user}">
 	              <c:choose>
-	              	<c:when test="${user.eType eq 1 && bCategory eq 1}">
+	              	<c:when test="${user.eType eq 1 && bCateGory eq '1'}">
 		              	<div class="Btn" onclick="boardForm();">공지사항 작성</div>
 	              	</c:when>
-	              	<c:when test="${bCategory ne 1}">
+	              	<c:when test="${bCateGory ne '1'}">
 		              	<div class="Btn" onclick="boardForm();">작성</div>
 	              	</c:when>
 	              </c:choose>

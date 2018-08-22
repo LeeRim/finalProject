@@ -16,11 +16,10 @@
 		<result property="eName" column="E_NAME"/>
 		<result property="bWriter" column="B_WRITER_FK"/>
 	</resultMap>
-
+	
 	<insert id="insertAttachment" parameterType="AttachVo">
 		INSERT INTO ATTACHMENT VALUES(
-		SEQ_ATTACHMENT.NEXTVAL,#{attaLocation},#{attaFileName},#{attaFilePath},null
-		)
+		SEQ_ATTACHMENT.NEXTVAL,#{attaLocation},#{attaFileName},#{attaFilePath})
 	</insert>
 
 	<select id="selectAttachment" resultType="AttachVo">

@@ -1,5 +1,5 @@
-package com.jdl.css.employee.controller;
 
+package com.jdl.css.employee.controller;
 import java.io.File;
 
 import java.io.IOException;
@@ -63,9 +63,9 @@ public class EmployeeController {
 		VacationVo giveVacation = vService.selectTotalVacation(user);
 		//휴가 사용일 가져오기
 		List<VacationVo> usedVacation = vService.selectUsedVacation(user);
-		
 		System.out.println(giveVacation);
 		System.out.println(usedVacation);
+		System.out.println(user);
 		int totalUsedVacation = 0;
 		for(VacationVo vacation : usedVacation){
 			totalUsedVacation += vacation.getvUseddate();

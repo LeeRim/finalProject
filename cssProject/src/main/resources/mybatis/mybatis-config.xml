@@ -33,10 +33,12 @@
 	<typeAlias type="com.jdl.css.common.model.vo.DivisionVo" alias="DivisionVo"/>
 	<typeAlias type="com.jdl.css.common.model.vo.VacationVo" alias="VacationVo"/>
 	<typeAlias type="com.jdl.css.givevacation.model.vo.GivevacationVo" alias="Give"/>
+	<typeAlias type="com.jdl.css.QNA.model.vo.QNAVo" alias="QNA"/>
   </typeAliases>
 
 
   <mappers>
+  	<mapper resource="mybatis/sql/QNAMapper.xml"/>
   	<mapper resource="mybatis/sql/GiveVactionMapper.xml"/>
 	<mapper resource="mybatis/sql/BorderMapper.xml" /> 
 	<mapper resource="mybatis/sql/employeeMapper.xml" /> 
