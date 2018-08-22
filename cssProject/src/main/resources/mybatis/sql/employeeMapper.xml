@@ -86,9 +86,9 @@
 		, EI.E_KEY AS INSTEAD_KEY, EI.E_NAME AS INSTEAD_NAME,
 		EJ.DIV_INFO AS
 		"INSTEAD_JOB",
-		ED.DIV_INFO AS "INSTEAD_DEPART"
-		FROM
-		EMPLOYEE E
+		ED.DIV_INFO AS "INSTEAD_DEPART",
+		C.C_LEVEL
+		FROM EMPLOYEE E
 		LEFT JOIN
 		DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
 		LEFT JOIN
@@ -97,12 +97,10 @@
 		LEFT JOIN EMPLOYEE EI
 		ON(EI.E_KEY =
 		E.E_INSTEAD)
-		LEFT JOIN DIVISION EJ ON(EI.E_JOBCODE_FK =
-		EJ.DIV_KEY)
+		LEFT JOIN DIVISION EJ ON(EI.E_JOBCODE_FK = EJ.DIV_KEY)
 		LEFT JOIN DIVISION ED ON(EI.E_DEPART_FK = ED.DIV_KEY)
-		WHERE
-		E.E_ID =
-		#{eId}
+		LEFT JOIN COMPANY C ON(E.C_KEY_FK = C.C_KEY)
+		WHERE E.E_ID = 	#{eId}
 	</select>
 
 	<!-- 쪽지 직원 불러오는 쿼리문 -->
@@ -281,6 +279,12 @@
 		UPDATE EMPLOYEE
 		SET E_INSTEAD = #{eInstead}
 		WHERE E_KEY=#{eKey}
+	</update>
+	
+	<update id="updateState" parameterType="EmployeeVo">
+		UPDATE EMPLOYEE
+        SET E_STATE = #{eState}
+        WHERE E_KEY = #{eKey}
 	</update>
 
 </mapper>

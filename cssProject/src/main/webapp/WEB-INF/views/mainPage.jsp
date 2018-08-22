@@ -128,99 +128,99 @@ margin-top:60px;
 </style>
 <body>
 <div class="mainFrame">
-<div class="header">
-	<h1 class="logo"><a href="" class="logo_daouoiffice" title="DaouOffice"></a></h1>
-	<h2 class="blind">주요 서비스</h2>
-	<ul class="navi_main">
-		<li><a href="">기능안내</a></li>
-		<li><a href="">가격안내</a></li>
-		<li><a href="">상담 및 데모신청</a></li>
-		<li><a onclick="openDOapply()" style="cursor: pointer;">
-    			<span style="cursor: pointer;">서비스신청</span>
-	 	   </a>
+<!-- <div class="header"> -->
+<!-- 	<h1 class="logo"><a href="" class="logo_daouoiffice" title="DaouOffice"></a></h1> -->
+<!-- 	<h2 class="blind">주요 서비스</h2> -->
+<!-- 	<ul class="navi_main"> -->
+<!--  		<li><a href=""></a></li>  -->
+<!--  		<li><a href=""></a></li>  -->
+<!-- 		<li><a href="">상담 및 데모신청</a></li> -->
+<!-- 		<li><a onclick="openDOapply()" style="cursor: pointer;"> -->
+<!--     			<span style="cursor: pointer;"></span> -->
+<!-- 	 	   </a> -->
 		    <script>
-	        function openDOapply() {
-	        //window.open("http://pay.daouoffice.com/apply/", "서비스 신청하기", "width=1100,height=900,resizable=yes,scrollbars=yes");
-	        }
-		    </script>
-		</li>
-		<li><a href="">교육신청</a></li>
-	</ul>
-	<div class="modal" style="display: none;"></div>
-	<button class="open_nav"></button>
-	<div class="navi_all" style="display: block; right: -1167px;">
-		<button class="btn_gnb_close" title="close"></button>
+ // 	        function openDOapply() { 
+ // 	        //window.open("http://pay.daouoffice.com/apply/", "서비스 신청하기", "width=1100,height=900,resizable=yes,scrollbars=yes"); 
+ // 	        } 
+  		    </script>  
+<!-- 		</li> -->
+<!-- 		<li><a href=""></a></li> -->
+<!-- 	</ul> -->
+<!-- 	<div class="modal" style="display: none;"></div> -->
+<!-- 	<button class="open_nav"></button> -->
+<!-- 	<div class="navi_all" style="display: block; right: -1167px;"> -->
+<!-- 		<button class="btn_gnb_close" title="close"></button> -->
 
-		<div class="navi_box_wrap">
-			<div class="navi_box">
-				<i class="separator pin01"></i>
-				<h3>다우오피스 소개</h3>
-				<ul>
-					<li><a href="">회사소개</a></li>
-					<li><a href="">다우오피스란</a></li>
-					<li class="point"><a href="">기능안내</a></li>
-					<li><a href="">고객정책</a></li>
-					<!--li><a href="">제휴 신청 안내</a></li-->
-				</ul>
-			</div>
-			<div class="navi_box">
-				<i class="separator pin01"></i>
-				<h3>체험하기</h3>
-				<ul>
-					<li class="point"><a href="">왜 다우오피스인가</a></li>
-					<li class="point"><a href="">상담 및 데모신청</a></li>
-					<li class="point"><a href="">한눈에 둘러보기</a></li>
-					<li><a href="">고객사 현황</a></li>
-				</ul>
-			</div>
-			<div class="navi_box">
-				<i class="separator pin01"></i>
-				<h3>시작하기</h3>
-				<ul>
-					<li class="point">
-						<a onclick="openDOapply()" style="cursor: pointer;">
-    						<span style="cursor: pointer;">서비스 신청</span>
-				 	   </a>
+<!-- 		<div class="navi_box_wrap"> -->
+<!-- 			<div class="navi_box"> -->
+<!-- 				<i class="separator pin01"></i> -->
+<!-- 				<h3>다우오피스 소개</h3> -->
+<!-- 				<ul> -->
+<!-- 					<li><a href="">회사소개</a></li> -->
+<!-- 					<li><a href="">다우오피스란</a></li> -->
+<!-- 					<li class="point"><a href="">기능안내</a></li> -->
+<!-- 					<li><a href="">고객정책</a></li> -->
+<!-- 					li><a href="">제휴 신청 안내</a></li -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 			<div class="navi_box"> -->
+<!-- 				<i class="separator pin01"></i> -->
+<!-- 				<h3>체험하기</h3> -->
+<!-- 				<ul> -->
+<!-- 					<li class="point"><a href="">왜 다우오피스인가</a></li> -->
+<!-- 					<li class="point"><a href="">상담 및 데모신청</a></li> -->
+<!-- 					<li class="point"><a href="">한눈에 둘러보기</a></li> -->
+<!-- 					<li><a href="">고객사 현황</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 			<div class="navi_box"> -->
+<!-- 				<i class="separator pin01"></i> -->
+<!-- 				<h3>시작하기</h3> -->
+<!-- 				<ul> -->
+<!-- 					<li class="point"> -->
+<!-- 						<a onclick="openDOapply()" style="cursor: pointer;"> -->
+<!--     						<span style="cursor: pointer;">서비스 신청</span> -->
+<!-- 				 	   </a> -->
 					    <script>
-				        function openDOapply() {
-				        //window.open("http://pay.daouoffice.com/apply/", "서비스 신청하기", "width=1100,height=900,resizable=yes,scrollbars=yes");
-				        }
-					    </script>
-					</li>
-					<li class="point"><a href="">유형 및 가격안내</a></li>
-					<!--li><a href="">보안상품</a></li-->
-					<li><a href="">제휴상품</a></li>
-					<li><a href="">FAQ</a></li>
-				</ul>
-			</div>
-			<div class="navi_box">
-				<i class="separator pin01"></i>
-				<h3>활용하기</h3>
-				<ul>
-					<li><a href="">교육 안내 및 신청</a></li>
-					<li><a href="">도움말 동영상</a></li>
-					<li><a href="">활용사례</a></li>
-					<!--li><a href="">Works 가이드</a></li-->
-				</ul>
-			</div>
-			<div class="navi_box">
-				<i class="separator pin01"></i>
-				<h3>다우오피스 소식</h3>
-				<ul>
-					<li><a href="">공지사항</a></li>
-					<li><a href="">이벤트</a></li>
-				</ul>
-			</div>
-			<div class="navi_box">
-				<i class="separator pin01"></i>
-				<h3>고객센터</h3>
-				<ul>
-					<li><a href="">고객센터</a></li>
-				</ul>
-			</div>			
-		</div>
-	</div>
-</div>
+// 				        function openDOapply() {
+// 				        //window.open("http://pay.daouoffice.com/apply/", "서비스 신청하기", "width=1100,height=900,resizable=yes,scrollbars=yes");
+// 				        }
+ 					    </script> 
+<!-- 					</li> -->
+<!-- 					<li class="point"><a href="">유형 및 가격안내</a></li> -->
+<!-- 					li><a href="">보안상품</a></li -->
+<!-- 					<li><a href="">제휴상품</a></li> -->
+<!-- 					<li><a href="">FAQ</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 			<div class="navi_box"> -->
+<!-- 				<i class="separator pin01"></i> -->
+<!-- 				<h3>활용하기</h3> -->
+<!-- 				<ul> -->
+<!-- 					<li><a href="">교육 안내 및 신청</a></li> -->
+<!-- 					<li><a href="">도움말 동영상</a></li> -->
+<!-- 					<li><a href="">활용사례</a></li> -->
+<!-- 					li><a href="">Works 가이드</a></li -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 			<div class="navi_box"> -->
+<!-- 				<i class="separator pin01"></i> -->
+<!-- 				<h3>다우오피스 소식</h3> -->
+<!-- 				<ul> -->
+<!-- 					<li><a href="">공지사항</a></li> -->
+<!-- 					<li><a href="">이벤트</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 			<div class="navi_box"> -->
+<!-- 				<i class="separator pin01"></i> -->
+<!-- 				<h3>고객센터</h3> -->
+<!-- 				<ul> -->
+<!-- 					<li><a href="">고객센터</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div>			 -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 <div class="row introduce">
 		<div class="inner">
@@ -233,9 +233,10 @@ margin-top:60px;
 						<p class="stitle01">최고의 제품, 최적의 가격을 선보이다</p>
 					</div>
 					<div class="btn_box">
-						<a href="" class="btn_major pc_display">서비스 접속하기</a>
-						<a href="" class="btn_major mo_display">상담 및 데모신청</a>
+						<a href="loginForm.do" class="btn_major pc_display">서비스 접속하기</a>
+						<p style="margin-top: 10px; text-align: center;"><a href="companyJoinForm.do" style="color: white;">아직 CSS회원이 아니신가요?</a></p>
 					</div>
+				
 				</div>
 				<div class="sp-slide2" style="display: none; opacity: 1;">
 					<div class="text_box">

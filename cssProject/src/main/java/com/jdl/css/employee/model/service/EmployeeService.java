@@ -49,5 +49,8 @@ public class EmployeeService {
 		// TODO Auto-generated method stub
 		return dao.updateInstead(user);
 	}
+	public int stateUpdate(EmployeeVo employee) {
+		return dao.stateUpdate(employee);
+	}
 
 }

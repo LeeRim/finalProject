@@ -33,12 +33,19 @@
       <c:otherwise>
       	<div class="user-panel">
 	        <div class="pull-left image">
-	          <img src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" class="img-circle" alt="User Image">
+		          <img src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" class="img-circle" alt="User Image">
 	        </div>
 	        <div class="pull-left info">
-	          <p><c:out value="${sessionScope.user.eName} ${sessionScope.user.job}"/></p>
-	          <!-- Status -->
-	          <a href="#"><i class="fa fa-circle text-success"></i> <c:out value ="${sessionScope.user.department}"/></a>
+	        <c:choose>
+	        	<c:when test="${sessionScope.user.eName != null}">
+		          <p><c:out value="${sessionScope.user.eName} ${sessionScope.user.job}"/></p>
+		          <!-- Status -->
+		          <a href="#"><i class="fa fa-circle text-success"></i> <c:out value ="${sessionScope.user.department}"/></a>
+	        	</c:when>
+	        	<c:otherwise>
+	        		 <a><i class="fa fa-circle text-success"></i> 등록된 정보가 없습니다.<br>정보를 등록하세요</a>
+	        	</c:otherwise>
+	        </c:choose>
 	        </div>
 	      </div>
       </c:otherwise>
@@ -70,3 +77,7 @@
  
 </body>
 </html>
+
+
+
+

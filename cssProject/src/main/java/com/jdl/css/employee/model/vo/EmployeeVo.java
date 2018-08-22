@@ -45,6 +45,9 @@ public class EmployeeVo {
     //vacation 용
     private int totalVacation;				//총휴가
     private int remainingVacation;      //남은휴가
+    
+    //회사 레벨
+    private int cLevel;
     public EmployeeVo() {
     }
 
@@ -281,8 +284,15 @@ public class EmployeeVo {
 	public void setRemainingVacation(int remainingVacation) {
 		this.remainingVacation = remainingVacation;
 	}
+	
 
+	public int getcLevel() {
+		return cLevel;
+	}
 
+	public void setcLevel(int cLevel) {
+		this.cLevel = cLevel;
+	}
 
 	@Override
 	public String toString() {
@@ -293,12 +303,6 @@ public class EmployeeVo {
 				+ ", ePhoto=" + ePhoto + ", eInstead=" + eInstead + ", eState=" + eState + ", job=" + job
 				+ ", department=" + department + ", divInfolevel=" + divInfolevel + ", instead=" + instead
 				+ ", division=" + division + ", totalVacation=" + totalVacation + ", remainingVacation="
-				+ remainingVacation + "]";
+				+ remainingVacation + ", cLevel=" + cLevel + "]";
 	}
-
-	
-	
-
-
-
 }

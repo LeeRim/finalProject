@@ -50,6 +50,10 @@ public class EmployeeDao {
 		// TODO Auto-generated method stub
 		return sqlSession.update("EmployeeMapper.updateInstead", user);
 	}
+	
+	public int stateUpdate(EmployeeVo employee) {
+		return sqlSession.update("EmployeeMapper.updateState", employee);
+	}
 
 
 }
