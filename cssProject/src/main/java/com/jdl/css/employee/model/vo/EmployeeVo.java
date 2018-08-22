@@ -84,7 +84,6 @@ public class EmployeeVo {
 	}
 
 
-
 	public void seteType(String eType) {
 		this.eType = eType;
 	}
@@ -286,6 +285,7 @@ public class EmployeeVo {
 	}
 	
 
+
 	public int getcLevel() {
 		return cLevel;
 	}
@@ -293,6 +293,7 @@ public class EmployeeVo {
 	public void setcLevel(int cLevel) {
 		this.cLevel = cLevel;
 	}
+
 
 	@Override
 	public String toString() {
@@ -305,4 +306,5 @@ public class EmployeeVo {
 				+ ", division=" + division + ", totalVacation=" + totalVacation + ", remainingVacation="
 				+ remainingVacation + ", cLevel=" + cLevel + "]";
 	}
+
 }

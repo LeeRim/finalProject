@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QNAMapper">
+
+	<insert id="insertQNA" parameterType="QNA">
+		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL, #{qWriterFk}, #{qContent}, null, SYSDATE, 'N')
+	</insert>
+	
+	<update id="updateQNA" parameterType="QNA">
+		UPDATE QNA SET Q_ANSWER = #{qAnswer}, Q_CHECK = 'Y' WHERE Q_KEY = #{qKey}
+	</update>
+	
+	<select id="selectQNA" parameterType="EmployeeVo" resultType="QNA">
+		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, Q_CHECK FROM QNA
+		WHERE Q_WRITER_FK = #{eKey}
+	</select>
+	
+	<select id="selectOneQNA" resultType="QNA">
+		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, Q_CHECK FROM QNA
+		WHERE Q_KEY = #{qKey}
+	</select>
+	
+	<!-- <select id="selectOneQna" resultType="QNA">
+		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, Q_CHECK FROM QNA
+		WHERE Q_KEY = #{}
+	</select> -->
+</mapper>
