@@ -147,20 +147,29 @@
                 <img src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" class="img-circle" alt="User Image">
                 <p>
                   <c:out value="${sessionScope.user.eName} ${sessionScope.user.job}"/>
-                  <small><c:out value="${sessionScope.user.department}"/></small>
+                  <small><c:out value="${sessionScope.user.department}"/><br>
+                  			<c:choose>
+                  				<c:when test="${sessionScope.user.eState == 0}">
+                  					(자리비움)	
+                  				</c:when>
+                  				<c:otherwise>
+									(근무중)                  				
+                  				</c:otherwise>
+                  			</c:choose>
+                  </small>
                 </p>
               </li>
               <!-- Menu Body -->
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="#">자리비움<br>(휴가)</a>
+                    <a href="stateUpdate.do?eState=0">자리비움<br>(휴가)</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">출장</a>
+                    <a href="stateUpdate.do?eState=0">출장</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">복귀</a>
+                    <a href="stateUpdate.do?eState=1">근무복귀</a>
                   </div>
                 </div>
                 <!-- /.row -->

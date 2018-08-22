@@ -46,5 +46,9 @@ public class EmployeeDao {
 
 	}
 
+	public int stateUpdate(EmployeeVo employee) {
+		return sqlSession.update("EmployeeMapper.updateState", employee);
+	}
+
 
 }

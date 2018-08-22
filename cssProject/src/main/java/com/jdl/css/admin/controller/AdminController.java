@@ -1,7 +1,5 @@
 package com.jdl.css.admin.controller;
 
-
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,15 +17,13 @@ import com.jdl.css.company.model.vo.CompanyVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 
-
-
 @Controller
 public class AdminController {
 	@Autowired
 	AdminService service;
 	
 	@RequestMapping("companyPayment.do")
-	public ModelAndView companyPayment(ModelAndView mv,int cKeyFk){
+	public ModelAndView companyPayment(ModelAndView mv,@RequestParam("cKeyFk") int cKeyFk){
 		System.out.println(cKeyFk);
 		CompanyVo company = service.selectComapnyPayment(cKeyFk);
 		mv.addObject("company",company);
@@ -54,6 +51,7 @@ public class AdminController {
 		service.insertCompany(company);
 		
 		employee.setcKeyFk(company.getcKey());
+		employee.setePhoto("emptyImage.png");
 		service.insertEmployeeAdmin(employee);
 		return "redirect:loginForm.do";
 	}

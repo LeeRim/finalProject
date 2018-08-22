@@ -45,4 +45,8 @@ public class EmployeeService {
 
 	}
 
+	public int stateUpdate(EmployeeVo employee) {
+		return dao.stateUpdate(employee);
+	}
+
 }
