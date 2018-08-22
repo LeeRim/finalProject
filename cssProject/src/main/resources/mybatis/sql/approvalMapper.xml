@@ -22,7 +22,7 @@
 			<result property="eType" column="E_TYPE" />
 			<result property="eId" column="E_ID" />
 			<result property="ePwd" column="E_PWD" />
-			<result property="eName" column="E_NAME" />
+			<result property="eName" column="W_E_NAME" />
 			<result property="eJobcodeFk" column="E_JOBCODE_FK" />
 			<result property="eDepartFk" column="E_DEPART_FK" />
 			<result property="eAddress" column="E_ADDRESS" />
@@ -34,9 +34,9 @@
 			<result property="eEntDate" column="E_ENT_DATE" />
 			<result property="eEntYn" column="E_ENT_YN" />
 			<result property="ePhoto" column="E_PHOTO" />
-			<result property="job" column="JOB" />
+			<result property="job" column="W_JOB" />
 			<result property="divInfolevel" column="DIV_INFOLEVEL" />
-			<result property="department" column="DEPARTMENT" />
+			<result property="department" column="W_DEPARTMENT" />
 		</association>
 		<collection property="aConList" column="A_KEY" ofType="AppConVo"
 			resultMap="appConMap"></collection>
@@ -392,7 +392,6 @@
 	<select id="selectApprovalDetail" resultMap="approvalMap"
 		parameterType="ApprovalVo">
 		SELECT A.A_KEY A_KEY,
-		A.C_KEY_FK C_KEY_FK,
 		A.DIV_DOCTYPE_FK DIV_DOCTYPE_FK,
 		A.A_TITLE A_TITLE,
 		A.A_CONTENT
@@ -417,10 +416,10 @@
 		DIV2.DIV_INFO
 		DEPARTMENT,
 		E2.E_NAME
-		E_NAME,
-		DIV3.DIV_INFO JOB,
+		W_E_NAME,
+		DIV3.DIV_INFO W_JOB,
 		DIV4.DIV_INFO
-		DEPARTMENT,
+		W_DEPARTMENT,
 		ATTA.ATTA_KEY
 		ATTA_KEY,
 		ATTA.ATTA_LOCATION ATTA_LOCATION,
@@ -431,9 +430,9 @@
 		ATTA_FILESIZE
 		FROM
 		APPROVAL A
-		JOIN APPROVAL_CONDITION AC ON
+		LEFT JOIN APPROVAL_CONDITION AC ON
 		(A.A_KEY=AC.A_KEY_FK)
-		JOIN
+		LEFT JOIN
 		EMPLOYEE E ON (AC.AC_APPROVER_FK=E.E_KEY)
 		JOIN EMPLOYEE E2 ON
 		(A.A_WRITER_FK=E2.E_KEY)
@@ -594,9 +593,43 @@
 	</select>
 
 	<select id="selectVacationForm" parameterType="int" resultType="VacationFormVo">
-		SELECT VF_KEY, A_KEY_FK, VF_TYPE, VF_STARTDATE, VF_ENDDATE,
-		VF_HALFFLAG, VF_REASON
+		SELECT VF_KEY, A_KEY_FK, VF_TYPE,TO_CHAR(VF_STARTDATE,'YYYY-MM-DD')
+		VF_STARTDATE,TO_CHAR(VF_ENDDATE,'YYYY-MM-DD') VF_ENDDATE,
+		VF_HALFFLAG,
+		VF_REASON
 		FROM VACATION_FORM
+		WHERE A_KEY_FK = #{aKey}
+	</select>
+
+	<select id="selectOrderForm" parameterType="int" resultType="OrderFormVo">
+		SELECT O_KEY ,
+		A_KEY_FK ,
+		O_DEPARTMENT ,
+		TO_CHAR(O_LIMIT,'YYYY-MM-DD') O_LIMIT ,
+		O_NO ,
+		TO_CHAR(O_DATE,'YYYY-MM-DD') O_DATE ,
+		O_PAYMENT ,
+		TO_CHAR(O_STARTDATE,'YYYY-MM-DD') O_STARTDATE ,
+		TO_CHAR(O_ENDDATE,'YYYY-MM-DD') O_ENDDATE ,
+		TO_CHAR(O_PAYEND,'YYYY-MM-DD') O_PAYEND ,
+		O_PURPOSE
+		FROM ORDERTABLE
+		WHERE A_KEY_FK = #{aKey}
+	</select>
+
+	<select id="selectOrderLinked" parameterType="int"
+		resultType="OrderTableLinkedVo">
+		SELECT OL_KEY ,
+		A_KEY_FK ,
+		OL_CULNO ,
+		OL_PRODUCT ,
+		OL_SIZE ,
+		OL_UNION ,
+		OL_PRODUCTCOUNT ,
+		OL_ORIZINPRICE ,
+		OL_PRICE ,
+		OL_ETC
+		FROM ORDERTABLELINKED
 		WHERE A_KEY_FK = #{aKey}
 	</select>
 
@@ -636,13 +669,13 @@
 		SEQ_JOB_PROPSAL.NEXTVAL,#{aKeyFk},#{jpWorkingDate},#{jpCooperation}
 		)
 	</insert>
-	
+
 	<insert id="insertVacation" parameterType="VacationFormVo">
 		INSERT INTO
 		VACATION_FORM
 		VALUES(SEQ_VACATION_FORM.NEXTVAL,#{aKeyFk},#{vfType},#{vfStartdate},#{vfEnddate},#{vfHalfflag},#{vfReason})
 	</insert>
-	
+
 	<insert id="insertOrderForm" parameterType="OrderFormVo">
 		INSERT INTO
 		ORDERTABLE VALUES (SEQ_ORDERTABLE.NEXTVAL, #{aKeyFk}, #{oDepartment},
@@ -652,5 +685,11 @@
 		#{oEnddate},
 		#{oPayend}, #{oPurpose})
 
+	</insert>
+
+	<insert id="insertOrderLinked" parameterType="OrderTableLinkedVo">
+		INSERT INTO
+		ORDERTABLELINKED VALUES
+		(SEQ_ORDERTABLELINKED.NEXTVAL,#{aKeyFk},#{olCulno},#{olProduct},#{olSize},#{olUnion},#{olProductcount},#{olOrizinprice},#{olPrice},#{olEtc})
 	</insert>
 </mapper>

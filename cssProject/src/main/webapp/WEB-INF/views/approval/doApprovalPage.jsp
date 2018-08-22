@@ -25,7 +25,7 @@ function submitCondition(){
 }
 
 $(function() {
-	if(${sessionScope.user.eKey == requestSession.approval.aWriterFk || approval.aCondition !=0 }){
+	if(${sessionScope.user.eKey == approval.aWriterFk || approval.aCondition !=0 }){
 		$(".doApproval").hide();
 	}
 	
