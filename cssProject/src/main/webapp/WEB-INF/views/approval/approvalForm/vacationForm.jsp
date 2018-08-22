@@ -15,28 +15,53 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <title>AdminLTE 2 | Starter</title>
 
 <!-- 승인table -->
-<link rel="stylesheet" href="resources/dist/css/approval.css">
+<link rel="stylesheet" href="resources/dist/css/approval.css"/>
 
 <!-- datepicker -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 <script type="text/javascript">
 	function openSelectApprover() {
 		$('div.modal').modal();
 	}
+	var vfStart = "";
+	var vfEnd = "";
 	$(function() {
-		$('#vfStartdate,#vfEnddate').datepicker({
-			format : "yyyy/mm/dd",
+		$('#vfStartdate').datepicker({
+			format : "yyyy-mm-dd",
 			language : "kr",
-			autoclose : true
-		});
+			autoclose : true,
+			startDate : "today"
+		}).on('changeDate', function(){
+            console.log($('#vfStartdate').datepicker('getFormattedDate'));
+            vfStart = $('#vfStartdate').datepicker('getFormattedDate');
+	      });
+		
+		$('#vfEnddate').datepicker({
+			format : "yyyy-mm-dd",
+			language : "kr",
+			autoclose : true,
+			startDate : vfStart
+		}).on('changeDate', function(){
+            console.log($('#vfEnddate').datepicker('getFormattedDate'));
+            vfEnd = $('#vfEnddate').datepicker('getFormattedDate');
+	      });
+		
 	});
+	function days(){
+		var startArray = vfStart.split("-");
+		var endArray = vfEnd.split("-");
+		
+		var startD = new Date(startArray[0], Number(startArray[1])-1, startArray[2]);
+		var endD = new Date(endArray[0], Number(endArray[1])-1, endArray[2]);
+		
+		var between = (endD.getTime() - startD.getTime());
+		var betweenDay = between / (1000*60*60*24) + 1 ;
+		console.log(betweenDay);
+		$("#useV").val(betweenDay);
+	}
 	
 </script>
-<!--  -->
-
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -75,7 +100,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<!--전자결재 내용-->
 						<div class="approval_import ie9-scroll-fix">
 							<!-- 문서 내용 표시 테스트 -->
-							<form id="vacationForm" action="writeVacation.do" class="form_doc_editor editor_view" method="post"  enctype="multipart/form-data">
+							<form id="vacationForm" action="writeVacation.do" class="form_doc_editor editor_view" method="post"  enctype="multipart/form-data" >
 							<input type="hidden" id="appStr" name="appStr" value="">
 										<input type="hidden" id="insteads" name="insteads" value="">
 								<span style="font-family: 맑은 고딕; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
@@ -195,11 +220,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 22px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle;">
 													<input type="text" readonly class="ipt_editor ipt_editor_date hasDatepicker" id="vfStartdate" name="vfStartdate" value="">~
 													<input type="text" readonly class="ipt_editor ipt_editor_date hasDatepicker" id="vfEnddate" name="vfEnddate" value=""> 
-													<span id="usingPointArea"
-													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>사용일수
-															: </b> <input type="text" class="ipt_editor ipt_editor_num"
+													<span onclick="days();">클릭</span>
+													<span id="usingPointArea" style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>사용일수
+															: </b> <input type="text" id="useV" class="ipt_editor ipt_editor_num"
 														data-dsl="{{number:usingPoint}}" name="usingPoint"
-														value="1" readonly="readonly"> <b
+														value="" readonly="readonly"> <b
 														id="usingPoint_Comment"
 														style="font-weight: bold; color: red"></b> </span></td>
 											</tr>
@@ -231,15 +256,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<td
 													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 22px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle;"><span
 													id="restPointArea"
-													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>잔여연차
+													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>총 연차
 															: </b> <input type="text" class="ipt_editor ipt_editor_num"
-														name="restPoint" id="restPoint" value="15"
+														name="restPoint" id="restPoint" value="${sessionScope.user.totalVacation}"
 														readonly="readonly"> <b id="restPoint_Comment"
 														style="font-weight: bold; color: red"></b> </span><span
 													id="applyPointArea"
-													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>신청연차
+													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>남은연차
 															: </b> <input type="text" class="ipt_editor ipt_editor_num"
-														name="applyPoint" id="applyPoint" value="3"
+														name="applyPoint" id="applyPoint" value="${sessionScope.user.remainingVacation}"
 														readonly="readonly"> <b id="applyPoint_Comment"
 														style="font-weight: bold; color: red"></b> </span></td>
 											</tr>
