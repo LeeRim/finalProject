@@ -180,17 +180,17 @@ function validate(){
 	function select(index,eKey,name, job, department,eState,iKey,iName,iJob,iDepartment) {
 		var html="";
 		
-		for(var i=0;i<total.length;i++){
-			if(total[i]==eKey || total[i]==iKey){				
-				return;
-			}
-		}
 		
 		if(eState==0){
 			if(iKey==-1){
 				alert("현재 "+name+" "+job+"님께서 결재가 불가능한 상태입니다.");
 			}else{
 				alert("현재 "+name+job+"님께서 결재가 불가능한 상태입니다. 따라서 대결자인 "+iName+iJob+"님에게 결재요청됩니다.");
+		for(var i=0;i<total.length;i++){
+			if(total[i]==eKey || total[i]==iKey){				
+				return;
+			}
+		}
 			html = $("#approverList").html()
 			+ "<tr>"
 			+ "<td>"
@@ -208,6 +208,11 @@ function validate(){
 	total.push(iKey);
 			}
 		}else{
+			for(var i=0;i<total.length;i++){
+				if(total[i]==eKey || total[i]==iKey){				
+					return;
+				}
+			}
 			html = $("#approverList").html()
 			+ "<tr>"
 			+ "<td>"
