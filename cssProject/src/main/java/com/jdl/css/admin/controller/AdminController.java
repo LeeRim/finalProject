@@ -55,7 +55,7 @@ public class AdminController {
 		
 		employee.setcKeyFk(company.getcKey());
 		service.insertEmployeeAdmin(employee);
-		return "redirect:index.do";
+		return "redirect:loginForm.do";
 	}
 	
 	@RequestMapping("adminMain.do")

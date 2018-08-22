@@ -71,7 +71,7 @@ public class EmployeeController {
 		user.setTotalVacation(giveVacation.getGvVacadate());
 		user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
 		}catch (NullPointerException e) {
-			// TODO: handle exception
+			
 		}
 		
 		if(user == null){
