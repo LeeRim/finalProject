@@ -63,83 +63,83 @@ $(function() {
 				<input type="hidden" name="gvKey" />
 					<tr class="item1">
 						<td><input type="text" name="gvYear" value="1" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="12" /></td>
+						<td><input type="text" name="gvVacaDate" value="12" maxlength="2"/></td>
 					</tr>
 					<tr class="item2">
 						<td><input type="text" name="gvYear" value="2" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="12" /></td>
+						<td><input type="text" name="gvVacaDate" value="12" maxlength="2"/></td>
 					</tr>
 					<tr class="item3">
 						<td><input type="text" name="gvYear" value="3" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="12" /></td>
+						<td><input type="text" name="gvVacaDate" value="12" maxlength="2"/></td>
 					</tr>
 					<tr class="item4">
 						<td><input type="text" name="gvYear" value="4" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item5">
 						<td><input type="text" name="gvYear" value="5" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item6">
 						<td><input type="text" name="gvYear" value="6" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item7">
 						<td><input type="text" name="gvYear" value="7" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item8">
 						<td><input type="text" name="gvYear" value="8" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item9">
 						<td><input type="text" name="gvYear" value="9" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item10">
 						<td><input type="text" name="gvYear" value="10" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item11">
 						<td><input type="text" name="gvYear" value="11" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item12">
 						<td><input type="text" name="gvYear" value="12" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item13">
 						<td><input type="text" name="gvYear" value="13" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item14">
 						<td><input type="text" name="gvYear" value="14" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item15">
 						<td><input type="text" name="gvYear" value="15" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item16">
 						<td><input type="text" name="gvYear" value="16" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item17">
 						<td><input type="text" name="gvYear" value="17" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item18">
 						<td><input type="text" name="gvYear" value="18" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item19">
 						<td><input type="text" name="gvYear" value="19" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 					<tr class="item20">
 						<td><input type="text" name="gvYear" value="20" readonly /></td>
-						<td><input type="text" name="gvVacaDate" value="15" /></td>
+						<td><input type="text" name="gvVacaDate" value="15" maxlength="2"/></td>
 					</tr>
 				</c:if>
 			</table>

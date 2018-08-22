@@ -103,6 +103,12 @@
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
+						<c:if test="${list.size() == 0}">
+    	            <tr>
+                		<td colspan="3">조회 된 게시글이 없습니다.</td>
+ 	                </tr>
+                		</c:if>
+                		<c:if test="${list.size() != 0}">
 						<c:forEach items="${board1}" var="board1" varStatus="status">
 							<tr data-key=${board1.boardKey }>
 								<td class="title"><c:out value="${board1.bTitle }" /></td>
@@ -110,6 +116,7 @@
 								<td class="date"><c:out value="${board1.bDate }" /></td>
 							</tr>
 						</c:forEach>
+						</c:if>
 					</table>
 				</div>
 				<br><br>
@@ -130,6 +137,12 @@
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
+						<c:if test="${list.size() == 0}">
+    	            <tr>
+                		<td colspan="3">조회 된 게시글이 없습니다.</td>
+ 	                </tr>
+                		</c:if>
+                		<c:if test="${list.size() != 0}">
 						<c:forEach items="${board2}" var="board2" varStatus="status">
 							<tr data-key="${board2.boardKey }">
 								<td class="title"><c:out value="${board2.bTitle }" /></td>
@@ -137,6 +150,7 @@
 								<td class="date"><c:out value="${board2.bDate }" /></td>
 							</tr>
 						</c:forEach>
+						</c:if>
 					</table>
 				</div>
 			</div>
@@ -158,6 +172,12 @@
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
+						<c:if test="${list.size() == 0}">
+    	            <tr>
+                		<td colspan="3">조회 된 게시글이 없습니다.</td>
+ 	                </tr>
+                		</c:if>
+                		<c:if test="${list.size() != 0}">
 						<c:forEach items="${board3}" var="board3" varStatus="status">
 							 <tr data-key="${board3.boardKey}">
 								<td class="title"><c:out value="${board3.bTitle}" /></td>
@@ -165,6 +185,7 @@
 								<td class="date"><c:out value="${board3.bDate}" /></td>
 							</tr>
 						</c:forEach>
+						</c:if>
 					</table>
 				</div>
 				<br><br>
@@ -186,6 +207,12 @@
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
+						<c:if test="${list.size() == 0}">
+    	            <tr>
+                		<td colspan="3">조회 된 게시글이 없습니다.</td>
+ 	                </tr>
+                		</c:if>
+                		<c:if test="${list.size() != 0}">
 						<c:forEach items="${attach}" var="att">
 							 <tr data-key="${att.attaKey}">
 								<td class="title"><c:out value="${att.bTitle}" /></td>
@@ -193,6 +220,7 @@
 								<td class="date"><c:out value="${att.bDate}" /></td>
 							</tr>
 						</c:forEach>
+						</c:if>
 					</table>
 				</div>
 				</div>
