@@ -59,6 +59,7 @@ public class EmployeeController {
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
 		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
 		System.out.println(user);
+		System.out.println("user : " + user);
 		//근속년수에 따른 총 휴가 값 가지고오기
 		VacationVo giveVacation = vService.selectTotalVacation(user);
 		//휴가 사용일 가져오기
@@ -71,8 +72,8 @@ public class EmployeeController {
 			totalUsedVacation += vacation.getvUseddate();
 		}
 		try{
-		user.setTotalVacation(giveVacation.getGvVacadate());
-		user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
+			user.setTotalVacation(giveVacation.getGvVacadate());
+			user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
 		}catch (NullPointerException e) {
 			
 		}
