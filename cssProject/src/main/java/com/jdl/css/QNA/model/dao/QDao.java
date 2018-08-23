@@ -31,6 +31,10 @@ public class QDao {
 		return session.selectOne("QNAMapper.selectOneQNA", qKey);
 	}
 
+	public List<QNAVo> selectAll() {
+		return session.selectList("QNAMapper.selectAllQNA");
+	}
+
 	/*public QNAVo selectOneQNA() {
 		return session.selectOne("QNAMapper.selectOneQna");
 	}*/

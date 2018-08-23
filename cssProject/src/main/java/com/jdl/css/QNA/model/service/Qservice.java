@@ -31,6 +31,10 @@ public class Qservice {
 		return dao.selectone(qKey);
 	}
 
+	public List<QNAVo> selectAll() {
+		return dao.selectAll();
+	}
+
 	/*public QNAVo selectOneQNA() {
 		return dao.selectOneQNA();
 	}*/

@@ -61,9 +61,16 @@ public class EmployeeController {
 	public ModelAndView login(EmployeeVo employee,HttpSession session, ModelAndView mv){
 
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
-		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
+		//List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
 		System.out.println(user);
 		System.out.println("user : " + user);
+		List<NoteVo> indexNote = new ArrayList<NoteVo>();
+		try{
+			indexNote = nService.selectIndexNote(user.geteKey());
+		}catch (NullPointerException e) {
+			// TODO: handle exception
+		}
+		
 		//근속년수에 따른 총 휴가 값 가지고오기
 		VacationVo giveVacation = vService.selectTotalVacation(user);
 		//휴가 사용일 가져오기
@@ -86,7 +93,9 @@ public class EmployeeController {
 			System.out.println("아이디 오류");
 		}else if(user.getePwd().equals(employee.getePwd())){
 			session.setAttribute("user", user);
-			session.setAttribute("indexNote", indexNote);
+			if(indexNote !=null){
+				session.setAttribute("indexNote", indexNote);
+			}
 		}else{
 			System.out.println("비밀번호 오류");
 		}
