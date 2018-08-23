@@ -77,8 +77,10 @@ $(function(){
 			</tr>
 			</c:forEach> 
 	</table>
-	<input type="submit" value="문의하기"/>
-	<input type="button" value="목록으로" onclick="listread();"/>
+	<c:if test="${user.eType == 1}">
+		<input type="submit" value="문의하기"/>
+	</c:if>
+	<input type="button" value="메인" onclick="listread();"/>
 </form>
 </div>
 

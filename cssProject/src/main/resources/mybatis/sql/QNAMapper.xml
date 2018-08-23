@@ -5,7 +5,7 @@
 <mapper namespace="QNAMapper">
 
 	<insert id="insertQNA" parameterType="QNA">
-		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL, #{qWriterFk}, #{qContent}, null, SYSDATE, 'N', #{title}, NULL);
+		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL, #{qWriterFk}, #{qContent}, null, SYSDATE, 'N', #{title}, NULL)
 	</insert>
 	
 	<update id="updateQNA" parameterType="QNA">
