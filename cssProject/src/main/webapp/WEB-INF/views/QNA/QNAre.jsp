@@ -37,7 +37,7 @@
 	</c:if>
 	<c:if test="${qv.qAnswer ne null}">
 		<tr>
-			<td>답변 : <textarea style="resize: none;" name="qAnswer" rows="25" cols="80">${qv.qAnswer}</textarea> </td>
+			<td>답변 : <textarea style="resize: none;" name="qAnswer" rows="25" cols="80" readonly>${qv.qAnswer}</textarea> </td>
 		</tr>
 	</c:if>
 </table>
