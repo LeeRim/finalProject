@@ -33,7 +33,9 @@ public class QNAController {
 	@RequestMapping("writeQNA.do")
 	public ModelAndView writeQna(@RequestParam("file") MultipartFile file, HttpServletRequest request, QNAVo qv, ModelAndView mv, HttpSession session){
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
+		
 		qv.setqWriterFk(employee.geteKey());
+		System.out.println("QNA 작성 : " + qv);
 		int QNAresult = service.insertQNA(qv);
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -58,7 +60,7 @@ public class QNAController {
 			
 			List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
 			attach.setAttaFileName(file.getOriginalFilename());
-			attach.setAttaFilePath("boardGallery");
+			attach.setAttaFilePath("QNA");
 			attach.setAttaLocation(qv.getqKey());
 			attachList.add(attach);
 		
@@ -72,7 +74,7 @@ public class QNAController {
 	
 	@RequestMapping("updateQNA.do")
 	public ModelAndView updateQna(QNAVo qv, ModelAndView mv){
-		
+		//
 		int QNAresult = service.updateQNA(qv);
 		QNAVo qvg = service.selectone(qv.getqKey());
 		System.out.println("업데이트 후 질문 답변 : " + qv);
@@ -85,14 +87,19 @@ public class QNAController {
 	@RequestMapping("empQNA.do")
 	public ModelAndView empQNA(HttpSession session, ModelAndView mv){
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
-		
+		//본인의 리스트만 조회 로직
 		List<QNAVo> list = service.selectQNA(employee);
-		/*QNAVo qnv = service.selectOneQNA();*/
 		
 		System.out.println("질문답변 : " + list);
-		/*mv.addObject("QNA", qnv);*/
 		mv.addObject("list", list);
 		mv.setViewName("QNA/qnapage");
+		
+		//관리자는 모든 리스트를 조회해오는 로직
+		List<QNAVo> AllList = service.selectAll();
+		if(employee.geteType().charAt(0) == '1'){
+			mv.addObject("list", AllList);
+			mv.setViewName("QNA/qnapage");
+		}
 		return mv;
 	}
 	
