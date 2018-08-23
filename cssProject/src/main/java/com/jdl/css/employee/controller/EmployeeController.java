@@ -2,11 +2,13 @@
 package com.jdl.css.employee.controller;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -438,7 +440,11 @@ public class EmployeeController {
 	}
 
 	@RequestMapping("employeeIndex.do")
-	public ModelAndView employeeIndex(ModelAndView mav) {
+	public ModelAndView employeeIndex(ModelAndView mav)throws ServletException, IOException {
+		InetAddress addr = null;
+		addr = InetAddress.getLocalHost();
+		String ipLocation = addr.getHostAddress();
+		
 		List<CalenderVo> list = cservice.showCalender();
 		mav.addObject("list", list);
 
@@ -448,6 +454,7 @@ public class EmployeeController {
 		mav.addObject("board1", board1);
 		mav.addObject("board2", board2);
 		mav.addObject("board3", board3);
+		mav.addObject("ipLocation",ipLocation);
 
 		mav.setViewName("employee/employeeIndex");
 		return mav;
