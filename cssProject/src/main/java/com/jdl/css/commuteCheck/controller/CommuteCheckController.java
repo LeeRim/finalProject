@@ -34,10 +34,6 @@ CommuteCheckService service;
 		String ipLocation = addr.getHostAddress();
 		
 		mav.addObject("ipLocation",ipLocation);
-		
-		List<CommuteCheckVo> list = service.showCommuteCheck();
-		
-			mav.addObject("list", list);
 			mav.setViewName("commuteCheck/commuteCheck");
 		return mav;
 	}
@@ -70,4 +66,24 @@ CommuteCheckService service;
 		mv.setViewName("redirect:commuteCheck.do");
 		return mv;
 	}
+	
+	@RequestMapping("commuteList.do")
+	public ModelAndView selectCommuteList(ModelAndView mav){
+ 
+		List<CommuteCheckVo> list = service.showCommuteCheck();
+		mav.addObject("list", list);
+		System.out.println(list);
+		mav.setViewName("commuteCheck/commuteList");
+		return mav;
+	}
+	
+	@RequestMapping("commuteAllList.do")
+	public ModelAndView selectCommuteAllList(ModelAndView mav){
+		List<CommuteCheckVo> list = service.showCommuteAllCheck();
+		mav.addObject("list", list);
+		System.out.println(list);
+		mav.setViewName("commuteCheck/commuteAllList");
+		return mav;
+	}
 }
+
