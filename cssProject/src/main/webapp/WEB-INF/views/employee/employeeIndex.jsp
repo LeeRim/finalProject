@@ -38,7 +38,7 @@
 		padding:7px;
 	}
 	#calendar{
-		height:520px;
+		height:565px;
 	}
 	.bordName{
 		margin-left:10px;
@@ -90,7 +90,7 @@
   
 
 
-  <div class="content-wrapper" style="height: 100%;">
+  <div class="content-wrapper" style="height: 890px;">
 
     <section class="content-header">
 
@@ -221,7 +221,7 @@
 	           </div>
 	        </div>
 	        
-	         <div class="col-md-4" style="margin-top:-9px; width:41%;">
+	         <div class="col-md-4" style="width:41%;">
 				<div class="box-body table-responsive no-padding">
 					<table class="table table-hover">
 						<tr>
@@ -232,6 +232,12 @@
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
+						<c:if test="${board1.size() == 0}">
+		    	            <tr>
+		                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+		 	               </tr>
+		                </c:if>
+		                <c:if test="${board1.size() != 0}">
 						<c:forEach items="${board1}" var="board1" varStatus="status">
 							<tr data-key=${board1.boardKey }>
 								<td class="title"><c:out value="${board1.bTitle }" /></td>
@@ -239,6 +245,7 @@
 								<td class="date"><c:out value="${board1.bDate }" /></td>
 							</tr>
 						</c:forEach>
+						</c:if>
 					</table>
 				</div>
 			</div>
@@ -258,7 +265,7 @@
         </div>
         
         <div class="row">
-				<div class="col-md-4" style="margin-top:-15px; margin-bottom:7px; width:41%">
+				<div class="col-md-4" style="margin-top:10px; width:41%">
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
 							<tr>
@@ -269,17 +276,24 @@
 								<th class="writer">작성자</th>
 								<th class="date">작성일</th>
 							</tr>
-							<c:forEach items="${board3}" var="board3" varStatus="status">
-							 <tr data-key="${board3.boardKey}">
-								<td class="title"><c:out value="${board3.bTitle}" /></td>
-								<td class="writer"><c:out value="${board3.eName}" /></td>
-								<td class="date"><c:out value="${board3.bDate}" /></td>
-							</tr>
-						</c:forEach>
+							<c:if test="${board3.size() == 0}">
+			    	            <tr>
+			                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+			 	               </tr>
+			                </c:if>
+			                <c:if test="${board3.size() != 0}">
+								<c:forEach items="${board3}" var="board3" varStatus="status">
+								 <tr data-key="${board3.boardKey}">
+									<td class="title"><c:out value="${board3.bTitle}" /></td>
+									<td class="writer"><c:out value="${board3.eName}" /></td>
+									<td class="date"><c:out value="${board3.bDate}" /></td>
+								</tr>
+							</c:forEach>
+						</c:if>
 						</table>
 					</div>
 				</div>
-				 <div class="col-md-4" style="margin-top:-11px; width:41%">
+				 <div class="col-md-4" style="margin-top:15px; width:41%">
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
 							<tr>
@@ -290,6 +304,12 @@
 								<th class="writer">작성자</th>
 								<th class="date">작성일</th>
 							</tr>
+							<c:if test="${board2.size() == 0}">
+			    	            <tr>
+			                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+			 	               </tr>
+			                </c:if>
+			                <c:if test="${board2.size() != 0}">
 							<c:forEach items="${board2}" var="board2" varStatus="status">
 								<tr data-key="${board2.boardKey }">
 									<td class="title"><c:out value="${board2.bTitle }" /></td>
@@ -297,11 +317,11 @@
 									<td class="date"><c:out value="${board2.bDate }" /></td>
 								</tr>
 							</c:forEach>
+							</c:if>
 						</table>
 					</div>
 				</div>
 			</div>
-        
      </div>
     </section>
     <!-- /.content -->
@@ -357,7 +377,7 @@
     
     
     $('#calendar').fullCalendar({
-    	height: 520, 
+    	height: 565, 
     	header    : {
         left  : '',
         center: 'title',

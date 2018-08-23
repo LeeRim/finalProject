@@ -282,7 +282,7 @@
 	  <div class="row" style="margin-top:10px;">
 	  	<div class="col-md-6" >
               <!-- USERS LIST -->
-              <div class="box box-danger">
+              <div class="box box-danger" style="height:353px;">
                 <div class="box-header with-border">
                   <h3 class="box-title">Happy Birthday</h3>
 
@@ -290,46 +290,13 @@
                 <!-- /.box-header -->
                 <div class="box-body no-padding" >
                   <ul class="users-list clearfix">
+                  <c:forEach items="${todayBList }" var="tb">
                     <li>
-                      <img class="birthPhoto" src="resources/dist/img/user1-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">이름</a>
-                      <span class="users-list-date">부서</span>
+                      <img class="birthPhoto" src="resources/dist/img/user1-128x128.jpg"  alt="User Image">
+                      <a class="users-list-name" href="#">${tb.eName }</a>
+                      <span class="users-list-date">${tb.department }</span>
                     </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user8-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Norman</a>
-                      <span class="users-list-date">Yesterday</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user7-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Jane</a>
-                      <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user6-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">John</a>
-                      <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user6-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Alexander</a>
-                      <span class="users-list-date">13 Jan</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user5-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Sarah</a>
-                      <span class="users-list-date">14 Jan</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user4-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Nora</a>
-                      <span class="users-list-date">15 Jan</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user3-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Nadia</a>
-                      <span class="users-list-date">15 Jan</span>
-                    </li>
+                  </c:forEach>
                   </ul>
                   <!-- /.users-list -->
                 </div>
@@ -375,18 +342,18 @@
 							<th class="date">작성일</th>
 						</tr>
 						 <c:if test="${board1.size() == 0}">
-    	            <tr>
-                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
- 	               </tr>
-                </c:if>
-                <c:if test="${board1.size() != 0}">
-						<c:forEach items="${board1}" var="board1" varStatus="status">
-							<tr data-key=${board1.boardKey }>
-								<td class="title"><c:out value="${board1.bTitle }" /></td>
-								<td class="writer"><c:out value="${board1.eName }" /></td>
-								<td class="date"><c:out value="${board1.bDate }" /></td>
-							</tr>
-						</c:forEach>
+		    	            <tr>
+		                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+		 	               </tr>
+		                </c:if>
+		                <c:if test="${board1.size() != 0}">
+								<c:forEach items="${board1}" var="board1" varStatus="status">
+									<tr data-key=${board1.boardKey }>
+										<td class="title"><c:out value="${board1.bTitle }" /></td>
+										<td class="writer"><c:out value="${board1.eName }" /></td>
+										<td class="date"><c:out value="${board1.bDate }" /></td>
+									</tr>
+								</c:forEach>
 						</c:if>
 					</table>
 				</div>
@@ -443,10 +410,10 @@
      */
 
     var donutData = [
-      { label: '인사부', data: 30, color: '#3c8dbc' },
-      { label: '개발부', data: 20, color: '#0073b7' },
-      { label: '영업부', data: 20, color: '#3c8dbc' },
-      { label: '마케팅부', data: 50, color: '#00c0ef' }
+    	<c:forEach items="${departCountList }" var="dc" varStatus="status">
+	    	<c:if test="${!status.last}">{ label: '${dc.department}', data: ${dc.count}, color: '#3c8dbc' },</c:if>
+			<c:if test="${status.last}">{ label: '${dc.department}', data: ${dc.count}, color: '#3c8dbb' }</c:if>
+      </c:forEach>	
     ]
     $.plot('#donut-chart', donutData, {
       series: {

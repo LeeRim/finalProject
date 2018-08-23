@@ -45,6 +45,9 @@ public class EmployeeVo {
     //vacation 용
     private int totalVacation;				//총휴가
     private int remainingVacation;      //남은휴가
+    
+    //부서 count용
+    private int count;
     public EmployeeVo() {
     }
 
@@ -275,6 +278,17 @@ public class EmployeeVo {
 	public void setRemainingVacation(int remainingVacation) {
 		this.remainingVacation = remainingVacation;
 	}
+	
+
+	public int getCount() {
+		return count;
+	}
+
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 
 
@@ -287,9 +301,12 @@ public class EmployeeVo {
 				+ ", ePhoto=" + ePhoto + ", eInstead=" + eInstead + ", eState=" + eState + ", job=" + job
 				+ ", department=" + department + ", divInfolevel=" + divInfolevel + ", instead=" + instead
 				+ ", division=" + division + ", totalVacation=" + totalVacation + ", remainingVacation="
-				+ remainingVacation + "]";
+				+ remainingVacation + ", count=" + count + "]";
 	}
 
+
+
+	
 	
 	
 

@@ -46,5 +46,13 @@ public class EmployeeDao {
 
 	}
 
+	public List<EmployeeVo> selectTodayBList(int cKey) {
+		return sqlSession.selectList("EmployeeMapper.selectTodayBList",cKey);
+	}
+
+	public List<EmployeeVo> selectDepartCountList(int cKey) {
+		return sqlSession.selectList("EmployeeMapper.selectDepartCountList",cKey);
+	}
+
 
 }
