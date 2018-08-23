@@ -145,7 +145,7 @@ desired effect
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="all">
 
-						<div class="box">
+						<div class="box" style="width:100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">전체결재문서</h3>
 
@@ -218,7 +218,7 @@ desired effect
 					
 					<div role="tabpanel" class="tab-pane" id="ing">
 
-						<div class="box">
+						<div class="box" style="width:100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">진행중인 결재문서</h3>
 
@@ -283,7 +283,7 @@ desired effect
 					
 					<div role="tabpanel" class="tab-pane" id="complete">
 
-						<div class="box">
+						<div class="box" style="width:100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">완료된 결재문서</h3>
 
@@ -348,7 +348,7 @@ desired effect
 					
 					<div role="tabpanel" class="tab-pane" id="companion">
 
-						<div class="box">
+						<div class="box" style="width:100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">반려된 결재문서</h3>
 
