@@ -64,6 +64,7 @@
 		font-weight:bold;
 	}
 
+
  </style>
  <script>
 	$(function(){
@@ -80,11 +81,45 @@
 	
 	function border(b){
 		location.href="borderList.do?bCateGory=" + b;
+  </script>
+	<script>
+	$(function(){
+	   $(".box-body td").mouseenter(function(){
+	      $(this).parent().css("background","darkgray");
+	      $(this).parent().css("cursor","pointer");
+	   }).mouseout(function(){
+	      $(this).parent().css("background","white");
+	   }).click(function(){
+	      var boardNo = $(this).parent("tr").data("key");
+	      location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1";       
+	   });
+	});
+	
+	function border(b){
+		location.href="borderList.do?bCateGory=" + b;
+	}
+	function startTime() {
+	    var today = new Date();
+	    var year = today.getFullYear();
+		var month = today.getMonth();
+		var date = today.getDate();
+	    var h = today.getHours();
+	    var m = today.getMinutes();
+	    var s = today.getSeconds();
+	    m = checkTime(m);
+	    s = checkTime(s);
+	    document.getElementById('clock').innerHTML =
+	   year+ "년" + month + "월" + date + "일" + h + ":" + m + ":" + s;
+	    var t = setTimeout(startTime, 500);
+	}
+	function checkTime(i) {
+	    if (i < 10) {i = "0" + i}; // 숫자가 10보다 작을 경우 앞에 0을 붙여줌
+	    return i;
 	}
 </script>
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" onload="startTime()">
 <div class="wrapper">
 	
 	<c:import url="../include/left_column_employee.jsp"/>
@@ -215,7 +250,115 @@
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	              2018-08-21 18:08:09
+              <div class="widget-user-image">
+                <img class="img-circle" src="resources/dist/img/user1-128x128.jpg" alt="User Avatar">
+              </div>
+              <!-- /.widget-user-image -->
+              <div class="empInfo">
+	              <h3 class="widget-user-username">KH컴퍼니</h3>
+	              <h5 class="widget-user-desc">최범석대리</h5>
+              </div>
+            </div>
+            <div class="box-footer " >
+              <div class="row">
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header">사원번호</h5>
+                    <span class="description-text">K3829</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header">부서</h5>
+                    <span class="description-text">개발팀</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4">
+                  <div class="description-block">
+                    <h5 class="description-header">근속년수</h5>
+                    <span class="description-text">3년</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+             <div class="box-footer" >
+              <div class="row" >
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header">입사일</h5>
+                    <span class="description-text">2016-08-07</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header">연락망</h5>
+                    <span class="description-text">010-1234-5678</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4">
+                  <div class="description-block">
+                    <h5 class="description-header">생년월일</h5>
+                    <span class="description-text">1999/01/01</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+          </div>
+          <!-- /.widget-user -->
+        </div>
+        
+	        <div class="col-md-3">
+	        <div class="box box-default" style="height:150px; text-align:center;">
+	            <div class="box-header with-border">
+	              <h3 class="box-title" style="padding:10px;"><c:out value="${ipLocation}"></c:out></h3>
+					
+	              <!-- /.box-tools -->
+	            </div>
+	            <!-- /.box-header -->
+	            <div id="clock" class="box-body">
+	              현재시간 <br>
+	              2018-08-21 16:58:03
+	            </div>
+	            <!-- /.box-body -->
+	          </div>
+	          
+	          <div class="row">
+	          <div class="box box-default" style="width:48.5%; height:106.5px;">
+	            <div class="box-header with-border">
+	              <h3 class="box-title">출근시간</h3>
+				  <input type="submit" class="btn btn-box-tool"value="출근" onclick="inTime();" >출근
+	              <!-- /.box-tools -->
+	            </div>
+	            <!-- /.box-header -->
+	            <div id="inTime" class="box-body">
+	              
+	            </div>
+	            <!-- /.box-body -->
+	          </div>
+	          <!-- /.box -->
+	          
+	          <div class="box box-default" style="width:48.5%; height:106.5px; margin-left:10px;">
+	            <div class="box-header with-border">
+	              <h3 class="box-title">퇴근시간</h3>
+					<input type="submit" value="퇴근" onclick="outTime();" class="btn btn-box-tool" >퇴근
+	              <!-- /.box-tools -->
+	            </div>
+	            <!-- /.box-header -->
+	            <div id="outTime" class="box-body">
 	            </div>
 	            <!-- /.box-body -->
 	          </div>
