@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.employee.model.vo.EmployeeVo;
+import com.jdl.css.note.model.service.NoteService;
 import com.jdl.css.note.model.service.ReceivenoteService;
 import com.jdl.css.note.model.vo.NoteVo;
 import com.jdl.css.note.model.vo.ReceivenoteVo;
@@ -18,7 +19,8 @@ import com.jdl.css.note.model.vo.ReceivenoteVo;
 public class ReceivenoteController {
 	@Autowired
 	ReceivenoteService service;
-	
+	@Autowired
+	NoteService nService;
 	
 	@RequestMapping("receiveNoteList.do")
 	public ModelAndView receiveNoteList(ModelAndView mv,HttpSession session){
@@ -35,9 +37,14 @@ public class ReceivenoteController {
 	}
 	
 	@RequestMapping("receiveNoteDetail.do")
-	public ModelAndView receiveNoteDetail(ModelAndView mv, ReceivenoteVo receiveNote){
+	public ModelAndView receiveNoteDetail(ModelAndView mv, ReceivenoteVo receiveNote, HttpSession session){
 		//읽음 표시 업데이트
 		int updateResult = service.updateReadYn(receiveNote);
+		
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		//받은쪽지 변경된 session 값 초기화
+		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
+		session.setAttribute("indexNote", indexNote);
 		
 		NoteVo noteDetail = service.selectSendNoteDetail(receiveNote);
 		List<ReceivenoteVo> receiveList = service.selectReceiveList(receiveNote);

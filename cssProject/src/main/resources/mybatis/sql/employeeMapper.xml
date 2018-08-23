@@ -60,6 +60,8 @@
 		<result property="job" column="JOB" />
 		<result property="department" column="DEPARTMENT" />
 		<result property="divInfolevel" column="DIV_INFOLEVER" />
+		<result property="cName" column="C_NAME"/>
+		<result property="cLevel" column="C_LEVEL"/>
 		<association property="instead" javaType="EmployeeVo">
 			<id property="eKey" column="INSTEAD_KEY" />
 			<result property="eName" column="INSTEAD_NAME" />
@@ -87,7 +89,7 @@
 		EJ.DIV_INFO AS
 		"INSTEAD_JOB",
 		ED.DIV_INFO AS "INSTEAD_DEPART",
-		C.C_LEVEL
+		C.C_LEVEL,C.C_NAME
 		FROM EMPLOYEE E
 		LEFT JOIN
 		DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)

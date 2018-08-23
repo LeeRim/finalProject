@@ -61,23 +61,18 @@ public class EmployeeController {
 	public ModelAndView login(EmployeeVo employee,HttpSession session, ModelAndView mv){
 
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
-		//List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
 		System.out.println(user);
-		System.out.println("user : " + user);
 		List<NoteVo> indexNote = new ArrayList<NoteVo>();
 		try{
 			indexNote = nService.selectIndexNote(user.geteKey());
 		}catch (NullPointerException e) {
-			// TODO: handle exception
+
 		}
 		
 		//근속년수에 따른 총 휴가 값 가지고오기
 		VacationVo giveVacation = vService.selectTotalVacation(user);
 		//휴가 사용일 가져오기
 		List<VacationVo> usedVacation = vService.selectUsedVacation(user);
-		System.out.println(giveVacation);
-		System.out.println(usedVacation);
-		System.out.println(user);
 		int totalUsedVacation = 0;
 		for(VacationVo vacation : usedVacation){
 			totalUsedVacation += vacation.getvUseddate();
@@ -85,9 +80,11 @@ public class EmployeeController {
 		try{
 			user.setTotalVacation(giveVacation.getGvVacadate());
 			user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
+			user.setWorkYears(giveVacation.getGvYear());
 		}catch (NullPointerException e) {
 			
 		}
+		System.out.println(user);
 		
 		if(user == null){
 			System.out.println("아이디 오류");
@@ -106,7 +103,7 @@ public class EmployeeController {
 		}else if(user.geteType().equals("1")){
 			viewName ="";
 		}else if(user.geteType().equals("2")){
-			viewName ="home";
+			viewName ="employee/employeeIndex";
 		}
 		mv.setViewName(viewName);
 		return mv;
@@ -480,6 +477,8 @@ public class EmployeeController {
 			HttpSession session, @RequestParam("flag") String flag) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		int cKey = employee.getcKeyFk();
+		String view="";
+		if(flag.equals("true")){
 
 		// System.out.println(ePhoto);
 		System.out.println("부서키 = " + member.geteDepartFk());
@@ -517,8 +516,8 @@ public class EmployeeController {
 
 		int result = eService.insertMember(member);
 		System.out.println(flag);
-		String view="";
-		if(flag.equals("true")){
+		
+		
 			view ="companyStartHome";
 		}else{
 			view ="redirect:companyPayment.do?cKeyFk="+cKey;
@@ -541,24 +540,10 @@ public class EmployeeController {
 		return mv;
 	}
 		
-		
-		
-		
-		
 		//마이페이지 수정
-		
 		@RequestMapping("myPageUpdate.do")
 		public String myPageUpdate(){
 			return "employee/myPageUpdate";
 		}
-
-		
-
-			
-			
-			
-			
-			
-	
 
 }
