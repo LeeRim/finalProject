@@ -26,6 +26,12 @@ function select(key,no,name,job,depart,state,photo){
 	$("#job").html(job);
 	$("#no").html(no);
 }
+
+$(function(){
+	$("#labelBtn").hover(function(){
+		$("#labelBtn").css("background","#337ab7");
+	});
+});
 </script>
 
 </head>
@@ -76,13 +82,11 @@ desired effect
         | Your Page Content Here |
         -------------------------->
 				<div class="col-md-3">
-					<label class="callout callout-info
-"
-						style="width: 100%; height: 45px; margin-bottom: 10px; text-align: center;">대결자
+					<label class="btn btn-primary btn-block margin-bottom" id="labelBtn">대결자
 						선택</label>
 
 					<c:forEach items="${department}" var="department">
-						<div class="box box-solid collapsed-box" style="width: 100%">
+						<div class="box box-solid collapsed-box" style="margin:3px 0 0 0;width: 100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">
 									<c:out value="${department.department}" />
