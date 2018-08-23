@@ -17,9 +17,9 @@
 	          <img src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" class="img-circle" alt="User Image">
 	        </div>
 	        <div class="pull-left info">
-	          <p><c:out value="${sessionScope.user.eName} ${sessionScope.user.job}"/></p>
+	          <p><c:out value="${sessionScope.user.cName} "/></p>
 	          <!-- Status -->
-	          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+	          <a href="#"><i class="fa fa-circle text-success"></i> <c:out value="${sessionScope.user.department} "/></a>
 	        </div>
 	      </div>
 
@@ -28,17 +28,14 @@
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
 
-        <li><a href=""><i class="fa fa-link"></i> <span>마이페이지</span></a></li>
-        <li class="treeview">
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
-        </li>
+        <li><a href=""><i class="fa fa-link"></i> <span>회원정보</span></a></li>
+        <li><a href=""><i class="fa fa-link"></i> <span>근태관리</span></a></li>
+        <li><a href=""><i class="fa fa-link"></i> <span>조직도</span></a></li>
+        <li><a href=""><i class="fa fa-link"></i> <span>일정관리</span></a></li>
+        <li><a href=""><i class="fa fa-link"></i> <span>전자결재</span></a></li>
+        <li><a href="receiveNoteList.do"><i class="fa fa-envelope-o"></i> <span>쪽지</span></a></li>
+        <li><a href=""><i class="fa fa-link"></i> <span>커뮤니티</span></a></li>
+        
       </ul>
       <!-- /.sidebar-menu -->
     </section>

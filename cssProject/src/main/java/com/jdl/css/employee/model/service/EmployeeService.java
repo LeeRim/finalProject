@@ -63,4 +63,8 @@ public class EmployeeService {
 
 	}
 
+	public int empNoCheck(EmployeeVo chekEmployee) {
+		return dao.empNoCheck(chekEmployee);
+	}
+
 }

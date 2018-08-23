@@ -32,7 +32,7 @@
 <form action="writeQNA.do" method="post" enctype="multipart/form-data">
 	<table border="1">
 		<tr>
-			<th>질문</th>
+			<th><input type="text" value="제목" name="title"/></th>
 		</tr>
 		<tr>
 			<td class="wd"><textarea style="resize: none;" name="qContent" rows="25" cols="80"></textarea></td>

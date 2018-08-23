@@ -1,7 +1,6 @@
 
 package com.jdl.css.employee.controller;
 import java.io.File;
-
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -19,13 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jdl.css.approval.model.service.ApprovalService;
+import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.border.model.service.BorderService;
 import com.jdl.css.border.model.vo.BorderVo;
 import com.jdl.css.calender.model.service.CalenderService;
 import com.jdl.css.calender.model.vo.CalenderVo;
 import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.service.VacationService;
-import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.common.model.vo.VacationVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
@@ -49,6 +49,9 @@ public class EmployeeController {
 
 	@Autowired
 	BorderService borderservice;
+	
+	@Autowired
+	ApprovalService aService;
 
 	@RequestMapping("loginForm.do")
 	public String openLoginForm() {
@@ -59,18 +62,15 @@ public class EmployeeController {
 	
 	@RequestMapping("login.do")
 	public ModelAndView login(EmployeeVo employee,HttpSession session, ModelAndView mv){
-
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
+
 		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
-		System.out.println(user);
-		System.out.println("user : " + user);
+		List<ApprovalVo> waitingApprovals = aService.selectWaitingApprovalList(user.geteKey());
+
 		//근속년수에 따른 총 휴가 값 가지고오기
 		VacationVo giveVacation = vService.selectTotalVacation(user);
 		//휴가 사용일 가져오기
 		List<VacationVo> usedVacation = vService.selectUsedVacation(user);
-		System.out.println(giveVacation);
-		System.out.println(usedVacation);
-		System.out.println(user);
 		int totalUsedVacation = 0;
 		for(VacationVo vacation : usedVacation){
 			totalUsedVacation += vacation.getvUseddate();
@@ -78,15 +78,21 @@ public class EmployeeController {
 		try{
 			user.setTotalVacation(giveVacation.getGvVacadate());
 			user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
+			user.setWorkYears(giveVacation.getGvYear());
 		}catch (NullPointerException e) {
 			
 		}
+		System.out.println(user);
 		
 		if(user == null){
 			System.out.println("아이디 오류");
 		}else if(user.getePwd().equals(employee.getePwd())){
 			session.setAttribute("user", user);
+			/*if(indexNote !=null){
+				session.setAttribute("indexNote", indexNote);
+			}*/
 			session.setAttribute("indexNote", indexNote);
+			session.setAttribute("indexApproval", waitingApprovals);
 		}else{
 			System.out.println("비밀번호 오류");
 		}
@@ -97,12 +103,14 @@ public class EmployeeController {
 		}else if(user.geteType().equals("1")){
 			viewName ="";
 		}else if(user.geteType().equals("2")){
-			viewName ="home";
+			viewName ="employee/employeeIndex";
 		}
 		mv.setViewName(viewName);
 		return mv;
 	}
 	
+	
+	//직급 부서 리스트 출력
 	@RequestMapping("memberAdd.do")
 	public ModelAndView memberAdd(ModelAndView mv, HttpSession session) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
@@ -133,15 +141,17 @@ public class EmployeeController {
 		// System.out.println(ePhoto);
 		System.out.println("부서키 = " + member.geteDepartFk());
 
-		String birth = eBirth1;
-		String hire = eHireDate1;
 
+		
+		if(!eBirth1.equals("")){
 		Date birth2 = Date.valueOf(eBirth1);
-		Date hire2 = Date.valueOf(eHireDate1);
-
 		member.seteBirth(birth2);
+		}
+		if(!eHireDate1.equals("")){
+		Date hire2 = Date.valueOf(eHireDate1);
 		member.seteHireDate(hire2);
-
+		}
+		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 
 		String path = root + "\\upload\\empPhoto";
@@ -203,6 +213,27 @@ public class EmployeeController {
 			return result;
 		}
 		
+		//사원등록 아이디체크
+				@RequestMapping("empNoCheck.do")
+				public @ResponseBody int empNoCheck(String eNo, HttpSession session){
+					
+					
+					EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+					EmployeeVo chekEmployee = new EmployeeVo();
+					int cKey = employee.getcKeyFk();
+					System.out.println(eNo);
+					System.out.println(cKey);
+					chekEmployee.setcKeyFk(cKey);
+					chekEmployee.seteNo(eNo);
+					
+					int result = eService.empNoCheck(chekEmployee);
+					
+					
+					
+
+					return result;
+				}
+		
 		
 		
 		
@@ -228,6 +259,12 @@ public class EmployeeController {
 		eKey = Integer.parseInt("6");
 		
 		EmployeeVo select = eService.selectEmployeeInfo(eKey);
+		
+		
+		if(select.getePhoto()==null){
+			
+			select.setePhoto("empty.png");
+		}
 		
 		System.out.println(select);
 		mv.addObject("select", select);
@@ -302,11 +339,16 @@ public class EmployeeController {
 			member.setePhoto(ePhoto2);
 		}
 		
+		
+		//비밀번호 null값 일시 기존 비밀번호 입력
+			if(member.getePwd().equals("")){
+			member.setePwd(employee.getePwd());
+			}
 			member.setcKeyFk(cKey);
 		
 			int result =eService.updateEmployee(member);
 			System.out.println("업데이트 : " + member);
-
+			
 			
 		return "redirect:organizationChart.do";
 	}
@@ -435,6 +477,8 @@ public class EmployeeController {
 			HttpSession session, @RequestParam("flag") String flag) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		int cKey = employee.getcKeyFk();
+		String view="";
+		if(flag.equals("true")){
 
 		// System.out.println(ePhoto);
 		System.out.println("부서키 = " + member.geteDepartFk());
@@ -472,8 +516,8 @@ public class EmployeeController {
 
 		int result = eService.insertMember(member);
 		System.out.println(flag);
-		String view="";
-		if(flag.equals("true")){
+		
+		
 			view ="companyStartHome";
 		}else{
 			view ="redirect:companyPayment.do?cKeyFk="+cKey;
@@ -496,24 +540,10 @@ public class EmployeeController {
 		return mv;
 	}
 		
-		
-		
-		
-		
 		//마이페이지 수정
-		
 		@RequestMapping("myPageUpdate.do")
 		public String myPageUpdate(){
 			return "employee/myPageUpdate";
 		}
-
-		
-
-			
-			
-			
-			
-			
-	
 
 }

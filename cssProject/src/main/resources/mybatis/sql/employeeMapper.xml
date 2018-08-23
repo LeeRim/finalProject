@@ -60,6 +60,8 @@
 		<result property="job" column="JOB" />
 		<result property="department" column="DEPARTMENT" />
 		<result property="divInfolevel" column="DIV_INFOLEVER" />
+		<result property="cName" column="C_NAME"/>
+		<result property="cLevel" column="C_LEVEL"/>
 		<association property="instead" javaType="EmployeeVo">
 			<id property="eKey" column="INSTEAD_KEY" />
 			<result property="eName" column="INSTEAD_NAME" />
@@ -82,7 +84,7 @@
 		EJ.DIV_INFO AS
 		"INSTEAD_JOB",
 		ED.DIV_INFO AS "INSTEAD_DEPART",
-		C.C_LEVEL
+		C.C_LEVEL,C.C_NAME
 		FROM EMPLOYEE E
 		LEFT JOIN
 		DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
@@ -129,6 +131,8 @@
 	<!-- 쪽지 직원 불러오는 쿼리문 끝 -->
 
 
+
+	<!-- 사원등록 -->
 	<insert id="insertEmployee" parameterType="EmployeeVo">
 		INSERT INTO EMPLOYEE
 		(E_KEY, E_NO, C_KEY_FK, E_TYPE, E_ID, E_PWD,
@@ -137,7 +141,7 @@
 		E_BIRTH,
 		E_HIRE_DATE, E_PHOTO)
 		VALUES (SEQ_EMPLOYEE.NEXTVAL, #{eNo}, #{cKeyFk},
-		'A' , #{eId}, #{ePwd},
+		'2' , #{eId}, #{ePwd},
 		#{eName}, #{eJobcodeFk}, #{eDepartFk},
 		#{eAddress} , #{eExten}, #{ePhone},
 		#{eEmail},
@@ -156,6 +160,16 @@
 
 	</select>
 	
+	<!-- 사원등록 사원번호 유효성 검사 -->
+	<select id="empNoCheck" parameterType="EmployeeVo"
+		resultType="int">
+		SELECT
+    	COUNT(*)
+		FROM EMPLOYEE
+		WHERE E_NO = #{eNo} AND C_KEY_FK = #{cKeyFk}
+		
+
+	</select>
 	
 	
 	

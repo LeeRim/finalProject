@@ -19,33 +19,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script>
 	function writeOrderForm() {
-		$("#form").submit();
-	}
-
-	function validate() {
 		//console.log($("#orderList").children());
 		var count = 0;
 		for (var i = 1; i < 6; i++) {
 			for (var j = 1; j < 7; j++) {
-				if ($("#orderList").children().eq(i).children().eq(j).children().val() != "") {
-					count+=1;
+				if ($("#orderList").children().eq(i).children().eq(j)
+						.children().val() != "") {
+					count += 1;
 				}
 			}
-			if(count!=0){
-			for (var j = 1; j < 7; j++) {
-				if ($("#orderList").children().eq(i).children().eq(j).children().val() == "") {
-					var text = $("#orderList").children().eq(0).children().eq(j).text();
-					alert(i + "번째 물품의 " + text + "을(를) 작성해 주세요");
-					return false;
+			if (count != 0) {
+				for (var j = 1; j < 7; j++) {
+					var text = $("#orderList").children().eq(0).children()
+							.eq(j).text();
+					if ($("#orderList").children().eq(i).children().eq(j)
+							.children().val() == "") {
+						alert(i + "번째 물품의 " + text + "을(를) 작성해 주세요");
+						return;
+					}
+					var re = /^[0-9]+$/;
+					if (j == 4 || j == 5 || j == 6) {
+						if (!re.test($("#orderList").children().eq(i).children()
+								.eq(j).children().val())) {
+							alert(i + "번째 물품의 " + text + "에는 숫자만 입력해 주세요");
+							return;
+						}
+					}
 				}
-			}
-			count=0;
-			if ($("#orderList").children().eq(i).children().eq(7).children().val() == ""){
-				$("#orderList").children().eq(i).children().eq(7).children().val("/");
-			}
+				count = 0;
+				if ($("#orderList").children().eq(i).children().eq(7)
+						.children().val() == "") {
+					$("#orderList").children().eq(i).children().eq(7)
+							.children().val("/");
+				}
 			}
 		}
-		return true;
+
+		$("#form").submit();
 	}
 
 	function openSelectApprover() {
@@ -121,13 +131,13 @@ desired effect
 							<!-- 문서 내용 표시 테스트 -->
 							<form id="form" class="form_doc_editor editor_view"
 								action="writeOrderForm.do" method="post"
-								enctype="multipart/form-data" onsubmit="return validate();">
+								enctype="multipart/form-data">
 								<input type="hidden" id="appStr" name="appStr" value="">
 								<input type="hidden" id="insteads" name="insteads" value="">
 								<span><span
-									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+									style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
 										<!-- default copy start --> <span
-										style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
+										style="font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; 맑은 고딕&amp;amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot;; font-size: 10pt; line-height: normal; margin-top: 0px; margin-bottom: 0px;">
 
 											<table
 												style="border: 0px solid rgb(0, 0, 0); width: 800px; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;">
@@ -366,7 +376,7 @@ desired effect
 
 
 										<table
-											style="border-bottom: 2px solid black; border-left: 2px solid black; width: 800px; border-collapse: collapse; font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; malgun gothic&amp;amp; amp; amp; amp; amp; amp; amp; amp; quot; , dotum , arial, tahoma; border-right: 2px solid black; height: 453.636px;">
+											style="border-bottom: 2px solid black; border-left: 2px solid black; width: 800px; border-collapse: collapse; font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; malgun gothic&amp;amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; , dotum , arial, tahoma; border-right: 2px solid black; height: 453.636px;">
 											<colgroup>
 												<col width="40">
 												<col width="300">
@@ -1151,7 +1161,7 @@ desired effect
 													<td
 														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"
 														colspan="8"><p
-															style="margin: 0px 0px 10px; font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; malgun gothic&amp;amp; amp; amp; amp; amp; amp; amp; amp; quot; , dotum , arial, tahoma; font-size: 9pt; line-height: 18px;">※
+															style="margin: 0px 0px 10px; font-family: &amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; malgun gothic&amp;amp; amp; amp; amp; amp; amp; amp; amp; amp; amp; quot; , dotum , arial, tahoma; font-size: 9pt; line-height: 18px;">※
 															특기사항</p> <textarea class="txta_editor"
 															data-dsl="{{textarea}}" name="aContent" id="aContent"
 															value="" data-id="" data-name="" data-require="false"

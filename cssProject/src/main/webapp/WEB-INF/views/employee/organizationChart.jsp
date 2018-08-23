@@ -34,7 +34,8 @@
 .frame {
 	padding: 0 20px;
 	/* border: 1px solid black; */
-	width: 1500px;
+	width:90%;
+	margin: 20px auto;
 }
 
 .org_map {

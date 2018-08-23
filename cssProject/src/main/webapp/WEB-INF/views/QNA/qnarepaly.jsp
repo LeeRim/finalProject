@@ -37,13 +37,22 @@ function listread(){
 			<th>질문 : ${qv.qContent}</th>
 		</tr>
 		<tr>
-			<td>답변 : <textarea style="resize: none;" name="qAnswer" rows="25" cols="80"></textarea></td>
+			<c:if test="${qv.qAnswer == null}">
+				<td>답변 : <textarea style="resize: none;" name="qAnswer" rows="25" cols="80" ></textarea></td>
+			</c:if>
+			<c:if test="${qv.qAnswer != null}">
+				<td>답변 : <textarea style="resize: none;" name="qAnswer" rows="25" cols="80" readonly>${qv.qAnswer}</textarea></td>
+			</c:if>
+		</tr>
+		<tr>
+			<td>첨부파일 : </td>
 		</tr>
 	</table>
 	<input type="hidden" name="qContent" value="${qv.qContent}"/>
-	<input type="hidden" name="qAnswer" value="${qv.qAnswer}"/>
 	<input type="hidden" name="qKey" value="${qKey}"/>
+	<c:if test="${qv.qAnswer == null}">
 	<input type="submit" value="답변 완료"/>
+	</c:if>
 	<input type="button" value="메인" onclick="listread();"/>
 </form>
 </div>

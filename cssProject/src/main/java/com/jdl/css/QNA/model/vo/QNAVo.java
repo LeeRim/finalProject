@@ -1,6 +1,6 @@
 package com.jdl.css.QNA.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -15,7 +15,39 @@ public class QNAVo {
 	private String qContent; // 질문내용
 	private String qAnswer; //답변내용
 	private Date qDate; //작성일
-	private char qCheck; //답변여부
+	private String qCheck; //답변여부
+	private Date endDate; //답변일
+	private String title; //제목
+	
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public QNAVo(int qKey, int qWriterFk, String qContent, String qAnswer, Date qDate, String qCheck, Date endDate,
+			String title, List<AttachmentVo> attach) {
+		this.qKey = qKey;
+		this.qWriterFk = qWriterFk;
+		this.qContent = qContent;
+		this.qAnswer = qAnswer;
+		this.qDate = qDate;
+		this.qCheck = qCheck;
+		this.endDate = endDate;
+		this.title = title;
+		this.attach = attach;
+	}
+
 	private List<AttachmentVo> attach;
 	
 	public QNAVo(){
@@ -30,14 +62,6 @@ public class QNAVo {
 		this.attach = attach;
 	}
 
-	public QNAVo(int qKey, int qWriterFk, String qContent, String qAnswer, Date qDate, char qCheck) {
-		this.qKey = qKey;
-		this.qWriterFk = qWriterFk;
-		this.qContent = qContent;
-		this.qAnswer = qAnswer;
-		this.qDate = qDate;
-		this.qCheck = qCheck;
-	}
 
 	public int getqKey() {
 		return qKey;
@@ -79,11 +103,11 @@ public class QNAVo {
 		this.qDate = qDate;
 	}
 
-	public char getqCheck() {
+	public String getqCheck() {
 		return qCheck;
 	}
 
-	public void setqCheck(char qCheck) {
+	public void setqCheck(String qCheck) {
 		this.qCheck = qCheck;
 	}
 
