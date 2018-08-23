@@ -252,17 +252,17 @@ $(document).ready(
                   <label for="exampleInputFile">사원 사진</label>
               <div class="form-group">
 						<div class="btn btn-default btn-file">
-							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="ePhoto1" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
+							<i class="fa fa-paperclip"></i> Attachment <input    type="file" name="ePhoto1" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
 																								onchange="fileCheck(this)"/>
 						</div>
 					<div class="file-list"></div>
+					
                 </div>
               
               
                </div>
-              
-              
-              
+       
+
               <!-- /.box-body -->
 
               <div class="box-footer" style="text-align:center;">
