@@ -103,9 +103,10 @@
 					<!-- Messages: style can be found in dropdown.less-->
 					<li class="dropdown messages-menu">
 						<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span
+						data-toggle="dropdown"> <i class="fa fa-envelope-o"></i>
+						<c:if test="${sessionScope.indexNote.size()!=0 }"> <span
 							class="label label-success"><c:out
-									value="${fn:length(sessionScope.indexNote)}" /></span>
+									value="${fn:length(sessionScope.indexNote)}" /></span></c:if>
 					</a>
 						<ul class="dropdown-menu">
 							<li class="header">안읽은 쪽지</li>
