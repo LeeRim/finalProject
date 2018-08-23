@@ -85,14 +85,22 @@ public class QNAController {
 	@RequestMapping("empQNA.do")
 	public ModelAndView empQNA(HttpSession session, ModelAndView mv){
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
-		
+		System.out.println("관리자 타입 : ");
+		System.out.println(employee.geteType());
+		System.out.println(employee.geteType() == "1" );
+		//본인의 리스트만 조회 로직
 		List<QNAVo> list = service.selectQNA(employee);
-		/*QNAVo qnv = service.selectOneQNA();*/
 		
 		System.out.println("질문답변 : " + list);
-		/*mv.addObject("QNA", qnv);*/
 		mv.addObject("list", list);
 		mv.setViewName("QNA/qnapage");
+		
+		//관리자는 모든 리스트를 조회해오는 로직
+		List<QNAVo> AllList = service.selectAll();
+		if(employee.geteType().equals('1')){
+			mv.addObject("list", AllList);
+			mv.setViewName("QNA/qnapage");
+		}
 		return mv;
 	}
 	

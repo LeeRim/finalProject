@@ -22,6 +22,10 @@
 		WHERE Q_KEY = #{qKey}
 	</select>
 	
+	<select id="selectAllQNA" resultType="QNA">
+		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, Q_CHECK FROM QNA
+	</select>
+	
 	<!-- <select id="selectOneQna" resultType="QNA">
 		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, Q_CHECK FROM QNA
 		WHERE Q_KEY = #{}
