@@ -96,7 +96,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 	
-	<c:import url="../include/left_column_employee.jsp"/>
+	<c:import url="../include/left_column_companyAdmin.jsp"/>
   
   
 

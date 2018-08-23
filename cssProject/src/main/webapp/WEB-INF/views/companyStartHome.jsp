@@ -106,13 +106,18 @@ $(function () {
 
 function memberJoin(){
 	if (confirm("계속 저장하시겠습니까?") == true){    //확인
-		$("#joinForm").submit();
 		$("#flag").val("true");
-	}else{   //취소
 		$("#joinForm").submit();
-		$("#flag").val("false");
+	}else{   //취소
 	}
 	
+}
+function memberJoinNext(){
+	if (confirm("결제 하시겠습니까?") == true){    //확인
+		$("#joinForm").submit();
+		$("#flag").val("false");	
+	}else{   //취소
+	}
 }
 
 
@@ -426,7 +431,7 @@ function photoDelete() {
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" action="insertMember2.do"  onsubmit="return validate();" method="post" enctype="multipart/form-data">
+            <form role="form" action="insertMember2.do"  onsubmit="return validate();" method="post" enctype="multipart/form-data" id="joinForm">
             	<input type="hidden" name="flag" id="flag" value=""/>
             	<div class="emp_picture">
             	<div class="emp_picture2" id="holder">
@@ -596,8 +601,8 @@ function photoDelete() {
               <!-- /.box-body -->
 
               <div class="box-footer" style="text-align:center;">
-                <button class="btn btn-primary" id="joinBtn" onclick="memberJoin();" >등록하기</button>
-                
+                <span class="btn btn-primary" id="joinBtn" onclick="memberJoin();" >등록하기</span>
+                <span class="btn btn-primary" id="joinBtn" onclick="memberJoinNext();" >결제하기</span>
               </div>
             </form>
           </div>
@@ -669,20 +674,7 @@ $('#datepicker2').datepicker({
   autoclose: true
  })
 
-
-
-
-
-
-
-
-
-
-
 </script>
-
-
-
 
 <c:import url="include/footer.jsp"/>
 </body>

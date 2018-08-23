@@ -103,9 +103,11 @@ public class EmployeeController {
 		if(user.geteType().equals("1")  && user.getcLevel() ==0){
 			viewName ="companyStartHome";
 		}else if(user.geteType().equals("1")){
-			viewName ="";
+			viewName ="redirect:adminIndex.do";
 		}else if(user.geteType().equals("2")){
-			viewName ="employee/employeeIndex";
+			viewName ="redirect:employeeIndex.do";
+		}else if(user.geteType().equals("0")){
+			viewName="redirect:adminMain.do";
 		}
 		mv.setViewName(viewName);
 		return mv;
@@ -328,16 +330,11 @@ public class EmployeeController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
 
 			member.setePhoto(sdf.format(dt)+ePhoto.getOriginalFilename());
-		}
-		else if(ePhoto2.equals("")){
+		}else if(ePhoto2.equals("")){
 			member.setePhoto(null);
-		}
-		
-		else{
+		}else{
 			member.setePhoto(ePhoto2);
 		}
 		
@@ -351,17 +348,32 @@ public class EmployeeController {
 			int result =eService.updateEmployee(member);
 			System.out.println("업데이트 : " + member);
 			
+			EmployeeVo user = eService.selectSessionEmployee(member);
+			List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
+		      //근속년수에 따른 총 휴가 값 가지고오기
+		      VacationVo giveVacation = vService.selectTotalVacation(user);
+		      //휴가 사용일 가져오기
+		      List<VacationVo> usedVacation = vService.selectUsedVacation(user);
+
+		      int totalUsedVacation = 0;
+		      for(VacationVo vacation : usedVacation){
+		         totalUsedVacation += vacation.getvUseddate();
+		      }
+		      try{
+		         user.setTotalVacation(giveVacation.getGvVacadate());
+		         user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
+		         user.setWorkYears(giveVacation.getGvYear());
+		      }catch (NullPointerException e) {
+		         
+		      }
+		      if(result > 0){
+		    	  session.setAttribute("user", user);
+		      }
+		      System.out.println("update시 session 값 : " + user);
+			
 			
 		return "redirect:organizationChart.do";
 	}
-	
-	
-	
-	//관리자-사원정보 update
-//	@RequestMapping("employeeUpdate.do")
-//	public String employeeUpdate(){
-//		return "employee/employeeUpdate";
-//	}
 	
 	
 	
@@ -543,7 +555,7 @@ public class EmployeeController {
 			session.setAttribute("user", eKeyEm);
 		}
 		
-		mv.setViewName("home");
+		mv.setViewName("employee/employeeIndex");
 		return mv;
 	}
 		

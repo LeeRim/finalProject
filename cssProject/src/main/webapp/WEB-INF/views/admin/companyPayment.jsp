@@ -119,6 +119,7 @@ function kakaopay(){
 	                 msg += '\결제 금액 : ' + rsp.paid_amount;
 	                 msg += '카드 승인번호 : ' + rsp.apply_num;
 	                 alert("결제완료");
+	                 location.href="adminIndex.do";
 	           	},error:function(e){
 	           		alert("error");
 	           	}
