@@ -31,22 +31,16 @@
 
 
 .frame{
-padding:0 20px;
 /* border: 1px solid black;  */
 width:80%;
 margin: 0 auto;
 height:100%;
 }
 
-.org_map{
-float:left;
-width:400px;
-}
 
 .box-body{
 display:inline-block;
 width:60%;
-height:561px;
 column-count: 2;
 padding: 10px 50px;
   
@@ -55,7 +49,7 @@ padding: 10px 50px;
 .emp_picture{
 display:inline-block;
 width:25%;
-height: 540.5px;
+height: 560px;
 border-right: 1px solid #f4f4f4;
 float:left;
 
@@ -64,8 +58,8 @@ float:left;
 .emp_picture2{
 display:table;
 border: 1px solid #D8D8D8;
-margin-top:50px;
-margin-left :62px;
+margin-top:50%;
+margin-left :10%;
 margin-bottom :10px;
  width: 151px;
  height: 151px;
@@ -80,7 +74,7 @@ font-size:16px;
 
 .emp_picture3{
 text-align:center;
-margin :0 80px;
+margin-left :-19%;
 }
 
 #inputId2{
@@ -96,6 +90,13 @@ width:200px;
 .pull-right{
 background-color: white !important;
 }
+
+
+.file-list{
+
+text-align:center;
+}
+
 
 
 
@@ -584,10 +585,11 @@ function openAddressPopup(){
     <section>
 		<div class="frame">
 		
-		<div class="box box-primary" style="margin-top:50px; width:1100px;">
+		<div class="box box-primary" style="margin-top:50px; width:1300px;">
             <div class="box-header with-border">
               <h3 class="box-title">사원등록</h3>
             </div>
+            <div style="width:80%; margin: 0 auto;">
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form" action="insertMember.do"  onsubmit="return validate();" method="post" enctype="multipart/form-data">
@@ -759,7 +761,7 @@ function openAddressPopup(){
               
               
               <!-- /.box-body -->
-
+			
               <div class="box-footer" style="text-align:center;">
                 <button class="btn btn-primary" id="joinBtn" onclick="memberJoin();" >등록하기</button>
                 
@@ -767,7 +769,7 @@ function openAddressPopup(){
             </form>
           </div>
 		
-		
+		</div>
 		</div>
 
    
