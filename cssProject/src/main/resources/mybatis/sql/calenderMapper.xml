@@ -18,6 +18,7 @@
 	
 	<insert id="createEvent" parameterType="Calender">
 		insert into calender values(SEQ_CALENDER.NEXTVAL,1,#{title},#{startDate},#{endDate},2,1,#{background})
+		<!--이 부분수정예정  -->
 	</insert>
 	
 </mapper>

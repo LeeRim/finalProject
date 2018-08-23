@@ -30,4 +30,7 @@ public class CommuteCheckDao {
 	public CommuteCheckVo selectInnsr(CommuteCheckVo commute) {
 		return sqlsession.selectOne("commuteCheckMapper.selectOneCommute", commute);
 	}
+	public List<CommuteCheckVo> showCommuteAllCheck() {
+		return sqlsession.selectList("commuteCheckMapper.selectAllCommute");
+	}
 }
