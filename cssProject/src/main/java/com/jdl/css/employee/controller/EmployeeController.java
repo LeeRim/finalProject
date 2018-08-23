@@ -1,7 +1,6 @@
 
 package com.jdl.css.employee.controller;
 import java.io.File;
-
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -19,13 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jdl.css.approval.model.service.ApprovalService;
+import com.jdl.css.approval.model.vo.ApprovalVo;
 import com.jdl.css.border.model.service.BorderService;
 import com.jdl.css.border.model.vo.BorderVo;
 import com.jdl.css.calender.model.service.CalenderService;
 import com.jdl.css.calender.model.vo.CalenderVo;
 import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.service.VacationService;
-import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.common.model.vo.VacationVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
@@ -49,6 +49,9 @@ public class EmployeeController {
 
 	@Autowired
 	BorderService borderservice;
+	
+	@Autowired
+	ApprovalService aService;
 
 	@RequestMapping("loginForm.do")
 	public String openLoginForm() {
@@ -59,11 +62,12 @@ public class EmployeeController {
 	
 	@RequestMapping("login.do")
 	public ModelAndView login(EmployeeVo employee,HttpSession session, ModelAndView mv){
-
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
 		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
-		System.out.println(user);
-		System.out.println("user : " + user);
+		List<ApprovalVo> waitingApprovals = aService.selectWaitingApprovalList(user.geteKey());
+		for(int i=0;i<waitingApprovals.size();i++){
+		System.out.println(i+" / "+waitingApprovals.get(i));
+		}
 		//근속년수에 따른 총 휴가 값 가지고오기
 		VacationVo giveVacation = vService.selectTotalVacation(user);
 		//휴가 사용일 가져오기
@@ -87,6 +91,7 @@ public class EmployeeController {
 		}else if(user.getePwd().equals(employee.getePwd())){
 			session.setAttribute("user", user);
 			session.setAttribute("indexNote", indexNote);
+			session.setAttribute("indexApproval", waitingApprovals);
 		}else{
 			System.out.println("비밀번호 오류");
 		}
