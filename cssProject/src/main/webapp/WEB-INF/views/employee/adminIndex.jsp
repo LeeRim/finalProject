@@ -67,8 +67,8 @@
 		height:270px;
 	}
 	.cLogo{
-		width:128px;
-		height:128px;
+		width:130px;
+		height:130px;
 	}
 	.birthPhoto{
 		width:100px;
@@ -109,6 +109,8 @@
 
     <!-- Main content -->
     <section class="content ">
+    
+    
     <div class="row">
         <div class="col-md-4 cProfile" >
           <div class="box box-widget widget-user-2 cProfileBody">
@@ -132,22 +134,20 @@
 						<tr >
 							<th>내선번호</th>
 							<td>1234</td>
-							<th >개인번호</th>
-							<td >5678</td>
-						</tr>
-						<tr >
-							<th >가입일</th>
-							<td >2018-08-22</td>
 							<th >레벨</th>
 							<td >1</td>
+						</tr>
+						<tr >
+							<th >개인번호</th>
+							<td colspan="3">010-6561-2016</td>
 						</tr>
 						<tr >
 							<th colspan="2">회사주소</th>
 							<td colspan="4">서울특별시 테헤란로41 빌딩 4층</td>
 						</tr>
 						<tr >
-							<th colspan="2">결제수단</th>
-							<td colspan="4">카카오페이</td>
+							<th colspan="2">서비스 종료일</th>
+							<td colspan="4">2018-08-23</td>
 						</tr>
 					</table>
           </div>
@@ -374,6 +374,12 @@
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
+						 <c:if test="${board1.size() == 0}">
+    	            <tr>
+                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+ 	               </tr>
+                </c:if>
+                <c:if test="${board1.size() != 0}">
 						<c:forEach items="${board1}" var="board1" varStatus="status">
 							<tr data-key=${board1.boardKey }>
 								<td class="title"><c:out value="${board1.bTitle }" /></td>
@@ -381,6 +387,7 @@
 								<td class="date"><c:out value="${board1.bDate }" /></td>
 							</tr>
 						</c:forEach>
+						</c:if>
 					</table>
 				</div>
 			</div>
@@ -396,13 +403,20 @@
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
-						<c:forEach items="${board1}" var="board1" varStatus="status">
-							<tr data-key=${board1.boardKey }>
-								<td class="title"><c:out value="${board1.bTitle }" /></td>
-								<td class="writer"><c:out value="${board1.eName }" /></td>
-								<td class="date"><c:out value="${board1.bDate }" /></td>
-							</tr>
-						</c:forEach>
+						 <c:if test="${board1.size() == 0}">
+		    	            <tr>
+		                		<td colspan="5">조회 된 게시글이 없습니다.</td>
+		 	               </tr>
+                		</c:if>
+		                <c:if test="${board1.size() != 0}">
+								<c:forEach items="${board1}" var="board1" varStatus="status">
+									<tr data-key=${board1.boardKey }>
+										<td class="title"><c:out value="${board1.bTitle }" /></td>
+										<td class="writer"><c:out value="${board1.eName }" /></td>
+										<td class="date"><c:out value="${board1.bDate }" /></td>
+									</tr>
+								</c:forEach>
+						</c:if>
 					</table>
 				</div>
 			</div>

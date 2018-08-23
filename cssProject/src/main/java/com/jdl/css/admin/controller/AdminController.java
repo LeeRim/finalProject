@@ -54,6 +54,7 @@ public class AdminController {
 		service.insertCompany(company);
 		
 		employee.setcKeyFk(company.getcKey());
+		employee.seteName(company.getcOwner());
 		service.insertEmployeeAdmin(employee);
 		return "redirect:index.do";
 	}
