@@ -33,7 +33,8 @@
 .frame{
 padding:0 20px;
 /* border: 1px solid black;  */
-width:100%;
+width:80%;
+margin: 0 auto;
 height:100%;
 }
 
@@ -45,8 +46,9 @@ width:400px;
 .box-body{
 display:inline-block;
 width:60%;
+height:561px;
 column-count: 2;
-padding: 0 50px;
+padding: 10px 50px;
   
 
 }
@@ -91,12 +93,18 @@ width:200px;
 }
 
 
+.pull-right{
+background-color: white !important;
+}
+
 
 
 </style>
 <body class="hold-transition skin-blue sidebar-mini">
 
 <script type="text/javascript">
+
+
 
 //전화번호 입력
 $(function () {
@@ -133,7 +141,7 @@ $(document).ready(
 	               var file = $(this)[0].files[i];
 	               filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove' onclick='photoDelete();'></i><br>";
 	               filenames2 +=$(this)[0].files[i].name;
-	               console.log(filenames);
+	              
 	            }
 	            } else { // old IE
 	               var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
@@ -145,9 +153,12 @@ $(document).ready(
 	           
 	         });
 	         
-	         
+	         //사진 반영
 	         $(function() {
+	        	
+	        	
 	             $("#imgInp").on('change', function(){
+	            	 consol.log("dddd")
 	                 readURL(this);
 	             });
 	         });
@@ -159,23 +170,121 @@ $(document).ready(
 	             reader.onload = function (e) {
 	            	 	
 	            	 $("#holder").empty();
-		               var html = $("#holder").html("<img id='blah' src='#'/>")
+		              
+	            	 var html = $("#holder").html("<img id='blah' src='#'/>")
 	                  $('#blah').attr('src', e.target.result);
 	                   
 	                     
 	                 }
 
 	               reader.readAsDataURL(input.files[0]);
+	               
+	               
 	             }
 	         }
+	         
+	         //사진 제거
+	         function photoDelete() {
+	        	 $('.file-list').empty();
+	        	 $('#holder').empty();
+	        	 
+	        	 $("#imgInp").val(null);
+
+
+	        	 
+	        	 var html = $("#holder").html("<p class='emp_picture2_1' >사&emsp;진</p>")
+	        	  
+	        	 
+	        	 $('#file-list2').val(null);
+	        }
+	         
 
 	         
 	         
 	         
-	         
-	            //포토값 전송
+	         //사원번호 유효성
+	         $('#eNoCheck').on('input',function(e){
+	        	 
+	 			var eNo = $("#eNoCheck").val();
+	 			
+	 			
+	 			$.ajax({
+	 			    type      : 'POST',
+	 			    url         : 'empNoCheck.do',
+	 			    traditional : true,
+	 			    dataType : "json",
+	 			    data        : {"eNo": eNo},
+	 			    success     : function(data) {
+	 			    	
+	 			    	
+	 				$("#inputNo2").empty();
+	 			    	
+						if(eNo==""){
+							
+							$('#inputNo').removeClass('has-success');
+							$('#inputNo').removeClass('has-error');
+							$('#inputNo').addClass('has-warning');
+							var html = $("#inputNo2").html()
+							+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
+							$("#inputNo2").html(html);
+	 			    	}
+						
+						else if(eNo.search(/\s/) != -1){
+							$('#inputNo').removeClass('has-success');
+		 			    	$('#inputNo').removeClass('has-warning');
+		 			    	$('#inputNo').addClass('has-error');
+		 			    	
+		 			    	var html = $("#inputNo2").html()
+		 			    	
+		 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
+		 			    	
+		 			    	$("#inputNo2").html(html);
+							
+		 			    	
+		 			    	
+						}else if(data>=1){
+		 			    	
+		 			    	$('#inputNo').removeClass('has-success');
+		 			    	$('#inputNo').removeClass('has-warning');
+		 			    	$('#inputNo').addClass('has-error');
+		 			    	
+		 			    	var html = $("#inputNo2").html()
+		 			    	
+		 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >이미 사용중입니다.</i> </label>";
+		 			    	
+		 			    	$("#inputNo2").html(html);
+		 			    	
+		 			    	
+		 			    	
+		 			    	
+		 			    	}else if (data==0){
+			 			    	
+			 			    	$('#inputNo').removeClass('has-error');
+			 			    	$('#inputNo').removeClass('has-warning');
+			 			    	$('#inputNo').addClass('has-success');
+			 			    	
+								var html = $("#inputNo2").html()
+			 			    	
+			 			    	+"<label class='control-label '  style='font-size:12px; color: #00a65a; margin-top: -10px;' ><i class='fa fa-check ' >사용 가능합니다.</i> </label>";
+			 			    	
+			 			    	$("#inputNo2").html(html);
+			 			    	
+			 			    	}
+	 			    	
+	 			    	
+	 			    	
+
+	 				    
+	 			    },
+	 			    error       : function(request, status, error) {
+	 			        alert(error);
+	 			    }
+	 			});
+	         });
 	         
 
+	            
+	            
 	         
 	       
 	       //아이디 유효성
@@ -206,9 +315,20 @@ $(document).ready(
 							+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
 							$("#inputId2").html(html);
 	 			    	}
+						else if(eId.search(/\s/) != -1){
+							$('#inputId').removeClass('has-success');
+		 			    	$('#inputId').removeClass('has-warning');
+		 			    	$('#inputId').addClass('has-error');
+		 			    	
+		 			    	var html = $("#inputId2").html()
+		 			    	
+		 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
+		 			    	
+		 			    	$("#inputId2").html(html);
+							
+						}
 						
 						else if(!check.test(eId)){
-							
 		 			    	$('#inputId').removeClass('has-success');
 		 			    	$('#inputId').removeClass('has-warning');
 		 			    	$('#inputId').addClass('has-error');
@@ -266,6 +386,8 @@ $(document).ready(
 	 			});
 	         });
 	       
+	       
+	       //비밀번호 유효성 검사
 	         $('#pwdChek').on('input',function(e){
 	        	 
 	        	 var ePwd = $("#pwdChek").val();
@@ -290,15 +412,31 @@ $(document).ready(
 	        		 
 	        	 }
 	        	 
+	        	 else if(ePwd.search(/\s/) != -1){
+						$('#inputpwd').removeClass('has-success');
+	 			    	$('#inputpwd').removeClass('has-warning');
+	 			    	$('#inputpwd').addClass('has-error');
+	 			    	
+	 			    	var html = $("#inputpwd2").html()
+	 			    	
+	 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
+	 			    	
+	 			    	$("#inputpwd2").html(html);
+						
+					}
+	        	 
+	        	 
+	        	 
 	        	 else if(ePwd.length<4){
 	        		 $('#inputpwd').removeClass('has-success');
 	 			    	$('#inputpwd').removeClass('has-warning');
 	 			    	$('#inputpwd').addClass('has-error');
 						var html = $("#inputpwd2").html()
-						+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' > 4글자 이상 입력하십시오.</i> </label>";
+						+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' > 4자리 이상 입력하십시오.</i> </label>";
 						$("#inputpwd2").html(html);
 	        		 
 	        	 }
+	        	 
 	        	 else{
 	        		 	$('#inputpwd').removeClass('has-error');
 	 			    	$('#inputpwd').removeClass('has-warning');
@@ -315,20 +453,56 @@ $(document).ready(
 	        	 $("#inputpwd2").empty();
 	        	 $("#inputpwdcf2").empty();
 	        	 
-	        	 if(ePwd==ePwd2){
-	        		 	$('#inputpwdcf').removeClass('has-error'); 			    	
-	 			    	$('#inputpwd').addClass('has-success');
-	 			    	$('#inputpwdcf').addClass('has-success');
-						var html = $("#inputpwd2").html()
-						+"<label class='control-label ' style='font-size:12px; color: #00a65a; margin-top: -10px;' > <i class='fa fa-check' > 사용 가능합니다.</i> </label>";
-						$("#inputpwdcf2").html(html);
-	        		 
+	           
+				if(ePwd.length==0){
+					$('#inputpwd').removeClass('has-success');
+					$('#inputpwd').removeClass('has-error');
+					$('#inputpwd').addClass('has-warning');
+					var html = $("#inputpwd2").html()
+					+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
+					$("#inputpwd2").html(html);
+
+				}
+				
+				
+				else if(ePwd.search(/\s/) != -1){
+					$('#inputpwd').removeClass('has-success');
+ 			    	$('#inputpwdcf').removeClass('has-success');
+ 			    	$('#inputpwdcf').addClass('has-error');
+ 			    	
+ 			    	var html = $("#inputpwd2").html()
+ 			    	
+ 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
+ 			    	
+ 			    	$("#inputpwd2").html(html);
+					
+				}
+				
+	        	 
+	        	 
+	        	 else if(ePwd.length<4){
+			        			$('#inputpwd').removeClass('has-success');
+			        			$('#inputpwdcf').removeClass('has-success');
+			 			    	$('#inputpwdcf').addClass('has-error');
+								var html = $("#inputpwd2").html()
+								+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' > 4자리 이상 입력하십시오.</i> </label>";
+								$("#inputpwd2").html(html);
+								
+			        		 
+		         }else if(ePwd==ePwd2){
+		        		 	$('#inputpwdcf').removeClass('has-error'); 			    	
+		 			    	$('#inputpwd').addClass('has-success');
+		 			    	$('#inputpwdcf').addClass('has-success');
+							var html = $("#inputpwdcf2").html()
+							+"<label class='control-label ' style='font-size:12px; color: #00a65a; margin-top: -10px;' > <i class='fa fa-check' > 사용 가능합니다.</i> </label>";
+							$("#inputpwdcf2").html(html);
+			        	 
 	        		 
 	        	 }else{
 	        		 	$('#inputpwd').removeClass('has-success');
 	        		 	$('#inputpwdcf').removeClass('has-success');
 	 			    	$('#inputpwdcf').addClass('has-error');
-						var html = $("#inputpwd2").html()
+						var html = $("#inputpwdcf2").html()
 						+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' >비밀번호가 일치하지 않습니다.</i> </label>";
 						$("#inputpwdcf2").html(html);
 	        		 
@@ -384,11 +558,7 @@ function openAddressPopup(){
     }).open();
 }
 
-function photoDelete() {
-	 $('.file-list').empty();
-	
-	 $('#file-list2').val(null);
-}
+
 	      
 	      
 </script>
@@ -423,7 +593,7 @@ function photoDelete() {
             <form role="form" action="insertMember.do"  onsubmit="return validate();" method="post" enctype="multipart/form-data">
             	<div class="emp_picture">
             	<div class="emp_picture2" id="holder">
-            	 <p class="emp_picture2_1" >사&emsp;진</p>
+            	 <p class="emp_picture2_1"  id="photoEmpty" >사&emsp;진</p>
             	</div>
             	<div class="emp_picture3">
             	<label for="exampleInputFile">사원 사진</label>
@@ -435,7 +605,7 @@ function photoDelete() {
 						
 						<input type="hidden" name="ePhoto2" id="file-list2" value="${select.ePhoto}"/>
 					<div class="file-list">
-					<i class='fa fa-remove' onclick='photoDelete();'></i>
+					
 					</div>
                 </div>
                 </div>
@@ -447,9 +617,11 @@ function photoDelete() {
             
               <div class="box-body">
               
-              <div class="form-group" style="width:200px">
+              <div class="form-group" style="width:200px" id="inputNo">
                   <label>사원번호</label>
-                  <input type="text" class="form-control"  name="eNo" maxlength="20">
+                  <input type="text" class="form-control"  name="eNo"   id="eNoCheck"  autocomplete="off"  maxlength="20">
+                </div>
+                <div id="inputNo2">
                 </div>
                 
                 <div class="form-group" style="width:200px" id="inputId">
@@ -560,7 +732,7 @@ function photoDelete() {
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name="eBirth1">
+                  <input type="text" class="form-control pull-right" id="datepicker" name="eBirth1"  readonly>
                   
                 </div>
                 <!-- /.input group -->
@@ -573,7 +745,7 @@ function photoDelete() {
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker2" name="eHireDate1" >
+                  <input type="text" class="form-control pull-right" id="datepicker2" name="eHireDate1"  readonly>
                 </div>
                 <!-- /.input group -->
               </div>
@@ -616,8 +788,6 @@ function fileCheck(obj) {
     pathpoint = obj.value.lastIndexOf('.');
     filepoint = obj.value.substring(pathpoint+1,obj.length);
     filetype = filepoint.toLowerCase();
-    
-    
     
     
     

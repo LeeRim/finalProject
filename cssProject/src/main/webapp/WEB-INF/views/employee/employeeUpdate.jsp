@@ -35,7 +35,8 @@
 .frame{
 padding:0 20px;
 /* border: 1px solid black;  */
-width:100%;
+width:80%;
+margin: 0 auto;
 height:100%;
 }
 
@@ -91,6 +92,15 @@ width:275px;
 text-align:center;
 }
 
+#blah{
+ width: 150px;
+ height: 150px;
+}
+
+.pull-right{
+background-color: white !important;
+}
+
 
 
 </style>
@@ -144,15 +154,386 @@ $(document).ready(
 	            $('.file-list').html(filenames);
 	            $('#file-list2').val(filenames2);
 	            
-	            
- 
-	            
-	            
-	            
-	            
-	            
+
 	         });
+	         
+	         
+	         $(function() {
+		        	
+		        	
+	             $("#imgInp").on('change', function(){
+	                 readURL(this);
+	             });
+	         });
+	         
+
+	         function readURL(input) {
+	             if (input.files && input.files[0]) {
+	             var reader = new FileReader();
+
+	             reader.onload = function (e) {
+	            	 	
+	            	 $("#holder").empty();
+		              
+	            	 var html = $("#holder").html("<img id='blah' src='#'/>")
+	                  $('#blah').attr('src', e.target.result);
+	                   
+	                     
+	                 }
+
+	               reader.readAsDataURL(input.files[0]);
+	               
+	               
+	             }
+	         }
+	         
+	         
+	         function photoDelete() {
+	        	 $('.file-list').empty();
+	        	 $('#holder').empty();
+	        	 
+	        	 $("#imgInp").val(null);
+
+
+	        	 
+	        	 var html = $("#holder").html("<p class='emp_picture2_1' >사&emsp;진</p>")
+	        	  
+	        	 
+	        	 $('#file-list2').val(null);
+
+
+	        }
+	         
+	         
+	         
+	         //사원번호 유효성
+	         $('#eNoCheck').on('input',function(e){
+	        	 
+	 			var eNo = $("#eNoCheck").val();
+	 			var originENo = "${select.eNo}";
+	 			
+	 			$.ajax({
+	 			    type      : 'POST',
+	 			    url         : 'empNoCheck.do',
+	 			    traditional : true,
+	 			    dataType : "json",
+	 			    data        : {"eNo": eNo},
+	 			    success     : function(data) {
+	 			    	
+	 			    	
+	 				$("#inputNo2").empty();
+	 			    	
+						if(eNo==""){
+							
+							$('#inputNo').removeClass('has-success');
+							$('#inputNo').removeClass('has-error');
+							$('#inputNo').addClass('has-warning');
+							var html = $("#inputNo2").html()
+							+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
+							$("#inputNo2").html(html);
+	 			    	}
+						
+						else if(eNo.search(/\s/) != -1){
+							$('#inputNo').removeClass('has-success');
+		 			    	$('#inputNo').removeClass('has-warning');
+		 			    	$('#inputNo').addClass('has-error');
+		 			    	
+		 			    	var html = $("#inputNo2").html()
+		 			    	
+		 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
+		 			    	
+		 			    	$("#inputNo2").html(html);
+							
+		 			    	
+		 			    	
+						}else if(data>=1 && originENo!=eNo ){
+		 			    	
+		 			    	$('#inputNo').removeClass('has-success');
+		 			    	$('#inputNo').removeClass('has-warning');
+		 			    	$('#inputNo').addClass('has-error');
+		 			    	
+		 			    	var html = $("#inputNo2").html()
+		 			    	
+		 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >이미 사용중입니다.</i> </label>";
+		 			    	
+		 			    	$("#inputNo2").html(html);
+		 			    	
+		 			    	
+		 			    	
+						}else if (originENo==eNo){
+		 			    	
+		 			    	$('#inputNo').removeClass('has-error');
+		 			    	$('#inputNo').removeClass('has-warning');
+		 			    	$('#inputNo').removeClass('has-success');
+		 			    	
+		 			    	
+		 			    	
+						
+		 			    	}else if (data==0){
+			 			    	
+			 			    	$('#inputNo').removeClass('has-error');
+			 			    	$('#inputNo').removeClass('has-warning');
+			 			    	$('#inputNo').addClass('has-success');
+			 			    	
+								var html = $("#inputNo2").html()
+			 			    	
+			 			    	+"<label class='control-label '  style='font-size:12px; color: #00a65a; margin-top: -10px;' ><i class='fa fa-check ' >사용 가능합니다.</i> </label>";
+			 			    	
+			 			    	$("#inputNo2").html(html);
+			 			    	
+			 			    	}
+	 			    	
+	 			    	
+	 			    	
+
+	 				    
+	 			    },
+	 			    error       : function(request, status, error) {
+	 			        alert(error);
+	 			    }
+	 			});
+	         });
+	         
+	         
+	         
+	       //아이디 유효성
+		      
+	         $('#idCheck').on('input',function(e){
+	        	 
+	 			var eId = $("#idCheck").val();
+	 			var check = /^[a-z0-9]{1}[a-z0-9_-]{3,21}$/; 
+	 			var originEId = "${select.eId}";
+	 			
+	 			// 첫글자는 영어 소문자와 숫자만 가능. 영어 소문자, 숫자, 특수기호 - _ 만 사용 가능.  4글자 이상 20자 이하 입력 가능.
+	 			$.ajax({
+	 			    type      : 'POST',
+	 			    url         : 'empIdCheck.do',
+	 			    traditional : true,
+	 			    dataType : "json",
+	 			    data        : {"eId": eId},
+	 			    success     : function(data) {
+	 			    	
+	 			    	console.log("중복id : "+data);
+	 			    	$("#inputId2").empty();
+	 			    	
+	 			    	
+						if(eId==""){
+							
+							$('#inputId').removeClass('has-success');
+							$('#inputId').removeClass('has-error');
+							$('#inputId').addClass('has-warning');
+							var html = $("#inputId2").html()
+							+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
+							$("#inputId2").html(html);
+	 			    	}
+						
+						else if(eId.search(/\s/) != -1){
+							$('#inputId').removeClass('has-success');
+		 			    	$('#inputId').removeClass('has-warning');
+		 			    	$('#inputId').addClass('has-error');
+		 			    	
+		 			    	var html = $("#inputId2").html()
+		 			    	
+		 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
+		 			    	
+		 			    	$("#inputId2").html(html);
+							
+						}
+						
+						else if(!check.test(eId)){
+		 			    	$('#inputId').removeClass('has-success');
+		 			    	$('#inputId').removeClass('has-warning');
+		 			    	$('#inputId').addClass('has-error');
+		 			    	
+		 			    	var html = $("#inputId2").html()
+		 			    	
+		 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >4~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.</i> </label>";
+		 			    	
+		 			    	$("#inputId2").html(html);
+							
+							
+							
+						}
+						
+	 			    	
+						else if(data>=1 && originEId!=eId){
+	 			    	
+	 			    	$('#inputId').removeClass('has-success');
+	 			    	$('#inputId').removeClass('has-warning');
+	 			    	$('#inputId').addClass('has-error');
+	 			    	
+	 			    	var html = $("#inputId2").html()
+	 			    	
+	 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >이미 사용중입니다.</i> </label>";
+	 			    	
+	 			    	$("#inputId2").html(html);
+
+	 			    	}
+						else if(originEId==eId){
+		 			    	
+		 			    	$('#inputId').removeClass('has-success');
+		 			    	$('#inputId').removeClass('has-warning');
+		 			    	$('#inputId').removeClass('has-error');
+		 			    	
+
+		 			    	}
+						
+	 			    	
+	 			    	else if (data==0){
+	 			    	
+	 			    	$('#inputId').removeClass('has-error');
+	 			    	$('#inputId').removeClass('has-warning');
+	 			    	$('#inputId').addClass('has-success');
+	 			    	
+						var html = $("#inputId2").html()
+	 			    	
+	 			    	+"<label class='control-label '  style='font-size:12px; color: #00a65a; margin-top: -10px;' ><i class='fa fa-check ' >사용 가능합니다.</i> </label>";
+	 			    	
+	 			    	$("#inputId2").html(html);
+	 			    	
+	 			    	}
+	 			    	
+	 			    	
+	 			    	
+
+	 				    
+	 			    },
+	 			    error       : function(request, status, error) {
+	 			        alert(error);
+	 			    }
+	 			});
+	         });
+	         
+	         
+	         
+	         //비밀번호 유효성 검사
+	         $('#pwdChek').on('input',function(e){
+	        	 
+	        	 var ePwd = $("#pwdChek").val();
+	        	 var check = /^[az]{4,5}$/;
+	        	 
+	        	 $("#inputpwd2").empty();
+	        	 $("#inputpwdcf2").empty();
+	        	 
+	        	 $('#pwdChek2').val('');
+	        	 
+	        	 $('#inputpwdcf').removeClass('has-error');
+	        	 $('#inputpwdcf').removeClass('has-success');
+	        	 
+	        	 if(ePwd == ""){
+	        		 $('#inputpwd').removeClass('has-success');
+						$('#inputpwd').removeClass('has-error');
+						$('#inputpwd').addClass('has-warning');
+						var html = $("#inputpwd2").html()
+						+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
+						$("#inputpwd2").html(html);
+	        		 
+	        		 
+	        	 }
+	        	 
+	        	 else if(ePwd.search(/\s/) != -1){
+						$('#inputpwd').removeClass('has-success');
+	 			    	$('#inputpwd').removeClass('has-warning');
+	 			    	$('#inputpwd').addClass('has-error');
+	 			    	
+	 			    	var html = $("#inputpwd2").html()
+	 			    	
+	 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
+	 			    	
+	 			    	$("#inputpwd2").html(html);
+						
+					}
+	        	 
+	        	 
+	        	 
+	        	 else if(ePwd.length<4){
+	        		 $('#inputpwd').removeClass('has-success');
+	 			    	$('#inputpwd').removeClass('has-warning');
+	 			    	$('#inputpwd').addClass('has-error');
+						var html = $("#inputpwd2").html()
+						+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' > 4자리 이상 입력하십시오.</i> </label>";
+						$("#inputpwd2").html(html);
+	        		 
+	        	 }
+	        	 
+	        	 else{
+	        		 	$('#inputpwd').removeClass('has-error');
+	 			    	$('#inputpwd').removeClass('has-warning');
+	        		 
+	        	 }
+	       
+	       
+	         });
+	         
+	         $('#pwdChek2').on('input',function(e){
+	        	 
+	        	 var ePwd = $("#pwdChek").val();
+	        	 var ePwd2 = $("#pwdChek2").val();
+	        	 $("#inputpwd2").empty();
+	        	 $("#inputpwdcf2").empty();
+	        	 
+	           
+				if(ePwd.length==0){
+					$('#inputpwd').removeClass('has-success');
+					$('#inputpwd').removeClass('has-error');
+					$('#inputpwd').addClass('has-warning');
+					var html = $("#inputpwd2").html()
+					+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
+					$("#inputpwd2").html(html);
+
+				}
+				
+				
+				else if(ePwd.search(/\s/) != -1){
+					$('#inputpwd').removeClass('has-success');
+ 			    	$('#inputpwdcf').removeClass('has-success');
+ 			    	$('#inputpwdcf').addClass('has-error');
+ 			    	
+ 			    	var html = $("#inputpwd2").html()
+ 			    	
+ 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
+ 			    	
+ 			    	$("#inputpwd2").html(html);
+					
+				}
+				
+	        	 
+	        	 
+	        	 else if(ePwd.length<4){
+			        			$('#inputpwd').removeClass('has-success');
+			        			$('#inputpwdcf').removeClass('has-success');
+			 			    	$('#inputpwdcf').addClass('has-error');
+								var html = $("#inputpwd2").html()
+								+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' > 4자리 이상 입력하십시오.</i> </label>";
+								$("#inputpwd2").html(html);
+								
+			        		 
+		         }else if(ePwd==ePwd2){
+		        		 	$('#inputpwdcf').removeClass('has-error'); 			    	
+		 			    	$('#inputpwd').addClass('has-success');
+		 			    	$('#inputpwdcf').addClass('has-success');
+							var html = $("#inputpwdcf2").html()
+							+"<label class='control-label ' style='font-size:12px; color: #00a65a; margin-top: -10px;' > <i class='fa fa-check' > 사용 가능합니다.</i> </label>";
+							$("#inputpwdcf2").html(html);
+			        	 
+	        		 
+	        	 }else{
+	        		 	$('#inputpwd').removeClass('has-success');
+	        		 	$('#inputpwdcf').removeClass('has-success');
+	 			    	$('#inputpwdcf').addClass('has-error');
+						var html = $("#inputpwdcf2").html()
+						+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' >비밀번호가 일치하지 않습니다.</i> </label>";
+						$("#inputpwdcf2").html(html);
+	        		 
+	        		 
+	        	 }
+	         
+	         });
+
+
 	      });
+	      
+
 	      
 	      
 function openAddressPopup(){
@@ -198,10 +579,6 @@ function openAddressPopup(){
 }
 
 
- function photoDelete() {
-	 $('.file-list').empty();
-	 $('#file-list2').val(null);
-}
 	      
 	      
 	      
@@ -238,7 +615,7 @@ function openAddressPopup(){
             <!-- form start -->
             <form role="form" action="updateEmployee.do"  onsubmit="return validate();" method="post" enctype="multipart/form-data">
             	<div class="emp_picture">
-            	<div class="emp_picture2">
+            	<div class="emp_picture2" id="holder">
             	<c:if test="${ select.ePhoto ne null }">
             
             	<img class='emp_photo' src='resources/upload/empPhoto/${select.ePhoto }'>
@@ -251,7 +628,7 @@ function openAddressPopup(){
             	<label for="exampleInputFile">사원 사진</label>
               <div class="form-group">
 						<div class="btn btn-default btn-file">
-							<i class="fa fa-paperclip"></i> Attachment <input   type="file" name="ePhoto1" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
+							<i class="fa fa-paperclip"></i> Attachment <input   type="file" id="imgInp" name="ePhoto1" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
 																								onchange="fileCheck(this)" />
 						</div>
 						
@@ -272,23 +649,20 @@ function openAddressPopup(){
             
             
               <div class="box-body">
-              <input type="hidden" name="eKey" value="${select.eKey}"/>
-              <div class="form-group" style="width:200px">
+              <input type="hidden" name="eKey" value="${select.eKey}" />
+              <div class="form-group" style="width:200px"  id="inputNo">
                   <label>사원번호</label>
-                  <input type="text" class="form-control"  name="eNo" value="${select.eNo}">
+                  <input type="text" class="form-control"  name="eNo"  id="eNoCheck"  autocomplete="off"  value="${select.eNo}"  maxlength="20">
+                </div>
+                <div id="inputNo2">
                 </div>
                 
-                <div class="form-group" style="width:200px">
+                <div class="form-group" style="width:200px"  id="inputId">
                   <label>아이디</label>
-                  <input type="text" class="form-control"  name="eId" value="${select.eId}">
+                  <input type="text" class="form-control"  name="eId" value="${select.eId}"  id="idCheck" autocomplete="off" maxlength="20" >
                 </div>
-                <!-- 성공 할때 -->
-<!--                   <div class="form-group has-success" style="width:200px"> -->
-<!--                   <label>아이디</label> -->
-<!--                   <input type="text" class="form-control"  name="eId" >  -->
-<!-- 					<label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> </label> -->
-<!--                   <input type="text" class="form-control" id="inputSuccess" placeholder="Enter ..."> -->
-<!--                 </div> -->
+                 <div id="inputId2">
+                </div>
                 
                <div class="form-group"style="width:200px;">
                   <label>사원이름</label>
@@ -297,14 +671,18 @@ function openAddressPopup(){
                 
                 
                 
-                <div class="form-group"style="width:200px;">
-                  <label for="exampleInputPassword1">비밀번호</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"  name="ePwd" value="1234">
+                <div class="form-group"style="width:200px;"id="inputpwd">
+                  <label for="inputPassword1">비밀번호</label>
+                  <input type="password" class="form-control" placeholder="Password"  name="ePwd" id="pwdChek" maxlength="16">
+                </div>
+                 <div id="inputpwd2">
                 </div>
                 
-                <div class="form-group"style="width:200px;">
-                  <label for="exampleInputPassword1">비밀번호 확인</label>
-                  <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password"  >
+                <div class="form-group"style="width:200px;"  id="inputpwdcf">
+                  <label for="inputPassword2">비밀번호 확인</label>
+                  <input type="password" class="form-control"  placeholder="Password"  id="pwdChek2" maxlength="16">
+                </div>
+                 <div id="inputpwdcf2">
                 </div>
                 
                 <div class="form-group"style="width:200px;">
@@ -400,7 +778,7 @@ function openAddressPopup(){
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name="eBirth1" value="${select.eBirth}">
+                  <input type="text" class="form-control pull-right" id="datepicker" name="eBirth1" value="${select.eBirth}" readonly>
                   
                 </div>
                 <!-- /.input group -->
@@ -413,7 +791,7 @@ function openAddressPopup(){
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker2" name="eHireDate1" value="${select.eHireDate}">
+                  <input type="text" class="form-control pull-right" id="datepicker2" name="eHireDate1" value="${select.eHireDate}" readonly>
                 </div>
                 <!-- /.input group -->
               </div>
@@ -424,7 +802,7 @@ function openAddressPopup(){
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker3" name="eEntDate1"  value="${select.eEntDate}" >
+                  <input type="text" class="form-control pull-right" id="datepicker3" name="eEntDate1"  value="${select.eEntDate}" readonly>
                 </div>
                 <!-- /.input group -->
               </div>

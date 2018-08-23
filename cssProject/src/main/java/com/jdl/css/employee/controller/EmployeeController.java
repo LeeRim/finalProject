@@ -103,6 +103,8 @@ public class EmployeeController {
 		return mv;
 	}
 	
+	
+	//직급 부서 리스트 출력
 	@RequestMapping("memberAdd.do")
 	public ModelAndView memberAdd(ModelAndView mv, HttpSession session) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
@@ -133,15 +135,17 @@ public class EmployeeController {
 		// System.out.println(ePhoto);
 		System.out.println("부서키 = " + member.geteDepartFk());
 
-		String birth = eBirth1;
-		String hire = eHireDate1;
 
+		
+		if(!eBirth1.equals("")){
 		Date birth2 = Date.valueOf(eBirth1);
-		Date hire2 = Date.valueOf(eHireDate1);
-
 		member.seteBirth(birth2);
+		}
+		if(!eHireDate1.equals("")){
+		Date hire2 = Date.valueOf(eHireDate1);
 		member.seteHireDate(hire2);
-
+		}
+		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 
 		String path = root + "\\upload\\empPhoto";
@@ -203,6 +207,27 @@ public class EmployeeController {
 			return result;
 		}
 		
+		//사원등록 아이디체크
+				@RequestMapping("empNoCheck.do")
+				public @ResponseBody int empNoCheck(String eNo, HttpSession session){
+					
+					
+					EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+					EmployeeVo chekEmployee = new EmployeeVo();
+					int cKey = employee.getcKeyFk();
+					System.out.println(eNo);
+					System.out.println(cKey);
+					chekEmployee.setcKeyFk(cKey);
+					chekEmployee.seteNo(eNo);
+					
+					int result = eService.empNoCheck(chekEmployee);
+					
+					
+					
+
+					return result;
+				}
+		
 		
 		
 		
@@ -228,6 +253,12 @@ public class EmployeeController {
 		eKey = Integer.parseInt("6");
 		
 		EmployeeVo select = eService.selectEmployeeInfo(eKey);
+		
+		
+		if(select.getePhoto()==null){
+			
+			select.setePhoto("empty.png");
+		}
 		
 		System.out.println(select);
 		mv.addObject("select", select);
@@ -302,11 +333,16 @@ public class EmployeeController {
 			member.setePhoto(ePhoto2);
 		}
 		
+		
+		//비밀번호 null값 일시 기존 비밀번호 입력
+			if(member.getePwd().equals("")){
+			member.setePwd(employee.getePwd());
+			}
 			member.setcKeyFk(cKey);
 		
 			int result =eService.updateEmployee(member);
 			System.out.println("업데이트 : " + member);
-
+			
 			
 		return "redirect:organizationChart.do";
 	}

@@ -65,5 +65,9 @@ public class EmployeeDao {
 		return sqlSession.selectOne("EmployeeMapper.empAddIdCheck", chekEmployee);
 	}
 
+	public int empNoCheck(EmployeeVo chekEmployee) {
+		return sqlSession.selectOne("EmployeeMapper.empNoCheck", chekEmployee);
+	}
+
 
 }

@@ -134,6 +134,8 @@
 	<!-- 쪽지 직원 불러오는 쿼리문 끝 -->
 
 
+
+	<!-- 사원등록 -->
 	<insert id="insertEmployee" parameterType="EmployeeVo">
 		INSERT INTO EMPLOYEE
 		(E_KEY, E_NO, C_KEY_FK, E_TYPE, E_ID, E_PWD,
@@ -142,7 +144,7 @@
 		E_BIRTH,
 		E_HIRE_DATE, E_PHOTO)
 		VALUES (SEQ_EMPLOYEE.NEXTVAL, #{eNo}, #{cKeyFk},
-		'A' , #{eId}, #{ePwd},
+		'2' , #{eId}, #{ePwd},
 		#{eName}, #{eJobcodeFk}, #{eDepartFk},
 		#{eAddress} , #{eExten}, #{ePhone},
 		#{eEmail},
@@ -161,6 +163,16 @@
 
 	</select>
 	
+	<!-- 사원등록 사원번호 유효성 검사 -->
+	<select id="empNoCheck" parameterType="EmployeeVo"
+		resultType="int">
+		SELECT
+    	COUNT(*)
+		FROM EMPLOYEE
+		WHERE E_NO = #{eNo} AND C_KEY_FK = #{cKeyFk}
+		
+
+	</select>
 	
 	
 	

@@ -31,10 +31,14 @@
 <style>
 
 .frame{
+
 padding:0 20px;
 /* border: 1px solid black;  */
-width:100%;
-height:100%;
+
+  width: 80%;
+  height: 100%;
+  margin: 0px auto;
+
 }
 
 .box-body{
@@ -51,6 +55,10 @@ width:150px;
 height:150px;
 text-align:center;
 vertical-align: middle;
+border-top-left-radius: 1.5em;
+border-top-right-radius: 1.5em;
+border-bottom-left-radius: 1.5em;
+border-bottom-right-radius: 1.5em;
 }
 
 
