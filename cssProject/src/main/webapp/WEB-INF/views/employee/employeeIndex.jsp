@@ -63,6 +63,7 @@
 	th{
 		font-weight:bold;
 	}
+
  </style>
  <script>
 	$(function(){
@@ -105,13 +106,13 @@
           <div class="box box-widget widget-user-2">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
-              <div class="widget-user-image">
-                <img class="img-circle" src="resources/dist/img/user1-128x128.jpg" alt="User Avatar">
+              <div class="widget-user-image ">
+                <img class="img-circle" src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" style="width:80px; height:80px;"alt="User Avatar">
               </div>
               <!-- /.widget-user-image -->
               <div class="empInfo">
-	              <h3 class="widget-user-username">KH컴퍼니</h3>
-	              <h5 class="widget-user-desc">최범석대리</h5>
+	              <h3 class="widget-user-username"><c:out value="${sessionScope.user.cName}"/></h3>
+	              <h5 class="widget-user-desc"><c:out value="${sessionScope.user.eName} ${sessionScope.user.job}"/></h5>
               </div>
             </div>
             <div class="box-footer " >
@@ -119,7 +120,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">사원번호</h5>
-                    <span class="description-text">K3829</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.eNo}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -127,7 +128,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">부서</h5>
-                    <span class="description-text">개발팀</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.department}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -135,7 +136,7 @@
                 <div class="col-sm-4">
                   <div class="description-block">
                     <h5 class="description-header">근속년수</h5>
-                    <span class="description-text">3년</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.workYears} 년"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -148,7 +149,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">입사일</h5>
-                    <span class="description-text">2016-08-07</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.eHireDate}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -156,7 +157,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">연락망</h5>
-                    <span class="description-text">010-1234-5678</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.ePhone}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -164,7 +165,7 @@
                 <div class="col-sm-4">
                   <div class="description-block">
                     <h5 class="description-header">생년월일</h5>
-                    <span class="description-text">1999/01/01</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.eBirth}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
