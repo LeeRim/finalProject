@@ -69,11 +69,6 @@
 		</association>
 	</resultMap>
 
-
-
-
-
-
 	<select id="selectEmployeeById" parameterType="string"
 		resultMap="EmployeeMap">
 		SELECT

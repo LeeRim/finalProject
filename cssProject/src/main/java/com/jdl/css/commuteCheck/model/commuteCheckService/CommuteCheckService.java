@@ -34,6 +34,10 @@ public class CommuteCheckService {
 	public CommuteCheckVo selectCommute(CommuteCheckVo commute) {
 		return dao.selectInnsr(commute);
 	}
+
+	public List<CommuteCheckVo> showCommuteAllCheck() {
+		return dao.showCommuteAllCheck();
+	}
 	
 	
 	

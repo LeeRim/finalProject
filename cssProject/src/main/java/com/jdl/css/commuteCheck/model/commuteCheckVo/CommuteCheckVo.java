@@ -5,22 +5,21 @@ import java.sql.Date;
 public class CommuteCheckVo {
 	
 	private int employeeNumber; //사원 번호
-	private int inYear; //연도
-	private int inMonth; //월
-	private int inDate; //일
+	private Date inDate; //일
 	private Date inTime; //출근시간
 	private Date outTime; //퇴근시간
 	private int company; //회사키
+	
+	private String strInTime;
+	private String strOutTime;
 
 	public CommuteCheckVo(){
 		
 	}
 
-	public CommuteCheckVo(int employeeNumber, int inYear, int inMonth, int inDate, Date inTime, Date outTime,
+	public CommuteCheckVo(int employeeNumber, Date inDate, Date inTime, Date outTime,
 			int company) {
 		this.employeeNumber = employeeNumber;
-		this.inYear = inYear;
-		this.inMonth = inMonth;
 		this.inDate = inDate;
 		this.inTime = inTime;
 		this.outTime = outTime;
@@ -35,27 +34,29 @@ public class CommuteCheckVo {
 		this.employeeNumber = employeeNumber;
 	}
 
-	public int getInYear() {
-		return inYear;
+
+
+	public String getStrInTime() {
+		return strInTime;
 	}
 
-	public void setInYear(int inYear) {
-		this.inYear = inYear;
+	public void setStrInTime(String strInTime) {
+		this.strInTime = strInTime;
 	}
 
-	public int getInMonth() {
-		return inMonth;
+	public String getStrOutTime() {
+		return strOutTime;
 	}
 
-	public void setInMonth(int inMonth) {
-		this.inMonth = inMonth;
+	public void setStrOutTime(String strOutTime) {
+		this.strOutTime = strOutTime;
 	}
 
-	public int getInDate() {
+	public Date getInDate() {
 		return inDate;
 	}
 
-	public void setInDate(int inDate) {
+	public void setInDate(Date inDate) {
 		this.inDate = inDate;
 	}
 
@@ -83,10 +84,12 @@ public class CommuteCheckVo {
 		this.company = company;
 	}
 
+	
+	
 	@Override
 	public String toString() {
-		return "CommuteCheckVo [employeeNumber=" + employeeNumber + ", inYear=" + inYear + ", inMonth=" + inMonth
-				+ ", inDate=" + inDate + ", inTime=" + inTime + ", outTime=" + outTime + ", company=" + company + "]";
+		return "CommuteCheckVo [employeeNumber=" + employeeNumber + ", inDate=" + inDate + ", inTime=" + inTime
+				+ ", outTime=" + outTime + ", company=" + company + "]";
 	}
 
 	

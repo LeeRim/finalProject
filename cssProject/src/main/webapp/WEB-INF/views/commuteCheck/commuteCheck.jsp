@@ -80,6 +80,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			});
 		}
 
+
+	
 	</script>
 </head>
 
@@ -114,6 +116,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		<h1>퇴근시간</h1><br/>
 		<div id="outTime"></div>
 		<input type="submit" value="퇴근" onclick="outTime();">
+		
+		<h1>출근 목록 출력</h1>
+		<input type="button" value="사원출근체크" onclick="window.open('commuteList.do', 'check', 'width=300px, height=300px')">
+		<input type="button" value="회사원출근체크" onclick="window.open('commuteAllList.do', 'check', 'width=300px, height=300px')">
+
+		
     </section>
     <!-- /.content -->
   </div>
