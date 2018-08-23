@@ -69,5 +69,9 @@ public class EmployeeDao {
 		return sqlSession.selectOne("EmployeeMapper.empNoCheck", chekEmployee);
 	}
 
+	public EmployeeVo selectSessionEmployee(EmployeeVo member) {
+		return sqlSession.selectOne("EmployeeMapper.sessionSelect", member);
+	}
+
 
 }

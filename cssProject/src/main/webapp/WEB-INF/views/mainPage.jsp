@@ -319,8 +319,8 @@ margin-top:60px;
 			<div class="wrap_text">
 				<p class="wrap_text1">With Ease</p>
 				<p class="wrap_text1">누구나 쉽게 사용할 수 있습니다.</p>
-			<p class="wrap_text2">사용자의 입장에서 다우기술이 직접 사용하면서 개발한 다우오피스는 쉽고, 직관적인 UI 로 모든 기능을 편리하게 이용할 수 있습니다. 
-			메일, 전자결재, 메신저, 게시판, 문서관리, Works, 보고, ToDO+ 등의 다양한 기능을 자유롭게 이용하세요.</p>
+			<p class="wrap_text2">사용자의 입장에서 CSS기술이 직접 사용하면서 개발한 CSS는 쉽고, 직관적인 UI 로 모든 기능을 편리하게 이용할 수 있습니다. 
+			쪽지, 전자결재, 게시판, 일정관리, 근태관리 등의 다양한 기능을 자유롭게 이용하세요.</p>
 			</div>
 			<div class="wrap_image">
 				<img src="resources/dist/img/test/switch_2.png" >
@@ -333,7 +333,7 @@ margin-top:60px;
 			<div class="wrap_text">
 				<p class="wrap_text1" style="color: #25cad3;">Anytime Anywhere</p>
 				<p class="wrap_text1" style="color: #424140;">언제 어디서나<br>업무가 가능합니다.</p>
-				<p class="wrap_text2" style="color:#8f8f8f;'">사무실은 물론,  언제 어디서나  손 끝에서 펼쳐지는 업무 공간 다우오피스.메일부터 전자결재까지! 기업에 필요한 모든 업무 기능을 PC와 모바일에 최적화하여 제공합니다.</p>
+				<p class="wrap_text2" style="color:#8f8f8f;'">사무실은 물론,  언제 어디서나  손 끝에서 펼쳐지는 업무 공간 CSS.메일부터 전자결재까지! 기업에 필요한 모든 업무 기능을 PC에 최적화하여 제공합니다.</p>
 			</div>
 			<div class="wrap_image">
 				<img src="resources/dist/img/test/switch_1.png" >
@@ -348,7 +348,7 @@ margin-top:60px;
 				<p class="wrap_text1">예산 걱정까지 덜어드립니다.</p>
 				<p class="wrap_text2" style="padding:0 30px;">가격은 솔루션 도입을 위한 의사결정과정에서 가장 중요하게 작용하죠. 
 				다우오피스는  좋은 제품을 보다 합리적인 가격에 제공하기 위해 항상 고민합니다. 클라우드에서 가볍고 빠르게 이용할 수 
-				있는 서비스형부터, 단독 서버에 설치하여 월 단위로 지불하는 설치형까지! 업무 솔루션이 필요하다면, 다우오피스 도입하시고 
+				있는 서비스형부터, 단독 서버에 설치하여 월 단위로 지불하는 설치형까지! 업무 솔루션이 필요하다면, CSS 도입하시고 
 				예산을 절감하세요.</p>
 			</div>
 			<div class="wrap_image">
@@ -362,12 +362,12 @@ margin-top:60px;
 <div class="row footer_copy">
 	<div class="inner">
 		<div class="copy">
-			<p>경기도 용인시 수지구 디지털벨리로 81, 6층(죽전동, 디지털스퀘어) | ㈜다우기술 | 대표이사 김윤덕 </p>
-			<p>사업자 등록번호 220-81-02810 | 통신판매업신고 제 2010 – 용인수지 – 114호 &nbsp; 
-				<a href="http://www.ftc.go.kr/bizCommPop.do?wrkr_no=&amp;apv_perm_no=2010564001730200114" class="btn btn_ghost2" target="_blank">사업자 정보 확인</a>
+			<p>서울특별시 강남구 테헤란로 14길 6 남도빌딩 , 2층, 3층,4층(강남구, 역삼동) | ㈜CSS | 대표이사 장건희 </p>
+			<p>사업자 등록번호 123-45-56789 | 통신판매업신고 제 1010 – 강남 – 111호 &nbsp; 
+				<a href="#" class="btn btn_ghost2" target="_blank">사업자 정보 확인</a>
 			</p>
-			<p>호스팅 서비스 제공자 : ㈜ 다우기술 | Email: daouoffice@daou.co.kr </p>
-			<p>Copyright DAOU TECHONOLOGY INC. All rights reserved.</p>
+			<p>호스팅 서비스 제공자 : ㈜CSS | Email: css@naver.com </p>
+			<p>Copyright COMPANY SYSTEM SERVICE. All rights reserved.</p>
 		</div>
 	</div>
 </div>
