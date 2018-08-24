@@ -90,10 +90,30 @@ function memberJoin(){
 
 
 function validate(){
-	
 	$("#eAddress").val($("#eAddress1").val()+","+$("#eAddress2").val())
-
 }
+
+	$(function(){
+				var num = 0; 
+		$('#btn-departAdd-row').click(function() {
+	    $('#mytable1 > tbody:last').append('<tr><td><input type = "text" class="form-control"/> </td></tr>');
+	 	 });
+		  $('#btn-jobAdd-row').click(function() {
+				num = $("#mytable2 tbody tr").last().find("td").first().text();
+				num = (parseInt(num)+1)
+				console.log(num);
+			  $('#mytable2 > tbody:last').append('<tr><td>'+num+'</td><td><input type = "text" class="form-control"/> </td></tr>');
+
+		  });
+		  $('#btn-departRemove-row').click(function() {
+	 		    $('#mytable1 > tbody:last > tr:last').remove();			  
+		  });
+		  $('#btn-jobRemove-row').click(function() {
+			  num = num-1;
+	 		    $('#mytable2 > tbody:last > tr:last').remove();			  
+		  });
+	});
+
 
 </script>
 
@@ -127,48 +147,50 @@ function validate(){
             <!-- form start -->
             <form role="form" action="insertMember.do"  onsubmit="return validate();">
             
-            <div style="padding: 30px;">
-              <table>
-              <tr> <th></th><th>부서명</th> <th>부서설명</th>  </tr>
-              <tr>
-              <td>1.</td>
-              
-              <td><input type="text" class="form-control" ></td>
-               
-              <td><input type="text" class="form-control input2"></td>
-              </tr>
-              <tr>
-              <td>2.</td>
-              
-              <td><input type="text" class="form-control" ></td>
-               
-              <td><input type="text" class="form-control input2"></td>
-              </tr>
-              <tr>
-              <td>3.</td>
-              
-              <td><input type="text" class="form-control" ></td>
-               
-              <td><input type="text" class="form-control input2"></td>
-              </tr>
-              <tr>
-              <td>4.</td>
-              
-              <td><input type="text" class="form-control" ></td>
-               
-              <td><input type="text" class="form-control input2"></td>
-              </tr>
-              
-              
+            <div class= "row"style="padding: 30px;">
+             <div class= "col-md-3"></div>
+            <div class= "col-md-3">
+              <table id="mytable1">
+              	<tr>
+              		<th>부서명</th>
+              	</tr>
+				<tbody>
+					<tr>
+						<td>
+							<input type = "text" class="form-control"/>
+						</td>
+					</tr>
+				</tbody>              	
               </table>
-			</div>
+            </div>
+            <div class= "col-md-6">  
+               <table id="mytable2">
+              	<tr>
+              		<th></th>
+              		<th>직급명</th>
+              	</tr>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>
+							<input type = "text" class="form-control"/>
+						</td>
+					</tr>
+				</tbody>              	
+              </table>
+              </div>
               
+			</div>
 
               <div class="box-footer" style="text-align:center;">
                 <button class="btn btn-primary" id="joinBtn" onclick="memberJoin();" >등록하기</button>
                 
               </div>
             </form>
+              <button id='btn-departAdd-row' >부서 행 추가하기</button>
+			  <button id='btn-jobAdd-row'>직급 행 추가하기</button>
+			  <button id='btn-departRemove-row'>부서 행 지우기</button>
+			  <button id='btn-jobRemove-row'>직급 행 지우기</button>
           </div>
 		
 		
@@ -199,8 +221,5 @@ function validate(){
 
 
 	<c:import url="../include/footer.jsp"/>
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
 </body>
 </html>
