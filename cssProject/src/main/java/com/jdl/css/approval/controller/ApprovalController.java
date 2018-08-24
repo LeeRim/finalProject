@@ -99,6 +99,35 @@ public class ApprovalController {
 		return mv;
 	}
 
+	@RequestMapping("setApprovalSystemPage.do")
+	public ModelAndView setApprovalSystemPage(HttpSession session, ModelAndView mv) {
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		// 회사키
+		int companyK = user.getcKeyFk();
+
+		List<EmployeeVo> employee = eService.selectEmployeeList(companyK);
+		List<EmployeeVo> department = eService.selectDepartList(companyK);
+		for (EmployeeVo e : employee) {
+			if (e.getInstead() == null) {
+				e.setInstead(new EmployeeVo());
+				e.getInstead().seteKey(-1);
+			}
+		}
+
+		// System.out.println(employee);
+		mv.addObject("employee", employee);
+		mv.addObject("department", department);
+
+		int[] key = new int[1];
+		key[0] = user.geteInstead();
+		List<EmployeeVo> instead = eService.selectEmployeeListByKeyStr(key);
+		if(instead.size()!=0){
+		mv.addObject("instead", instead.get(0));
+		}
+		mv.setViewName("approval/approvalSystemPage");
+		return mv;
+	}
+
 	// 문서작성폼이동
 
 	@RequestMapping("jobPropsalPage.do")
@@ -355,9 +384,8 @@ public class ApprovalController {
 
 		order.setaKeyFk(app.getaKey());
 		int addOrderFormResult = aService.insertOrderForm(order);
-		//System.out.println("addOrderFormResult / "+addOrderFormResult);
-		
-		
+		// System.out.println("addOrderFormResult / "+addOrderFormResult);
+
 		List<OrderTableLinkedVo> otlList = new ArrayList<OrderTableLinkedVo>();
 		String[] olCulnos = olCulno.split(",");
 		String[] olProducts = olProduct.split(",");
@@ -367,14 +395,16 @@ public class ApprovalController {
 		String[] olOrizinprices = olOrizinprice.split(",");
 		String[] olPrices = olPrice.split(",");
 		String[] olEtcs = olEtc.split(",");
-		for(int i=0;i<olProducts.length;i++){
-			OrderTableLinkedVo otl = new OrderTableLinkedVo(app.getaKey(),Integer.parseInt(olCulnos[i]),olProducts[i],olSizes[i],olUnions[i],Integer.parseInt(olProductcounts[i]),Integer.parseInt(olOrizinprices[i]),Integer.parseInt(olPrices[i]),olEtcs[i]);
+		for (int i = 0; i < olProducts.length; i++) {
+			OrderTableLinkedVo otl = new OrderTableLinkedVo(app.getaKey(), Integer.parseInt(olCulnos[i]), olProducts[i],
+					olSizes[i], olUnions[i], Integer.parseInt(olProductcounts[i]), Integer.parseInt(olOrizinprices[i]),
+					Integer.parseInt(olPrices[i]), olEtcs[i]);
 			otlList.add(otl);
 		}
 
 		int addOrderLinkedResult = aService.insertOrderLinked(otlList);
-		//System.out.println("addOrderLinkedResult / "+addOrderLinkedResult);
-		
+		// System.out.println("addOrderLinkedResult / "+addOrderLinkedResult);
+
 		List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
 
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -422,7 +452,6 @@ public class ApprovalController {
 		return "redirect:openOrderFormDetail.do?aKey=" + app.getaKey();
 	}
 
-	
 	@RequestMapping("writeVacation.do")
 	public String writeVacation(ApprovalVo app, VacationFormVo vForm, @RequestParam("appStr") List<Integer> appStr,
 			@RequestParam("insteads") List<Integer> insteads, @RequestParam("files") MultipartFile[] files,
@@ -505,44 +534,47 @@ public class ApprovalController {
 		a = aService.selectApprovalDetail(a);
 		JobPropsalVo jp = aService.selectJobPropsal(a.getaKey());
 		ApprovalConditionVo cApprover = aService.selectCurrentApprover(a.getaKey());
+		ApprovalConditionVo last = aService.selectLastApprover(a.getaKey());
 		mv.addObject("approval", a);
 		mv.addObject("cApprover", cApprover);
 		mv.addObject("jp", jp);
+		mv.addObject("lApprover", last);
 		mv.setViewName("approval/approvalForm/jobPropsalDetail");
 		return mv;
 	}
-	
+
 	@RequestMapping("openVacationFormDetail.do")
 	public ModelAndView openVacationFormDetail(ModelAndView mv, ApprovalVo a) {
 		a = aService.selectApprovalDetail(a);
-		//아래부분 다 수정해야함
-		//JobPropsalVo jp = aService.selectJobPropsal(a.getaKey());
+		// 아래부분 다 수정해야함
+		// JobPropsalVo jp = aService.selectJobPropsal(a.getaKey());
 		System.out.println("vf aKey : " + a.getaKey());
 		VacationFormVo vf = aService.selectVacationForm(a.getaKey());
 		ApprovalConditionVo cApprover = aService.selectCurrentApprover(a.getaKey());
+		ApprovalConditionVo last = aService.selectLastApprover(a.getaKey());
 		mv.addObject("approval", a);
 		mv.addObject("cApprover", cApprover);
 		mv.addObject("vf", vf);
+		mv.addObject("lApprover", last);
 		System.out.println("vf : " + vf);
 		mv.setViewName("approval/approvalForm/vacationFormDetail");
 		return mv;
 	}
-	
+
 	@RequestMapping("openOrderFormDetail.do")
 	public ModelAndView openOrderFormDetail(ModelAndView mv, ApprovalVo a) {
 		a = aService.selectApprovalDetail(a);
 		OrderFormVo of = aService.selectOrderForm(a.getaKey());
 		List<OrderTableLinkedVo> otlList = aService.selectOrderLinked(a.getaKey());
 		ApprovalConditionVo cApprover = aService.selectCurrentApprover(a.getaKey());
-		
-		System.out.println(a);
-		System.out.println(of);
-		System.out.println(otlList);
-		
+		ApprovalConditionVo last = aService.selectLastApprover(a.getaKey());
+
+
 		mv.addObject("approval", a);
 		mv.addObject("cApprover", cApprover);
 		mv.addObject("of", of);
 		mv.addObject("otlList", otlList);
+		mv.addObject("lApprover", last);
 		mv.setViewName("approval/approvalForm/orderFormDetail");
 		return mv;
 	}
@@ -615,4 +647,13 @@ public class ApprovalController {
 		}
 		return result;
 	}
+	
+	@RequestMapping("updateInstead.do")
+	public String updateInstead(HttpSession session,int iKey){
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		user.seteInstead(iKey);
+		int result = eService.updateInstead(user);
+		return "redirect:setApprovalSystemPage.do";
+	}
+	
 }

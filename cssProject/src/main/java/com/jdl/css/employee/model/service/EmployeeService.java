@@ -45,4 +45,9 @@ public class EmployeeService {
 
 	}
 
+	public int updateInstead(EmployeeVo user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
