@@ -184,6 +184,7 @@ var approvers = new Array();
     if(eState==0){
       if(iKey==-1){
         alert("현재 "+name+" "+job+"님께서 결재가 불가능한 상태입니다.");
+        return;
       }else{
         alert("현재 "+name+job+"님께서 결재가 불가능한 상태입니다. 따라서 대결자인 "+iName+iJob+"님에게 결재요청됩니다.");
         for(var i=0;i<total.length;i++){
@@ -312,6 +313,8 @@ if (window.FileReader) { // modern browser
       $("#labelBtn").hover(function(){
         $("#labelBtn").css("background","#337ab7");
       });
+      
+      
     });
   </script>
 <!-- 팝업 모달영역 -->
@@ -328,7 +331,6 @@ if (window.FileReader) { // modern browser
 			<div class="box" style="width: 1065px;">
 				<div class="box-header">
 					<h3 class="box-title" style="text-align: center;">결재선</h3>
-					<button type="button" class="close" data-dismiss="modal">×</button>
 				</div>
 			</div>
 			<!-- body -->
@@ -361,7 +363,7 @@ if (window.FileReader) { // modern browser
 												<li><a
 													onclick="select(${st.index},${employee.eKey},'${employee.eName}','${employee.job}','${employee.department}',${employee.eState},${employee.instead.eKey},'${employee.instead.eName}','${employee.instead.job}','${employee.instead.department}');"><i
 														class="fa fa-circle-o text-red"></i> <c:out
-															value="${employee.eName}" /></a></li>
+															value="${employee.eName} ${employee.job }" /></a></li>
 											</c:if>
 										</c:forEach>
 									</ul>

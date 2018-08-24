@@ -534,9 +534,11 @@ public class ApprovalController {
 		a = aService.selectApprovalDetail(a);
 		JobPropsalVo jp = aService.selectJobPropsal(a.getaKey());
 		ApprovalConditionVo cApprover = aService.selectCurrentApprover(a.getaKey());
+		ApprovalConditionVo last = aService.selectLastApprover(a.getaKey());
 		mv.addObject("approval", a);
 		mv.addObject("cApprover", cApprover);
 		mv.addObject("jp", jp);
+		mv.addObject("lApprover", last);
 		mv.setViewName("approval/approvalForm/jobPropsalDetail");
 		return mv;
 	}
@@ -549,9 +551,11 @@ public class ApprovalController {
 		System.out.println("vf aKey : " + a.getaKey());
 		VacationFormVo vf = aService.selectVacationForm(a.getaKey());
 		ApprovalConditionVo cApprover = aService.selectCurrentApprover(a.getaKey());
+		ApprovalConditionVo last = aService.selectLastApprover(a.getaKey());
 		mv.addObject("approval", a);
 		mv.addObject("cApprover", cApprover);
 		mv.addObject("vf", vf);
+		mv.addObject("lApprover", last);
 		System.out.println("vf : " + vf);
 		mv.setViewName("approval/approvalForm/vacationFormDetail");
 		return mv;
@@ -563,15 +567,14 @@ public class ApprovalController {
 		OrderFormVo of = aService.selectOrderForm(a.getaKey());
 		List<OrderTableLinkedVo> otlList = aService.selectOrderLinked(a.getaKey());
 		ApprovalConditionVo cApprover = aService.selectCurrentApprover(a.getaKey());
+		ApprovalConditionVo last = aService.selectLastApprover(a.getaKey());
 
-		System.out.println(a);
-		System.out.println(of);
-		System.out.println(otlList);
 
 		mv.addObject("approval", a);
 		mv.addObject("cApprover", cApprover);
 		mv.addObject("of", of);
 		mv.addObject("otlList", otlList);
+		mv.addObject("lApprover", last);
 		mv.setViewName("approval/approvalForm/orderFormDetail");
 		return mv;
 	}

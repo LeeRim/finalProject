@@ -106,7 +106,7 @@ desired effect
 											<li><a
 												onclick="select(${employee.eKey},'${employee.eNo}','${employee.eName}','${employee.job}','${employee.department}',${employee.eState},${employee.ePhoto});"><i
 													class="fa fa-circle-o text-red"></i> <c:out
-														value="${employee.eName}" /></a></li>
+														value="${employee.eName} ${employee.job }" /></a></li>
 										</c:if>
 									</c:forEach>
 								</ul>
