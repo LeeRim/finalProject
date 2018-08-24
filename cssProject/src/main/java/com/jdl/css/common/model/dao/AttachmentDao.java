@@ -41,4 +41,8 @@ public class AttachmentDao {
 	public List<AttachmentVo> selectAttachmentSev() {
 		return session.selectList("AttachmentMapper.selectSev");
 	}
+
+	public AttachmentVo selectQnaAttach(int qKey) {
+		return session.selectOne("AttachmentMapper.selectQNAttach", qKey);
+	}
 }

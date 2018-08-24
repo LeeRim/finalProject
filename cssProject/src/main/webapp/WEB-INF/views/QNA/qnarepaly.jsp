@@ -44,9 +44,6 @@ function listread(){
 				<td>답변 : <textarea style="resize: none;" name="qAnswer" rows="25" cols="80" readonly>${qv.qAnswer}</textarea></td>
 			</c:if>
 		</tr>
-		<tr>
-			<td>첨부파일 : </td>
-		</tr>
 	</table>
 	<input type="hidden" name="qContent" value="${qv.qContent}"/>
 	<input type="hidden" name="qKey" value="${qKey}"/>
@@ -55,6 +52,8 @@ function listread(){
 	</c:if>
 	<input type="button" value="메인" onclick="listread();"/>
 </form>
+첨부파일 :  ${qnaAttach.attaFileName }
+<a href="resources/upload/boardGallery/${qnaAttach.attaFileName}" download><button>다운로드</button></a>
 </div>
 </div>
 </div>

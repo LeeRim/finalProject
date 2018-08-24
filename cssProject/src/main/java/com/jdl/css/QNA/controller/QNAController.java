@@ -115,10 +115,12 @@ public class QNAController {
 	
 	@RequestMapping("selectQNA.do")
 	public ModelAndView selectQNA(ModelAndView mv, int qKey){
-		
 		System.out.println("키 값 : " + qKey);
 		QNAVo qv = service.selectone(qKey);
 		
+		AttachmentVo qnaAttach = attachservice.qnaAttach(qKey);
+		System.out.println("받아오는 값 확인 : " + qnaAttach);
+		mv.addObject("qnaAttach", qnaAttach);
 		mv.addObject("qv", qv);
 		mv.addObject("qKey", qKey);
 		mv.setViewName("QNA/qnarepaly");
