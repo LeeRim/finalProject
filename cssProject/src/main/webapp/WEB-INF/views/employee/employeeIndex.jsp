@@ -109,12 +109,12 @@
 	    h = today.getHours();
 	    m = today.getMinutes();
 	    s = today.getSeconds();
-    	var sum = new Date(year, month, date);
-    	var timeSum = new Date(h,m,s);
+	    var cKeyFk = ${user.cKeyFk}
+	    var eKeyFk= ${user.eKey}
 		$.ajax({
 			type:"post",
 	        url:"commuteone.do",
-	        data : {inHour:h, inMinute:m},
+	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk},
 	        success: function(data){
 	        	 document.getElementById('inTime').innerHTML =
 	        		 h + "시" + m+ "분"+ s + "초"
@@ -126,28 +126,28 @@
 	}
 	
 	function outTime(){
-		    var today = new Date();
-			year = today.getFullYear(); 
-			month = today.getMonth();
-			date = today.getDate();
-		    h = today.getHours();
-		    m = today.getMinutes();
-		    s = today.getSeconds();
-	    	var sum = new Date(year, month, date);
-	    	var timeSum = new Date(h,m,s);
-			$.ajax({
-				type:"post",
-		        url:"commuteOut.do",
-		        data : {inHour:h, inMinute:m},
-		        success: function(data){
-		        	 document.getElementById('outTime').innerHTML =
-		        		 h + "시" + m+ "분"+ s + "초"
-		        },
-		        error: function(error) {
-		            alert(error);
-		        }
-			});
-		}
+	    var today = new Date();
+		year = today.getFullYear(); 
+		month = today.getMonth();
+		date = today.getDate();
+	    h = today.getHours();
+	    m = today.getMinutes();
+	    s = today.getSeconds();
+	    var cKeyFk = ${user.cKeyFk}
+	    var eKeyFk= ${user.eKey}
+		$.ajax({
+			type:"post",
+	        url:"commuteOut.do",
+	        data : {inHour:h, inMinute:m,cKeyFk:cKeyFk,eKeyFk:eKeyFk},
+	        success: function(data){
+	        	 document.getElementById('outTime').innerHTML =
+	        		 h + "시" + m+ "분"+ s + "초"
+	        },
+	        error: function(error) {
+	            alert(error);
+	        }
+		});
+	}
 </script>
 
 </head>

@@ -3,12 +3,12 @@ package com.jdl.css.commuteCheck.model.commuteCheckVo;
 import java.sql.Date;
 
 public class CommuteCheckVo {
-	
-	private int employeeNumber; //사원 번호
+	private int id;
+	private int eKey; //사원 번호
 	private Date inDate; //일
 	private Date inTime; //출근시간
 	private Date outTime; //퇴근시간
-	private int company; //회사키
+	private int cKeyFk; //회사키
 	
 	private String strInTime;
 	private String strOutTime;
@@ -17,24 +17,33 @@ public class CommuteCheckVo {
 		
 	}
 
-	public CommuteCheckVo(int employeeNumber, Date inDate, Date inTime, Date outTime,
-			int company) {
-		this.employeeNumber = employeeNumber;
+	public CommuteCheckVo(int id,int eKeyFk, Date inDate, Date inTime, Date outTime,
+			int cKey) {
+		this.id=id;
+		this.eKey = eKey;
 		this.inDate = inDate;
 		this.inTime = inTime;
 		this.outTime = outTime;
-		this.company = company;
+		this.cKeyFk = cKeyFk;
 	}
 
-	public int getEmployeeNumber() {
-		return employeeNumber;
+	
+	
+	public int getId() {
+		return id;
 	}
 
-	public void setEmployeeNumber(int employeeNumber) {
-		this.employeeNumber = employeeNumber;
+	public void setId(int id) {
+		this.id = id;
 	}
 
+	public int getEKey() {
+		return eKey;
+	}
 
+	public void setEKey(int eKey) {
+		this.eKey = eKey;
+	}
 
 	public String getStrInTime() {
 		return strInTime;
@@ -76,21 +85,23 @@ public class CommuteCheckVo {
 		this.outTime = outTime;
 	}
 
-	public int getCompany() {
-		return company;
+	public int getCKeyFk() {
+		return cKeyFk;
 	}
 
-	public void setCompany(int company) {
-		this.company = company;
+	public void setCKeyFk(int cKeyFk) {
+		this.cKeyFk = cKeyFk;
 	}
 
-	
-	
 	@Override
 	public String toString() {
-		return "CommuteCheckVo [employeeNumber=" + employeeNumber + ", inDate=" + inDate + ", inTime=" + inTime
-				+ ", outTime=" + outTime + ", company=" + company + "]";
+		return "CommuteCheckVo [id=" + id + ", eKey=" + eKey + ", inDate=" + inDate + ", inTime=" + inTime
+				+ ", outTime=" + outTime + ", cKeyFk=" + cKeyFk + ", strInTime=" + strInTime + ", strOutTime="
+				+ strOutTime + "]";
 	}
+
+	
+
 
 	
 	
