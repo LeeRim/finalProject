@@ -1,4 +1,3 @@
-
 package com.jdl.css.employee.controller;
 import java.io.File;
 import java.io.IOException;
@@ -116,7 +115,7 @@ public class EmployeeController {
 	}
 	
 	
-	//직급 부서 리스트 출력
+	//사원등록 ,직급 부서 리스트 출력
 	@RequestMapping("memberAdd.do")
 	public ModelAndView memberAdd(ModelAndView mv, HttpSession session) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
@@ -524,6 +523,11 @@ public class EmployeeController {
 		member.seteBirth(birth2);
 		member.seteHireDate(hire2);
 
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		java.util.Date dt = new java.util.Date();
+		
+		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 
 		String path = root + "\\upload\\empPhoto";
@@ -534,7 +538,7 @@ public class EmployeeController {
 			folder.mkdirs();
 		}
 
-		filePath = folder + "\\" + ePhoto.getOriginalFilename();
+		filePath = folder + "\\" + sdf.format(dt)+ ePhoto.getOriginalFilename();
 		try {
 			ePhoto.transferTo(new File(filePath));
 		} catch (IllegalStateException e) {
@@ -572,10 +576,40 @@ public class EmployeeController {
 		return mv;
 	}
 		
-		//마이페이지 수정
+		
+		
+		
+		
+		
+		//사원 마이페이지 수정
 		@RequestMapping("myPageUpdate.do")
-		public String myPageUpdate(){
-			return "employee/myPageUpdate";
+		public ModelAndView myPageUpdate(ModelAndView mv,HttpSession session){
+			
+			EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+			List<EmployeeVo> list = eService.selectJobList(employee.getcKeyFk());
+			List<EmployeeVo> list2 = eService.selectDepartList(employee.getcKeyFk());
+			
+			mv.addObject("list", list);
+			mv.addObject("list2", list2);
+			
+//			System.out.println(main);
+			
+			int eKey;
+			eKey = Integer.parseInt("6");
+			
+			EmployeeVo select = eService.selectEmployeeInfo(eKey);
+			
+			
+			if(select.getePhoto()==null){
+				
+				select.setePhoto("empty.png");
+			}
+			
+			System.out.println(select);
+			mv.addObject("select", select);
+			mv.setViewName("employee/myPageUpdate");
+			return mv;
+			
 		}
 
 }
