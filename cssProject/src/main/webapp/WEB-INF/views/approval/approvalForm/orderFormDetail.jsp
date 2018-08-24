@@ -160,25 +160,26 @@ desired effect
 														</table></td>
 													<td>
 														<div class="sign_condition" id="sign_condition">
-															<span class='sign_type1_inline'> <span
-																class='sign_tit_wrap'> <span class='sign_tit'>
-																		<strong>승인</strong>
-																</span>
-															</span> <c:forEach items="${approval.aConList}" var="appCon">
-																	<span class='sign_member_wrap' id='activity_15162'><span
-																		class='sign_member'><span
-																			class='sign_rank_wrap'><span class='sign_rank'><c:out
-																						value="${appCon.approver.job }"></c:out></span></span><span
-																			class='sign_wrap'><span class='sign_name'><c:out
-																						value="${appCon.acType}"></c:out><br>
-																				<c:out value="${appCon.condition }"></c:out> <c:out
-																						value="${appCon.approver.eName }"></c:out></span></span><span
-																			class='sign_date_wrap'><span
-																				class='sign_date ' id='date_15162'>${appCon.acApprovalDate }</span></span></span></span>
+																<span class='sign_type1_inline'> <span
+																	class='sign_tit_wrap'> <span class='sign_tit'>
+																			<strong>승인</strong>
+																	</span>
+																</span> <c:forEach items="${approval.aConList}" var="appCon">
+																		<span class='sign_member_wrap' id='activity_15162'><span
+																			class='sign_member'><span
+																				class='sign_rank_wrap'><span
+																					class='sign_rank'><c:out
+																							value="${appCon.approver.job }"></c:out></span></span><span
+																				class='sign_wrap'><span class='sign_name'><small><c:out value="${appCon.acType}"></c:out></small><br>
+																				<c:if test="${appCon.acCondition ==1}"><img alt="" src="resources/upload/image/ok.png" height="30" width="30"></c:if>
+																				<c:if test="${appCon.acCondition ==2}"><img alt="" src="resources/upload/image/companion.png"></c:if>
+																						<br><c:out value="${appCon.approver.eName }"></c:out></span></span><span
+																				class='sign_date_wrap'><span
+																					class='sign_date ' id='date_15162'>${appCon.acApprovalDate }</span></span></span></span>
 
-																</c:forEach>
-															</span>
-														</div>
+																	</c:forEach>
+																</span>
+															</div>
 
 														<div class="sign_condition">
 															<span class="sign_type1_inline"><span

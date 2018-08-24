@@ -165,171 +165,158 @@ var approvers = new Array();
 </html> --%>
 
 
-<script>
-var approvers = new Array();
-var insteads = new Array();
-var total = new Array();
-function validate(){
-	if(total.length==0){
-		alert("선택된 결재자가 없습니다.");
-		return false;
-	}else{
-		return true;
-	}
+ <script>
+  var approvers = new Array();
+  var insteads = new Array();
+  var total = new Array();
+  function validate(){
+    if(total.length==0){
+      alert("선택된 결재자가 없습니다.");
+      return false;
+    }else{
+      return true;
+    }
+  }
+  function select(index,eKey,name, job, department,eState,iKey,iName,iJob,iDepartment) {
+    var html="";
+    
+    
+    if(eState==0){
+      if(iKey==-1){
+        alert("현재 "+name+" "+job+"님께서 결재가 불가능한 상태입니다.");
+        return;
+      }else{
+        alert("현재 "+name+job+"님께서 결재가 불가능한 상태입니다. 따라서 대결자인 "+iName+iJob+"님에게 결재요청됩니다.");
+        for(var i=0;i<total.length;i++){
+          if(total[i]==iKey){       
+            return;
+          }
+        }
+        html = $("#approverList").html()
+        + "<tr>"
+        + "<td>"
+        + iName
+        + "</td>"
+        + "<td>"
+        + iJob
+        + "</td>"
+        + "<td style='text-align:center;'>"
+        + iDepartment
+        + "</td>"
+        + "<td class='removeBtn' onclick='removeApprover("+iKey+",this);'><i class='fa fa-remove'></i></td>"
+        "</tr>";
+        insteads.push(iKey);
+        total.push(iKey);
+      }
+    }else{
+      for(var i=0;i<total.length;i++){
+        if(total[i]==eKey){       
+          return;
+        }
+      }
+      html = $("#approverList").html()
+      + "<tr>"
+      + "<td>"
+      + name
+      + "</td>"
+      + "<td>"
+      + job
+      + "</td>"
+      + "<td style='text-align:center;'>"
+      + department
+      + "</td>"
+      + "<td class='removeBtn' onclick='removeApprover("+eKey+",this);'><i class='fa fa-remove'></i></td>"
+      "</tr>";
+      approvers.push(eKey);
+      total.push(eKey);
+    }
+    
+    $("#approverList").html(html);
+  }
+
+  function removeApprover(eKey,obj) {
+    $(obj).parent().remove();
+    for(var i=0;i<approvers.length;i++){
+      if(approvers[i]==eKey){       
+        approvers.splice(i,1);
+      }
+    }
+    for(var i=0;i<total.length;i++){
+      if(total[i]==eKey){       
+        total.splice(i,1);
+      }
+    }
+    for(var i=0;i<insteads.length;i++){
+      if(insteads[i]==eKey){        
+        insteads.splice(i,1);
+      }
+    }
+  }
+  
+  function addApprovers(){
+    //console.log(approvers.join(", "));
+    $("#appStr").val(approvers);
+    $("#insteads").val(insteads);
+    $("#closeBtn").trigger("click");
+    $.ajax({
+      url:"addApproversTable.do",
+      data:{
+        appStr : total.join(", ")
+      },
+      type : "post",
+      success : function(data) {
+        //console.log(data.length);
+        var user;
+        var resultStr = "<span class='sign_type1_inline'>"
+        +"<span class='sign_tit_wrap'>"
+        +"<span class='sign_tit'>"
+        +"<strong>승인</strong>"
+        +"</span>"+
+        "</span>";
+        for(var key in data){
+          user = data[key];
+          resultStr +="<span class='sign_member_wrap' id='activity_15162'><span "+
+          "class='sign_member'><span "+
+          "class='sign_rank_wrap'><span "+
+          "class='sign_rank'>"+user.job+"</span></span><span class='sign_wrap'><span "+
+          "class='sign_name'>"+user.eName+"</span></span><span "+
+          "class='sign_date_wrap'><span "+
+          "class='sign_date ' id='date_15162'></span></span></span></span>";
+        }
+        resultStr+="</span>";
+        $("#sign_condition").html(resultStr);
+        $("#sign_condition").css("width",data.length*80+30);
+      },
+      error : function(e) {
+        console.log(e);
+      }
+    });
+  }
+  
+  $(document).ready(function() {
+      var fileTarget = $('.form-group .upload-hidden');
+      fileTarget.on('change',function() { // 값이 변경되면 
+        var filenames = "";
+if (window.FileReader) { // modern browser 
+
+ for (var i = 0; i < $(this)[0].files.length; i++) {
+  var file = $(this)[0].files[i];
+  filenames += $(this)[0].files[i].name + "<br>";
 }
-	function select(index,eKey,name, job, department,eState,iKey,iName,iJob,iDepartment) {
-		var html="";
-		
-		
-		if(eState==0){
-			if(iKey==-1){
-				alert("현재 "+name+" "+job+"님께서 결재가 불가능한 상태입니다.");
-			}else{
-				alert("현재 "+name+job+"님께서 결재가 불가능한 상태입니다. 따라서 대결자인 "+iName+iJob+"님에게 결재요청됩니다.");
-		for(var i=0;i<total.length;i++){
-			if(total[i]==iKey){				
-				return;
-			}
-		}
-			html = $("#approverList").html()
-			+ "<tr>"
-			+ "<td>"
-			+ iName
-			+ "</td>"
-			+ "<td>"
-			+ iJob
-			+ "</td>"
-			+ "<td style='text-align:center;'>"
-			+ iDepartment
-			+ "</td>"
-			+ "<td class='removeBtn' onclick='removeApprover("+iKey+",this);'><i class='fa fa-remove'></i></td>"
-	"</tr>";
-	insteads.push(iKey);
-	total.push(iKey);
-			}
-		}else{
-			for(var i=0;i<total.length;i++){
-				if(total[i]==eKey){				
-					return;
-				}
-			}
-			html = $("#approverList").html()
-			+ "<tr>"
-			+ "<td>"
-			+ name
-			+ "</td>"
-			+ "<td>"
-			+ job
-			+ "</td>"
-			+ "<td style='text-align:center;'>"
-			+ department
-			+ "</td>"
-			+ "<td class='removeBtn' onclick='removeApprover("+eKey+",this);'><i class='fa fa-remove'></i></td>"
-	"</tr>";
-	approvers.push(eKey);
-	total.push(eKey);
-		}
-		
-		$("#approverList").html(html);
-	}
+ } else { // old IE
+     var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
+   }
+ // 추출한 파일명 삽입 
+ $('.file-list').html(filenames);
+});
 
-	function removeApprover(eKey,obj) {
-		$(obj).parent().remove();
-		for(var i=0;i<approvers.length;i++){
-			if(approvers[i]==eKey){				
-				approvers.splice(i,1);
-			}
-		}
-		for(var i=0;i<total.length;i++){
-			if(total[i]==eKey){				
-				total.splice(i,1);
-			}
-		}
-		for(var i=0;i<insteads.length;i++){
-			if(insteads[i]==eKey){				
-				insteads.splice(i,1);
-			}
-		}
-	}
-	
-	function addApprovers(){
-		//console.log(approvers.join(", "));
-		$("#appStr").val(approvers);
-		$("#insteads").val(insteads);
-		$("#closeBtn").trigger("click");
-		$.ajax({
-			url:"addApproversTable.do",
-			data:{
-				appStr : total.join(", ")
-			},
-			type : "post",
-			success : function(data) {
-				//console.log(data.length);
-				var user;
-				var resultStr = "<span class='sign_type1_inline'>"
-				+"<span class='sign_tit_wrap'>"
-				+"<span class='sign_tit'>"
-				+"<strong>승인</strong>"
-				+"</span>"+
-				"</span>";
-				for(var key in data){
-					user = data[key];
-					resultStr +="<span class='sign_member_wrap' id='activity_15162'><span "+
-					"class='sign_member'><span "+
-					"class='sign_rank_wrap'><span "+
-						"class='sign_rank'>"+user.job+"</span></span><span class='sign_wrap'><span "+
-						"class='sign_name'>"+user.eName+"</span></span><span "+
-					"class='sign_date_wrap'><span "+
-						"class='sign_date ' id='date_15162'></span></span></span></span>";
-				}
-				resultStr+="</span>";
-				$("#sign_condition").html(resultStr);
-				$("#sign_condition").css("width",data.length*80+30);
-			},
-			error : function(e) {
-				console.log(e);
-			}
-		});
-	}
-	
-											$(document)
-													.ready(
-															function() {
-																var fileTarget = $('.form-group .upload-hidden');
-																fileTarget
-																		.on(
-																				'change',
-																				function() { // 값이 변경되면 
-																					var filenames = "";
-																					if (window.FileReader) { // modern browser 
-
-																						for (var i = 0; i < $(this)[0].files.length; i++) {
-																							var file = $(this)[0].files[i];
-																							filenames += $(this)[0].files[i].name
-																									+ "&nbsp<i class='fa fa-remove'></i><br>";
-																							console
-																									.log(filenames);
-																						}
-																					} else { // old IE
-																						var filename = $(
-																								this)
-																								.val()
-																								.split(
-																										'/')
-																								.pop()
-																								.split(
-																										'\\')
-																								.pop(); // 파일명만 추출
-																					}
-																					// 추출한 파일명 삽입 
-																					$(
-																							'.file-list')
-																							.html(
-																									filenames);
-																				});
-															});
-										</script>
-
+      $("#labelBtn").hover(function(){
+        $("#labelBtn").css("background","#337ab7");
+      });
+      
+      
+    });
+  </script>
 <!-- 팝업 모달영역 -->
 <div class="modal fade" id="layerpop" style="text-align: center;">
 	<div class="modal-dialog" style="margin-left: 370px;">
@@ -344,20 +331,19 @@ function validate(){
 			<div class="box" style="width: 1065px;">
 				<div class="box-header">
 					<h3 class="box-title" style="text-align: center;">결재선</h3>
-					<button type="button" class="close" data-dismiss="modal">×</button>
 				</div>
 			</div>
 			<!-- body -->
 			<div class="modal-body">
 
-				<div class="row" style="height: 430px;">
+				<div class="row" style="height: 490px;">
 					<div class="col-md-1"></div>
-					<div class="col-md-3">
-						<label class="btn btn-primary btn-block margin-bottom">수신자
+					<div class="col-md-3" style="height: 450px;overflow-y:scroll;">
+						<label class="btn btn-primary btn-block margin-bottom" id="labelBtn">수신자
 							선택</label>
 
 						<c:forEach items="${department}" var="department">
-							<div class="box box-solid collapsed-box" style="width: 100%">
+							<div class="box box-solid collapsed-box" style="margin:3px 0 0 0;width: 100%">
 								<div class="box-header with-border">
 									<h3 class="box-title">
 										<c:out value="${department.department}" />
@@ -377,7 +363,7 @@ function validate(){
 												<li><a
 													onclick="select(${st.index},${employee.eKey},'${employee.eName}','${employee.job}','${employee.department}',${employee.eState},${employee.instead.eKey},'${employee.instead.eName}','${employee.instead.job}','${employee.instead.department}');"><i
 														class="fa fa-circle-o text-red"></i> <c:out
-															value="${employee.eName}" /></a></li>
+															value="${employee.eName} ${employee.job }" /></a></li>
 											</c:if>
 										</c:forEach>
 									</ul>
