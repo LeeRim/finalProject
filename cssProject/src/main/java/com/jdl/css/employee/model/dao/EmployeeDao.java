@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jdl.css.common.model.vo.AttachmentVo;
+import com.jdl.css.common.model.vo.DivisionVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Repository
@@ -78,6 +79,16 @@ public class EmployeeDao {
 
 	public List<EmployeeVo> selectDepartCountList(int cKey) {
 		return sqlSession.selectList("EmployeeMapper.selectDepartCountList",cKey);
+	}
+
+	public int insertDivision(DivisionVo division) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("EmployeeMapper.insertDivision", division);
+	}
+
+	public int deleteDivision(int divKey) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("EmployeeMapper.deleteDivision", divKey);
 	}
 
 
