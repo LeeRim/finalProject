@@ -153,9 +153,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 																				class='sign_rank_wrap'><span
 																					class='sign_rank'><c:out
 																							value="${appCon.approver.job }"></c:out></span></span><span
-																				class='sign_wrap'><span class='sign_name'><c:out value="${appCon.acType}"></c:out><br><c:out
-																							value="${appCon.condition }"></c:out>
-																						<c:out value="${appCon.approver.eName }"></c:out></span></span><span
+																				class='sign_wrap'><span class='sign_name'><small><c:out value="${appCon.acType}"></c:out></small><br>
+																				<c:if test="${appCon.acCondition ==1}"><img alt="" src="resources/upload/image/ok.png" height="30" width="30"></c:if>
+																				<c:if test="${appCon.acCondition ==2}"><img alt="" src="resources/upload/image/companion.png"></c:if>
+																						<br><c:out value="${appCon.approver.eName }"></c:out></span></span><span
 																				class='sign_date_wrap'><span
 																					class='sign_date ' id='date_15162'>${appCon.acApprovalDate }</span></span></span></span>
 
