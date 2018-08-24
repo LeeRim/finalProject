@@ -159,7 +159,7 @@ $(document).ready(
 	        	
 	        	
 	             $("#imgInp").on('change', function(){
-	            	 consol.log("dddd")
+	            	
 	                 readURL(this);
 	             });
 	         });
@@ -184,20 +184,7 @@ $(document).ready(
 	             }
 	         }
 	         
-	         //사진 제거
-	         function photoDelete() {
-	        	 $('.file-list').empty();
-	        	 $('#holder').empty();
-	        	 
-	        	 $("#imgInp").val(null);
-
-
-	        	 
-	        	 var html = $("#holder").html("<p class='emp_picture2_1' >사&emsp;진</p>")
-	        	  
-	        	 
-	        	 $('#file-list2').val(null);
-	        }
+	         
 	         
 
 	         
@@ -560,6 +547,21 @@ function openAddressPopup(){
 }
 
 
+//사진 제거
+function photoDelete() {
+	 $('.file-list').empty();
+	 $('#holder').empty();
+	 
+	 $("#imgInp").val(null);
+
+
+	 
+	 var html = $("#holder").html("<p class='emp_picture2_1' >사&emsp;진</p>")
+	  
+	 
+	 $('#file-list2').val(null);
+}
+
 	      
 	      
 </script>
@@ -677,7 +679,7 @@ function openAddressPopup(){
                 
              
            
-                
+             <div>
               <label>주소</label>
               <div class="input-group"style="width:400px;">
               
@@ -691,6 +693,8 @@ function openAddressPopup(){
                     <div class="input-group" style="width:300px; margin-bottom:15px;">
                   <input type="text" class="form-control"id="eAddress2"/>
                   </div>
+                  </div>
+                  
                 <div class="form-group" style="width:250px;">
                 <label>내선번호</label>
 

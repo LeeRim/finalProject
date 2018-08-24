@@ -1,6 +1,6 @@
-
 package com.jdl.css.employee.controller;
 import java.io.File;
+
 
 import java.io.IOException;
 import java.sql.Date;
@@ -104,7 +104,7 @@ public class EmployeeController {
 	}
 	
 	
-	//직급 부서 리스트 출력
+	//사원등록 ,직급 부서 리스트 출력
 	@RequestMapping("memberAdd.do")
 	public ModelAndView memberAdd(ModelAndView mv, HttpSession session) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
@@ -484,6 +484,11 @@ public class EmployeeController {
 		member.seteBirth(birth2);
 		member.seteHireDate(hire2);
 
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		java.util.Date dt = new java.util.Date();
+		
+		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 
 		String path = root + "\\upload\\empPhoto";
@@ -494,7 +499,7 @@ public class EmployeeController {
 			folder.mkdirs();
 		}
 
-		filePath = folder + "\\" + ePhoto.getOriginalFilename();
+		filePath = folder + "\\" + sdf.format(dt)+ ePhoto.getOriginalFilename();
 		try {
 			ePhoto.transferTo(new File(filePath));
 		} catch (IllegalStateException e) {

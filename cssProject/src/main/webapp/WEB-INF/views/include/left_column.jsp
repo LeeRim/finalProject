@@ -63,6 +63,7 @@
         <li><a href="memberAdd.do"><i class="fa fa-link"></i> <span>사원 등록</span></a></li>
         <li><a href="department.do"><i class="fa fa-link"></i> <span>부서 관리</span></a></li>
         <li><a href="jobGrade.do"><i class="fa fa-link"></i> <span>직위 관리</span></a></li>
+        <li><a href="companyUpdate.do"><i class="fa fa-link"></i> <span>회사 정보 수정</span></a></li>
         <li class="treeview">
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>

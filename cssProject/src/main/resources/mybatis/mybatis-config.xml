@@ -49,5 +49,6 @@
 	<mapper resource="mybatis/sql/attachmentMapper.xml"/>
 	<mapper resource="mybatis/sql/commuteCheckMapper.xml"/>
 	<mapper resource="mybatis/sql/vacationMapper.xml"/>		
+	<mapper resource="mybatis/sql/companyMapper.xml"/>	
   </mappers>
 </configuration>

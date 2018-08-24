@@ -113,7 +113,7 @@ $(function () {
 
 
 function memberUpdate(){
-	$("#joinForm").submit();	
+	$("#joinForm").submit();
 	
 }
 
@@ -713,7 +713,7 @@ function photoDelete() {
                 
              
            
-                
+                <div>
               <label>사원주소</label>
               <div class="input-group"style="width:400px;">
               
@@ -731,7 +731,7 @@ function photoDelete() {
                    
                   <input type="text" class="form-control"id="eAddress2" 
                  value="<c:forEach var="adrr2" items="${adrr}" varStatus="a"><c:if test="${a.count == 2}">${adrr2}</c:if></c:forEach> "/>
-               
+               </div>
 
                   </div>
                 <div class="form-group" style="width:250px;">
