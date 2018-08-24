@@ -160,7 +160,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 															<col width="220">
 														</colgroup>
 														<tbody>
-															<tr><button class="btn btn-primary" style="margin-top:-20px;"><i class="fa fa-edit"></i>작성</button></tr>
 															<tr>
 																<td class="leftColumn">기안자</td>
 																<td class="rightColumn"><c:out value="${sessionScope.user.eName}"></c:out></td>
@@ -281,6 +280,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<p class="help-block">Max. 32MB</p>
 											</div>
 											<div class="file-list"></div>
+										
+											<button class="btn btn-primary" style="margin-top:10px;float:right;"><i class="fa fa-edit"></i>작성</button>
+											
 										</div>
 							</form>
 						</div>
