@@ -353,6 +353,7 @@
         WHERE E_KEY = #{eKey}
 	</update>
 	
+	
 	<select id="sessionSelect" parameterType="EmployeeVo" resultMap="EmployeeMap">
 	 SELECT
 		      E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_PWD,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
@@ -377,4 +378,5 @@
         LEFT JOIN COMPANY C ON(E.C_KEY_FK = C.C_KEY)
       WHERE E.E_KEY =#{eKey}
 	</select>
+
 </mapper>

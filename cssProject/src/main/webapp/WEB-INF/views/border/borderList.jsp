@@ -124,8 +124,14 @@ $(function(){
 	}).mouseout(function(){
 		$(this).parent().css("background","white");
 	}).click(function(){
+		if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
 		var boardNo = $(this).parent().children().eq(0).text();
-		location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=${pi.currentPage}"; 		
+		location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=${pi.currentPage}"; 
+		}
+	});
+	
+	$("#nullList").hover(function(){
+		$(this).css("background","white");
 	});
 });
 
@@ -194,7 +200,7 @@ $(function(){
                 </tr>
                 <c:if test="${list.size() == 0}">
     	            <tr>
-                		<td colspan="5">조회 된 게시글이 없습니다.</td>
+                		<td colspan="5" id="nullList">조회 된 게시글이 없습니다.</td>
  	               </tr>
                 </c:if>
                 <c:if test="${list.size() != 0}">

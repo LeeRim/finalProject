@@ -14,19 +14,19 @@
 	
 	</resultMap>
   
-  	<select id="selectCommute" resultType="Commute">
+  	<select id="selectCommute" resultType="Commute" parameterType="Commute">
   		select comm_date as "inDate",to_char(comm_intime,'hh:mm:ss') as "strInTime" ,to_char(comm_outtime,'hh:mm:ss') as "strOutTime"
 		from commute
 		where E_KEY_FK = ${eKey} and C_KEY_FK = ${cKeyFk}
   	</select>
   	
-  	<select id="selectAllCommute" resultType="Commute"><!-- 이게 회사관리자가볼거 -->
-  		 select E_KEY_FK as "employeeNumber" ,comm_date as "inDate",to_char(comm_intime,'hh:mm:ss') as "strInTime" ,to_char(comm_outtime,'hh:mm:ss') as "strOutTime"
+  	<select id="selectAllCommute" resultType="Commute" parameterType="Commute"><!-- 이게 회사관리자가볼거 -->
+  		select E_KEY_FK as "eKey" ,comm_date as "inDate",to_char(comm_intime,'hh:mm:ss') as "strInTime" ,to_char(comm_outtime,'hh:mm:ss') as "strOutTime"
 		from commute
-		where C_KEY_FK = 1 and to_char(comm_date,'dd') = to_char(sysdate,'dd') and C_KEY_FK = ${cKeyFk}
+		where C_KEY_FK = ${cKeyFk} and to_char(comm_date,'dd') = to_char(sysdate,'dd')
   	</select>
   	
-  	<select id="selectOneCommute" resultType="Commute">
+  	<select id="selectOneCommute" resultType="Commute" parameterType="Commute">
   		select comm_intime as " inTime"
 		from commute
 		where to_number(to_char(comm_date, 'dd'))=to_number(to_char(sysdate, 'dd')) and E_KEY_FK = ${eKey} and C_KEY_FK = ${cKeyFk}
