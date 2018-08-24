@@ -81,7 +81,7 @@
 	         });	 
 	});
 	function validate(){
-		var address = $("#zipcode").val() + ", " + $("#address1").val() + ", " + $("#address2").val();
+		var address = $("#zipcode").val() + "/ " + $("#address1").val() + "/ " + $("#address2").val();
 		$("#cAddress").val(address);
 		
 		return true;

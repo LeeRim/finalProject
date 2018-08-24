@@ -476,11 +476,21 @@ public class EmployeeController {
 	}
 
 	@RequestMapping("adminIndex.do")
-	public ModelAndView adminIndex(ModelAndView mav) {
+	public ModelAndView adminIndex(ModelAndView mav, HttpSession session) {
 
 		List<BorderVo> board1 = borderservice.selectBoardOneEmp(); // 공지사항
 		mav.addObject("board1", board1);
+		
+		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
+		// 회사키
+		int cKey = employee.getcKeyFk();
+		
+		List<EmployeeVo> todayBList = eService.selectTodayBList(cKey);
+		mav.addObject("todayBList",todayBList);
 
+		List<EmployeeVo> departCountList = eService.selectDepartCountList(cKey);
+		mav.addObject("departCountList",departCountList);
+		
 		mav.setViewName("employee/adminIndex");
 		return mav;
 	}

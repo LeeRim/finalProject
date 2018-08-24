@@ -72,6 +72,13 @@ public class EmployeeDao {
 	public EmployeeVo selectSessionEmployee(EmployeeVo member) {
 		return sqlSession.selectOne("EmployeeMapper.sessionSelect", member);
 	}
+	public List<EmployeeVo> selectTodayBList(int cKey) {
+		return sqlSession.selectList("EmployeeMapper.selectTodayBList",cKey);
+	}
+
+	public List<EmployeeVo> selectDepartCountList(int cKey) {
+		return sqlSession.selectList("EmployeeMapper.selectDepartCountList",cKey);
+	}
 
 
 }

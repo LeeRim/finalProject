@@ -72,4 +72,12 @@ public class EmployeeService {
 
 	}
 
+	public List<EmployeeVo> selectTodayBList(int cKey) {
+		return dao.selectTodayBList(cKey);
+	}
+
+	public List<EmployeeVo> selectDepartCountList(int cKey) {
+		return dao.selectDepartCountList(cKey);
+	}
+
 }

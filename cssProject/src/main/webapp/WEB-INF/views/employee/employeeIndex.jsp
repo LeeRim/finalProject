@@ -12,58 +12,57 @@
   <link rel="stylesheet" href="resources/bower_components/fullcalendar/dist/fullcalendar.min.css">
   <link rel="stylesheet" href="resources/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
  <style>
-    .row{
-       margin-left:auto;
-       margin-right:auto;
-    }
-   .box{
-      width:100%;
-   }
-   .box.box-default{
-      height:82px;
-   }
-   .box-footer{
-      height:80px; 
-      padding-top:11px;
-   }
-   .empInfo{
-      margin-left:40px;
-      margin-top:10px;
-   }
-   .widget-user-2 .widget-user-image > img{
-      width:80px;
-   }
-   .widget-user-image{
-      margin-top:-13px;
-      padding:7px;
-   }
-   #calendar{
-      height:520px;
-   }
-   .bordName{
-      margin-left:10px;
-      font-size:17px;
-      font-weight:bold;
-   }
-   .table, th{
-      text-align:center;
-      background:white;
-   }
-   .no{
-      width:200px;
-   }
-   .bindex{
-      display:inline-block;
-      width:45%;
-      margin-left:60px;
-   }
-   .date,.writer{
-      width:150px;
-   }
-   th{
-      font-weight:bold;
-   }
-
+ 	.row{
+ 		margin-left:auto;
+ 		margin-right:auto;
+ 	}
+	.box{
+		width:100%;
+	}
+	.box.box-default{
+		height:82px;
+	}
+	.box-footer{
+		height:80px; 
+		padding-top:11px;
+	}
+	.empInfo{
+		margin-left:40px;
+		margin-top:10px;
+	}
+	.widget-user-2 .widget-user-image > img{
+		width:80px;
+	}
+	.widget-user-image{
+		margin-top:-13px;
+		padding:7px;
+	}
+	#calendar{
+		height:565px;
+	}
+	.bordName{
+		margin-left:10px;
+		font-size:17px;
+		font-weight:bold;
+	}
+	.table, th{
+		text-align:center;
+		background:white;
+	}
+	.no{
+		width:200px;
+	}
+	.bindex{
+		display:inline-block;
+		width:45%;
+		margin-left:60px;
+	}
+	.date,.writer{
+		width:150px;
+	}
+	th{
+		font-weight:bold;
+	}
  </style>
  <script>
    $(function(){
@@ -159,7 +158,7 @@
   
 
 
-  <div class="content-wrapper" style="height: 100%;">
+  <div class="content-wrapper" style="height: 890px;">
 
     <section class="content-header">
 
@@ -244,6 +243,7 @@
           <!-- /.widget-user -->
         </div>
         
+<<<<<<< HEAD
            <div class="col-md-3">
            <div class="box box-default" style="height:150px; text-align:center;">
                <div class="box-header with-border">
@@ -316,6 +316,87 @@
      
      <div class="row">
         <div class="col-md-9" style="width:58.3%;">
+=======
+	        <div class="col-md-3">
+	        <div class="box box-default" style="height:150px; text-align:center;">
+	            <div class="box-header with-border">
+	              <h3 class="box-title" style="padding:10px;"> IP : 192.169.12.3 </h3>
+					
+	              <!-- /.box-tools -->
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body" >
+	              현재시간 <br>
+	              2018-08-21 16:58:03
+	            </div>
+	            <!-- /.box-body -->
+	          </div>
+	          
+	          <div class="row">
+	          <div class="box box-default" style="width:48.5%; height:106.5px;">
+	            <div class="box-header with-border">
+	              <h3 class="box-title">출근시간</h3>
+				  <button type="button" class="btn btn-box-tool" >출근</button>
+	              <!-- /.box-tools -->
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	              2018-08-21 08:08:01
+	            </div>
+	            <!-- /.box-body -->
+	          </div>
+	          <!-- /.box -->
+	          
+	          <div class="box box-default" style="width:48.5%; height:106.5px; margin-left:10px;">
+	            <div class="box-header with-border">
+	              <h3 class="box-title">퇴근시간</h3>
+					<button type="button" class="btn btn-box-tool" >퇴근</button>
+	              <!-- /.box-tools -->
+	            </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	              2018-08-21 18:08:09
+	            </div>
+	            <!-- /.box-body -->
+	          </div>
+	          <!-- /.box -->
+	           </div>
+	        </div>
+	        
+	         <div class="col-md-4" style="width:41%;">
+				<div class="box-body table-responsive no-padding">
+					<table class="table table-hover">
+						<tr>
+							<th colspan="3" style="background:#bcbcbc;">공지사항</th>
+						</tr>
+						<tr>
+							<th class="title">글제목</th>
+							<th class="writer">작성자</th>
+							<th class="date">작성일</th>
+						</tr>
+						<c:if test="${board1.size() == 0}">
+		    	            <tr>
+		                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+		 	               </tr>
+		                </c:if>
+		                <c:if test="${board1.size() != 0}">
+						<c:forEach items="${board1}" var="board1" varStatus="status">
+							<tr data-key=${board1.boardKey }>
+								<td class="title"><c:out value="${board1.bTitle }" /></td>
+								<td class="writer"><c:out value="${board1.eName }" /></td>
+								<td class="date"><c:out value="${board1.bDate }" /></td>
+							</tr>
+						</c:forEach>
+						</c:if>
+					</table>
+				</div>
+			</div>
+	        
+	  </div>      
+	  
+	  <div class="row">
+     	<div class="col-md-9" style="width:58.3%;">
+>>>>>>> refs/heads/yumin
           <div class="box box-primary">
             <div class="box-body no-padding">
               <!-- THE CALENDAR -->
@@ -327,50 +408,64 @@
         </div>
         
         <div class="row">
-            <div class="col-md-4" style="margin-top:-15px; margin-bottom:7px; width:41%">
-               <div class="box-body table-responsive no-padding">
-                  <table class="table table-hover">
-                     <tr>
-                        <th colspan="3" style="background:#bcbcbc;">경조사 게시판</th>
-                     </tr>
-                     <tr>
-                        <th class="title">글제목</th>
-                        <th class="writer">작성자</th>
-                        <th class="date">작성일</th>
-                     </tr>
-                     <c:forEach items="${board3}" var="board3" varStatus="status">
-                      <tr data-key="${board3.boardKey}">
-                        <td class="title"><c:out value="${board3.bTitle}" /></td>
-                        <td class="writer"><c:out value="${board3.eName}" /></td>
-                        <td class="date"><c:out value="${board3.bDate}" /></td>
-                     </tr>
-                  </c:forEach>
-                  </table>
-               </div>
-            </div>
-             <div class="col-md-4" style="margin-top:-11px; width:41%">
-               <div class="box-body table-responsive no-padding">
-                  <table class="table table-hover">
-                     <tr>
-                        <th colspan="3" style="background:#bcbcbc;">자유게시판</th>
-                     </tr>
-                     <tr>
-                        <th class="title">글제목</th>
-                        <th class="writer">작성자</th>
-                        <th class="date">작성일</th>
-                     </tr>
-                     <c:forEach items="${board2}" var="board2" varStatus="status">
-                        <tr data-key="${board2.boardKey }">
-                           <td class="title"><c:out value="${board2.bTitle }" /></td>
-                           <td class="writer"><c:out value="${board2.eName }" /></td>
-                           <td class="date"><c:out value="${board2.bDate }" /></td>
-                        </tr>
-                     </c:forEach>
-                  </table>
-               </div>
-            </div>
-         </div>
-        
+				<div class="col-md-4" style="margin-top:10px; width:41%">
+					<div class="box-body table-responsive no-padding">
+						<table class="table table-hover">
+							<tr>
+								<th colspan="3" style="background:#bcbcbc;">경조사 게시판</th>
+							</tr>
+							<tr>
+								<th class="title">글제목</th>
+								<th class="writer">작성자</th>
+								<th class="date">작성일</th>
+							</tr>
+							<c:if test="${board3.size() == 0}">
+			    	            <tr>
+			                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+			 	               </tr>
+			                </c:if>
+			                <c:if test="${board3.size() != 0}">
+								<c:forEach items="${board3}" var="board3" varStatus="status">
+								 <tr data-key="${board3.boardKey}">
+									<td class="title"><c:out value="${board3.bTitle}" /></td>
+									<td class="writer"><c:out value="${board3.eName}" /></td>
+									<td class="date"><c:out value="${board3.bDate}" /></td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						</table>
+					</div>
+				</div>
+				 <div class="col-md-4" style="margin-top:15px; width:41%">
+					<div class="box-body table-responsive no-padding">
+						<table class="table table-hover">
+							<tr>
+								<th colspan="3" style="background:#bcbcbc;">자유게시판</th>
+							</tr>
+							<tr>
+								<th class="title">글제목</th>
+								<th class="writer">작성자</th>
+								<th class="date">작성일</th>
+							</tr>
+							<c:if test="${board2.size() == 0}">
+			    	            <tr>
+			                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+			 	               </tr>
+			                </c:if>
+			                <c:if test="${board2.size() != 0}">
+							<c:forEach items="${board2}" var="board2" varStatus="status">
+								<tr data-key="${board2.boardKey }">
+									<td class="title"><c:out value="${board2.bTitle }" /></td>
+									<td class="writer"><c:out value="${board2.eName }" /></td>
+									<td class="date"><c:out value="${board2.bDate }" /></td>
+								</tr>
+							</c:forEach>
+							</c:if>
+						</table>
+					</div>
+				</div>
+			</div>
+>>>>>>> refs/heads/yumin
      </div>
 
     </section>
@@ -427,8 +522,13 @@
     
     
     $('#calendar').fullCalendar({
+<<<<<<< HEAD
        height: 520, 
        header    : {
+=======
+    	height: 565, 
+    	header    : {
+>>>>>>> refs/heads/yumin
         left  : '',
         center: 'title',
         right : 'prev,next today'

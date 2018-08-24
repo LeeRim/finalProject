@@ -51,6 +51,8 @@ public class EmployeeVo {
     private String cName;
     private int cLevel;
     private int workYears;
+    //부서 count용
+    private int count;
     public EmployeeVo() {
     }
 
@@ -278,6 +280,16 @@ public class EmployeeVo {
 		return cLevel;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public void setcLevel(int cLevel) {
 		this.cLevel = cLevel;
 	}
@@ -297,6 +309,9 @@ public class EmployeeVo {
 	public void setWorkYears(int workYears) {
 		this.workYears = workYears;
 	}
+
+
+
 	@Override
 	public String toString() {
 		return "EmployeeVo [eKey=" + eKey + ", eNo=" + eNo + ", cKeyFk=" + cKeyFk + ", eType=" + eType + ", eId=" + eId
@@ -306,7 +321,9 @@ public class EmployeeVo {
 				+ ", ePhoto=" + ePhoto + ", eInstead=" + eInstead + ", eState=" + eState + ", job=" + job
 				+ ", department=" + department + ", divInfolevel=" + divInfolevel + ", instead=" + instead
 				+ ", division=" + division + ", totalVacation=" + totalVacation + ", remainingVacation="
-				+ remainingVacation + ", cName=" + cName + ", cLevel=" + cLevel + ", workYears=" + workYears + "]";
+				+ remainingVacation + ", cName=" + cName + ", cLevel=" + cLevel + ", workYears=" + workYears
+				+ ", count=" + count + "]";
 	}
-
+	
+	
 }
