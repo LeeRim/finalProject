@@ -30,6 +30,7 @@ function select(key,no,name,job,depart,state,photo){
 $(function(){
 	$("#labelBtn").hover(function(){
 		$("#labelBtn").css("background","#337ab7");
+		$("#labelBtn").css("border","none");
 	});
 });
 </script>

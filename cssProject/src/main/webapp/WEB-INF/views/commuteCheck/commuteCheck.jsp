@@ -40,12 +40,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    h = today.getHours();
 	    m = today.getMinutes();
 	    s = today.getSeconds();
-    	var sum = new Date(year, month, date);
-    	var timeSum = new Date(h,m,s);
+	    var cKeyFk = ${user.cKeyFk}
+	    var eKeyFk=${user.eKey}
 		$.ajax({
 			type:"post",
 	        url:"commuteone.do",
-	        data : {inHour:h, inMinute:m},
+	        data : {inHour:h, inMinute:m,cKeyFk:cKeyFk,eKeyFk=eKeyFk},
 	        success: function(data){
 	        	 document.getElementById('inTime').innerHTML =
 	        		 h + "시" + m+ "분"+ s + "초"
@@ -64,12 +64,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		    h = today.getHours();
 		    m = today.getMinutes();
 		    s = today.getSeconds();
-	    	var sum = new Date(year, month, date);
-	    	var timeSum = new Date(h,m,s);
+		    var cKeyFk = ${user.cKeyFk}
+		    var eKeyFk=${user.eKey}
 			$.ajax({
 				type:"post",
 		        url:"commuteOut.do",
-		        data : {inHour:h, inMinute:m},
+		        data : {inHour:h, inMinute:m,cKeyFk:cKeyFk,eKeyFk=eKeyFk},
 		        success: function(data){
 		        	 document.getElementById('outTime').innerHTML =
 		        		 h + "시" + m+ "분"+ s + "초"

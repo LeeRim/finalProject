@@ -452,12 +452,13 @@ public class EmployeeController {
 	}
 
 	@RequestMapping("employeeIndex.do")
-	public ModelAndView employeeIndex(ModelAndView mav)throws ServletException, IOException {
+	public ModelAndView employeeIndex(ModelAndView mav,HttpSession session)throws ServletException, IOException {
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
 		InetAddress addr = null;
 		addr = InetAddress.getLocalHost();
 		String ipLocation = addr.getHostAddress();
 		
-		List<CalenderVo> list = cservice.showCalender();
+		List<CalenderVo> list = cservice.showCalender(user);
 		mav.addObject("list", list);
 
 		List<BorderVo> board1 = borderservice.selectBoardOneEmp(); // 공지사항
