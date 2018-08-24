@@ -150,7 +150,7 @@ desired effect
 								<h3 class="box-title">전체결재문서</h3>
 
 								<div class="box-tools">
-									<div class="input-group input-group-sm" style="width: 150px;">
+									<!-- <div class="input-group input-group-sm" style="width: 150px;">
 										<input type="text" name="table_search"
 											class="form-control pull-right" placeholder="Search">
 
@@ -159,7 +159,7 @@ desired effect
 												<i class="fa fa-search"></i>
 											</button>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 							<!-- /.box-header -->

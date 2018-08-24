@@ -312,6 +312,7 @@ if (window.FileReader) { // modern browser
 
       $("#labelBtn").hover(function(){
         $("#labelBtn").css("background","#337ab7");
+        $("#labelBtn").css("border","none");
       });
       
       

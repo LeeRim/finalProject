@@ -31,31 +31,18 @@
       <!-- Sidebar Menu -->
       <!-- li에 active 클래스 추가시 클릭으로나옴 -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
+        <li class="header">사내쪽지함</li>
         <!-- Optionally, you can add icons to the links -->
-        <li ><a href="writeNote.do" ><i class="fa fa-link"></i> <span>쪽지작성</span></a></li>
+        <li ><a href="writeNote.do" ><i class="fa fa-pencil"></i><span>쪽지작성</span></a></li>
          <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>수신쪽지</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-          	<li><a href="receiveNoteList.do">수신쪽지함</a></li>
-            <li><a href="receiveNoteTrashList.do">휴지통</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>보낸쪽지</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="sendNoteList.do">보낸쪽지함</a></li>
-            <li><a href="sendNoteTrashList.do">휴지통</a></li>
-          </ul>
-        </li>
+          <li class="header">수신쪽지</li>
+          	<li><a href="receiveNoteList.do"><i class="fa fa-mail-reply"></i><span>수신쪽지함</span></a></li>
+            <li><a href="receiveNoteTrashList.do"><i class="fa fa-trash"></i><span>휴지통</span></a></li>
+        
+        <li class="header">보낸쪽지</li>
+            <li><a href="sendNoteList.do"><i class="fa fa-mail-forward"></i><span>보낸쪽지함</span></a></li>
+            <li><a href="sendNoteTrashList.do"><i class="fa fa-trash"></i><span>휴지통</span></a></li>
+       
       </ul>
       <!-- /.sidebar-menu -->
     </section>
