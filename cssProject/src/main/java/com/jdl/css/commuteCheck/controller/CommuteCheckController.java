@@ -30,13 +30,17 @@ public class CommuteCheckController {
 CommuteCheckService service;
 	
 	@RequestMapping("commuteCheck.do")
-	public ModelAndView showCommuteCheck(ModelAndView mav, HttpServletRequest request)throws ServletException, IOException{
-		InetAddress addr = null;
-		addr = InetAddress.getLocalHost();
-		String ipLocation = addr.getHostAddress();
-		
-		mav.addObject("ipLocation",ipLocation);
-			mav.setViewName("commuteCheck/commuteCheck");
+	public ModelAndView showCommuteCheck(ModelAndView mav,HttpSession session,CommuteCheckVo commute){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		System.out.println(user);
+		List<CommuteCheckVo> list = service.showCommuteAllCheck(user);
+		List<CommuteCheckVo> list2 = service.showCommuteCheck(user);
+		mav.addObject("user",user);
+		mav.addObject("list",list);
+		mav.addObject("list2",list2);
+		System.out.println(list);
+		System.out.println(list2);
+		mav.setViewName("commuteCheck/commuteCheck");
 		return mav;
 	}
 	
@@ -71,35 +75,12 @@ CommuteCheckService service;
 			mv.addObject(user);
 			mv.addObject(commute);
 		}
-		
-		
 		mv.setViewName("redirect:commuteCheck.do");
 		return mv;
 	}
 	
-	@RequestMapping("commuteList.do")
-	public ModelAndView selectCommuteList(ModelAndView mav,HttpSession session){
- 
-		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
-		System.out.println(user);
-		List<CommuteCheckVo> list = service.showCommuteCheck(user);
-		mav.addObject("user",user);
-		mav.addObject("list", list);
-		System.out.println(list);
-		mav.setViewName("commuteCheck/commuteList");
-		return mav;
-	}
+
 	
-	@RequestMapping("commuteAllList.do")
-	public ModelAndView selectCommuteAllList(ModelAndView mav,HttpSession session){
-		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
-		System.out.println(user);
-		
-		List<CommuteCheckVo> list = service.showCommuteAllCheck(user);
-		mav.addObject("list", list);
-		System.out.println(list);
-		mav.setViewName("commuteCheck/commuteAllList");
-		return mav;
-	}
+
 }
 
