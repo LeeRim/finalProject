@@ -65,4 +65,9 @@
         ORDER BY B_DATE DESC)
         WHERE ROWNUM BETWEEN 1 AND 7
 	</select>
+	
+	<select id="selectQNAttach" parameterType="QNA" resultMap="AttachMap">
+		SELECT ATTA_KEY, ATTA_LOCATION, ATTA_FILENAME, ATTA_FILEPATH FROM ATTACHMENT
+		WHERE ATTA_LOCATION = #{qKey} AND ATTA_FILEPATH = 'QNA'
+	</select>
 </mapper>

@@ -5,7 +5,10 @@
 <mapper namespace="QNAMapper">
 
 	<insert id="insertQNA" parameterType="QNA">
-		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL, #{qWriterFk}, #{qContent}, null, SYSDATE, 'N', #{title}, NULL);
+		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL, #{qWriterFk}, #{qContent}, null, SYSDATE, 'N', #{title}, NULL)
+		<selectKey keyProperty="qKey" resultType="Integer" order="AFTER">
+				 SELECT SEQ_QNA.CURRVAL FROM DUAL 
+		</selectKey>
 	</insert>
 	
 	<update id="updateQNA" parameterType="QNA">

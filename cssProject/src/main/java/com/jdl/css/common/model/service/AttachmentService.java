@@ -46,4 +46,9 @@ public class AttachmentService {
 		return dao.selectAttachmentSev();
 	}
 
+	public AttachmentVo qnaAttach(int qKey) {
+		return dao.selectQnaAttach(qKey);
+	}
+
+
 }
