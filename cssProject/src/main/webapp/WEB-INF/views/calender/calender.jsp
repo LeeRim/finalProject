@@ -275,7 +275,7 @@
 		<form method="get" action="insertEvent.do">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Create Event</h3>
+              <h3 class="box-title">Create Event-수정중</h3>
             </div>
             <div class="box-body">
               <div class="btn-group" style="width: 100%; margin-bottom: 10px; margin-left: -40px">
