@@ -130,10 +130,6 @@
    <c:import url="/WEB-INF/views/border/left_column_board.jsp"/>
 	<div class="content-wrapper">
 	<section class="content-header">
-      <h1>
-        Data Tables
-        <small>advanced tables</small>
-      </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
@@ -163,7 +159,7 @@
           <div class="box box-widget" style="width:100%;">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" alt="User Image">
+                <img class="img-circle" src="resources/upload/empPhoto/${board.ePhoto}" alt="User Image">
                 <span class="username">${board.bTitle }</span>
                 <span class="description"><c:out value="${board.eName }"/></span>
               </div>
@@ -188,7 +184,7 @@
             <!-- 이부분 반복 -->
               <div class="box-comment">
                 <!-- User image -->
-                <img class="img-circle img-sm" src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" alt="User Image">
+                <img class="img-circle img-sm" src="resources/upload/empPhoto/${b.user.ePhoto}" alt="User Image">
 
                 <div class="comment-text">
                       <span class="username">
