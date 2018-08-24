@@ -34,7 +34,7 @@ public class QNAController {
 	public ModelAndView writeQna(@RequestParam("file") MultipartFile file, HttpServletRequest request, QNAVo qv, ModelAndView mv, HttpSession session){
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		
-		qv.setqWriterFk(employee.geteKey());
+		qv.setqWriterFk(employee.getcKeyFk());
 		System.out.println("QNA 작성 : " + qv);
 		int QNAresult = service.insertQNA(qv);
 		
@@ -96,9 +96,10 @@ public class QNAController {
 		
 		//관리자는 모든 리스트를 조회해오는 로직
 		List<QNAVo> AllList = service.selectAll();
-		if(employee.geteType().charAt(0) == '1'){
-			mv.addObject("list", AllList);
-			mv.setViewName("QNA/qnapage");
+		System.out.println(AllList);
+		if(employee.geteType().charAt(0) == '0'){
+			mv.addObject("AllList", AllList);
+			mv.setViewName("admin/qnaList");
 		}
 		return mv;
 	}
@@ -112,7 +113,6 @@ public class QNAController {
 	public String longd(){
 		return "QNA/QNAWrite";
 	}
-	
 	@RequestMapping("selectQNA.do")
 	public ModelAndView selectQNA(ModelAndView mv, int qKey){
 		System.out.println("키 값 : " + qKey);
@@ -127,4 +127,18 @@ public class QNAController {
 		return mv;
 	}
 	
+	@RequestMapping("QNAreply.do")
+	public ModelAndView qnareplay(int qKey, ModelAndView mv){
+		System.out.println("키 값 : " + qKey);
+		QNAVo qv = service.selectone(qKey);
+		
+		AttachmentVo qnaAttach = attachservice.qnaAttach(qKey);
+		
+		mv.addObject("qnaAttach", qnaAttach);
+		mv.addObject("qv", qv);
+		mv.addObject("qKey", qKey);
+		mv.addObject("qv", qv);
+		mv.setViewName("QNA/qnarepaly");
+		return mv;
+	}
 }

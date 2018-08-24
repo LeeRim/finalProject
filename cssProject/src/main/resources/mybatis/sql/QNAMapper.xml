@@ -5,31 +5,33 @@
 <mapper namespace="QNAMapper">
 
 	<insert id="insertQNA" parameterType="QNA">
-		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL, #{qWriterFk}, #{qContent}, null, SYSDATE, 'N', #{title}, NULL)
+		INSERT INTO QNA VALUES(SEQ_QNA.NEXTVAL, #{qWriterFk}, #{qTitle},#{qContent}, NULL, SYSDATE, NULL, 'N')
 		<selectKey keyProperty="qKey" resultType="Integer" order="AFTER">
 				 SELECT SEQ_QNA.CURRVAL FROM DUAL 
 		</selectKey>
 	</insert>
 	
 	<update id="updateQNA" parameterType="QNA">
-		UPDATE QNA SET Q_ANSWER = #{qAnswer}, Q_CHECK = 'Y', END_DATE = SYSDATE WHERE Q_KEY = #{qKey}
+		UPDATE QNA SET Q_ANSWER = #{qAnswer}, QA_CHECK = 'Y', A_DATE = SYSDATE WHERE Q_KEY = #{qKey}
 	</update>
 	
 	<select id="selectQNA" parameterType="EmployeeVo" resultType="QNA">
-		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, Q_CHECK, TITLE, END_DATE 
+		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, QA_CHECK, Q_TITLE, A_DATE 
 		FROM QNA
 		WHERE Q_WRITER_FK = #{eKey}
 	</select>
 	
 	<select id="selectOneQNA" resultType="QNA">
-		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, Q_CHECK, TITLE, END_DATE 
+		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, QA_CHECK, Q_TITLE, A_DATE 
 		FROM QNA
 		WHERE Q_KEY = #{qKey}
 	</select>
 	
 	<select id="selectAllQNA" resultType="QNA">
-		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, Q_CHECK, TITLE, END_DATE
+		SELECT Q_KEY, C_NAME, Q_CONTENT, Q_ANSWER, Q_DATE, QA_CHECK, Q_TITLE, A_DATE 
 		FROM QNA
+		JOIN COMPANY ON (C_KEY = Q_WRITER_FK)
+		ORDER BY Q_DATE
 	</select>
 	
 	<!-- <select id="selectOneQna" resultType="QNA">
