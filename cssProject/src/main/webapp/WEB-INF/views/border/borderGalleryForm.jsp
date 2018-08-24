@@ -22,7 +22,7 @@
 		  lang: 'ko-KR'
 	  });
 	});
-	  function validate(){
+	  /* function validate(){
 		  console.log("호출");
 		  
 		var bTitle = $("#bTitle").val();
@@ -43,7 +43,7 @@
 		}
 		
 		return false;
-	} 
+	}  */
 	  
 	  $(document).ready(
 		      function() {

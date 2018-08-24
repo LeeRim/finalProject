@@ -64,11 +64,11 @@ $(function(){
 				</td>
 				<td>
 					<c:if test="${QNA.qCheck eq 'N' }">
-						O
+						X
 					</c:if>
 					
 					<c:if test="${QNA.qCheck ne 'N' }">
-						X
+						O
 					</c:if>
 				</td>
 				<td>

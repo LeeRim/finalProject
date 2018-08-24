@@ -69,6 +69,7 @@ public class EmployeeService {
 
 	public EmployeeVo selectSessionEmployee(EmployeeVo member) {
 		return dao.selectSessionEmployee(member);
+
 	}
 
 }

@@ -21,7 +21,7 @@
 	  });
 	});
 	function border(){
-		location.href="borderList.do?bCateGory=${board.bCateGory}";
+		location.href="selectBoard.do?boardKey=${board.boardKey }" + "&currentPage=${currentPage}";
 	}
 	/* function validate(){
 		var bTitle = $("#bTitle").val();
