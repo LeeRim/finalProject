@@ -74,11 +74,13 @@
 				 	<input name="endDate" type="date" class="form-control"/>
 				 	</li>
 				 <li>일정 색<br/>
+					<input type="radio" name="background" value="#00c0ef"><a class="text-aqua"><i class="fa fa-square"></i></a>
+					<c:if test="${user.eType eq 1 }">
 					<input type="radio" name="background" value="#00a65a"><a class="text-green"><i class="fa fa-square"></i></a> 
 					<input type="radio" name="background" value="#f39c12"><a class="text-yellow"><i class="fa fa-square"></i></a> 
-					<input type="radio" name="background" value="#00c0ef"><a class="text-aqua"><i class="fa fa-square"></i></a>
 					<input type="radio" name="background" value="#0073b7"><a class="text-blue"><i class="fa fa-square"></i></a>
 					<input type="radio" name="background" value="#f56954"><a class="text-red"><i class="fa fa-square"></i></a>
+					</c:if>
 				 </li>
                 </ul>
               </div>

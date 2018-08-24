@@ -41,11 +41,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	    m = today.getMinutes();
 	    s = today.getSeconds();
 	    var cKeyFk = ${user.cKeyFk}
-	    var eKeyFk=${user.eKey}
+	    var eKeyFk= ${user.eKey}
 		$.ajax({
 			type:"post",
 	        url:"commuteone.do",
-	        data : {inHour:h, inMinute:m,cKeyFk:cKeyFk,eKeyFk=eKeyFk},
+	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk},
 	        success: function(data){
 	        	 document.getElementById('inTime').innerHTML =
 	        		 h + "시" + m+ "분"+ s + "초"
@@ -57,28 +57,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	}
 	
 	function outTime(){
-		    var today = new Date();
-			year = today.getFullYear(); 
-			month = today.getMonth();
-			date = today.getDate();
-		    h = today.getHours();
-		    m = today.getMinutes();
-		    s = today.getSeconds();
-		    var cKeyFk = ${user.cKeyFk}
-		    var eKeyFk=${user.eKey}
-			$.ajax({
-				type:"post",
-		        url:"commuteOut.do",
-		        data : {inHour:h, inMinute:m,cKeyFk:cKeyFk,eKeyFk=eKeyFk},
-		        success: function(data){
-		        	 document.getElementById('outTime').innerHTML =
-		        		 h + "시" + m+ "분"+ s + "초"
-		        },
-		        error: function(error) {
-		            alert(error);
-		        }
-			});
-		}
+	    var today = new Date();
+		year = today.getFullYear(); 
+		month = today.getMonth();
+		date = today.getDate();
+	    h = today.getHours();
+	    m = today.getMinutes();
+	    s = today.getSeconds();
+	    var cKeyFk = ${user.cKeyFk}
+	    var eKeyFk= ${user.eKey}
+		$.ajax({
+			type:"post",
+	        url:"commuteOut.do",
+	        data : {inHour:h, inMinute:m,cKeyFk:cKeyFk,eKeyFk:eKeyFk},
+	        success: function(data){
+	        	 document.getElementById('outTime').innerHTML =
+	        		 h + "시" + m+ "분"+ s + "초"
+	        },
+	        error: function(error) {
+	            alert(error);
+	        }
+		});
+	}
 
 
 	
