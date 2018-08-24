@@ -85,30 +85,32 @@ public class EmployeeController {
 			
 		}
 		System.out.println(user);
+		String viewName ="";
 		
 		if(user == null){
 			System.out.println("아이디 오류");
+			mv.addObject("errorMsg", "아이디 또는 비밀번호가 틀렸습니다.");
+			viewName = "index/login";
 		}else if(user.getePwd().equals(employee.getePwd())){
 			session.setAttribute("user", user);
-			/*if(indexNote !=null){
-				session.setAttribute("indexNote", indexNote);
-			}*/
 			session.setAttribute("indexNote", indexNote);
 			session.setAttribute("indexApproval", waitingApprovals);
+			
+			if(user.geteType().equals("1")  && user.getcLevel() ==0){
+				viewName ="companyStartHome";
+			}else if(user.geteType().equals("1")){
+				viewName ="redirect:adminIndex.do";
+			}else if(user.geteType().equals("2")){
+				viewName ="redirect:employeeIndex.do";
+			}else if(user.geteType().equals("0")){
+				viewName="redirect:adminMain.do";
+			}
 		}else{
 			System.out.println("비밀번호 오류");
+			mv.addObject("errorMsg", "아이디 또는 비밀번호가 틀렸습니다.");
+			viewName = "index/login";
 		}
-		String viewName ="";
 
-		if(user.geteType().equals("1")  && user.getcLevel() ==0){
-			viewName ="companyStartHome";
-		}else if(user.geteType().equals("1")){
-			viewName ="redirect:adminIndex.do";
-		}else if(user.geteType().equals("2")){
-			viewName ="redirect:employeeIndex.do";
-		}else if(user.geteType().equals("0")){
-			viewName="redirect:adminMain.do";
-		}
 		mv.setViewName(viewName);
 		return mv;
 	}

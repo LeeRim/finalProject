@@ -5,23 +5,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 2 | Starter</title>
-<link rel="stylesheet" href="resources/plugins/iCheck/flat/blue.css">
-<!-- bootstrap wysihtml5 - text editor -->
-<link rel="stylesheet"
-	href="resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
-<!-- summerNote 관련  -->
-<!-- include libraries(jQuery, bootstrap) -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Starter</title>
+  <link rel="stylesheet" href="resources/plugins/iCheck/flat/blue.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  
 
 <!-- include summernote css/js-->
 <link href="resources/Js/summernote.css" rel="stylesheet">
@@ -109,11 +100,9 @@
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
+<div class="wrapper">
 
 		<c:import url="left_column_note.jsp" />
-
-
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper" style="height: 100%;">

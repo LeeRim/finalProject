@@ -62,8 +62,16 @@
 	<header class="main-header">
 
 		<!-- Logo -->
-		<a href="index.do" class="logo" onclick="menuHighlight(1);"> <!-- mini logo for sidebar mini 50x50 pixels -->
-			<span class="logo-mini"><b>C</b>SS</span> <!-- logo for regular state and mobile devices -->
+		<c:if test="${sessionScope.user.eType=='2' }"><!-- 사원 -->
+		<a href="employeeIndex.do" class="logo" onclick="menuHighlight(1);">
+		</c:if>
+		<c:if test="${sessionScope.user.eType=='1' }"><!-- 회사관리자 -->
+		<a href="adminIndex.do" class="logo" onclick="menuHighlight(1);">
+		</c:if> 
+		<c:if test="${sessionScope.user.eType=='0' }"><!-- 회사관리자 -->
+		<a href="adminMain.do" class="logo" onclick="menuHighlight(1);">
+		</c:if> 
+			<span class="logo-mini"><b>C</b>SS</span> 
 			<span class="logo-lg"><b>C</b>SS</span>
 		</a>
 
@@ -75,8 +83,9 @@
 				<c:if test="${sessionScope.user.eType=='2' }">
 					<!-- 사원 -->
 					<ul class="dropdown-menu">
-						<li><a href="#">회원정보</a></li>
+						<li><a href="myPageUpdate.do">회원정보</a></li>
 						<li><a href="commuteCheck.do">근태관리</a></li>
+						<li><a href="organizationChart.do">조직도</a></li>
 						<li><a href="calender.do">일정관리</a></li>
 						<li><a href="waitingPage.do">전자결재</a></li>
 						<li><a href="receiveNoteList.do">쪽지</a></li>
@@ -86,9 +95,9 @@
 				<c:if test="${sessionScope.user.eType=='1' }">
 					<!-- 회사관리자 -->
 					<ul class="dropdown-menu">
-						<li><a href="#">회원정보</a></li>
-						<li><a href="#">사원관리</a></li>
+						<li><a href="#">회사관리</a></li>
 						<li><a href="commuteCheck.do">근태관리</a></li>
+						<li><a href="organizationChart.do">조직도</a></li>
 						<li><a href="calender.do">일정관리</a></li>
 						<li><a href="waitingPage.do">전자결재</a></li>
 						<li><a href="receiveNoteList.do">쪽지</a></li>
