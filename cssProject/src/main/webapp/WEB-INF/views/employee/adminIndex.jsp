@@ -91,9 +91,76 @@
 	function border(b){
 		location.href="borderList.do?bCateGory=" + b;
 	}
+	
+	function startTime() {
+	    var today = new Date();
+	    var year = today.getFullYear();
+		var month = today.getMonth();
+		var date = today.getDate();
+	    var h = today.getHours();
+	    var m = today.getMinutes();
+	    var s = today.getSeconds();
+	    m = checkTime(m);
+	    s = checkTime(s);
+	    document.getElementById('clock').innerHTML =
+	   year+ "년" + month + "월" + date + "일" + h + ":" + m + ":" + s;
+	    var t = setTimeout(startTime, 500);
+	}
+	function checkTime(i) {
+	    if (i < 10) {i = "0" + i}; // 숫자가 10보다 작을 경우 앞에 0을 붙여줌
+	    return i;
+	}
+	
+	function inTime(){
+	    var today = new Date();
+		year = today.getFullYear(); 
+		month = today.getMonth();
+		date = today.getDate();
+	    h = today.getHours();
+	    m = today.getMinutes();
+	    s = today.getSeconds();
+	    var cKeyFk = ${user.cKeyFk}
+	    var eKeyFk= ${user.eKey}
+		$.ajax({
+			type:"post",
+	        url:"commuteone.do",
+	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk},
+	        success: function(data){
+	        	 document.getElementById('inTime').innerHTML =
+	        		 h + "시" + m+ "분"+ s + "초"
+	        },
+	        error: function(error) {
+	            alert(error);
+	        }
+		});
+	}
+	
+	function outTime(){
+	    var today = new Date();
+		year = today.getFullYear(); 
+		month = today.getMonth();
+		date = today.getDate();
+	    h = today.getHours();
+	    m = today.getMinutes();
+	    s = today.getSeconds();
+	    var cKeyFk = ${user.cKeyFk}
+	    var eKeyFk= ${user.eKey}
+		$.ajax({
+			type:"post",
+	        url:"commuteOut.do",
+	        data : {inHour:h, inMinute:m,cKeyFk:cKeyFk,eKeyFk:eKeyFk},
+	        success: function(data){
+	        	 document.getElementById('outTime').innerHTML =
+	        		 h + "시" + m+ "분"+ s + "초"
+	        },
+	        error: function(error) {
+	            alert(error);
+	        }
+		});
+	}
 </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" onload="startTime()">
 <div class="wrapper">
 	
 	<c:import url="../include/left_column_employee.jsp"/>
@@ -235,14 +302,14 @@
 	        <div class="col-md-3">
 	        <div class="box box-default" style="height:150px; text-align:center;">
 	            <div class="box-header with-border">
-	              <h3 class="box-title" style="padding:10px;"> IP : 192.169.12.3 </h3>
+	              <h3 class="box-title" style="padding:10px;"><c:out value="${ipLocation}"></c:out> </h3>
 					
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body" >
 	              현재시간 <br>
-	              2018-08-21 16:58:03
+	              <div id="clock"></div>
 	            </div>
 	            <!-- /.box-body -->
 	          </div>
@@ -251,12 +318,12 @@
 	          <div class="box box-default" style="width:48.5%; height:112px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">출근시간</h3>
-				  <button type="button" class="btn btn-box-tool" >출근</button>
+				  <input type="submit" value="출근" onclick="inTime();" class="btn btn-box-tool" >
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
-	            <div class="box-body">
-	              2018-08-21 08:08:01
+	            <div id="inTime" class="box-body">
+	              
 	            </div>
 	            <!-- /.box-body -->
 	          </div>
@@ -265,12 +332,12 @@
 	          <div class="box box-default" style="width:48.5%; height:112px; margin-left:10px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">퇴근시간</h3>
-					<button type="button" class="btn btn-box-tool" >퇴근</button>
+					<input type="submit" value="퇴근" onclick="outTime();" class="btn btn-box-tool" >
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
-	            <div class="box-body">
-	              2018-08-21 18:08:09
+	            <div id="outTime" class="box-body">
+	              
 	            </div>
 	            <!-- /.box-body -->
 	          </div>

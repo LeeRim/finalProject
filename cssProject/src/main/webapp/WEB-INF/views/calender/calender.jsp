@@ -298,6 +298,7 @@
 				 </li>
                 </ul>
               </div>
+              	<input type ="hidden" name="cKeyFk" value="${user.cKeyFk}">
                 <div class="input-group-btn">
                 <input type="submit" value="일정 생성" class="btn btn-primary btn-flat">
                 </div>

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jdl.css.calender.model.service.CalenderService;
 import com.jdl.css.calender.model.vo.CalenderVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 
 @Controller
@@ -25,9 +27,11 @@ public class CalenderController {
 	CalenderService service;
 	
 	@RequestMapping("calender.do")
-	public ModelAndView showCalender(ModelAndView mav){
+	public ModelAndView showCalender(ModelAndView mav,HttpSession session){
 		
-		List<CalenderVo> list = service.showCalender();
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		
+		List<CalenderVo> list = service.showCalender(user);
 		mav.addObject("list", list);
 		mav.setViewName("calender/calender");
 		return mav;
@@ -35,8 +39,11 @@ public class CalenderController {
 
 
 	@RequestMapping("insertEvent.do")
-	public ModelAndView createEvent(CalenderVo calender,ModelAndView mav){
+	public ModelAndView createEvent(CalenderVo calender,ModelAndView mav,HttpSession session){
 		
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		System.out.println(user);
+		mav.addObject("user",user);
 		System.out.println("insertEvent : "+calender);
 		int calenderResult = service.createEvent(calender);
 		System.out.println(calenderResult);
