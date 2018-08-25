@@ -79,7 +79,6 @@ td {
 		 var customerId = new Array();
 		function removeKey(object,key){
 			num = num - 1;
-			num1=num1-1;
 			if(key !=null){
 // 				console.log("key값 있음");
 			removeKeies.push(key);
@@ -96,24 +95,15 @@ td {
 			    $(this).children().eq(0).html('<input type="hidden" name="jlevel" value="'+index+'">'+index);
 			    }
 			}); 
-			$('#mytable1 tbody tr').each(function(index,item) {
-			    if(index!=0){
-			    $(this).children().eq(0).html('<input type="hidden" name="dlevel" value="'+index+'">'+index);
-			    }
-			}); 
 			$("#removeKeys").val(removeKeies);
 		}
 	
 	
 			var num = ${jobList.size()};
-			var num1= ${departList.size()};
 		$(function() {
 			$('#btn-departAdd-row').click(function() {
-				num1 = (parseInt(num1) + 1)
 				$('#mytable1 > tbody:last').append(
-						'<tr><td><input type="hidden" name="dlevel" value="'+num1+'">'
-						+ num1
-						+ '</td><td><input type="hidden" name="departKey"><input type = "text" name="depart" class="form-control"/> </td><td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td></tr>');
+						'<tr><td><input type="hidden" name="departKey"><input type = "text" name="depart" class="form-control"/> </td><td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td></tr>');
 					});
 							
 			$('#btn-jobAdd-row').click(function() {
@@ -131,7 +121,6 @@ td {
 			$('#btn-departRemove-row').click(function() {
  				//console.log($("#mytable1 > tbody:last > tr > td > input:last").val()=="");
 				if($("#mytable1 > tbody:last > tr > td > input:last").val()==""){
-					num1 = num1-1;
 					$('#mytable1 > tbody:last > tr:last').remove();
 				}else{
 					alert("부서명이 입력되어있어서 행을 지울 수 없습니다.");
@@ -191,7 +180,6 @@ td {
 								<div class="col-md-5">
 									<table id="mytable1">
 										<tr>
-											<th>부서번호</th>
 											<th>부서명</th>
 											<th></th>
 										</tr>
@@ -199,8 +187,7 @@ td {
 											<c:if test="${departList.size()!=0}">
 												<c:forEach var="depart" items="${departList}">
 													<tr>
-													<td><input type="hidden" name="dlevel" value="${depart.divInfolevel}"><c:out value="${depart.divInfolevel}"></c:out></td>
-														<td><input type="hidden" name="departKey"
+													<td><input type="hidden" name="departKey"
 															value="${depart.eDepartFk}"> <input type="text"
 															name="depart" class="form-control"
 															value="${depart.department }" /> </td>
@@ -210,7 +197,7 @@ td {
 											</c:if>
 											<c:if test="${departList.size()==0}">
 												<tr>
-												<td><input type="hidden" name="dlevel" value="1"></td>
+												
 													<td><input type="hidden" name="departKey">
 													 <input	type="text" name="depart" class="form-control" /> </td>
 													 <td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td>

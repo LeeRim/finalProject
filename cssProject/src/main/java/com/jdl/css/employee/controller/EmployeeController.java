@@ -490,14 +490,14 @@ public class EmployeeController {
 	// 부서,직급 insert
 	@RequestMapping("insertDivision.do")
 	public String insertDivision(HttpSession session, String depart, String job, String departKey, String jobKey,
-			String dlevel,String jlevel,String removeKeys,String check) {
+			String jlevel,String removeKeys,String check) {
 		
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 		String[] departArr = depart.split(",");
 		String[] jobArr = job.split(",");
 		String[] departKeys = departKey.split(",");
  		String[] jobKeys = jobKey.split(",");
- 		String[] dlevels = dlevel.split(",");
+ 		//String[] dlevels = dlevel.split(",");
 		String[] jlevels = jlevel.split(",");
 		String[] removes = removeKeys.split(",");
 		
@@ -520,7 +520,7 @@ public class EmployeeController {
 				// System.out.println(div.getDivKey()==0); true
 				div.setDivType(1);
 				div.setDivInfo(departArr[i]);
-				div.setDivInfolevel(Integer.parseInt(dlevels[i]));
+				//div.setDivInfolevel(Integer.parseInt(dlevels[i]));
 				divisionList.add(div);
 			}
 		}

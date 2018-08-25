@@ -449,9 +449,12 @@
             WHEN MATCHED THEN
                       UPDATE SET
                         DIV_INFO=#{divInfo}
+                        <if test="divInfolevel!=0">
                         ,DIV_INFOLEVEL=#{divInfolevel}
+                        </if>
             WHEN NOT MATCHED THEN
-                     INSERT (DIV_KEY, C_KEY_FK, DIV_TYPE, DIV_INFO, DIV_INFOLEVEL) VALUES (SEQ_DIVISION.NEXTVAL,#{cKeyFk} , #{divType}, #{divInfo},#{divInfolevel}
+                     INSERT (DIV_KEY, C_KEY_FK, DIV_TYPE, DIV_INFO, DIV_INFOLEVEL) VALUES (SEQ_DIVISION.NEXTVAL,#{cKeyFk} , #{divType}, #{divInfo},
+                     <if test="divInfolevel!=0">#{divInfolevel}</if><if test="divInfolevel==0">null</if>
                      )
 	</insert>
 </mapper>
