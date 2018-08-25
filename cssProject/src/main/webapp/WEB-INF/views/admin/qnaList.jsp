@@ -117,7 +117,7 @@ $(function(){
                 </tr>
                 </thead>
                 <tbody>
-                	<c:forEach items="${AllList }" var="a">
+                	<c:forEach items="${list }" var="a">
 		                <tr>
 		                	<td>${a.qKey }</td>
 		                  <td>${a.qDate }</td>

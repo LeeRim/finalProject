@@ -88,19 +88,19 @@ public class QNAController {
 	public ModelAndView empQNA(HttpSession session, ModelAndView mv){
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		//본인의 리스트만 조회 로직
-		List<QNAVo> list = service.selectQNA(employee);
 		
-		System.out.println("질문답변 : " + list);
-		mv.addObject("list", list);
-		mv.setViewName("QNA/qnapage");
 		
 		//관리자는 모든 리스트를 조회해오는 로직
-		List<QNAVo> AllList = service.selectAll();
-		System.out.println(AllList);
 		if(employee.geteType().charAt(0) == '0'){
-			mv.addObject("AllList", AllList);
-			mv.setViewName("admin/qnaList");
+			List<QNAVo> list = service.selectAll();
+			mv.addObject("list", list);
+			
+		}else if(employee.geteType().charAt(0) == '1'){
+			List<QNAVo> list = service.selectQNA(employee);
+			System.out.println("질문답변 : " + list);
+			mv.addObject("list", list);
 		}
+		mv.setViewName("admin/qnaList");
 		return mv;
 	}
 	

@@ -12,12 +12,14 @@ public class VacationFormVo {
 	private int vfHalfflag;
 	private String vfReason;
 	
+	//사용일수
+	private double vfUseddate;
+	
 	
 	public VacationFormVo() {}
 
-
 	public VacationFormVo(int vfKey, int aKeyFk, String vfType, String vfStartdate, String vfEnddate, int vfHalfflag,
-			String vfReason) {
+			String vfReason, double vfUseddate) {
 		super();
 		this.vfKey = vfKey;
 		this.aKeyFk = aKeyFk;
@@ -26,7 +28,9 @@ public class VacationFormVo {
 		this.vfEnddate = vfEnddate;
 		this.vfHalfflag = vfHalfflag;
 		this.vfReason = vfReason;
+		this.vfUseddate = vfUseddate;
 	}
+
 
 
 	public int getVfKey() {
@@ -97,14 +101,24 @@ public class VacationFormVo {
 	public void setVfReason(String vfReason) {
 		this.vfReason = vfReason;
 	}
+	
 
+	public double getvfUseddate() {
+		return vfUseddate;
+	}
+
+	public void setvfUseddate(double vfUseddate) {
+		this.vfUseddate = vfUseddate;
+	}
 
 	@Override
 	public String toString() {
 		return "VacationFormVo [vfKey=" + vfKey + ", aKeyFk=" + aKeyFk + ", vfType=" + vfType + ", vfStartdate="
 				+ vfStartdate + ", vfEnddate=" + vfEnddate + ", vfHalfflag=" + vfHalfflag + ", vfReason=" + vfReason
-				+ "]";
+				+ ", vfUseddate=" + vfUseddate + "]";
 	}
+
+	
 	
 	
 	

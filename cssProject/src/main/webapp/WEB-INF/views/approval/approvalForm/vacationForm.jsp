@@ -80,6 +80,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	}
 	var vfStart = "";
 	var vfEnd = "";
+	var startHalf = 0;
+	var endHalf = 0;
 	$(function() {
 		$('#vfStartdate').datepicker({
 			format : "yyyy-mm-dd",
@@ -101,6 +103,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             vfEnd = $('#vfEnddate').datepicker('getFormattedDate');
 	      });
 		
+		
+		$("#startHalf").click(days);
+		$("#endHalf").click(days);
+		
+		
 	});
 	function days(){
 		var startArray = vfStart.split("-");
@@ -112,7 +119,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		var between = (endD.getTime() - startD.getTime());
 		var betweenDay = between / (1000*60*60*24) + 1 ;
 		console.log(betweenDay);
-		$("#useV").val(betweenDay);
+		
+		if($("#startHalf").prop("checked")){
+			startHalf = 0.5;
+		}else if(!$("#startHalf").prop("checked")){
+			startHalf = 0;
+		}
+		
+		if($("#endHalf").prop("checked")){
+			endHalf = 0.5;
+		}else if(!$("#endHalf").prop("checked")){
+			endHalf = 0;
+		}
+		console.log(startHalf);
+		console.log(endHalf);
+		var totalVDay = betweenDay + startHalf + endHalf;
+		
+		$("#useV").val(totalVDay);
 	}
 	
 </script>
@@ -221,10 +244,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<td  class="columns" >
 													<input type="text" readonly class="ipt_editor ipt_editor_date hasDatepicker" id="vfStartdate" name="vfStartdate" value="">~
 													<input type="text" readonly class="ipt_editor ipt_editor_date hasDatepicker" id="vfEnddate" name="vfEnddate" value=""> 
-													<span onclick="days();" style="cursor:pointer">일 수 확인</span>
+													<span id=chkDays" onclick="days();" style="cursor:pointer">일 수 확인</span>
 													<span id="usingPointArea" class="pointArea" >
 														<b>사용일수 : </b> 
-														<input type="text" id="useV" class="ipt_editor ipt_editor_num" data-dsl="{{number:usingPoint}}" name="usingPoint" value="" readonly="readonly"> 
+														<input type="text" id="useV" class="ipt_editor ipt_editor_num" data-dsl="{{number:usingPoint}}" name="vfUseddate" value="" readonly="readonly"> 
 														<b id="usingPoint_Comment" style="font-weight: bold; color: red"></b> 
 													</span>
 												</td>

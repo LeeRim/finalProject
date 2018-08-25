@@ -16,15 +16,19 @@
 	</update>
 	
 	<select id="selectQNA" parameterType="EmployeeVo" resultType="QNA">
-		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, QA_CHECK, Q_TITLE, A_DATE 
+		SELECT Q_KEY, C_NAME, Q_CONTENT, Q_ANSWER, Q_DATE, QA_CHECK, Q_TITLE, A_DATE 
 		FROM QNA
-		WHERE Q_WRITER_FK = #{eKey}
+		JOIN COMPANY ON (C_KEY = Q_WRITER_FK)
+		WHERE C_NAME = #{cName}
+		ORDER BY Q_DATE
 	</select>
 	
 	<select id="selectOneQNA" resultType="QNA">
-		SELECT Q_KEY, Q_WRITER_FK, Q_CONTENT, Q_ANSWER, Q_DATE, QA_CHECK, Q_TITLE, A_DATE 
+		SELECT Q_KEY, C_NAME, Q_CONTENT, Q_ANSWER, Q_DATE, QA_CHECK, Q_TITLE, A_DATE 
 		FROM QNA
+		JOIN COMPANY ON (C_KEY = Q_WRITER_FK)
 		WHERE Q_KEY = #{qKey}
+		ORDER BY Q_DATE
 	</select>
 	
 	<select id="selectAllQNA" resultType="QNA">
