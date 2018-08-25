@@ -218,10 +218,42 @@ td {
 	
 	function callFunction2(obj) {
 	
+		
 		location.href="employeeInfo.do?eKey="+obj;
 		
 		
 	}
+	
+	function callFunction3(obj) {
+		
+		
+		$.ajax({
+		    type      : 'POST',
+		    url         : 'selectEmployeeInfo.do',
+		    traditional : true,
+		    dataType : "json",
+		    data        : { 'main' : obj},
+		    success     : function(data) {
+
+		    	 var jbResult = confirm(data.department+" "+data.eName+" "+data.job+"님의 정보를 삭제하시겠습니까?");
+				 
+				 if(jbResult == true){
+				location.href="employeeDelete.do?eKey="+obj;
+				 
+				 }
+		    	
+			    
+		    },
+		    error       : function(request, status, error) {
+		        alert(error);
+		    }
+		});
+		
+		
+	}
+	
+	
+	
 	// 사원 정보 띄우는 메소드
 	function callFunction(obj) {
 		
@@ -613,6 +645,7 @@ td {
 									<td class="employee_list_tab">입사일</td>
 									<td class="employee_list_tab">퇴사일</td>
 									<td class="employee_list_tab">정보수정</td>
+									<td class="employee_list_tab">사원삭제</td>
 								</tr>
 								</tbody>
 								<tbody id="listView">
@@ -632,6 +665,13 @@ td {
 										<td class="employee_list_emp">${e.eEntDate}</td>
 										<td class="employee_list_emp"><a href="javascript:void(0);" onclick="callFunction2(${e.eKey});" >
 										<b>수정하기</b></a></td>
+										<c:if test="${e.eType.toString() ne '1' }">
+										<td class="employee_list_emp"><a href="javascript:void(0);" onclick="callFunction3(${e.eKey});" >
+										<b>삭제</b></a></td>
+										</c:if>
+										<c:if test="${e.eType.toString() eq '1' }">
+										<td class="employee_list_emp"><b>-</b></td>
+										</c:if>
 									</tr>
 								</c:forEach>
 								</tbody>

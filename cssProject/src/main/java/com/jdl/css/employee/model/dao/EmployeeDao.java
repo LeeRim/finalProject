@@ -116,8 +116,14 @@ public class EmployeeDao {
 		return sqlSession.insert("EmployeeMapper.insertDivision", division);
 	}
 
+
 	public int selectEmployeeTotal(int cKey) {
 		return sqlSession.selectOne("EmployeeMapper.selectEmployeeTotal", cKey);
+	}
+	
+	public int employeeDelete(int eKey) {
+		return sqlSession.delete("EmployeeMapper.employeeDelete", eKey);
+
 	}
 
 

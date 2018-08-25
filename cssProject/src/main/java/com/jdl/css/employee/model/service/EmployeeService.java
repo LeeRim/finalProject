@@ -119,8 +119,16 @@ public class EmployeeService {
 		return result;
 	}
 
+
 	public int selectEmployeeTotal(int cKey) {
 		return dao.selectEmployeeTotal(cKey);
+	}
+	
+	public int employeeDelete(int eKey) {
+		
+		return dao.employeeDelete(eKey);
+		
+
 	}
 
 

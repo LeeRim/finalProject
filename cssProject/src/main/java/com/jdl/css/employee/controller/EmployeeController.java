@@ -69,8 +69,25 @@ public class EmployeeController {
 	CompanyService companyService;
 
 	@RequestMapping("loginForm.do")
-	public String openLoginForm() {
-		return "index/login";
+	public String openLoginForm(HttpSession session) {
+		
+		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
+		
+		  String view ="";
+	      if(employee==null){
+	    	  view= "index/login";
+	      }else{
+	    	  if (employee.geteType().equals("1")) {
+	    		  view = "redirect:adminIndex.do";
+				} else if (employee.geteType().equals("2")) {
+					view = "redirect:employeeIndex.do";
+				} else if (employee.geteType().equals("0")) {
+					view = "redirect:adminMain.do";
+				}
+	      }
+		
+		
+		return view;
 	}
 	
 	
@@ -298,7 +315,7 @@ public class EmployeeController {
 		
 		
 		
-		return "redirect:organizationChart.do";
+		return "redirect:adminOrganizationChart.do";
 	}
 	
 	
@@ -474,9 +491,35 @@ public class EmployeeController {
 //		    	  session.setAttribute("user", user);
 		      }
 			
+		      
+		      //사원타입이 1일때 관리자 조직도, 2일때 사원조직도
+		      String redirect ="";
+		      if(employee.geteType().equals('1')){
+		    	  redirect= "redirect:adminOrganizationChart.do";
+		      }else if(employee.geteType().equals('2')){
+		    	  redirect= "redirect:organizationChart.do";
+		      }
+		      
 			
+		return redirect;
+		
+		
+	}
+	
+	//사원 삭제
+	
+	@RequestMapping("employeeDelete.do")
+	public String employeeDelete(@RequestParam("eKey") int eKey){
+		
+		
+		int result = eService.employeeDelete(eKey);
+
+		
 		return "redirect:adminOrganizationChart.do";
 	}
+	
+	
+	
 	
 	
 	
