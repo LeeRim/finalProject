@@ -103,12 +103,17 @@ public class EmployeeDao {
 
 	public int insertDepartment(DivisionVo division) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("EmployeeMapper.insertDivision", division);
+		return sqlSession.insert("EmployeeMapper.insertDepartment", division);
 	}
 
 	public int insertJob(DivisionVo division) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("EmployeeMapper.insertJob", division);
+	}
+
+	public int insertDivision(DivisionVo division) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("EmployeeMapper.insertDivision", division);
 	}
 
 

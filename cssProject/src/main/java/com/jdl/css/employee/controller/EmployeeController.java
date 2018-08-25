@@ -524,8 +524,8 @@ public class EmployeeController {
 				divisionList.add(div);
 			}
 		}
-		eService.insertDepartment(divisionList);
-		divisionList = new ArrayList<DivisionVo>();
+		//eService.insertDepartment(divisionList);
+		//divisionList = new ArrayList<DivisionVo>();
 		if (!jobArr[0].equals("")) {
 			for (int i = 0; i <jobArr.length; i++) {
 				DivisionVo div = new DivisionVo();
@@ -540,13 +540,13 @@ public class EmployeeController {
 				divisionList.add(div);
 			}
 		}
-		int result = eService.insertJob(divisionList);
-		// System.out.println("result" + result);
-		if(check.equals("true")){
+		int result = eService.insertDivision(divisionList);
+		System.out.println("result" + result);
+		/*if(check.equals("true")){
 			return "companyStartHome";
 		}else{
-			return "redirect:department.do";
-		}
+		}*/
+		return "redirect:department.do";
 	}
 
 	@RequestMapping("jobGrade.do")

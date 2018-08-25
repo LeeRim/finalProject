@@ -111,5 +111,13 @@ public class EmployeeService {
 		return result;
 	}
 
+	public int insertDivision(List<DivisionVo> divisionList) {
+		int result=0;
+		for(int i=0;i<divisionList.size();i++){
+			result+=dao.insertDivision(divisionList.get(i));
+		}
+		return result;
+	}
+
 
 }

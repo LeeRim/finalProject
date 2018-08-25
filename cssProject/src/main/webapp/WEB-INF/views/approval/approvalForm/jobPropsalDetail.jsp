@@ -57,7 +57,7 @@ desired effect
 
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
+		<div class="content-wrapper" style="background:white;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
@@ -75,16 +75,16 @@ desired effect
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-				<div class="doApproval">
+				<div class="doApproval" style="margin-left:60px; width:100px;">
 					<a class="btn btn-app" href="#" onclick="openDoApproval();">
-						<i class="fa fa-check"></i>결재하기
+						<i class="fa fa-check" style="margin-top:5px;"></i>결재하기
 					</a>
 				</div>
 				<div class="content_page report_detail">
 
 					<div class="wrap_container">
 						<!-- 3단 레이아웃 멀티클래스 -->
-						<section class="content_wrapper">
+						<section class="content_wrapper" style="margin-left:300px; margin-top:-50px;">
 							<!--전자결제 상세-->
 							<div class="report_type approval_type form_back">
 
