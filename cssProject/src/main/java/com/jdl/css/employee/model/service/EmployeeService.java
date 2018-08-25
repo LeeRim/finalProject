@@ -97,7 +97,7 @@ public class EmployeeService {
 
 	public int insertDepartment(List<DivisionVo> divisionList) {
 		int result=0;
-		for(int i=0;i<divisionList.size();i++){
+		for(int i=0;i<divisionList.size(); i++){
 			result+=dao.insertDepartment(divisionList.get(i));
 		}
 		return result;
