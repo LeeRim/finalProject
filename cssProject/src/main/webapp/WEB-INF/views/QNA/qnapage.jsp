@@ -22,8 +22,8 @@ $(function(){
 		var eType = "${user.eType}";
 		if(eType == 1){
 			location.href="selectQNA.do?qKey=" + boardNo;		
-		}else{
-			location.href="updateQNA.do?qKey=" + boardNo;
+		}else if(eType == 0){
+			location.href="QNAreply.do?qKey=" + boardNo;
 		}
 	});
 });
@@ -49,9 +49,10 @@ $(function(){
 <h1>QNA 보여질 화면</h1>
 <div class="box-body table-responsive no-padding">
 <form action="QNA.do" method="post">
-	<table border="1">
+	<table class="table table-hover">
 			<tr>
-				<th colspan="2">질문</th>
+				<th colspan="2">제목</th>
+				<th>질문</th>
 			</tr>
 			<c:forEach items="${list}" var="QNA">
 			<tr>
@@ -60,13 +61,26 @@ $(function(){
 				</td>
 				<td>
 					<c:out value="${QNA.qContent}"></c:out>
-					<c:set var="qWriterFk" value="${gv.qWriterFk}"></c:set>
+				</td>
+				<td>
+					<c:if test="${QNA.qCheck eq 'N' }">
+						X
+					</c:if>
+					
+					<c:if test="${QNA.qCheck ne 'N' }">
+						O
+					</c:if>
+				</td>
+				<td>
+					<c:out value="${QNA.qDate }"></c:out>
 				</td>
 			</tr>
 			</c:forEach> 
 	</table>
-	<input type="submit" value="문의하기"/>
-	<input type="button" value="목록으로" onclick="listread();"/>
+	<c:if test="${user.eType == 1}">
+		<input type="submit" value="문의하기"/>
+	</c:if>
+	<input type="button" value="메인" onclick="listread();"/>
 </form>
 </div>
 

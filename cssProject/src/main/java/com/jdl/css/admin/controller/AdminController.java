@@ -52,6 +52,7 @@ public class AdminController {
 		
 		employee.setcKeyFk(company.getcKey());
 		employee.setePhoto("emptyImage.png");
+		employee.seteName(company.getcOwner());
 		service.insertEmployeeAdmin(employee);
 		return "redirect:loginForm.do";
 	}

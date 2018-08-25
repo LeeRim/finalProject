@@ -147,10 +147,11 @@ public class BorderController {
 	}
 	
 	@RequestMapping("borderUpdateForm.do")
-	public ModelAndView borderUpdateForm(BorderVo b, ModelAndView mv){
+	public ModelAndView borderUpdateForm(@RequestParam(value="currentPage", required=false)String currentPagestr, BorderVo b, ModelAndView mv){
 		
 		BorderVo board = borderservice.selectBoard(b.getBoardKey());
 		if(board != null){
+			mv.addObject("currentPage", currentPagestr);
 			mv.addObject("board", board);
 			mv.setViewName("border/borderUpdateForm");
 		}
