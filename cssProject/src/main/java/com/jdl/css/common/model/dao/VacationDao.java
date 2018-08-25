@@ -23,4 +23,8 @@ public class VacationDao {
 		return session.selectList("vacationMapper.selectUsedVacation", user);
 	}
 
+	public int insertVacation(VacationVo v) {
+		return session.insert("vacationMapper.insertVacation", v);
+	}
+
 }

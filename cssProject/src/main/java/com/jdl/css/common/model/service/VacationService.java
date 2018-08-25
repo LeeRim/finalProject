@@ -24,4 +24,8 @@ public class VacationService {
 		return dao.selectUsedVacation(user);
 	}
 
+	public int insertVacation(VacationVo v) {
+		return dao.insertVacation(v);
+	}
+
 }

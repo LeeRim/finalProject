@@ -10,7 +10,7 @@ public class VacationVo {
 	private int vKey;
 	private int cKeyFk;
 	private int eKeyFk;
-	private int vUseddate;
+	private double vUseddate;
 	private String vStartdate;
 	private String vRecalldate;
 	
@@ -18,8 +18,7 @@ public class VacationVo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public VacationVo(int vKey, int cKeyFk, int eKeyFk, int vUseddate, String vStartdate, String vRecalldate) {
-		super();
+	public VacationVo(int vKey, int cKeyFk, int eKeyFk, double vUseddate, String vStartdate, String vRecalldate) {
 		this.vKey = vKey;
 		this.cKeyFk = cKeyFk;
 		this.eKeyFk = eKeyFk;
@@ -52,11 +51,11 @@ public class VacationVo {
 		this.eKeyFk = eKeyFk;
 	}
 
-	public int getvUseddate() {
+	public double getvUseddate() {
 		return vUseddate;
 	}
 
-	public void setvUseddate(int vUseddate) {
+	public void setvUseddate(double vUseddate) {
 		this.vUseddate = vUseddate;
 	}
 
