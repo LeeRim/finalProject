@@ -477,10 +477,11 @@ public class EmployeeController {
 	
 	
 	@RequestMapping("department.do")
-	public ModelAndView department(ModelAndView mv, HttpSession session) {
+	public ModelAndView department(ModelAndView mv, HttpSession session,String check) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 		List<EmployeeVo> jobList = eService.selectJobList(user.getcKeyFk());
 		List<EmployeeVo> departList = eService.selectDepartList(user.getcKeyFk());
+		mv.addObject("check", check);
 		mv.addObject("jobList", jobList);
 		mv.addObject("departList", departList);
 		mv.setViewName("employee/department");
@@ -507,32 +508,6 @@ public class EmployeeController {
 			}
 		}
 		
-	/*	List<String> departs = new ArrayList<String>();
-		for(String d:departArr){
-			departs.add(d);
-		}
-		List<String> jobs = new ArrayList<String>();
-		for(String j:jobArr){
-			jobs.add(j);
-		}
-
-		List<EmployeeVo> jobList = eService.selectJobList(user.getcKeyFk());
-		List<EmployeeVo> departList = eService.selectDepartList(user.getcKeyFk());
-		for (int i = 0; i < departList.size(); i++) {
-			for(int j=0;j<departs.size();j++){
-				if(departList.get(i).equals(departs.get(j))){
-					departs.remove(j);
-				}
-			}
-		}
-		for (int i = 0; i < jobList.size(); i++) {
-			for(int j=0;j<jobs.size();j++){
-				if(jobList.get(i).equals(jobs.get(j))){
-					jobs.remove(j);
-				}
-			}
-		}*/
-
 		List<DivisionVo> divisionList = new ArrayList<DivisionVo>();
 		if (!departArr[0].equals("")) {
 			for (int i = 0; i <departArr.length; i++) {

@@ -278,10 +278,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 	<c:import url="../selectApproverPage.jsp"/>
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
-	<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
-     <script>
-     </script>
 </body>
 </html>
