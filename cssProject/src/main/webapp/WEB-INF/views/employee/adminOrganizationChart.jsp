@@ -216,7 +216,12 @@ td {
 		
 	}
 	
+	function callFunction2(obj) {
 	
+		location.href="employeeInfo.do?eKey="+obj;
+		
+		
+	}
 	// 사원 정보 띄우는 메소드
 	function callFunction(obj) {
 		
@@ -437,9 +442,14 @@ td {
 			    	for(var i in data){
 			    		
 			    	var no =parseInt(i)+1;
-				    	
+			    	
 				    	var date = dateToYYYYMMDD(new Date(data[i].eHireDate));
-				    	
+				    	if(data[i].eEntDate != null){
+				    	var date2 = dateToYYYYMMDD(new Date(data[i].eEntDate));
+			    		}
+				    	else{
+				    		var date2 ="";
+				    	}
 			    		
 			    	var html = $("#ddd").html()
 					+ "<tr bgcolor='#FFFFFF' height='26'>"+
@@ -453,7 +463,10 @@ td {
 										+"<b>"+data[i].eName+"</b></a></td>"
 										+"<td class='employee_list_emp'>"+data[i].eExten+"</td>"
 										+"<td class='employee_list_emp'>"+data[i].ePhone+"</td>"
-										+"<td class='employee_list_emp'>"+date+"</td></tr>";
+										+"<td class='employee_list_emp'>"+date+"</td>"
+										+"<td class='employee_list_emp'>"+date2+"</td>"
+										+"<td class='employee_list_emp'><a href='javascript:void(0);' onclick='callFunction2("+data[i].eKey+");' >"
+										+"<b>수정하기</b></a></td></tr>";
 										
 			 $("#ddd").html(html);
 			    	}
@@ -471,6 +484,9 @@ td {
 	});
 		
 		
+		function checkUser(){
+			
+		}
 		
 		
 		
@@ -543,7 +559,23 @@ td {
 											</c:if>
 										</c:if>
 									</c:forEach>
-
+													<li><label> <input type="checkbox"
+													name="checkDpt"
+													onclick="chkSubCheckbox(999, this)"> <strong><b style="color:black;">퇴사자</b></strong>
+											</label> 
+													<c:forEach items="${list }" var="e5">
+													<c:if test="${e5.eEntYn.toString() eq 'Y'}"> 
+													<ul style="display: block;">
+																<li><label> <input type="checkbox"
+																		value="${e5.eKey }" name="chk" class="999"> ${e5.eName } ${e5.job }
+																</label></li>
+															</ul>
+											</c:if> 
+															
+									</c:forEach>
+									</li>
+									
+							
 								</ul>
 								
 							</div>
@@ -588,13 +620,14 @@ td {
 									<td class="employee_list_tab">사내번호</td>
 									<td class="employee_list_tab">핸드폰</td>
 									<td class="employee_list_tab">입사일</td>
+									<td class="employee_list_tab">퇴사일</td>
+									<td class="employee_list_tab">정보수정</td>
 								</tr>
 								</tbody>
 								<tbody id="listView">
 								<c:forEach items="${list }" var="e" varStatus="status">
-								<c:if test="${e.eEntYn.toString() eq 'N' }">
 									<tr bgcolor="#FFFFFF" height="26">
-		
+
 										<td class="employee_list_emp">${status.index+1}</td>
 										<td class="employee_list_emp"><a href="javascript:void(0);" onclick="callFunction(${e.eKey});" class="showMask">
 										<b>${e.eId}</b></a></td>
@@ -605,8 +638,10 @@ td {
 										<td class="employee_list_emp">${e.eExten}</td>
 										<td class="employee_list_emp">${e.ePhone}</td>
 										<td class="employee_list_emp">${e.eHireDate}</td>
+										<td class="employee_list_emp">${e.eEntDate}</td>
+										<td class="employee_list_emp"><a href="javascript:void(0);" onclick="callFunction2(${e.eKey});" >
+										<b>수정하기</b></a></td>
 									</tr>
-									</c:if>
 								</c:forEach>
 								</tbody>
 								<tbody id="ddd">
@@ -668,6 +703,20 @@ td {
      Both of these plugins are recommended to enhance the
      user experience. -->
 </body>
+
+<script type="text/javascript">
+    
+</script>
+
+
+
+
+
+
+
+
+
+
 
 
 
