@@ -175,7 +175,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              ${board.bContent}
+              <div class="content">${board.bContent}</div>
               <button type="button" onclick="border();" class="btn btn-default btn-xs"><i class="fa fa-share"></i> 리스트</button>
               <c:if test="${user ne null && user.eKey eq board.bWriter}">
               <button type="button" onclick="bModifyPage();" class="btn btn-default btn-xs"><i class="fa fa-share"></i> 수정</button>

@@ -59,8 +59,16 @@
 		text-align:center;
 		cursor:pointer;
 	}
+	.btn{
+		border:1px solid #bcbcbc;
+		margin-left:23px;
+		margin-bottom:10px;
+	}
 </style>
 <script>
+function qnaForm(){
+	location.href="QNA.do";
+}
 $(function(){
 	$(".box-body td").mouseenter(function(){
 		$(this).parent().css("background","darkgray");
@@ -82,7 +90,7 @@ $(function(){
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 	<c:if test="${sessionScope.user.eType eq '0' }">
-		<c:import url="admin_side.jsp"/>
+		<c:import url="/WEB-INF/views/admin/admin_side.jsp"/>
 	</c:if>
 	<c:if test="${sessionScope.user.eType eq '1' }">
 		<c:import url="../include/left_column_companyAdmin.jsp"/>
@@ -140,6 +148,9 @@ $(function(){
                 </tbody>
               </table>
             </div>
+            <c:if test="${user.eType eq '1'}">
+            	<div class="Btn" onclick="qnaForm();">문의사항 작성</div>
+            </c:if>
             <!-- /.box-body -->
           </div>
           <!-- /.box -->

@@ -112,7 +112,6 @@
 		FROM EMPLOYEE
 		WHERE E_EMAIL = 	#{eEmail}
 	</select>
-	
 
 	<!-- 쪽지 직원 불러오는 쿼리문 -->
 	<select id="selectEmployeeList" parameterType="int" resultType="EmployeeVo">

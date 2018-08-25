@@ -35,7 +35,7 @@
         <li><a href="waitingPage.do"><i class="fa  fa-book"></i> <span>전자결재</span></a></li>
         <li><a href="receiveNoteList.do"><i class="fa fa-envelope-o"></i> <span>쪽지</span></a></li>
         <li><a href="borderIndex.do"><i class="fa  fa-bullhorn"></i> <span>커뮤니티</span></a></li>
-        <li><a href="empQNA.do"><i class="fa  fa-comments-o"></i> <span>문의하기</span></a></li>
+        <li><a href="qnaList.do"><i class="fa  fa-comments-o"></i> <span>문의하기</span></a></li>
         
       </ul>
       <!-- /.sidebar-menu -->
