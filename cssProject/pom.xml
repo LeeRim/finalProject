@@ -32,7 +32,15 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
+		
+		
+		<!-- 이메일 전송 -->
+	 	<dependency> 
+		<groupId>javax.mail</groupId> 
+		<artifactId>mail</artifactId> 
+		<version>1.4.7</version> 
+		</dependency>
+
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>

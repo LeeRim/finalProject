@@ -683,12 +683,14 @@ function photoDelete() {
                 
                 <div class="form-group"style="width:200px;">
                 <label>부서</label>
-                <input type="text" class="form-control" name="eDepartFk" value="${select.department}" readonly>
+                <input type="hidden" name="eDepartFk"  value="${select.eDepartFk}" />
+                <input type="text" class="form-control" value="${select.department}" readonly>
                 
               </div>
                 <div class="form-group"style="width:200px; margin-bottom: 100px;">
                 <label>직급</label>
-                 <input type="text" class="form-control" name="eJobcodeFk" value="${select.job}" readonly>
+                <input type="hidden" name="eJobcodeFk" value="${select.eDepartFk}" />
+                 <input type="text" class="form-control" value="${select.job}" readonly>
               </div>
                 
              

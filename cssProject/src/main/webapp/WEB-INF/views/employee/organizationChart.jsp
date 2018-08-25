@@ -35,6 +35,7 @@
 	padding: 0 20px;
 	/* border: 1px solid black; */
 	width:90%;
+	min-width:1200px;
 	margin: 20px auto;
 }
 
@@ -70,7 +71,7 @@
 
 .employee_list {
 	float: left;
-	width: 950px;
+	width: 70%;
 	height: 619px;
 	background:white;
     border-top-right-radius: 3px;
