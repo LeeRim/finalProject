@@ -109,6 +109,7 @@ public class EmployeeController {
 			session.setAttribute("indexApproval", waitingApprovals);
 
 			if (user.geteType().equals("1") && user.getcLevel() == 0) {
+				mv.addObject("check", "true");
 				viewName = "redirect:department.do";
 			} else if (user.geteType().equals("1")) {
 				viewName = "redirect:adminIndex.do";
@@ -489,8 +490,8 @@ public class EmployeeController {
 
 	// 부서,직급 insert
 	@RequestMapping("insertDivision.do")
-	public String insertDivision(HttpSession session, String depart, String job, String departKey, String jobKey,
-			String level) {
+	public ModelAndView insertDivision(HttpSession session, String depart, String job, String departKey, String jobKey,
+			String level, String check, ModelAndView mv) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 		String[] departArr = depart.split(",");
 		String[] jobArr = job.split(",");
@@ -517,7 +518,7 @@ public class EmployeeController {
 			}
 		}
 		for (int i = 0; i < jobList.size(); i++) {
-			for(int j=0;j<departs.size();j++){
+			for(int j=0;j<jobs.size();j++){
 				if(jobList.get(i).equals(jobs.get(j))){
 					jobs.remove(j);
 				}
@@ -555,7 +556,21 @@ public class EmployeeController {
 		}
 		int result = eService.insertDivision(divisionList);
 		// System.out.println("result" + result);
-		return "redirect:department.do";
+		String viewName="";
+		System.out.println(check);
+		if(check.equals("true")){
+			viewName="companyStartHome";
+			List<EmployeeVo> list = eService.selectJobList(user.getcKeyFk());
+			List<EmployeeVo> list2 = eService.selectDepartList(user.getcKeyFk());
+
+			mv.addObject("list", list);
+			mv.addObject("list2", list2);
+		}else{
+			viewName="redirect:adminIndex.do";
+		}
+		
+		mv.setViewName(viewName);
+		return mv;
 	}
 
 	@RequestMapping("jobGrade.do")
