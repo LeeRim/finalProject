@@ -600,7 +600,7 @@ public class ApprovalController {
 			result = "redirect:openJobPropsalDetail.do?aKey=" + aKey;
 			break;
 		case 5:
-			result = "redirect:openVacationFormDetail.do?aKey=" + aKey;
+			result = "redirect:openJobPropsalDetail.do?aKey=" + aKey;
 			break;
 		}
 

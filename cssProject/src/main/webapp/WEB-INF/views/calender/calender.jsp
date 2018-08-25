@@ -7,12 +7,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Calendar</title>
+  <title>AdminLTE 2 | Calendar</title>
 
   <!-- fullCalendar -->
   <link rel="stylesheet" href="resources/bower_components/fullcalendar/dist/fullcalendar.min.css">
   <link rel="stylesheet" href="resources/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
   <!-- jQuery 3 -->
+	<!-- AdminLTE App -->
 	<script src="resources/dist/js/demo.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -58,7 +59,7 @@
 		<form method="get" action="insertEvent.do">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Create Event-수정중</h3>
+              <h3 class="box-title">Create Event</h3>
             </div>
             <div class="box-body">
               <div class="btn-group" style="width: 100%; margin-bottom: 10px; margin-left: -40px">
@@ -73,13 +74,11 @@
 				 	<input name="endDate" type="date" class="form-control"/>
 				 	</li>
 				 <li>일정 색<br/>
-					<input type="radio" name="background" value="#00c0ef"><a class="text-aqua"><i class="fa fa-square"></i></a>
-					<c:if test="${user.eType eq 1 }">
 					<input type="radio" name="background" value="#00a65a"><a class="text-green"><i class="fa fa-square"></i></a> 
 					<input type="radio" name="background" value="#f39c12"><a class="text-yellow"><i class="fa fa-square"></i></a> 
+					<input type="radio" name="background" value="#00c0ef"><a class="text-aqua"><i class="fa fa-square"></i></a>
 					<input type="radio" name="background" value="#0073b7"><a class="text-blue"><i class="fa fa-square"></i></a>
 					<input type="radio" name="background" value="#f56954"><a class="text-red"><i class="fa fa-square"></i></a>
-					</c:if>
 				 </li>
                 </ul>
               </div>
@@ -135,10 +134,13 @@
 
         // store the Event Object in the DOM element so we can get to it later
         $(this).data('eventObject', eventObject)
+
+        // make the event draggable using jQuery UI
+
       });
     }
 
-   // init_events($('#external-events div.external-event'))
+    init_events($('#external-events div.external-event'))
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
@@ -169,7 +171,7 @@
           today: 'today'
         },
       //Random default events
-      displayEventTime : false,
+      
       events    : dataList,
       editable  : false,
       droppable : false, // this allows things to be dropped onto the calendar !!!
@@ -182,18 +184,21 @@
         var copiedEventObject = $.extend({}, originalEventObject)
 
         // assign it the date that was reported
-       /*  copiedEventObject.start           = date
+        copiedEventObject.start           = date
         copiedEventObject.allDay          = allDay
         copiedEventObject.backgroundColor = $(this).css('background-color')
-        copiedEventObject.borderColor     = $(this).css('border-color') */
+        copiedEventObject.borderColor     = $(this).css('border-color')
 
         // render the event on the calendar
         
         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
 
+        // is the "remove after drop" checkbox checked?
+
       }
     })
 	  
+    
   })
 
 

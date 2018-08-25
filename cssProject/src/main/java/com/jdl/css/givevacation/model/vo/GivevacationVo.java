@@ -11,22 +11,23 @@ public class GivevacationVo {
 	private int gvKey; //기본키
 	private int cKeyFk; //회사키
 	private int gvYear; //근속년수
-	private int gvVacadate;//지급할 일수
+	private int gvVacaDate;//지급할 일수
 	private String gvDate;//휴가를 지급할 날짜
 
 	public GivevacationVo(){
 		
 	}
 
+	
 
-
-	public GivevacationVo(int gvKey, int cKeyFk, int gvYear, int gvVacadate, String gvDate) {
+	public GivevacationVo(int gvKey, int cKeyFk, int gvYear, int gvVacaDate, String gvDate) {
 		this.gvKey = gvKey;
 		this.cKeyFk = cKeyFk;
 		this.gvYear = gvYear;
-		this.gvVacadate = gvVacadate;
+		this.gvVacaDate = gvVacaDate;
 		this.gvDate = gvDate;
 	}
+
 
 
 
@@ -58,17 +59,13 @@ public class GivevacationVo {
 		this.gvYear = gvYear;
 	}
 
-
-	public int getGvVacadate() {
-		return gvVacadate;
+	public int getGvVacaDate() {
+		return gvVacaDate;
 	}
 
-
-
-	public void setGvVacadate(int gvVacadate) {
-		this.gvVacadate = gvVacadate;
+	public void setGvVacaDate(int gvVacaDate) {
+		this.gvVacaDate = gvVacaDate;
 	}
-
 
 
 	public String getGvDate() {
@@ -85,9 +82,11 @@ public class GivevacationVo {
 
 	@Override
 	public String toString() {
-		return "GivevacationVo [gvKey=" + gvKey + ", cKeyFk=" + cKeyFk + ", gvYear=" + gvYear + ", gvVacadate="
-				+ gvVacadate + ", gvDate=" + gvDate + "]";
+		return "GivevacationVo [gvKey=" + gvKey + ", cKeyFk=" + cKeyFk + ", gvYear=" + gvYear + ", gvVacaDate="
+				+ gvVacaDate + ", gvDate=" + gvDate + "]";
 	}
 
+
+	
 	
 }

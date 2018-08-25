@@ -9,6 +9,7 @@ public class CommuteCheckVo {
 	private Date inTime; //출근시간
 	private Date outTime; //퇴근시간
 	private int cKeyFk; //회사키
+	
 	private String strInTime;
 	private String strOutTime;
 
@@ -16,19 +17,18 @@ public class CommuteCheckVo {
 		
 	}
 
-	public CommuteCheckVo(int id, int eKey, Date inDate, Date inTime, Date outTime, int cKeyFk, String strInTime,
-			String strOutTime){
-		super();
-		this.id = id;
+	public CommuteCheckVo(int id,int eKeyFk, Date inDate, Date inTime, Date outTime,
+			int cKey) {
+		this.id=id;
 		this.eKey = eKey;
 		this.inDate = inDate;
 		this.inTime = inTime;
 		this.outTime = outTime;
 		this.cKeyFk = cKeyFk;
-		this.strInTime = strInTime;
-		this.strOutTime = strOutTime;
 	}
 
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -100,5 +100,9 @@ public class CommuteCheckVo {
 				+ strOutTime + "]";
 	}
 
+	
 
+
+	
+	
 }
