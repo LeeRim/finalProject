@@ -74,34 +74,69 @@ td {
 <body class="hold-transition skin-blue sidebar-mini">
 
 	<script type="text/javascript">
-		$(function() {
-			var num = 1;
-			$('#btn-departAdd-row')
-					.click(
-							function() {
-								$('#mytable1 > tbody:last')
-										.append(
-												'<tr><td><input type="hidden" name="departKey"><input type = "text" name="depart" class="form-control"/> </td></tr>');
-							});
-			$('#btn-jobAdd-row')
-					.click(
-							function() {
-								//num = $("#mytable2 tbody tr").last().find("td").first().text();
-								num = (parseInt(num) + 1)
-								//console.log(num);
-								$('#mytable2 > tbody:last')
-										.append(
-												'<tr><td><input type="hidden" name="level" value="'+num+'">'
-														+ num
-														+ '</td><td><input type="hidden" name="jobKey"><input type = "text" name="job" class="form-control"/> </td></tr>');
+	
+		var removeKeies = new Array();
+		 var customerId = new Array();
+		function removeKey(object,key){
+			num = num - 1;
+			if(key !=null){
+// 				console.log("key값 있음");
+			removeKeies.push(key);
+			}else{
+// 				console.log("key값 없음");
+			}
+// 			console.log(removeKeies);
+			
+			$(object).parent().parent().remove();
+			//console.log($("#mytable2 tbody tr"));
+			var curretNum = $(object).parent().parent().find("td:first > input").val();
+			$('#mytable2 tbody tr').each(function(index,item) {
+			    if(index!=0){
+			    $(this).children().eq(0).children().val(index);
+			    $(this).children().eq(0).text(index);
+			    }
+			});
 
-							});
+			
+		}
+	
+	
+			var num = ${jobList.size()};
+		$(function() {
+			$('#btn-departAdd-row').click(function() {
+				$('#mytable1 > tbody:last').append(
+						'<tr><td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td><td><input type="hidden" name="departKey"><input type = "text" name="depart" class="form-control"/> </td></tr>');
+					});
+							
+			$('#btn-jobAdd-row').click(function() {
+				//num = $("#mytable2 tbody tr").last().find("td").first().text();
+				num = (parseInt(num) + 1)
+				//console.log(num);
+				$('#mytable2 > tbody:last')
+						.append(
+								'<tr><td><input type="hidden" name="level" value="'+num+'">'
+										+ num
+										+ '</td><td><input type="hidden" name="jobKey"><input type = "text" name="job" class="form-control"/> </td>'
+										+ '<td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td></tr>');
+
+			});
 			$('#btn-departRemove-row').click(function() {
-				$('#mytable1 > tbody:last > tr:last').remove();
+// 				console.log($("#mytable1 > tbody:last > tr > td > input:last").val());
+				if($("#mytable1 > tbody:last > tr > td:last > input:last").val() == ""){
+					$('#mytable1 > tbody:last > tr:last').remove();
+				}else{
+					alert("부서명이 입력되어있습니다.");
+				}
+				
 			});
 			$('#btn-jobRemove-row').click(function() {
-				num = num - 1;
-				$('#mytable2 > tbody:last > tr:last').remove();
+// 				console.log($("#mytable2 > tbody:last > tr > td > input:last").val());
+				if($("#mytable2 > tbody:last > tr > td > input:last").val() == ""){
+					num = num - 1;
+					$('#mytable2 > tbody:last > tr:last').remove();
+				}else{
+					alert("직급명이 입력되어있습니다.");
+				}
 			});
 		});
 	</script>
@@ -145,23 +180,26 @@ td {
 								<div class="col-md-3">
 									<table id="mytable1">
 										<tr>
+											<th></th>
 											<th>부서명</th>
 										</tr>
 										<tbody>
 											<c:if test="${departList.size()!=0}">
-												<c:forEach var="depart" items="${departList }">
+												<c:forEach var="depart" items="${departList}">
 													<tr>
+														<td><span onclick="removeKey(this,${depart.eDepartFk});" style="cursor: pointer;"><i class ="fa fa-times"></i></span></td>
 														<td><input type="hidden" name="departKey"
 															value="${depart.eDepartFk}"> <input type="text"
 															name="depart" class="form-control"
-															value="${depart.department }" /></td>
+															value="${depart.department }" /> </td>
 													</tr>
 												</c:forEach>
 											</c:if>
 											<c:if test="${departList.size()==0}">
 												<tr>
-													<td><input type="hidden" name="departKey"> <input
-														type="text" name="depart" class="form-control" /></td>
+													 <td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td>
+													<td ><input type="hidden" name="departKey">
+													 <input	type="text" name="depart" class="form-control" /> </td>
 												</tr>
 											</c:if>
 										</tbody>
@@ -172,6 +210,7 @@ td {
 										<tr>
 											<th></th>
 											<th>직급명</th>
+											<th></th>
 										</tr>
 										<tbody>
 											<c:if test="${jobList.size()!=0}">
@@ -180,14 +219,16 @@ td {
 														<td><input type="hidden" name="level" value="${job.divInfolevel}"><c:out value="${job.divInfolevel}"></c:out></td>
 														<td><input type="hidden" name="jobKey" value="${job.eJobcodeFk }"> <input
 															type="text" name="job" class="form-control"  value="${job.job }"/></td>
+														<td><span onclick="removeKey(this,${job.eJobcodeFk});" style="cursor: pointer;"><i class ="fa fa-times"></i></span></td>
 													</tr>
 												</c:forEach>
 											</c:if>
 											<c:if test="${jobList.size()==0 }">
 													<tr>
-														<td><input type="hidden" name="level" value="1">1</td>
+														<td><input type="hidden" name="level" value="1"></td>
 														<td><input type="hidden" name="jobKey"> <input
 															type="text" name="job" class="form-control" /></td>
+														<td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i></span></td>
 													</tr>
 											</c:if>
 										</tbody>

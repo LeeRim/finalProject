@@ -96,7 +96,7 @@ public class EmployeeController {
 			session.setAttribute("indexApproval", waitingApprovals);
 
 			if (user.geteType().equals("1") && user.getcLevel() == 0) {
-				viewName = "companyStartHome";
+				viewName = "redirect:department.do";
 			} else if (user.geteType().equals("1")) {
 				viewName = "redirect:adminIndex.do";
 			} else if (user.geteType().equals("2")) {
