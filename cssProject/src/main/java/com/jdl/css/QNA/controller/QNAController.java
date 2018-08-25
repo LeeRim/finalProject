@@ -35,7 +35,7 @@ public class QNAController {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		
 		qv.setqWriterFk(employee.getcKeyFk());
-		System.out.println("QNA 작성 : " + qv);
+		//System.out.println("QNA 작성 : " + qv);
 		int QNAresult = service.insertQNA(qv);
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -68,7 +68,7 @@ public class QNAController {
 		
 		int resultAttach = attachservice.insertAttachments(attachList);
 		
-		mv.setViewName("home");
+		mv.setViewName("redirect:qnaList.do");
 		return mv;
 	}
 	
@@ -80,7 +80,7 @@ public class QNAController {
 		System.out.println("업데이트 후 질문 답변 : " + qv);
 		System.out.println("질문자의 질문과 답변 얻어오기 : " + qvg);
 		mv.addObject("qv", qvg);
-		mv.setViewName("QNA/QNAre");
+		mv.setViewName("redirect:qnaList.do");
 		return mv;
 	}
 	
@@ -97,7 +97,7 @@ public class QNAController {
 			
 		}else if(employee.geteType().charAt(0) == '1'){
 			List<QNAVo> list = service.selectQNA(employee);
-			System.out.println("질문답변 : " + list);
+			//System.out.println("질문답변 : " + list);
 			mv.addObject("list", list);
 		}
 		mv.setViewName("qna/qnaList");
@@ -111,34 +111,36 @@ public class QNAController {
 	
 	@RequestMapping("QNA.do")
 	public String longd(){
-		return "QNA/QNAWrite";
+		return "qna/QNAWrite";
 	}
+	
 	@RequestMapping("selectQNA.do")
 	public ModelAndView selectQNA(ModelAndView mv, int qKey){
-		System.out.println("키 값 : " + qKey);
+		//System.out.println("키 값 : " + qKey);
 		QNAVo qv = service.selectone(qKey);
 		
 		AttachmentVo qnaAttach = attachservice.qnaAttach(qKey);
-		System.out.println("받아오는 값 확인 : " + qnaAttach);
+		//System.out.println("받아오는 값 확인 : " + qnaAttach);
 		mv.addObject("qnaAttach", qnaAttach);
 		mv.addObject("qv", qv);
 		mv.addObject("qKey", qKey);
-		mv.setViewName("QNA/QNAre");
+		mv.setViewName("qna/QNAre");
 		return mv;
 	}
 	
 	@RequestMapping("QNAreply.do")
 	public ModelAndView qnareplay(int qKey, ModelAndView mv){
-		System.out.println("키 값 : " + qKey);
+		//System.out.println("키 값 : " + qKey);
 		QNAVo qv = service.selectone(qKey);
 		
 		AttachmentVo qnaAttach = attachservice.qnaAttach(qKey);
 		
+		System.out.println("값 확인 : " + qv);
 		mv.addObject("qnaAttach", qnaAttach);
-		mv.addObject("qv", qv);
 		mv.addObject("qKey", qKey);
 		mv.addObject("qv", qv);
-		mv.setViewName("QNA/qnarepaly");
+		//mv.addObject("qAnswer", qv.getqAnswer());
+		mv.setViewName("qna/qnarepaly");
 		return mv;
 	}
 }

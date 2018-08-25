@@ -8,16 +8,42 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
+	.table-bordered{
+		background:white;
+		margin-top:30px;
+	}
+	.title, textarea{
+		border:none;
+		width:100%;
+	}
+	textarea{
+		height:400px;
+	}
+	th{
+		background:#bcbcbc;
+	}
+	.btn{
+		border:1px solid #bcbcbc;
+		background:white;
+		margin-left:auto;
+		margin-right:auto;
+	}
 </style>
+<script>
+	function wirteQnA(){
+		$("#wirteQnA").submit();
+		
+	}
+</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-   <c:import url="/WEB-INF/views/border/left_column_board.jsp"/>
+   <c:import url="/WEB-INF/views/include/left_column_companyAdmin.jsp"/>
 	<div class="content-wrapper">
 	<section class="content-header">
       <h1>
-        Data Tables
-        <small>advanced tables</small>
+        문의사항
+        <small>_작성</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -27,21 +53,19 @@
     </section>
 <div class="row" style="width:95%; margin-right:auto; margin-left:auto;">
 
-<h1>1:1 QNA 작성 페이지</h1>
 <div class="asd">
-<form action="writeQNA.do" method="post" enctype="multipart/form-data">
-	<table border="1">
+<form action="writeQNA.do" id="wirteQnA" method="post" enctype="multipart/form-data">
+	<table class="table table-bordered">
 		<tr>
-			<th><input type="text" name="title" placeholder="질문"/></th>
+			<th style="width:100px; text-align:center;">제목</th>
+			<td><input type="text" class="title" name="qTitle" /></td>
+			<td style="width:100px;"><input type="file" name="file"/></td>
 		</tr>
 		<tr>
-			<td class="wd"><textarea style="resize: none;" name="qContent" rows="25" cols="80"></textarea></td>
-		</tr>
-		<tr>
-			<td><input type="file" name="file"/></td>
+			<td class="wd" colspan="3"><textarea style="resize: none;" name="qContent" ></textarea></td>
 		</tr>
 	</table>
-	<input type="submit" value="문의하기"/>
+	<div class="Btn" onclick="wirteQnA();">문의하기</div>
 </form>
 </div>
 

@@ -10,7 +10,7 @@
 <style>
 	.bordName{
 		margin-left:10px;
-		font-size:17px;
+		font-size:20px;
 		font-weight:bold;
 	}
 	.table, th{
@@ -19,11 +19,6 @@
 	}
 	.no{
 		width:200px;
-	}
-	.bindex{
-		display:inline-block;
-		width:45%;
-		margin-left:60px;
 	}
 	.date,.writer{
 		width:150px;
@@ -36,9 +31,15 @@
 		cursor:pointer;
 		float:right;
 		display:inline-block;
+		margin-bottom:-10px;
 	}
 	.img{
 		opacity:0.5;
+	}
+	.row{
+		width:99%;
+		margin-left:auto;
+		margin-right:auto;
 	}
 </style>
 <script>
@@ -85,15 +86,14 @@
 					<li class="active">Data tables</li>
 				</ol>
 			</section>
-			<div class="row" style="width:100%; margin-right:auto; margin-left:auto; margin-top:50px;">
-				<div class="bindex">
+			<div class="row" style="margin-top:30px;">
+				<div class="row">
 				<div class="box-body table-responsive no-padding">
 					<c:choose>
 						<c:when test="${bo1 eq 1}">
 							<span class="bordName">공지사항</span>
 							<div class="image" onclick="border(1);">
-							<img src="resources/upload/image/more.png" 
-									class="img" width="100px" height="50px" onclick="border(1);"/>
+							<img src="resources/upload/image/more.png" class="img" width="100px" height="50px" onclick="border(1);"/>
 							</div>
 						</c:when>
 					</c:choose>
@@ -153,8 +153,7 @@
 						</c:if>
 					</table>
 				</div>
-			</div>
-			<div class="bindex">
+				<br><br>
 				<div class="box-body table-responsive no-padding">
 				<c:choose>
 					<c:when test="${bo3 eq 3}">

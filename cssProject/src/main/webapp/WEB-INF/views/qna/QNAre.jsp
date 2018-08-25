@@ -7,20 +7,34 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style>
+	textarea{
+		border:none;
+		width:100%;
+	}
+	.tt{
+		margin:0 auto;
+		text-align:center;
+	}
+	th{
+		background:#bcbcbc;
+	}
+
+</style>
 <script>
-function listread(){
-	location.href="back.do";
+function qnaList(){
+	location.href="qnaList.do";
 }
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-   <c:import url="/WEB-INF/views/border/left_column_board.jsp"/>
+   <c:import url="../include/left_column_companyAdmin.jsp"/>
 	<div class="content-wrapper">
 	<section class="content-header">
       <h1>
-        Data Tables
-        <small>advanced tables</small>
+        QnA
+        <small>_</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -30,25 +44,43 @@ function listread(){
     </section>
 <div class="row" style="width:95%; margin-right:auto; margin-left:auto;">
 
-<h1>질문과 답변이 다있는 페이지</h1>
-<table border="1">
-	<tr>
-		<th>질문 : ${qv.qContent}</th>
+<table id="example2" class="table table-bordered tt" style="background:white; margin-top:20px;">
+	<tr >
+		<th style="text-align:center; ">제목</th>
+		<th style="width:300px; text-align:center">질문등록일</th>
 	</tr>
-	<c:if test="${qv.qAnswer eq null}">
-		<tr>
-			<td>답변이 아직 없습니다.</td>
-		</tr>
-	</c:if>
-	<c:if test="${qv.qAnswer ne null}">
-		<tr>
-			<td>답변 : <textarea style="resize: none;" name="qAnswer" rows="25" cols="80" readonly>${qv.qAnswer}</textarea> </td>
-		</tr>
-	</c:if>
+	<tr >
+		<td style="text-align:center; ">${qv.qTitle}</td>
+		<td style="width:300px; text-align:center">${qv.qDate }</td>
+	</tr>
 	<tr>
-		<td><input type="button" value="메인" onclick="listread();"/></td>
+		<td colspan="2" style="height:100px;">${qv.qContent}</td>
 	</tr>
 </table>
+
+<table id="example2" class="table table-bordered " style="background:white; margin-top:20px;">
+	<c:if test="${qv.qAnswer == null}">
+		<tr >
+			<th style="text-align:center; ">답변 </th>
+			<th style="width:100px; text-align:center; ">답변등록일</th>
+			<td style="width:200px; text-align:center; ">${qv.aDate }</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="vertical-align:middle; text-align:center; width:300px; height:300px;">답변이 아직 없습니다.</td>
+		</tr>
+	</c:if>
+	<c:if test="${qv.qAnswer != null}">
+		<tr>
+			<th style="text-align:center; ">답변</th>
+			<th style="width:100px; text-align:center; ">답변등록일</th>
+			<td style="width:200px; text-align:center; ">${qv.aDate }</td>
+		</tr>
+		<tr>
+			<td colspan="3" style="vertical-align:middle; text-align:center; width:300px; height:300px;">${qv.qAnswer}</td>
+		</tr>
+	</c:if>
+</table>
+		<div onclick="qnaList();" class="btn btn-default btn-xs modifyBtn"" style="width:100px; padding:5px;;"><i class="fa fa-share"></i>목록으로</div>
 </div>
 </div>
 </div>
