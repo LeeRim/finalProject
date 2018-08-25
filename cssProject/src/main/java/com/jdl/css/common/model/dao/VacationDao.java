@@ -8,13 +8,14 @@ import org.springframework.stereotype.Repository;
 
 import com.jdl.css.common.model.vo.VacationVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
+import com.jdl.css.givevacation.model.vo.GivevacationVo;
 
 @Repository
 public class VacationDao {
 	@Autowired
 	SqlSessionTemplate session;
 	
-	public VacationVo selectTotalVacation(EmployeeVo user) {
+	public GivevacationVo selectTotalVacation(EmployeeVo user) {
 		return session.selectOne("vacationMapper.selectTotalVacation", user);
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.jdl.css.common.model.dao.VacationDao;
 import com.jdl.css.common.model.vo.VacationVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
+import com.jdl.css.givevacation.model.vo.GivevacationVo;
 
 @Service
 public class VacationService {
@@ -15,7 +16,7 @@ public class VacationService {
 	@Autowired
 	VacationDao dao;
 	
-	public VacationVo selectTotalVacation(EmployeeVo user) {
+	public GivevacationVo selectTotalVacation(EmployeeVo user) {
 		return dao.selectTotalVacation(user);
 	}
 

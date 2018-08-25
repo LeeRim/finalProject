@@ -7,85 +7,80 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VacationVo {
-	private int gvKey;                    //기본키
-	private int cKeyFk;					  //회사키
-	private int gvYear;					  //근속년수
-	private int gvVacadate;			  //지급일수
-	private Date gvDate;                //휴가지급날짜
+	private int vKey;
+	private int cKeyFk;
+	private int eKeyFk;
+	private int vUseddate;
+	private String vStartdate;
+	private String vRecalldate;
 	
-	
-	//Vacation사용 정보
-	private int vUseddate;            //휴가 사용일수
-    
 	public VacationVo() {
+		// TODO Auto-generated constructor stub
 	}
 
-
-	public int getGvKey() {
-		return gvKey;
+	public VacationVo(int vKey, int cKeyFk, int eKeyFk, int vUseddate, String vStartdate, String vRecalldate) {
+		super();
+		this.vKey = vKey;
+		this.cKeyFk = cKeyFk;
+		this.eKeyFk = eKeyFk;
+		this.vUseddate = vUseddate;
+		this.vStartdate = vStartdate;
+		this.vRecalldate = vRecalldate;
 	}
 
-
-	public void setGvKey(int gvKey) {
-		this.gvKey = gvKey;
+	public int getvKey() {
+		return vKey;
 	}
 
+	public void setvKey(int vKey) {
+		this.vKey = vKey;
+	}
 
 	public int getcKeyFk() {
 		return cKeyFk;
 	}
 
-
 	public void setcKeyFk(int cKeyFk) {
 		this.cKeyFk = cKeyFk;
 	}
 
-
-	public int getGvYear() {
-		return gvYear;
+	public int geteKeyFk() {
+		return eKeyFk;
 	}
 
-
-	public void setGvYear(int gvYear) {
-		this.gvYear = gvYear;
+	public void seteKeyFk(int eKeyFk) {
+		this.eKeyFk = eKeyFk;
 	}
-
-
-	public int getGvVacadate() {
-		return gvVacadate;
-	}
-
-
-	public void setGvVacadate(int gvVacadate) {
-		this.gvVacadate = gvVacadate;
-	}
-
-
-	public Date getGvDate() {
-		return gvDate;
-	}
-
-
-	public void setGvDate(Date gvDate) {
-		this.gvDate = gvDate;
-	}
-	
 
 	public int getvUseddate() {
 		return vUseddate;
 	}
 
-
 	public void setvUseddate(int vUseddate) {
 		this.vUseddate = vUseddate;
 	}
 
+	public String getvStartdate() {
+		return vStartdate;
+	}
+
+	public void setvStartdate(String vStartdate) {
+		this.vStartdate = vStartdate;
+	}
+
+	public String getvRecalldate() {
+		return vRecalldate;
+	}
+
+	public void setvRecalldate(String vRecalldate) {
+		this.vRecalldate = vRecalldate;
+	}
 
 	@Override
 	public String toString() {
-		return "VacationVo [gvKey=" + gvKey + ", cKeyFk=" + cKeyFk + ", gvYear=" + gvYear + ", gvVacadate=" + gvVacadate
-				+ ", gvDate=" + gvDate + ", vUseddate=" + vUseddate + "]";
+		return "VacationVo [vKey=" + vKey + ", cKeyFk=" + cKeyFk + ", eKeyFk=" + eKeyFk + ", vUseddate=" + vUseddate
+				+ ", vStartdate=" + vStartdate + ", vRecalldate=" + vRecalldate + "]";
 	}
-
-
+	
+	
 }

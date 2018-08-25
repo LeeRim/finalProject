@@ -32,6 +32,7 @@ import com.jdl.css.common.model.vo.DivisionVo;
 import com.jdl.css.common.model.vo.VacationVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
+import com.jdl.css.givevacation.model.vo.GivevacationVo;
 import com.jdl.css.note.model.service.NoteService;
 import com.jdl.css.note.model.vo.NoteVo;
 
@@ -69,7 +70,7 @@ public class EmployeeController {
 		List<ApprovalVo> waitingApprovals = aService.selectWaitingApprovalList(user.geteKey());
 
 		// 근속년수에 따른 총 휴가 값 가지고오기
-		VacationVo giveVacation = vService.selectTotalVacation(user);
+		GivevacationVo giveVacation = vService.selectTotalVacation(user);
 		// 휴가 사용일 가져오기
 		List<VacationVo> usedVacation = vService.selectUsedVacation(user);
 		int totalUsedVacation = 0;
@@ -314,7 +315,7 @@ public class EmployeeController {
 		EmployeeVo user = eService.selectSessionEmployee(member);
 		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
 		// 근속년수에 따른 총 휴가 값 가지고오기
-		VacationVo giveVacation = vService.selectTotalVacation(user);
+		GivevacationVo giveVacation = vService.selectTotalVacation(user);
 		// 휴가 사용일 가져오기
 		List<VacationVo> usedVacation = vService.selectUsedVacation(user);
 
