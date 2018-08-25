@@ -17,4 +17,10 @@
 		FROM VACATION
 		WHERE E_KEY_FK = #{eKey}
 	</select>
+	
+	<insert id="insertVacation" parameterType="VacationVo">
+		INSERT INTO VACATION (V_KEY, C_KEY_FK, E_KEY_FK, V_USEDDATE, V_STARTDATE, V_RECALLDATE) 
+		VALUES (SEQ_VACATION.NEXTVAL, #{cKeyFk}, #{eKeyFk}, #{vUseddate}, #{vStartdate}, #{vRecalldate})
+		
+	</insert>
 </mapper>

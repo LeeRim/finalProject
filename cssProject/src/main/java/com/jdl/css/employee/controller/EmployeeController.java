@@ -38,6 +38,7 @@ import com.jdl.css.calender.model.service.CalenderService;
 import com.jdl.css.calender.model.vo.CalenderVo;
 import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.service.VacationService;
+import com.jdl.css.common.model.vo.DivisionVo;
 import com.jdl.css.common.model.vo.VacationVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
@@ -476,8 +477,85 @@ public class EmployeeController {
 	
 	
 	@RequestMapping("department.do")
-	public String department() {
-		return "employee/department";
+	public ModelAndView department(ModelAndView mv, HttpSession session) {
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		List<EmployeeVo> jobList = eService.selectJobList(user.getcKeyFk());
+		List<EmployeeVo> departList = eService.selectDepartList(user.getcKeyFk());
+		mv.addObject("jobList", jobList);
+		mv.addObject("departList", departList);
+		mv.setViewName("employee/department");
+		return mv;
+	}
+
+	// 부서,직급 insert
+	@RequestMapping("insertDivision.do")
+	public String insertDivision(HttpSession session, String depart, String job, String departKey, String jobKey,
+			String level) {
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		String[] departArr = depart.split(",");
+		String[] jobArr = job.split(",");
+		String[] departKeys = departKey.split(",");
+		String[] jobKeys = jobKey.split(",");
+		String[] levels = level.split(",");
+		
+		List<String> departs = new ArrayList<String>();
+		for(String d:departArr){
+			departs.add(d);
+		}
+		List<String> jobs = new ArrayList<String>();
+		for(String j:jobArr){
+			jobs.add(j);
+		}
+
+		List<EmployeeVo> jobList = eService.selectJobList(user.getcKeyFk());
+		List<EmployeeVo> departList = eService.selectDepartList(user.getcKeyFk());
+		for (int i = 0; i < departList.size(); i++) {
+			for(int j=0;j<departs.size();j++){
+				if(departList.get(i).equals(departs.get(j))){
+					departs.remove(j);
+				}
+			}
+		}
+		for (int i = 0; i < jobList.size(); i++) {
+			for(int j=0;j<departs.size();j++){
+				if(jobList.get(i).equals(jobs.get(j))){
+					jobs.remove(j);
+				}
+			}
+		}
+
+		List<DivisionVo> divisionList = new ArrayList<DivisionVo>();
+		if (!departArr[0].equals("")) {
+			for (int i = 0; i <departs.size(); i++) {
+				DivisionVo div = new DivisionVo();
+				div.setcKeyFk(user.getcKeyFk());
+				try {
+					div.setDivKey(Integer.parseInt(departKeys[i]));
+				} catch (ArrayIndexOutOfBoundsException e) {
+				}
+				// System.out.println(div.getDivKey()==0); true
+				div.setDivType(1);
+				div.setDivInfo(departs.get(i));
+				divisionList.add(div);
+			}
+		}
+		if (!jobArr[0].equals("")) {
+			for (int i = 0; i <jobs.size(); i++) {
+				DivisionVo div = new DivisionVo();
+				div.setcKeyFk(user.getcKeyFk());
+				try {
+					div.setDivKey(Integer.parseInt(jobKeys[i]));
+				} catch (ArrayIndexOutOfBoundsException e) {
+				}
+				div.setDivType(2);
+				div.setDivInfo(jobs.get(i));
+				div.setDivInfolevel(Integer.parseInt(levels[i]));
+				divisionList.add(div);
+			}
+		}
+		int result = eService.insertDivision(divisionList);
+		// System.out.println("result" + result);
+		return "redirect:department.do";
 	}
 
 	@RequestMapping("jobGrade.do")

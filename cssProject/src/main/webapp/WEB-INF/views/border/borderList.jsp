@@ -221,8 +221,11 @@ $(function(){
 	              	<c:when test="${user.eType eq 1 && bCateGory eq '1'}">
 		              	<div class="Btn" onclick="boardForm();">공지사항 작성</div>
 	              	</c:when>
-	              	<c:when test="${bCateGory ne '1'}">
-		              	<div class="Btn" onclick="boardForm();">작성</div>
+	              	<c:when test="${bCateGory eq '2'}">
+		              	<div class="Btn" onclick="boardForm();">자유게시판 작성</div>
+	              	</c:when>
+	              	<c:when test="${bCateGory eq '3'}">
+		              	<div class="Btn" onclick="boardForm();">경조사 작성</div>
 	              	</c:when>
 	              </c:choose>
               </c:if>

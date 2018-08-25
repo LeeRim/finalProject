@@ -2,6 +2,7 @@ package com.jdl.css.approval.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +25,12 @@ import com.jdl.css.approval.model.vo.JobPropsalVo;
 import com.jdl.css.approval.model.vo.OrderFormVo;
 import com.jdl.css.approval.model.vo.OrderTableLinkedVo;
 import com.jdl.css.approval.model.vo.VacationFormVo;
+import com.jdl.css.calender.model.service.CalenderService;
+import com.jdl.css.calender.model.vo.CalenderVo;
 import com.jdl.css.common.model.service.AttachmentService;
+import com.jdl.css.common.model.service.VacationService;
 import com.jdl.css.common.model.vo.AttachmentVo;
+import com.jdl.css.common.model.vo.VacationVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 import com.jdl.css.note.model.service.NoteService;
@@ -41,6 +46,10 @@ public class ApprovalController {
 	AttachmentService attService;
 	@Autowired
 	EmployeeService eService;
+	@Autowired
+	VacationService vService;
+	@Autowired
+	CalenderService cService;
 
 	@RequestMapping("approvalPage.do")
 	public String openApprovalPage() {
@@ -641,9 +650,38 @@ public class ApprovalController {
 				}
 			}
 		}
+		
 
 		if (last.getAcKey() == acKey || condition == 2) {
 			updateAResult = aService.updateApproval(app);
+		}
+		if(doctype==5){
+			updateVacation(app);
+		}
+		return result;
+	}
+	
+	public int updateVacation(ApprovalVo a){
+		int result=0;
+		a = aService.selectApprovalDetail(a);
+		VacationFormVo vacation = aService.selectVacationForm(a.getaKey());
+		if(a.getaCondition()==1){
+			VacationVo v = new VacationVo();
+			v.setcKeyFk(a.getcKeyFk());
+			v.seteKeyFk(a.getaWriterFk());
+			v.setvStartdate(vacation.getVfStartdate());
+			v.setvRecalldate(vacation.getVfEnddate());
+			v.setvUseddate(vacation.getvfUseddate());
+			result+=vService.insertVacation(v);
+			
+			CalenderVo vCal = new CalenderVo();
+			String title = a.getWriter().geteName()+" "+a.getWriter().getJob()+"님 휴가";
+			vCal.setcKeyFk(a.getcKeyFk());
+			vCal.setTitle(title);
+			vCal.setStartDate(Date.valueOf(vacation.getVfStartdate()));
+			vCal.setEndDate(Date.valueOf(vacation.getVfEnddate()));
+			vCal.setBackground("#F56954");
+			result+=cService.createEvent(vCal);			
 		}
 		return result;
 	}
