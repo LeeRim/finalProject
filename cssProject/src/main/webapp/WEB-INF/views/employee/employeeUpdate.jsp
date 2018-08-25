@@ -882,11 +882,10 @@ function fileCheck(obj) {
         // 정상적인 이미지 확장자 파일일 경우 ...
 
     } else if(filetype!='jpg' || filetype!='gif' || filetype!='png' || filetype!='jpeg' || filetype!='bmp') {
-        alert('이미지 파일만 선택할 수 있습니다.');
-
-        parentObj  = obj.parentNode
-        node = parentObj.replaceChild(obj.cloneNode(true),obj);
-
+      
+    	 parentObj  = obj.parentNode
+         node = parentObj.replaceChild(obj.cloneNode(true),obj);
+    	 
         return false;
     }
     if(filetype=='bmp') {

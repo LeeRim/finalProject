@@ -459,16 +459,17 @@ public class EmployeeController {
 		         totalUsedVacation += vacation.getvUseddate();
 		      }
 		      try{
-		         user.setTotalVacation(giveVacation.getGvVacadate());
-		         user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
-		         user.setWorkYears(giveVacation.getGvYear());
+		    	  user.setTotalVacation(giveVacation.getGvVacadate());
+		    	  user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
+		    	  user.setWorkYears(giveVacation.getGvYear());
 		      }catch (NullPointerException e) {
 		         
 		      }
-		      if(result > 0){
-		    	  session.setAttribute("user", user);
+		      System.out.println(employee.geteKey());
+		      System.out.println(user.geteKey());
+		      if(result > 0 && employee.geteKey()==user.geteKey()){
+//		    	  session.setAttribute("user", user);
 		      }
-		      System.out.println("update시 session 값 : " + user);
 			
 			
 		return "redirect:adminOrganizationChart.do";
