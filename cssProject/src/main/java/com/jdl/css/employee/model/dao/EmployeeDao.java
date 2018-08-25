@@ -82,11 +82,6 @@ public class EmployeeDao {
 		return sqlSession.selectList("EmployeeMapper.selectDepartCountList",cKey);
 	}
 
-	public int insertDivision(DivisionVo division) {
-		// TODO Auto-generated method stub
-		return sqlSession.insert("EmployeeMapper.insertDivision", division);
-	}
-
 	public int deleteDivision(int divKey) {
 		return sqlSession.delete("EmployeeMapper.deleteDivision", divKey);
 
@@ -104,6 +99,16 @@ public class EmployeeDao {
 	 
 		return sqlSession.update("EmployeeMapper.updatePwd", user2);
 		
+	}
+
+	public int insertDepartment(DivisionVo division) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("EmployeeMapper.insertDivision", division);
+	}
+
+	public int insertJob(DivisionVo division) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("EmployeeMapper.insertJob", division);
 	}
 
 

@@ -283,7 +283,8 @@
 		SELECT
 		DIV_INFO AS
 		"DEPARTMENT" ,
-		DIV_KEY AS"E_DEPART_FK"
+		DIV_KEY AS"E_DEPART_FK",
+		DIV_INFOLEVEL DIV_INFOLEVEL
 		FROM DIVISION
 		WHERE DIV_TYPE =1 AND C_KEY_FK = #{cKey}
 		ORDER BY DIV_KEY ASC
@@ -411,28 +412,34 @@
 	</select>
 	
 	
+	<delete id="deleteDivision" parameterType="int">
+		DELETE FROM DIVISION WHERE DIV_KEY=#{divKey}
+	</delete>
 	
-
-
 	<insert id="insertDivision" parameterType="DivisionVo">
 		MERGE INTO DIVISION DIV
+            USING DUAL
+            ON (DIV_INFOLEVEL=#{divInfolevel} AND C_KEY_FK=#{cKeyFk} AND DIV_TYPE=1)
+            WHEN MATCHED THEN
+                      UPDATE SET
+                      	DIV_KEY=#{divKey}
+                        DIV_INFO=#{divInfo}
+            WHEN NOT MATCHED THEN
+                     INSERT (DIV_KEY, C_KEY_FK, DIV_TYPE, DIV_INFO, DIV_INFOLEVEL) VALUES (SEQ_DIVISION.NEXTVAL,#{cKeyFk} , #{divType}, #{divInfo}, #{divInfolevel}
+                     )
+	</insert>
+	
+	<insert id="insertJob" parameterType="DivisionVo">
+	MERGE INTO DIVISION DIV
             USING DUAL
             ON (DIV_KEY=#{divKey})
             WHEN MATCHED THEN
                       UPDATE SET
-                        DIV_TYPE=#{divType},
                         DIV_INFO=#{divInfo}
-                        <if test="divInfolevel!=0">
                         ,DIV_INFOLEVEL=#{divInfolevel}
-                        </if>
             WHEN NOT MATCHED THEN
-                     INSERT (DIV_KEY, C_KEY_FK, DIV_TYPE, DIV_INFO, DIV_INFOLEVEL) VALUES (SEQ_DIVISION.NEXTVAL,#{cKeyFk} , #{divType}, #{divInfo}, 
-                     <if test="divInfolevel==0">null</if><if test="divInfolevel!=0">#{divInfolevel}</if>
+                     INSERT (DIV_KEY, C_KEY_FK, DIV_TYPE, DIV_INFO, DIV_INFOLEVEL) VALUES (SEQ_DIVISION.NEXTVAL,#{cKeyFk} , #{divType}, #{divInfo},#{divInfolevel}
                      )
 	</insert>
-	
-	<delete id="deleteDivision" parameterType="int">
-		DELETE FROM DIVISION WHERE DIV_KEY=#{divKey}
-	</delete>
 
 </mapper>

@@ -79,6 +79,7 @@ td {
 		 var customerId = new Array();
 		function removeKey(object,key){
 			num = num - 1;
+			num1=num1-1;
 			if(key !=null){
 // 				console.log("key값 있음");
 			removeKeies.push(key);
@@ -87,25 +88,32 @@ td {
 			}
 // 			console.log(removeKeies);
 			
+			//console.log($(object).parent().parent());
 			$(object).parent().parent().remove();
-			//console.log($("#mytable2 tbody tr"));
-			var curretNum = $(object).parent().parent().find("td:first > input").val();
+			//var curretNum = $(object).parent().parent().find("td:first > input").val();
 			$('#mytable2 tbody tr').each(function(index,item) {
 			    if(index!=0){
-			    $(this).children().eq(0).children().val(index);
-			    $(this).children().eq(0).text(index);
+			    $(this).children().eq(0).html('<input type="hidden" name="jlevel" value="'+index+'">'+index);
 			    }
-			});
-
-			
+			}); 
+			$('#mytable1 tbody tr').each(function(index,item) {
+			    if(index!=0){
+			    $(this).children().eq(0).html('<input type="hidden" name="dlevel" value="'+index+'">'+index);
+			    }
+			}); 
+			$("#removeKeys").val(removeKeies);
 		}
 	
 	
 			var num = ${jobList.size()};
+			var num1= ${departList.size()};
 		$(function() {
 			$('#btn-departAdd-row').click(function() {
+				num1 = (parseInt(num1) + 1)
 				$('#mytable1 > tbody:last').append(
-						'<tr><td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td><td><input type="hidden" name="departKey"><input type = "text" name="depart" class="form-control"/> </td></tr>');
+						'<tr><td><input type="hidden" name="dlevel" value="'+num1+'">'
+						+ num1
+						+ '</td><td><input type="hidden" name="departKey"><input type = "text" name="depart" class="form-control"/> </td><td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td></tr>');
 					});
 							
 			$('#btn-jobAdd-row').click(function() {
@@ -114,18 +122,19 @@ td {
 				//console.log(num);
 				$('#mytable2 > tbody:last')
 						.append(
-								'<tr><td><input type="hidden" name="level" value="'+num+'">'
+								'<tr><td><input type="hidden" name="jlevel" value="'+num+'">'
 										+ num
 										+ '</td><td><input type="hidden" name="jobKey"><input type = "text" name="job" class="form-control"/> </td>'
 										+ '<td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td></tr>');
 
 			});
 			$('#btn-departRemove-row').click(function() {
-// 				console.log($("#mytable1 > tbody:last > tr > td > input:last").val());
-				if($("#mytable1 > tbody:last > tr > td:last > input:last").val() == ""){
+ 				//console.log($("#mytable1 > tbody:last > tr > td > input:last").val()=="");
+				if($("#mytable1 > tbody:last > tr > td > input:last").val()==""){
+					num1 = num1-1;
 					$('#mytable1 > tbody:last > tr:last').remove();
 				}else{
-					alert("부서명이 입력되어있습니다.");
+					alert("부서명이 입력되어있어서 행을 지울 수 없습니다.");
 				}
 				
 			});
@@ -135,7 +144,7 @@ td {
 					num = num - 1;
 					$('#mytable2 > tbody:last > tr:last').remove();
 				}else{
-					alert("직급명이 입력되어있습니다.");
+					alert("직급명이 입력되어있어서 행을 지울 수 없습니다.");
 				}
 			});
 		});
@@ -175,41 +184,45 @@ td {
 						</div>
 						<!-- form start -->
 						<form role="form" action="insertDivision.do" method="post">
-								<input type="hidden" value="${check}" name ="check"/>							
+								<input type="hidden" value="${check}" name ="check"/>
+						<input type="hidden" name="removeKeys" id="removeKeys">
 							<div class="row" style="padding:30px;">
-								<div class="col-md-3"></div>
-								<div class="col-md-3">
+								<div class="col-md-2"></div>
+								<div class="col-md-5">
 									<table id="mytable1">
 										<tr>
-											<th></th>
+											<th>부서번호</th>
 											<th>부서명</th>
+											<th></th>
 										</tr>
 										<tbody>
 											<c:if test="${departList.size()!=0}">
 												<c:forEach var="depart" items="${departList}">
 													<tr>
-														<td><span onclick="removeKey(this,${depart.eDepartFk});" style="cursor: pointer;"><i class ="fa fa-times"></i></span></td>
+													<td><input type="hidden" name="dlevel" value="${depart.divInfolevel}"><c:out value="${depart.divInfolevel}"></c:out></td>
 														<td><input type="hidden" name="departKey"
 															value="${depart.eDepartFk}"> <input type="text"
 															name="depart" class="form-control"
 															value="${depart.department }" /> </td>
+													<td><span onclick="removeKey(this,${depart.eDepartFk});" style="cursor: pointer;"><i class ="fa fa-times"></i></span></td>
 													</tr>
 												</c:forEach>
 											</c:if>
 											<c:if test="${departList.size()==0}">
 												<tr>
-													 <td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td>
-													<td ><input type="hidden" name="departKey">
+												<td><input type="hidden" name="dlevel" value="1"></td>
+													<td><input type="hidden" name="departKey">
 													 <input	type="text" name="depart" class="form-control" /> </td>
+													 <td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i> </span></td>
 												</tr>
 											</c:if>
 										</tbody>
 									</table>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-5">
 									<table id="mytable2">
 										<tr>
-											<th></th>
+											<th>직급순서</th>
 											<th>직급명</th>
 											<th></th>
 										</tr>
@@ -217,7 +230,7 @@ td {
 											<c:if test="${jobList.size()!=0}">
 												<c:forEach var="job" items="${jobList }">
 													<tr>
-														<td><input type="hidden" name="level" value="${job.divInfolevel}"><c:out value="${job.divInfolevel}"></c:out></td>
+														<td><input type="hidden" name="jlevel" value="${job.divInfolevel}"><c:out value="${job.divInfolevel}"></c:out></td>
 														<td><input type="hidden" name="jobKey" value="${job.eJobcodeFk }"> <input
 															type="text" name="job" class="form-control"  value="${job.job }"/></td>
 														<td><span onclick="removeKey(this,${job.eJobcodeFk});" style="cursor: pointer;"><i class ="fa fa-times"></i></span></td>
@@ -226,7 +239,7 @@ td {
 											</c:if>
 											<c:if test="${jobList.size()==0 }">
 													<tr>
-														<td><input type="hidden" name="level" value="1"></td>
+														<td><input type="hidden" name="jlevel" value="1"></td>
 														<td><input type="hidden" name="jobKey"> <input
 															type="text" name="job" class="form-control" /></td>
 														<td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i></span></td>
