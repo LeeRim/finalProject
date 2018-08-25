@@ -67,4 +67,17 @@ public class EmployeeService {
 		return dao.empNoCheck(chekEmployee);
 	}
 
+	public EmployeeVo selectEmail(String email) {
+		return dao.selectEmail(email);
+	}
+
+	public int updatePwd(EmployeeVo user2) {
+		
+		return dao.updatePwd(user2);
+		
+	}
+
+	
+	
+
 }

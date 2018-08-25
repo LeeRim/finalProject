@@ -1,4 +1,6 @@
 package com.jdl.css.employee.controller;
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.io.File;
 
 
@@ -7,7 +9,17 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -102,6 +114,97 @@ public class EmployeeController {
 		mv.setViewName(viewName);
 		return mv;
 	}
+	
+	
+	
+	@RequestMapping("login2.do")
+	public String login2() {
+		return "index/login2";
+	}
+	
+	
+	
+	@RequestMapping("findPwd.do")
+		public @ResponseBody int findPwd(String main){
+		
+		
+		int result=0;
+		
+		
+		EmployeeVo user2 = eService.selectEmail(main);
+		System.out.println("user2 : " +user2);
+		//6자리의 랜덤 숫자 출력
+		Random random = new Random();
+		String pwd = String.valueOf(random.nextInt(999999));
+		
+		//일치하는 이메일 값이 있을 때 리턴값인 result 를 1로 설정하고 비밀번호 입력
+		if(user2 != null){
+		result =1;
+		
+		user2.setePwd(pwd);
+		
+		
+		}
+		
+		
+		//일치하는 이메일 값이 있을 때 이메일을 발송함.
+		if(result >= 1){
+			final String user = "dbzmsquf1@gmail.com";
+			final String password = "!asdf1234"; 
+
+			Properties prop = new Properties(); 
+			prop.put("mail.smtp.host", "smtp.gmail.com"); 
+			prop.put("mail.smtp.port", 465); 
+			prop.put("mail.smtp.auth", "true");
+			prop.put("mail.smtp.ssl.enable", "true");
+			prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+			
+			
+			//비밀번호 변경
+			int result2 = eService.updatePwd(user2);
+			
+			Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(user, password);
+	            }
+	        });
+
+	        try {
+	            MimeMessage message = new MimeMessage(session);
+	            message.setFrom(new InternetAddress(user));
+
+	            //수신자메일주소
+	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(main)); 
+
+	            // Subject
+	            message.setSubject("CSS에서 아이디 정보와 임시 비밀번호가 발송되었습니다."); //메일 제목을 입력
+
+	            // Text
+	            message.setText("접속 후 반드시 비밀번호를 변경하시기 바랍니다.\n\n 아이디 : "+user2.geteId()+"\n임시 비밀번호 : "+pwd+"\n");   
+	            
+	            
+	            // send the message
+	            Transport.send(message); ////전송
+	            System.out.println("message sent successfully...");
+	        } catch (AddressException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } catch (MessagingException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+			
+			
+		}
+		
+		
+		
+		return result;
+	}
+	
+	
+	
+	
 	
 	
 	//사원등록 ,직급 부서 리스트 출력
@@ -246,11 +349,9 @@ public class EmployeeController {
 		
 		mv.addObject("list", list);
 		mv.addObject("list2", list2);
+		//		System.out.println(main);
 		
-//		System.out.println(main);
-		
-		int eKey;
-		eKey = Integer.parseInt("6");
+		int eKey= employee.geteKey();
 		
 		EmployeeVo select = eService.selectEmployeeInfo(eKey);
 		
@@ -260,7 +361,7 @@ public class EmployeeController {
 			select.setePhoto("empty.png");
 		}
 		
-		System.out.println(select);
+		System.out.println("관리자:"+ select);
 		mv.addObject("select", select);
 		mv.setViewName("employee/employeeUpdate");
 		return mv;
@@ -349,11 +450,6 @@ public class EmployeeController {
 	
 	
 	
-	//관리자-사원정보 update
-//	@RequestMapping("employeeUpdate.do")
-//	public String employeeUpdate(){
-//		return "employee/employeeUpdate";
-//	}
 	
 	
 	
@@ -384,7 +480,7 @@ public class EmployeeController {
 	// select 사원 정보 리스트 출력
 	@RequestMapping("organizationChart2.do")
 	public @ResponseBody List<EmployeeVo> employeeList2(String main, HttpSession session) {
-		System.out.println(main);
+
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		// 회사키
 		int cKey = employee.getcKeyFk();
@@ -420,7 +516,7 @@ public class EmployeeController {
 	// select 사원 정보 팝업 출력
 	@RequestMapping("selectEmployeeInfo.do")
 	public @ResponseBody EmployeeVo selectEmployeeInfo(String main) {
-		System.out.println(main);
+		
 
 		int eKey;
 		eKey = Integer.parseInt(main);
@@ -555,8 +651,7 @@ public class EmployeeController {
 			
 //			System.out.println(main);
 			
-			int eKey;
-			eKey = Integer.parseInt("6");
+			int eKey= employee.geteKey();
 			
 			EmployeeVo select = eService.selectEmployeeInfo(eKey);
 			
@@ -566,7 +661,7 @@ public class EmployeeController {
 				select.setePhoto("empty.png");
 			}
 			
-			System.out.println(select);
+			System.out.println("사원:"+ select);
 			mv.addObject("select", select);
 			mv.setViewName("employee/myPageUpdate");
 			return mv;

@@ -102,6 +102,17 @@
 		LEFT JOIN COMPANY C ON(E.C_KEY_FK = C.C_KEY)
 		WHERE E.E_ID = 	#{eId}
 	</select>
+	
+	
+	
+	<select id="selectEmail" parameterType="string"  resultMap="EmployeeMap">
+		SELECT
+    	E_KEY, E_ID, E_EMAIL
+		FROM EMPLOYEE
+		WHERE E_EMAIL = 	#{eEmail}
+	</select>
+	
+	
 
 	<!-- 쪽지 직원 불러오는 쿼리문 -->
 	<select id="selectEmployeeList" parameterType="int" resultType="EmployeeVo">
@@ -344,6 +355,12 @@
 	</update>
 	
 	
+	<!-- 임시 비밀번호 발급 -->
+	<update id="updatePwd" parameterType="EmployeeVo">
+		UPDATE EMPLOYEE
+        SET E_PWD = #{ePwd}
+        WHERE E_KEY = #{eKey}
+	</update>
 	
 	
 	

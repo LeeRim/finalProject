@@ -69,5 +69,19 @@ public class EmployeeDao {
 		return sqlSession.selectOne("EmployeeMapper.empNoCheck", chekEmployee);
 	}
 
+	public EmployeeVo selectEmail(String email) {
+		return sqlSession.selectOne("EmployeeMapper.selectEmail", email);
+	}
+
+	public int updatePwd(String pwd) {
+		return sqlSession.update("EmployeeMapper.updatePwd", pwd);
+	}
+
+	public int updatePwd(EmployeeVo user2) {
+	 
+		return sqlSession.update("EmployeeMapper.updatePwd", user2);
+		
+	}
+
 
 }

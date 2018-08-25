@@ -44,7 +44,7 @@
 
 					<div class="flex-sb-m w-full p-b-30">
 						<div>
-							<a href="#" class="txt1">
+							<a href="login2.do" class="txt1">
 								Forgot Account?
 							</a>
 						</div>
