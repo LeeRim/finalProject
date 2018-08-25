@@ -63,8 +63,10 @@
 .org_map2 {
 	float: left;
 	width: 340px;
-	padding:20px 0;
-	background: #F2F2F2;
+	height: 219px;
+	padding:20px 10px;
+	background: white;
+	border-right: 1px #BDBDBD solid;
 	border-bottom-left-radius: 5px;
     border-bottom: 3px solid #3c8dbc;
 }
@@ -191,7 +193,11 @@ td {
 		}
 
 
-
+.btn-df{
+    background-color: #f4f4f4;
+    color: #444;
+    border-color: #ddd;
+}
 
 
 
@@ -553,28 +559,21 @@ td {
 						</div>
 						<div class="org_map2">
 
-							<button type="button" class="btn bg-maroon margin"
+
+							<button type="button" class="btn btn-primary margin"
 								id="getCheckedAll">사원검색</button>
-							<button type="button" class="btn bg-orange margin" id="checkAll">전체선택</button>
-							<button type="button" class="btn bg-orange margin"
+							<button type="button" class="btn btn-df margin" id="checkAll">전체선택</button>
+							<button type="button" class="btn btn-df margin"
 								id="uncheckAll">전체해제</button>
 								
 							<div id="sidetreecontrol">
-							<button type="button" class="btn bg-maroon margin"
+							<button type="button" class="btn btn-primary margin"
 								id="allListView">전체검색</button>
 								<a href="?#"><button type="button"
-										class="btn bg-orange margin">전체닫기</button></a> <a href="?#"><button
-										type="button" class="btn bg-orange margin">전체열기</button></a>
+										class="btn btn-df margin">전체닫기</button></a> <a href="?#"><button
+										type="button" class="btn btn-df margin">전체열기</button></a>
 							</div>
-							<div style="display: block;">
-								<a href="department.do"><button type="button"
-										class="btn bg-purple margin">부서관리</button></a> <a
-									href="jobGrade.do"><button type="button"
-										class="btn bg-purple margin">직위관리</button></a> <a
-									href="memberAdd.do"><button type="button"
-										class="btn bg-purple margin">사원등록</button></a>
-							</div>
-							<button type="button" class="btn bg-olive margin" onclick="checkUser();">쪽지보내기</button>
+							
 						</div>
 
 					</div>
