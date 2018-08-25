@@ -5,18 +5,34 @@ import java.sql.Date;
 public class CommuteCheckVo {
 	private int id;
 	private int eKey; //사원 번호
-	private Date inDate; //일
+	private String inDate; //일
 	private Date inTime; //출근시간
 	private Date outTime; //퇴근시간
 	private int cKeyFk; //회사키
 	private String strInTime;
 	private String strOutTime;
 
+	public int geteKey() {
+		return eKey;
+	}
+
+	public void seteKey(int eKey) {
+		this.eKey = eKey;
+	}
+
+	public int getcKeyFk() {
+		return cKeyFk;
+	}
+
+	public void setcKeyFk(int cKeyFk) {
+		this.cKeyFk = cKeyFk;
+	}
+
 	public CommuteCheckVo(){
 		
 	}
 
-	public CommuteCheckVo(int id, int eKey, Date inDate, Date inTime, Date outTime, int cKeyFk, String strInTime,
+	public CommuteCheckVo(int id, int eKey, String inDate, Date inTime, Date outTime, int cKeyFk, String strInTime,
 			String strOutTime){
 		super();
 		this.id = id;
@@ -61,11 +77,11 @@ public class CommuteCheckVo {
 		this.strOutTime = strOutTime;
 	}
 
-	public Date getInDate() {
+	public String getInDate() {
 		return inDate;
 	}
 
-	public void setInDate(Date inDate) {
+	public void setInDate(String inDate) {
 		this.inDate = inDate;
 	}
 

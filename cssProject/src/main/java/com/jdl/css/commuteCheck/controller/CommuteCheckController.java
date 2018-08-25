@@ -39,7 +39,6 @@ CommuteCheckService service;
 		mav.addObject("list",list);
 		mav.addObject("list2",list2);
 		System.out.println(list);
-		System.out.println(list2);
 		mav.setViewName("commuteCheck/commuteCheck");
 		return mav;
 	}
