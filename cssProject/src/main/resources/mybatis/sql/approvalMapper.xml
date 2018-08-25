@@ -598,7 +598,7 @@
 	<select id="selectVacationForm" parameterType="int" resultType="VacationFormVo">
 		SELECT VF_KEY, A_KEY_FK, VF_TYPE,TO_CHAR(VF_STARTDATE,'YYYY-MM-DD')
 		VF_STARTDATE,TO_CHAR(VF_ENDDATE,'YYYY-MM-DD') VF_ENDDATE,
-		VF_HALFFLAG,
+		VF_HALFFLAG,VF_USEDDATE,
 		VF_REASON
 		FROM VACATION_FORM
 		WHERE A_KEY_FK = #{aKey}
@@ -676,7 +676,7 @@
 	<insert id="insertVacation" parameterType="VacationFormVo">
 		INSERT INTO
 		VACATION_FORM
-		VALUES(SEQ_VACATION_FORM.NEXTVAL,#{aKeyFk},#{vfType},#{vfStartdate},#{vfEnddate},#{vfHalfflag},#{vfReason})
+		VALUES(SEQ_VACATION_FORM.NEXTVAL,#{aKeyFk},#{vfType},#{vfStartdate},#{vfEnddate},#{vfHalfflag},#{vfUseddate},#{vfReason})
 	</insert>
 
 	<insert id="insertOrderForm" parameterType="OrderFormVo">
