@@ -416,13 +416,13 @@
 		DELETE FROM DIVISION WHERE DIV_KEY=#{divKey}
 	</delete>
 	
-	<insert id="insertDivision" parameterType="DivisionVo">
+	<insert id="insertDepartment" parameterType="DivisionVo">
 		MERGE INTO DIVISION DIV
             USING DUAL
             ON (DIV_INFOLEVEL=#{divInfolevel} AND C_KEY_FK=#{cKeyFk} AND DIV_TYPE=1)
             WHEN MATCHED THEN
                       UPDATE SET
-                      	DIV_KEY=#{divKey}
+                      	DIV_KEY=#{divKey},
                         DIV_INFO=#{divInfo}
             WHEN NOT MATCHED THEN
                      INSERT (DIV_KEY, C_KEY_FK, DIV_TYPE, DIV_INFO, DIV_INFOLEVEL) VALUES (SEQ_DIVISION.NEXTVAL,#{cKeyFk} , #{divType}, #{divInfo}, #{divInfolevel}
