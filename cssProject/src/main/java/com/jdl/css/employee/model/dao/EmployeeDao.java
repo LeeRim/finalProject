@@ -116,5 +116,9 @@ public class EmployeeDao {
 		return sqlSession.insert("EmployeeMapper.insertDivision", division);
 	}
 
+	public int employeeDelete(int eKey) {
+		return sqlSession.delete("EmployeeMapper.employeeDelete", eKey);
+	}
+
 
 }

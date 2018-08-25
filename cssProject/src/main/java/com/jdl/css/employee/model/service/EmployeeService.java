@@ -119,5 +119,11 @@ public class EmployeeService {
 		return result;
 	}
 
+	public int employeeDelete(int eKey) {
+		
+		return dao.employeeDelete(eKey);
+		
+	}
+
 
 }

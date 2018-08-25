@@ -212,6 +212,10 @@
 	</update>
 
 
+	<!-- 사원삭제 -->
+	<delete id="employeeDelete" parameterType="int">
+		DELETE FROM EMPLOYEE WHERE E_KEY = #{eKey}
+	</delete>
 
 
 	<!-- 조직도 select 사원 리스트 출력 쿼리문 -->
@@ -261,7 +265,7 @@
 		WHERE
 		E.C_KEY_FK =#{cKey}
 		ORDER BY
-		E_DEPART_FK ASC , J.DIV_INFOLEVEL ASC,E.E_NAME
+		E_DEPART_FK, E_JOBCODE_FK ASC , J.DIV_INFOLEVEL ,E.E_KEY ASC
 	</select>
 
 
