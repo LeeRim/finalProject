@@ -109,7 +109,7 @@ public class EmployeeController {
 			session.setAttribute("indexApproval", waitingApprovals);
 
 			if (user.geteType().equals("1") && user.getcLevel() == 0) {
-				viewName = "redirect:department.do";
+				viewName = "redirect:department.do?check=check";
 			} else if (user.geteType().equals("1")) {
 				viewName = "redirect:adminIndex.do";
 			} else if (user.geteType().equals("2")) {
@@ -477,7 +477,7 @@ public class EmployeeController {
 	
 	
 	@RequestMapping("department.do")
-	public ModelAndView department(ModelAndView mv, HttpSession session,String check) {
+	public ModelAndView department(ModelAndView mv, HttpSession session, String check) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 		List<EmployeeVo> jobList = eService.selectJobList(user.getcKeyFk());
 		List<EmployeeVo> departList = eService.selectDepartList(user.getcKeyFk());
@@ -490,8 +490,8 @@ public class EmployeeController {
 
 	// 부서,직급 insert
 	@RequestMapping("insertDivision.do")
-	public String insertDivision(HttpSession session, String depart, String job, String departKey, String jobKey,
-			String jlevel,String removeKeys,String check) {
+	public ModelAndView insertDivision(HttpSession session, String depart, String job, String departKey, String jobKey,
+			String jlevel,String removeKeys,String check,ModelAndView mv) {
 		
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 		String[] departArr = depart.split(",");
@@ -542,11 +542,17 @@ public class EmployeeController {
 		}
 		int result = eService.insertDivision(divisionList);
 		System.out.println("result" + result);
-		/*if(check.equals("true")){
-			return "companyStartHome";
+		if(check.equals("check")){
+			List<EmployeeVo> list = eService.selectJobList(user.getcKeyFk());
+			List<EmployeeVo> list2 = eService.selectDepartList(user.getcKeyFk());
+
+			mv.addObject("list", list);
+			mv.addObject("list2", list2);
+			 mv.setViewName("companyStartHome");
 		}else{
-		}*/
-		return "redirect:department.do";
+			 mv.setViewName("redirect:department.do");
+		}
+		return mv;
 	}
 
 	@RequestMapping("jobGrade.do")
@@ -669,9 +675,9 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping("insertMember2.do")
-	public String memberJoin2(@RequestParam("eBirth1") String eBirth1, @RequestParam("eHireDate1") String eHireDate1,
+	public ModelAndView memberJoin2(@RequestParam("eBirth1") String eBirth1, @RequestParam("eHireDate1") String eHireDate1,
 			HttpServletRequest request, @RequestParam("ePhoto1") MultipartFile ePhoto, EmployeeVo member,
-			HttpSession session, @RequestParam("flag") String flag) {
+			HttpSession session, @RequestParam("flag") String flag, ModelAndView mv) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		int cKey = employee.getcKeyFk();
 		String view="";
@@ -713,13 +719,19 @@ public class EmployeeController {
 
 		int result = eService.insertMember(member);
 		System.out.println(flag);
-		
+			
+		List<EmployeeVo> list = eService.selectJobList(employee.getcKeyFk());
+		List<EmployeeVo> list2 = eService.selectDepartList(employee.getcKeyFk());
+
+		mv.addObject("list", list);
+		mv.addObject("list2", list2);
 		
 			view ="companyStartHome";
 		}else{
 			view ="redirect:companyPayment.do?cKeyFk="+cKey;
 		}
-		return view;
+		mv.setViewName(view);
+		return mv;
 	}
 	
 	@RequestMapping("stateUpdate.do")
@@ -759,10 +771,10 @@ public class EmployeeController {
 			EmployeeVo select = eService.selectEmployeeInfo(eKey);
 			
 			
-			if(select.getePhoto()==null){
-				
-				select.setePhoto("empty.png");
-			}
+//			if(select.getePhoto()==null){
+//				
+//				select.setePhoto("empty.png");
+//			}
 			
 			mv.addObject("select", select);
 			mv.setViewName("employee/myPageUpdate");
