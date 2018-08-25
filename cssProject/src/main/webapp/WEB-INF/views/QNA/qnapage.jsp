@@ -23,7 +23,7 @@ $(function(){
 		if(eType == 1){
 			location.href="selectQNA.do?qKey=" + boardNo;		
 		}else if(eType == 0){
-			location.href="updateQNA.do?qKey=" + boardNo;
+			location.href="QNAreply.do?qKey=" + boardNo;
 		}
 	});
 });
