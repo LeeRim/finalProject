@@ -352,8 +352,9 @@ public class EmployeeController {
 	
 	//관리자-사원정보 select
 	@RequestMapping("employeeInfo.do")
-	public ModelAndView employeeInfo(ModelAndView mv,HttpSession session){
+	public ModelAndView employeeInfo(ModelAndView mv,HttpSession session, @RequestParam("eKey") int eKey){
 		
+		System.out.println(eKey);
 		EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
 		List<EmployeeVo> list = eService.selectJobList(employee.getcKeyFk());
 		List<EmployeeVo> list2 = eService.selectDepartList(employee.getcKeyFk());
@@ -361,7 +362,6 @@ public class EmployeeController {
 		mv.addObject("list", list);
 		mv.addObject("list2", list2);
 
-		int eKey= employee.geteKey();
 		
 		EmployeeVo select = eService.selectEmployeeInfo(eKey);
 		
@@ -576,6 +576,25 @@ public class EmployeeController {
 		mv.setViewName("employee/organizationChart");
 		return mv;
 	}
+	
+	
+		// 관리자 사원 정보 리스트 출력
+		@RequestMapping("adminOrganizationChart.do")
+		public ModelAndView adminOrganizationChart(ModelAndView mv, HttpSession session) {
+
+			EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
+			// 회사키
+			int cKey = employee.getcKeyFk();
+
+			List<EmployeeVo> list = eService.selectEmployeeList(cKey);
+			mv.addObject("list", list);
+			mv.setViewName("employee/adminOrganizationChart");
+			
+			return mv;
+		}
+	
+	
+	
 
 	// select 사원 정보 리스트 출력
 	@RequestMapping("organizationChart2.do")

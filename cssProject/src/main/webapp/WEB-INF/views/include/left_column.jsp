@@ -58,7 +58,7 @@
 
         <li class="active"><a href="organizationChart.do"><i class="fa fa-link"></i> <span>조직도</span></a></li>
         <li><a href="employeeIndex.do"><i class="fa fa-link"></i> <span>사원 인덱스</span></a></li>
-        <li><a href="employeeInfo.do"><i class="fa fa-link"></i> <span>사원 정보 수정</span></a></li>
+        <li><a href="adminOrganizationChart.do"><i class="fa fa-link"></i> <span>사원 정보 수정</span></a></li>
         <li><a href="myPageUpdate.do"><i class="fa fa-link"></i> <span>마이페이지 수정</span></a></li>
         <li><a href="memberAdd.do"><i class="fa fa-link"></i> <span>사원 등록</span></a></li>
         <li><a href="department.do"><i class="fa fa-link"></i> <span>부서 관리</span></a></li>
