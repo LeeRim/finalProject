@@ -5,6 +5,8 @@ import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 
+import com.jdl.css.employee.model.vo.EmployeeVo;
+
 @Component
 public class BoardCommentVo {
 	private int commentKey; //댓글 기본키
@@ -13,7 +15,16 @@ public class BoardCommentVo {
 	private String cContent; //내용
 	private Date cDate; //작성일
 	private String eName; //작성자이름
+	private EmployeeVo user; //작성자 정보
 	
+	public EmployeeVo getUser() {
+		return user;
+	}
+
+	public void setUser(EmployeeVo user) {
+		this.user = user;
+	}
+
 	public BoardCommentVo(){
 		
 	}

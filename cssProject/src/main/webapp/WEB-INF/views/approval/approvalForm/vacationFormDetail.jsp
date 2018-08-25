@@ -34,6 +34,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		});
 	});
 	
+
+	
 </script>
 <!--  -->
 
@@ -64,9 +66,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-				<div class="addApprover">
-					<a class="btn btn-app" href="#" onclick="openSelectApprover();">
-						<i class="fa fa-user-plus"></i>결재자추가
+				<div class="doApproval">
+					<a class="btn btn-app" href="#" onclick="openDoApproval();">
+						<i class="fa fa-check"></i>결재하기
 					</a>
 				</div>
 				<section class="content_wrapper">
@@ -153,9 +155,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 																				class='sign_rank_wrap'><span
 																					class='sign_rank'><c:out
 																							value="${appCon.approver.job }"></c:out></span></span><span
-																				class='sign_wrap'><span class='sign_name'><small><c:out value="${appCon.acType}"></c:out></small><br>
-																				<c:if test="${appCon.acCondition ==1}"><img alt="" src="resources/upload/image/ok.png" height="30" width="30"></c:if>
-																				<c:if test="${appCon.acCondition ==2}"><img alt="" src="resources/upload/image/companion.png"></c:if>
+																				class='sign_wrap'><span class='sign_name'><c:if test="${appCon.acType != null}"><small><c:out value="${appCon.acType}"></c:out></small><br></c:if>
+																				<c:if test="${appCon.acCondition ==1}"><img alt="" src="resources/upload/image/ok.png" height="30" width="30" style="margin-left:5px"></c:if>
+																				<c:if test="${appCon.acCondition ==2}"><img alt="" src="resources/upload/image/companion.png" height="30" width="30" style="margin-left:5px"></c:if>
 																						<br><c:out value="${appCon.approver.eName }"></c:out></span></span><span
 																				class='sign_date_wrap'><span
 																					class='sign_date ' id='date_15162'>${appCon.acApprovalDate }</span></span></span></span>
@@ -209,7 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>사용일수
 															: </b> <input type="text" class="ipt_editor ipt_editor_num"
 														data-dsl="{{number:usingPoint}}" name="usingPoint"
-														value="1" readonly="readonly"> <b
+														value="${vf.vfUseddate }" readonly="readonly"> <b
 														id="usingPoint_Comment"
 														style="font-weight: bold; color: red"></b> </span></td>
 											</tr>
@@ -235,26 +237,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 											</tr>
 											<tr>
 												<td
-													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;">
-
-													연차 일수</td>
-												<td
-													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 22px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle;"><span
-													id="restPointArea"
-													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>잔여연차
-															: </b> <input type="text" class="ipt_editor ipt_editor_num"
-														name="restPoint" id="restPoint" value="15"
-														readonly="readonly"> <b id="restPoint_Comment"
-														style="font-weight: bold; color: red"></b> </span><span
-													id="applyPointArea"
-													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>신청연차
-															: </b> <input type="text" class="ipt_editor ipt_editor_num"
-														name="applyPoint" id="applyPoint" value="3"
-														readonly="readonly"> <b id="applyPoint_Comment"
-														style="font-weight: bold; color: red"></b> </span></td>
-											</tr>
-											<tr>
-												<td
 													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 80px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;"><b
 													style="color: rgb(255, 0, 0);">*</b>휴가 사유</td>
 												<td
@@ -274,17 +256,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										</tbody>
 									</table></span>
 									<div class="form-group" style="height: 100px;">
-											<div style="float: left; height: 100px; width: 130px;">
-												<div class="btn btn-default btn-file">
-													<i class="fa fa-paperclip"></i> Attachment <input
-														multiple="multiple" type="file" name="files"
-														class="upload-hidden">
-												</div>
-												<p class="help-block">Max. 32MB</p>
+											<div class="file-list">
+											<c:forEach var="attach" items="${approval.aAttachList}">
+												<br><a href="/css/resources/upload/approval/<c:out value="${attach.attaFileName}"/>" download><i class="fa fa-paperclip"></i>&nbsp<c:out value="${attach.attaFileName}"></c:out></a>
+											</c:forEach>
 											</div>
-											<div class="file-list"></div>
 										</div>
-									<button class="btn btn-primary"><i class="fa fa-edit"></i>작성</button>
 							</form>
 						</div>
 
@@ -304,5 +281,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+     <script>
+     	$(function(){
+     		if($("#startHalf").val() == '<%=req.getBathroom()%>'){
+     			$("#bathroom").prop("checked",true);
+     		}
+     	});
+     </script>
 </body>
 </html>

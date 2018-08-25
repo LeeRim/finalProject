@@ -81,7 +81,12 @@ $(function(){
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-	<c:import url="admin_side.jsp"/>
+	<c:if test="${sessionScope.user.eType eq '0' }">
+		<c:import url="admin_side.jsp"/>
+	</c:if>
+	<c:if test="${sessionScope.user.eType eq '1' }">
+		<c:import url="../include/left_column_companyAdmin.jsp"/>
+	</c:if>
 
     <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

@@ -123,7 +123,7 @@ public class QNAController {
 		mv.addObject("qnaAttach", qnaAttach);
 		mv.addObject("qv", qv);
 		mv.addObject("qKey", qKey);
-		mv.setViewName("QNA/qnarepaly");
+		mv.setViewName("QNA/QNAre");
 		return mv;
 	}
 	

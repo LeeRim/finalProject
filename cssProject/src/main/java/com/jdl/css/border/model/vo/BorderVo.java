@@ -25,7 +25,16 @@ public class BorderVo extends PageInfo{
 	private int endRow;
 	private String bAttach;
 	private List<AttachmentVo> attach;
+	private String ePhoto;
 	
+	public String getePhoto() {
+		return ePhoto;
+	}
+
+	public void setePhoto(String ePhoto) {
+		this.ePhoto = ePhoto;
+	}
+
 	public BorderVo(){
 		
 	}
