@@ -7,13 +7,12 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Calendar</title>
+  <title>Calendar</title>
 
   <!-- fullCalendar -->
   <link rel="stylesheet" href="resources/bower_components/fullcalendar/dist/fullcalendar.min.css">
   <link rel="stylesheet" href="resources/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
   <!-- jQuery 3 -->
-	<!-- AdminLTE App -->
 	<script src="resources/dist/js/demo.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -136,13 +135,10 @@
 
         // store the Event Object in the DOM element so we can get to it later
         $(this).data('eventObject', eventObject)
-
-        // make the event draggable using jQuery UI
-
       });
     }
 
-    init_events($('#external-events div.external-event'))
+   // init_events($('#external-events div.external-event'))
 
     /* initialize the calendar
      -----------------------------------------------------------------*/
@@ -173,7 +169,7 @@
           today: 'today'
         },
       //Random default events
-      
+      displayEventTime : false,
       events    : dataList,
       editable  : false,
       droppable : false, // this allows things to be dropped onto the calendar !!!
@@ -186,21 +182,18 @@
         var copiedEventObject = $.extend({}, originalEventObject)
 
         // assign it the date that was reported
-        copiedEventObject.start           = date
+       /*  copiedEventObject.start           = date
         copiedEventObject.allDay          = allDay
         copiedEventObject.backgroundColor = $(this).css('background-color')
-        copiedEventObject.borderColor     = $(this).css('border-color')
+        copiedEventObject.borderColor     = $(this).css('border-color') */
 
         // render the event on the calendar
         
         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
 
-        // is the "remove after drop" checkbox checked?
-
       }
     })
 	  
-    
   })
 
 
