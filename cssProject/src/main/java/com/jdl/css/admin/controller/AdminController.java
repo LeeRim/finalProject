@@ -108,10 +108,6 @@ public class AdminController {
 		return "redirect:companyList.do";
 	}
 	
-	@RequestMapping("qnaList.do")
-	public String qnaList(){
-		return "admin/qnaList";
-	}
 	
 	@RequestMapping("calendarList.do")
 	public @ResponseBody List<CompanyVo> calList(String dateList){

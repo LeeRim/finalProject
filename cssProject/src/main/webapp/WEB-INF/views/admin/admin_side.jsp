@@ -85,7 +85,7 @@
 						<li><a href="companySet.do" onclick="menuHighlight(2);">회원설정</a></li>
 					</ul>
 				</li>
-				<li><a href="empQNA.do" onclick="menuHighlight(3);"><i class="fa fa-question"></i> <span>문의사항</span></a></li>
+				<li><a href="qnaList.do" onclick="menuHighlight(3);"><i class="fa fa-question"></i> <span>문의사항</span></a></li>
 				<li class="treeview">
 					<a href="#" ><i class="fa fa-krw"></i>
 						<span>매출현황</span>

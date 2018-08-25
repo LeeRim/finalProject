@@ -84,8 +84,8 @@ public class QNAController {
 		return mv;
 	}
 	
-	@RequestMapping("empQNA.do")
-	public ModelAndView empQNA(HttpSession session, ModelAndView mv){
+	@RequestMapping("qnaList.do")
+	public ModelAndView qnaList(HttpSession session, ModelAndView mv){
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		//본인의 리스트만 조회 로직
 		
@@ -100,7 +100,7 @@ public class QNAController {
 			System.out.println("질문답변 : " + list);
 			mv.addObject("list", list);
 		}
-		mv.setViewName("admin/qnaList");
+		mv.setViewName("qna/qnaList");
 		return mv;
 	}
 	

@@ -135,6 +135,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		console.log(endHalf);
 		var totalVDay = betweenDay + startHalf + endHalf;
 		
+		var vfHalfflag = 0;
+		if(startHalf == 0 && endHalf == 0){
+			vfHalfflag = 0;
+		}else if(startHalf == 0.5 && endHalf == 0){
+			vfHalfflag = 1;
+		}else if(startHalf == 0 && endHalf == 0.5){
+			vfHalfflag = 2;
+		}else{
+			vfHalfflag = 3;
+		}
+		
 		$("#useV").val(totalVDay);
 	}
 	
@@ -171,6 +182,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							<form id="vacationForm" action="writeVacation.do" class="form_doc_editor editor_view" method="post"  enctype="multipart/form-data" >
 								<input type="hidden" id="appStr" name="appStr" value="">
 								<input type="hidden" id="insteads" name="insteads" value="">
+								<input type="hidden" id="vfHalfflag" name="vfHalfflag" value="">
 									<table class="__se_tbl" >
 										<!-- Header -->
 										<tbody>

@@ -19,6 +19,7 @@ public class GivevacationVo {
 	}
 
 	
+	
 
 	public GivevacationVo(int gvKey, int cKeyFk, int gvYear, int gvVacadate, String gvDate) {
 		this.gvKey = gvKey;
@@ -68,6 +69,8 @@ public class GivevacationVo {
 	}
 
 
+
+
 	public String getGvDate() {
 		return gvDate;
 	}
@@ -80,11 +83,16 @@ public class GivevacationVo {
 
 
 
+
 	@Override
 	public String toString() {
 		return "GivevacationVo [gvKey=" + gvKey + ", cKeyFk=" + cKeyFk + ", gvYear=" + gvYear + ", gvVacadate="
 				+ gvVacadate + ", gvDate=" + gvDate + "]";
 	}
+
+
+
+	
 
 
 	

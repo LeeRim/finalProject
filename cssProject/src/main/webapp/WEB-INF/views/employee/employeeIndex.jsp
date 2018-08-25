@@ -460,6 +460,7 @@
       
       events    : dataList,
       editable  : false,
+      displayEventTime : false,
       droppable : false, // this allows things to be dropped onto the calendar !!!
       drop      : function (date, allDay) { 
 
