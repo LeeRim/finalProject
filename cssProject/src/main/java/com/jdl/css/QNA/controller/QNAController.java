@@ -34,7 +34,7 @@ public class QNAController {
 	public ModelAndView writeQna(@RequestParam("file") MultipartFile file, HttpServletRequest request, QNAVo qv, ModelAndView mv, HttpSession session){
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		
-		qv.setqWriterFk(employee.geteKey());
+		qv.setqWriterFk(employee.getcKeyFk());
 		System.out.println("QNA 작성 : " + qv);
 		int QNAresult = service.insertQNA(qv);
 		
@@ -88,18 +88,19 @@ public class QNAController {
 	public ModelAndView empQNA(HttpSession session, ModelAndView mv){
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		//본인의 리스트만 조회 로직
-		List<QNAVo> list = service.selectQNA(employee);
 		
-		System.out.println("질문답변 : " + list);
-		mv.addObject("list", list);
-		mv.setViewName("QNA/qnapage");
 		
 		//관리자는 모든 리스트를 조회해오는 로직
-		List<QNAVo> AllList = service.selectAll();
-		if(employee.geteType().charAt(0) == '1'){
-			mv.addObject("list", AllList);
-			mv.setViewName("QNA/qnapage");
+		if(employee.geteType().charAt(0) == '0'){
+			List<QNAVo> list = service.selectAll();
+			mv.addObject("list", list);
+			
+		}else if(employee.geteType().charAt(0) == '1'){
+			List<QNAVo> list = service.selectQNA(employee);
+			System.out.println("질문답변 : " + list);
+			mv.addObject("list", list);
 		}
+		mv.setViewName("admin/qnaList");
 		return mv;
 	}
 	
@@ -112,7 +113,6 @@ public class QNAController {
 	public String longd(){
 		return "QNA/QNAWrite";
 	}
-	
 	@RequestMapping("selectQNA.do")
 	public ModelAndView selectQNA(ModelAndView mv, int qKey){
 		System.out.println("키 값 : " + qKey);
@@ -123,8 +123,22 @@ public class QNAController {
 		mv.addObject("qnaAttach", qnaAttach);
 		mv.addObject("qv", qv);
 		mv.addObject("qKey", qKey);
-		mv.setViewName("QNA/qnarepaly");
+		mv.setViewName("QNA/QNAre");
 		return mv;
 	}
 	
+	@RequestMapping("QNAreply.do")
+	public ModelAndView qnareplay(int qKey, ModelAndView mv){
+		System.out.println("키 값 : " + qKey);
+		QNAVo qv = service.selectone(qKey);
+		
+		AttachmentVo qnaAttach = attachservice.qnaAttach(qKey);
+		
+		mv.addObject("qnaAttach", qnaAttach);
+		mv.addObject("qv", qv);
+		mv.addObject("qKey", qKey);
+		mv.addObject("qv", qv);
+		mv.setViewName("QNA/qnarepaly");
+		return mv;
+	}
 }

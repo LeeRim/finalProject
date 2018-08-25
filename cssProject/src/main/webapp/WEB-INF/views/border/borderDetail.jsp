@@ -130,6 +130,10 @@
    <c:import url="/WEB-INF/views/border/left_column_board.jsp"/>
 	<div class="content-wrapper">
 	<section class="content-header">
+      <h1>
+        Data Tables
+        <small>advanced tables</small>
+      </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Tables</a></li>
@@ -159,7 +163,7 @@
           <div class="box box-widget" style="width:100%;">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="resources/upload/empPhoto/${board.ePhoto}" alt="User Image">
+                <img class="img-circle" src="resources/dist/img/user1-128x128.jpg" alt="User Image">
                 <span class="username">${board.bTitle }</span>
                 <span class="description"><c:out value="${board.eName }"/></span>
               </div>
@@ -184,11 +188,11 @@
             <!-- 이부분 반복 -->
               <div class="box-comment">
                 <!-- User image -->
-                <img class="img-circle img-sm" src="resources/upload/empPhoto/${b.user.ePhoto}" alt="User Image">
+                <img class="img-circle img-sm" src="resources/dist/img/user3-128x128.jpg" alt="User Image">
 
                 <div class="comment-text">
                       <span class="username">
-                        	${b.user.eName}
+                        ${sessionScope.user.eName} 사원
                         <span class="text-muted pull-right">${b.cDate}</span>
                         	<span class="text-muted pull-right">
                         		<button type="button" onclick="updateCommentForm(this, true);" class="btn btn-default btn-xs modifyBtn""><i class="fa fa-share"></i> 수정</button>
@@ -211,7 +215,7 @@
             <c:if test="${!empty user}">
             <div class="box-footer">
               <form action="writeComment.do" method="post">
-                <img class="img-responsive img-circle img-sm" src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" alt="Alt Text">
+                <img class="img-responsive img-circle img-sm" src="resources/dist/img/user4-128x128.jpg" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
                   <input type="text" name="cContent" class="form-control input-sm" placeholder="댓글 작성후 Enter시 등록됩니다.">

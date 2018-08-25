@@ -242,7 +242,7 @@
           </div>
           <!-- /.widget-user -->
         </div>
-
+        
            <div class="col-md-3">
            <div class="box box-default" style="height:150px; text-align:center;">
                <div class="box-header with-border">
@@ -316,8 +316,10 @@
                   </c:if>
                </table>
             </div>
-         </div>         
+         </div>
+           
      </div>      
+     
 	  
 	  <div class="row">
      	<div class="col-md-9" style="width:58.3%;">

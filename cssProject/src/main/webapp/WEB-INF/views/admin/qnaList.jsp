@@ -61,7 +61,22 @@
 	}
 </style>
 <script>
-
+$(function(){
+	$(".box-body td").mouseenter(function(){
+		$(this).parent().css("background","darkgray");
+		$(this).parent().css("cursor","pointer");
+	}).mouseout(function(){
+		$(this).parent().css("background","white");
+	}).click(function(){
+		var boardNo = $(this).parent().children().eq(0).text();
+		var eType = "${user.eType}";
+		if(eType == 1){
+			location.href="selectQNA.do?qKey=" + boardNo;		
+		}else if(eType == 0){
+			location.href="QNAreply.do?qKey=" + boardNo;
+		}
+	});
+});
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -93,6 +108,7 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
+                	<th>글번호</th>
                   <th>작성일</th>
                   <th>회사 명</th>
                   <th>제목</th>
@@ -101,13 +117,21 @@
                 </tr>
                 </thead>
                 <tbody>
-	                <tr>
-	                  <td>2018/08/08</td>
-	                  <td>KH정보교육원</td>
-	                  <td>집에보내주세요</td>
-	                  <td>읽지않음</td>
-	                  <td> </td>
-	                 </tr>
+                	<c:forEach items="${list }" var="a">
+		                <tr>
+		                	<td>${a.qKey }</td>
+		                  <td>${a.qDate }</td>
+		                  <td>${a.cName }</td>
+		                  <td>${a.qTitle }</td>
+		                  <c:if test="${a.qaCheck eq 'Y'}">
+			                  <td>답변완료</td>
+		                  </c:if>
+		                  <c:if test="${a.qaCheck eq 'N'}">
+			                  <td>답변대기</td>
+		                  </c:if>
+		                  <td>${a.aDate }</td>
+		                 </tr>
+                	</c:forEach>
                 </tbody>
               </table>
             </div>

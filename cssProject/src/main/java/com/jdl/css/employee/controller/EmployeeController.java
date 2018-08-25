@@ -7,7 +7,17 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,10 +38,10 @@ import com.jdl.css.calender.model.service.CalenderService;
 import com.jdl.css.calender.model.vo.CalenderVo;
 import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.service.VacationService;
-import com.jdl.css.common.model.vo.DivisionVo;
 import com.jdl.css.common.model.vo.VacationVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
+import com.jdl.css.givevacation.model.vo.GivevacationVo;
 import com.jdl.css.note.model.service.NoteService;
 import com.jdl.css.note.model.vo.NoteVo;
 
@@ -52,7 +62,7 @@ public class EmployeeController {
 
 	@Autowired
 	BorderService borderservice;
-
+	
 	@Autowired
 	ApprovalService aService;
 
@@ -60,37 +70,39 @@ public class EmployeeController {
 	public String openLoginForm() {
 		return "index/login";
 	}
-
+	
+	
+	
 	@RequestMapping("login.do")
-	public ModelAndView login(EmployeeVo employee, HttpSession session, ModelAndView mv) {
+	public ModelAndView login(EmployeeVo employee,HttpSession session, ModelAndView mv){
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
 
 		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
 		List<ApprovalVo> waitingApprovals = aService.selectWaitingApprovalList(user.geteKey());
 
-		// 근속년수에 따른 총 휴가 값 가지고오기
-		VacationVo giveVacation = vService.selectTotalVacation(user);
-		// 휴가 사용일 가져오기
+		//근속년수에 따른 총 휴가 값 가지고오기
+		GivevacationVo giveVacation = vService.selectTotalVacation(user);
+		//휴가 사용일 가져오기
 		List<VacationVo> usedVacation = vService.selectUsedVacation(user);
 		int totalUsedVacation = 0;
-		for (VacationVo vacation : usedVacation) {
+		for(VacationVo vacation : usedVacation){
 			totalUsedVacation += vacation.getvUseddate();
 		}
-		try {
+		try{
 			user.setTotalVacation(giveVacation.getGvVacadate());
-			user.setRemainingVacation(giveVacation.getGvVacadate() - totalUsedVacation);
+			user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
 			user.setWorkYears(giveVacation.getGvYear());
-		} catch (NullPointerException e) {
-
+		}catch (NullPointerException e) {
+			
 		}
 		System.out.println(user);
-		String viewName = "";
-
-		if (user == null) {
+		String viewName ="";
+		
+		if(user == null){
 			System.out.println("아이디 오류");
 			mv.addObject("errorMsg", "아이디 또는 비밀번호가 틀렸습니다.");
 			viewName = "index/login";
-		} else if (user.getePwd().equals(employee.getePwd())) {
+		}else if(user.getePwd().equals(employee.getePwd())){
 			session.setAttribute("user", user);
 			session.setAttribute("indexNote", indexNote);
 			session.setAttribute("indexApproval", waitingApprovals);
@@ -104,7 +116,7 @@ public class EmployeeController {
 			} else if (user.geteType().equals("0")) {
 				viewName = "redirect:adminMain.do";
 			}
-		} else {
+		}else{
 			System.out.println("비밀번호 오류");
 			mv.addObject("errorMsg", "아이디 또는 비밀번호가 틀렸습니다.");
 			viewName = "index/login";
@@ -114,7 +126,98 @@ public class EmployeeController {
 		return mv;
 	}
 
-	// 사원등록 ,직급 부서 리스트 출력
+
+	@RequestMapping("login2.do")
+	public String login2() {
+		return "index/login2";
+	}
+	
+	
+	
+	@RequestMapping("findPwd.do")
+		public @ResponseBody int findPwd(String main){
+		
+		
+		int result=0;
+		
+		
+		EmployeeVo user2 = eService.selectEmail(main);
+		System.out.println("user2 : " +user2);
+		//6자리의 랜덤 숫자 출력
+		Random random = new Random();
+		String pwd = String.valueOf(random.nextInt(999999));
+		
+		//일치하는 이메일 값이 있을 때 리턴값인 result 를 1로 설정하고 비밀번호 입력
+		if(user2 != null){
+		result =1;
+		
+		user2.setePwd(pwd);
+		
+		
+		}
+		
+		
+		//일치하는 이메일 값이 있을 때 이메일을 발송함.
+		if(result >= 1){
+			final String user = "dbzmsquf1@gmail.com";
+			final String password = "!asdf1234"; 
+
+			Properties prop = new Properties(); 
+			prop.put("mail.smtp.host", "smtp.gmail.com"); 
+			prop.put("mail.smtp.port", 465); 
+			prop.put("mail.smtp.auth", "true");
+			prop.put("mail.smtp.ssl.enable", "true");
+			prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+			
+			
+			//비밀번호 변경
+			int result2 = eService.updatePwd(user2);
+			
+			Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(user, password);
+	            }
+	        });
+
+	        try {
+	            MimeMessage message = new MimeMessage(session);
+	            message.setFrom(new InternetAddress(user));
+
+	            //수신자메일주소
+	            message.addRecipient(Message.RecipientType.TO, new InternetAddress(main)); 
+
+	            // Subject
+	            message.setSubject("CSS에서 아이디 정보와 임시 비밀번호가 발송되었습니다."); //메일 제목을 입력
+
+	            // Text
+	            message.setText("접속 후 반드시 비밀번호를 변경하시기 바랍니다.\n\n 아이디 : "+user2.geteId()+"\n임시 비밀번호 : "+pwd+"\n");   
+	            
+	            
+	            // send the message
+	            Transport.send(message); ////전송
+	            System.out.println("message sent successfully...");
+	        } catch (AddressException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        } catch (MessagingException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }
+			
+			
+		}
+		
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	//사원등록 ,직급 부서 리스트 출력
 	@RequestMapping("memberAdd.do")
 	public ModelAndView memberAdd(ModelAndView mv, HttpSession session) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
@@ -125,8 +228,14 @@ public class EmployeeController {
 		mv.addObject("list2", list2);
 		mv.setViewName("employee/employeeInsert");
 		return mv;
-
+		
 	}
+	
+	
+	
+	
+	
+	
 
 	// 사원 등록
 	@RequestMapping("insertMember.do")
@@ -139,15 +248,17 @@ public class EmployeeController {
 		// System.out.println(ePhoto);
 		System.out.println("부서키 = " + member.geteDepartFk());
 
-		if (!eBirth1.equals("")) {
-			Date birth2 = Date.valueOf(eBirth1);
-			member.seteBirth(birth2);
-		}
-		if (!eHireDate1.equals("")) {
-			Date hire2 = Date.valueOf(eHireDate1);
-			member.seteHireDate(hire2);
-		}
 
+		
+		if(!eBirth1.equals("")){
+		Date birth2 = Date.valueOf(eBirth1);
+		member.seteBirth(birth2);
+		}
+		if(!eHireDate1.equals("")){
+		Date hire2 = Date.valueOf(eHireDate1);
+		member.seteHireDate(hire2);
+		}
+		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 
 		String path = root + "\\upload\\empPhoto";
@@ -157,137 +268,160 @@ public class EmployeeController {
 		if (!folder.exists()) {
 			folder.mkdirs();
 		}
-
-		filePath = folder + "\\" + ePhoto.getOriginalFilename();
-		try {
-			ePhoto.transferTo(new File(filePath));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		if (ePhoto == null) {
+			
+			filePath = folder + "\\" + ePhoto.getOriginalFilename();
+			try {
+				ePhoto.transferTo(new File(filePath));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if(ePhoto==null){
 			member.setePhoto("empty.png");
-		} else {
+			}
+			else{
 			member.setePhoto(ePhoto.getOriginalFilename());
-		}
-		member.setcKeyFk(cKey);
+			}
+			member.setcKeyFk(cKey);
+			
+			int result =eService.insertMember(member);
+			System.out.println(member);
 
-		int result = eService.insertMember(member);
-		System.out.println(member);
-
+			
+		
+		
+		
 		return "redirect:organizationChart.do";
 	}
+	
+	
+	
 
-	// 사원등록 아이디체크
-	@RequestMapping("empIdCheck.do")
-	public @ResponseBody int empAddIdCheck(String eId, HttpSession session) {
 
-		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
-		EmployeeVo chekEmployee = new EmployeeVo();
-		int cKey = employee.getcKeyFk();
+	//사원등록 아이디체크
+		@RequestMapping("empIdCheck.do")
+		public @ResponseBody int empAddIdCheck(String eId, HttpSession session){
+			
+			
+			EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+			EmployeeVo chekEmployee = new EmployeeVo();
+			int cKey = employee.getcKeyFk();
+			
+			chekEmployee.setcKeyFk(cKey);
+			chekEmployee.seteId(eId);
+			
+			int result = eService.empIdCheck(chekEmployee);
+			
+			
+			
 
-		chekEmployee.setcKeyFk(cKey);
-		chekEmployee.seteId(eId);
+			return result;
+		}
+		
+		//사원등록 아이디체크
+				@RequestMapping("empNoCheck.do")
+				public @ResponseBody int empNoCheck(String eNo, HttpSession session){
+					
+					
+					EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+					EmployeeVo chekEmployee = new EmployeeVo();
+					int cKey = employee.getcKeyFk();
+					System.out.println(eNo);
+					System.out.println(cKey);
+					chekEmployee.setcKeyFk(cKey);
+					chekEmployee.seteNo(eNo);
+					
+					int result = eService.empNoCheck(chekEmployee);
+					
+					
+					
 
-		int result = eService.empIdCheck(chekEmployee);
+					return result;
+				}
+		
+		
+		
+		
+	
+	
 
-		return result;
-	}
-
-	// 사원등록 아이디체크
-	@RequestMapping("empNoCheck.do")
-	public @ResponseBody int empNoCheck(String eNo, HttpSession session) {
-
-		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
-		EmployeeVo chekEmployee = new EmployeeVo();
-		int cKey = employee.getcKeyFk();
-		System.out.println(eNo);
-		System.out.println(cKey);
-		chekEmployee.setcKeyFk(cKey);
-		chekEmployee.seteNo(eNo);
-
-		int result = eService.empNoCheck(chekEmployee);
-
-		return result;
-	}
-
-	// 관리자-사원정보 select
+	
+	
+	//관리자-사원정보 select
 	@RequestMapping("employeeInfo.do")
-	public ModelAndView employeeInfo(ModelAndView mv, HttpSession session) {
-
-		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
+	public ModelAndView employeeInfo(ModelAndView mv,HttpSession session){
+		
+		EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
 		List<EmployeeVo> list = eService.selectJobList(employee.getcKeyFk());
 		List<EmployeeVo> list2 = eService.selectDepartList(employee.getcKeyFk());
-
+		
 		mv.addObject("list", list);
 		mv.addObject("list2", list2);
 
-		// System.out.println(main);
-
-		int eKey;
-		eKey = Integer.parseInt("6");
-
+		int eKey= employee.geteKey();
+		
 		EmployeeVo select = eService.selectEmployeeInfo(eKey);
-
-		if (select.getePhoto() == null) {
-
+		
+		
+		if(select.getePhoto()==null){
+			
 			select.setePhoto("empty.png");
 		}
-
-		System.out.println(select);
 		mv.addObject("select", select);
 		mv.setViewName("employee/employeeUpdate");
 		return mv;
-
+		
 	}
-
-	// 관리자-사원정보 update
-	@RequestMapping("updateEmployee.do")
-	public String updateEmployee(@RequestParam("eBirth1") String eBirth1, @RequestParam("eHireDate1") String eHireDate1,
+	
+	
+	
+	//관리자-사원정보 update
+	@RequestMapping("updateEmployee.do" )
+	public String updateEmployee(@RequestParam("eBirth1") String eBirth1, @RequestParam("eHireDate1") String eHireDate1,  
 			@RequestParam("eEntDate1") String eEntDate1, HttpServletRequest request,
-			@RequestParam("ePhoto1") MultipartFile ePhoto, @RequestParam("ePhoto2") String ePhoto2, EmployeeVo member,
-			HttpSession session) {
-		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
+			@RequestParam("ePhoto1") MultipartFile ePhoto, @RequestParam("ePhoto2") String ePhoto2, EmployeeVo member, HttpSession session){
+		EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
 		int cKey = employee.getcKeyFk();
-
-		Date birth2 = null;
-		Date hire2 = null;
-		Date ent2 = null;
-
-		if (eBirth1 != null && !eBirth1.equals("")) {
-			birth2 = Date.valueOf(eBirth1);
-			member.seteBirth(birth2);
+		
+		Date birth2= null;
+		Date hire2= null;
+		Date ent2= null;
+		
+		if(eBirth1 != null && !eBirth1.equals("")){
+		birth2 = Date.valueOf(eBirth1);
+		member.seteBirth(birth2);
 		}
-		if (eHireDate1 != null && !eHireDate1.equals("")) {
-			hire2 = Date.valueOf(eHireDate1);
-			member.seteHireDate(hire2);
+		if(eHireDate1 != null && !eHireDate1.equals("")){
+		hire2 = Date.valueOf(eHireDate1);
+		member.seteHireDate(hire2);
 		}
-		if (eEntDate1 != null && !eEntDate1.equals("")) {
-			ent2 = Date.valueOf(eEntDate1);
-			member.seteEntDate(ent2);
+		if(eEntDate1 != null && !eEntDate1.equals("")){
+		ent2 = Date.valueOf(eEntDate1);
+		member.seteEntDate(ent2);
 		}
 
-		// 기존 파일 삭제
-		// 새로업로드된 파일이 있거나 기존 employee사진과 파일명이 같지 않을때만 실행
-		if (!ePhoto.getOriginalFilename().equals("")) {
-
+			
+			//기존 파일 삭제
+		//새로업로드된 파일이 있거나 기존 employee사진과 파일명이 같지 않을때만 실행
+		if(!ePhoto.getOriginalFilename().equals("")){
+			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 			java.util.Date dt = new java.util.Date();
-
+			
 			String root = request.getSession().getServletContext().getRealPath("resources");
-			String path = root + "\\upload\\empPhoto";
+			String path = root + "\\upload\\empPhoto"; 
 			String filePath = "";
-
+			
 			File folder = new File(path);
-			filePath = folder + "\\" + sdf.format(dt) + ePhoto.getOriginalFilename();
+			filePath = folder + "\\" + sdf.format(dt)+ ePhoto.getOriginalFilename();
 			File oldFile = new File(filePath);
-			if (oldFile.exists()) {
+			if(oldFile.exists()){
 				oldFile.delete();
 			}
-
-			// 새로운 파일 저장
+					
+			//새로운 파일 저장
 			String newFilePath = folder + "\\" + sdf.format(dt) + ePhoto.getOriginalFilename();
 			try {
 				ePhoto.transferTo(new File(filePath));
@@ -295,115 +429,55 @@ public class EmployeeController {
 				e.printStackTrace();
 			}
 
-			member.setePhoto(sdf.format(dt) + ePhoto.getOriginalFilename());
-		} else if (ePhoto2.equals("")) {
+			member.setePhoto(sdf.format(dt)+ePhoto.getOriginalFilename());
+		}else if(ePhoto2.equals("")){
 			member.setePhoto(null);
-		} else {
+		}else{
 			member.setePhoto(ePhoto2);
 		}
-
-		// 비밀번호 null값 일시 기존 비밀번호 입력
-		if (member.getePwd().equals("")) {
+		
+		
+		//비밀번호 null값 일시 기존 비밀번호 입력
+			if(member.getePwd().equals("")){
 			member.setePwd(employee.getePwd());
-		}
-		member.setcKeyFk(cKey);
+			}
+			member.setcKeyFk(cKey);
+		
+			int result =eService.updateEmployee(member);
+			System.out.println("업데이트 : " + member);
+			
+			EmployeeVo user = eService.selectSessionEmployee(member);
+			List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
+		      //근속년수에 따른 총 휴가 값 가지고오기
+			GivevacationVo giveVacation = vService.selectTotalVacation(user);
+		      //휴가 사용일 가져오기
+		      List<VacationVo> usedVacation = vService.selectUsedVacation(user);
 
-		int result = eService.updateEmployee(member);
-		System.out.println("업데이트 : " + member);
-
-		EmployeeVo user = eService.selectSessionEmployee(member);
-		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
-		// 근속년수에 따른 총 휴가 값 가지고오기
-		VacationVo giveVacation = vService.selectTotalVacation(user);
-		// 휴가 사용일 가져오기
-		List<VacationVo> usedVacation = vService.selectUsedVacation(user);
-
-		int totalUsedVacation = 0;
-		for (VacationVo vacation : usedVacation) {
-			totalUsedVacation += vacation.getvUseddate();
-		}
-		try {
-			user.setTotalVacation(giveVacation.getGvVacadate());
-			user.setRemainingVacation(giveVacation.getGvVacadate() - totalUsedVacation);
-			user.setWorkYears(giveVacation.getGvYear());
-		} catch (NullPointerException e) {
-
-		}
-		if (result > 0) {
-			session.setAttribute("user", user);
-		}
-		System.out.println("update시 session 값 : " + user);
-
+		      int totalUsedVacation = 0;
+		      for(VacationVo vacation : usedVacation){
+		         totalUsedVacation += vacation.getvUseddate();
+		      }
+		      try{
+		         user.setTotalVacation(giveVacation.getGvVacadate());
+		         user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
+		         user.setWorkYears(giveVacation.getGvYear());
+		      }catch (NullPointerException e) {
+		         
+		      }
+		      if(result > 0){
+		    	  session.setAttribute("user", user);
+		      }
+		      System.out.println("update시 session 값 : " + user);
+			
+			
 		return "redirect:organizationChart.do";
 	}
-
+	
+	
+	
 	@RequestMapping("department.do")
-	public ModelAndView department(ModelAndView mv, HttpSession session) {
-		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
-		List<EmployeeVo> jobList = eService.selectJobList(user.getcKeyFk());
-		List<EmployeeVo> departList = eService.selectDepartList(user.getcKeyFk());
-		mv.addObject("jobList", jobList);
-		mv.addObject("departList", departList);
-		mv.setViewName("employee/department");
-		return mv;
-	}
-
-	// 부서,직급 insert
-	@RequestMapping("insertDivision.do")
-	public String insertDivision(HttpSession session, String depart, String job, String departKey, String jobKey,
-			String level) {
-		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
-		String[] departArr = depart.split(",");
-		String[] jobArr = job.split(",");
-		String[] departKeys = departKey.split(",");
-		String[] jobKeys = jobKey.split(",");
-		String[] levels = level.split(",");
-
-		List<EmployeeVo> jobList = eService.selectJobList(user.getcKeyFk());
-		List<EmployeeVo> departList = eService.selectDepartList(user.getcKeyFk());
-		if (departArr.length != departList.size()) {
-			for (int i = 0; i < departList.size(); i++) {
-				eService.deleteDivision(departList.get(i).geteDepartFk());
-			}
-		}
-		if(jobArr.length != jobList.size()){
-			for (int i = 0; i < jobList.size(); i++) {
-				eService.deleteDivision(jobList.get(i).geteJobcodeFk());
-			}
-		}
-
-		List<DivisionVo> divisionList = new ArrayList<DivisionVo>();
-		if (!departArr[0].equals("")) {
-			for (int i = 0; i < departArr.length; i++) {
-				DivisionVo div = new DivisionVo();
-				div.setcKeyFk(user.getcKeyFk());
-				try {
-					div.setDivKey(Integer.parseInt(departKeys[i]));
-				} catch (ArrayIndexOutOfBoundsException e) {
-				}
-				// System.out.println(div.getDivKey()==0); true
-				div.setDivType(1);
-				div.setDivInfo(departArr[i]);
-				divisionList.add(div);
-			}
-		}
-		if (!jobArr[0].equals("")) {
-			for (int i = 0; i < jobArr.length; i++) {
-				DivisionVo div = new DivisionVo();
-				div.setcKeyFk(user.getcKeyFk());
-				try {
-					div.setDivKey(Integer.parseInt(jobKeys[i]));
-				} catch (ArrayIndexOutOfBoundsException e) {
-				}
-				div.setDivType(2);
-				div.setDivInfo(jobArr[i]);
-				div.setDivInfolevel(Integer.parseInt(levels[i]));
-				divisionList.add(div);
-			}
-		}
-		int result = eService.insertDivision(divisionList);
-		//System.out.println("result" + result);
-		return "redirect:department.do";
+	public String department() {
+		return "employee/department";
 	}
 
 	@RequestMapping("jobGrade.do")
@@ -428,7 +502,7 @@ public class EmployeeController {
 	// select 사원 정보 리스트 출력
 	@RequestMapping("organizationChart2.do")
 	public @ResponseBody List<EmployeeVo> employeeList2(String main, HttpSession session) {
-		System.out.println(main);
+
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		// 회사키
 		int cKey = employee.getcKeyFk();
@@ -464,7 +538,7 @@ public class EmployeeController {
 	// select 사원 정보 팝업 출력
 	@RequestMapping("selectEmployeeInfo.do")
 	public @ResponseBody EmployeeVo selectEmployeeInfo(String main) {
-		System.out.println(main);
+		
 
 		int eKey;
 		eKey = Integer.parseInt(main);
@@ -476,12 +550,12 @@ public class EmployeeController {
 	}
 
 	@RequestMapping("employeeIndex.do")
-	public ModelAndView employeeIndex(ModelAndView mav, HttpSession session) throws ServletException, IOException {
-		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+	public ModelAndView employeeIndex(ModelAndView mav,HttpSession session)throws ServletException, IOException {
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
 		InetAddress addr = null;
 		addr = InetAddress.getLocalHost();
 		String ipLocation = addr.getHostAddress();
-
+		
 		List<CalenderVo> list = cservice.showCalender(user);
 		mav.addObject("list", list);
 
@@ -491,7 +565,7 @@ public class EmployeeController {
 		mav.addObject("board1", board1);
 		mav.addObject("board2", board2);
 		mav.addObject("board3", board3);
-		mav.addObject("ipLocation", ipLocation);
+		mav.addObject("ipLocation",ipLocation);
 
 		mav.setViewName("employee/employeeIndex");
 		return mav;
@@ -502,17 +576,17 @@ public class EmployeeController {
 
 		List<BorderVo> board1 = borderservice.selectBoardOneEmp(); // 공지사항
 		mav.addObject("board1", board1);
-
+		
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		// 회사키
 		int cKey = employee.getcKeyFk();
-
+		
 		List<EmployeeVo> todayBList = eService.selectTodayBList(cKey);
-		mav.addObject("todayBList", todayBList);
+		mav.addObject("todayBList",todayBList);
 
 		List<EmployeeVo> departCountList = eService.selectDepartCountList(cKey);
-		mav.addObject("departCountList", departCountList);
-
+		mav.addObject("departCountList",departCountList);
+		
 		mav.setViewName("employee/adminIndex");
 		return mav;
 	}
@@ -524,106 +598,107 @@ public class EmployeeController {
 		}
 		return "mainPage";
 	}
-
+	
 	@RequestMapping("insertMember2.do")
 	public String memberJoin2(@RequestParam("eBirth1") String eBirth1, @RequestParam("eHireDate1") String eHireDate1,
 			HttpServletRequest request, @RequestParam("ePhoto1") MultipartFile ePhoto, EmployeeVo member,
 			HttpSession session, @RequestParam("flag") String flag) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		int cKey = employee.getcKeyFk();
-		String view = "";
-		if (flag.equals("true")) {
+		String view="";
+		if(flag.equals("true")){
 
-			// System.out.println(ePhoto);
-			System.out.println("부서키 = " + member.geteDepartFk());
+		// System.out.println(ePhoto);
+		System.out.println("부서키 = " + member.geteDepartFk());
 
-			String birth = eBirth1;
-			String hire = eHireDate1;
+		String birth = eBirth1;
+		String hire = eHireDate1;
 
-			Date birth2 = Date.valueOf(eBirth1);
-			Date hire2 = Date.valueOf(eHireDate1);
+		Date birth2 = Date.valueOf(eBirth1);
+		Date hire2 = Date.valueOf(eHireDate1);
 
-			member.seteBirth(birth2);
-			member.seteHireDate(hire2);
+		member.seteBirth(birth2);
+		member.seteHireDate(hire2);
 
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			java.util.Date dt = new java.util.Date();
+		String root = request.getSession().getServletContext().getRealPath("resources");
 
-			String root = request.getSession().getServletContext().getRealPath("resources");
+		String path = root + "\\upload\\empPhoto";
+		String filePath = "";
 
-			String path = root + "\\upload\\empPhoto";
-			String filePath = "";
+		File folder = new File(path);
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
 
-			File folder = new File(path);
-			if (!folder.exists()) {
-				folder.mkdirs();
-			}
+		filePath = folder + "\\" + ePhoto.getOriginalFilename();
+		try {
+			ePhoto.transferTo(new File(filePath));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-			filePath = folder + "\\" + sdf.format(dt) + ePhoto.getOriginalFilename();
-			try {
-				ePhoto.transferTo(new File(filePath));
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		member.setePhoto(ePhoto.getOriginalFilename());
+		member.setcKeyFk(cKey);
 
-			member.setePhoto(ePhoto.getOriginalFilename());
-			member.setcKeyFk(cKey);
-
-			int result = eService.insertMember(member);
-			System.out.println(flag);
-
-			view = "companyStartHome";
-		} else {
-			view = "redirect:companyPayment.do?cKeyFk=" + cKey;
+		int result = eService.insertMember(member);
+		System.out.println(flag);
+		
+		
+			view ="companyStartHome";
+		}else{
+			view ="redirect:companyPayment.do?cKeyFk="+cKey;
 		}
 		return view;
 	}
-
+	
 	@RequestMapping("stateUpdate.do")
-	public ModelAndView stateUpdate(ModelAndView mv, EmployeeVo employee, HttpSession session) {
-		EmployeeVo eKeyEm = (EmployeeVo) session.getAttribute("user");
+	public ModelAndView stateUpdate(ModelAndView mv, EmployeeVo employee,HttpSession session){
+		EmployeeVo eKeyEm = (EmployeeVo)session.getAttribute("user");
 		employee.seteKey(eKeyEm.geteKey());
 
-		int result = eService.stateUpdate(employee);
-		if (result > 0) {
+		int	result = eService.stateUpdate(employee);
+		if(result >0){
 			eKeyEm.seteState(employee.geteState());
 			session.setAttribute("user", eKeyEm);
 		}
-
+		
 		mv.setViewName("employee/employeeIndex");
 		return mv;
 	}
+	
 
-	// 사원 마이페이지 수정
-	@RequestMapping("myPageUpdate.do")
-	public ModelAndView myPageUpdate(ModelAndView mv, HttpSession session) {
-
-		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
-		List<EmployeeVo> list = eService.selectJobList(employee.getcKeyFk());
-		List<EmployeeVo> list2 = eService.selectDepartList(employee.getcKeyFk());
-
-		mv.addObject("list", list);
-		mv.addObject("list2", list2);
-
-		// System.out.println(main);
-
-		int eKey;
-		eKey = Integer.parseInt("6");
-
-		EmployeeVo select = eService.selectEmployeeInfo(eKey);
-
-		if (select.getePhoto() == null) {
-
-			select.setePhoto("empty.png");
-		}
-
-		System.out.println(select);
-		mv.addObject("select", select);
-		mv.setViewName("employee/myPageUpdate");
-		return mv;
-
+		
+		
+		
+		
+		//사원 마이페이지 수정
+		@RequestMapping("myPageUpdate.do")
+		public ModelAndView myPageUpdate(ModelAndView mv,HttpSession session){
+			
+			EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+			List<EmployeeVo> list = eService.selectJobList(employee.getcKeyFk());
+			List<EmployeeVo> list2 = eService.selectDepartList(employee.getcKeyFk());
+			
+			mv.addObject("list", list);
+			mv.addObject("list2", list2);
+			
+			
+			int eKey= employee.geteKey();
+			
+			EmployeeVo select = eService.selectEmployeeInfo(eKey);
+			
+			
+			if(select.getePhoto()==null){
+				
+				select.setePhoto("empty.png");
+			}
+			
+			mv.addObject("select", select);
+			mv.setViewName("employee/myPageUpdate");
+			return mv;
+			
 	}
 
 }

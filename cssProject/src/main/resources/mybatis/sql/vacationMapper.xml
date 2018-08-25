@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="vacationMapper">
-	<select id="selectTotalVacation" parameterType="EmployeeVo" resultType="VacationVo">
+	<select id="selectTotalVacation" parameterType="EmployeeVo" resultType="Give">
 		SELECT GV_YEAR ,GV_VACADATE
 		FROM GIVEVACATION 
 		WHERE GV_YEAR = (SELECT TRUNC(MONTHS_BETWEEN(SYSDATE,E_HIRE_DATE)/12+1,0)

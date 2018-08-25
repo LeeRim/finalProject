@@ -59,7 +59,7 @@
 		<form method="get" action="insertEvent.do">
           <div class="box box-solid">
             <div class="box-header with-border">
-              <h3 class="box-title">Create Event-수정중</h3>
+              <h3 class="box-title">Create Event</h3>
             </div>
             <div class="box-body">
               <div class="btn-group" style="width: 100%; margin-bottom: 10px; margin-left: -40px">
@@ -74,13 +74,11 @@
 				 	<input name="endDate" type="date" class="form-control"/>
 				 	</li>
 				 <li>일정 색<br/>
-					<input type="radio" name="background" value="#00c0ef"><a class="text-aqua"><i class="fa fa-square"></i></a>
-					<c:if test="${user.eType eq 1 }">
 					<input type="radio" name="background" value="#00a65a"><a class="text-green"><i class="fa fa-square"></i></a> 
 					<input type="radio" name="background" value="#f39c12"><a class="text-yellow"><i class="fa fa-square"></i></a> 
+					<input type="radio" name="background" value="#00c0ef"><a class="text-aqua"><i class="fa fa-square"></i></a>
 					<input type="radio" name="background" value="#0073b7"><a class="text-blue"><i class="fa fa-square"></i></a>
 					<input type="radio" name="background" value="#f56954"><a class="text-red"><i class="fa fa-square"></i></a>
-					</c:if>
 				 </li>
                 </ul>
               </div>

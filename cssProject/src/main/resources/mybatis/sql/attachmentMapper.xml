@@ -19,7 +19,7 @@
 	
 	<insert id="insertAttachment" parameterType="AttachVo">
 		INSERT INTO ATTACHMENT VALUES(
-		SEQ_ATTACHMENT.NEXTVAL,#{attaLocation},#{attaFileName},#{attaFilePath})
+		SEQ_ATTACHMENT.NEXTVAL,#{attaLocation},#{attaFileName},#{attaFilePath},null)
 	</insert>
 
 	<select id="selectAttachment" resultType="AttachVo">
