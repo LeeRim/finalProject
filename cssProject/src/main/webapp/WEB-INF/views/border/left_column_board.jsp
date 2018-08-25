@@ -1,76 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE >
 <html>
 <head>
-<meta  charset="UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-  	function boardPage(bType){
-  		location.href="borderList.do?bCateGory=" + bType;
-  	}
-  	function board(){
-  		location.href="borderIndex.do"
-  	}
-  	function boardGallery(){
-  		location.href="borderGalleryList.do"
-  	}
-  </script>
+	function boardPage(bType) {
+		location.href = "borderList.do?bCateGory=" + bType;
+	}
+	function board() {
+		location.href = "borderIndex.do"
+	}
+	function boardGallery() {
+		location.href = "borderGalleryList.do"
+	}
+</script>
 </head>
 <body>
 	<!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar" style="padding-top: 0 ">
+	<aside class="main-sidebar" style="padding-top: 0">
 
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+		<!-- sidebar: style can be found in sidebar.less -->
+		<section class="sidebar">
 
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
+			<!-- Sidebar user panel (optional) -->
+			<div class="user-panel">
+	        <div class="pull-left image">
+	          <img src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" class="img-circle" alt="User Image">
+	        </div>
+	        <div class="pull-left info">
+	          <p><c:out value="${sessionScope.user.eName} ${sessionScope.user.job}"/></p>
+	          <!-- Status -->
+	          <a href="#"><i class="fa fa-circle text-success"></i> <c:out value="${sessionScope.user.department}"/></a>
+	        </div>
+	      </div>
 
-      <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      </form>
-      <!-- /.search form -->
 
-      <!-- Sidebar Menu -->
-      <!-- li에 active 클래스 추가시 클릭으로나옴 -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="treeview">
-        	<a href="borderIndex.do"><i class="fa fa-link"></i> <span>커뮤니티 게시판</span>
-        		<span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-        	</a>
-        	<ul class="treeview-menu">
-          		<li><a href="#" onclick="boardPage(1);">공지사항</a></li>
-          		<li><a href="#" onclick="boardPage(2);">자유게시판</a></li>
-            	<li><a href="#" onclick="boardPage(3);">경조사</a></li>
-            	<li><a href="#" onclick="boardGallery();">갤러리</a></li>
-          	</ul>
-        </li>
-      </ul>
-      <!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-  </aside>
- 
+			<!-- Sidebar Menu -->
+			<!-- li에 active 클래스 추가시 클릭으로나옴 -->
+			<ul class="sidebar-menu" data-widget="tree">
+				<li class="header">커뮤니티</li>
+				<!-- Optionally, you can add icons to the links -->
+
+				<li><a href="#" onclick="boardPage(1);"><i class="fa fa-bullhorn"></i>공지사항</a></li>
+				<li><a href="#" onclick="boardPage(2);"><i class="fa fa-comments"></i>자유게시판</a></li>
+				<li><a href="#" onclick="boardPage(3);"><i class="fa fa-users"></i>경조사</a></li>
+				<li><a href="#" onclick="boardGallery();"><i class="fa fa-image"></i>갤러리</a></li>
+
+
+			</ul>
+			<!-- /.sidebar-menu -->
+		</section>
+		<!-- /.sidebar -->
+	</aside>
+
 </body>
 </html>

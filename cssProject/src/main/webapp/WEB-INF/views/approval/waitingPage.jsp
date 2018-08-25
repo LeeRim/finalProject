@@ -84,7 +84,7 @@ desired effect
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					전자결재페이지 <small>Optional description</small>
+					전자결재
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -100,12 +100,12 @@ desired effect
         -------------------------->
 				
 				
-						<div class="box">
+						<div class="box" style="width:100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">결재대기문서</h3>
 
 								<div class="box-tools">
-									<div class="input-group input-group-sm" style="width: 150px;">
+									<!-- <div class="input-group input-group-sm" style="width: 150px;">
 										<input type="text" name="table_search"
 											class="form-control pull-right" placeholder="Search">
 
@@ -114,7 +114,7 @@ desired effect
 												<i class="fa fa-search"></i>
 											</button>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 							<!-- /.box-header -->

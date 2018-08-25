@@ -5,6 +5,7 @@ public class DivisionVo {
 	private int cKeyFk;
 	private int divType;
 	private String divInfo;
+	private int divInfolevel;
 	
 	public DivisionVo() {
 	}
@@ -42,10 +43,21 @@ public class DivisionVo {
 	}
 	
 	
+	
+	
+	public int getDivInfolevel() {
+		return divInfolevel;
+	}
+
+	public void setDivInfolevel(int divInfolevel) {
+		this.divInfolevel = divInfolevel;
+	}
+
 	@Override
 	public String toString() {
 		return "DivisionVo [divKey=" + divKey + ", cKeyFk=" + cKeyFk + ", divType=" + divType + ", divInfo=" + divInfo
-				+ "]";
+				+ ", divInfolevel=" + divInfolevel + "]";
 	}
+	
 	
 }

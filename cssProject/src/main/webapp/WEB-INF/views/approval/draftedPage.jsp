@@ -111,7 +111,7 @@ desired effect
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					전자결재페이지 <small>Optional description</small>
+					전자결재
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -128,11 +128,11 @@ desired effect
 				<div class="row">
 					<div class="col-xs-12">
 						<!-- Nav tabs -->
-						<ul class="nav nav-tabs" role="tablist"  onclick="hideThead();">
+						<ul class="nav nav-tabs" role="tablist" onclick="hideThead();">
 							<li role="presentation" class="active"><a href="#all"
 								aria-controls="all" role="tab" data-toggle="tab">전체</a></li>
-							<li role="presentation"><a href="#ing"
-								aria-controls="ing" role="tab" data-toggle="tab">진행</a></li>
+							<li role="presentation"><a href="#ing" aria-controls="ing"
+								role="tab" data-toggle="tab">진행</a></li>
 							<li role="presentation"><a href="#complete"
 								aria-controls="complete" role="tab" data-toggle="tab">완료</a></li>
 							<li role="presentation"><a href="#companion"
@@ -145,12 +145,12 @@ desired effect
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="all">
 
-						<div class="box">
+						<div class="box" style="width: 100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">전체결재문서</h3>
 
 								<div class="box-tools">
-									<div class="input-group input-group-sm" style="width: 150px;">
+									<!-- <div class="input-group input-group-sm" style="width: 150px;">
 										<input type="text" name="table_search"
 											class="form-control pull-right" placeholder="Search">
 
@@ -159,7 +159,7 @@ desired effect
 												<i class="fa fa-search"></i>
 											</button>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 							<!-- /.box-header -->
@@ -176,19 +176,22 @@ desired effect
 											<th>상태</th>
 										</tr>
 									</thead>
-										<tr>
-											<th><p style="visibility: hidden; height:15px;">0</p></th>
-											<th>기안일</th>
-											<th>완료일</th>
-											<th>결재양식</th>
-											<th>제목</th>
-											<th>문서번호</th>
-											<th>상태</th>
-										</tr>
-										
-										<c:forEach var="approval" items="${allList }">
-										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
-											<td><p style="visibility: hidden; height:15px;"><c:out value="${9999999-approval.aKey }"></c:out></p></td>
+									<tr>
+										<th><p style="visibility: hidden; height: 15px;">0</p></th>
+										<th>기안일</th>
+										<th>완료일</th>
+										<th>결재양식</th>
+										<th>제목</th>
+										<th>문서번호</th>
+										<th>상태</th>
+									</tr>
+
+									<c:forEach var="approval" items="${allList }">
+										<tr
+											onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
+											<td><p style="visibility: hidden; height: 15px;">
+													<c:out value="${9999999-approval.aKey }"></c:out>
+												</p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
 											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
@@ -204,7 +207,7 @@ desired effect
 												<td><span class="label label-danger">반려</span></td>
 											</c:if>
 										</tr>
-										</c:forEach>
+									</c:forEach>
 								</table>
 							</div>
 							<!-- /.box-body -->
@@ -212,10 +215,10 @@ desired effect
 						<!-- /.box -->
 					</div>
 					<!-- #all -->
-					
+
 					<div role="tabpanel" class="tab-pane" id="ing">
 
-						<div class="box">
+						<div class="box" style="width: 100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">진행중인 결재문서</h3>
 
@@ -246,27 +249,36 @@ desired effect
 											<th>상태</th>
 										</tr>
 									</thead>
+									<tr>
+										<th><p style="visibility: hidden; height: 15px;">0</p></th>
+										<th>기안일</th>
+										<th>완료일</th>
+										<th>결재양식</th>
+										<th>제목</th>
+										<th>문서번호</th>
+										<th>상태</th>
+									</tr>
+									<c:if test="${ingList.size()==0}">
 										<tr>
-											<th><p style="visibility: hidden; height:15px;">0</p></th>
-											<th>기안일</th>
-											<th>완료일</th>
-											<th>결재양식</th>
-											<th>제목</th>
-											<th>문서번호</th>
-											<th>상태</th>
+											<td colspan="7">기안한 문서가 없습니다.</td>
 										</tr>
-										
+									</c:if>
+									<c:if test="${ingList.size()!=0 }">
 										<c:forEach var="approval" items="${ingList }">
-										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
-											<td><p style="visibility: hidden; height:15px;"><c:out value="${9999999-approval.aKey }"></c:out></p></td>
-											<td><c:out value="${approval.aWriteDate }"></c:out></td>
-											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
-											<td><c:out value="${approval.doctype }"></c:out></td>
-											<td><c:out value="${approval.aTitle }"></c:out></td>
-											<td><c:out value="${approval.aKey }"></c:out></td>
-											<td><span class="label label-warning">진행</span></td>
-										</tr>
+											<tr
+												onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
+												<td><p style="visibility: hidden; height: 15px;">
+														<c:out value="${9999999-approval.aKey }"></c:out>
+													</p></td>
+												<td><c:out value="${approval.aWriteDate }"></c:out></td>
+												<td><c:out value="${approval.aCompleteDate}"></c:out></td>
+												<td><c:out value="${approval.doctype }"></c:out></td>
+												<td><c:out value="${approval.aTitle }"></c:out></td>
+												<td><c:out value="${approval.aKey }"></c:out></td>
+												<td><span class="label label-warning">진행</span></td>
+											</tr>
 										</c:forEach>
+									</c:if>
 								</table>
 							</div>
 							<!-- /.box-body -->
@@ -274,10 +286,10 @@ desired effect
 						<!-- /.box -->
 					</div>
 					<!-- #ing -->
-					
+
 					<div role="tabpanel" class="tab-pane" id="complete">
 
-						<div class="box">
+						<div class="box" style="width: 100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">완료된 결재문서</h3>
 
@@ -308,19 +320,22 @@ desired effect
 											<th>상태</th>
 										</tr>
 									</thead>
-										<tr>
-											<th><p style="visibility: hidden; height:15px;">0</p></th>
-											<th>기안일</th>
-											<th>완료일</th>
-											<th>결재양식</th>
-											<th>제목</th>
-											<th>문서번호</th>
-											<th>상태</th>
-										</tr>
-										
-										<c:forEach var="approval" items="${complList }">
-										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
-											<td><p style="visibility: hidden; height:15px;"><c:out value="${9999999-approval.aKey }"></c:out></p></td>
+									<tr>
+										<th><p style="visibility: hidden; height: 15px;">0</p></th>
+										<th>기안일</th>
+										<th>완료일</th>
+										<th>결재양식</th>
+										<th>제목</th>
+										<th>문서번호</th>
+										<th>상태</th>
+									</tr>
+
+									<c:forEach var="approval" items="${complList }">
+										<tr
+											onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
+											<td><p style="visibility: hidden; height: 15px;">
+													<c:out value="${9999999-approval.aKey }"></c:out>
+												</p></td>
 											<td><c:out value="${approval.aWriteDate }"></c:out></td>
 											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
 											<td><c:out value="${approval.doctype }"></c:out></td>
@@ -328,7 +343,7 @@ desired effect
 											<td><c:out value="${approval.aKey }"></c:out></td>
 											<td><span class="label label-primary">완료</span></td>
 										</tr>
-										</c:forEach>
+									</c:forEach>
 								</table>
 							</div>
 							<!-- /.box-body -->
@@ -336,10 +351,10 @@ desired effect
 						<!-- /.box -->
 					</div>
 					<!-- #complete -->
-					
+
 					<div role="tabpanel" class="tab-pane" id="companion">
 
-						<div class="box">
+						<div class="box" style="width: 100%">
 							<div class="box-header with-border">
 								<h3 class="box-title">반려된 결재문서</h3>
 
@@ -370,27 +385,36 @@ desired effect
 											<th>상태</th>
 										</tr>
 									</thead>
+									<tr>
+										<th><p style="visibility: hidden; height: 15px;">0</p></th>
+										<th>기안일</th>
+										<th>완료일</th>
+										<th>결재양식</th>
+										<th>제목</th>
+										<th>문서번호</th>
+										<th>상태</th>
+									</tr>
+									<c:if test="${compaList.size()==0 }">
 										<tr>
-											<th><p style="visibility: hidden; height:15px;">0</p></th>
-											<th>기안일</th>
-											<th>완료일</th>
-											<th>결재양식</th>
-											<th>제목</th>
-											<th>문서번호</th>
-											<th>상태</th>
+											<td colspan="7" style="text-align:center;">반려된 기안한 문서가 없습니다.</td>
 										</tr>
-										
+									</c:if>
+									<c:if test="${compaList.size()!=0 }">
 										<c:forEach var="approval" items="${compaList }">
-										<tr onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
-											<td><p style="visibility: hidden; height:15px;"><c:out value="${9999999-approval.aKey }"></c:out></p></td>
-											<td><c:out value="${approval.aWriteDate }"></c:out></td>
-											<td><c:out value="${approval.aCompleteDate}"></c:out></td>
-											<td><c:out value="${approval.doctype }"></c:out></td>
-											<td><c:out value="${approval.aTitle }"></c:out></td>
-											<td><c:out value="${approval.aKey }"></c:out></td>
-											<td><span class="label label-danger">반려</span></td>
-										</tr>
+											<tr
+												onclick="openDetail(${approval.aKey},${approval.divDoctypeFk});">
+												<td><p style="visibility: hidden; height: 15px;">
+														<c:out value="${9999999-approval.aKey }"></c:out>
+													</p></td>
+												<td><c:out value="${approval.aWriteDate }"></c:out></td>
+												<td><c:out value="${approval.aCompleteDate}"></c:out></td>
+												<td><c:out value="${approval.doctype }"></c:out></td>
+												<td><c:out value="${approval.aTitle }"></c:out></td>
+												<td><c:out value="${approval.aKey }"></c:out></td>
+												<td><span class="label label-danger">반려</span></td>
+											</tr>
 										</c:forEach>
+									</c:if>
 								</table>
 							</div>
 							<!-- /.box-body -->
@@ -398,7 +422,7 @@ desired effect
 						<!-- /.box -->
 					</div>
 					<!-- #companion -->
-					
+
 				</div>
 				<!-- tab-content -->
 			</section>

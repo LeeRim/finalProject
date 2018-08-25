@@ -3,59 +3,69 @@ package com.jdl.css.commuteCheck.model.commuteCheckVo;
 import java.sql.Date;
 
 public class CommuteCheckVo {
-	
-	private int employeeNumber; //사원 번호
-	private int inYear; //연도
-	private int inMonth; //월
-	private int inDate; //일
+	private int id;
+	private int eKey; //사원 번호
+	private Date inDate; //일
 	private Date inTime; //출근시간
 	private Date outTime; //퇴근시간
-	private int company; //회사키
+	private int cKeyFk; //회사키
+	private String strInTime;
+	private String strOutTime;
 
 	public CommuteCheckVo(){
 		
 	}
 
-	public CommuteCheckVo(int employeeNumber, int inYear, int inMonth, int inDate, Date inTime, Date outTime,
-			int company) {
-		this.employeeNumber = employeeNumber;
-		this.inYear = inYear;
-		this.inMonth = inMonth;
+	public CommuteCheckVo(int id, int eKey, Date inDate, Date inTime, Date outTime, int cKeyFk, String strInTime,
+			String strOutTime){
+		super();
+		this.id = id;
+		this.eKey = eKey;
 		this.inDate = inDate;
 		this.inTime = inTime;
 		this.outTime = outTime;
-		this.company = company;
+		this.cKeyFk = cKeyFk;
+		this.strInTime = strInTime;
+		this.strOutTime = strOutTime;
 	}
 
-	public int getEmployeeNumber() {
-		return employeeNumber;
+	public int getId() {
+		return id;
 	}
 
-	public void setEmployeeNumber(int employeeNumber) {
-		this.employeeNumber = employeeNumber;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getInYear() {
-		return inYear;
+	public int getEKey() {
+		return eKey;
 	}
 
-	public void setInYear(int inYear) {
-		this.inYear = inYear;
+	public void setEKey(int eKey) {
+		this.eKey = eKey;
 	}
 
-	public int getInMonth() {
-		return inMonth;
+	public String getStrInTime() {
+		return strInTime;
 	}
 
-	public void setInMonth(int inMonth) {
-		this.inMonth = inMonth;
+	public void setStrInTime(String strInTime) {
+		this.strInTime = strInTime;
 	}
 
-	public int getInDate() {
+	public String getStrOutTime() {
+		return strOutTime;
+	}
+
+	public void setStrOutTime(String strOutTime) {
+		this.strOutTime = strOutTime;
+	}
+
+	public Date getInDate() {
 		return inDate;
 	}
 
-	public void setInDate(int inDate) {
+	public void setInDate(Date inDate) {
 		this.inDate = inDate;
 	}
 
@@ -75,20 +85,20 @@ public class CommuteCheckVo {
 		this.outTime = outTime;
 	}
 
-	public int getCompany() {
-		return company;
+	public int getCKeyFk() {
+		return cKeyFk;
 	}
 
-	public void setCompany(int company) {
-		this.company = company;
+	public void setCKeyFk(int cKeyFk) {
+		this.cKeyFk = cKeyFk;
 	}
 
 	@Override
 	public String toString() {
-		return "CommuteCheckVo [employeeNumber=" + employeeNumber + ", inYear=" + inYear + ", inMonth=" + inMonth
-				+ ", inDate=" + inDate + ", inTime=" + inTime + ", outTime=" + outTime + ", company=" + company + "]";
+		return "CommuteCheckVo [id=" + id + ", eKey=" + eKey + ", inDate=" + inDate + ", inTime=" + inTime
+				+ ", outTime=" + outTime + ", cKeyFk=" + cKeyFk + ", strInTime=" + strInTime + ", strOutTime="
+				+ strOutTime + "]";
 	}
 
-	
-	
+
 }

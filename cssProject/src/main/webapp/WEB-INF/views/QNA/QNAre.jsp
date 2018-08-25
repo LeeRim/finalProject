@@ -7,6 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script>
+function listread(){
+	location.href="back.do";
+}
+</script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -37,9 +42,12 @@
 	</c:if>
 	<c:if test="${qv.qAnswer ne null}">
 		<tr>
-			<td>답변 : <textarea style="resize: none;" name="qAnswer" rows="25" cols="80">${qv.qAnswer}</textarea> </td>
+			<td>답변 : <textarea style="resize: none;" name="qAnswer" rows="25" cols="80" readonly>${qv.qAnswer}</textarea> </td>
 		</tr>
 	</c:if>
+	<tr>
+		<td><input type="button" value="메인" onclick="listread();"/></td>
+	</tr>
 </table>
 </div>
 </div>

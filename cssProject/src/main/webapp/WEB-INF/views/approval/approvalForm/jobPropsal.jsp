@@ -23,6 +23,62 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
+<style type="text/css">
+	.row{
+		margin-left:auto;
+		margin-right:auto;
+	}
+	.__se_tbl{
+		sbackground: white; border: 0px solid black; border-image: none; width: 800px; color: black; font-family: malgun gothic, dotum, arial, tahoma; font-size: 12px; border-collapse: collapse !important;
+	}
+	.aTitle{
+		padding: 3px !important; border: 0px solid black; border-image: none; width: 300px; height: 90px !important; text-align: center; font-size: 22px; font-weight: bold; vertical-align: middle;
+	}
+	.tWrappser{
+		background: white; padding: 0px !important; border: currentColor; border-image: none; text-align: left; color: black; font-size: 12px; font-weight: normal; vertical-align: top;
+	}
+	.tHeader{
+		border: 1px solid rgb(0, 0, 0); border-image: none; font-family: malgun gothic, dotum, arial, tahoma; margin-top: 1px; border-collapse: collapse;
+	}
+	.leftColumn{
+		background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; vertical-align: middle;
+	}
+	.leftColumn2{
+		background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 18px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;
+	}
+	.rightColumn{
+		background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 12px; font-weight: normal; vertical-align: middle;
+	}
+	.rightColumn2{
+		background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; height: 25px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;
+	}
+	.columns{
+		background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 22px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle;
+	}
+	.vacationHalfArea{
+		line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; margin-top: 0px; margin-bottom: 0px;
+	}
+	.vacationTypeArea{
+		line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; margin-top: 0px; margin-bottom: 0px;
+	}
+	.pointArea{
+		line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;
+	}
+	.msg{
+		background: rgb(221, 221, 221); padding: 20px !important; border: 1px solid black; border-image: none; width: 800px; height: 22px; text-align: left; vertical-align: middle;
+	}
+	.btn{
+		margin-top:10px;
+	}
+	.btn-primary{
+		margin-top:20px;
+	}
+	.btn-app{
+		width:150px;
+	}
+
+</style>
+
 <script type="text/javascript">
 	function openSelectApprover() {
 		$('div.modal').modal();
@@ -67,11 +123,11 @@ desired effect
 
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
+		<div class="content-wrapper" style="background:white;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					전자결재페이지 <small>Optional description</small>
+					전자결재 <small>업무기안</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -85,16 +141,16 @@ desired effect
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-				<div class="addApprover">
+				<div class="addApprover" style="margin-left:60px; width:100px;">
 					<a class="btn btn-app" href="#" onclick="openSelectApprover();">
-						<i class="fa fa-user-plus"></i>결재자추가
+						<i class="fa fa-user-plus" style="margin-top:5px;"></i>결재자추가
 					</a>
 				</div>
 				<div class="content_page report_detail">
 
 					<div class="wrap_container">
 						<!-- 3단 레이아웃 멀티클래스 -->
-						<section class="content_wrapper">
+						<section class="content_wrapper" style="margin-left:300px; margin-top:-50px;">
 							<!--전자결제 상세-->
 							<div class="report_type approval_type form_back">
 
@@ -244,10 +300,9 @@ desired effect
 													<tr>
 														<td
 															style="background: rgb(255, 255, 255); border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor black black; padding: 5px; height: 350px; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: top;"
-															colspan="4" class=""><textarea
-																data-dsl="{{editor:appContent}}" name="aContent"
-																id="aContent" style="width: 100%; min-width: 200px;"
-																value="" class="go-editor"></textarea></td>
+															colspan="4" class=""><textarea name="aContent"
+																id="aContent" style="width:100%;height:100%; border:none;"
+																value="" class="txta_editor"></textarea></td>
 													</tr>
 												</tbody>
 											</table>
@@ -263,10 +318,9 @@ desired effect
 												<p class="help-block">Max. 32MB</p>
 											</div>
 											<div class="file-list"></div>
+										<button class="btn btn-primary" style="margin-top:10px;float:right;"><i class="fa fa-edit"></i>작성</button>
 										</div>
-										<button class="btn btn-primary">
-											<i class="fa fa-edit"></i>작성
-										</button>
+											
 									</form>
 								</div>
 

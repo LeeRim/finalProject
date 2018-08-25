@@ -37,8 +37,8 @@
 	        </div>
 	        <div class="pull-left info">
 	        <c:choose>
-	        	<c:when test="${sessionScope.user.eName != null}">
-		          <p><c:out value="${sessionScope.user.eName} ${sessionScope.user.job}"/></p>
+	        	<c:when test="${sessionScope.user.cName != null}">
+		          <p><c:out value="${sessionScope.user.cName}"/></p>
 		          <!-- Status -->
 		          <a href="#"><i class="fa fa-circle text-success"></i> <c:out value ="${sessionScope.user.department}"/></a>
 	        	</c:when>

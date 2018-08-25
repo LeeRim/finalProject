@@ -28,13 +28,14 @@
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
 
-        <li><a href="myPageUpdate.do"><i class="fa fa-cogs"></i> <span>회원정보</span></a></li>
-        <li><a href="commuteCheck.do"><i class="fa fa-refresh"></i> <span>근태관리</span></a></li>
-        <li><a href="organizationChart.do"><i class="fa fa-user"></i> <span>조직도</span></a></li>
-        <li><a href="calender.do"><i class="fa fa-calendar-check-o"></i> <span>일정관리</span></a></li>
-        <li><a href="waitingPage.do"><i class="fa fa-book"></i> <span>전자결재</span></a></li>
+        <li><a href=""><i class="fa  fa-cogs"></i> <span>회사관리</span></a></li>
+        <li><a href=""><i class="fa   fa-refresh"></i> <span>근태관리</span></a></li>
+        <li><a href=""><i class="fa  fa-user"></i> <span>조직도</span></a></li>
+        <li><a href=""><i class="fa fa-calendar-check-o"></i> <span>일정관리</span></a></li>
+        <li><a href=""><i class="fa  fa-book"></i> <span>전자결재</span></a></li>
         <li><a href="receiveNoteList.do"><i class="fa fa-envelope-o"></i> <span>쪽지</span></a></li>
-        <li><a href="borderIndex.do"><i class="fa fa-bullhorn"></i> <span>커뮤니티</span></a></li>
+        <li><a href=""><i class="fa  fa-bullhorn"></i> <span>커뮤니티</span></a></li>
+        <li><a href="empQNA.do"><i class="fa  fa-comments-o"></i> <span>문의하기</span></a></li>
         
       </ul>
       <!-- /.sidebar-menu -->

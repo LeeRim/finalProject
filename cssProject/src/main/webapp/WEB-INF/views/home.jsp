@@ -23,7 +23,10 @@
   		location.href="empGive.do";
   	}
   	function empQNA(){
-  		location.href="empQNA.do";
+  		var eType = "${user.eType}";
+  		if(eType == 1 || eType == 0){
+	  		location.href="empQNA.do";
+  		}
   	}
   </script>
 

@@ -50,7 +50,8 @@ public class NoteController {
 	}
 	
 	@RequestMapping("sendNote.do")
-	public ModelAndView sendNote(NoteVo note ,ModelAndView mv, @RequestParam("files") MultipartFile[] files, HttpServletRequest request){
+	public ModelAndView sendNote(NoteVo note ,ModelAndView mv, @RequestParam("files") MultipartFile[] files, HttpServletRequest request
+											,HttpSession session){
 		if(files[1] !=null && !(files[1].getOriginalFilename().equals(""))){
 			note.setSnAttachYn("Y");
 		}else{
@@ -115,6 +116,10 @@ public class NoteController {
 		System.out.println("attach = " +resultAttach );
 		mv.setViewName("redirect:sendNoteList.do");
 		
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		//받은쪽지 변경된 session 값 초기화
+		List<NoteVo> indexNote = service.selectIndexNote(user.geteKey());
+		session.setAttribute("indexNote", indexNote);
 		return mv;
 	};
 	

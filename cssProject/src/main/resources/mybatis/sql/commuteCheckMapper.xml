@@ -4,27 +4,41 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="commuteCheckMapper">
   
+  	<resultMap type="Commute" id="CommuteMap">
+	<id property="id" column="COMM_KEY"/>
+		<result property="cKeyFk" column="C_KEY_FK" />
+		<result property="eKey" column="E_KEY_FK" />
+		<result property="inDate" column="COMM_DATE" />
+		<result property="inTime" column="COMM_INTIME" />
+		<result property="outTime" column="COMM_OUTTIME" />
+	
+	</resultMap>
+  
   	<select id="selectCommute" resultType="Commute">
-  		select to_number(to_char(comm_date, 'yyyy')) as "inYear",
-  			to_number(to_char(comm_date, 'mm')) as "inMonth",
-  			to_number(to_char(comm_date, 'dd')) as "inDate",
-  			comm_intime as "inTime",
-  			comm_outtime as "outTime"
-  		from commute
+  		SELECT COMM_DATE AS "INDATE",TO_CHAR(COMM_INTIME,'HH:MM:SS') AS "STRINTIME" ,TO_CHAR(COMM_OUTTIME,'HH:MM:SS') AS "STROUTTIME"
+		FROM COMMUTE
+		WHERE E_KEY_FK = ${eKey} AND C_KEY_FK = ${cKeyFk}
   	</select>
+  	
+  	<select id="selectAllCommute" resultType="Commute"><!-- 이게 회사관리자가볼거 -->
+  		 SELECT E_KEY_FK AS "EMPLOYEENUMBER" ,COMM_DATE AS "INDATE",TO_CHAR(COMM_INTIME,'HH:MM:SS') AS "STRINTIME" ,TO_CHAR(COMM_OUTTIME,'HH:MM:SS') AS "STROUTTIME"
+		FROM COMMUTE
+		WHERE C_KEY_FK = 1 AND TO_CHAR(COMM_DATE,'DD') = TO_CHAR(SYSDATE,'DD') AND C_KEY_FK = ${cKeyFk}
+  	</select>
+  	
+  	<select id="selectOneCommute" resultType="Commute">
+  		SELECT COMM_INTIME AS " INTIME"
+		FROM COMMUTE
+		WHERE TO_NUMBER(TO_CHAR(COMM_DATE, 'DD'))=TO_NUMBER(TO_CHAR(SYSDATE, 'DD')) AND E_KEY_FK = ${eKey} AND C_KEY_FK = ${cKeyFk}
+  	</select>
+  	
+  	<insert id="insertInner" parameterType="Commute">
+  		INSERT INTO COMMUTE VALUES(SEQ_COMMUTE.NEXTVAL, ${cKeyFk}, ${eKey}, SYSDATE, SYSDATE, NULL)
+  	</insert>
   	
   	<update id="insertOutCommute" parameterType="Commute">
   	UPDATE COMMUTE SET COMM_OUTTIME= SYSDATE
-	WHERE to_number(to_char(comm_date, 'dd')) = to_number(to_char(sysdate, 'dd'))
+	WHERE TO_NUMBER(TO_CHAR(COMM_DATE, 'DD')) = TO_NUMBER(TO_CHAR(SYSDATE, 'DD')) AND E_KEY_FK = ${eKey} AND C_KEY_FK = ${cKeyFk}
   	</update>
-  	
-  	<insert id="insertInner" parameterType="date">
-  		INSERT INTO COMMUTE VALUES(SEQ_COMMUTE.NEXTVAL, 1, 1, SYSDATE, SYSDATE, NULL)
-  	</insert>
-  	
-  	<select id="selectOneCommute" resultType="Commute">
-  		select comm_intime as " inTime"
-		from commute
-		where to_number(to_char(comm_date, 'dd'))=to_number(to_char(sysdate, 'dd'))
-  	</select>
+
   </mapper>

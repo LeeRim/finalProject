@@ -71,7 +71,7 @@ public class GivevacationController {
 			System.out.println(array1[i]);
 			Giv.setGvKey(array1[i]);
 			Giv.setGvYear(array[i]);
-			Giv.setGvVacaDate(array2[i]);
+			Giv.setGvVacadate(array2[i]);
 			Giv.setcKeyFk(employee.getcKeyFk());
 			Giv.setGvDate(gvDate);
 			list.add(Giv);

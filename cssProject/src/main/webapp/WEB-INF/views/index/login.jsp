@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,19 +8,21 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="resources/loginCss/images/icons/favicon.ico"/>
-	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="resources/loginCss/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="resources/loginCss/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/animate/animate.css">
-	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/css-hamburgers/hamburgers.min.css">
-	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/animsition/css/animsition.min.css">
-	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/select2/select2.min.css">
-	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/daterangepicker/daterangepicker.css">
-	<link rel="stylesheet" type="text/css" href="resources/loginCss/css/util.css">
-	<link rel="stylesheet" type="text/css" href="resources/loginCss/css/main.css">
+	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/loginCss/fonts/font-awesome-4.7.0/css/font-awesome.min.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/loginCss/fonts/Linearicons-Free-v1.0.0/icon-font.min.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/animate/animate.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/css-hamburgers/hamburgers.min.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/animsition/css/animsition.min.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/select2/select2.min.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/loginCss/vendor/daterangepicker/daterangepicker.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/loginCss/css/util.css"/>
+	<link rel="stylesheet" type="text/css" href="resources/loginCss/css/main.css"/>
+
 </head>
-<body>
+
 	
+<body>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -44,6 +47,12 @@
 
 					<div class="flex-sb-m w-full p-b-30">
 						<div>
+
+							<div style="color: red;">
+								<c:if test="${!empty(errorMsg)}">
+									<c:out value="${errorMsg}"/>
+								</c:if>
+							</div>
 							<a href="login2.do" class="txt1">
 								Forgot Account?
 							</a>

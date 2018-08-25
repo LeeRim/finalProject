@@ -38,7 +38,7 @@
 		padding:7px;
 	}
 	#calendar{
-		height:520px;
+		height:565px;
 	}
 	.bordName{
 		margin-left:10px;
@@ -65,33 +65,100 @@
 	}
  </style>
  <script>
-	$(function(){
-	   $(".box-body td").mouseenter(function(){
-	      $(this).parent().css("background","darkgray");
-	      $(this).parent().css("cursor","pointer");
-	   }).mouseout(function(){
-	      $(this).parent().css("background","white");
-	   }).click(function(){
-	      var boardNo = $(this).parent("tr").data("key");
-	      location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1";       
-	   });
-	});
+   $(function(){
+      $(".box-body td").mouseenter(function(){
+         $(this).parent().css("background","darkgray");
+         $(this).parent().css("cursor","pointer");
+      }).mouseout(function(){
+         $(this).parent().css("background","white");
+      }).click(function(){
+         var boardNo = $(this).parent("tr").data("key");
+         location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1";       
+      });
+   });
+   
+   function border(b){
+      location.href="borderList.do?bCateGory=" + b;
+   }
+   
+	function startTime() {
+	    var today = new Date();
+	    var year = today.getFullYear();
+		var month = today.getMonth();
+		var date = today.getDate();
+	    var h = today.getHours();
+	    var m = today.getMinutes();
+	    var s = today.getSeconds();
+	    m = checkTime(m);
+	    s = checkTime(s);
+	    document.getElementById('clock').innerHTML =
+	   year+ "년" + month + "월" + date + "일" + h + ":" + m + ":" + s;
+	    var t = setTimeout(startTime, 500);
+	}
+	function checkTime(i) {
+	    if (i < 10) {i = "0" + i}; // 숫자가 10보다 작을 경우 앞에 0을 붙여줌
+	    return i;
+	}
 	
-	function border(b){
-		location.href="borderList.do?bCateGory=" + b;
+	function inTime(){
+	    var today = new Date();
+		year = today.getFullYear(); 
+		month = today.getMonth();
+		date = today.getDate();
+	    h = today.getHours();
+	    m = today.getMinutes();
+	    s = today.getSeconds();
+	    var cKeyFk = ${user.cKeyFk}
+	    var eKeyFk= ${user.eKey}
+		$.ajax({
+			type:"post",
+	        url:"commuteone.do",
+	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk},
+	        success: function(data){
+	        	 document.getElementById('inTime').innerHTML =
+	        		 h + "시" + m+ "분"+ s + "초"
+	        },
+	        error: function(error) {
+	            alert(error);
+	        }
+		});
+	}
+	
+	function outTime(){
+	    var today = new Date();
+		year = today.getFullYear(); 
+		month = today.getMonth();
+		date = today.getDate();
+	    h = today.getHours();
+	    m = today.getMinutes();
+	    s = today.getSeconds();
+	    var cKeyFk = ${user.cKeyFk}
+	    var eKeyFk= ${user.eKey}
+		$.ajax({
+			type:"post",
+	        url:"commuteOut.do",
+	        data : {inHour:h, inMinute:m,cKeyFk:cKeyFk,eKeyFk:eKeyFk},
+	        success: function(data){
+	        	 document.getElementById('outTime').innerHTML =
+	        		 h + "시" + m+ "분"+ s + "초"
+	        },
+	        error: function(error) {
+	            alert(error);
+	        }
+		});
 	}
 </script>
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" onload="startTime()">
 <div class="wrapper">
-	
-	<c:import url="../include/left_column_employee.jsp"/>
+   
+   <c:import url="../include/left_column_employee.jsp"/>
   
   
 
 
-  <div class="content-wrapper" style="height: 100%;">
+  <div class="content-wrapper" style="height: 890px;">
 
     <section class="content-header">
 
@@ -100,18 +167,18 @@
     <!-- Main content -->
     <section class="content ">
     <div class="row">
-		<div class="col-md-4">
+      <div class="col-md-4">
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user-2">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
-              <div class="widget-user-image">
-                <img class="img-circle" src="resources/dist/img/user1-128x128.jpg" alt="User Avatar">
+              <div class="widget-user-image ">
+                <img class="img-circle" src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" style="width:80px; height:80px;"alt="User Avatar">
               </div>
               <!-- /.widget-user-image -->
               <div class="empInfo">
-	              <h3 class="widget-user-username">KH컴퍼니</h3>
-	              <h5 class="widget-user-desc">최범석대리</h5>
+                 <h3 class="widget-user-username"><c:out value="${sessionScope.user.cName}"/></h3>
+                 <h5 class="widget-user-desc"><c:out value="${sessionScope.user.eName} ${sessionScope.user.job}"/></h5>
               </div>
             </div>
             <div class="box-footer " >
@@ -119,7 +186,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">사원번호</h5>
-                    <span class="description-text">K3829</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.eNo}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -127,7 +194,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">부서</h5>
-                    <span class="description-text">개발팀</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.department}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -135,7 +202,7 @@
                 <div class="col-sm-4">
                   <div class="description-block">
                     <h5 class="description-header">근속년수</h5>
-                    <span class="description-text">3년</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.workYears} 년"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -148,7 +215,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">입사일</h5>
-                    <span class="description-text">2016-08-07</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.eHireDate}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -156,7 +223,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">연락망</h5>
-                    <span class="description-text">010-1234-5678</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.ePhone}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -164,7 +231,7 @@
                 <div class="col-sm-4">
                   <div class="description-block">
                     <h5 class="description-header">생년월일</h5>
-                    <span class="description-text">1999/01/01</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.eBirth}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -175,76 +242,82 @@
           </div>
           <!-- /.widget-user -->
         </div>
-        
-	        <div class="col-md-3">
-	        <div class="box box-default" style="height:150px; text-align:center;">
-	            <div class="box-header with-border">
-	              <h3 class="box-title" style="padding:10px;"> IP : 192.169.12.3 </h3>
-					
-	              <!-- /.box-tools -->
-	            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body" >
-	              현재시간 <br>
-	              2018-08-21 16:58:03
-	            </div>
-	            <!-- /.box-body -->
-	          </div>
-	          
-	          <div class="row">
-	          <div class="box box-default" style="width:48.5%; height:106.5px;">
-	            <div class="box-header with-border">
-	              <h3 class="box-title">출근시간</h3>
-				  <button type="button" class="btn btn-box-tool" >출근</button>
-	              <!-- /.box-tools -->
-	            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-	              2018-08-21 08:08:01
-	            </div>
-	            <!-- /.box-body -->
-	          </div>
-	          <!-- /.box -->
-	          
-	          <div class="box box-default" style="width:48.5%; height:106.5px; margin-left:10px;">
-	            <div class="box-header with-border">
-	              <h3 class="box-title">퇴근시간</h3>
-					<button type="button" class="btn btn-box-tool" >퇴근</button>
-	              <!-- /.box-tools -->
-	            </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-	              2018-08-21 18:08:09
-	            </div>
-	            <!-- /.box-body -->
-	          </div>
-	          <!-- /.box -->
-	           </div>
-	        </div>
-	        
-	         <div class="col-md-4" style="margin-top:-9px; width:41%;">
-				<div class="box-body table-responsive no-padding">
-					<table class="table table-hover">
-						<tr>
-							<th colspan="3" style="background:#bcbcbc;">공지사항</th>
-						</tr>
-						<tr>
-							<th class="title">글제목</th>
-							<th class="writer">작성자</th>
-							<th class="date">작성일</th>
-						</tr>
-						<c:forEach items="${board1}" var="board1" varStatus="status">
-							<tr data-key=${board1.boardKey }>
-								<td class="title"><c:out value="${board1.bTitle }" /></td>
-								<td class="writer"><c:out value="${board1.eName }" /></td>
-								<td class="date"><c:out value="${board1.bDate }" /></td>
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
-			</div>
-	        
-	  </div>      
+
+           <div class="col-md-3">
+           <div class="box box-default" style="height:150px; text-align:center;">
+               <div class="box-header with-border">
+                 <h3 class="box-title" style="padding:10px;"> <c:out value="${ipLocation}"></c:out> </h3>
+               
+                 <!-- /.box-tools -->
+               </div>
+               <!-- /.box-header -->
+               <div class="box-body" >
+                 현재시간 <br>
+                <div id="clock"></div>
+               </div>
+               <!-- /.box-body -->
+             </div>
+             
+             <div class="row">
+             <div class="box box-default" style="width:48.5%; height:106.5px;">
+               <div class="box-header with-border">
+                 <h3 class="box-title">출근시간</h3>
+              <input type="submit" value="출근" onclick="inTime();" class="btn btn-box-tool" >
+                 <!-- /.box-tools -->
+               </div>
+               <!-- /.box-header -->
+               <div id="inTime" class="box-body">
+                 
+               </div>
+               <!-- /.box-body -->
+             </div>
+             <!-- /.box -->
+             
+             <div class="box box-default" style="width:48.5%; height:106.5px; margin-left:10px;">
+               <div class="box-header with-border">
+                 <h3 class="box-title">퇴근시간</h3>
+               <input type="submit" value="퇴근" onclick="outTime();" class="btn btn-box-tool" >
+                 <!-- /.box-tools -->
+               </div>
+               <!-- /.box-header -->
+               <div id="outTime" class="box-body">
+                 
+               </div>
+               <!-- /.box-body -->
+             </div>
+             <!-- /.box -->
+              </div>
+           </div>
+           
+            <div class="col-md-4" style="margin-top:-9px; width:41%;">
+            <div class="box-body table-responsive no-padding">
+               <table class="table table-hover">
+                  <tr>
+                     <th colspan="3" style="background:#bcbcbc;">공지사항</th>
+                  </tr>
+                  <tr>
+                     <th class="title">글제목</th>
+                     <th class="writer">작성자</th>
+                     <th class="date">작성일</th>
+                  </tr>
+                  <c:if test="${board1.size() == 0}">
+		    	            <tr>
+		                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+		 	               </tr>
+		                </c:if>
+		                <c:if test="${board1.size() != 0}">
+                  <c:forEach items="${board1}" var="board1" varStatus="status">
+                     <tr data-key=${board1.boardKey }>
+                        <td class="title"><c:out value="${board1.bTitle }" /></td>
+                        <td class="writer"><c:out value="${board1.eName }" /></td>
+                        <td class="date"><c:out value="${board1.bDate }" /></td>
+                     </tr>
+                  </c:forEach>
+                  </c:if>
+               </table>
+            </div>
+         </div>         
+     </div>      
 	  
 	  <div class="row">
      	<div class="col-md-9" style="width:58.3%;">
@@ -259,7 +332,7 @@
         </div>
         
         <div class="row">
-				<div class="col-md-4" style="margin-top:-15px; margin-bottom:7px; width:41%">
+				<div class="col-md-4" style="margin-top:10px; width:41%">
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
 							<tr>
@@ -270,17 +343,24 @@
 								<th class="writer">작성자</th>
 								<th class="date">작성일</th>
 							</tr>
-							<c:forEach items="${board3}" var="board3" varStatus="status">
-							 <tr data-key="${board3.boardKey}">
-								<td class="title"><c:out value="${board3.bTitle}" /></td>
-								<td class="writer"><c:out value="${board3.eName}" /></td>
-								<td class="date"><c:out value="${board3.bDate}" /></td>
-							</tr>
-						</c:forEach>
+							<c:if test="${board3.size() == 0}">
+			    	            <tr>
+			                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+			 	               </tr>
+			                </c:if>
+			                <c:if test="${board3.size() != 0}">
+								<c:forEach items="${board3}" var="board3" varStatus="status">
+								 <tr data-key="${board3.boardKey}">
+									<td class="title"><c:out value="${board3.bTitle}" /></td>
+									<td class="writer"><c:out value="${board3.eName}" /></td>
+									<td class="date"><c:out value="${board3.bDate}" /></td>
+								</tr>
+							</c:forEach>
+						</c:if>
 						</table>
 					</div>
 				</div>
-				 <div class="col-md-4" style="margin-top:-11px; width:41%">
+				 <div class="col-md-4" style="margin-top:15px; width:41%">
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
 							<tr>
@@ -291,6 +371,12 @@
 								<th class="writer">작성자</th>
 								<th class="date">작성일</th>
 							</tr>
+							<c:if test="${board2.size() == 0}">
+			    	            <tr>
+			                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+			 	               </tr>
+			                </c:if>
+			                <c:if test="${board2.size() != 0}">
 							<c:forEach items="${board2}" var="board2" varStatus="status">
 								<tr data-key="${board2.boardKey }">
 									<td class="title"><c:out value="${board2.bTitle }" /></td>
@@ -298,11 +384,11 @@
 									<td class="date"><c:out value="${board2.bDate }" /></td>
 								</tr>
 							</c:forEach>
+							</c:if>
 						</table>
 					</div>
 				</div>
 			</div>
-        
      </div>
 
     </section>
@@ -313,8 +399,8 @@
 
 
 
-	<c:import url="../include/footer.jsp"/>
-	<!-- fullCalendar -->
+   <c:import url="../include/footer.jsp"/>
+   <!-- fullCalendar -->
 <script src="resources/bower_components/moment/moment.js"></script>
 <script src="resources/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <!-- Page specific script -->
@@ -349,17 +435,17 @@
     //모든 일정을 받아오는 반복문
     <c:forEach items="${list}" var="cal">
     dataList.push({
-    	title   : '${cal.title}',
+       title   : '${cal.title}',
         start   : new Date(${cal.startYear}, ${cal.startMonth - 1}, ${cal.startDay} ),
-        end		:  new Date(${cal.endYear}, ${cal.endMonth - 1}, ${cal.endDay+1} ),
+        end      :  new Date(${cal.endYear}, ${cal.endMonth - 1}, ${cal.endDay+1} ),
         backgroundColor: '${cal.background}', 
         borderColor    : '${cal.background}' 
     });
-	</c:forEach>
+   </c:forEach>
     
     
     $('#calendar').fullCalendar({
-    	height: 520, 
+    	height: 565, 
     	header    : {
         left  : '',
         center: 'title',

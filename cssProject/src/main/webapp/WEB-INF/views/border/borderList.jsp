@@ -69,16 +69,16 @@
 	}
 </style>
 <script>
-/* $(function(){
-    $(".writerTd").contextmenu(function(e){
+ /* $(function(){
+    $(".bt").contextmenu(function(e){
        $writerTd = $(e.target);
        console.log($writerTd.text());
     });
- })
+ }) */
 
- $(document).bind("contextmenu", function(event) {
-/*
-	 var cursorX;
+
+/*  $(document).bind("contextmenu", function(event) {
+	/*  var cursorX;
 	var cursorY;
 	document.onmousemove = function(e){
 	    cursorX = e.pageX;
@@ -87,8 +87,8 @@
 	setInterval(checkCursor, 1000);
 	function checkCursor(){
 	    alert("Cursor at: " + cursorX + ", " + cursorY);
-	}
- */	
+	} */
+ 	
 	/* console.log(event);
  	console.log(event.target);
  	
@@ -96,19 +96,26 @@
  	
     event.preventDefault();
     $("div.custom-menu:visible").hide();
-    $("<div class='custom-menu'>Custom menu</div>")
+    $("<div class='custom-menu'>작성자 글보기</div>")
         .appendTo("body")
         .css({top: event.pageY + "px", left: event.pageX + "px"});
-	}).bind("click", function(event) {
+	});
+ 
+ 	$(".bt").mouseover(function(){
+ 		$('.custom-menu').click(function() {
+	 		alert('Handler for .click() called.'); 
+	 		/* location.href="read.do?text=" + btText; */
+	    	/* $("div.custom-menu").hide();
+	 	});
+ 	}); */
+
+ 	/* .bind("click", function(event) {
 	var bt = $(event.target);
-	var btText = bt.text();
+	var btText = bt.text(); */
 	
- 	console.log(bt.text());
- 	console.log(btText);
- 	
-	location.href="read.do?text=" + btText;
-    $("div.custom-menu").hide();
-}); */
+ 	/* console.log(bt.text());
+ 	console.log(btText); */
+	
 
 $(function(){
 	$(".box-body td").mouseenter(function(){
@@ -117,8 +124,14 @@ $(function(){
 	}).mouseout(function(){
 		$(this).parent().css("background","white");
 	}).click(function(){
+		if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
 		var boardNo = $(this).parent().children().eq(0).text();
-		location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=${pi.currentPage}"; 		
+		location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=${pi.currentPage}"; 
+		}
+	});
+	
+	$("#nullList").hover(function(){
+		$(this).css("background","white");
 	});
 });
 
@@ -187,7 +200,7 @@ $(function(){
                 </tr>
                 <c:if test="${list.size() == 0}">
     	            <tr>
-                		<td colspan="5">조회 된 게시글이 없습니다.</td>
+                		<td colspan="5" id="nullList">조회 된 게시글이 없습니다.</td>
  	               </tr>
                 </c:if>
                 <c:if test="${list.size() != 0}">

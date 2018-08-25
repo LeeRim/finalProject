@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jdl.css.common.model.vo.AttachmentVo;
+import com.jdl.css.common.model.vo.DivisionVo;
 import com.jdl.css.employee.model.dao.EmployeeDao;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
@@ -67,6 +68,31 @@ public class EmployeeService {
 		return dao.empNoCheck(chekEmployee);
 	}
 
+	public EmployeeVo selectSessionEmployee(EmployeeVo member) {
+		return dao.selectSessionEmployee(member);
+
+	}
+
+	public List<EmployeeVo> selectTodayBList(int cKey) {
+		return dao.selectTodayBList(cKey);
+	}
+
+	public List<EmployeeVo> selectDepartCountList(int cKey) {
+		return dao.selectDepartCountList(cKey);
+	}
+
+	public int insertDivision(List<DivisionVo> divisionList) {
+		int result=0;
+		for(int i=0;i<divisionList.size();i++){
+			result+=dao.insertDivision(divisionList.get(i));
+		}
+		return result;
+	}
+
+	public int deleteDivision(int divKey) {
+		return dao.deleteDivision(divKey);
+	}
+	
 	public EmployeeVo selectEmail(String email) {
 		return dao.selectEmail(email);
 	}
@@ -77,7 +103,5 @@ public class EmployeeService {
 		
 	}
 
-	
-	
 
 }

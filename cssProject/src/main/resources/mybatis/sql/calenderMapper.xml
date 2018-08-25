@@ -4,7 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CalenderMapper">
 
-	<select id="selectCalender" resultType="Calender">
+	<resultMap type="Calender" id="calenderMap">
+	<id property="id" column="CAL_KEY"/>
+		<result property="title" column="CAL_NAME" />
+		<result property="cKeyFk" column="C_KEY_FK" />
+		<result property="startDate" column="CAL_STARTDATE" />
+		<result property="endDate" column="CAL_ENDDATE" />
+		<result property="background" column="BACKGROUND" />
+	
+	</resultMap>
+	
+	<select id="selectCalender" resultType="Calender" parameterType ="EmployeeVo">
 		select cal_name as "title",
 				to_number(to_char(cal_startdate, 'yyyy')) as "startYear",
 				to_number(to_char(cal_startdate, 'mm')) as "startMonth",
@@ -14,10 +24,12 @@
 				to_number(to_char(cal_enddate, 'dd')) as "endDay",
 				background
 		from calender
+		where c_key_fk = #{cKeyFk}
 	</select>
 	
 	<insert id="createEvent" parameterType="Calender">
-		insert into calender values(SEQ_CALENDER.NEXTVAL,1,#{title},#{startDate},#{endDate},2,1,#{background})
+		insert into calender values(SEQ_CALENDER.NEXTVAL,#{cKeyFk},#{title},#{startDate},#{endDate},2,1,#{background})
+		<!--이 부분수정예정  -->
 	</insert>
 	
 </mapper>

@@ -67,8 +67,8 @@
 		height:270px;
 	}
 	.cLogo{
-		width:128px;
-		height:128px;
+		width:130px;
+		height:130px;
 	}
 	.birthPhoto{
 		width:100px;
@@ -91,12 +91,79 @@
 	function border(b){
 		location.href="borderList.do?bCateGory=" + b;
 	}
+	
+	function startTime() {
+	    var today = new Date();
+	    var year = today.getFullYear();
+		var month = today.getMonth();
+		var date = today.getDate();
+	    var h = today.getHours();
+	    var m = today.getMinutes();
+	    var s = today.getSeconds();
+	    m = checkTime(m);
+	    s = checkTime(s);
+	    document.getElementById('clock').innerHTML =
+	   year+ "년" + month + "월" + date + "일" + h + ":" + m + ":" + s;
+	    var t = setTimeout(startTime, 500);
+	}
+	function checkTime(i) {
+	    if (i < 10) {i = "0" + i}; // 숫자가 10보다 작을 경우 앞에 0을 붙여줌
+	    return i;
+	}
+	
+	function inTime(){
+	    var today = new Date();
+		year = today.getFullYear(); 
+		month = today.getMonth();
+		date = today.getDate();
+	    h = today.getHours();
+	    m = today.getMinutes();
+	    s = today.getSeconds();
+	    var cKeyFk = ${user.cKeyFk}
+	    var eKeyFk= ${user.eKey}
+		$.ajax({
+			type:"post",
+	        url:"commuteone.do",
+	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk},
+	        success: function(data){
+	        	 document.getElementById('inTime').innerHTML =
+	        		 h + "시" + m+ "분"+ s + "초"
+	        },
+	        error: function(error) {
+	            alert(error);
+	        }
+		});
+	}
+	
+	function outTime(){
+	    var today = new Date();
+		year = today.getFullYear(); 
+		month = today.getMonth();
+		date = today.getDate();
+	    h = today.getHours();
+	    m = today.getMinutes();
+	    s = today.getSeconds();
+	    var cKeyFk = ${user.cKeyFk}
+	    var eKeyFk= ${user.eKey}
+		$.ajax({
+			type:"post",
+	        url:"commuteOut.do",
+	        data : {inHour:h, inMinute:m,cKeyFk:cKeyFk,eKeyFk:eKeyFk},
+	        success: function(data){
+	        	 document.getElementById('outTime').innerHTML =
+	        		 h + "시" + m+ "분"+ s + "초"
+	        },
+	        error: function(error) {
+	            alert(error);
+	        }
+		});
+	}
 </script>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" onload="startTime()">
 <div class="wrapper">
 	
-	<c:import url="../include/left_column_employee.jsp"/>
+	<c:import url="../include/left_column_companyAdmin.jsp"/>
   
   
 
@@ -109,6 +176,8 @@
 
     <!-- Main content -->
     <section class="content ">
+    
+    
     <div class="row">
         <div class="col-md-4 cProfile" >
           <div class="box box-widget widget-user-2 cProfileBody">
@@ -132,22 +201,20 @@
 						<tr >
 							<th>내선번호</th>
 							<td>1234</td>
-							<th >개인번호</th>
-							<td >5678</td>
-						</tr>
-						<tr >
-							<th >가입일</th>
-							<td >2018-08-22</td>
 							<th >레벨</th>
 							<td >1</td>
+						</tr>
+						<tr >
+							<th >개인번호</th>
+							<td colspan="3">010-6561-2016</td>
 						</tr>
 						<tr >
 							<th colspan="2">회사주소</th>
 							<td colspan="4">서울특별시 테헤란로41 빌딩 4층</td>
 						</tr>
 						<tr >
-							<th colspan="2">결제수단</th>
-							<td colspan="4">카카오페이</td>
+							<th colspan="2">서비스 종료일</th>
+							<td colspan="4">2018-08-23</td>
 						</tr>
 					</table>
           </div>
@@ -235,14 +302,14 @@
 	        <div class="col-md-3">
 	        <div class="box box-default" style="height:150px; text-align:center;">
 	            <div class="box-header with-border">
-	              <h3 class="box-title" style="padding:10px;"> IP : 192.169.12.3 </h3>
+	              <h3 class="box-title" style="padding:10px;"><c:out value="${ipLocation}"></c:out> </h3>
 					
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
 	            <div class="box-body" >
 	              현재시간 <br>
-	              2018-08-21 16:58:03
+	              <div id="clock"></div>
 	            </div>
 	            <!-- /.box-body -->
 	          </div>
@@ -251,12 +318,12 @@
 	          <div class="box box-default" style="width:48.5%; height:112px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">출근시간</h3>
-				  <button type="button" class="btn btn-box-tool" >출근</button>
+				  <input type="submit" value="출근" onclick="inTime();" class="btn btn-box-tool" >
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
-	            <div class="box-body">
-	              2018-08-21 08:08:01
+	            <div id="inTime" class="box-body">
+	              
 	            </div>
 	            <!-- /.box-body -->
 	          </div>
@@ -265,12 +332,12 @@
 	          <div class="box box-default" style="width:48.5%; height:112px; margin-left:10px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">퇴근시간</h3>
-					<button type="button" class="btn btn-box-tool" >퇴근</button>
+					<input type="submit" value="퇴근" onclick="outTime();" class="btn btn-box-tool" >
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
-	            <div class="box-body">
-	              2018-08-21 18:08:09
+	            <div id="outTime" class="box-body">
+	              
 	            </div>
 	            <!-- /.box-body -->
 	          </div>
@@ -282,7 +349,7 @@
 	  <div class="row" style="margin-top:10px;">
 	  	<div class="col-md-6" >
               <!-- USERS LIST -->
-              <div class="box box-danger">
+              <div class="box box-danger" style="height:353px;">
                 <div class="box-header with-border">
                   <h3 class="box-title">Happy Birthday</h3>
 
@@ -290,46 +357,13 @@
                 <!-- /.box-header -->
                 <div class="box-body no-padding" >
                   <ul class="users-list clearfix">
+                  <c:forEach items="${todayBList }" var="tb">
                     <li>
-                      <img class="birthPhoto" src="resources/dist/img/user1-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">이름</a>
-                      <span class="users-list-date">부서</span>
+                      <img class="birthPhoto" src="resources/dist/img/user1-128x128.jpg"  alt="User Image">
+                      <a class="users-list-name" href="#">${tb.eName }</a>
+                      <span class="users-list-date">${tb.department }</span>
                     </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user8-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Norman</a>
-                      <span class="users-list-date">Yesterday</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user7-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Jane</a>
-                      <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user6-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">John</a>
-                      <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user6-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Alexander</a>
-                      <span class="users-list-date">13 Jan</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user5-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Sarah</a>
-                      <span class="users-list-date">14 Jan</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user4-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Nora</a>
-                      <span class="users-list-date">15 Jan</span>
-                    </li>
-                    <li>
-                      <img class="birthPhoto"  src="resources/dist/img/user3-128x128.jpg" alt="User Image">
-                      <a class="users-list-name" href="#">Nadia</a>
-                      <span class="users-list-date">15 Jan</span>
-                    </li>
+                  </c:forEach>
                   </ul>
                   <!-- /.users-list -->
                 </div>
@@ -374,13 +408,20 @@
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
-						<c:forEach items="${board1}" var="board1" varStatus="status">
-							<tr data-key=${board1.boardKey }>
-								<td class="title"><c:out value="${board1.bTitle }" /></td>
-								<td class="writer"><c:out value="${board1.eName }" /></td>
-								<td class="date"><c:out value="${board1.bDate }" /></td>
-							</tr>
-						</c:forEach>
+						 <c:if test="${board1.size() == 0}">
+		    	            <tr>
+		                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+		 	               </tr>
+		                </c:if>
+		                <c:if test="${board1.size() != 0}">
+								<c:forEach items="${board1}" var="board1" varStatus="status">
+									<tr data-key=${board1.boardKey }>
+										<td class="title"><c:out value="${board1.bTitle }" /></td>
+										<td class="writer"><c:out value="${board1.eName }" /></td>
+										<td class="date"><c:out value="${board1.bDate }" /></td>
+									</tr>
+								</c:forEach>
+						</c:if>
 					</table>
 				</div>
 			</div>
@@ -396,13 +437,20 @@
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
-						<c:forEach items="${board1}" var="board1" varStatus="status">
-							<tr data-key=${board1.boardKey }>
-								<td class="title"><c:out value="${board1.bTitle }" /></td>
-								<td class="writer"><c:out value="${board1.eName }" /></td>
-								<td class="date"><c:out value="${board1.bDate }" /></td>
-							</tr>
-						</c:forEach>
+						 <c:if test="${board1.size() == 0}">
+		    	            <tr>
+		                		<td colspan="5">조회 된 게시글이 없습니다.</td>
+		 	               </tr>
+                		</c:if>
+		                <c:if test="${board1.size() != 0}">
+								<c:forEach items="${board1}" var="board1" varStatus="status">
+									<tr data-key=${board1.boardKey }>
+										<td class="title"><c:out value="${board1.bTitle }" /></td>
+										<td class="writer"><c:out value="${board1.eName }" /></td>
+										<td class="date"><c:out value="${board1.bDate }" /></td>
+									</tr>
+								</c:forEach>
+						</c:if>
 					</table>
 				</div>
 			</div>
@@ -429,10 +477,10 @@
      */
 
     var donutData = [
-      { label: '인사부', data: 30, color: '#3c8dbc' },
-      { label: '개발부', data: 20, color: '#0073b7' },
-      { label: '영업부', data: 20, color: '#3c8dbc' },
-      { label: '마케팅부', data: 50, color: '#00c0ef' }
+    	<c:forEach items="${departCountList }" var="dc" varStatus="status">
+	    	<c:if test="${!status.last}">{ label: '${dc.department}', data: ${dc.count}, color: '#3c8dbc' },</c:if>
+			<c:if test="${status.last}">{ label: '${dc.department}', data: ${dc.count}, color: '#3c8dbb' }</c:if>
+      </c:forEach>	
     ]
     $.plot('#donut-chart', donutData, {
       series: {

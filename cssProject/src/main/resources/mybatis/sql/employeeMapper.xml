@@ -59,7 +59,9 @@
 		<result property="eState" column="E_STATE" />
 		<result property="job" column="JOB" />
 		<result property="department" column="DEPARTMENT" />
-		<result property="divInfolevel" column="DIV_INFOLEVER" />
+		<result property="divInfolevel" column="DIV_INFOLEVEL" />
+		<result property="cName" column="C_NAME" />
+		<result property="cLevel" column="C_LEVEL" />
 		<association property="instead" javaType="EmployeeVo">
 			<id property="eKey" column="INSTEAD_KEY" />
 			<result property="eName" column="INSTEAD_NAME" />
@@ -68,11 +70,6 @@
 			<result property="department" column="INSTEAD_DEPART" />
 		</association>
 	</resultMap>
-
-
-
-
-
 
 	<select id="selectEmployeeById" parameterType="string"
 		resultMap="EmployeeMap">
@@ -87,20 +84,25 @@
 		EJ.DIV_INFO AS
 		"INSTEAD_JOB",
 		ED.DIV_INFO AS "INSTEAD_DEPART",
-		C.C_LEVEL
+		C.C_LEVEL,C.C_NAME
 		FROM EMPLOYEE E
 		LEFT JOIN
-		DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		DIVISION J ON(E.E_JOBCODE_FK
+		= J.DIV_KEY)
 		LEFT JOIN
 		DIVISION D
 		ON(E.E_DEPART_FK = D.DIV_KEY)
-		LEFT JOIN EMPLOYEE EI
+		LEFT JOIN
+		EMPLOYEE EI
 		ON(EI.E_KEY =
 		E.E_INSTEAD)
-		LEFT JOIN DIVISION EJ ON(EI.E_JOBCODE_FK = EJ.DIV_KEY)
-		LEFT JOIN DIVISION ED ON(EI.E_DEPART_FK = ED.DIV_KEY)
+		LEFT JOIN DIVISION EJ
+		ON(EI.E_JOBCODE_FK = EJ.DIV_KEY)
+		LEFT JOIN DIVISION ED
+		ON(EI.E_DEPART_FK = ED.DIV_KEY)
 		LEFT JOIN COMPANY C ON(E.C_KEY_FK = C.C_KEY)
-		WHERE E.E_ID = 	#{eId}
+
+		WHERE E.E_ID = #{eId}
 	</select>
 	
 	
@@ -129,7 +131,7 @@
 		D.DIV_KEY)
 		WHERE E.C_KEY_FK = #{companyK}
 	</select>
-	
+
 	<!-- 부서 불러오기 -->
 	<select id="selectDepartment" parameterType="int" resultType="EmployeeVo">
 		SELECT D.DIV_INFO AS "DEPARTMENT"
@@ -143,8 +145,6 @@
 	</select>
 
 	<!-- 쪽지 직원 불러오는 쿼리문 끝 -->
-
-
 
 	<!-- 사원등록 -->
 	<insert id="insertEmployee" parameterType="EmployeeVo">
@@ -162,64 +162,63 @@
 		#{eBirth}, #{eHireDate},
 		#{ePhoto} )
 	</insert>
-	
+
 	<!-- 사원등록 아이디 유효성 검사 -->
 	<select id="empAddIdCheck" parameterType="EmployeeVo"
 		resultType="int">
 		SELECT
-    	COUNT(*)
-		FROM EMPLOYEE	
+		COUNT(*)
+		FROM EMPLOYEE
 		WHERE E_ID = #{eId} AND C_KEY_FK = #{cKeyFk}
-		
+
 
 	</select>
-	
+
 	<!-- 사원등록 사원번호 유효성 검사 -->
-	<select id="empNoCheck" parameterType="EmployeeVo"
-		resultType="int">
+	<select id="empNoCheck" parameterType="EmployeeVo" resultType="int">
 		SELECT
-    	COUNT(*)
+		COUNT(*)
 		FROM EMPLOYEE
 		WHERE E_NO = #{eNo} AND C_KEY_FK = #{cKeyFk}
-		
+
 
 	</select>
-	
-	
-	
-	
+
+
+
+
 	<update id="updateEmployee" parameterType="EmployeeVo">
-  			UPDATE EMPLOYEE 
-		 	SET E_NO = #{eNo},
-				  E_ID = #{eId},
-				  E_PWD = #{ePwd},
-				  E_NAME = #{eName},
-				  E_JOBCODE_FK = #{eJobcodeFk}, 
-				  E_DEPART_FK = #{eDepartFk}, 
-				  E_ADDRESS = #{eAddress},
-				  E_EXTEN = #{eExten},
-				  E_PHONE = #{ePhone}, 
-				  E_EMAIL = #{eEmail}, 
-				  E_BIRTH = #{eBirth},
-				  E_HIRE_DATE = #{eHireDate}, 
-				  E_ENT_DATE = #{eEntDate},
-				  <choose>
-				  <when test="eEntDate !=null">
-				  E_ENT_YN =  'Y',
-				  </when>
-				  <when test="eEntDate ==null">
-				  E_ENT_YN =  'N',
-				  </when>
-				  </choose>
-				  E_PHOTO = #{ePhoto}
-			WHERE E_KEY = #{eKey} 
-  	</update>
-	
-	
+		UPDATE EMPLOYEE
+		SET E_NO = #{eNo},
+		E_ID = #{eId},
+		E_PWD = #{ePwd},
+		E_NAME = #{eName},
+		E_JOBCODE_FK = #{eJobcodeFk},
+		E_DEPART_FK = #{eDepartFk},
+		E_ADDRESS = #{eAddress},
+		E_EXTEN = #{eExten},
+		E_PHONE = #{ePhone},
+		E_EMAIL = #{eEmail},
+		E_BIRTH = #{eBirth},
+		E_HIRE_DATE = #{eHireDate},
+		E_ENT_DATE = #{eEntDate},
+		<choose>
+			<when test="eEntDate !=null">
+				E_ENT_YN = 'Y',
+			</when>
+			<when test="eEntDate ==null">
+				E_ENT_YN = 'N',
+			</when>
+		</choose>
+		E_PHOTO = #{ePhoto}
+		WHERE E_KEY = #{eKey}
+	</update>
+
+
 
 
 	<!-- 조직도 select 사원 리스트 출력 쿼리문 -->
-	
+
 	<select id="selectEmployeeList2" resultMap="EmployeeMap"
 		parameterType="int">
 		SELECT E.E_KEY E_KEY,
@@ -273,11 +272,11 @@
 	<select id="selectJobList" parameterType="int" resultMap="EmployeeMap">
 		SELECT
 		DIV_INFO AS "JOB",
-		DIV_KEY AS"E_JOBCODE_FK"
+		DIV_KEY AS"E_JOBCODE_FK",
+		DIV_INFOLEVEL DIV_INFOLEVEL
 		FROM DIVISION
-		WHERE DIV_TYPE =1 AND C_KEY_FK = #{cKey}
-		ORDER BY DIV_KEY
-		DESC
+		WHERE DIV_TYPE
+		=2 AND C_KEY_FK = #{cKey} ORDER BY DIV_INFOLEVEL
 
 	</select>
 
@@ -288,7 +287,7 @@
 		"DEPARTMENT" ,
 		DIV_KEY AS"E_DEPART_FK"
 		FROM DIVISION
-		WHERE DIV_TYPE =2 AND C_KEY_FK = #{cKey}
+		WHERE DIV_TYPE =1 AND C_KEY_FK = #{cKey}
 		ORDER BY DIV_KEY ASC
 	</select>
 
@@ -317,42 +316,93 @@
 	<!-- 조직도 select 사원정보 팝업창 출력 쿼리문 -->
 	<select id="selectEmployeeInfo" parameterType="int" resultMap="EmployeeMap">
 		SELECT
-        E.E_KEY AS "E_KEY",
-        E.E_NO AS "E_NO",
+		E.E_KEY AS "E_KEY",
+		E.E_NO AS "E_NO",
 		E.E_ID AS "E_ID",
 		D.DIV_INFO AS "DEPARTMENT",
-		J.DIV_INFO AS "JOB",
-		E.E_NAME AS "E_NAME",
+		E.E_NAME AS
+		"E_NAME",
 		E.E_EXTEN AS "E_EXTEN",
 		E.E_PHONE AS "E_PHONE",
-		E.E_HIRE_DATE AS "E_HIRE_DATE",
-        E.E_BIRTH AS "E_BIRTH",
-        E.E_ENT_DATE AS "E_ENT_DATE",
+		E.E_HIRE_DATE
+		AS "E_HIRE_DATE",
+		E.E_BIRTH AS "E_BIRTH",
+		E.E_ENT_DATE AS "E_ENT_DATE",
 		D.DIV_KEY AS "E_DEPART_FK",
-		J.DIV_KEY AS "E_JOBCODE_FK",
-        E.E_ADDRESS AS "E_ADDRESS",
+		J.DIV_KEY AS
+		"E_JOBCODE_FK",
+		E.E_ADDRESS AS "E_ADDRESS",
 		E.E_EMAIL AS "E_EMAIL",
 		E.E_PHOTO AS "E_PHOTO"
 
-		FROM EMPLOYEE E
+		FROM
+		EMPLOYEE E
 		JOIN DIVISION J
 		ON(E.E_JOBCODE_FK = J.DIV_KEY)
-		JOIN DIVISION D ON(E.E_DEPART_FK =
+		JOIN DIVISION D
+		ON(E.E_DEPART_FK =
 		D.DIV_KEY)
 		WHERE E.E_KEY = #{eKey}
 	</select>
 
+	<select id="selectTodayBList" parameterType="int" resultType="EmployeeVo">
+		SELECT E.E_NAME,D.DIV_INFO AS "DEPARTMENT",E.E_BIRTH,E.E_PHOTO
+		FROM
+		EMPLOYEE E
+		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
+		WHERE
+		E.C_KEY_FK = #{cKey} AND TO_CHAR(E_BIRTH,'MM/DD') =
+		TO_CHAR(SYSDATE,'MM/DD')
+	</select>
+
+	<select id="selectDepartCountList" parameterType="int"
+		resultType="EmployeeVo">
+		SELECT D.DIV_INFO AS "DEPARTMENT" ,COUNT(*) AS "COUNT"
+		FROM
+		EMPLOYEE E
+		JOIN DIVISION D ON(E.E_DEPART_FK= D.DIV_KEY)
+		GROUP BY
+		D.DIV_INFO
+	</select>
+
 	<update id="updateInstead" parameterType="EmployeeVo">
 		UPDATE EMPLOYEE
-		SET E_INSTEAD = #{eInstead}
+		SET
+		E_INSTEAD = #{eInstead}
 		WHERE E_KEY=#{eKey}
 	</update>
-	
+
 	<update id="updateState" parameterType="EmployeeVo">
 		UPDATE EMPLOYEE
-        SET E_STATE = #{eState}
-        WHERE E_KEY = #{eKey}
+		SET E_STATE = #{eState}
+		WHERE E_KEY = #{eKey}
 	</update>
+
+
+	<select id="sessionSelect" parameterType="EmployeeVo" resultMap="EmployeeMap">
+		SELECT
+		E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_PWD,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
+		,E.E_EXTEN, E.E_PHONE,E.E_EMAIL,
+		E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN,E.E_PHOTO, E.E_BIRTH,
+		E.E_INSTEAD,E.E_STATE
+		,J.DIV_INFO AS "JOB", D.DIV_INFO AS "DEPARTMENT"
+		,J.DIV_INFOLEVEL
+		, EI.E_KEY AS INSTEAD_KEY, EI.E_NAME AS INSTEAD_NAME, EJ.DIV_INFO AS
+		"INSTEAD_JOB",
+		ED.DIV_INFO AS "INSTEAD_DEPART",
+		C.C_LEVEL,C.C_NAME
+		FROM EMPLOYEE E
+		LEFT JOIN
+		DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		LEFT JOIN DIVISION D
+		ON(E.E_DEPART_FK = D.DIV_KEY)
+		LEFT JOIN EMPLOYEE EI ON(EI.E_KEY =
+		E.E_INSTEAD)
+		LEFT JOIN DIVISION EJ ON(EI.E_JOBCODE_FK = EJ.DIV_KEY)
+		LEFT JOIN DIVISION ED ON(EI.E_DEPART_FK = ED.DIV_KEY)
+		LEFT JOIN COMPANY C ON(E.C_KEY_FK = C.C_KEY)
+		WHERE E.E_KEY =#{eKey}
+	</select>
 	
 	
 	<!-- 임시 비밀번호 발급 -->
@@ -364,5 +414,27 @@
 	
 	
 	
+
+
+	<insert id="insertDivision" parameterType="DivisionVo">
+		MERGE INTO DIVISION DIV
+            USING DUAL
+            ON (DIV_KEY=#{divKey})
+            WHEN MATCHED THEN
+                      UPDATE SET
+                        DIV_TYPE=#{divType},
+                        DIV_INFO=#{divInfo}
+                        <if test="divInfolevel!=0">
+                        ,DIV_INFOLEVEL=#{divInfolevel}
+                        </if>
+            WHEN NOT MATCHED THEN
+                     INSERT (DIV_KEY, C_KEY_FK, DIV_TYPE, DIV_INFO, DIV_INFOLEVEL) VALUES (SEQ_DIVISION.NEXTVAL,#{cKeyFk} , #{divType}, #{divInfo}, 
+                     <if test="divInfolevel==0">null</if><if test="divInfolevel!=0">#{divInfolevel}</if>
+                     )
+	</insert>
+	
+	<delete id="deleteDivision" parameterType="int">
+		DELETE FROM DIVISION WHERE DIV_KEY=#{divKey}
+	</delete>
 
 </mapper>

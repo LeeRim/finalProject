@@ -46,8 +46,13 @@ public class EmployeeVo {
     private int totalVacation;				//총휴가
     private int remainingVacation;      //남은휴가
     
-    //회사 레벨
+    
+    //회사 정보
+    private String cName;
     private int cLevel;
+    private int workYears;
+    //부서 count용
+    private int count;
     public EmployeeVo() {
     }
 
@@ -77,8 +82,6 @@ public class EmployeeVo {
 		this.cKeyFk = cKeyFk;
 	}
 
-	
-
 	public String geteType() {
 		return eType;
 	}
@@ -87,8 +90,6 @@ public class EmployeeVo {
 	public void seteType(String eType) {
 		this.eType = eType;
 	}
-
-
 
 	public String geteId() {
 		return eId;
@@ -129,7 +130,6 @@ public class EmployeeVo {
 	public void seteDepartFk(int eDepartFk) {
 		this.eDepartFk = eDepartFk;
 	}
-
 
 	public String geteAddress() {
 		return eAddress;
@@ -244,25 +244,17 @@ public class EmployeeVo {
 		this.eState = eState;
 	}
 
-
-
 	public int getDivInfolevel() {
 		return divInfolevel;
 	}
-
-
 
 	public void setDivInfolevel(int divInfolevel) {
 		this.divInfolevel = divInfolevel;
 	}
 
-
-
 	public EmployeeVo getInstead() {
 		return instead;
 	}
-
-
 
 	public void setInstead(EmployeeVo instead) {
 		this.instead = instead;
@@ -283,16 +275,41 @@ public class EmployeeVo {
 	public void setRemainingVacation(int remainingVacation) {
 		this.remainingVacation = remainingVacation;
 	}
-	
-
 
 	public int getcLevel() {
 		return cLevel;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public void setcLevel(int cLevel) {
 		this.cLevel = cLevel;
 	}
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
+	
+	public int getWorkYears() {
+		return workYears;
+	}
+
+	public void setWorkYears(int workYears) {
+		this.workYears = workYears;
+	}
+
 
 
 	@Override
@@ -304,7 +321,9 @@ public class EmployeeVo {
 				+ ", ePhoto=" + ePhoto + ", eInstead=" + eInstead + ", eState=" + eState + ", job=" + job
 				+ ", department=" + department + ", divInfolevel=" + divInfolevel + ", instead=" + instead
 				+ ", division=" + division + ", totalVacation=" + totalVacation + ", remainingVacation="
-				+ remainingVacation + ", cLevel=" + cLevel + "]";
+				+ remainingVacation + ", cName=" + cName + ", cLevel=" + cLevel + ", workYears=" + workYears
+				+ ", count=" + count + "]";
 	}
-
+	
+	
 }

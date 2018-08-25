@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jdl.css.commuteCheck.model.commuteCheckVo.CommuteCheckVo;
+import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Repository
 public class CommuteCheckDao {
@@ -15,19 +16,22 @@ public class CommuteCheckDao {
 	@Autowired
 	SqlSessionTemplate sqlsession;
 	
-	public List<CommuteCheckVo> showCommuteCheck(){
-		return sqlsession.selectList("commuteCheckMapper.selectCommute");
+	public List<CommuteCheckVo> showCommuteCheck(EmployeeVo user){
+		return sqlsession.selectList("commuteCheckMapper.selectCommute",user);
 	}
 	public int insertInCommuteCheck(CommuteCheckVo commute) {
 		return sqlsession.insert("commuteCheckMapper.insertInCommute",commute);
 	}
-	public int insertOutCommuteCheck(CommuteCheckVo commute) {
-		return sqlsession.insert("commuteCheckMapper.insertOutCommute",commute);
+	public int insertOutCommuteCheck(EmployeeVo user) {
+		return sqlsession.insert("commuteCheckMapper.insertOutCommute",user);
 	}
-	public int insertInnsr(Date inTime) {
-		return sqlsession.insert("commuteCheckMapper.insertInner", inTime);
+	public int insertInnsr(EmployeeVo user) {
+		return sqlsession.insert("commuteCheckMapper.insertInner", user);
 	}
 	public CommuteCheckVo selectInnsr(CommuteCheckVo commute) {
 		return sqlsession.selectOne("commuteCheckMapper.selectOneCommute", commute);
+	}
+	public List<CommuteCheckVo> showCommuteAllCheck(EmployeeVo user) {
+		return sqlsession.selectList("commuteCheckMapper.selectAllCommute",user);
 	}
 }

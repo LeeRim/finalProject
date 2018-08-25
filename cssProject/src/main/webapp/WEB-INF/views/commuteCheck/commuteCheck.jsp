@@ -11,79 +11,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <script src="resources/dist/js/demo.js"></script>
   <title>AdminLTE 2 | Starter</title>
-	<script>
-	function startTime() {
-	    var today = new Date();
-	    var year = today.getFullYear();
-		var month = today.getMonth();
-		var date = today.getDate();
-	    var h = today.getHours();
-	    var m = today.getMinutes();
-	    var s = today.getSeconds();
-	    m = checkTime(m);
-	    s = checkTime(s);
-	    document.getElementById('clock').innerHTML =
-	   year+ "년" + month + "월" + date + "일" + h + ":" + m + ":" + s;
-	    var t = setTimeout(startTime, 500);
-	}
-	function checkTime(i) {
-	    if (i < 10) {i = "0" + i}; // 숫자가 10보다 작을 경우 앞에 0을 붙여줌
-	    return i;
-	}
-	
-	function inTime(){
-	    var today = new Date();
-		year = today.getFullYear(); 
-		month = today.getMonth();
-		date = today.getDate();
-	    h = today.getHours();
-	    m = today.getMinutes();
-	    s = today.getSeconds();
-    	var sum = new Date(year, month, date);
-    	var timeSum = new Date(h,m,s);
-		$.ajax({
-			type:"post",
-	        url:"commuteone.do",
-	        data : {inHour:h, inMinute:m},
-	        success: function(data){
-	        	 document.getElementById('inTime').innerHTML =
-	        		 h + "시" + m+ "분"+ s + "초"
-	        },
-	        error: function(error) {
-	            alert(error);
-	        }
-		});
-	}
-	
-	function outTime(){
-		    var today = new Date();
-			year = today.getFullYear(); 
-			month = today.getMonth();
-			date = today.getDate();
-		    h = today.getHours();
-		    m = today.getMinutes();
-		    s = today.getSeconds();
-	    	var sum = new Date(year, month, date);
-	    	var timeSum = new Date(h,m,s);
-			$.ajax({
-				type:"post",
-		        url:"commuteOut.do",
-		        data : {inHour:h, inMinute:m},
-		        success: function(data){
-		        	 document.getElementById('outTime').innerHTML =
-		        		 h + "시" + m+ "분"+ s + "초"
-		        },
-		        error: function(error) {
-		            alert(error);
-		        }
-			});
-		}
-
-	</script>
 </head>
-
-<body class="hold-transition skin-blue sidebar-mini" onload="startTime()">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 	
 	<c:import url="/WEB-INF/views/include/left_column.jsp"/>
@@ -92,28 +24,59 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper" style="height: 100%;">
 
     <section class="content-header">
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content container-fluid">
-		
-		<h1>현재시간</h1><br/>
-		<form name="timeForm" style="width: 20%; text-align: center; margin:20px">
-  		<div id="clock"></div>
-		</form>
-		<div id="date"></div>
-		<h1>현재 IP주소</h1>
-		<div><c:out value="${ipLocation}"></c:out></div>
-		<h1>출근시간</h1><br/>
-		<div id="inTime"></div>
-		<input type="submit" value="출근" onclick="inTime();">
-		<h1>퇴근시간</h1><br/>
-		<div id="outTime"></div>
-		<input type="submit" value="퇴근" onclick="outTime();">
+    <section class="content">
+    <div class="row">
+    	<div class="col-xs-12">
+    	<div class="box">
+    	<div class="box-header">
+    		 <h3 class="box-title">근태관리</h3>
+		</div>
+		<div class="box-body">
+				<c:if test="${user.eType eq 1}">
+					<table id="commuteList" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>사원번호</th>
+								<th>출근일 </th>
+								<th>출근시간</th>
+								<th>퇴근시간</th>
+							</tr>
+						</thead>
+						<c:forEach items="${list}" var="commute">
+							<tr>
+								<td>${user.eKey}</td>
+								<td>${commute.inDate}</td>
+								<td>${commute.strInTime}</td>
+								<td>${commute.strOutTime}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+				<c:if test="${user.eType ne 1}">
+					<table id="commuteList" class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>출근일 </th>
+								<th>출근시간</th>
+								<th>퇴근시간</th>
+							</tr>
+						</thead>
+						<c:forEach items="${list2}" var="commute">
+							<tr>
+								<td>${commute.inDate}</td>
+								<td>${commute.strInTime}</td>
+								<td>${commute.strOutTime}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</c:if>
+			</div>
+		</div>
+		</div>
+	</div>
     </section>
     <!-- /.content -->
   </div>
@@ -127,6 +90,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
      Both of these plugins are recommended to enhance the
      user experience. -->
 <P>  The time on the server is ${serverTime}. 111</P>
+<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="resources/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script>
+$(function () {
+    $('#commuteList').DataTable({
+      'paging'      : true,
+      'lengthChange': true,
+      'searching'   : true,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false,
+    })
+  })
 
+</script>
 </body>
 </html>
