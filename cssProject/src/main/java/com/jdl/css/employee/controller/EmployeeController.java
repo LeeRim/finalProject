@@ -281,6 +281,9 @@ public class EmployeeController {
 		member.seteHireDate(hire2);
 		}
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		java.util.Date dt = new java.util.Date();
+		
 		String root = request.getSession().getServletContext().getRealPath("resources");
 
 		String path = root + "\\upload\\empPhoto";
@@ -291,7 +294,7 @@ public class EmployeeController {
 			folder.mkdirs();
 		}
 			
-			filePath = folder + "\\" + ePhoto.getOriginalFilename();
+			filePath = folder + "\\" + sdf.format(dt) + ePhoto.getOriginalFilename();
 			try {
 				ePhoto.transferTo(new File(filePath));
 			} catch (IllegalStateException e) {
