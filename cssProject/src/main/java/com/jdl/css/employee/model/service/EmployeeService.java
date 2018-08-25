@@ -92,5 +92,16 @@ public class EmployeeService {
 	public int deleteDivision(int divKey) {
 		return dao.deleteDivision(divKey);
 	}
+	
+	public EmployeeVo selectEmail(String email) {
+		return dao.selectEmail(email);
+	}
+
+	public int updatePwd(EmployeeVo user2) {
+		
+		return dao.updatePwd(user2);
+		
+	}
+
 
 }
