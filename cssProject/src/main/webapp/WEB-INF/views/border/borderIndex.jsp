@@ -213,8 +213,8 @@
  	                </tr>
                 		</c:if>
                 		<c:if test="${list.size() != 0}">
-						<c:forEach items="${attach}" var="att">
-							 <tr data-key="${att.attaKey}">
+						<c:forEach items="${board4}" var="att">
+							 <tr data-key="${att.boardKey}">
 								<td class="title"><c:out value="${att.bTitle}" /></td>
 								<td class="writer"><c:out value="${att.eName}" /></td>
 								<td class="date"><c:out value="${att.bDate}" /></td>

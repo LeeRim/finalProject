@@ -671,7 +671,7 @@ public class ApprovalController {
 			v.seteKeyFk(a.getaWriterFk());
 			v.setvStartdate(vacation.getVfStartdate());
 			v.setvRecalldate(vacation.getVfEnddate());
-			//v.setvUseddate(vacation.get);
+			v.setvUseddate(vacation.getvfUseddate());
 			result+=vService.insertVacation(v);
 			
 			CalenderVo vCal = new CalenderVo();
