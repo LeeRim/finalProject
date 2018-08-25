@@ -490,14 +490,15 @@ public class EmployeeController {
 	// 부서,직급 insert
 	@RequestMapping("insertDivision.do")
 	public String insertDivision(HttpSession session, String depart, String job, String departKey, String jobKey,
-			String level,String removeKeys) {
+			String dlevel,String jlevel,String removeKeys) {
 		
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 		String[] departArr = depart.split(",");
 		String[] jobArr = job.split(",");
 		String[] departKeys = departKey.split(",");
-		String[] jobKeys = jobKey.split(",");
-		String[] levels = level.split(",");
+ 		String[] jobKeys = jobKey.split(",");
+ 		String[] dlevels = dlevel.split(",");
+		String[] jlevels = jlevel.split(",");
 		String[] removes = removeKeys.split(",");
 		
 		for(String key:removes){
@@ -506,7 +507,7 @@ public class EmployeeController {
 			}
 		}
 		
-		List<String> departs = new ArrayList<String>();
+	/*	List<String> departs = new ArrayList<String>();
 		for(String d:departArr){
 			departs.add(d);
 		}
@@ -530,11 +531,11 @@ public class EmployeeController {
 					jobs.remove(j);
 				}
 			}
-		}
+		}*/
 
 		List<DivisionVo> divisionList = new ArrayList<DivisionVo>();
 		if (!departArr[0].equals("")) {
-			for (int i = 0; i <departs.size(); i++) {
+			for (int i = 0; i <departArr.length; i++) {
 				DivisionVo div = new DivisionVo();
 				div.setcKeyFk(user.getcKeyFk());
 				try {
@@ -543,12 +544,16 @@ public class EmployeeController {
 				}
 				// System.out.println(div.getDivKey()==0); true
 				div.setDivType(1);
-				div.setDivInfo(departs.get(i));
+				div.setDivInfo(departArr[i]);
+				div.setDivInfolevel(Integer.parseInt(dlevels[i]));
 				divisionList.add(div);
 			}
 		}
+		eService.insertDepartment(divisionList);
+		
+		divisionList = new ArrayList<DivisionVo>();
 		if (!jobArr[0].equals("")) {
-			for (int i = 0; i <jobs.size(); i++) {
+			for (int i = 0; i <jobArr.length; i++) {
 				DivisionVo div = new DivisionVo();
 				div.setcKeyFk(user.getcKeyFk());
 				try {
@@ -556,12 +561,12 @@ public class EmployeeController {
 				} catch (ArrayIndexOutOfBoundsException e) {
 				}
 				div.setDivType(2);
-				div.setDivInfo(jobs.get(i));
-				div.setDivInfolevel(Integer.parseInt(levels[i]));
+				div.setDivInfo(jobArr[i]);
+				div.setDivInfolevel(Integer.parseInt(jlevels[i]));
 				divisionList.add(div);
 			}
 		}
-		int result = eService.insertDivision(divisionList);
+		int result = eService.insertJob(divisionList);
 		// System.out.println("result" + result);
 		return "redirect:department.do";
 	}

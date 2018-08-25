@@ -81,14 +81,6 @@ public class EmployeeService {
 		return dao.selectDepartCountList(cKey);
 	}
 
-	public int insertDivision(List<DivisionVo> divisionList) {
-		int result=0;
-		for(int i=0;i<divisionList.size();i++){
-			result+=dao.insertDivision(divisionList.get(i));
-		}
-		return result;
-	}
-
 	public int deleteDivision(int divKey) {
 		return dao.deleteDivision(divKey);
 	}
@@ -101,6 +93,22 @@ public class EmployeeService {
 		
 		return dao.updatePwd(user2);
 		
+	}
+
+	public int insertDepartment(List<DivisionVo> divisionList) {
+		int result=0;
+		for(int i=0;i<divisionList.size();i++){
+			result+=dao.insertDepartment(divisionList.get(i));
+		}
+		return result;
+	}
+
+	public int insertJob(List<DivisionVo> divisionList) {
+		int result=0;
+		for(int i=0;i<divisionList.size();i++){
+			result+=dao.insertJob(divisionList.get(i));
+		}
+		return result;
 	}
 
 
