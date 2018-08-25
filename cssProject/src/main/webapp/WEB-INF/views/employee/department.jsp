@@ -173,7 +173,7 @@ td {
 						</div>
 						<!-- form start -->
 						<form role="form" action="insertDivision.do" method="post">
-								<input type="hidden" value="${check}" name ="check"/>
+						<input type="hidden" value="${check}" name ="check"/>
 						<input type="hidden" name="removeKeys" id="removeKeys">
 							<div class="row" style="padding:30px;">
 								<div class="col-md-2"></div>
