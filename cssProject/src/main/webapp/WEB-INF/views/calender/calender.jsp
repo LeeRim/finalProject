@@ -74,11 +74,13 @@
 				 	<input name="endDate" type="date" class="form-control"/>
 				 	</li>
 				 <li>일정 색<br/>
+					<input type="radio" name="background" value="#00c0ef"><a class="text-aqua"><i class="fa fa-square"></i></a>
+					<c:if test="${user.eType eq 1}">
 					<input type="radio" name="background" value="#00a65a"><a class="text-green"><i class="fa fa-square"></i></a> 
 					<input type="radio" name="background" value="#f39c12"><a class="text-yellow"><i class="fa fa-square"></i></a> 
-					<input type="radio" name="background" value="#00c0ef"><a class="text-aqua"><i class="fa fa-square"></i></a>
 					<input type="radio" name="background" value="#0073b7"><a class="text-blue"><i class="fa fa-square"></i></a>
 					<input type="radio" name="background" value="#f56954"><a class="text-red"><i class="fa fa-square"></i></a>
+					</c:if>
 				 </li>
                 </ul>
               </div>
@@ -132,6 +134,7 @@
           title: $.trim($(this).text()) // use the element's text as the event title
         }
 
+        
         // store the Event Object in the DOM element so we can get to it later
         $(this).data('eventObject', eventObject)
 
@@ -160,7 +163,6 @@
     })
 	</c:forEach>
     
-    
     $('#calendar').fullCalendar({
      	 header    : {
         left  : '',
@@ -173,6 +175,7 @@
       //Random default events
       
       events    : dataList,
+      displayEventTime : false,
       editable  : false,
       droppable : false, // this allows things to be dropped onto the calendar !!!
       drop      : function (date, allDay) { 
@@ -184,16 +187,14 @@
         var copiedEventObject = $.extend({}, originalEventObject)
 
         // assign it the date that was reported
-        copiedEventObject.start           = date
+       /*  copiedEventObject.start           = date
         copiedEventObject.allDay          = allDay
         copiedEventObject.backgroundColor = $(this).css('background-color')
         copiedEventObject.borderColor     = $(this).css('border-color')
-
+ */
         // render the event on the calendar
         
         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
-
-        // is the "remove after drop" checkbox checked?
 
       }
     })

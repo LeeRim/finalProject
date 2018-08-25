@@ -459,6 +459,7 @@
       //Random default events
       
       events    : dataList,
+      displayEventTime : false,
       editable  : false,
       droppable : false, // this allows things to be dropped onto the calendar !!!
       drop      : function (date, allDay) { 
@@ -470,11 +471,11 @@
         var copiedEventObject = $.extend({}, originalEventObject)
 
         // assign it the date that was reported
-        copiedEventObject.start           = date
+/*         copiedEventObject.start           = date
         copiedEventObject.allDay          = allDay
         copiedEventObject.backgroundColor = $(this).css('background-color')
         copiedEventObject.borderColor     = $(this).css('border-color')
-
+ */
         // render the event on the calendar
         
         $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
