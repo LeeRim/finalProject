@@ -39,18 +39,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<table id="commuteList" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>사원번호</th>
-								<th>출근일 </th>
-								<th>출근시간</th>
-								<th>퇴근시간</th>
+								<th width="150">사원번호</th>
+								<th width="150">출근일 </th>
+								<th width="150">출근시간</th>
+								<th width="150">퇴근시간</th>
 							</tr>
 						</thead>
 						<c:forEach items="${list}" var="commute">
 							<tr>
-								<td>${user.eKey}</td>
-								<td>${commute.inDate}</td>
-								<td>${commute.strInTime}</td>
-								<td>${commute.strOutTime}</td>
+								<td width="150">${commute.eKey}</td>
+								<td width="150">${commute.inDate}</td>
+								<td width="150">${commute.strInTime}</td>
+								<td width="150">${commute.strOutTime}</td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -59,16 +59,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<table id="commuteList" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>출근일 </th>
-								<th>출근시간</th>
-								<th>퇴근시간</th>
+								<th width="150">출근일 </th>
+								<th width="150">출근시간</th>
+								<th width="150">퇴근시간</th>
 							</tr>
 						</thead>
-						<c:forEach items="${list2}" var="commute">
+						<c:forEach items="${list2}" var="commute2">
 							<tr>
-								<td>${commute.inDate}</td>
-								<td>${commute.strInTime}</td>
-								<td>${commute.strOutTime}</td>
+								<td width="150">${commute2.inDate}</td>
+								<td width="150">${commute2.strInTime}</td>
+								<td width="150">${commute2.strOutTime}</td>
 							</tr>
 						</c:forEach>
 					</table>

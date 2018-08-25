@@ -20,10 +20,10 @@
 		WHERE E_KEY_FK = ${eKey} AND C_KEY_FK = ${cKeyFk}
   	</select>
   	
-  	<select id="selectAllCommute" resultType="Commute"><!-- 이게 회사관리자가볼거 -->
-  		 SELECT E_KEY_FK AS "EMPLOYEENUMBER" ,COMM_DATE AS "INDATE",TO_CHAR(COMM_INTIME,'HH:MM:SS') AS "STRINTIME" ,TO_CHAR(COMM_OUTTIME,'HH:MM:SS') AS "STROUTTIME"
-		FROM COMMUTE
-		WHERE C_KEY_FK = 1 AND TO_CHAR(COMM_DATE,'DD') = TO_CHAR(SYSDATE,'DD') AND C_KEY_FK = ${cKeyFk}
+  	<select id="selectAllCommute" resultType="Commute" parameterType="EmployeeVo"><!-- 이게 회사관리자가볼거 -->
+  		select E_KEY_FK as"eKey" ,comm_date as "inDate",to_char(comm_intime,'hh:mm:ss') as "strInTime" ,to_char(comm_outtime,'hh:mm:ss') as "strOutTime"
+		from commute
+		where C_KEY_FK = ${cKeyFk} and to_char(comm_date,'dd') = to_char(sysdate,'dd')
   	</select>
   	
   	<select id="selectOneCommute" resultType="Commute">
