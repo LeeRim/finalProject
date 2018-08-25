@@ -47,13 +47,14 @@
 
 					<div class="flex-sb-m w-full p-b-30">
 						<div>
+
 							<div style="color: red;">
 								<c:if test="${!empty(errorMsg)}">
 									<c:out value="${errorMsg}"/>
 								</c:if>
 							</div>
-							<a href="#" class="txt1">
-								Forgot Account? 
+							<a href="login2.do" class="txt1">
+								Forgot Account?
 							</a>
 						</div>
 					</div>

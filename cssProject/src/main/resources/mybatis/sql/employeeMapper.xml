@@ -103,6 +103,18 @@
 		LEFT JOIN COMPANY C ON(E.C_KEY_FK = C.C_KEY)
 		WHERE E.E_ID = #{eId}
 	</select>
+	
+	
+	
+	<select id="selectEmail" parameterType="string"  resultMap="EmployeeMap">
+		SELECT
+    	E_KEY, E_ID, E_EMAIL
+		FROM EMPLOYEE
+		WHERE E_EMAIL = 	#{eEmail}
+	</select>
+	
+	
+>>>>>>> refs/heads/master
 
 	<!-- 쪽지 직원 불러오는 쿼리문 -->
 	<select id="selectEmployeeList" parameterType="int" resultType="EmployeeVo">
@@ -391,6 +403,43 @@
 		LEFT JOIN COMPANY C ON(E.C_KEY_FK = C.C_KEY)
 		WHERE E.E_KEY =#{eKey}
 	</select>
+	
+	
+	<!-- 임시 비밀번호 발급 -->
+	<update id="updatePwd" parameterType="EmployeeVo">
+		UPDATE EMPLOYEE
+		SET E_STATE = #{eState}
+		WHERE E_KEY = #{eKey}
+	</update>
+
+
+	<select id="sessionSelect" parameterType="EmployeeVo" resultMap="EmployeeMap">
+		SELECT
+		E.E_KEY,E.E_NO,E.C_KEY_FK,E.E_TYPE,E.E_ID,E.E_PWD,E.E_NAME,E.E_JOBCODE_FK,E.E_DEPART_FK,E.E_ADDRESS
+		,E.E_EXTEN, E.E_PHONE,E.E_EMAIL,
+		E.E_HIRE_DATE,E.E_ENT_DATE,E.E_ENT_YN,E.E_PHOTO, E.E_BIRTH,
+		E.E_INSTEAD,E.E_STATE
+		,J.DIV_INFO AS "JOB", D.DIV_INFO AS "DEPARTMENT"
+		,J.DIV_INFOLEVEL
+		, EI.E_KEY AS INSTEAD_KEY, EI.E_NAME AS INSTEAD_NAME, EJ.DIV_INFO AS
+		"INSTEAD_JOB",
+		ED.DIV_INFO AS "INSTEAD_DEPART",
+		C.C_LEVEL,C.C_NAME
+		FROM EMPLOYEE E
+		LEFT JOIN
+		DIVISION J ON(E.E_JOBCODE_FK = J.DIV_KEY)
+		LEFT JOIN DIVISION D
+		ON(E.E_DEPART_FK = D.DIV_KEY)
+		LEFT JOIN EMPLOYEE EI ON(EI.E_KEY =
+		E.E_INSTEAD)
+		LEFT JOIN DIVISION EJ ON(EI.E_JOBCODE_FK = EJ.DIV_KEY)
+		LEFT JOIN DIVISION ED ON(EI.E_DEPART_FK = ED.DIV_KEY)
+		LEFT JOIN COMPANY C ON(E.C_KEY_FK = C.C_KEY)
+		WHERE E.E_KEY =#{eKey}
+	</select>
+	
+	
+	
 
 
 	<insert id="insertDivision" parameterType="DivisionVo">

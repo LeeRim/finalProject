@@ -22,7 +22,6 @@ public class GivevacationVo {
 	
 
 	public GivevacationVo(int gvKey, int cKeyFk, int gvYear, int gvVacadate, String gvDate) {
-		super();
 		this.gvKey = gvKey;
 		this.cKeyFk = cKeyFk;
 		this.gvYear = gvYear;
@@ -61,15 +60,9 @@ public class GivevacationVo {
 		this.gvYear = gvYear;
 	}
 
-	
-
-
 	public int getGvVacadate() {
 		return gvVacadate;
 	}
-
-
-
 
 	public void setGvVacadate(int gvVacadate) {
 		this.gvVacadate = gvVacadate;

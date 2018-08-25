@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jdl.css.common.model.vo.AttachmentVo;
+import com.jdl.css.common.model.vo.DivisionVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 
 @Repository
@@ -69,6 +70,7 @@ public class EmployeeDao {
 		return sqlSession.selectOne("EmployeeMapper.empNoCheck", chekEmployee);
 	}
 
+	
 	public EmployeeVo selectSessionEmployee(EmployeeVo member) {
 		return sqlSession.selectOne("EmployeeMapper.sessionSelect", member);
 	}
@@ -78,6 +80,30 @@ public class EmployeeDao {
 
 	public List<EmployeeVo> selectDepartCountList(int cKey) {
 		return sqlSession.selectList("EmployeeMapper.selectDepartCountList",cKey);
+	}
+
+	public int insertDivision(DivisionVo division) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("EmployeeMapper.insertDivision", division);
+	}
+
+	public int deleteDivision(int divKey) {
+		return sqlSession.delete("EmployeeMapper.deleteDivision", divKey);
+
+	}
+	
+	public EmployeeVo selectEmail(String email) {
+		return sqlSession.selectOne("EmployeeMapper.selectEmail", email);
+	}
+
+	public int updatePwd(String pwd) {
+		return sqlSession.update("EmployeeMapper.updatePwd", pwd);
+	}
+
+	public int updatePwd(EmployeeVo user2) {
+	 
+		return sqlSession.update("EmployeeMapper.updatePwd", user2);
+		
 	}
 
 
