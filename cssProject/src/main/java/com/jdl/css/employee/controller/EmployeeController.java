@@ -507,31 +507,6 @@ public class EmployeeController {
 			}
 		}
 		
-	/*	List<String> departs = new ArrayList<String>();
-		for(String d:departArr){
-			departs.add(d);
-		}
-		List<String> jobs = new ArrayList<String>();
-		for(String j:jobArr){
-			jobs.add(j);
-		}
-
-		List<EmployeeVo> jobList = eService.selectJobList(user.getcKeyFk());
-		List<EmployeeVo> departList = eService.selectDepartList(user.getcKeyFk());
-		for (int i = 0; i < departList.size(); i++) {
-			for(int j=0;j<departs.size();j++){
-				if(departList.get(i).equals(departs.get(j))){
-					departs.remove(j);
-				}
-			}
-		}
-		for (int i = 0; i < jobList.size(); i++) {
-			for(int j=0;j<jobs.size();j++){
-				if(jobList.get(i).equals(jobs.get(j))){
-					jobs.remove(j);
-				}
-			}
-		}*/
 
 		List<DivisionVo> divisionList = new ArrayList<DivisionVo>();
 		if (!departArr[0].equals("")) {
@@ -549,8 +524,8 @@ public class EmployeeController {
 				divisionList.add(div);
 			}
 		}
-		eService.insertDepartment(divisionList);
-		divisionList = new ArrayList<DivisionVo>();
+		//eService.insertDepartment(divisionList);
+		//divisionList = new ArrayList<DivisionVo>();
 		if (!jobArr[0].equals("")) {
 			for (int i = 0; i <jobArr.length; i++) {
 				DivisionVo div = new DivisionVo();
@@ -565,13 +540,13 @@ public class EmployeeController {
 				divisionList.add(div);
 			}
 		}
-		int result = eService.insertJob(divisionList);
-		// System.out.println("result" + result);
-		if(check.equals("true")){
+		int result = eService.insertDivision(divisionList);
+		System.out.println("result" + result);
+		/*if(check.equals("true")){
 			return "companyStartHome";
 		}else{
-			return "redirect:department.do";
-		}
+		}*/
+		return "redirect:department.do";
 	}
 
 	@RequestMapping("jobGrade.do")

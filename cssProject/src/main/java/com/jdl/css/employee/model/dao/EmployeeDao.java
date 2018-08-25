@@ -111,5 +111,10 @@ public class EmployeeDao {
 		return sqlSession.insert("EmployeeMapper.insertJob", division);
 	}
 
+	public int insertDivision(DivisionVo division) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("EmployeeMapper.insertDivision", division);
+	}
+
 
 }

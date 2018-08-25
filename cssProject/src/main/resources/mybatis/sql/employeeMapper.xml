@@ -442,4 +442,16 @@
                      )
 	</insert>
 
+	<insert id="insertDivision" parameterType="DivisionVo">
+	MERGE INTO DIVISION DIV
+            USING DUAL
+            ON (DIV_KEY=#{divKey})
+            WHEN MATCHED THEN
+                      UPDATE SET
+                        DIV_INFO=#{divInfo}
+                        ,DIV_INFOLEVEL=#{divInfolevel}
+            WHEN NOT MATCHED THEN
+                     INSERT (DIV_KEY, C_KEY_FK, DIV_TYPE, DIV_INFO, DIV_INFOLEVEL) VALUES (SEQ_DIVISION.NEXTVAL,#{cKeyFk} , #{divType}, #{divInfo},#{divInfolevel}
+                     )
+	</insert>
 </mapper>
