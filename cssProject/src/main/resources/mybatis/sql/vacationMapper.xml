@@ -21,6 +21,10 @@
 	<insert id="insertVacation" parameterType="VacationVo">
 		INSERT INTO VACATION (V_KEY, C_KEY_FK, E_KEY_FK, V_USEDDATE, V_STARTDATE, V_RECALLDATE) 
 		VALUES (SEQ_VACATION.NEXTVAL, #{cKeyFk}, #{eKeyFk}, #{vUseddate}, #{vStartdate}, #{vRecalldate})
-		
 	</insert>
+	<select id="selectWorkYear" parameterType="EmployeeVo"  resultType="VacationVo">
+		SELECT TRUNC(MONTHS_BETWEEN(SYSDATE,E_HIRE_DATE)/12+1,0) AS "WORKYEAR"
+		                FROM EMPLOYEE
+		                WHERE E_KEY = #{eKey}
+	</select>
 </mapper>

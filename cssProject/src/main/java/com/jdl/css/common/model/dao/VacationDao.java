@@ -27,4 +27,8 @@ public class VacationDao {
 		return session.insert("vacationMapper.insertVacation", v);
 	}
 
+	public VacationVo selectWorkYear(EmployeeVo user) {
+		return session.selectOne("vacationMapper.selectWorkYear", user);
+	}
+
 }

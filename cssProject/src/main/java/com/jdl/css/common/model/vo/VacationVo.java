@@ -14,8 +14,9 @@ public class VacationVo {
 	private String vStartdate;
 	private String vRecalldate;
 	
+	private int workyear;
+	
 	public VacationVo() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public VacationVo(int vKey, int cKeyFk, int eKeyFk, double vUseddate, String vStartdate, String vRecalldate) {
@@ -75,11 +76,20 @@ public class VacationVo {
 		this.vRecalldate = vRecalldate;
 	}
 
+	public int getWorkyear() {
+		return workyear;
+	}
+
+	public void setWorkyear(int workyear) {
+		this.workyear = workyear;
+	}
+
 	@Override
 	public String toString() {
 		return "VacationVo [vKey=" + vKey + ", cKeyFk=" + cKeyFk + ", eKeyFk=" + eKeyFk + ", vUseddate=" + vUseddate
-				+ ", vStartdate=" + vStartdate + ", vRecalldate=" + vRecalldate + "]";
+				+ ", vStartdate=" + vStartdate + ", vRecalldate=" + vRecalldate + ", workyear=" + workyear + "]";
 	}
+
 	
 	
 }

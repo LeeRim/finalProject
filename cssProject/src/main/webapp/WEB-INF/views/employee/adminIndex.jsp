@@ -190,31 +190,46 @@
 						</tr>
 						<tr >
 							<th>회사명</th>
-							<td colspan="3">CSS</td>
+							<td colspan="3"><c:out value="${requestScope.indexCompany.cName}"/></td>
 						</tr>
 						<tr>
 							<th >대표</th>
-							<td >장건희</td>
+							<td ><c:out value="${requestScope.indexCompany.cOwner}"/></td>
 							<th >사원수</th>
-							<td >6명</td>
+							<td ><c:out value="${requestScope.indexCompany.counts}"/></td>
 						</tr>
 						<tr >
 							<th>내선번호</th>
-							<td>1234</td>
+							<c:choose>
+								<c:when test="{sessionScope.user.eExten != null}">
+									<td><c:out value="${sessionScope.user.eExten}"/></td>
+								</c:when>
+								<c:otherwise>
+									<td> 없음</td>
+								</c:otherwise>
+							
+							</c:choose>
 							<th >레벨</th>
-							<td >1</td>
+							<td><c:out value="${sessionScope.user.cLevel}"/></td>
 						</tr>
 						<tr >
 							<th >개인번호</th>
-							<td colspan="3">010-6561-2016</td>
+							<c:choose>
+								<c:when test="{sessionScope.user.eExten != null}">
+									<td colspan="3"><c:out value="${sessionScope.user.ePhone}"/></td>
+								</c:when>
+								<c:otherwise>
+									<td>없습니다. </td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 						<tr >
 							<th colspan="2">회사주소</th>
-							<td colspan="4">서울특별시 테헤란로41 빌딩 4층</td>
+							<td colspan="4"><c:out value="${requestScope.indexCompany.cAddress}"/></td>
 						</tr>
 						<tr >
 							<th colspan="2">서비스 종료일</th>
-							<td colspan="4">2018-08-23</td>
+							<td colspan="4"><c:out value="${requestScope.indexCompany.cCloseDay}"/></td>
 						</tr>
 					</table>
           </div>
@@ -227,12 +242,12 @@
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
               <div class="widget-user-image">
-                <img class="img-circle" src="resources/dist/img/user1-128x128.jpg" alt="User Avatar">
+                <img class="img-circle" src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" alt="User Avatar">
               </div>
               <!-- /.widget-user-image -->
               <div class="empInfo">
-	              <h3 class="widget-user-username">KH컴퍼니</h3>
-	              <h5 class="widget-user-desc">최범석대리</h5>
+	              <h3 class="widget-user-username"><c:out value="${sessionScope.user.cName}"/></h3>
+	              <h5 class="widget-user-desc"><c:out value="${sessionScope.user.eName} ${sessionScope.user.job}"/></h5>
               </div>
             </div>
             <div class="box-footer " >
@@ -240,7 +255,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">사원번호</h5>
-                    <span class="description-text">K3829</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.eNo}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -248,7 +263,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">부서</h5>
-                    <span class="description-text">개발팀</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.department}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -256,7 +271,7 @@
                 <div class="col-sm-4">
                   <div class="description-block">
                     <h5 class="description-header">근속년수</h5>
-                    <span class="description-text">3년</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.workYears} 년"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -269,7 +284,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">입사일</h5>
-                    <span class="description-text">2016-08-07</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.eHireDate}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -277,7 +292,7 @@
                 <div class="col-sm-4 border-right">
                   <div class="description-block">
                     <h5 class="description-header">연락망</h5>
-                    <span class="description-text">010-1234-5678</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.ePhone}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>
@@ -285,7 +300,7 @@
                 <div class="col-sm-4">
                   <div class="description-block">
                     <h5 class="description-header">생년월일</h5>
-                    <span class="description-text">1999/01/01</span>
+                    <span class="description-text"><c:out value="${sessionScope.user.eBirth}"/></span>
                   </div>
                   <!-- /.description-block -->
                 </div>

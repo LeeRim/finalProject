@@ -455,4 +455,10 @@
                      <if test="divInfolevel!=0">#{divInfolevel}</if><if test="divInfolevel==0">null</if>
                      )
 	</insert>
+	
+	<select id="selectEmployeeTotal" parameterType="int" resultType="int">
+		 SELECT COUNT(*)
+        FROM EMPLOYEE
+        WHERE C_KEY_FK =#{cKey}
+	</select>
 </mapper>

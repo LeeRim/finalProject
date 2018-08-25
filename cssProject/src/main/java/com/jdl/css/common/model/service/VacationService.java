@@ -28,4 +28,8 @@ public class VacationService {
 		return dao.insertVacation(v);
 	}
 
+	public VacationVo selectWorkYear(EmployeeVo user) {
+		return dao.selectWorkYear(user);
+	}
+
 }

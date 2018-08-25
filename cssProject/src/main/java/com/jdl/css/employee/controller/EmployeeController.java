@@ -40,6 +40,8 @@ import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.service.VacationService;
 import com.jdl.css.common.model.vo.DivisionVo;
 import com.jdl.css.common.model.vo.VacationVo;
+import com.jdl.css.company.model.service.CompanyService;
+import com.jdl.css.company.model.vo.CompanyVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
 import com.jdl.css.givevacation.model.vo.GivevacationVo;
@@ -57,15 +59,14 @@ public class EmployeeController {
 	NoteService nService;
 	@Autowired
 	VacationService vService;
-
 	@Autowired
 	CalenderService cservice;
-
 	@Autowired
 	BorderService borderservice;
-	
 	@Autowired
 	ApprovalService aService;
+	@Autowired
+	CompanyService companyService;
 
 	@RequestMapping("loginForm.do")
 	public String openLoginForm() {
@@ -85,14 +86,17 @@ public class EmployeeController {
 		GivevacationVo giveVacation = vService.selectTotalVacation(user);
 		//휴가 사용일 가져오기
 		List<VacationVo> usedVacation = vService.selectUsedVacation(user);
+		//근속년수 가지고 오기
+		VacationVo workYear = vService.selectWorkYear(user);
+//		System.out.println("근속년수  = "+workYear.getWorkyear());
 		int totalUsedVacation = 0;
 		for(VacationVo vacation : usedVacation){
 			totalUsedVacation += vacation.getvUseddate();
 		}
 		try{
+			user.setWorkYears(workYear.getWorkyear());
 			user.setTotalVacation(giveVacation.getGvVacadate());
 			user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
-			user.setWorkYears(giveVacation.getGvYear());
 		}catch (NullPointerException e) {
 			
 		}
@@ -448,7 +452,6 @@ public class EmployeeController {
 			System.out.println("업데이트 : " + member);
 			
 			EmployeeVo user = eService.selectSessionEmployee(member);
-			List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
 		      //근속년수에 따른 총 휴가 값 가지고오기
 			GivevacationVo giveVacation = vService.selectTotalVacation(user);
 		      //휴가 사용일 가져오기
@@ -667,7 +670,7 @@ public class EmployeeController {
 
 	@RequestMapping("adminIndex.do")
 	public ModelAndView adminIndex(ModelAndView mav, HttpSession session) {
-
+		
 		List<BorderVo> board1 = borderservice.selectBoardOneEmp(); // 공지사항
 		mav.addObject("board1", board1);
 		
@@ -680,6 +683,11 @@ public class EmployeeController {
 
 		List<EmployeeVo> departCountList = eService.selectDepartCountList(cKey);
 		mav.addObject("departCountList",departCountList);
+		
+		CompanyVo indexCompany = companyService.selectCompanyInfo(cKey);
+		int employeeTotal = eService.selectEmployeeTotal(cKey);
+		indexCompany.setCounts(employeeTotal);
+		mav.addObject("indexCompany", indexCompany);
 		
 		mav.setViewName("employee/adminIndex");
 		return mav;

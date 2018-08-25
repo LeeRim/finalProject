@@ -119,5 +119,9 @@ public class EmployeeService {
 		return result;
 	}
 
+	public int selectEmployeeTotal(int cKey) {
+		return dao.selectEmployeeTotal(cKey);
+	}
+
 
 }

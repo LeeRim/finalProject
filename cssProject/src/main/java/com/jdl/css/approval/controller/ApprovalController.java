@@ -33,6 +33,7 @@ import com.jdl.css.common.model.vo.AttachmentVo;
 import com.jdl.css.common.model.vo.VacationVo;
 import com.jdl.css.employee.model.service.EmployeeService;
 import com.jdl.css.employee.model.vo.EmployeeVo;
+import com.jdl.css.givevacation.model.vo.GivevacationVo;
 import com.jdl.css.note.model.service.NoteService;
 
 @Controller
@@ -657,6 +658,23 @@ public class ApprovalController {
 		}
 		if(doctype==5){
 			updateVacation(app);
+			if(updateVacation(app) >0){
+			     //근속년수에 따른 총 휴가 값 가지고오기
+				GivevacationVo giveVacation = vService.selectTotalVacation(user);
+			      //휴가 사용일 가져오기
+			      List<VacationVo> usedVacation = vService.selectUsedVacation(user);
+			      int totalUsedVacation = 0;
+			      for(VacationVo vacation : usedVacation){
+			         totalUsedVacation += vacation.getvUseddate();
+			      }
+			      try{
+			         user.setTotalVacation(giveVacation.getGvVacadate());
+			         user.setRemainingVacation(giveVacation.getGvVacadate()-totalUsedVacation);
+			         user.setWorkYears(giveVacation.getGvYear());
+			      }catch (NullPointerException e) {
+			      }
+			      session.setAttribute("user", user);
+			}
 		}
 		return result;
 	}

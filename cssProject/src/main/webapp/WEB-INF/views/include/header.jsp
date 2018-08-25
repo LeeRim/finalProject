@@ -95,14 +95,14 @@
 				<c:if test="${sessionScope.user.eType=='1' }">
 					<!-- 회사관리자 -->
 					<ul class="dropdown-menu">
-						<li><a href="#">회사관리</a></li>
+						<li><a href="companyUpdate.do">회사관리</a></li>
 						<li><a href="commuteCheck.do">근태관리</a></li>
 						<li><a href="organizationChart.do">조직도</a></li>
 						<li><a href="calender.do">일정관리</a></li>
 						<li><a href="waitingPage.do">전자결재</a></li>
 						<li><a href="receiveNoteList.do">쪽지</a></li>
 						<li><a href="borderIndex.do">커뮤니티</a></li>
-						<li><a href="#">문의하기</a></li>
+						<li><a href="qnaList.do">문의하기</a></li>
 					</ul>
 				</c:if>
 			</div>
