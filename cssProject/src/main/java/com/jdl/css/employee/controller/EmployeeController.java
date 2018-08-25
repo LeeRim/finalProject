@@ -767,6 +767,7 @@ public class EmployeeController {
 			
 			EmployeeVo select = eService.selectEmployeeInfo(eKey);
 			
+			System.out.println(select);
 			
 			if(select.getePhoto()==null){
 				
