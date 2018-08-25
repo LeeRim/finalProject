@@ -281,12 +281,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
-     <script>
-     	$(function(){
-     		if($("#startHalf").val() == '<%=req.getBathroom()%>'){
-     			$("#bathroom").prop("checked",true);
-     		}
-     	});
-     </script>
+     
 </body>
 </html>

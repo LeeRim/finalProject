@@ -478,10 +478,11 @@ public class EmployeeController {
 	
 	
 	@RequestMapping("department.do")
-	public ModelAndView department(ModelAndView mv, HttpSession session) {
+	public ModelAndView department(ModelAndView mv, HttpSession session,String check) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 		List<EmployeeVo> jobList = eService.selectJobList(user.getcKeyFk());
 		List<EmployeeVo> departList = eService.selectDepartList(user.getcKeyFk());
+		mv.addObject("check", check);
 		mv.addObject("jobList", jobList);
 		mv.addObject("departList", departList);
 		mv.setViewName("employee/department");

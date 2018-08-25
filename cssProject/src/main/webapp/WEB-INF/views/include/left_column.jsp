@@ -55,13 +55,15 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-
-        <li><a href="myPageUpdate.do"><i class="fa fa-link"></i> <span>마이페이지 수정</span></a></li>
+		<c:if test="${user.eType == '2'}">
+	        <li><a href="myPageUpdate.do"><i class="fa fa-link"></i> <span>마이페이지 수정</span></a></li>
+        </c:if>
+        <c:if test="${user.eType == '1'}">
         <li><a href="employeeInfo.do"><i class="fa fa-link"></i> <span>사원 정보 수정</span></a></li>
+        <li><a href="companyUpdate.do"><i class="fa fa-link"></i> <span>회사 정보 수정</span></a></li>
         <li><a href="memberAdd.do"><i class="fa fa-link"></i> <span>사원 등록</span></a></li>
         <li><a href="department.do"><i class="fa fa-link"></i> <span>부서 관리</span></a></li>
-        <li><a href="jobGrade.do"><i class="fa fa-link"></i> <span>직위 관리</span></a></li>
-        <li><a href="companyUpdate.do"><i class="fa fa-link"></i> <span>회사 정보 수정</span></a></li>
+        </c:if>
         <li class="treeview">
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
