@@ -471,7 +471,7 @@ public class EmployeeController {
 		      System.out.println("update시 session 값 : " + user);
 			
 			
-		return "redirect:organizationChart.do";
+		return "redirect:adminOrganizationChart.do";
 	}
 	
 	

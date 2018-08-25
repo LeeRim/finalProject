@@ -483,16 +483,7 @@ td {
 		
 	});
 		
-		
-		function checkUser(){
-			
-		}
-		
-		
-		
-		
-		
-		
+
 		
 		
 	</script>
@@ -509,7 +500,7 @@ td {
 
 		<div class="content-wrapper">
 			<section class="content-header">
-				<h1>조직도</h1>
+				<h1>사원 정보 관리</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
 					<li class="active">Here</li>
