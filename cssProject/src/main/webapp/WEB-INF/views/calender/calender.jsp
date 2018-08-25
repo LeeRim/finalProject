@@ -19,7 +19,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  <c:import url="../include/left_column.jsp"/>
+  <c:import url="../include/left_column_employee.jsp"/>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
