@@ -106,6 +106,10 @@ background-color: white !important;
 
 <script type="text/javascript">
 
+
+//유효성 검사
+	var validity = true;
+
 //전화번호 입력
 $(function () {
   $('[data-mask]').inputmask()
@@ -113,7 +117,7 @@ $(function () {
 
 
 function memberUpdate(){
-	$("#joinForm").submit();
+	
 	
 }
 
@@ -124,6 +128,13 @@ function validate(){
 	
 	$("#eAddress").val($("#eAddress1").val()+"/"+$.trim($("#eAddress2").val()))
 
+	if(validity == false){
+		alert("입력 정보를 확인해 주시기 바랍니다.");
+		return false;
+	}else{
+		alert("수정되었습니다.");
+		return true;
+	}
 	
 
 	
@@ -212,6 +223,8 @@ $(document).ready(
 							var html = $("#inputNo2").html()
 							+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
 							$("#inputNo2").html(html);
+							
+							validity = false;
 	 			    	}
 						
 						else if(eNo.search(/\s/) != -1){
@@ -225,7 +238,7 @@ $(document).ready(
 		 			    	
 		 			    	$("#inputNo2").html(html);
 							
-		 			    	
+		 			    	validity = false;
 		 			    	
 						}else if(data>=1 && originENo!=eNo ){
 		 			    	
@@ -239,7 +252,7 @@ $(document).ready(
 		 			    	
 		 			    	$("#inputNo2").html(html);
 		 			    	
-		 			    	
+		 			    	validity = false;
 		 			    	
 						}else if (originENo==eNo){
 		 			    	
@@ -247,7 +260,7 @@ $(document).ready(
 		 			    	$('#inputNo').removeClass('has-warning');
 		 			    	$('#inputNo').removeClass('has-success');
 		 			    	
-		 			    	
+		 			    	validity = true;
 		 			    	
 						
 		 			    	}else if (data==0){
@@ -261,6 +274,8 @@ $(document).ready(
 			 			    	+"<label class='control-label '  style='font-size:12px; color: #00a65a; margin-top: -10px;' ><i class='fa fa-check ' >사용 가능합니다.</i> </label>";
 			 			    	
 			 			    	$("#inputNo2").html(html);
+			 			    	
+			 			    	validity = true;
 			 			    	
 			 			    	}
 	 			    	
@@ -306,6 +321,9 @@ $(document).ready(
 							var html = $("#inputId2").html()
 							+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
 							$("#inputId2").html(html);
+							
+							validity = false;
+							
 	 			    	}
 						
 						else if(eId.search(/\s/) != -1){
@@ -319,6 +337,8 @@ $(document).ready(
 		 			    	
 		 			    	$("#inputId2").html(html);
 							
+		 			    	validity = false;
+		 			    	
 						}
 						
 						else if(!check.test(eId)){
@@ -332,7 +352,7 @@ $(document).ready(
 		 			    	
 		 			    	$("#inputId2").html(html);
 							
-							
+		 			    	validity = false;
 							
 						}
 						
@@ -348,6 +368,8 @@ $(document).ready(
 	 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >이미 사용중입니다.</i> </label>";
 	 			    	
 	 			    	$("#inputId2").html(html);
+	 			    	
+	 			    	validity = false;
 
 	 			    	}
 						else if(originEId==eId){
@@ -356,6 +378,7 @@ $(document).ready(
 		 			    	$('#inputId').removeClass('has-warning');
 		 			    	$('#inputId').removeClass('has-error');
 		 			    	
+		 			    	validity = true;
 
 		 			    	}
 						
@@ -371,6 +394,8 @@ $(document).ready(
 	 			    	+"<label class='control-label '  style='font-size:12px; color: #00a65a; margin-top: -10px;' ><i class='fa fa-check ' >사용 가능합니다.</i> </label>";
 	 			    	
 	 			    	$("#inputId2").html(html);
+	 			    	
+	 			    	validity = true;
 	 			    	
 	 			    	}
 	 			    	
@@ -409,6 +434,7 @@ $(document).ready(
 						+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
 						$("#inputpwd2").html(html);
 	        		 
+						validity = false;
 	        		 
 	        	 }
 	        	 
@@ -422,6 +448,8 @@ $(document).ready(
 	 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
 	 			    	
 	 			    	$("#inputpwd2").html(html);
+	 			    	
+	 			    	validity = false;
 						
 					}
 	        	 
@@ -434,6 +462,8 @@ $(document).ready(
 						var html = $("#inputpwd2").html()
 						+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' > 4자리 이상 입력하십시오.</i> </label>";
 						$("#inputpwd2").html(html);
+						
+						validity = false;
 	        		 
 	        	 }
 	        	 
@@ -461,6 +491,8 @@ $(document).ready(
 					var html = $("#inputpwd2").html()
 					+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
 					$("#inputpwd2").html(html);
+					
+					validity = false;
 
 				}
 				
@@ -475,6 +507,8 @@ $(document).ready(
  			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
  			    	
  			    	$("#inputpwd2").html(html);
+ 			    	
+ 			    	validity = false;
 					
 				}
 				
@@ -488,6 +522,7 @@ $(document).ready(
 								+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' > 4자리 이상 입력하십시오.</i> </label>";
 								$("#inputpwd2").html(html);
 								
+								validity = false;
 			        		 
 		         }else if(ePwd==ePwd2){
 		        		 	$('#inputpwdcf').removeClass('has-error'); 			    	
@@ -497,6 +532,7 @@ $(document).ready(
 							+"<label class='control-label ' style='font-size:12px; color: #00a65a; margin-top: -10px;' > <i class='fa fa-check' > 사용 가능합니다.</i> </label>";
 							$("#inputpwdcf2").html(html);
 			        	 
+							validity = true;
 	        		 
 	        	 }else{
 	        		 	$('#inputpwd').removeClass('has-success');
@@ -506,6 +542,7 @@ $(document).ready(
 						+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' >비밀번호가 일치하지 않습니다.</i> </label>";
 						$("#inputpwdcf2").html(html);
 	        		 
+						validity = false;
 	        		 
 	        	 }
 	         
