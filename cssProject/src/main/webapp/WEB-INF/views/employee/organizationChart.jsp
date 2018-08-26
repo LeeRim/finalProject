@@ -39,6 +39,10 @@
 	margin: 20px auto;
 }
 
+.sidebar{
+  font-size: 14px;
+}
+
 .org_map {
 	float: left;
 	width: 340px;

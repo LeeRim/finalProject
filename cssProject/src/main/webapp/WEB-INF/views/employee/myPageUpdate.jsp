@@ -128,14 +128,22 @@ function validate(){
 	
 	
 	$("#eAddress").val($("#eAddress1").val()+"/"+$.trim($("#eAddress2").val()))
+	
 	if(validity == false){
 		alert("입력 정보를 확인해 주시기 바랍니다.");
 		return false;
-	}else{
-		alert("수정되었습니다.");
+	}else if(validity == true){
+		
+		if($("#phone").val().indexOf("_") >=0){
+			alert("휴대폰 입력 정보를 확인해 주시기 바랍니다.");
+			$("#phone").focus();
+			return false;
+		}
+		else{
+			alert("수정되었습니다.");
 		return true;
+		}
 	}
-	
 
 	
 }

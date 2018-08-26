@@ -410,8 +410,7 @@ function photoDelete2() {
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name="cCloseDay" value="${select.cCloseDay }"  readonly>
-                  
+                  <input type="text" class="form-control pull-right"  name="cCloseDay"  value="${select.cCloseDay }"  readonly>
                 </div>
                 <!-- /.input group -->
               </div>
@@ -544,6 +543,7 @@ function fileCheck(obj) {
  	maxViewMode : 2,
  	startDate: '1910-01-01',
  	endDate: 'today',
+ 	constrainInput: false,
   autoclose: true
  })
 

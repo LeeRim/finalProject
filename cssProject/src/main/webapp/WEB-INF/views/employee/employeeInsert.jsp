@@ -106,6 +106,8 @@ text-align:center;
 <script type="text/javascript">
 
 var validity = true;
+var validity1 = true;
+var validity2 = true;
 
 //전화번호 입력
 $(function () {
@@ -129,12 +131,21 @@ function validate(){
 	 var ePwds2 = $("#pwdChek2").val();
 
 	 
-	if(validity == true && eNos =="" && eIds =="" && ePwds =="" && ePwds2 ==""){
+	if(validity == false || validity1 == false || validity2 == false || eNos =="" || eIds =="" || ePwds =="" || ePwds2 ==""){
 		alert("입력 정보를 확인해 주시기 바랍니다.");
 		return false;
 	}else{
+		
+		if($("#phone").val().indexOf("_") >=0){
+			alert("휴대폰 입력 정보를 확인해 주시기 바랍니다.");
+			$("#phone").focus();
+			return false;
+			
+		}
+		else{
 		alert("등록되었습니다.");
 		return true;
+		}
 	}
 
 	
@@ -319,7 +330,7 @@ $(document).ready(
 							+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
 							$("#inputId2").html(html);
 							
-							validity = false;
+							validity1 = false;
 							
 	 			    	}
 						else if(eId.search(/\s/) != -1){
@@ -333,7 +344,7 @@ $(document).ready(
 		 			    	
 		 			    	$("#inputId2").html(html);
 		 			    	
-		 			    	validity = false;
+		 			    	validity1 = false;
 							
 						}
 						
@@ -348,7 +359,7 @@ $(document).ready(
 		 			    	
 		 			    	$("#inputId2").html(html);
 							
-		 			    	validity = false;
+		 			    	validity1 = false;
 							
 						}
 						
@@ -365,7 +376,7 @@ $(document).ready(
 	 			    	
 	 			    	$("#inputId2").html(html);
 	 			    	
-	 			    	validity = false;
+	 			    	validity1 = false;
 	 			    	
 	 			    	
 	 			    	}
@@ -382,7 +393,7 @@ $(document).ready(
 	 			    	
 	 			    	$("#inputId2").html(html);
 	 			    	
-	 			    	validity = true;
+	 			    	validity1 = true;
 	 			    	
 	 			    	}
 	 			    	
@@ -420,7 +431,7 @@ $(document).ready(
 						+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
 						$("#inputpwd2").html(html);
 	        		 
-						validity = false;
+						validity2 = false;
 						
 	        	 }
 	        	 
@@ -435,7 +446,7 @@ $(document).ready(
 	 			    	
 	 			    	$("#inputpwd2").html(html);
 	 			    	
-	 			    	validity = false;
+	 			    	validity2 = false;
 						
 					}
 	        	 
@@ -449,7 +460,7 @@ $(document).ready(
 						+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' > 4자리 이상 입력하십시오.</i> </label>";
 						$("#inputpwd2").html(html);
 						
-						validity = false;
+						validity2 = false;
 	        		 
 	        	 }
 	        	 
@@ -478,7 +489,7 @@ $(document).ready(
 					+"<label class='control-label ' style='font-size:12px; color: #f39c12; margin-top: -10px;' > <i class='fa fa-exclamation ' > 필수 정보입니다.</i> </label>";
 					$("#inputpwd2").html(html);
 					
-					validity = false;
+					validity2 = false;
 
 				}
 				
@@ -494,7 +505,7 @@ $(document).ready(
  			    	
  			    	$("#inputpwd2").html(html);
  			    	
- 			    	validity = false;
+ 			    	validity2 = false;
 					
 				}
 				
@@ -508,7 +519,7 @@ $(document).ready(
 								+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' > 4자리 이상 입력하십시오.</i> </label>";
 								$("#inputpwd2").html(html);
 								
-								validity = false;
+								validity2 = false;
 			        		 
 		         }else if(ePwd==ePwd2){
 		        		 	$('#inputpwdcf').removeClass('has-error'); 			    	
@@ -518,7 +529,7 @@ $(document).ready(
 							+"<label class='control-label ' style='font-size:12px; color: #00a65a; margin-top: -10px;' > <i class='fa fa-check' > 사용 가능합니다.</i> </label>";
 							$("#inputpwdcf2").html(html);
 							
-							validity = true;
+							validity2 = true;
 			        	 
 	        		 
 	        	 }else{
@@ -529,7 +540,7 @@ $(document).ready(
 						+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' > <i class='fa fa-remove' >비밀번호가 일치하지 않습니다.</i> </label>";
 						$("#inputpwdcf2").html(html);
 	        		 
-						validity = false;
+						validity2 = false;
 	        		 
 	        	 }
 	         

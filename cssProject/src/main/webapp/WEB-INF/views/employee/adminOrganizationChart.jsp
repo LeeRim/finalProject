@@ -39,6 +39,9 @@
 	margin: 20px auto;
 }
 
+.sidebar{
+  font-size: 14px;
+}
 .org_map {
 	float: left;
 	width: 20%;
@@ -69,6 +72,11 @@
 	border-right: 1px #BDBDBD solid;
 	border-bottom-left-radius: 5px;
     border-bottom: 3px solid #3c8dbc;
+}
+
+.button-group{
+margin-left:10px;
+
 }
 
 .employee_list {
@@ -478,11 +486,15 @@ td {
 				    	var date = dateToYYYYMMDD(new Date(data[i].eHireDate));
 				    	if(data[i].eEntDate != null){
 				    	var date2 = dateToYYYYMMDD(new Date(data[i].eEntDate));
+				    	
 			    		}
 				    	else{
 				    		var date2 ="";
 				    	}
-			    		
+				    	var eType = data[i].eType;
+				    	console.log(data[i].eType)
+				    	console.log(eType)
+				    	if(data[i].eType =='2'){
 			    	var html = $("#ddd").html()
 					+ "<tr bgcolor='#FFFFFF' height='26'>"+
 
@@ -498,7 +510,30 @@ td {
 										+"<td class='employee_list_emp'>"+date+"</td>"
 										+"<td class='employee_list_emp'>"+date2+"</td>"
 										+"<td class='employee_list_emp'><a href='javascript:void(0);' onclick='callFunction2("+data[i].eKey+");' >"
-										+"<b>수정하기</b></a></td></tr>";
+										+"<b>수정하기</b></a></td>"
+										+"<td class='employee_list_emp'><a href='javascript:void(0);' onclick='callFunction3("+data[i].eKey+");' >"
+										+"<b>삭제</b></a></td></tr>"}
+										else{
+											
+											var html = $("#ddd").html()
+											+ "<tr bgcolor='#FFFFFF' height='26'>"+
+
+										"<td class='employee_list_emp'>"+no+"</td>"
+										+"<td class='employee_list_emp'><a href='javascript:void(0);' onclick='callFunction("+data[i].eKey+");' class='showMask' >"
+										+"<b>"+data[i].eId+"</b></a></td>"
+										+"<td class='employee_list_emp'>"+data[i].department+"</td>"
+										+"<td class='employee_list_emp'>"+data[i].job+"</td>"
+										+"<td class='employee_list_emp'><a href='javascript:void(0);' onclick='callFunction("+data[i].eKey+");' class='showMask' >"
+										+"<b>"+data[i].eName+"</b></a></td>"
+										+"<td class='employee_list_emp'>"+data[i].eExten+"</td>"
+										+"<td class='employee_list_emp'>"+data[i].ePhone+"</td>"
+										+"<td class='employee_list_emp'>"+date+"</td>"
+										+"<td class='employee_list_emp'>"+date2+"</td>"
+										+"<td class='employee_list_emp'><a href='javascript:void(0);' onclick='callFunction2("+data[i].eKey+");' >"
+										+"<b>수정하기</b></a></td>"
+										+"<td class='employee_list_emp'><b>-</b></td></tr>"
+										}
+										
 										
 			 $("#ddd").html(html);
 			    	}
@@ -611,23 +646,23 @@ td {
 						</div>
 						<div class="org_map2">
 
-
+						<div class="button-group">
 							<button type="button" class="btn btn-primary margin"
 								id="getCheckedAll">사원검색</button>
+								<button type="button" class="btn btn-primary margin"
+								id="allListView">전체검색</button>
 							<button type="button" class="btn btn-df margin" id="checkAll">전체선택</button>
 							<button type="button" class="btn btn-df margin"
 								id="uncheckAll">전체해제</button>
 								
 							<div id="sidetreecontrol">
-							<button type="button" class="btn btn-primary margin"
-								id="allListView">전체검색</button>
 								<a href="?#"><button type="button"
 										class="btn btn-df margin">전체닫기</button></a> <a href="?#"><button
 										type="button" class="btn btn-df margin">전체열기</button></a>
 							</div>
 							
 						</div>
-
+						</div>
 					</div>
 
 					<div class="employee_list">
