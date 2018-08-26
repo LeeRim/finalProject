@@ -35,19 +35,19 @@
 	padding: 0 20px;
 	/* border: 1px solid black; */
 	width:90%;
-	min-width:1200px;
+	min-width:1300px;
 	margin: 20px auto;
 }
 
 .org_map {
 	float: left;
-	width: 340px;
+	width: 20%;
 	/* border: 1px solid black; */
 }
 
 .org_map1 {
 	float: left;
-	width: 340px;
+	width: 100%;
 	height: 400px;
 	border-top: 3px solid #3c8dbc;
 	border-bottom: 2px solid #3c8dbc;
@@ -62,7 +62,7 @@
 
 .org_map2 {
 	float: left;
-	width: 340px;
+	width:  100%;
 	height: 219px;
 	padding:20px 10px;
 	background: white;
@@ -73,7 +73,7 @@
 
 .employee_list {
 	float: left;
-	width: 70%;
+	width: 80%;
 	height: 619px;
 	background:white;
     border-top-right-radius: 3px;
