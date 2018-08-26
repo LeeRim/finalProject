@@ -32,9 +32,16 @@
 		WHERE TO_NUMBER(TO_CHAR(COMM_DATE, 'DD'))=TO_NUMBER(TO_CHAR(SYSDATE, 'DD')) AND E_KEY_FK = ${eKey} AND C_KEY_FK = ${cKeyFk}
   	</select>
   	
-  	<insert id="insertInner" parameterType="Commute">
-  		INSERT INTO COMMUTE VALUES(SEQ_COMMUTE.NEXTVAL, ${cKeyFk}, ${eKey}, SYSDATE, SYSDATE, NULL)
-  	</insert>
+  	<update id="insertInner" parameterType="Commute">
+  		MERGE INTO COMMUTE
+ 		USING DUAL
+ 		ON(E_KEY_FK = ${eKey} AND C_KEY_FK= ${cKeyFk} AND TO_NUMBER(TO_CHAR(COMM_DATE, 'DD'))=TO_NUMBER(TO_CHAR(SYSDATE, 'DD')))
+ 		WHEN MATCHED THEN
+   		 UPDATE SET
+   			 COMM_INTIME = SYSDATE
+		WHEN NOT MATCHED THEN
+    		INSERT VALUES(SEQ_COMMUTE.NEXTVAL, ${cKeyFk} , ${eKey}, SYSDATE, SYSDATE, NULL);
+  	</update>
   	
   	<update id="insertOutCommute" parameterType="Commute">
   	UPDATE COMMUTE SET COMM_OUTTIME= SYSDATE
