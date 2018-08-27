@@ -219,7 +219,7 @@
 									<td colspan="3"><c:out value="${sessionScope.user.ePhone}"/></td>
 								</c:when>
 								<c:otherwise>
-									<td>없습니다. </td>
+									<td colspan="3">없습니다. </td>
 								</c:otherwise>
 							</c:choose>
 						</tr>
