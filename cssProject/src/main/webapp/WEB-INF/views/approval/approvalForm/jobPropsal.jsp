@@ -116,7 +116,7 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
+	<div style="height:892px;">
 
 		<c:import url="/WEB-INF/views/approval/approval_menu.jsp" />
 
@@ -141,7 +141,7 @@ desired effect
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-				<div class="addApprover" style="margin-left:60px; width:100px;">
+				<div class="addApprover" style="margin-left:60px;">
 					<a class="btn btn-app" href="#" onclick="openSelectApprover();">
 						<i class="fa fa-user-plus" style="margin-top:5px;"></i>결재자추가
 					</a>
@@ -150,7 +150,7 @@ desired effect
 
 					<div class="wrap_container">
 						<!-- 3단 레이아웃 멀티클래스 -->
-						<section class="content_wrapper" style="margin-left:300px; margin-top:-50px;">
+						<section class="content_wrapper" style="margin-left:300px; margin-top:-100px;">
 							<!--전자결제 상세-->
 							<div class="report_type approval_type form_back">
 

@@ -152,10 +152,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper" >
+	<!-- <div class="wrapper" > -->
 		<c:import url="/WEB-INF/views/approval/approval_menu.jsp" />
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper" style="background:white;">
+		<div class="content-wrapper" style="background:white; height:892px;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>전자결재 <small>연차신청서</small></h1>
@@ -173,7 +173,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					</a>
 				</div>
 				<div class="row">
-				<section class="content_wrapper" style="margin-left:300px; margin-top:-50px;">
+				<section class="content_wrapper" style="margin-left:300px; margin-top:-100px;">
 					<!--전자결제 상세-->
 					<div class="report_type approval_type form_back">
 						<!--전자결재 내용-->
@@ -187,6 +187,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<!-- Header -->
 										<tbody>
 											<tr>
+											<tr>
+														<td
+															style="background: white; padding: 0px !important; border: 0px currentColor; border-image: none; height: 90px; text-align: center; color: black; font-size: 36px; font-weight: bold; vertical-align: middle;"
+															colspan="2" class="">연차 신청서</td>
+													</tr>
 												<td class="tWrappser">
 													<table class="tHeader">
 														<!-- User -->
@@ -195,7 +200,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 															<col width="220">
 														</colgroup>
 														<tbody>
-															<tr><button class="btn btn-primary" style="margin-top:-20px;"><i class="fa fa-edit"></i>작성</button></tr>
 															<tr>
 																<td class="leftColumn">기안자</td>
 																<td class="rightColumn"><c:out value="${sessionScope.user.eName}"></c:out></td>
@@ -310,12 +314,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 									<div class="form-group" style="height: 100px;">
 											<div style="float: left; height: 100px; width: 130px;">
 												<div class="btn btn-default btn-file">
-													<i class="fa fa-paperclip"></i> Attachment 
-													<input multiple="multiple" type="file" name="files" class="upload-hidden">
+													<i class="fa fa-paperclip"></i> Attachment <input
+														multiple="multiple" type="file" name="files"
+														class="upload-hidden">
 												</div>
 												<p class="help-block">Max. 32MB</p>
 											</div>
 											<div class="file-list"></div>
+										<button class="btn btn-primary" style="margin-top:10px;float:right;"><i class="fa fa-edit"></i>작성</button>
 										</div>
 							</form>
 						</div>
@@ -328,7 +334,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
-	</div>
+<!-- 	</div> -->
 
 
 	<c:import url="../selectApproverPage.jsp"/>

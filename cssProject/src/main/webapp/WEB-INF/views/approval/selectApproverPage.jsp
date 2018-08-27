@@ -344,7 +344,7 @@ if (window.FileReader) { // modern browser
 							선택</label>
 
 						<c:forEach items="${department}" var="department">
-							<div class="box box-solid collapsed-box" style="margin:3px 0 0 0;width: 100%">
+							<div class="box box-solid collapsed-box" style="width: 100%">
 								<div class="box-header with-border">
 									<h3 class="box-title">
 										<c:out value="${department.department}" />

@@ -47,11 +47,11 @@ desired effect
 
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
+		<div class="content-wrapper" style="background:white;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Page Header <small>Optional description</small>
+					전자결재 <small>구매 품의서</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -65,13 +65,13 @@ desired effect
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-				<div class="doApproval">
+				<div class="doApproval" style="margin-left:60px; width:100px;">
 					<a class="btn btn-app" href="#" onclick="openDoApproval();"> <i
-						class="fa fa-check"></i>결재하기
+						class="fa fa-check" style="margin-top:5px;"></i>결재하기
 					</a>
 				</div>
 				<!-- 3단 레이아웃 멀티클래스 -->
-				<section class="content_wrapper">
+				<section class="content_wrapper" style="margin-left:300px;">
 					<!--전자결제 상세-->
 					<div class="report_type approval_type orderForm_back">
 						<!--전자결재 내용-->
