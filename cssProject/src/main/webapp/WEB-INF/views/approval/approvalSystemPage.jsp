@@ -14,6 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <title>AdminLTE 2 | Starter</title>
 <script type="text/javascript">
 function select(key,no,name,job,depart,state,photo){
+	console.log(key);
 	$("#updateTag").attr("href","updateInstead.do?iKey="+key);
 	$("#profileImg").attr("src","resources/upload/empPhoto/"+photo);
 	$("#name").html(name);
@@ -105,7 +106,7 @@ desired effect
 									<c:forEach items="${employee}" var="employee" varStatus="st">
 										<c:if test="${employee.department == department.department}">
 											<li><a
-												onclick="select(${employee.eKey},'${employee.eNo}','${employee.eName}','${employee.job}','${employee.department}',${employee.eState},${employee.ePhoto});"><i
+												onclick="select(${employee.eKey},'${employee.eNo}','${employee.eName}','${employee.job}','${employee.department}',${employee.eState},'${employee.ePhoto}');"><i
 													class="fa fa-circle-o text-red"></i> <c:out
 														value="${employee.eName} ${employee.job }" /></a></li>
 										</c:if>
