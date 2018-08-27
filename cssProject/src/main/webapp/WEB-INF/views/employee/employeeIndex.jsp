@@ -90,7 +90,7 @@
 	    var m = today.getMinutes();
 	    var s = today.getSeconds();
 	    m = checkTime(m);
-	    s = checkTime(s);
+	    s = checkTime(s);	    
 	    document.getElementById('clock').innerHTML =
 	   year+ "년" + month + "월" + date + "일" + h + ":" + m + ":" + s;
 	    var t = setTimeout(startTime, 500);
@@ -109,14 +109,13 @@
 	    m = today.getMinutes();
 	    s = today.getSeconds();
 	    var cKeyFk = ${user.cKeyFk}
-	    var eKeyFk= ${user.eKey}
+	    var eKeyFk= ${user.eKey} 
 		$.ajax({
 			type:"post",
 	        url:"commuteone.do",
-	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk},
+	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk, inDate : inDate},
 	        success: function(data){
-	        	 document.getElementById('inTime').innerHTML =
-	        		 h + "시" + m+ "분"+ s + "초"
+	        	h + "시" + m+ "분"+ s + "초"
 	        },
 	        error: function(error) {
 	            alert(error);
@@ -267,7 +266,7 @@
                </div>
                <!-- /.box-header -->
                <div id="inTime" class="box-body">
-                 
+          			
                </div>
                <!-- /.box-body -->
              </div>
