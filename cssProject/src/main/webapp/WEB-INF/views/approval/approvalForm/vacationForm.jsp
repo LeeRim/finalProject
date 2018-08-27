@@ -152,10 +152,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-	<!-- <div class="wrapper" > -->
+	 <div class="wrapper" >
 		<c:import url="/WEB-INF/views/approval/approval_menu.jsp" />
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper" style="background:white; height:892px;">
+		<div class="content-wrapper" style="background:white; height:1100px;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>전자결재 <small>연차신청서</small></h1>
@@ -180,9 +180,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						<div class="approval_import ie9-scroll-fix">
 							<!-- 문서 내용 표시 테스트 -->
 							<form id="vacationForm" action="writeVacation.do" class="form_doc_editor editor_view" method="post"  enctype="multipart/form-data" >
-								<input type="hidden" id="appStr" name="appStr" value="">
-								<input type="hidden" id="insteads" name="insteads" value="">
-								<input type="hidden" id="vfHalfflag" name="vfHalfflag" value="">
+								<input type="hidden" id="appStr" name="appStr" value=""/>
+								<input type="hidden" id="insteads" name="insteads" value=""/>
+								<input type="hidden" id="vfHalfflag" name="vfHalfflag" value=""/>
 									<table class="__se_tbl" >
 										<!-- Header -->
 										<tbody>
@@ -214,7 +214,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 																<td class="rightColumn">
 																	<jsp:useBean id="currentTime" class="java.util.Date" />
 																	<fmt:formatDate value="${currentTime }" pattern="yyyy-MM-dd" var="currentTime" /> <c:out value="${currentTime }"></c:out>
-																	<input type="hidden" name="aWriteDate" value="${currentTime }">
+																	<input type="hidden" name="aWriteDate" value="${currentTime }"/>
 																</td>
 															</tr>
 															<tr>
@@ -258,12 +258,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 											<tr>
 												<td class="leftColumn2">기간 및 일시</td>
 												<td  class="columns" >
-													<input type="text" readonly class="ipt_editor ipt_editor_date hasDatepicker" id="vfStartdate" name="vfStartdate" value="">~
-													<input type="text" readonly class="ipt_editor ipt_editor_date hasDatepicker" id="vfEnddate" name="vfEnddate" value=""> 
+													<input type="text" readonly class="ipt_editor ipt_editor_date hasDatepicker" id="vfStartdate" name="vfStartdate" value=""/>~
+													<input type="text" readonly class="ipt_editor ipt_editor_date hasDatepicker" id="vfEnddate" name="vfEnddate" value=""/> 
 													<span id=chkDays" onclick="days();" style="cursor:pointer">일 수 확인</span>
 													<span id="usingPointArea" class="pointArea" >
 														<b>사용일수 : </b> 
-														<input type="text" id="useV" class="ipt_editor ipt_editor_num" data-dsl="{{number:usingPoint}}" name="vfUseddate" value="" readonly="readonly"> 
+														<input type="text" id="useV" class="ipt_editor ipt_editor_num" data-dsl="{{number:usingPoint}}" name="vfUseddate" value="" readonly="readonly"/> 
 														<b id="usingPoint_Comment" style="font-weight: bold; color: red"></b> 
 													</span>
 												</td>
@@ -273,11 +273,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<td class="rightColumn2">
 													<span id="vacationHalfArea" class="vacationHalfArea" >
 														<span class="halfArea">
-															<input type="checkbox" class="editor_opt" value="시작일" name="check_startHalf" id="startHalf">
+															<input type="checkbox" class="editor_opt" value="시작일" name="check_startHalf" id="startHalf"/>
 															 <label class="editor_label">시작일</label>
 														</span>
 														<span class="halfArea">
-															<input type="checkbox" class="editor_opt" value="종료일" name="check_startHalf" id="endHalf">
+															<input type="checkbox" class="editor_opt" value="종료일" name="check_startHalf" id="endHalf"/>
 															<label class="editor_label" >종료일</label>
 														</span> 
 													</span>
@@ -287,7 +287,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<td class="leftColumn2">연차 일수</td>
 												<td  class="columns" >
 													<span id="restPointArea" class="pointArea" ><b>총 연차 : </b> 
-														<input type="text" class="ipt_editor ipt_editor_num" name="restPoint" id="restPoint" value="${sessionScope.user.totalVacation}" readonly="readonly"> 
+														<input type="text" class="ipt_editor ipt_editor_num" name="restPoint" id="restPoint" value="${sessionScope.user.totalVacation}" readonly="readonly"/> 
 														<b id="restPoint_Comment" style="font-weight: bold; color: red"></b> 
 													</span>
 													<span id="applyPointArea" class="pointArea" ><b>남은연차 : </b> 
@@ -316,7 +316,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<div class="btn btn-default btn-file">
 													<i class="fa fa-paperclip"></i> Attachment <input
 														multiple="multiple" type="file" name="files"
-														class="upload-hidden">
+														class="upload-hidden"/>
 												</div>
 												<p class="help-block">Max. 32MB</p>
 											</div>
@@ -334,7 +334,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			<!-- /.content -->
 		</div>
 		<!-- /.content-wrapper -->
-<!-- 	</div> -->
+ 	 </div> 
 
 
 	<c:import url="../selectApproverPage.jsp"/>

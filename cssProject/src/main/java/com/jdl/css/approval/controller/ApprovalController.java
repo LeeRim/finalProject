@@ -466,7 +466,7 @@ public class ApprovalController {
 	public String writeVacation(ApprovalVo app, VacationFormVo vForm, @RequestParam("appStr") List<Integer> appStr,
 			@RequestParam("insteads") List<Integer> insteads, @RequestParam("files") MultipartFile[] files,
 			HttpSession session, HttpServletRequest request) {
-
+			System.out.println("와따");
 		app.setaWriterFk(((EmployeeVo) session.getAttribute("user")).geteKey());
 		app.setcKeyFk(((EmployeeVo) session.getAttribute("user")).getcKeyFk());
 		app.setDivDoctypeFk(5);
@@ -534,7 +534,7 @@ public class ApprovalController {
 
 		attService.insertAttachments(attachList);
 		// System.out.println(attachResult);
-		return "approval/approvalPage";
+		return "redirect:openVacationFormDetail.do?aKey=" + app.getaKey();
 	}
 
 	// 문서디테일열람

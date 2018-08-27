@@ -99,7 +99,7 @@ td {
 		}
 	
 	
-			var num = ${jobList.size()};
+			var num = ${jobList.size()}+1;
 		$(function() {
 			$('#btn-departAdd-row').click(function() {
 				$('#mytable1 > tbody:last').append(
@@ -108,8 +108,7 @@ td {
 							
 			$('#btn-jobAdd-row').click(function() {
 				//num = $("#mytable2 tbody tr").last().find("td").first().text();
-				num = (parseInt(num) + 1)
-				//console.log(num);
+				num = (parseInt(num) + 1);
 				$('#mytable2 > tbody:last')
 						.append(
 								'<tr><td><input type="hidden" name="jlevel" value="'+num+'">'
@@ -226,7 +225,7 @@ td {
 											</c:if>
 											<c:if test="${jobList.size()==0 }">
 													<tr>
-														<td><input type="hidden" name="jlevel" value="1"></td>
+														<td><input type="hidden" name="jlevel" value="1">1</td>
 														<td><input type="hidden" name="jobKey"> <input
 															type="text" name="job" class="form-control" /></td>
 														<td><span onclick="removeKey(this);" style="cursor: pointer;"><i class ="fa fa-times"></i></span></td>

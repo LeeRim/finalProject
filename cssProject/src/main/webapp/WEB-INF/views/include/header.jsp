@@ -87,20 +87,30 @@ font-size:15px;
 	<header class="main-header">
 
 		<!-- Logo -->
+		<c:if test="${sessionScope.user.cLevel== 0}">
+			<a href="#" class="logo" onclick="menuHighlight(1);">
+			<span class="logo-mini"><b>C</b>SS</span> <span class="logo-lg"><b>C</b>SS</span>
+		</a>
+		</c:if>
 		<c:if test="${sessionScope.user.eType=='2' }">
 			<!-- 사원 -->
 			<a href="employeeIndex.do" class="logo" onclick="menuHighlight(1);">
+			<span class="logo-mini"><b>C</b>SS</span> <span class="logo-lg"><b>C</b>SS</span>
+		</a>
 		</c:if>
 		<c:if test="${sessionScope.user.eType=='1' }">
 			<!-- 회사관리자 -->
 			<a href="adminIndex.do" class="logo" onclick="menuHighlight(1);">
+			<span class="logo-mini"><b>C</b>SS</span> <span class="logo-lg"><b>C</b>SS</span>
+		</a>
 		</c:if>
 		<c:if test="${sessionScope.user.eType=='0' }">
 			<!-- 회사관리자 -->
 			<a href="adminMain.do" class="logo" onclick="menuHighlight(1);">
-		</c:if>
-		<span class="logo-mini"><b>C</b>SS</span> <span class="logo-lg"><b>C</b>SS</span>
+			<span class="logo-mini"><b>C</b>SS</span> <span class="logo-lg"><b>C</b>SS</span>
 		</a>
+		</c:if>
+		
 
 		<!-- Header Navbar -->
 		<nav class="navbar navbar-static-top" role="navigation">

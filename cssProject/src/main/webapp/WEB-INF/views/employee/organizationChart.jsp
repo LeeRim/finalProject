@@ -531,7 +531,7 @@ td {
 												</c:forEach></li>
 										</c:if>
 										<c:if test="${status.count ne 1 }">
-											<c:if test="${list[status.index-1].department ne  e2.department}">
+											<c:if test="${list[status.index-1].department ne  e2.department and e2.department ne null}">
 												<li><label> <input type="checkbox"
 														value="${e2.department }" name="checkDpt"
 														onclick="chkSubCheckbox(${e2.eDepartFk}, this)"> <strong><b style="color:black;">${e2.department }</b></strong>
