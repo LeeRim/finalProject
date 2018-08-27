@@ -55,6 +55,17 @@
   		margin-left:auto;
   		margin-right:auto;
   	}
+  	.rpyText{
+  		width:80%;
+  	}
+  	.bcontent{
+  		width:1500px;
+  		height:500px;
+  	}
+  	.row{
+  		width:100%;
+  		margin-left:180px;
+  	}
 </style>
 <script>
 	function bGalleryModifyPage(){
@@ -71,15 +82,16 @@
 	function writeComment(){
 		$("#commentForm").submit();
 	}
-	function updateCommentForm(obj, flag){
-		var bcot = $("#bcot").text().trim();
-		console.log(bcot);
+	function updateCommentForm(obj, flag, index){
+		var bcot = $("#bcot" + index).text().trim(); 
+		var bcotSpan = $("#bcot" + index);
 		
+		$("#replyUpdate" + index).val(bcot);
+		$("#bcot" + index).css("display", "none");
+		$("#replyUpdate" + index).css("display", "block");
+		/* $(replyUpdate).val(bcotSpan.html()); */
 		
-		$("#bcot").html("<input type='text' id='replyUpdate'/>");
-		$("#replyUpdate").val(bcot);
-		
-		var $textArea = $(".form-control");
+		var $textArea = 	$("#replyUpdate" + index);
 		$textArea.prop("readonly", !flag);
 		if(flag){
 			$(obj).hide();
@@ -87,6 +99,9 @@
 			$(obj).siblings(".updateBtn").show();
 			$(obj).siblings(".cancelBtn").show();
 		}else{
+			$("#replyUpdate" + index).css("display", "none");
+			$("#bcot" + index).css("display", "block");
+			
 			$(obj).siblings(".modifyBtn").show();
 			$(obj).siblings(".deleteBtn").show();
 			$(obj).siblings(".updateBtn").hide();
@@ -94,13 +109,14 @@
 		}
 	}
 	
-	function updateComment(obj, cno){
+	function updateComment(obj, cno, index){
 		//댓글 작성 -> 댓글 번호, 댓글 내용
-		var commentValue =  $("#replyUpdate").val();
+		var replyUpdate = "#replyUpdate" + index;
+		var commentValue =  $(replyUpdate).val();
 		var cno = cno;
 		//console.log("updateComment.do?cno=" + cno + "&content=" + commentValue);
 		location.href
-			="updateComment.do?commentKey=" + cno + "&cContent=" + commentValue + "&boardKey=${attach.boardKey}";
+			="updateComment.do?commentKey=" + cno + "&cContent=" + commentValue + "&boardKey=${board.boardKey}";
 	}
 	function deleteComment(cno){
 		var cno = cno;
@@ -115,19 +131,21 @@
    <c:import url="/WEB-INF/views/border/left_column_board.jsp"/>
 	<div class="content-wrapper">
 	<section class="content-header">
+      <h1>
+       게시판
+        <small>_갤러리게시판</small>
+      </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Tables</a></li>
+        <li><a href="#">Table	s</a></li>
         <li class="active">Data tables</li>
       </ol>
     </section>
-<div class="row" style="width:95%; margin-right:auto; margin-left:auto;">
 
-<h1>갤러리 디테일 화면</h1>
 <!-- Main content -->
     <section class="content container-fluid">
-       <div class="row" >
-        <div class="col-md-6" style="width: 90%; ">
+       <div class="row" style="margin-top:20px;">
+        <div class="col-md-6" >
           <!-- Box Comment -->
           <div class="box box-widget">
             <div class="box-header with-border">
@@ -144,7 +162,10 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              ${attach.bContent}
+            
+             <div class="bcontent">
+             <img src="resources/upload/boardGallery/${Attach.attaFileName}" width="510px" height="150px"/><br>
+              ${attach.bContent}</div>
               <button type="button" onclick="border();" class="btn btn-default btn-xs"><i class="fa fa-share"></i> 리스트</button>
               <c:if test="${user ne null && user.eKey eq attach.bWriter}">
               <button type="button" onclick="bModifyPage();" class="btn btn-default btn-xs"><i class="fa fa-share"></i> 수정</button>
@@ -161,18 +182,19 @@
 
                 <div class="comment-text">
                       <span class="username">
-                        ${b.eName}
+                        ${attach.eName} 
                         <span class="text-muted pull-right">${b.cDate}</span>
                         	<span class="text-muted pull-right">
-                        		<button type="button" onclick="updateCommentForm(this, true);" class="btn btn-default btn-xs modifyBtn""><i class="fa fa-share"></i> 수정</button>
+                        		<button type="button" onclick="updateCommentForm(this, true, ${status.index });" class="btn btn-default btn-xs modifyBtn""><i class="fa fa-share"></i> 수정</button>
               					<button type="button" onclick="deleteComment(${b.commentKey});" class="btn btn-default btn-xs deleteBtn"><i class="fa fa-remove"></i> 삭제</button>
-              					<button type="button" class="btn btn-default btn-xs updateBtn" style="display:none;" onclick="updateComment(this,${b.commentKey});"><i class="fa fa-share"></i>작성 완료</button>
-								<button type="button" class="btn btn-default btn-xs cancelBtn" style="display:none;" onclick="updateCommentForm(this, false);"><i class="fa fa-share"></i>취소</button>
+              					<button type="button" class="btn btn-default btn-xs updateBtn" style="display:none;" onclick="updateComment(this,${b.commentKey}, ${status.index } );"><i class="fa fa-share"></i>작성 완료</button>
+								<button type="button" class="btn btn-default btn-xs cancelBtn" style="display:none;" onclick="updateCommentForm(this, false,  ${status.index });"><i class="fa fa-share"></i>취소</button>
               				</span>
                       </span><!-- /.username -->
-                  <span id="bcot">
+                   <span id="bcot${status.index }">
                   	<c:out value="${b.cContent}"/>
                   </span>
+                 	<input type="text" class="rpyText" id="replyUpdate${status.index }" value="<c:out value='${b.cContent }'/>" style="display:none;"/>
                 </div>
                 <!-- /.comment-text -->
               </div>
@@ -204,7 +226,6 @@
       <!-- /.row -->
     </section>
     
-    </div>
  </div>
  </div>
 

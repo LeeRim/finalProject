@@ -153,7 +153,7 @@ font-size:15px;
 								class="fa fa-envelope-o"></i><br> <span>쪽지</span></a></li>
 						<li><a href="borderIndex.do"><i class="fa  fa-bullhorn"></i><br>
 								<span>커뮤니티</span></a></li>
-						<li><a href="empQNA.do"><i class="fa  fa-comments-o"></i><br>
+						<li><a href="qnaList.do"><i class="fa  fa-comments-o"></i><br>
 								<span>문의하기</span></a></li>
 
 					</ul>
