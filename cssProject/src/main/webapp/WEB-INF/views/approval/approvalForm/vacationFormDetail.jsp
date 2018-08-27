@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			</section>
 
 			<!-- Main content -->
-			<section class="content container-fluid">
+			<section class="content container-fluid" style="margin-left:500px; margin-top:20px;">
 
 				<!--------------------------
         | Your Page Content Here |
@@ -211,7 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 9pt; margin-top: 0px; margin-bottom: 0px;"><b>사용일수
 															: </b> <input type="text" class="ipt_editor ipt_editor_num"
 														data-dsl="{{number:usingPoint}}" name="usingPoint"
-														value="${vf.vfUseddate }" readonly="readonly"> <b
+														value="${vf.vfUseddate }" style="border:none;" readonly="readonly"> <b
 														id="usingPoint_Comment"
 														style="font-weight: bold; color: red"></b> </span></td>
 											</tr>
@@ -225,11 +225,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													id="vacationHalfArea"
 													style="line-height: normal; font-family: malgun gothic, dotum, arial, tahoma; font-size: 11pt; margin-top: 0px; margin-bottom: 0px;"><span
 														class="halfArea"> <input type="checkbox"
-															class="editor_opt" value="시작일" name="check_startHalf"
+															class="editor_opt" disabled=false
 															id="startHalf"> <label class="editor_label">시작일</label>
 													</span>
 														<span class="halfArea">
-															 <input type="checkbox" class="editor_opt" value="종료일" name="check_startHalf" id="endHalf"> 
+															 <input type="checkbox" class="editor_opt" disabled=false id="endHalf"> 
 															 <label class="editor_label" data-type="removeSpan">종료일</label>
 														</span> 
 													</span>
@@ -240,7 +240,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 													style="background: rgb(221, 221, 221); padding: 5px; border: 1px solid black; border-image: none; height: 80px; text-align: center; color: rgb(0, 0, 0); font-size: 14px; font-weight: bold; vertical-align: middle;"><b
 													style="color: rgb(255, 0, 0);">*</b>휴가 사유</td>
 												<td
-													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 100px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: top;">
+													style="background: rgb(255, 255, 255); padding: 3px; border: 1px solid black; border-image: none; width: 700px; height: 300px; text-align: left; color: rgb(0, 0, 0); font-size: 12px; vertical-align: top;">
 													<c:out value="${vf.vfReason }"></c:out></td>
 											</tr>
 											<tr>
@@ -278,5 +278,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 	<c:import url="../selectApproverPage.jsp"/>
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
+	<script>
+		$(function(){
+			var half = ${vf.vfHalfflag};
+			if(half == 1){
+				$("#startHalf").prop("checked",true);
+			}else if(half == 2){
+				$("#endHalf").prop("checked",true);
+			}else if(half == 3){
+				$("#startHalf").prop("checked",true);
+				$("#endHalf").prop("checked",true);
+			}
+		});
+	</script>
 </body>
 </html>

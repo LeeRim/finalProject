@@ -354,8 +354,7 @@
 		EMPLOYEE E
 		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
 		WHERE
-		E.C_KEY_FK = #{cKey} AND TO_CHAR(E_BIRTH,'MM/DD') =
-		TO_CHAR(SYSDATE,'MM/DD')
+		E.C_KEY_FK = #{cKey} AND TO_CHAR(E_BIRTH,'MM/DD') = TO_CHAR(SYSDATE,'MM/DD') 
 	</select>
 
 	<select id="selectDepartCountList" parameterType="int"
