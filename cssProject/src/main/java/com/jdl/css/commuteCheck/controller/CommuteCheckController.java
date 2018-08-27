@@ -59,12 +59,11 @@ CommuteCheckService service;
 	
 	@RequestMapping("commuteone.do")
 	public ModelAndView innerCommute(ModelAndView mv, CommuteCheckVo commute,HttpServletRequest request, HttpSession session)throws ServletException, IOException{
+		
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
 		InetAddress addr = null;
 		addr = InetAddress.getLocalHost();
 		String ipLocation = addr.getHostAddress();
-		
-		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
-		System.out.println(user);
 		
 		int point1 = ipLocation.indexOf(".");
 		int point2 = ipLocation.indexOf(".", point1 + 1);

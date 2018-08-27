@@ -103,7 +103,7 @@
 	    var m = today.getMinutes();
 	    var s = today.getSeconds();
 	    m = checkTime(m);
-	    s = checkTime(s);
+	    s = checkTime(s);	    
 	    document.getElementById('clock').innerHTML =
 	   year+ "년" + month + "월" + date + "일" + h + ":" + m + ":" + s;
 	    var t = setTimeout(startTime, 500);
@@ -122,14 +122,14 @@
 	    m = today.getMinutes();
 	    s = today.getSeconds();
 	    var cKeyFk = ${user.cKeyFk}
-	    var eKeyFk= ${user.eKey}
+	    var eKeyFk= ${user.eKey} 
 		$.ajax({
 			type:"post",
 	        url:"commuteone.do",
 	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk},
 	        success: function(data){
 	        	 document.getElementById('inTime').innerHTML =
-	        		 h + "시" + m+ "분"+ s + "초"
+	        	h + "시" + m+ "분"+ s + "초"
 	        },
 	        error: function(error) {
 	            alert(error);
@@ -319,7 +319,7 @@
 	        <div class="col-md-3">
 	        <div class="box box-default" style="height:150px; text-align:center;">
 	            <div class="box-header with-border">
-	              <h3 class="box-title" style="padding:10px;"><c:out value="${ipLocation}"></c:out> </h3>
+	              <h3 class="box-title" style="padding:10px;"><c:out value="${ipLocation}"></c:out></h3>
 					
 	              <!-- /.box-tools -->
 	            </div>
@@ -492,13 +492,14 @@
      * DONUT CHART
      * -----------
      */
-
+     
     var donutData = [
     	<c:forEach items="${departCountList }" var="dc" varStatus="status">
 	    	<c:if test="${!status.last}">{ label: '${dc.department}', data: ${dc.count}, color: '#3c8dbc' },</c:if>
 			<c:if test="${status.last}">{ label: '${dc.department}', data: ${dc.count}, color: '#3c8dbb' }</c:if>
       </c:forEach>	
     ]
+    
     $.plot('#donut-chart', donutData, {
       series: {
         pie: {
