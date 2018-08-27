@@ -113,8 +113,9 @@
 		$.ajax({
 			type:"post",
 	        url:"commuteone.do",
-	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk, inDate : inDate},
+	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk},
 	        success: function(data){
+	        	 document.getElementById('inTime').innerHTML =
 	        	h + "시" + m+ "분"+ s + "초"
 	        },
 	        error: function(error) {
