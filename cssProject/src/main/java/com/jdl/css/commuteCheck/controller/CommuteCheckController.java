@@ -52,7 +52,7 @@ CommuteCheckService service;
 		int result = service.insertOutCommuteCheck(user);
 		CommuteCheckVo cc=service.selectCommute(commute);
 		mav.addObject("user",user);
-		mav.addObject(commute);
+		mav.addObject("commute",commute);
 		mav.setViewName("redirect:commuteCheck.do");
 		return mav;
 	}
@@ -71,8 +71,8 @@ CommuteCheckService service;
 		if(ipLocation.substring(0, point1).equals("192") && ipLocation.substring(point1 + 1, point2).equals("168")){	
 			int result = service.innserCommute(user);	
 			CommuteCheckVo cc = service.selectCommute(commute);
-			mv.addObject(user);
-			mv.addObject(commute);
+			mv.addObject("user",user);
+			mv.addObject("commute",commute);
 		}
 		mv.setViewName("redirect:commuteCheck.do");
 		return mv;
