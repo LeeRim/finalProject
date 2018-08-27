@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
 <c:import url ="/WEB-INF/views/include/header.jsp"/>
 <!DOCTYPE html>
 
@@ -23,8 +20,9 @@
 <script src="resources/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.kr.min.js"></script>
 
 <link rel="stylesheet" href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
-
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+
+
 
 
 
@@ -51,7 +49,7 @@ padding: 10px 50px;
 .emp_picture{
 display:inline-block;
 width:25%;
-height: 597.5px;
+height: 560px;
 border-right: 1px solid #f4f4f4;
 float:left;
 
@@ -79,15 +77,8 @@ text-align:center;
 margin-left :-19%;
 }
 
-.emp_photo{
-		width:150px;
-		height:150px;
-		
-		}
-
-.file-list{
-
-text-align:center;
+#inputId2{
+width:200px;
 }
 
 #blah{
@@ -95,9 +86,17 @@ text-align:center;
  height: 150px;
 }
 
+
 .pull-right{
 background-color: white !important;
 }
+
+
+.file-list{
+
+text-align:center;
+}
+
 
 
 
@@ -106,11 +105,9 @@ background-color: white !important;
 
 <script type="text/javascript">
 
-
-//유효성 검사
-	var validity = true;
-	var validity1 = true;
-	var validity2 = true;
+var validity = true;
+var validity1 = true;
+var validity2 = true;
 
 //전화번호 입력
 $(function () {
@@ -118,31 +115,40 @@ $(function () {
 })
 
 
+
 function memberJoin(){
-	if (confirm("계속 저장하시겠습니까?") == true){    //확인
-		$("#flag").val("true");
+	if (confirm("저장하시겠습니까?") == true){    //확인
 		$("#joinForm").submit();
+		return true;
 	}else{   //취소
 	}
-	
 }
+
+
+
 function memberJoinNext(){
-	if (confirm("결제 하시겠습니까?") == true){    //확인
-		$("#joinForm").submit();
-		$("#flag").val("false");	
+	if (confirm("결제단계로 넘어 가시겠습니까?") == true){    //확인
+		location.href ="companyPayment.do";
+	
 	}else{   //취소
 	}
 }
+
+
+
 
 
 
 function validate(){
 	
-	
-	
-	$("#eAddress").val($("#eAddress1").val()+"/"+$.trim($("#eAddress2").val()))
+	$("#eAddress").val($("#eAddress1").val()+"/"+$("#eAddress2").val())
+	var eNos = $("#eNoCheck").val();
+	var eIds = $("#idCheck").val();
+	 var ePwds = $("#pwdChek").val();
+	 var ePwds2 = $("#pwdChek2").val();
 
-	if(validity == false || validity1 == false || validity2 == false ){
+	 
+	if(validity == false || validity1 == false || validity2 == false || eNos =="" || eIds =="" || ePwds =="" || ePwds2 ==""){
 		alert("입력 정보를 확인해 주시기 바랍니다.");
 		return false;
 	}else{
@@ -152,23 +158,21 @@ function validate(){
 			$("#phone").focus();
 			return false;
 			
-		}
-		else{
-		alert("수정되었습니다.");
-		return true;
+		}else {
+				
+				return true;
+				
 		}
 	}
-	
 
 	
 }
 	
 $(document).ready(
-	      function() {
+		function() {
 	         var fileTarget = $('.form-group .upload-hidden');
 	         fileTarget.on('change',function() { // 값이 변경되면 
-	        
-	        	 
+
 	         var filenames ="";
 	         var filenames2 ="";
 	            if (window.FileReader) { // modern browser 
@@ -177,7 +181,7 @@ $(document).ready(
 	               var file = $(this)[0].files[i];
 	               filenames += $(this)[0].files[i].name+"&nbsp<i class='fa fa-remove' onclick='photoDelete();'></i><br>";
 	               filenames2 +=$(this)[0].files[i].name;
-	               console.log(filenames);
+	              
 	            }
 	            } else { // old IE
 	               var filename = $(this).val().split('/').pop().split('\\').pop(); // 파일명만 추출
@@ -186,18 +190,18 @@ $(document).ready(
 	            $('.file-list').html(filenames);
 	            $('#file-list2').val(filenames2);
 	            
-
+	           
 	         });
 	         
-	         
+	         //사진 반영
 	         $(function() {
-		        	
-		        	
+	        	
+	        	
 	             $("#imgInp").on('change', function(){
+	            	
 	                 readURL(this);
 	             });
 	         });
-	         
 
 	         function readURL(input) {
 	             if (input.files && input.files[0]) {
@@ -221,11 +225,15 @@ $(document).ready(
 	         
 	         
 	         
+
+	         
+	         
+	         
 	         //사원번호 유효성
 	         $('#eNoCheck').on('input',function(e){
 	        	 
 	 			var eNo = $("#eNoCheck").val();
-	 			var originENo = "${select.eNo}";
+	 			
 	 			
 	 			$.ajax({
 	 			    type      : 'POST',
@@ -248,6 +256,7 @@ $(document).ready(
 							$("#inputNo2").html(html);
 							
 							validity = false;
+							
 	 			    	}
 						
 						else if(eNo.search(/\s/) != -1){
@@ -263,7 +272,7 @@ $(document).ready(
 							
 		 			    	validity = false;
 		 			    	
-						}else if(data>=1 && originENo!=eNo ){
+						}else if(data>=1){
 		 			    	
 		 			    	$('#inputNo').removeClass('has-success');
 		 			    	$('#inputNo').removeClass('has-warning');
@@ -277,15 +286,7 @@ $(document).ready(
 		 			    	
 		 			    	validity = false;
 		 			    	
-						}else if (originENo==eNo){
 		 			    	
-		 			    	$('#inputNo').removeClass('has-error');
-		 			    	$('#inputNo').removeClass('has-warning');
-		 			    	$('#inputNo').removeClass('has-success');
-		 			    	
-		 			    	validity = true;
-		 			    	
-						
 		 			    	}else if (data==0){
 			 			    	
 			 			    	$('#inputNo').removeClass('has-error');
@@ -313,16 +314,17 @@ $(document).ready(
 	 			});
 	         });
 	         
+
+	            
+	            
 	         
-	         
+	       
 	       //아이디 유효성
-		      
+	      
 	         $('#idCheck').on('input',function(e){
 	        	 
 	 			var eId = $("#idCheck").val();
 	 			var check = /^[a-z0-9]{1}[a-z0-9_-]{3,21}$/; 
-	 			var originEId = "${select.eId}";
-	 			
 	 			// 첫글자는 영어 소문자와 숫자만 가능. 영어 소문자, 숫자, 특수기호 - _ 만 사용 가능.  4글자 이상 20자 이하 입력 가능.
 	 			$.ajax({
 	 			    type      : 'POST',
@@ -348,7 +350,6 @@ $(document).ready(
 							validity1 = false;
 							
 	 			    	}
-						
 						else if(eId.search(/\s/) != -1){
 							$('#inputId').removeClass('has-success');
 		 			    	$('#inputId').removeClass('has-warning');
@@ -359,9 +360,9 @@ $(document).ready(
 		 			    	+"<label class='control-label ' style='font-size:12px; color: #dd4b39; margin-top: -10px;' ><i class='fa fa-remove ' >공백은 사용하실 수 없습니다.</i> </label>";
 		 			    	
 		 			    	$("#inputId2").html(html);
-							
-		 			    	validity1 = false;
 		 			    	
+		 			    	validity1 = false;
+							
 						}
 						
 						else if(!check.test(eId)){
@@ -380,7 +381,7 @@ $(document).ready(
 						}
 						
 	 			    	
-						else if(data>=1 && originEId!=eId){
+						else if(data>=1){
 	 			    	
 	 			    	$('#inputId').removeClass('has-success');
 	 			    	$('#inputId').removeClass('has-warning');
@@ -393,18 +394,9 @@ $(document).ready(
 	 			    	$("#inputId2").html(html);
 	 			    	
 	 			    	validity1 = false;
-
+	 			    	
+	 			    	
 	 			    	}
-						else if(originEId==eId){
-		 			    	
-		 			    	$('#inputId').removeClass('has-success');
-		 			    	$('#inputId').removeClass('has-warning');
-		 			    	$('#inputId').removeClass('has-error');
-		 			    	
-		 			    	validity1 = true;
-
-		 			    	}
-						
 	 			    	
 	 			    	else if (data==0){
 	 			    	
@@ -432,10 +424,9 @@ $(document).ready(
 	 			    }
 	 			});
 	         });
-	         
-	         
-	         
-	         //비밀번호 유효성 검사
+	       
+	       
+	       //비밀번호 유효성 검사
 	         $('#pwdChek').on('input',function(e){
 	        	 
 	        	 var ePwd = $("#pwdChek").val();
@@ -458,7 +449,7 @@ $(document).ready(
 						$("#inputpwd2").html(html);
 	        		 
 						validity2 = false;
-	        		 
+						
 	        	 }
 	        	 
 	        	 else if(ePwd.search(/\s/) != -1){
@@ -554,8 +545,9 @@ $(document).ready(
 							var html = $("#inputpwdcf2").html()
 							+"<label class='control-label ' style='font-size:12px; color: #00a65a; margin-top: -10px;' > <i class='fa fa-check' > 사용 가능합니다.</i> </label>";
 							$("#inputpwdcf2").html(html);
-			        	 
+							
 							validity2 = true;
+			        	 
 	        		 
 	        	 }else{
 	        		 	$('#inputpwd').removeClass('has-success');
@@ -570,13 +562,12 @@ $(document).ready(
 	        	 }
 	         
 	         });
-
-
+	         
 	      });
+	     
 	      
-
-	      
-	      
+	       
+	       
 function openAddressPopup(){
 	new daum.Postcode({
         oncomplete: function(data) {
@@ -619,6 +610,8 @@ function openAddressPopup(){
     }).open();
 }
 
+
+//사진 제거
 function photoDelete() {
 	 $('.file-list').empty();
 	 $('#holder').empty();
@@ -631,12 +624,8 @@ function photoDelete() {
 	  
 	 
 	 $('#file-list2').val(null);
-
-
 }
-	      
-	      
-	      
+
 	      
 	      
 </script>
@@ -651,7 +640,7 @@ function photoDelete() {
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        사원정보 관리
+        사원 정보 관리
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -663,41 +652,32 @@ function photoDelete() {
 		<div class="frame">
 		
 		<div class="box box-primary" style="margin-top:50px; width:1300px;">
-		<div class="box-header with-border">
-              <h3 class="box-title">사원정보 수정</h3>
+            <div class="box-header with-border">
+              <h3 class="box-title">사원등록</h3>
             </div>
-		<div style="width:80%; margin: 0 auto;">
+            <div style="width:80%; margin: 0 auto;">
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form" action="insertMember2.do"  onsubmit="return validate();" method="post" enctype="multipart/form-data" id="joinForm">
-            	<input type="hidden" name="flag" id="flag" value=""/>
+            <input type="hidden" name="flag" id="flag" value="true"/>
+            <input type="hidden" name="flag2" id="flag2" value=""/>
             	<div class="emp_picture">
             	<div class="emp_picture2" id="holder">
-            	<c:if test="${ select.ePhoto ne null }">
-            
-            	<img class='emp_photo' src='resources/upload/empPhoto/${select.ePhoto }'>
-            	</c:if>
-				<c:if test="${select.ePhoto eq null }">
-            	 <p class="emp_picture2_1" >사&emsp;진</p>
-            	 </c:if>
+            	 <p class="emp_picture2_1"  id="photoEmpty" >사&emsp;진</p>
             	</div>
             	<div class="emp_picture3">
             	<label for="exampleInputFile">사원 사진</label>
               <div class="form-group">
 						<div class="btn btn-default btn-file">
-							<i class="fa fa-paperclip"></i> Attachment <input   type="file" id="imgInp" name="ePhoto1" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
-																								onchange="fileCheck(this)" />
+							<i class="fa fa-paperclip"></i> Attachment <input   type="file"  id="imgInp" name="ePhoto1" class="upload-hidden" accept="image/gif, image/jpeg, image/png"
+																								onchange="fileCheck(this)"/>
 						</div>
 						
-					<input type="hidden" name="ePhoto2" id="file-list2" value="${select.ePhoto}"/>
+						<input type="hidden" name="ePhoto2" id="file-list2" value="${select.ePhoto}"/>
+					<div class="file-list">
 					
-					<div class="file-list">${select.ePhoto}
-					<c:if test="${ null ne select.ePhoto }">
-					<i class='fa fa-remove' onclick='photoDelete();'></i>
-					</c:if>
 					</div>
                 </div>
-                
                 </div>
             	
             	
@@ -706,53 +686,49 @@ function photoDelete() {
             
             
               <div class="box-body">
-              <input type="hidden" name="eKey" value="${select.eKey}" />
-              <div class="form-group" style="width:200px"  id="inputNo">
+              
+              <div class="form-group" style="width:200px" id="inputNo">
                   <label>사원번호</label>
-                  <input type="text" class="form-control"  name="eNo"  id="eNoCheck"  autocomplete="off"  value="${select.eNo}"  maxlength="20">
+                  <input type="text" class="form-control"  name="eNo"   id="eNoCheck"  autocomplete="off"  maxlength="20">
                 </div>
                 <div id="inputNo2">
                 </div>
                 
-                <div class="form-group" style="width:200px"  id="inputId">
+                <div class="form-group" style="width:200px" id="inputId">
                   <label>아이디</label>
-                  <input type="text" class="form-control"  name="eId" value="${select.eId}"  id="idCheck" autocomplete="off" maxlength="20" >
-                </div>
-                 <div id="inputId2">
+                  <input type="text" class="form-control"  name="eId" id="idCheck" autocomplete="off" maxlength="20" >
+                  </div>
+                  <div id="inputId2">
                 </div>
                 
                <div class="form-group"style="width:200px;">
-                  <label>사원이름</label>
-                  <input type="text" class="form-control" name="eName"  value="${select.eName}">
+                  <label>이름</label>
+                  <input type="text" class="form-control" name="eName" >
                 </div>
                 
                 
                 
-                <div class="form-group"style="width:200px;"id="inputpwd">
+                <div class="form-group"style="width:200px;" id="inputpwd">
                   <label for="inputPassword1">비밀번호</label>
-                  <input type="password" class="form-control" placeholder="Password"  name="ePwd" id="pwdChek" maxlength="16">
+                  <input type="password" class="form-control" id="pwdChek" placeholder="Password"  name="ePwd"  maxlength="16">
                 </div>
-                 <div id="inputpwd2">
+                <div id="inputpwd2">
                 </div>
                 
-                <div class="form-group"style="width:200px;"  id="inputpwdcf">
+                <div class="form-group"style="width:200px;" id="inputpwdcf">
                   <label for="inputPassword2">비밀번호 확인</label>
-                  <input type="password" class="form-control"  placeholder="Password"  id="pwdChek2" maxlength="16">
+                  <input type="password" class="form-control" id="pwdChek2" placeholder="Password" maxlength="16" >
                 </div>
-                 <div id="inputpwdcf2">
+                <div id="inputpwdcf2">
                 </div>
+                
                 
                 <div class="form-group"style="width:200px;">
                 <label>부서</label>
                  
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true"  name="eDepartFk">
                   <c:forEach items="${list2 }" var="e2" >
-                  <c:if test="${ e2.department eq select.department }">
-                  <option selected="selected" value="${e2.eDepartFk}">${e2.department}</option>
-                  </c:if>
-                  <c:if test="${ e2.department ne select.department }">
                   <option value="${e2.eDepartFk}">${e2.department}</option>
-                  </c:if>
                   </c:forEach>
                 </select>
               </div>
@@ -761,12 +737,7 @@ function photoDelete() {
                  
                 <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true" name="eJobcodeFk">
                  <c:forEach items="${list }" var="e" >
-                 <c:if test="${ e.job eq select.job }">
-                  <option selected="selected" value="${e.eJobcodeFk}">${e.job}</option>
-                  </c:if>
-                  <c:if test="${ e.job ne select.job }">
                   <option value="${e.eJobcodeFk}">${e.job}</option>
-                  </c:if>
                   </c:forEach>
                   
                 </select>
@@ -774,27 +745,22 @@ function photoDelete() {
                 
              
            
-                <div>
-              <label>사원주소</label>
+             <div>
+              <label>주소</label>
               <div class="input-group"style="width:400px;">
               
               <input type="hidden" name="eAddress" id="eAddress" />
-              	<c:set var="adrr" value="${fn:split(select.eAddress,'/')}" />
-              				
-                <input type="text" class="form-control" id="eAddress1" 
-                value="<c:forEach var="adrr2" items="${adrr}" varStatus="a"><c:if test="${a.count == 1}">${adrr2}</c:if></c:forEach>"/>
-                
+              
+                <input type="text" class="form-control" id="eAddress1"/>
                     <span class="input-group-btn">
                       <button type="button" class="btn btn-block btn-default" onclick="openAddressPopup();">주소찾기</button>
                     </span>
                     </div>
                     <div class="input-group" style="width:300px; margin-bottom:15px;">
-                   
-                  <input type="text" class="form-control"id="eAddress2" 
-                 value="<c:forEach var="adrr2" items="${adrr}" varStatus="a"><c:if test="${a.count == 2}">${adrr2}</c:if></c:forEach> "/>
-               </div>
-
+                  <input type="text" class="form-control"id="eAddress2"/>
                   </div>
+                  </div>
+                  
                 <div class="form-group" style="width:250px;">
                 <label>내선번호</label>
 
@@ -803,8 +769,9 @@ function photoDelete() {
                     <i class="fa fa-phone"></i>
                   </div>
                   
-                  <input type="text" class="form-control"  name="eExten"  data-inputmask='"mask": "999-9999-9999"'  value="${select.eExten}"  data-mask>
-
+                  <input type="text" class="form-control"  name="eExten"  data-inputmask='"mask": "999-9999-9999"' data-mask>
+<!--                   <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 9999-9999&quot;" data-mask="" name="eExten"  value="11">
+ -->                  
                 </div>
                 <!-- /.input group -->
               </div>
@@ -815,8 +782,10 @@ function photoDelete() {
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="text" class="form-control"  id="phone" name="ePhone"  data-inputmask='"mask": "999-9999-9999"'  value="${select.ePhone}"  data-mask>
-                  
+                  <input type="text" class="form-control"  name="ePhone"  data-inputmask='"mask": "999-9999-9999"' data-mask>
+                   <!-- <input type="text" class="form-control"data-inputmask="'mask': ['999-999-9999', '+099 99 99 9999[9]-9999']" data-mask> -->
+<!--                   <input type="text" class="form-control" data-inputmask="'phone': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="phone" name="ePhone" >
+ -->                  
                 </div>
                 <!-- /.input group -->
               </div>
@@ -824,7 +793,7 @@ function photoDelete() {
                   <label for="exampleInputEmail1">이메일 주소</label>
               <div class="input-group" style="margin-bottom:15px;">
                   <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="eEmail"  value="${select.eEmail}">
+                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="eEmail" >
                 </div>
 
                 
@@ -835,7 +804,7 @@ function photoDelete() {
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker" name="eBirth1" value="${select.eBirth}" readonly>
+                  <input type="text" class="form-control pull-right" id="datepicker" name="eBirth1"  readonly>
                   
                 </div>
                 <!-- /.input group -->
@@ -848,21 +817,11 @@ function photoDelete() {
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-                  <input type="text" class="form-control pull-right" id="datepicker2" name="eHireDate1" value="${select.eHireDate}" readonly>
+                  <input type="text" class="form-control pull-right" id="datepicker2" name="eHireDate1"  readonly>
                 </div>
                 <!-- /.input group -->
               </div>
-              <div class="form-group" style="width:250px;">
-                <label>퇴사일</label>
-
-                <div class="input-group date">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control pull-right"  readonly>
-                </div>
-                <!-- /.input group -->
-              </div>
+              
               
                   
               
@@ -872,10 +831,11 @@ function photoDelete() {
               
               
               <!-- /.box-body -->
-
+			
               <div class="box-footer" style="text-align:center;">
-                <span class="btn btn-primary" id="joinBtn" onclick="memberJoin();" >등록하기</span>
-                <span class="btn btn-primary" id="joinBtn" onclick="memberJoinNext();" >결제하기</span>
+                  <span class="btn btn-primary" id="joinBtn" onclick="memberJoin();" >등록하기</span>
+   				<span class="btn btn-primary" id="joinBtn" onclick="memberJoinNext();" >결제하기</span>
+                
               </div>
             </form>
           </div>
@@ -901,15 +861,19 @@ function fileCheck(obj) {
     pathpoint = obj.value.lastIndexOf('.');
     filepoint = obj.value.substring(pathpoint+1,obj.length);
     filetype = filepoint.toLowerCase();
+    
+    
+    
+    
+    
     if(filetype=='jpg' || filetype=='gif' || filetype=='png' || filetype=='jpeg' || filetype=='bmp') {
 
         // 정상적인 이미지 확장자 파일일 경우 ...
 
-    } else if(filetype!='jpg' || filetype!='gif' || filetype!='png' || filetype!='jpeg' || filetype!='bmp') {
-      
-    	 parentObj  = obj.parentNode
-         node = parentObj.replaceChild(obj.cloneNode(true),obj);
-    	 
+    } else {
+        parentObj  = obj.parentNode
+        node = parentObj.replaceChild(obj.cloneNode(true),obj);
+
         return false;
     }
     if(filetype=='bmp') {
@@ -947,14 +911,13 @@ $('#datepicker2').datepicker({
 
 
 
+
+
 </script>
 
 
 
 
 <c:import url="include/footer.jsp"/>
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
 </body>
 </html>

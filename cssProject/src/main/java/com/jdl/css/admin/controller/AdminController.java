@@ -3,6 +3,7 @@ package com.jdl.css.admin.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,9 @@ public class AdminController {
 	AdminService service;
 	
 	@RequestMapping("companyPayment.do")
-	public ModelAndView companyPayment(ModelAndView mv,@RequestParam("cKeyFk") int cKeyFk){
-		System.out.println(cKeyFk);
+	public ModelAndView companyPayment(ModelAndView mv,HttpSession session){
+		EmployeeVo user=(EmployeeVo)session.getAttribute("user");
+		int cKeyFk =user.getcKeyFk();
 		CompanyVo company = service.selectComapnyPayment(cKeyFk);
 		mv.addObject("company",company);
 		mv.setViewName("admin/companyPayment");
