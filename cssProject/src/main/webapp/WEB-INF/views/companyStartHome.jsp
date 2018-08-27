@@ -118,14 +118,26 @@ $(function () {
 })
 
 
-function memberUpdate(){
+function memberJoin(){
+	if (confirm("계속 저장하시겠습니까?") == true){    //확인
+		$("#flag").val("true");
+		$("#joinForm").submit();
+	}else{   //취소
+	}
 	
-	
+}
+function memberJoinNext(){
+	if (confirm("결제 하시겠습니까?") == true){    //확인
+		$("#joinForm").submit();
+		$("#flag").val("false");	
+	}else{   //취소
+	}
 }
 
 
 
 function validate(){
+	
 	
 	
 	$("#eAddress").val($("#eAddress1").val()+"/"+$.trim($("#eAddress2").val()))
@@ -632,7 +644,7 @@ function photoDelete() {
 
 <div class="wrapper">
 	
-	<c:import url="../include/left_column.jsp"/>
+	<c:import url="include/left_column.jsp"/>
   
   
 
@@ -940,7 +952,7 @@ $('#datepicker2').datepicker({
 
 
 
-<c:import url="../include/footer.jsp"/>
+<c:import url="include/footer.jsp"/>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
