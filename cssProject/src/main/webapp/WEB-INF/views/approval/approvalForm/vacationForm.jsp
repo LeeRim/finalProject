@@ -153,9 +153,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 	 <div class="wrapper" >
+
 		<c:import url="/WEB-INF/views/approval/approval_menu.jsp" />
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper" style="background:white; height:1100px;">
+
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>전자결재 <small>연차신청서</small></h1>
@@ -335,6 +337,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		</div>
 		<!-- /.content-wrapper -->
  	 </div> 
+
 
 
 	<c:import url="../selectApproverPage.jsp"/>

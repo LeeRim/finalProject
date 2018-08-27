@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		width:150px;
 	}
 
-</style>
+</style> 
 
 <script type="text/javascript">
 	function openSelectApprover() {
@@ -124,6 +124,7 @@ desired effect
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper" style="background:white; height:1100px;">
+
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
