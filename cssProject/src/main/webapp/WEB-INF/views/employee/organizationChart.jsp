@@ -90,8 +90,7 @@
 .employee_list_tab {
 	border-bottom: 1px #BDBDBD solid;
 	border-right: 1px #BDBDBD solid;
-	padding: 3px 0 0 7px;
-	"
+	
 }
 
 .employee_list_emp {
