@@ -133,6 +133,10 @@ td {
             z-index:99999;
             border-radius: 3px;
             
+         border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius:   20px;
         }
         .window_title{
         display:block;
@@ -143,8 +147,8 @@ td {
         padding:5px;
        background: #E6E6E6;
         color:#585858;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
+		border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
         }
         
         .window_info{
@@ -655,22 +659,21 @@ td {
 						</div>
 						<div class="org_map2">
 
-						<div class="button-group">
+
 							<button type="button" class="btn btn-primary margin"
 								id="getCheckedAll">사원검색</button>
-								<button type="button" class="btn btn-primary margin"
-								id="allListView">전체검색</button>
 							<button type="button" class="btn btn-df margin" id="checkAll">전체선택</button>
 							<button type="button" class="btn btn-df margin"
 								id="uncheckAll">전체해제</button>
 								
 							<div id="sidetreecontrol">
+							<button type="button" class="btn btn-primary margin"
+								id="allListView">전체검색</button>
 								<a href="?#"><button type="button"
 										class="btn btn-df margin">전체닫기</button></a> <a href="?#"><button
 										type="button" class="btn btn-df margin">전체열기</button></a>
 							</div>
 							
-						</div>
 						</div>
 					</div>
 
@@ -680,7 +683,7 @@ td {
 							<tbody>
 								<tr height="24" style="text-align:center; background: #F2F2F2;">
 									<td class="employee_list_tab">No</td>
-									<td class="employee_list_tab">아이디</td>
+									<td class="employee_list_tab" style="width:130px;">아이디</td>
 									<td class="employee_list_tab">부서</td>
 									<td class="employee_list_tab">직급</td>
 									<td class="employee_list_tab">이름</td>

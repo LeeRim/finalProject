@@ -129,6 +129,13 @@ function validate(){
 	var eIds = $("#idCheck").val();
 	 var ePwds = $("#pwdChek").val();
 	 var ePwds2 = $("#pwdChek2").val();
+	 
+	 
+	 var exten= $("#exten").val().replace("_","");
+		exten= exten.replace(/-/gi,"");
+		exten= exten.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
+		$("#exten1").val(exten)
+	 
 
 	 
 	if(validity == false || validity1 == false || validity2 == false || eNos =="" || eIds =="" || ePwds =="" || ePwds2 ==""){
@@ -136,7 +143,14 @@ function validate(){
 		return false;
 	}else{
 		
-		if($("#phone").val().indexOf("_") >=0){
+		if(exten.indexOf("_") >=0){
+			alert("내선번호 입력 정보를 확인해 주시기 바랍니다.");
+			$("#exten").focus();
+			return false;
+		}
+	
+	
+		else if($("#phone").val().indexOf("_") >=0){
 			alert("휴대폰 입력 정보를 확인해 주시기 바랍니다.");
 			$("#phone").focus();
 			return false;
@@ -749,10 +763,9 @@ function photoDelete() {
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  
-                  <input type="text" class="form-control"  name="eExten"  data-inputmask='"mask": "999-9999-9999"' data-mask>
-<!--                   <input type="text" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 9999-9999&quot;" data-mask="" name="eExten"  value="11">
- -->                  
+                  <input type="hidden" name="eExten" id="exten1" />
+                  <input type="text" class="form-control"  id="exten" data-inputmask='"mask": "999-9999-9999"' data-mask>
+
                 </div>
                 <!-- /.input group -->
               </div>

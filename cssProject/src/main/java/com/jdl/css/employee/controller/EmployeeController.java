@@ -501,12 +501,12 @@ public class EmployeeController {
 			
 		      
 		      
-		      //사원타입이 1일때 관리자 조직도, 2일때 사원조직도
+		      //사원타입이 1일때 관리자 조직도, 2일때 사원인덱스
 		      String redirect ="";
 		      if(employee.geteType().equals("1")){
-		    	  redirect= "redirect:myPageUpdate.do";
+		    	  redirect= "redirect:adminOrganizationChart.do";
 		      }else if(employee.geteType().equals("2")){
-		    	  redirect= "redirect:myPageUpdate.do";
+		    	  redirect= "redirect:employeeIndex.do";
 		      }
 		      
 			

@@ -121,7 +121,14 @@ $(function () {
 function memberUpdate(){
 	
 	
+	
+	
+	
 }
+
+
+
+
 
 
 
@@ -129,13 +136,34 @@ function validate(){
 	
 	
 	$("#eAddress").val($("#eAddress1").val()+"/"+$.trim($("#eAddress2").val()))
+	
+	var eNos = $("#eNoCheck").val();
+	var eIds = $("#idCheck").val();
+	 var ePwds = $("#pwdChek").val();
+	 var ePwds2 = $("#pwdChek2").val();
 
-	if(validity == false || validity1 == false || validity2 == false ){
+		
+		var exten= $("#exten").val().replace("_","");
+		exten= exten.replace(/-/gi,"");
+		exten= exten.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3");
+		$("#exten1").val(exten)
+	
+
+	if(validity == false || validity1 == false || validity2 == false  || eNos =="" || eIds ==""){
 		alert("입력 정보를 확인해 주시기 바랍니다.");
 		return false;
 	}else{
 		
-		if($("#phone").val().indexOf("_") >=0){
+		
+		
+			if(exten.indexOf("_") >=0){
+				alert("내선번호 입력 정보를 확인해 주시기 바랍니다.");
+				$("#exten").focus();
+				return false;
+			}
+		
+		
+			else if($("#phone").val().indexOf("_") >=0){
 			alert("휴대폰 입력 정보를 확인해 주시기 바랍니다.");
 			$("#phone").focus();
 			return false;
@@ -153,6 +181,8 @@ function validate(){
 	
 $(document).ready(
 	      function() {
+	    	  
+	    	  
 	         var fileTarget = $('.form-group .upload-hidden');
 	         fileTarget.on('change',function() { // 값이 변경되면 
 	        
@@ -789,9 +819,9 @@ function photoDelete() {
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  
-                  <input type="text" class="form-control"  name="eExten"  data-inputmask='"mask": "999-9999-9999"'  value="${select.eExten}"  data-mask>
-
+                  <input type="hidden" name="eExten" id="exten1" value="${select.eExten}"/>
+                  <input type="text" class="form-control"  id="exten"  data-inputmask='"mask": "999-9999-9999"'  value="${select.eExten}"  data-mask>
+				
                 </div>
                 <!-- /.input group -->
               </div>
