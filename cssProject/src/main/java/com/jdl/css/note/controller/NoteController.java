@@ -58,6 +58,7 @@ public class NoteController {
 			note.setSnAttachYn("N");
 		}
 		int resultSend = service.insertNote(note);
+		
 		List<AttachmentVo> attachList = new ArrayList<AttachmentVo>();
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");

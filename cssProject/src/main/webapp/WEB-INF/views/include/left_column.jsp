@@ -65,6 +65,7 @@
         <li><a href="memberAdd.do"><i class="fa fa-link"></i> <span>사원 등록</span></a></li>
         <li><a href="department.do"><i class="fa fa-link"></i> <span>부서 관리</span></a></li>
         <li><a href="givevacation.do"><i class="fa fa-link"></i> <span>연차 등록</span></a></li>
+        <li><a href="givevacation.do"><i class="fa  fa-plane"></i> <span>휴가</span></a></li>
         </c:if>
         <li class="treeview">
             <span class="pull-right-container">

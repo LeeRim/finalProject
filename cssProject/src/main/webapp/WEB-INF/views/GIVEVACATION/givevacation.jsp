@@ -39,7 +39,7 @@ function subV(){
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-   <c:import url="/WEB-INF/views/include/left_column_companyAdmin.jsp"/>
+   <c:import url="/WEB-INF/views/include/left_column.jsp"/>
 	<div class="content-wrapper">
 	<section class="content-header">
       <h1>
