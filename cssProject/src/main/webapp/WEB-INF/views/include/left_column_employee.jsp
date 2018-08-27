@@ -36,6 +36,7 @@
         <li><a href="receiveNoteList.do"><i class="fa fa-envelope-o"></i> <span>쪽지</span></a></li>
         <li><a href="borderIndex.do"><i class="fa fa-bullhorn"></i> <span>커뮤니티</span></a></li>
         
+        
       </ul>
       <!-- /.sidebar-menu -->
     </section>
