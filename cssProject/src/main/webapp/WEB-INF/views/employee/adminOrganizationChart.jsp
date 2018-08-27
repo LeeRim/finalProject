@@ -617,6 +617,10 @@ td {
 											</c:if>
 										</c:if>
 									</c:forEach>
+									<c:set var="doneLoop" value="false"/>
+										<c:forEach  items="${list }" var="e6" varStatus="status">
+										 <c:if test="${not doneLoop}">
+										 <c:if test="${e6.eEntYn.toString() eq 'Y'}">
 													<li><label> <input type="checkbox"
 													name="checkDpt"
 													onclick="chkSubCheckbox(999, this)"> <strong><b style="color:black;">퇴사자</b></strong>
@@ -632,6 +636,12 @@ td {
 															
 									</c:forEach>
 									</li>
+										   <c:if test="${e6.eEntYn.toString() eq 'Y'}">
+										     <c:set var="doneLoop" value="true"/>			
+									 </c:if>
+										 </c:if>
+										 </c:if>
+										</c:forEach>
 									
 							
 								</ul>
