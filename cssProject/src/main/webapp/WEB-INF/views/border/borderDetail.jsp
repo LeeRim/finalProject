@@ -61,6 +61,9 @@
   		margin-left:auto;
   		margin-right:auto;
   	}
+  	.rpyText{
+  		width:80%;
+  	}
 </style>
 	<script type="text/javascript">
 	$(function() {
@@ -83,16 +86,16 @@
 			location.href="deleteBoard.do?boardKey=${board.boardKey}" + "&bCateGory=${board.bCateGory}"
 		}
 	}
-	function updateCommentForm(obj, flag){
-		var bcot = $("#bcot").text().trim();
-		console.log(bcot);
+	function updateCommentForm(obj, flag, index){
+		var bcot = $("#bcot" + index).text().trim(); 
+		var bcotSpan = $("#bcot" + index);
 		
+		$("#replyUpdate" + index).val(bcot);
+		$("#bcot" + index).css("display", "none");
+		$("#replyUpdate" + index).css("display", "block");
+		/* $(replyUpdate).val(bcotSpan.html()); */
 		
-		$("#bcot").html("<input type='text' id='replyUpdate'/>");
-		$("#replyUpdate").val(bcot);
-		
-		
-		var $textArea = $(".form-control");
+		var $textArea = 	$("#replyUpdate" + index);
 		$textArea.prop("readonly", !flag);
 		if(flag){
 			$(obj).hide();
@@ -100,6 +103,9 @@
 			$(obj).siblings(".updateBtn").show();
 			$(obj).siblings(".cancelBtn").show();
 		}else{
+			$("#replyUpdate" + index).css("display", "none");
+			$("#bcot" + index).css("display", "block");
+			
 			$(obj).siblings(".modifyBtn").show();
 			$(obj).siblings(".deleteBtn").show();
 			$(obj).siblings(".updateBtn").hide();
@@ -107,9 +113,10 @@
 		}
 	}
 	
-	function updateComment(obj, cno){
+	function updateComment(obj, cno, index){
 		//댓글 작성 -> 댓글 번호, 댓글 내용
-		var commentValue =  $("#replyUpdate").val();
+		var replyUpdate = "#replyUpdate" + index;
+		var commentValue =  $(replyUpdate).val();
 		var cno = cno;
 		//console.log("updateComment.do?cno=" + cno + "&content=" + commentValue);
 		location.href
@@ -180,7 +187,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer box-comments">
-            <c:forEach items="${bList}" var="b">
+            <c:forEach items="${bList}" var="b" varStatus="status">
             <!-- 이부분 반복 -->
               <div class="box-comment">
                 <!-- User image -->
@@ -191,15 +198,16 @@
                         ${b.user.eName}
                         <span class="text-muted pull-right">${b.cDate}</span>
                         	<span class="text-muted pull-right">
-                        		<button type="button" onclick="updateCommentForm(this, true);" class="btn btn-default btn-xs modifyBtn""><i class="fa fa-share"></i> 수정</button>
+                        		<button type="button" onclick="updateCommentForm(this, true, ${status.index });" class="btn btn-default btn-xs modifyBtn""><i class="fa fa-share"></i> 수정</button>
               					<button type="button" onclick="deleteComment(${b.commentKey});" class="btn btn-default btn-xs deleteBtn"><i class="fa fa-remove"></i> 삭제</button>
-              					<button type="button" class="btn btn-default btn-xs updateBtn" style="display:none;" onclick="updateComment(this,${b.commentKey});"><i class="fa fa-share"></i>작성 완료</button>
-								<button type="button" class="btn btn-default btn-xs cancelBtn" style="display:none;" onclick="updateCommentForm(this, false);"><i class="fa fa-share"></i>취소</button>
+              					<button type="button" class="btn btn-default btn-xs updateBtn" style="display:none;" onclick="updateComment(this,${b.commentKey}, ${status.index } );"><i class="fa fa-share"></i>작성 완료</button>
+								<button type="button" class="btn btn-default btn-xs cancelBtn" style="display:none;" onclick="updateCommentForm(this, false,  ${status.index });"><i class="fa fa-share"></i>취소</button>
               				</span>
                       </span><!-- /.username -->
-                  <span id="bcot">
+                  <span id="bcot${status.index }">
                   	<c:out value="${b.cContent}"/>
                   </span>
+                 	<input type="text"  class="rpyText" id="replyUpdate${status.index }" value="<c:out value='${b.cContent }'/>" style="display:none;"/>
                 </div>
                 <!-- /.comment-text -->
               </div>
@@ -216,7 +224,7 @@
                 <div class="img-push">
                   <input type="text" name="cContent" class="form-control input-sm" placeholder="댓글 작성후 Enter시 등록됩니다.">
                   <input type="hidden" name="boardKey" value='<c:out value="${board.boardKey}"/>'>
-				  <input type="hidden" name="cWriter"	value="${user.eKey }"/>
+				  <input type="hidden" name="cWriter"	value="${user.eKey }"  />
                 </div>
               </form>
             </div>
