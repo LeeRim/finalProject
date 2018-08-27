@@ -78,6 +78,12 @@ function hideThead(){
 		});
 	});
 </script>
+
+<style type="text/css">
+td{
+cursor:pointer;
+}
+</style>
 </head>
 <!--
 BODY TAG OPTIONS:
