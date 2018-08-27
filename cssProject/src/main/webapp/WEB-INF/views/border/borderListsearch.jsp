@@ -139,9 +139,21 @@ $(function(){
 	<div class="content-wrapper">
 	 <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Data Tables
-        <small>advanced tables</small>
+     <h1>
+        게시판
+        <small>
+        <c:choose>
+	 			<c:when test="${map.bCateGory eq 1}">
+	 				<h3 class="box-title">공지사항</h3>
+	 			</c:when>
+	 			<c:when test="${map.bCateGory eq 2}">
+	 				<h3 class="box-title">자유 게시판</h3>
+	 			</c:when>
+	 			<c:when test="${map.bCateGory eq 3}">
+	 				<h3 class="box-title">경조사</h3>
+	 			</c:when>
+	 		</c:choose>
+        </small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -154,17 +166,6 @@ $(function(){
         <div class="col-xs-12">
           <div class="box" style="margin-top:20px;width:100%;">
             <div class="box-header">
-            <c:choose>
-	 			<c:when test="${bCateGory eq 1}">
-	 				<h3 class="box-title">공지사항</h3>
-	 			</c:when>
-	 			<c:when test="${bCateGory eq 2}">
-	 				<h3 class="box-title">자유 게시판</h3>
-	 			</c:when>
-	 			<c:when test="${bCateGory eq 3}">
-	 				<h3 class="box-title">경조사</h3>
-	 			</c:when>
-	 		</c:choose>
 			</div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">
