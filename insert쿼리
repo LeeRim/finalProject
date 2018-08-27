@@ -1,4 +1,5 @@
-INSERT INTO "CSS"."COMPANY" (C_KEY, C_NAME, C_OWNER) VALUES ('1', 'KH', '장대리')
+--COMPANY INSERT
+Insert into CSS.COMPANY (C_KEY,C_NAME,C_OWNER,C_ADDRESS,C_LOGO,C_SIGN,C_QRCODE,C_MILEAGE,C_CLOSEDAY,C_LEVEL,COORD_KEY_FK) values (1,'CSS','장건희','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)','20180828020232cssLogo.png',null,null,'42000',to_date('19/03/02','RR/MM/DD'),1,null);
 
 
 
@@ -10,21 +11,22 @@ Insert into CSS.DIVISION values (3,1,3,'지출결의서',NULL);
 Insert into CSS.DIVISION values (4,1,3,'품의서',NULL);
 Insert into CSS.DIVISION values (5,1,3,'휴가계',NULL);
 
-Insert into CSS.DIVISION values (6,1,1,'현장서비스팀',NULL);
-Insert into CSS.DIVISION values (7,1,1,'인프라운영팀',NULL);
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (10,1,1,'개발팀',null);
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (11,1,1,'기획부',null);
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (12,1,1,'디자인팀',null);
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (13,1,1,'영업1부',null);
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (14,1,1,'영업2부',null);
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (15,1,1,'인사부',null);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (6,1,1,'총리부',null);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (16,1,1,'경영지원팀',null);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (17,1,1,'인사팀',null);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (18,1,1,'고객만족팀',null);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (19,1,1,'영업1팀',null);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (7,1,1,'인프라운영팀',null);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (8,1,1,'현장서비스팀',null);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (9,1,2,'대표이사',1);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (10,1,2,'부장',2);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (11,1,2,'차장',3);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (12,1,2,'과장',4);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (13,1,2,'대리',5);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (14,1,2,'주임',6);
+Insert into DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (15,1,2,'사원',7);
 
-Insert into CSS.DIVISION values (8,1,2,'대리',2);
-Insert into CSS.DIVISION values (9,1,2,'과장',1);
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (19,1,2,'사원',6);
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (16,1,2,'대표이사',1);
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (17,1,2,'부장',2);
-Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (18,1,2,'차장',3);
+
 
 --calender insert
 insert into calender values(SEQ_CALENDER.NEXTVAL,1,'임원진점심회동',to_date('2018-08-20','yyyy-mm-dd'),to_date('2018-08-20','yyyy-mm-dd'),2,1,'#00a65a');
@@ -36,10 +38,24 @@ insert into calender values(SEQ_CALENDER.NEXTVAL,1,'장대리휴가',to_date('20
 
 
 -- EMPLOYEE INSERT
-Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (1,'사번',1,'2','admin','admin','관리자',8,6,null,null,null,null,null,null,'N',null);
-Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (2,'사번',1,'2','user01','user01','테스터1',9,7,null,null,null,null,null,null,'N',null);
-Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (3,'사번',1,'2','user02','user02','테스터2',8,6,null,null,null,null,null,null,'N',null);
-Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (4,'사번',1,'2','user03','user03','테스터3',8,6,null,null,null,null,null,null,'N',null);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (1,'css00',1,'1','admin01','1234','장건희',9,6,'경기 성남시 분당구 용인서울고속도로 88 (대장동, 판교터널 관리사무소)/판교 터미널 휴게소 102호','_02-5784-8787','011-1241-5345','test@test.com',to_date('95/07/27','RR/MM/DD'),to_date('15/07/20','RR/MM/DD'),null,'N','test2.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (2,'css01',1,'2','user01','1234','이유림',10,18,'경기 성남시 분당구 용인서울고속도로 88 (대장동, 판교터널 관리사무소)/판교 터미널 휴게소 102호','_02-5784-8787','011-1241-5345','yurim@css.com',to_date('95/07/27','RR/MM/DD'),to_date('15/07/20','RR/MM/DD'),null,'N','test3.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (3,'css02',1,'2','user02','1234','이원준',15,7,'광주 남구 제중로 11 (양림동, 양림1단지휴먼시아)/','022-1245-4554','010-1505-0500','won@css.com',to_date('95/07/11','RR/MM/DD'),to_date('17/07/19','RR/MM/DD'),null,'N','test2.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (5,'css03',1,'2','user03','1234','김기영',11,16,'서울 강남구 도곡동 448-2/도곡 아파트 102동 404호','032-5454-5454','010-2415-4564','kim@css.com',to_date('80/02/20','RR/MM/DD'),to_date('02/11/20','RR/MM/DD'),null,'N','test4.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (6,'css04',1,'2','user04','1234','전유민',13,7,'인천 강화군 강화읍 갑룡길 3 (관청리)/갑룡 아파트 102동 303호','032-5745-7848','010-1546-5406','you@css.com',to_date('93/06/27','RR/MM/DD'),to_date('12/10/30','RR/MM/DD'),null,'N','test1.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (7,'css05',1,'2','user05','1234','안보람',14,8,'인천 강화군 강화읍 갑룡길 3 (관청리)/갑룡아파트 102동 999호','022-2454-6545','010-1514-5454','222@css.com',to_date('93/07/21','RR/MM/DD'),to_date('16/07/18','RR/MM/DD'),null,'N','test5.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (8,'css06',1,'2','user06','1234','최승원',13,17,'서울 강남구 개포동 1163-8/개포 아파트 202동 904호','022-1245-6416','010-1545-4545','cc@css.com',to_date('92/08/28','RR/MM/DD'),to_date('13/09/17','RR/MM/DD'),null,'N','test6.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (9,'css07',1,'2','user07','1234','박경호',12,6,'서울 관악구 당곡길 5 (봉천동)/봉천 아파트 404호','023-2456-4655','010-1504-5045','test@css.com',to_date('75/08/28','RR/MM/DD'),to_date('95/11/15','RR/MM/DD'),null,'N','test7.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (10,'css8',1,'2','user08','1234','고재준',13,16,'서울 도봉구 덕릉로 212 (창동)/덕릉 아파트','032-5454-6545','010-1551-5151','go@css.com',to_date('88/08/28','RR/MM/DD'),to_date('08/10/14','RR/MM/DD'),null,'N','test8.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (11,'css09',1,'2','user09','1234','하성미',14,7,'충북 청주시 상당구 가덕면 가덕시동길 10 (시동리)/청주 시골아파트 202동','020-4154-0505','010-4564-5464','test@css.com',to_date('95/08/28','RR/MM/DD'),to_date('14/10/21','RR/MM/DD'),null,'N','test9.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (12,'css10',1,'2','user10','1234','최원',13,17,'서울 관악구 약수암길 1-1 (신림동)/매운탕','023-0231-3201','010-1201-2013','test@test.com',to_date('90/08/28','RR/MM/DD'),to_date('11/11/22','RR/MM/DD'),null,'N','test10.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (13,'css11',1,'2','user11','1234','나신의',14,7,'경기 의왕시 오전동 324-5/전주는 전주비빔밥','032-4564-6546','010-1504-5454','test@test.com',to_date('95/08/28','RR/MM/DD'),to_date('10/11/24','RR/MM/DD'),null,'N','test11.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (14,'css12',1,'2','user12','1234','최태영',13,18,'서울 강남구 남부순환로 2907 (대치동, 대치지구대)/지구대 202호 유치장','020-1213-2056','010-1545-6464','test@css.com',to_date('82/08/28','RR/MM/DD'),to_date('10/10/19','RR/MM/DD'),null,'N','test12.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (15,'css13',1,'2','user13','1234','연제각',12,19,'서울 관악구 양녕로 5 (봉천동)/양녕은 양념치킨 101동','012-0456-0465','010-1545-6465','test@css.com',to_date('91/08/29','RR/MM/DD'),to_date('09/10/20','RR/MM/DD'),null,'N','test13.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (16,'css14',1,'2','user14','1234','최범석',12,6,'서울 강북구 삼양로 90 (미아동, 연경어린이집)/어린이집 복도 102호','034-5046-5046','010-1041-5454','test@css.com',to_date('99/08/29','RR/MM/DD'),to_date('18/03/21','RR/MM/DD'),null,'N','test14.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (17,'css15',1,'2','user15','1234','유지상',14,19,'서울 강동구 아리수로 46 (암사동)/아리수는 안심하고 먹어요','021-2304-5604','010-1546-544_','test@test.com',to_date('95/08/29','RR/MM/DD'),to_date('10/06/24','RR/MM/DD'),null,'N','test15.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (18,'css16',1,'2','user16','1234','김가영',14,7,'서울 관악구 약수암길 1-1 (신림동)/약수는 몸에좋은 202동','020-1205-0456','010-1154-6456','test@css.com',to_date('01/08/28','RR/MM/DD'),to_date('15/11/18','RR/MM/DD'),null,'N','test1.jpg',null,1);
+Insert into EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_BIRTH,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO,E_INSTEAD,E_STATE) values (19,'css17',1,'2','user17','1234','전윤석',14,18,'서울 강남구 양재대로 333 (개포동)/개포동 아파트 101동 904호','010-0465-4564','010-4848-4784','test@test.com',to_date('90/08/29','RR/MM/DD'),to_date('10/06/08','RR/MM/DD'),null,'N','test2.jpg',null,1);
 
 
 --COMMUTE INSERT
@@ -445,3 +461,8 @@ INSERT INTO COORDINATE
 VALUES(161,'영양군','36.6666560','129.1124010');
 INSERT INTO COORDINATE
 VALUES(162,'울릉군','37.4844170','130.9058000');
+
+--PAYMENT INSERT
+Insert into PAYMENT (PAY_KEY,C_KEY_FK,PAY_MILEAGE,PAY_DATE,PAY_VOUCHER) values (1,1,'42000',to_date('18/08/28','RR/MM/DD'),6);
+
+COMMIT;
