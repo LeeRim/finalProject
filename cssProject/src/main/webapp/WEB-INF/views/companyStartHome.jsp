@@ -153,16 +153,16 @@ function validate(){
 		return false;
 	}else{
 		
-		if($("#phone").val().indexOf("_") >=0){
-			alert("휴대폰 입력 정보를 확인해 주시기 바랍니다.");
-			$("#phone").focus();
-			return false;
+// 		if($("#phone").val().indexOf("_") >=0){
+// 			alert("휴대폰 입력 정보를 확인해 주시기 바랍니다.");
+// 			$("#phone").focus();
+// 			return false;
 			
-		}else {
+// 		}else {
 				
 				return true;
 				
-		}
+// 		}
 	}
 
 	
