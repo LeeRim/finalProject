@@ -200,7 +200,7 @@ $(function(){
                 </tr>
                 <c:if test="${list.size() == 0}">
     	            <tr>
-                		<td colspan="5" id="nullList">조회 된 게시글이 없습니다.</td>
+                		<td colspan="5" id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
  	               </tr>
                 </c:if>
                 <c:if test="${list.size() != 0}">

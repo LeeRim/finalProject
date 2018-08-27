@@ -220,7 +220,7 @@
 
 	<!-- 조직도 select 사원 리스트 출력 쿼리문 -->
 
-	<select id="selectEmployeeLis" resultMap="EmployeeMap"
+	<select id="selectEmployeeList2" resultMap="EmployeeMap"
 		parameterType="int">
 		SELECT E.E_KEY E_KEY,
 		E.E_NO E_NO,
