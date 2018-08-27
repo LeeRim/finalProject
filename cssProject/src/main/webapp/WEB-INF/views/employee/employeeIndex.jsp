@@ -246,7 +246,7 @@
            <div class="col-md-3">
            <div class="box box-default" style="height:150px; text-align:center;">
                <div class="box-header with-border">
-                 <h3 class="box-title" style="padding:10px;"> <c:out value="${ipLocation}"></c:out> </h3>
+                 <h3 class="box-title" style="padding:10px;"><c:out value="${ipLocation}"></c:out> </h3>
                
                  <!-- /.box-tools -->
                </div>

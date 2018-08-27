@@ -717,8 +717,12 @@ public class EmployeeController {
 	}
 
 	@RequestMapping("adminIndex.do")
-	public ModelAndView adminIndex(ModelAndView mav, HttpSession session) {
+	public ModelAndView adminIndex(ModelAndView mav, HttpSession session)throws ServletException, IOException {
 		
+		InetAddress addr = null;
+		addr = InetAddress.getLocalHost();
+		String ipLocation = addr.getHostAddress();
+		mav.addObject("ipLocation",ipLocation);
 		List<BorderVo> board1 = borderservice.selectBoardOneEmp(); // 공지사항
 		mav.addObject("board1", board1);
 		
