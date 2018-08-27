@@ -134,7 +134,7 @@
       
        <div class="row" style="margin-left:auto; margin-right:auto; ">
     	<!-- DONUT CHART -->
-          <div class="box box-danger" style="margin-left:15px;">
+          <div class="box box-danger" style="margin-left:15px; width:67.5%;">
             <div class="box-header with-border">
               <h3 class="box-title">레벨 별 월 매출액</h3>
 
@@ -144,7 +144,7 @@
               </div>
             </div>
             <div class="box-body chart-responsive">
-              <div id="level_chart_div"></div>
+              <div id="level_chart_div" ></div>
             </div>
             <!-- /.box-body -->
           </div>

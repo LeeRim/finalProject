@@ -95,7 +95,7 @@ function kakaopay(){
 	    pg : 'kakaopay',
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '마일리지 결제',
+	    name : 'CSS 이용권 결제',
 	    amount : returnCal,
 	    buyer_name : '${company.cName}',
 	    kakaoOpenApp : true
@@ -103,7 +103,7 @@ function kakaopay(){
 	    if ( rsp.success ) {
 	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 	    	jQuery.ajax({
-	    		url: "companyPaymentP.do", //cross-domain error가 발생하지 않도록 주의해주세요
+	    		url: "companyPaymentP.do", 
 	    		type: 'POST',
 	    		data: {
 	    			imp_uid : rsp.imp_uid,
@@ -111,7 +111,6 @@ function kakaopay(){
 	                payMileage : rsp.paid_amount,
 	                cLevel : level,
 	                payVoucher : voucher
-	                //기타 필요한 데이터가 있으면 추가 전달
 	    		},success:function(data) {
 	                 //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 	                 var msg = '결제가 완료되었습니다.';
