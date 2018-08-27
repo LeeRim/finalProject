@@ -50,7 +50,7 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
-	<div style="height:892px;">
+	<div style="height:923px;">
 
 		<c:import url="/WEB-INF/views/approval/approval_menu.jsp" />
 
@@ -76,7 +76,7 @@ desired effect
         | Your Page Content Here |
         -------------------------->
 				<div class="doApproval" style="margin-left:60px; width:100px;">
-					<a class="btn btn-app" href="#" onclick="openDoApproval();">
+					<a class="btn btn-app" href="#" onclick="openDoApproval();" style="width:120px">
 						<i class="fa fa-check" style="margin-top:5px;"></i>결재하기
 					</a>
 				</div>
@@ -84,7 +84,7 @@ desired effect
 
 					<div class="wrap_container">
 						<!-- 3단 레이아웃 멀티클래스 -->
-						<section class="content_wrapper" style="margin-left:300px;">
+						<section class="content_wrapper" style="margin-left:300px;margin-top: -50px;">
 							<!--전자결제 상세-->
 							<div class="report_type approval_type form_back">
 
