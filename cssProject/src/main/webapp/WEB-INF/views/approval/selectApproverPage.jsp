@@ -352,7 +352,7 @@ if (window.FileReader) { // modern browser
 
 									<div class="box-tools">
 										<button type="button" class="btn btn-box-tool"
-											data-widget="collapse">
+											data-widget="collapse" style="margin-top:0px;">
 											<i class="fa fa-plus"></i>
 										</button>
 									</div>

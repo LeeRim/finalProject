@@ -41,6 +41,23 @@ Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE
 Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (3,'사번',1,'2','user02','user02','테스터2',8,6,null,null,null,null,null,null,'N',null);
 Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (4,'사번',1,'2','user03','user03','테스터3',8,6,null,null,null,null,null,null,'N',null);
 
+
+--COMMUTE INSERT
+INSERT INTO COMMUTE VALUES(300,1,2,to_date('2018-08-01 08:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-01 08:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-01 17:15:30','yyyy-mm-dd HH24:MI:ss'));
+INSERT INTO COMMUTE VALUES(301,1,2,to_date('2018-08-02 08:07:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-02 08:07:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-02 17:06:30','yyyy-mm-dd HH24:MI:ss'));
+INSERT INTO COMMUTE VALUES(302,1,2,to_date('2018-08-03 08:30:20','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-03 08:30:20','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-03 17:50:30','yyyy-mm-dd HH24:MI:ss'));
+INSERT INTO COMMUTE VALUES(303,1,2,to_date('2018-08-06 09:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-06 09:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-06 18:15:30','yyyy-mm-dd HH24:MI:ss'));
+INSERT INTO COMMUTE VALUES(304,1,2,to_date('2018-08-07 08:15:00','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-07 08:15:00','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-07 18:00:30','yyyy-mm-dd HH24:MI:ss'));
+INSERT INTO COMMUTE VALUES(305,1,2,to_date('2018-08-08 08:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-08 08:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-08 17:15:30','yyyy-mm-dd HH24:MI:ss'));
+INSERT INTO COMMUTE VALUES(306,1,2,to_date('2018-08-09 08:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-09 08:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-09 17:15:30','yyyy-mm-dd HH24:MI:ss'));
+INSERT INTO COMMUTE VALUES(307,1,2,to_date('2018-08-10 09:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-10 09:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-10 16:15:30','yyyy-mm-dd HH24:MI:ss'));
+INSERT INTO COMMUTE VALUES(308,1,2,to_date('2018-08-13 08:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-13 08:15:30','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-13 17:15:30','yyyy-mm-dd HH24:MI:ss'));
+INSERT INTO COMMUTE VALUES(309,1,2,to_date('2018-08-20 07:00:00','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-20 07:00:00','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-20 18:15:30','yyyy-mm-dd HH24:MI:ss'));
+INSERT INTO COMMUTE VALUES(310,1,2,to_date('2018-08-21 08:30:45','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-21 08:30:45','yyyy-mm-dd HH24:MI:ss'),to_date('2018-08-21 18:36:30','yyyy-mm-dd HH24:MI:ss'));
+
+
+
+
 -- BOARD INSERT
 Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (21,1,'테스트입니당',1,0,to_date('18/08/22','RR/MM/DD'),null);
 Insert into CSS.BOARD (B_KEY,C_KEY_FK,B_TITLE,B_WRITER_FK,B_COUNT,B_DATE,B_CATEGORY) values (22,1,'테스트45345345345',1,15,to_date('18/08/22','RR/MM/DD'),'1');
