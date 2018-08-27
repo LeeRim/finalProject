@@ -34,10 +34,10 @@ public class GivevacationController {
 	}
 
 	@RequestMapping("writeGiveVaction.do")
-	public ModelAndView writeGiveVaction(HttpSession session, String gvKey, String gvYear, String gvVacaDate,
-			String gvDate, ModelAndView mv) {
+	public ModelAndView writeGiveVaction(HttpSession session, String gvKey, String gvYear, String gvVacadate,
+			 ModelAndView mv) {
 		System.out.println("gvKey / " + gvKey);
-		System.out.println(gvVacaDate);
+		System.out.println(gvVacadate);
 
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 
@@ -58,7 +58,7 @@ public class GivevacationController {
 			array[i] = Integer.parseInt(gvY[i]);
 		}
 
-		String[] gvV = gvVacaDate.split(",");
+		String[] gvV = gvVacadate.split(",");
 		int[] array2 = new int[gvV.length];
 
 		for (int i = 0; i < gvV.length; i++) {
@@ -73,7 +73,6 @@ public class GivevacationController {
 			Giv.setGvYear(array[i]);
 			Giv.setGvVacadate(array2[i]);
 			Giv.setcKeyFk(employee.getcKeyFk());
-			Giv.setGvDate(gvDate);
 			list.add(Giv);
 		}
 		int result = service.insertGive(list);

@@ -11,15 +11,15 @@
             WHEN MATCHED THEN
                       UPDATE SET
                       GV_YEAR = #{gvYear},
-                      GV_VACADATE = #{gvVacaDate},
-                      GV_DATE = #{gvDate}
+                      GV_VACADATE = #{gvVacadate}
             WHEN NOT MATCHED THEN
-                     INSERT (GV_KEY, C_KEY_FK, GV_YEAR, GV_VACADATE, GV_DATE) VALUES(SEQ_VICEVACATION.NEXTVAL, #{cKeyFk}, #{gvYear}, #{gvVacaDate}, #{gvDate})
+                     INSERT (GV_KEY, C_KEY_FK, GV_YEAR, GV_VACADATE) VALUES(SEQ_VICEVACATION.NEXTVAL, #{cKeyFk}, #{gvYear}, #{gvVacadate})
 	</insert>
 	
 	<select id="GiveSelect" parameterType="int" resultType="Give">
-		SELECT GV_KEY, C_KEY_FK, GV_YEAR, GV_VACADATE, TO_CHAR(GV_DATE,'YYYY-MM-DD') GV_DATE FROM GIVEVACATION
+		SELECT GV_KEY, C_KEY_FK, GV_YEAR, GV_VACADATE FROM GIVEVACATION
 		WHERE C_KEY_FK = #{cKeyFk}
+		ORDER BY GV_KEY
 	</select>
 	
 </mapper>

@@ -20,8 +20,11 @@
 	.no{
 		width:200px;
 	}
-	.date,.writer{
+	.date,.writer, .count{
 		width:150px;
+	}
+	.bno{
+		width:100px;
 	}
 	th{
 		background:gray;
@@ -78,7 +81,7 @@
 		<div class="content-wrapper">
 			<section class="content-header">
 				<h1>
-					Data Tables <small>advanced tables</small>
+					커뮤니티 <small>_</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -99,20 +102,24 @@
 					</c:choose>
 					<table class="table table-hover">
 						<tr>
+							<th class="bno">글번호</th>
 							<th class="title">글제목</th>
 							<th class="writer">작성자</th>
+							<th class="count">조회수</th>
 							<th class="date">작성일</th>
 						</tr>
 						<c:if test="${list.size() == 0}">
     	            <tr>
-                		<td colspan="3">조회 된 게시글이 없습니다.</td>
+                		<td colspan="5">조회 된 게시글이 없습니다.</td>
  	                </tr>
                 		</c:if>
                 		<c:if test="${list.size() != 0}">
 						<c:forEach items="${board1}" var="board1" varStatus="status">
 							<tr data-key=${board1.boardKey }>
+								<td class="bno">${status.count }</td>
 								<td class="title"><c:out value="${board1.bTitle }" /></td>
 								<td class="writer"><c:out value="${board1.eName }" /></td>
+								<td class="count">${board1.bCount }</td>
 								<td class="date"><c:out value="${board1.bDate }" /></td>
 							</tr>
 						</c:forEach>
@@ -133,8 +140,10 @@
 
 					<table class="table table-hover">
 						<tr>
+							<th class="bno">글번호</th>
 							<th class="title">글제목</th>
 							<th class="writer">작성자</th>
+							<th class="count">조회수</th>
 							<th class="date">작성일</th>
 						</tr>
 						<c:if test="${list.size() == 0}">
@@ -145,8 +154,10 @@
                 		<c:if test="${list.size() != 0}">
 						<c:forEach items="${board2}" var="board2" varStatus="status">
 							<tr data-key="${board2.boardKey }">
+								<td class="bno">${status.count }</td>
 								<td class="title"><c:out value="${board2.bTitle }" /></td>
 								<td class="writer"><c:out value="${board2.eName }" /></td>
+								<td class="count">${board2.bCount }</td>
 								<td class="date"><c:out value="${board2.bDate }" /></td>
 							</tr>
 						</c:forEach>
@@ -167,8 +178,10 @@
 
 					<table class="table table-hover">
 						<tr>
+							<th class="bno">글번호</th>
 							<th class="title">글제목</th>
 							<th class="writer">작성자</th>
+							<th class="count">조회수</th>
 							<th class="date">작성일</th>
 						</tr>
 						<c:if test="${list.size() == 0}">
@@ -179,8 +192,10 @@
                 		<c:if test="${list.size() != 0}">
 						<c:forEach items="${board3}" var="board3" varStatus="status">
 							 <tr data-key="${board3.boardKey}">
+							 	<td class="bno">${status.count }</td>
 								<td class="title"><c:out value="${board3.bTitle}" /></td>
 								<td class="writer"><c:out value="${board3.eName}" /></td>
+								<td class="count">${board3.bCount }</td>
 								<td class="date"><c:out value="${board3.bDate}" /></td>
 							</tr>
 						</c:forEach>
@@ -202,8 +217,10 @@
 				
 					<table class="table table-hover">
 						<tr>
+							<th class="bno">글번호</th>
 							<th class="title">글제목</th>
 							<th class="writer">작성자</th>
+							<th class="count">조회수</th>
 							<th class="date">작성일</th>
 						</tr>
 						<c:if test="${list.size() == 0}">
@@ -212,10 +229,12 @@
  	                </tr>
                 		</c:if>
                 		<c:if test="${list.size() != 0}">
-						<c:forEach items="${board4}" var="att">
+						<c:forEach items="${board4}" var="att" varStatus="status">
 							 <tr data-key="${att.boardKey}">
+							 	<td class="bno">${status.count }</td>
 								<td class="title"><c:out value="${att.bTitle}" /></td>
 								<td class="writer"><c:out value="${att.eName}" /></td>
+								<td class="count">${att.bCount }</td>
 								<td class="date"><c:out value="${att.bDate}" /></td>
 							</tr>
 						</c:forEach>
