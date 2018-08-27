@@ -515,7 +515,7 @@ td {
 								<ul id="tree" style="width: 250px; padding: 20px;">
 
 									<c:forEach items="${list }" var="e2" varStatus="status">
-										<c:if test="${status.count eq 1 }">
+										<c:if test="${status.count eq 1 and e2.department ne null}">
 											<li><label> <input type="checkbox"
 													value="${e2.department }" name="checkDpt"
 													onclick="chkSubCheckbox(${e2.eDepartFk}, this)"> <strong><b style="color:black;">${e2.department}</b></strong>
