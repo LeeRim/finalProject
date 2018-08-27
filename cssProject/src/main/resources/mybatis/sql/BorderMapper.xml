@@ -50,7 +50,7 @@
 	</insert>
 	
 	<select id="BorderSelect" parameterType="int" resultMap="BorderMap">
-		SELECT b.B_KEY, b.B_TITLE, b.C_KEY_FK, b.B_CONTENT, b.B_COUNT, b.B_DATE, b.B_CATEGORY ,e.E_NAME, b.B_WRITER_FK 
+		SELECT b.B_KEY, b.B_TITLE, b.C_KEY_FK, b.B_CONTENT, b.B_COUNT, b.B_DATE, b.B_CATEGORY ,e.E_NAME, b.B_WRITER_FK ,e.E_PHOTO
 		FROM BOARD b 
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
 		WHERE b.B_KEY = #{boardKey}
@@ -86,7 +86,7 @@
 	</update>
 	
 	<select id="selectCommentList" parameterType="int" resultMap="CommentMap">
-		SELECT CO_KEY, B_KEY_FK, CO_WRITER_FK, CO_CONTENT, CO_DATE, E_NAME, B_KEY, E_PHOTO
+		SELECT CO_KEY, B_KEY_FK, CO_WRITER_FK, CO_CONTENT, CO_DATE, E_NAME, B_KEY, e.E_PHOTO
 		FROM BOARD_COMMENT c
 		JOIN BOARD b on (c.B_KEY_FK = b.B_KEY)
 		JOIN EMPLOYEE e on (c.CO_WRITER_FK = e.E_KEY)
