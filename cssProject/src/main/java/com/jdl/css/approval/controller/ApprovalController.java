@@ -618,7 +618,6 @@ public class ApprovalController {
 			break;
 		}
 
-		ApprovalConditionVo last = aService.selectLastApprover(aKey);
 
 		ApprovalConditionVo ac = new ApprovalConditionVo();
 		ac.setAcKey(acKey);
@@ -656,6 +655,7 @@ public class ApprovalController {
 			}
 		}
 		
+		ApprovalConditionVo last = aService.selectLastApprover(aKey);
 
 		if (last.getAcKey() == acKey || condition == 2) {
 			updateAResult = aService.updateApproval(app);

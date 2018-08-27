@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/include/header.jsp" />
 <!DOCTYPE html>
 <!--
@@ -54,6 +55,15 @@ function openDetail(aKey,divDoctypeFk){
 <style type="text/css">
 td{
 cursor:pointer;
+}
+td:first-child{
+width:10px;
+}
+td:nth-child(2),td:nth-child(3),td:nth-child(5){
+width:150px;
+}
+td:nth-child(4){
+width:700px;
 }
 </style>
 </head>
@@ -153,7 +163,8 @@ desired effect
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
 											<td><c:out value="${approval.writer.eName }"></c:out></td>
-											<td><c:out value="${approval.aKey }"></c:out></td>
+											<td><fmt:formatNumber value="${approval.aKey}"
+																			pattern='000000' /></td>
 											<c:if test="${approval.aCondition==0 }">
 												<td><span class="label label-warning">진행</span></td>
 											</c:if>

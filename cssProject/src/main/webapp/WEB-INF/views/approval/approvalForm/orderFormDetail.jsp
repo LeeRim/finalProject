@@ -66,7 +66,7 @@ desired effect
         | Your Page Content Here |
         -------------------------->
 				<div class="doApproval" style="margin-left:60px; width:100px;">
-					<a class="btn btn-app" href="#" onclick="openDoApproval();"> <i
+					<a class="btn btn-app" href="#" onclick="openDoApproval();" style="width:150px;"> <i
 						class="fa fa-check" style="margin-top:5px;"></i>결재하기
 					</a>
 				</div>

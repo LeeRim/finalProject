@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/include/header.jsp" />
 <!DOCTYPE html>
 <!--
@@ -14,7 +15,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <title>AdminLTE 2 | Starter</title>
 <!-- DataTables -->
 <link rel="stylesheet"
-	href="resources/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+	href="resourcesc/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <!-- DataTables -->
 <script
 	src="resources/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -81,6 +82,15 @@ function openDetail(aKey,divDoctypeFk){
 <style type="text/css">
 td{
 cursor:pointer;
+}
+td:first-child{
+width:10px;
+}
+td:nth-child(2),td:nth-child(3),td:nth-child(4){
+width:150px;
+}
+td:nth-child(5){
+width:700px;
 }
 </style>
 </head>
@@ -201,7 +211,8 @@ desired effect
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
 											<td><c:out value="${approval.writer.eName }"></c:out></td>
-											<td><c:out value="${approval.aKey }"></c:out></td>
+											<td><fmt:formatNumber value="${approval.aKey}"
+																			pattern='000000' /></td>
 											<c:if test="${approval.aCondition==0 }">
 												<td><span class="label label-warning">진행</span></td>
 											</c:if>
@@ -274,7 +285,8 @@ desired effect
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
 											<td><c:out value="${approval.writer.eName }"></c:out></td>
-											<td><c:out value="${approval.aKey }"></c:out></td>
+											<td><fmt:formatNumber value="${approval.aKey}"
+																			pattern='000000' /></td>
 											<td><span class="label label-warning">진행</span></td>
 										</tr>
 										</c:forEach>
@@ -339,7 +351,8 @@ desired effect
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
 											<td><c:out value="${approval.writer.eName }"></c:out></td>
-											<td><c:out value="${approval.aKey }"></c:out></td>
+											<td><fmt:formatNumber value="${approval.aKey}"
+																			pattern='000000' /></td>
 											<td><span class="label label-primary">완료</span></td>
 										</tr>
 										</c:forEach>
@@ -404,7 +417,8 @@ desired effect
 											<td><c:out value="${approval.doctype }"></c:out></td>
 											<td><c:out value="${approval.aTitle }"></c:out></td>
 											<td><c:out value="${approval.writer.eName }"></c:out></td>
-											<td><c:out value="${approval.aKey }"></c:out></td>
+											<td><fmt:formatNumber value="${approval.aKey}"
+																			pattern='000000' /></td>
 											<td><span class="label label-danger">반려</span></td>
 										</tr>
 										</c:forEach>

@@ -49,11 +49,18 @@ $(function() {
 		});
 	</script>
 	</c:if>
+	<c:if test="${aCon.acApproverFk == sessionScope.user.eKey && aCon.acCondition!=0 }">
+		<script>
+		$(function() {
+				$(".doApproval").hide();
+		});
+		</script>
+	</c:if>
 </c:forEach>
 
 <!-- 팝업 모달영역 -->
 <div class="modal fade" id="layerpop">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="margin-top:100px;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
