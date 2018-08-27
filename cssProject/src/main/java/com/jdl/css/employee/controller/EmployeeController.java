@@ -243,12 +243,18 @@ public class EmployeeController {
 	@RequestMapping("memberAdd.do")
 	public ModelAndView memberAdd(ModelAndView mv, HttpSession session) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
+		 
+	//세션값 없으면 로그인페이지
+	 if(employee == null){
+			mv.setViewName("index/login");
+	 }else{
 		List<EmployeeVo> list = eService.selectJobList(employee.getcKeyFk());
 		List<EmployeeVo> list2 = eService.selectDepartList(employee.getcKeyFk());
 
 		mv.addObject("list", list);
-		mv.addObject("list2", list2);
+		mv.addObject("list2", list2);	 
 		mv.setViewName("employee/employeeInsert");
+	 }
 		return mv;
 		
 	}
@@ -266,8 +272,7 @@ public class EmployeeController {
 			HttpSession session) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		int cKey = employee.getcKeyFk();
-
-		// System.out.println(ePhoto);
+		
 		System.out.println("부서키 = " + member.geteDepartFk());
 
 
@@ -312,7 +317,7 @@ public class EmployeeController {
 			member.setcKeyFk(cKey);
 			
 			int result =eService.insertMember(member);
-			System.out.println(member);
+			
 
 			
 		
@@ -530,12 +535,17 @@ public class EmployeeController {
 	@RequestMapping("department.do")
 	public ModelAndView department(ModelAndView mv, HttpSession session, String check) {
 		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
+		//세션값 없으면 로그인페이지
+		 if(user == null){
+				mv.setViewName("index/login");
+		 }else{
 		List<EmployeeVo> jobList = eService.selectJobList(user.getcKeyFk());
 		List<EmployeeVo> departList = eService.selectDepartList(user.getcKeyFk());
 		mv.addObject("check", check);
 		mv.addObject("jobList", jobList);
 		mv.addObject("departList", departList);
 		mv.setViewName("employee/department");
+		 }
 		return mv;
 	}
 
@@ -616,12 +626,17 @@ public class EmployeeController {
 	public ModelAndView employeeList(ModelAndView mv, HttpSession session) {
 
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
-		// 회사키
+		//세션값 없으면 로그인페이지
+		 if(employee == null){
+				mv.setViewName("index/login");
+		 }else{
+			 
 		int cKey = employee.getcKeyFk();
 
 		List<EmployeeVo> list = eService.selectEmployeeList(cKey);
 		mv.addObject("list", list);
 		mv.setViewName("employee/organizationChart");
+	}
 		return mv;
 	}
 	
@@ -631,14 +646,17 @@ public class EmployeeController {
 		public ModelAndView adminOrganizationChart(ModelAndView mv, HttpSession session) {
 
 			EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
-			// 회사키
+			//세션값 없으면 로그인페이지
+			 if(employee == null){
+					mv.setViewName("index/login");
+			 }else{
 			int cKey = employee.getcKeyFk();
 
 			List<EmployeeVo> list = eService.selectEmployeeList(cKey);
 			mv.addObject("list", list);
 			System.out.println(list);
 			mv.setViewName("employee/adminOrganizationChart");
-			
+			 }
 			return mv;
 		}
 	
@@ -698,6 +716,11 @@ public class EmployeeController {
 	@RequestMapping("employeeIndex.do")
 	public ModelAndView employeeIndex(ModelAndView mav,HttpSession session)throws ServletException, IOException {
 		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		//세션값 없으면 로그인페이지
+		 if(user == null){
+			 mav.setViewName("index/login");
+		 }else{
+			 
 		InetAddress addr = null;
 		addr = InetAddress.getLocalHost();
 		String ipLocation = addr.getHostAddress();
@@ -714,6 +737,7 @@ public class EmployeeController {
 		mav.addObject("ipLocation",ipLocation);
 
 		mav.setViewName("employee/employeeIndex");
+		 }
 		return mav;
 	}
 
@@ -724,7 +748,11 @@ public class EmployeeController {
 		mav.addObject("board1", board1);
 		
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
-		// 회사키
+		//세션값 없으면 로그인페이지
+		 if(employee == null){
+			 mav.setViewName("index/login");
+		 }else{
+		
 		int cKey = employee.getcKeyFk();
 		
 		List<EmployeeVo> todayBList = eService.selectTodayBList(cKey);
@@ -739,6 +767,7 @@ public class EmployeeController {
 		mav.addObject("indexCompany", indexCompany);
 		
 		mav.setViewName("employee/adminIndex");
+		 }
 		return mav;
 	}
 
