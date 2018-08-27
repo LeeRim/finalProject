@@ -140,7 +140,7 @@ public class CompanyController {
 		System.out.println("업데이트 확인 : " + result);
 		
 		
-		return "redirect:organizationChart.do";
+		return "redirect:companyUpdate.do";
 	}
 	
 	

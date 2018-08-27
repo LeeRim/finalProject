@@ -56,15 +56,14 @@
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
 		<c:if test="${user.eType == '2'}">
-	        <li><a href="myPageUpdate.do"><i class="fa fa-link"></i> <span>마이페이지 수정</span></a></li>
+	        <li><a href="myPageUpdate.do"><i class="fa  fa-male"></i> <span>마이페이지 수정</span></a></li>
         </c:if>
         <c:if test="${user.eType == '1' and user.cLevel != 0}">
-        <li><a href="adminOrganizationChart.do"><i class="fa fa-link"></i> <span>사원 정보 관리</span></a></li>
-        <li><a href="myPageUpdate.do"><i class="fa fa-link"></i> <span>마이페이지 수정</span></a></li>
-        <li><a href="companyUpdate.do"><i class="fa fa-link"></i> <span>회사 정보 수정</span></a></li>
-        <li><a href="memberAdd.do"><i class="fa fa-link"></i> <span>사원 등록</span></a></li>
-        <li><a href="department.do"><i class="fa fa-link"></i> <span>부서 관리</span></a></li>
-        <li><a href="givevacation.do"><i class="fa fa-link"></i> <span>연차 등록</span></a></li>
+        <li><a href="adminOrganizationChart.do"><i class="fa  fa-pencil-square"></i> <span>사원 정보 관리</span></a></li>
+        <li><a href="myPageUpdate.do"><i class="fa  fa-male"></i> <span>마이페이지 수정</span></a></li>
+        <li><a href="companyUpdate.do"><i class="fa  fa-television"></i> <span>회사 정보 수정</span></a></li>
+        <li><a href="memberAdd.do"><i class="fa  fa-plus"></i> <span>사원 등록</span></a></li>
+        <li><a href="department.do"><i class="fa  fa-exchange"></i> <span>부서 관리</span></a></li>
         <li><a href="givevacation.do"><i class="fa  fa-plane"></i> <span>휴가</span></a></li>
         </c:if>
         <li class="treeview">

@@ -99,11 +99,17 @@ public class AdminController {
 	}
 	
 	@RequestMapping("updateCompanyLevel.do")
-	public String updateCompanyLevel(CompanyVo company, HttpServletRequest request){
+	public String updateCompanyLevel(CompanyVo company, HttpServletRequest request, HttpSession session){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		
 		int cLevel = Integer.parseInt(request.getParameter("cLevel"));
 		String cKey = request.getParameter("companyList");
 		String listValue = request.getParameter("listValue");
-		service.updateCompanyLevel(cLevel, cKey);
+		int result = service.updateCompanyLevel(cLevel, cKey);
+		if(result >0){
+			user.setcLevel(cLevel);
+			session.setAttribute("user", user);
+		} 
 		if(listValue.equals("setList")){
 			return "redirect:companySet.do";			
 		}

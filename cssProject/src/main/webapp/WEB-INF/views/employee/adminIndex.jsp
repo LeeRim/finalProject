@@ -191,7 +191,15 @@
 							<th colspan="6" style="background:#bcbcbc; color:white; ">회사정보</th>
 						</tr>
 						<tr>
-							<td colspan="2" rowspan="5"><img class="cLogo" src="resources/dist/img/photo1.png" ></td>
+						<c:choose>
+							<c:when test="${indexCompany.cLogo != null}">
+								<td colspan="2" rowspan="5"><img class="cLogo" src="resources/upload/CompanyLogo/${indexCompany.cLogo}" ></td>
+							</c:when>
+							<c:otherwise>
+								<td colspan="2" rowspan="5"><img class="cLogo" src="resources/dist/img/photo1.png" ></td>
+							</c:otherwise>
+						
+						</c:choose>
 						</tr>
 						<tr >
 							<th>회사명</th>

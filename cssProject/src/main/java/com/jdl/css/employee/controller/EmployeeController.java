@@ -757,10 +757,10 @@ public class EmployeeController {
 		//세션값 없으면 로그인페이지
 		 if(employee == null){
 			 mav.setViewName("index/login");
+			 
 		 }else{
 		
 		int cKey = employee.getcKeyFk();
-		
 		List<EmployeeVo> todayBList = eService.selectTodayBList(cKey);
 		mav.addObject("todayBList",todayBList);
 
