@@ -96,8 +96,8 @@ public class EmployeeController {
 	public ModelAndView login(EmployeeVo employee,HttpSession session, ModelAndView mv){
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
 
-		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
-		List<ApprovalVo> waitingApprovals = aService.selectWaitingApprovalList(user.geteKey());
+		
+		
 
 		//근속년수에 따른 총 휴가 값 가지고오기
 		GivevacationVo giveVacation = vService.selectTotalVacation(user);
@@ -126,9 +126,12 @@ public class EmployeeController {
 			viewName = "index/login";
 		}else if(user.getePwd().equals(employee.getePwd())){
 			session.setAttribute("user", user);
+			List<ApprovalVo> waitingApprovals = aService.selectWaitingApprovalList(user.geteKey());
+			List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
 			session.setAttribute("indexNote", indexNote);
 			session.setAttribute("indexApproval", waitingApprovals);
-
+			
+			System.out.println(user);
 			if (user.geteType().equals("1") && user.getcLevel() == 0) {
 				viewName = "redirect:department.do?check=check";
 			} else if (user.geteType().equals("1")) {
@@ -143,7 +146,7 @@ public class EmployeeController {
 			mv.addObject("errorMsg", "아이디 또는 비밀번호가 틀렸습니다.");
 			viewName = "index/login";
 		}
-
+		
 		mv.setViewName(viewName);
 		return mv;
 	}
@@ -496,7 +499,7 @@ public class EmployeeController {
 		      System.out.println(employee.geteKey());
 		      System.out.println(user.geteKey());
 		      if(result > 0 && employee.geteKey()==user.geteKey()){
-//		    	  session.setAttribute("user", user);
+		    	  session.setAttribute("user", user);
 		      }
 			
 		      
@@ -577,6 +580,7 @@ public class EmployeeController {
 				try {
 					div.setDivKey(Integer.parseInt(departKeys[i]));
 				} catch (ArrayIndexOutOfBoundsException e) {
+				}catch(NumberFormatException e2){
 				}
 				// System.out.println(div.getDivKey()==0); true
 				div.setDivType(1);
@@ -594,6 +598,7 @@ public class EmployeeController {
 				try {
 					div.setDivKey(Integer.parseInt(jobKeys[i]));
 				} catch (ArrayIndexOutOfBoundsException e) {
+				}catch(NumberFormatException e2){
 				}
 				div.setDivType(2);
 				div.setDivInfo(jobArr[i]);

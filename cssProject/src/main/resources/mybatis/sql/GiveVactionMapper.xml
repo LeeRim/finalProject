@@ -13,7 +13,7 @@
                       GV_YEAR = #{gvYear},
                       GV_VACADATE = #{gvVacadate}
             WHEN NOT MATCHED THEN
-                     INSERT (GV_KEY, C_KEY_FK, GV_YEAR, GV_VACADATE) VALUES(SEQ_VICEVACATION.NEXTVAL, #{cKeyFk}, #{gvYear}, #{gvVacadate})
+                     INSERT (GV_KEY, C_KEY_FK, GV_YEAR, GV_VACADATE) VALUES(SEQ_GIVEVACATION.NEXTVAL, #{cKeyFk}, #{gvYear}, #{gvVacadate})
 	</insert>
 	
 	<select id="GiveSelect" parameterType="int" resultType="Give">

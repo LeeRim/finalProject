@@ -50,14 +50,14 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
-	<div style="height:923px;">
+	<div class="wrapper">
 
 		<c:import url="/WEB-INF/views/approval/approval_menu.jsp" />
 
 
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper" style="background:white;">
+		<div class="content-wrapper" style="background:white;height:1100px;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
