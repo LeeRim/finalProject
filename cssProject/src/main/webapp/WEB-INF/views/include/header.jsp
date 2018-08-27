@@ -56,23 +56,50 @@
 	}
 </script>
 
+<style type="text/css">
+.headerMenu{
+width: 410px;
+}
+.headerMenu li{
+float:left;
+}
+.headerMenu li a:hover {
+	background-color: #3c8dbc;
+}
+.headerMenu li a{
+width:100px; height:100px;
+text-align:center;
+}
+.headerMenu li a i{
+margin:10px 5px 10px 8px;
+align:center;
+}
+.headerMenu li a i::before{
+font-size:45px;
+}
+.headerMenu li a span{
+font-size:15px;
+}
+</style>
 </head>
 <body>
 	<!-- Main Header -->
 	<header class="main-header">
 
 		<!-- Logo -->
-		<c:if test="${sessionScope.user.eType=='2' }"><!-- 사원 -->
-		<a href="employeeIndex.do" class="logo" onclick="menuHighlight(1);">
+		<c:if test="${sessionScope.user.eType=='2' }">
+			<!-- 사원 -->
+			<a href="employeeIndex.do" class="logo" onclick="menuHighlight(1);">
 		</c:if>
-		<c:if test="${sessionScope.user.eType=='1' }"><!-- 회사관리자 -->
-		<a href="adminIndex.do" class="logo" onclick="menuHighlight(1);">
-		</c:if> 
-		<c:if test="${sessionScope.user.eType=='0' }"><!-- 회사관리자 -->
-		<a href="adminMain.do" class="logo" onclick="menuHighlight(1);">
-		</c:if> 
-			<span class="logo-mini"><b>C</b>SS</span> 
-			<span class="logo-lg"><b>C</b>SS</span>
+		<c:if test="${sessionScope.user.eType=='1' }">
+			<!-- 회사관리자 -->
+			<a href="adminIndex.do" class="logo" onclick="menuHighlight(1);">
+		</c:if>
+		<c:if test="${sessionScope.user.eType=='0' }">
+			<!-- 회사관리자 -->
+			<a href="adminMain.do" class="logo" onclick="menuHighlight(1);">
+		</c:if>
+		<span class="logo-mini"><b>C</b>SS</span> <span class="logo-lg"><b>C</b>SS</span>
 		</a>
 
 		<!-- Header Navbar -->
@@ -82,27 +109,43 @@
 				<a class="sidebar-toggle" data-toggle="dropdown"> </a>
 				<c:if test="${sessionScope.user.eType=='2' }">
 					<!-- 사원 -->
-					<ul class="dropdown-menu">
-						<li><a href="myPageUpdate.do">회원정보</a></li>
-						<li><a href="commuteCheck.do">근태관리</a></li>
-						<li><a href="organizationChart.do">조직도</a></li>
-						<li><a href="calender.do">일정관리</a></li>
-						<li><a href="waitingPage.do">전자결재</a></li>
-						<li><a href="receiveNoteList.do">쪽지</a></li>
-						<li><a href="borderIndex.do">커뮤니티</a></li>
+					<ul class="dropdown-menu headerMenu">
+						<li><a href="myPageUpdate.do"><i class="fa fa-cogs"></i><br>
+								<span>회원정보</span></a></li>
+						<li><a href="commuteCheck.do"><i class="fa fa-refresh"></i><br>
+								<span>근태관리</span></a></li>
+						<li><a href="organizationChart.do"><i class="fa fa-user"></i><br>
+								<span>조직도</span></a></li>
+						<li><a href="calender.do"><i
+								class="fa fa-calendar-check-o"></i><br> <span>일정관리</span></a></li>
+						<li><a href="waitingPage.do"><i class="fa fa-book"></i><br> <span>전자결재</span></a></li>
+						<li><a href="receiveNoteList.do"><i
+								class="fa fa-envelope-o"></i><br> <span>쪽지</span></a></li>
+						<li><a href="borderIndex.do"><i class="fa fa-bullhorn"></i><br>
+								<span>커뮤니티</span></a></li>
 					</ul>
 				</c:if>
 				<c:if test="${sessionScope.user.eType=='1' }">
 					<!-- 회사관리자 -->
-					<ul class="dropdown-menu">
-						<li><a href="companyUpdate.do">회사관리</a></li>
-						<li><a href="commuteCheck.do">근태관리</a></li>
-						<li><a href="organizationChart.do">조직도</a></li>
-						<li><a href="calender.do">일정관리</a></li>
-						<li><a href="waitingPage.do">전자결재</a></li>
-						<li><a href="receiveNoteList.do">쪽지</a></li>
-						<li><a href="borderIndex.do">커뮤니티</a></li>
-						<li><a href="qnaList.do">문의하기</a></li>
+
+					<ul class="dropdown-menu headerMenu">
+						<li><a href="companyUpdate.do"><i class="fa  fa-cogs" id="icon"></i><br>
+								<span>회사관리</span></a></li>
+						<li><a href="commuteCheck.do"><i class="fa   fa-refresh"></i><br>
+								<span>근태관리</span></a></li>
+						<li><a href="organizationChart.do"><i class="fa  fa-user"></i><br>
+								<span>조직도</span></a></li>
+						<li><a href="calender.do"><i
+								class="fa fa-calendar-check-o"></i><br> <span>일정관리</span></a></li>
+						<li><a href="waitingPage.do"><i class="fa  fa-book"></i><br>
+								<span>전자결재</span></a></li>
+						<li><a href="receiveNoteList.do"><i
+								class="fa fa-envelope-o"></i><br> <span>쪽지</span></a></li>
+						<li><a href="borderIndex.do"><i class="fa  fa-bullhorn"></i><br>
+								<span>커뮤니티</span></a></li>
+						<li><a href="empQNA.do"><i class="fa  fa-comments-o"></i><br>
+								<span>문의하기</span></a></li>
+
 					</ul>
 				</c:if>
 			</div>
@@ -112,10 +155,11 @@
 					<!-- Messages: style can be found in dropdown.less-->
 					<li class="dropdown messages-menu">
 						<!-- Menu toggle button --> <a href="#" class="dropdown-toggle"
-						data-toggle="dropdown"> <i class="fa fa-envelope-o"></i>
-						<c:if test="${sessionScope.indexNote.size()!=0 }"> <span
-							class="label label-success"><c:out
-									value="${fn:length(sessionScope.indexNote)}" /></span></c:if>
+						data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <c:if
+								test="${sessionScope.indexNote.size()!=0 }">
+								<span class="label label-success"><c:out
+										value="${fn:length(sessionScope.indexNote)}" /></span>
+							</c:if>
 					</a>
 						<ul class="dropdown-menu">
 							<li class="header">안읽은 쪽지</li>
@@ -133,8 +177,8 @@
 												</div> <!-- Message title and timestamp -->
 												<h4>
 													<c:out value="${note.eName} ${note.job}" />
-													<small><i class="fa fa-clock-o"></i>
-													<c:out value="${note.snWriteDate}" /></small>
+													<small><i class="fa fa-clock-o"></i> <c:out
+															value="${note.snWriteDate}" /></small>
 												</h4> <!-- The message -->
 												<p>
 													<c:out value="제목 :  ${note.snTitle}" />
@@ -180,8 +224,8 @@
 														<h4>
 															<c:out
 																value="${approval.writer.eName} ${approval.writer.job }" />
-															<small><i class="fa fa-clock-o"></i>
-															<c:out value="${approval.aWriteDate}" /></small>
+															<small><i class="fa fa-clock-o"></i> <c:out
+																	value="${approval.aWriteDate}" /></small>
 														</h4> <!-- The message -->
 														<p>
 															<c:out value="제목 :  ${approval.aTitle}" />
@@ -199,8 +243,8 @@
 														<h4>
 															<c:out
 																value="${approval.writer.eName} ${approval.writer.job }" />
-															<small><i class="fa fa-clock-o"></i>
-															<c:out value="${approval.aWriteDate}" /></small>
+															<small><i class="fa fa-clock-o"></i> <c:out
+																	value="${approval.aWriteDate}" /></small>
 														</h4> <!-- The message -->
 														<p>
 															<c:out value="제목 :  ${approval.aTitle}" />
@@ -218,8 +262,8 @@
 														<h4>
 															<c:out
 																value="${approval.writer.eName} ${approval.writer.job }" />
-															<small><i class="fa fa-clock-o"></i>
-															<c:out value="${approval.aWriteDate}" /></small>
+															<small><i class="fa fa-clock-o"></i> <c:out
+																	value="${approval.aWriteDate}" /></small>
 														</h4> <!-- The message -->
 														<p>
 															<c:out value="제목 :  ${approval.aTitle}" />
@@ -237,8 +281,8 @@
 														<h4>
 															<c:out
 																value="${approval.writer.eName} ${approval.writer.job }" />
-															<small><i class="fa fa-clock-o"></i>
-															<c:out value="${approval.aWriteDate}" /></small>
+															<small><i class="fa fa-clock-o"></i> <c:out
+																	value="${approval.aWriteDate}" /></small>
 														</h4> <!-- The message -->
 														<p>
 															<c:out value="제목 :  ${approval.aTitle}" />
@@ -256,8 +300,8 @@
 														<h4>
 															<c:out
 																value="${approval.writer.eName} ${approval.writer.job }" />
-															<small><i class="fa fa-clock-o"></i>
-															<c:out value="${approval.aWriteDate}" /></small>
+															<small><i class="fa fa-clock-o"></i> <c:out
+																	value="${approval.aWriteDate}" /></small>
 														</h4> <!-- The message -->
 														<p>
 															<c:out value="휴가계" />
