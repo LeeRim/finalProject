@@ -347,6 +347,8 @@ public class BorderController {
 	
 	@RequestMapping("searchBoard.do")
 	public ModelAndView searchBoard(@RequestParam(value="currentPage", required=false)String currentPagestr, BorderVo board, String condition, String keyword, ModelAndView mv){
+		
+		System.out.println("검색 햇을때 카테고리 값 확인 : " + board.getbCateGory());
 		int currentPage;	//현재 페이지의 번호
 		int limitPage;		//한페이지에 출력할 페이지 갯수
 		//1~10
