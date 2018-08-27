@@ -504,9 +504,9 @@ public class EmployeeController {
 		      //사원타입이 1일때 관리자 조직도, 2일때 사원조직도
 		      String redirect ="";
 		      if(employee.geteType().equals("1")){
-		    	  redirect= "redirect:adminOrganizationChart.do";
+		    	  redirect= "redirect:myPageUpdate.do";
 		      }else if(employee.geteType().equals("2")){
-		    	  redirect= "redirect:organizationChart.do";
+		    	  redirect= "redirect:myPageUpdate.do";
 		      }
 		      
 			
