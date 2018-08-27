@@ -662,8 +662,7 @@
 	<insert id="insertApprovers" parameterType="hashMap">
 		INSERT INTO
 		APPROVAL_CONDITION VALUES (
-		SEQ_APPROVAL_CONDITION.NEXTVAL,#{aKeyFk},#{acApproverFk},0,#{acApprovalType},null
-		)
+		SEQ_APPROVAL_CONDITION.NEXTVAL,#{aKeyFk},#{acApproverFk},0,#{acApprovalType},null)
 	</insert>
 
 	<insert id="insertJobpropsal" parameterType="JobPropsalVo">

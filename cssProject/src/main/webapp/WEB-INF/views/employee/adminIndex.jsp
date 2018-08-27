@@ -17,11 +17,14 @@
 		width:100%;
 	}
 	.box.box-default{
-		height:82px;
+		height:90px;
 	}
 	.box-footer{
 		height:81px; 
 		padding-top:13px;
+	}
+	.boxTime{
+		width:100%;
 	}
 	.empInfo{
 		margin-left:30px;
@@ -170,7 +173,7 @@
   
 
 
-  <div class="content-wrapper" style="height: 980px;">
+  <div class="content-wrapper" style="height: 1050px;">
 
     <section class="content-header">
 
@@ -180,8 +183,8 @@
     <section class="content ">
     
     
-    <div class="row">
-        <div class="col-md-4 cProfile" >
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-4 cProfile"  style="width:40%;">
           <div class="box box-widget widget-user-2 cProfileBody">
           	<table class="table pfTable">
           				<tr>
@@ -238,7 +241,7 @@
         </div>
         
         
-        <div class="col-md-4">
+        <div class="col-md-4" style="margin-left:12px;">
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user-2 cProfileBody">
             <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -316,8 +319,8 @@
         
         
         
-	        <div class="col-md-3">
-	        <div class="box box-default" style="height:150px; text-align:center;">
+	        <div class="col-md-3" style="margin-left:12px;">
+	        <div class="box box-default boxTime" style="height:150px; text-align:center;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title" style="padding:10px;"><c:out value="${ipLocation}"></c:out></h3>
 					
@@ -331,8 +334,8 @@
 	            <!-- /.box-body -->
 	          </div>
 	          
-	          <div class="row">
-	          <div class="box box-default" style="width:48.5%; height:112px;">
+	          <div class="row" >
+	          <div class="box box-default" style="width:48.4%; height:112px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">출근시간</h3>
 				  <input type="submit" value="출근" onclick="inTime();" class="btn btn-box-tool" >
@@ -346,7 +349,7 @@
 	          </div>
 	          <!-- /.box -->
 	          
-	          <div class="box box-default" style="width:48.5%; height:112px; margin-left:10px;">
+	          <div class="box box-default" style="width:48.4%; height:112px; margin-left:14px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">퇴근시간</h3>
 					<input type="submit" value="퇴근" onclick="outTime();" class="btn btn-box-tool" >
@@ -363,7 +366,7 @@
 	        </div>
 	  </div>     
 	  
-	  <div class="row" style="margin-top:10px;">
+	  <div class="row" style="margin-top:20px;">
 	  	<div class="col-md-6" >
               <!-- USERS LIST -->
               <div class="box box-danger" style="height:353px;">
@@ -398,11 +401,6 @@
 
               <h3 class="box-title">부서 별 인원</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
             </div>
             <div class="box-body">
               <div id="donut-chart" style="height: 287px;"></div>
@@ -413,7 +411,7 @@
             </div>
 	  </div>
 	  
-	  <div class="row" style="margin-top:10px;">
+	  <div class="row" style="margin-top:20px;">
 	  	<div class="col-md-6" >
 				<div class="box-body table-responsive no-padding">
 					<table class="table table-hover">

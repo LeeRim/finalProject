@@ -133,7 +133,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		}
 		console.log(startHalf);
 		console.log(endHalf);
-		var totalVDay = betweenDay + startHalf + endHalf;
+		var totalVDay = betweenDay - startHalf - endHalf;
 		
 		var vfHalfflag = 0;
 		if(startHalf == 0 && endHalf == 0){
@@ -145,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		}else{
 			vfHalfflag = 3;
 		}
-		
+		$("#vfHalfflag").val(vfHalfflag);
 		$("#useV").val(totalVDay);
 	}
 	
@@ -188,10 +188,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<tbody>
 											<tr>
 											<tr>
-														<td
-															style="background: white; padding: 0px !important; border: 0px currentColor; border-image: none; height: 90px; text-align: center; color: black; font-size: 36px; font-weight: bold; vertical-align: middle;"
-															colspan="2" class="">연차 신청서</td>
-													</tr>
+												<td
+													style="background: white; padding: 0px !important; border: 0px currentColor; border-image: none; height: 90px; text-align: center; color: black; font-size: 36px; font-weight: bold; vertical-align: middle;"
+													colspan="2" class="">연차 신청서</td>
+												</tr>
 												<td class="tWrappser">
 													<table class="tHeader">
 														<!-- User -->
@@ -273,11 +273,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<td class="rightColumn2">
 													<span id="vacationHalfArea" class="vacationHalfArea" >
 														<span class="halfArea">
-															<input type="checkbox" class="editor_opt" value="시작일" name="check_startHalf" id="startHalf"/>
+															<input type="checkbox" class="editor_opt" id="startHalf">
 															 <label class="editor_label">시작일</label>
 														</span>
 														<span class="halfArea">
-															<input type="checkbox" class="editor_opt" value="종료일" name="check_startHalf" id="endHalf"/>
+															<input type="checkbox" class="editor_opt" id="endHalf">
 															<label class="editor_label" >종료일</label>
 														</span> 
 													</span>

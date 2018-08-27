@@ -470,8 +470,9 @@ public class ApprovalController {
 		app.setaWriterFk(((EmployeeVo) session.getAttribute("user")).geteKey());
 		app.setcKeyFk(((EmployeeVo) session.getAttribute("user")).getcKeyFk());
 		app.setDivDoctypeFk(5);
-
+		
 		aService.insertApproval(app);
+		System.out.println("app : " + app);
 
 		List<ApprovalConditionVo> acList = new ArrayList<ApprovalConditionVo>();
 		for (int i = 0; i < appStr.size(); i++) {
@@ -491,7 +492,10 @@ public class ApprovalController {
 		aService.insertApprovers(acList);
 		// System.out.println(addAppResult);
 
+		int vfHalfflag = Integer.parseInt(request.getParameter("vfHalfflag"));
+		vForm.setVfHalfflag(vfHalfflag);
 		vForm.setaKeyFk(app.getaKey());
+		System.out.println("vfHalf : " + vForm.getVfHalfflag());
 		System.out.println("aKeyFk : " + vForm.getaKeyFk());
 		System.out.println("vForm : " + vForm);
 		aService.insertVacation(vForm);

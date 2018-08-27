@@ -11,22 +11,15 @@
 	.row{
 		margin-left:auto;
 		margin-right:auto;
+		width:40%;
 		display:inline-block;
 	}
 	.row-wrapper{
 		margin-left:250px;
 		margin-top:30px;
 	}
-	.vYear, .vDay{
+	.year, .day{
 		text-align:center;
-		background:#bcbcbc;
-	}
-	.year{
-		width:100px;
-		background:white;
-	}
-	.day{
-		background:white;
 	}
 	input[type=text]{
 		border:none;
@@ -36,8 +29,6 @@
 	.btn{
 		border:1px solid #bcbcbc;
 		background:none;
-		margin-left:auto;
-		margin-right:auto;
 	}
 </style>
 <script>
@@ -48,7 +39,7 @@ function subV(){
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-   <c:import url="/WEB-INF/views/include/left_column.jsp"/>
+   <c:import url="/WEB-INF/views/include/left_column_companyAdmin.jsp"/>
 	<div class="content-wrapper">
 	<section class="content-header">
       <h1>
@@ -66,131 +57,133 @@ function subV(){
 		<div class="row">
 			<table id="table1" class="table table-bordered ">
 				<tr>
-					<td class="vYear">근로년수</td>
-					<td class="vDay">지급일수</td>
+					<td class="year">근로년수</td>
+					<td class="day">지급일수</td>
 				</tr>
-				<!-- 
+				
 				<c:if test="${list.size() != 0}">
 					<c:forEach items="${list}" var="gv" varStatus="status">
+								<c:if test="${status.count le 10}">
 						<input type="hidden" name="gvKey" value="${gv.gvKey }" />
-						<tr class="item1">
-							<td><input type="text" name="gvYear" value="${gv.gvYear}" readonly /></td>
-							<td><input type="text" name="gvVacadate" value="${gv.gvVacadate}" /></td>
-						</tr>
+							<tr class="item1">
+									<td class="year"><input type="text" name="gvYear" value="${gv.gvYear}" readonly /></td>
+									<td class="day"><input type="text" name="gvVacadate" value="${gv.gvVacadate}" /></td>
+							</tr>
+								</c:if>
 					</c:forEach>
-
 				</c:if>
-				 -->
 
-				<input type="hidden" name="gvKey" />
+				<c:if test="${list.size() == 0}">
 					<tr class="item1">
-						<td class="year"><input type="text"  class="year" name="gvYear" value="1" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="1" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="12" /></td>
 					</tr>
 					<tr class="item2">
-						<td class="year"><input type="text"  class="year" name="gvYear" value="2" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="2" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="12" /></td>
 					</tr>
 					<tr class="item3">
-						<td class="year"><input type="text"  class="year" name="gvYear" value="3" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="3" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="12" /></td>
 					</tr>
 					<tr class="item4">
-						<td class="year"><input type="text"  class="year" name="gvYear" value="4" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="4" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item5">
-						<td class="year"><input type="text" class="year" name="gvYear" value="5" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="5" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item6">
-						<td class="year"><input type="text" class="year" name="gvYear" value="6" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="6" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item7">
-						<td class="year"><input type="text" class="year" name="gvYear" value="7" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="7" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item8">
-						<td class="year"><input type="text" class="year" name="gvYear" value="8" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="8" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item9">
-						<td class="year"><input type="text" class="year" name="gvYear" value="9" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="9" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item10">
-						<td class="year"><input type="text" class="year" name="gvYear" value="10" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="10" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
+				</c:if>
 			</table>
 			</div>
 			
 			<div class="row">
 				<table id="table1" class="table table-bordered ">
 				<tr>
-					<td class="vYear">근로년수</td>
-					<td class="vDay">지급일수</td>
+					<td class="year">근로년수</td>
+					<td class="day">지급일수</td>
 				</tr>
-				<!-- 
+				
 				<c:if test="${list.size() != 0}">
-					<c:forEach items="${list}" var="gv">
+					<c:forEach items="${list}" var="gv" varStatus="status">
+								<c:if test="${status.count gt 10}">
 						<input type="hidden" name="gvKey" value="${gv.gvKey }" />
-						<tr class="item1">
-							<td><input type="text" name="gvYear" value="${gv.gvYear}" readonly /></td>
-							<td><input type="text" name="gvVacadate" value="${gv.gvVacadate}" /></td>
-						</tr>
+							<tr class="item1">
+									<td class="year"><input type="text" name="gvYear" value="${gv.gvYear}" readonly /></td>
+									<td class="day"><input type="text" name="gvVacadate" value="${gv.gvVacadate}" /></td>
+							</tr>
+								</c:if>
 					</c:forEach>
-
 				</c:if>
-				 -->
-
-				<input type="hidden" name="gvKey" />
+				
+				<c:if test="${list.size() == 0}">
 					<tr class="item11">
-						<td class="year"><input type="text" class="year" name="gvYear" value="11" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="11" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item12">
-						<td class="year"><input type="text" class="year" name="gvYear" value="12" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="12" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item13">
-						<td class="year"><input type="text"  class="year" name="gvYear" value="13" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="13" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item14">
-						<td class="year"><input type="text" class="year" name="gvYear" value="14" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="14" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item15">
-						<td class="year"><input type="text" class="year" name="gvYear" value="15" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="15" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item16">
-						<td class="year"><input type="text" class="year" name="gvYear" value="16" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="16" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item17">
-						<td class="year"><input type="text" class="year" name="gvYear" value="17" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="17" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item18">
-						<td class="year"><input type="text" class="year" name="gvYear" value="18" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="18" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item19">
-						<td class="year"><input type="text" class="year" name="gvYear" value="19" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="19" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
 					<tr class="item20">
-						<td class="year"><input type="text" class="year" name="gvYear" value="20" readonly /></td>
+						<td class="year"><input type="text" name="gvYear" value="20" readonly /></td>
 						<td class="day"><input type="text" name="gvVacadate" value="15" /></td>
 					</tr>
+				</c:if>
 			</table>
 			</div>
+			<div class="btn" onclick="subV();">휴가 지급</div>
 		</form>
 		</div>
-			<div class="btn" onclick="subV();">휴가 지급</div>
 </div>
 </div>
 

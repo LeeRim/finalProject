@@ -96,9 +96,6 @@ public class EmployeeController {
 	public ModelAndView login(EmployeeVo employee,HttpSession session, ModelAndView mv){
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
 
-		
-		
-
 		//근속년수에 따른 총 휴가 값 가지고오기
 		GivevacationVo giveVacation = vService.selectTotalVacation(user);
 		//휴가 사용일 가져오기
