@@ -73,10 +73,6 @@
 		width:130px;
 		height:130px;
 	}
-	.birthPhoto{
-		width:100px;
-		height:100px;
-	}
  </style>
  <script>
 	$(function(){
@@ -379,7 +375,7 @@
                   <ul class="users-list clearfix">
                   <c:forEach items="${todayBList }" var="tb">
                     <li>
-                      <img class="birthPhoto" src="resources/dist/img/user1-128x128.jpg"  alt="User Image">
+                      <img class="birthPhoto" src="resources/upload/empPhoto/${tb.ePhoto}" style="width:80px; height:90px;" alt="User Image">
                       <a class="users-list-name" href="#">${tb.eName }</a>
                       <span class="users-list-date">${tb.department }</span>
                     </li>
