@@ -99,11 +99,11 @@ desired effect
 
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
+		<div class="content-wrapper" style="background:white;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					Page Header <small>Optional description</small>
+					전자결재 <small>구매 품의서</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -117,13 +117,13 @@ desired effect
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-				<div class="addApprover">
-					<a class="btn btn-app" href="#" onclick="openSelectApprover();">
-						<i class="fa fa-user-plus"></i>결재자추가
+				<div class="addApprover" style="margin-left:60px; width:100px;">
+					<a class="btn btn-app" href="#" onclick="openSelectApprover();" style="width:150px;">
+						<i class="fa fa-user-plus" style="margin-top:5px;"></i>결재자추가
 					</a>
 				</div>
 				<!-- 3단 레이아웃 멀티클래스 -->
-				<section class="content_wrapper">
+				<section class="content_wrapper" style="margin-left:300px; margin-top:-50px;">
 					<!--전자결제 상세-->
 					<div class="report_type approval_type orderForm_back">
 						<!--전자결재 내용-->
@@ -237,7 +237,7 @@ desired effect
 									</span>
 
 										<table
-											style="border-bottom: black 1px solid; border-left: black 2px solid; margin-top: 10px; width: 800px; border-collapse: collapse; font-family: malgun gothic, dotum, arial, tahoma; border-top: black 2px solid; border-right: black 2px solid">
+											style="border-bottom: black 1px solid; border-left: black 2px solid; margin-top: 10px; width: 800px; border-collapse: collapse; font-family: malgun gothic, dotum, arial, tahoma; border-top: black 2px solid; border-right: black 2px solid;width:1155px;">
 											<!-- user -->
 
 											<tbody>
@@ -299,7 +299,7 @@ desired effect
 														style="border-bottom: black 1px solid; text-align: center; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(221, 221, 221); height: 18px; color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: bold; padding-top: 5px"
 														class="">번호</td>
 													<td
-														style="text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; padding-top: 5px"
+														style="text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; font-weight: normal; padding-top: 5px;width:250px;"
 														class=""><input type="text" class="ipt_editor"
 														data-dsl="{{text}}" name="oNo" id="oNo" value=""
 														data-id="" data-name="" data-require="false"
@@ -337,7 +337,7 @@ desired effect
 
 														납품기간</td>
 													<td
-														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px"><span
+														style="border-bottom: black 1px solid; text-align: left; border-left: black 1px solid; padding-bottom: 5px; padding-left: 5px; padding-right: 5px; background: rgb(255, 255, 255); color: rgb(0, 0, 0); font-size: 12px; vertical-align: middle; border-top: black 1px solid; font-weight: normal; border-right: black 1px solid; padding-top: 5px;width:400px;"><span
 														data-type="period" data-value=""><input type="text"
 															readonly=""
 															class="ipt_editor ipt_editor_date hasDatepicker"
@@ -1173,19 +1173,17 @@ desired effect
 								</span> </span>
 
 								<div class="form-group" style="height: 100px;">
-									<div style="float: left; height: 100px; width: 130px;">
-										<div class="btn btn-default btn-file">
-											<i class="fa fa-paperclip"></i> Attachment <input
-												multiple="multiple" type="file" name="files"
-												class="upload-hidden">
+											<div style="float: left; height: 100px; width: 130px;">
+												<div class="btn btn-default btn-file" style="margin-top:10px;">
+													<i class="fa fa-paperclip"></i> Attachment <input
+														multiple="multiple" type="file" name="files"
+														class="upload-hidden">
+												</div>
+												<p class="help-block">Max. 32MB</p>
+											</div>
+											<div class="file-list"></div>
+										<button class="btn btn-primary" style="margin:10px 45px 0 0;float:right;"><i class="fa fa-edit"></i>작성</button>
 										</div>
-										<p class="help-block">Max. 32MB</p>
-									</div>
-									<div class="file-list"></div>
-								</div>
-								<div class="btn btn-primary" onclick="writeOrderForm();">
-									<i class="fa fa-edit"></i>작성
-								</div>
 
 							</form>
 						</div>

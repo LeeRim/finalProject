@@ -50,7 +50,7 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
-	<div class="wrapper">
+	<div style="height:892px;">
 
 		<c:import url="/WEB-INF/views/approval/approval_menu.jsp" />
 
@@ -61,7 +61,7 @@ desired effect
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
-					전자결재페이지 <small>Optional description</small>
+					전자결재 <small>업무기안</small>
 				</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -84,7 +84,7 @@ desired effect
 
 					<div class="wrap_container">
 						<!-- 3단 레이아웃 멀티클래스 -->
-						<section class="content_wrapper" style="margin-left:300px; margin-top:-50px;">
+						<section class="content_wrapper" style="margin-left:300px;">
 							<!--전자결제 상세-->
 							<div class="report_type approval_type form_back">
 
