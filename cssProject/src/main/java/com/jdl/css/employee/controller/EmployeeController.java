@@ -788,48 +788,56 @@ public class EmployeeController {
 	@RequestMapping("insertMember2.do")
 	public ModelAndView memberJoin2(@RequestParam("eBirth1") String eBirth1, @RequestParam("eHireDate1") String eHireDate1,
 			HttpServletRequest request, @RequestParam("ePhoto1") MultipartFile ePhoto, EmployeeVo member,
-			HttpSession session, @RequestParam("flag") String flag, ModelAndView mv) {
+			HttpSession session,  ModelAndView mv ) {
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		int cKey = employee.getcKeyFk();
 		String view="";
-		if(flag.equals("true")){
 
-		// System.out.println(ePhoto);
-		System.out.println("부서키 = " + member.geteDepartFk());
+			
+			System.out.println("부서키 = " + member.geteDepartFk());
 
-		String birth = eBirth1;
-		String hire = eHireDate1;
 
-		Date birth2 = Date.valueOf(eBirth1);
-		Date hire2 = Date.valueOf(eHireDate1);
+			
+			if(!eBirth1.equals("")){
+			Date birth2 = Date.valueOf(eBirth1);
+			member.seteBirth(birth2);
+			}
+			if(!eHireDate1.equals("")){
+			Date hire2 = Date.valueOf(eHireDate1);
+			member.seteHireDate(hire2);
+			}
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			java.util.Date dt = new java.util.Date();
+			
+			String root = request.getSession().getServletContext().getRealPath("resources");
 
-		member.seteBirth(birth2);
-		member.seteHireDate(hire2);
+			String path = root + "\\upload\\empPhoto";
+			String filePath = "";
 
-		String root = request.getSession().getServletContext().getRealPath("resources");
-
-		String path = root + "\\upload\\empPhoto";
-		String filePath = "";
-
-		File folder = new File(path);
-		if (!folder.exists()) {
-			folder.mkdirs();
-		}
-
-		filePath = folder + "\\" + ePhoto.getOriginalFilename();
-		try {
-			ePhoto.transferTo(new File(filePath));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		member.setePhoto(ePhoto.getOriginalFilename());
-		member.setcKeyFk(cKey);
-
-		int result = eService.insertMember(member);
-		System.out.println(flag);
+			File folder = new File(path);
+			if (!folder.exists()) {
+				folder.mkdirs();
+			}
+				
+				filePath = folder + "\\" + sdf.format(dt) + ePhoto.getOriginalFilename();
+				try {
+					ePhoto.transferTo(new File(filePath));
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				if(ePhoto==null){
+				member.setePhoto("empty.png");
+				}
+				else{
+				member.setePhoto(ePhoto.getOriginalFilename());
+				}
+				member.setcKeyFk(cKey);
+				
+				int result =eService.insertMember(member);
 			
 		List<EmployeeVo> list = eService.selectJobList(employee.getcKeyFk());
 		List<EmployeeVo> list2 = eService.selectDepartList(employee.getcKeyFk());
@@ -838,9 +846,6 @@ public class EmployeeController {
 		mv.addObject("list2", list2);
 		
 			view ="companyStartHome";
-		}else{
-			view ="redirect:companyPayment.do?cKeyFk="+cKey;
-		}
 		mv.setViewName(view);
 		return mv;
 	}
