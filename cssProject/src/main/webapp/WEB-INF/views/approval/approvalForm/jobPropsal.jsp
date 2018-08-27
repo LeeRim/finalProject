@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		width:150px;
 	}
 
-</style>
+</style> 
 
 <script type="text/javascript">
 	function openSelectApprover() {
@@ -116,14 +116,14 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
-	<div style="height:892px;">
+	<div class="wrapper">
 
 		<c:import url="/WEB-INF/views/approval/approval_menu.jsp" />
 
 
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper" style="background:white;">
+		<div class="content-wrapper" style="background:white;height:1000px;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
