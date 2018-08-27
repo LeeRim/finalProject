@@ -132,7 +132,7 @@
           <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="resources/dist/img/user1-128x128.jpg" alt="User Image">
+                <img class="img-circle" src="resources/upload/empPhoto/${board.ePhoto}" alt="User Image">
                 <span class="username">${attach.bTitle}</span>
                 <span class="description"><c:out value="${attach.eName }"/></span>
               </div>
@@ -157,11 +157,11 @@
             <!-- 이부분 반복 -->
               <div class="box-comment">
                 <!-- User image -->
-                <img class="img-circle img-sm" src="resources/dist/img/user3-128x128.jpg" alt="User Image">
+                <img class="img-circle img-sm" src="resources/upload/empPhoto/${b.user.ePhoto}" alt="User Image">
 
                 <div class="comment-text">
                       <span class="username">
-                        ${b.eName} 사원
+                        ${b.eName}
                         <span class="text-muted pull-right">${b.cDate}</span>
                         	<span class="text-muted pull-right">
                         		<button type="button" onclick="updateCommentForm(this, true);" class="btn btn-default btn-xs modifyBtn""><i class="fa fa-share"></i> 수정</button>
@@ -184,12 +184,12 @@
             <c:if test="${!empty user}">
             <div class="box-footer">
               <form action="writeComment.do" method="post">
-                <img class="img-responsive img-circle img-sm" src="resources/dist/img/user4-128x128.jpg" alt="Alt Text">
+                <img class="img-responsive img-circle img-sm" src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" alt="Alt Text">
                 <!-- .img-push is used to add margin to elements next to floating images -->
                 <div class="img-push">
                   <input type="text" name="cContent" class="form-control input-sm" placeholder="댓글 작성후 Enter시 등록됩니다.">
                   <input type="hidden" name="boardKey" value='<c:out value="${attach.boardKey}"/>'>
-				  <input type="hidden" name="cWriter"	value="${attach.bWriter }"/>
+				  <input type="hidden" name="cWriter"	value="${user.eKey }"/>
                 </div>
               </form>
             </div>
