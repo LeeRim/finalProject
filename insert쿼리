@@ -26,6 +26,14 @@ Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) valu
 Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (17,1,2,'부장',2);
 Insert into CSS.DIVISION (DIV_KEY,C_KEY_FK,DIV_TYPE,DIV_INFO,DIV_INFOLEVEL) values (18,1,2,'차장',3);
 
+--calender insert
+insert into calender values(SEQ_CALENDER.NEXTVAL,1,'임원진점심회동',to_date('2018-08-20','yyyy-mm-dd'),to_date('2018-08-20','yyyy-mm-dd'),2,1,'#00a65a');
+insert into calender values(SEQ_CALENDER.NEXTVAL,1,'기획회의',to_date('2018-08-07','yyyy-mm-dd'),to_date('2018-08-07','yyyy-mm-dd'),2,1,'#f39c12');
+insert into calender values(SEQ_CALENDER.NEXTVAL,1,'거래처방문',to_date('2018-08-07','yyyy-mm-dd'),to_date('2018-08-08','yyyy-mm-dd'),2,1,'#00c0ef');
+insert into calender values(SEQ_CALENDER.NEXTVAL,1,'외부 감사주',to_date('2018-08-13','yyyy-mm-dd'),to_date('2018-08-17','yyyy-mm-dd'),2,1,'#0073b7');
+insert into calender values(SEQ_CALENDER.NEXTVAL,1,'장대리휴가',to_date('2018-08-30','yyyy-mm-dd'),to_date('2018-08-31','yyyy-mm-dd'),2,1,'#f56954');
+
+
 
 -- EMPLOYEE INSERT
 Insert into CSS.EMPLOYEE (E_KEY,E_NO,C_KEY_FK,E_TYPE,E_ID,E_PWD,E_NAME,E_JOBCODE_FK,E_DEPART_FK,E_ADDRESS,E_EXTEN,E_PHONE,E_EMAIL,E_HIRE_DATE,E_ENT_DATE,E_ENT_YN,E_PHOTO) values (1,'사번',1,'2','admin','admin','관리자',8,6,null,null,null,null,null,null,'N',null);

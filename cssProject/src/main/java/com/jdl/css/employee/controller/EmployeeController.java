@@ -611,7 +611,7 @@ public class EmployeeController {
 		return "employee/jobGrade";
 	}
 
-	// 사원 정보 리스트 출력
+	// 조직도 사원 정보 리스트 출력
 	@RequestMapping("organizationChart.do")
 	public ModelAndView employeeList(ModelAndView mv, HttpSession session) {
 
@@ -626,7 +626,7 @@ public class EmployeeController {
 	}
 	
 	
-		// 관리자 사원 정보 리스트 출력
+		// 관리자 조직도 사원 정보 리스트 출력 
 		@RequestMapping("adminOrganizationChart.do")
 		public ModelAndView adminOrganizationChart(ModelAndView mv, HttpSession session) {
 
@@ -636,6 +636,7 @@ public class EmployeeController {
 
 			List<EmployeeVo> list = eService.selectEmployeeList(cKey);
 			mv.addObject("list", list);
+			System.out.println(list);
 			mv.setViewName("employee/adminOrganizationChart");
 			
 			return mv;
