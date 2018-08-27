@@ -96,8 +96,6 @@ public class EmployeeController {
 	public ModelAndView login(EmployeeVo employee,HttpSession session, ModelAndView mv){
 		EmployeeVo user = eService.selectEmployeeById(employee.geteId());
 
-		List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
-		List<ApprovalVo> waitingApprovals = aService.selectWaitingApprovalList(user.geteKey());
 
 		//근속년수에 따른 총 휴가 값 가지고오기
 		GivevacationVo giveVacation = vService.selectTotalVacation(user);
@@ -125,6 +123,8 @@ public class EmployeeController {
 			mv.addObject("errorMsg", "아이디 또는 비밀번호가 틀렸습니다.");
 			viewName = "index/login";
 		}else if(user.getePwd().equals(employee.getePwd())){
+			List<NoteVo> indexNote = nService.selectIndexNote(user.geteKey());
+			List<ApprovalVo> waitingApprovals = aService.selectWaitingApprovalList(user.geteKey());
 			session.setAttribute("user", user);
 			session.setAttribute("indexNote", indexNote);
 			session.setAttribute("indexApproval", waitingApprovals);

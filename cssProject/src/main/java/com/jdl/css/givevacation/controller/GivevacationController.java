@@ -27,6 +27,7 @@ public class GivevacationController {
 
 		List<GivevacationVo> list = service.selectGive(employee.getcKeyFk());
 
+		System.out.println("사이즈"+list.size());
 		System.out.println("리스트 : " + list);
 		mv.addObject("list", list);
 		mv.setViewName("GIVEVACATION/givevacation");
@@ -37,20 +38,22 @@ public class GivevacationController {
 	public ModelAndView writeGiveVaction(HttpSession session, String gvKey, String gvYear, String gvVacadate,
 			 ModelAndView mv) {
 		System.out.println("gvKey / " + gvKey);
-		System.out.println(gvVacadate);
-
+		System.out.println("몇 개 : " + gvVacadate);
+		
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
-
-		String[] gvK = gvKey.split(",");
-		int[] array1 = new int[20];
-
-		for (int i = 0; i < gvK.length; i++) {
-			try {
-				array1[i] = Integer.parseInt(gvK[i]);
-			} catch (NumberFormatException e) {
+		 int[] array1 = new int[20];
+		System.out.println(array1);
+		if(null != gvKey){
+			String[] gvK = gvKey.split(",");
+	
+			for (int i = 0; i < gvK.length; i++) {
+					array1[i] = Integer.parseInt(gvK[i]);
 			}
+		}else{
+			
 		}
-
+		System.out.println("20개 맞니 : " + array1);
+		
 		String[] gvY = gvYear.split(",");
 		int[] array = new int[gvY.length];
 
@@ -68,11 +71,11 @@ public class GivevacationController {
 		List<GivevacationVo> list = new ArrayList<GivevacationVo>();
 		for (int i = 0; i < array.length; i++) {
 			GivevacationVo Giv = new GivevacationVo();
-			System.out.println(array1[i]);
 			Giv.setGvKey(array1[i]);
 			Giv.setGvYear(array[i]);
 			Giv.setGvVacadate(array2[i]);
 			Giv.setcKeyFk(employee.getcKeyFk());
+			System.out.println(i+" / "+Giv);
 			list.add(Giv);
 		}
 		int result = service.insertGive(list);

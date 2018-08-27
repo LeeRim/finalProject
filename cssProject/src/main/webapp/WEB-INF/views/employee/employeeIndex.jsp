@@ -38,7 +38,7 @@
 		padding:7px;
 	}
 	#calendar{
-		height:565px;
+		height:720px;
 	}
 	.bordName{
 		margin-left:10px;
@@ -160,7 +160,7 @@
   
 
 
-  <div class="content-wrapper" style="height: 890px;">
+  <div class="content-wrapper" style="height: 1050px;">
 
     <section class="content-header">
 
@@ -291,7 +291,7 @@
               </div>
            </div>
            
-            <div class="col-md-4" style="margin-top:-9px; width:41%;">
+            <div class="col-md-4" style="width:41%;">
             <div class="box-body table-responsive no-padding">
                <table class="table table-hover">
                   <tr>
@@ -324,7 +324,7 @@
      
 	  
 	  <div class="row">
-     	<div class="col-md-9" style="width:58.3%;">
+     	<div class="col-md-9" style="width:58.3%; margin-top:-30px; ">
           <div class="box box-primary">
             <div class="box-body no-padding">
               <!-- THE CALENDAR -->
@@ -449,7 +449,7 @@
     
     
     $('#calendar').fullCalendar({
-    	height: 565, 
+    	height: 720, 
     	header    : {
         left  : '',
         center: 'title',
