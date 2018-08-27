@@ -72,8 +72,10 @@
       }).mouseout(function(){
          $(this).parent().css("background","white");
       }).click(function(){
+    	 if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
          var boardNo = $(this).parent("tr").data("key");
-         location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1";       
+         location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1";
+    	 }
       });
    });
    
@@ -302,7 +304,7 @@
                   </tr>
                   <c:if test="${board1.size() == 0}">
 		    	            <tr>
-		                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+		                		<td colspan="3" id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
 		 	               </tr>
 		                </c:if>
 		                <c:if test="${board1.size() != 0}">
@@ -347,7 +349,7 @@
 							</tr>
 							<c:if test="${board3.size() == 0}">
 			    	            <tr>
-			                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
+			                		<td colspan="3"  id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
 			 	               </tr>
 			                </c:if>
 			                <c:if test="${board3.size() != 0}">

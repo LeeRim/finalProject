@@ -53,8 +53,10 @@
 	   }).mouseout(function(){
 	      $(this).parent().css("background","white");
 	   }).click(function(){
+		  if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
 	      var boardNo = $(this).parent("tr").data("key");
-	      location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1";       
+	      location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1"; 
+		  }
 	   });
 	});
 	
@@ -65,8 +67,10 @@
 		   }).mouseout(function(){
 		      $(this).parent().css("background","white");
 		   }).click(function(){
+			  if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
 		      var attach = $(this).parent("tr").data("key");
-		      location.href = "attachDetailPage.do?attaKey=" + attach;    
+		      location.href = "attachDetailPage.do?attaKey=" + attach;
+			  }
 		   });
 		});  
 	
@@ -108,12 +112,12 @@
 							<th class="count">조회수</th>
 							<th class="date">작성일</th>
 						</tr>
-						<c:if test="${list.size() == 0}">
+						<c:if test="${board1.size() == 0}">
     	            <tr>
-                		<td colspan="5">조회 된 게시글이 없습니다.</td>
+                		<td colspan="5" id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
  	                </tr>
                 		</c:if>
-                		<c:if test="${list.size() != 0}">
+                		<c:if test="${board1.size() != 0}">
 						<c:forEach items="${board1}" var="board1" varStatus="status">
 							<tr data-key=${board1.boardKey }>
 								<td class="bno">${status.count }</td>
@@ -146,12 +150,12 @@
 							<th class="count">조회수</th>
 							<th class="date">작성일</th>
 						</tr>
-						<c:if test="${list.size() == 0}">
+						<c:if test="${board2.size() == 0}">
     	            <tr>
-                		<td colspan="3">조회 된 게시글이 없습니다.</td>
+                		<td colspan="5" id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
  	                </tr>
                 		</c:if>
-                		<c:if test="${list.size() != 0}">
+                		<c:if test="${board2.size() != 0}">
 						<c:forEach items="${board2}" var="board2" varStatus="status">
 							<tr data-key="${board2.boardKey }">
 								<td class="bno">${status.count }</td>
@@ -184,12 +188,12 @@
 							<th class="count">조회수</th>
 							<th class="date">작성일</th>
 						</tr>
-						<c:if test="${list.size() == 0}">
+						<c:if test="${board3.size() == 0}">
     	            <tr>
-                		<td colspan="3">조회 된 게시글이 없습니다.</td>
+                		<td colspan="5" id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
  	                </tr>
                 		</c:if>
-                		<c:if test="${list.size() != 0}">
+                		<c:if test="${board3.size() != 0}">
 						<c:forEach items="${board3}" var="board3" varStatus="status">
 							 <tr data-key="${board3.boardKey}">
 							 	<td class="bno">${status.count }</td>
@@ -223,12 +227,12 @@
 							<th class="count">조회수</th>
 							<th class="date">작성일</th>
 						</tr>
-						<c:if test="${list.size() == 0}">
+						<c:if test="${board4.size() == 0}">
     	            <tr>
-                		<td colspan="3">조회 된 게시글이 없습니다.</td>
+                		<td colspan="5" id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
  	                </tr>
                 		</c:if>
-                		<c:if test="${list.size() != 0}">
+                		<c:if test="${board4.size() != 0}">
 						<c:forEach items="${board4}" var="att" varStatus="status">
 							 <tr data-key="${att.boardKey}">
 							 	<td class="bno">${status.count }</td>
