@@ -59,7 +59,7 @@
 	        <li><a href="myPageUpdate.do"><i class="fa fa-link"></i> <span>마이페이지 수정</span></a></li>
         </c:if>
         <c:if test="${user.eType == '1'}">
-        <li><a href="adminOrganizationChart.do"><i class="fa fa-link"></i> <span>사원 정보 수정</span></a></li>
+        <li><a href="adminOrganizationChart.do"><i class="fa fa-link"></i> <span>사원 정보 관리</span></a></li>
         <li><a href="myPageUpdate.do"><i class="fa fa-link"></i> <span>마이페이지 수정</span></a></li>
         <li><a href="companyUpdate.do"><i class="fa fa-link"></i> <span>회사 정보 수정</span></a></li>
         <li><a href="memberAdd.do"><i class="fa fa-link"></i> <span>사원 등록</span></a></li>
