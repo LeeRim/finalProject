@@ -45,10 +45,9 @@ public class BorderService {
 		return dao.updateBoardCount(boardKey);
 	}
 
-	public List<BoardCommentVo> selectCommentList(int boardKey) {
-		return dao.selectCommentList(boardKey);
+	public List<BoardCommentVo> selectCommentList(int attaLocation) {
+		return dao.selectCommentList(attaLocation);
 	}
-
 	public int InsertborderComment(BoardCommentVo bc) {
 		return dao.insertComment(bc);
 	}

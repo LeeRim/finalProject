@@ -803,7 +803,8 @@ public class EmployeeController {
 		
 		List<BorderVo> board1 = borderservice.selectBoardOneEmp(); // 공지사항
 		mav.addObject("board1", board1);
-		
+		List<BorderVo> board2 = borderservice.selectBoardTwoEmp(); //자유
+		mav.addObject("board2", board2);
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		//세션값 없으면 로그인페이지
 		String oneSelect = commservice.selectOneCommute(employee);	

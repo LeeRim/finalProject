@@ -47,8 +47,8 @@ public class BorderDao {
 		return sqlSession.update("BorderMapper.BorderCountUpdate", boardKey);
 	}
 
-	public List<BoardCommentVo> selectCommentList(int boardKey) {
-		return sqlSession.selectList("BorderMapper.selectCommentList", boardKey);
+	public List<BoardCommentVo> selectCommentList(int attaLocation) {
+		return sqlSession.selectList("BorderMapper.selectCommentList", attaLocation);
 	}
 
 	public int insertComment(BoardCommentVo bc) {

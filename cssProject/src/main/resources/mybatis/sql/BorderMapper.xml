@@ -90,7 +90,7 @@
 		FROM BOARD_COMMENT c
 		JOIN BOARD b on (c.B_KEY_FK = b.B_KEY)
 		JOIN EMPLOYEE e on (c.CO_WRITER_FK = e.E_KEY)
-		WHERE B_KEY = #{boardKey}
+		WHERE B_KEY = #{attaLocation}
 	</select>
 	
 	<insert id="BorderComment">

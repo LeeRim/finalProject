@@ -285,9 +285,12 @@ public class BorderController {
 		
 		AttachmentVo attach = attachservice.selectAttachDetail(av);
 		List<BoardCommentVo> bList = borderservice.selectCommentList(attach.getBoardKey());
+		BorderVo board = borderservice.selectBoard(attach.getBoardKey());
 		
 		System.out.println("갤러리 디테일 : " + attach);
 		System.out.println("갤러리 디테일2 : " + bList);
+		System.out.println("갤러리 보드 : " + board);
+		mv.addObject("board", board);
 		mv.addObject("attach", attach);
 		mv.addObject("bList", bList);
 		mv.setViewName("border/borderGalleryDetail");

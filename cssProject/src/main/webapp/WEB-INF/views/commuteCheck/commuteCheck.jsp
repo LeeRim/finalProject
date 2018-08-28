@@ -39,7 +39,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<table id="commuteList" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th width="150">사원번호</th>
+								<th width="150">사원명</th>
 								<th width="150">출근일 </th>
 								<th width="150">출근시간</th>
 								<th width="150">퇴근시간</th>
@@ -47,7 +47,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						</thead>
 						<c:forEach items="${list}" var="commute">
 							<tr>
-								<td width="150">${commute.eKey}</td>
+								<td width="150">${commute.name} ${commute.job}</td>
 								<td width="150">${commute.inDate}</td>
 								<td width="150">${commute.strInTime}</td>
 								<td width="150">${commute.strOutTime}</td>

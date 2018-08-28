@@ -164,7 +164,7 @@
             <div class="box-body">
             
              <div class="bcontent">
-             <img src="resources/upload/boardGallery/${Attach.attaFileName}" width="510px" height="150px"/><br>
+             <img src="resources/upload/boardGallery/${attach.attaFileName}" width="510px" height="150px"/><br>
               ${attach.bContent}</div>
               <button type="button" onclick="border();" class="btn btn-default btn-xs"><i class="fa fa-share"></i> 리스트</button>
               <c:if test="${user ne null && user.eKey eq attach.bWriter}">

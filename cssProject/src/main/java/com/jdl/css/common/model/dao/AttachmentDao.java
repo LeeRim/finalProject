@@ -22,9 +22,6 @@ public class AttachmentDao {
 		return session.selectList("AttachmentMapper.selectAttachment");
 	}
 
-	public AttachmentVo selectAttachmentDetail(AttachmentVo av) {
-		return session.selectOne("AttachmentMapper.selectAttachmentDetail", av);
-	}
 
 	public int deleteAttachGallery(AttachmentVo av) {
 		return session.delete("AttachmentMapper.deleteAttachment", av);
@@ -44,5 +41,9 @@ public class AttachmentDao {
 
 	public AttachmentVo selectQnaAttach(int qKey) {
 		return session.selectOne("AttachmentMapper.selectQNAttach", qKey);
+	}
+
+	public AttachmentVo selectAttachmentDetail(AttachmentVo av) {
+		return session.selectOne("AttachmentMapper.selectAttachmentDetail", av);
 	}
 }

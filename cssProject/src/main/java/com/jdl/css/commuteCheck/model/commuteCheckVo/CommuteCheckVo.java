@@ -12,6 +12,24 @@ public class CommuteCheckVo {
 	
 	private String strInTime;
 	private String strOutTime;
+	
+	private String name;
+	private String job;
+	
+		
+	public CommuteCheckVo(){
+		
+	}
+	
+	public CommuteCheckVo(int id, int eKey, String inDate, Date inTime, Date outTime, int cKeyFk, String strInTime,
+			String strOutTime){
+		this.id = id;
+		this.eKey = eKey;
+		this.inDate = inDate;
+		this.inTime = inTime;
+		this.outTime = outTime;
+		this.cKeyFk = cKeyFk;
+	}
 
 	public int geteKey() {
 		return eKey;
@@ -29,23 +47,25 @@ public class CommuteCheckVo {
 		this.cKeyFk = cKeyFk;
 	}
 
-	public CommuteCheckVo(){
-		
+	
+	public String getName() {
+		return name;
 	}
 
-
-	public CommuteCheckVo(int id, int eKey, String inDate, Date inTime, Date outTime, int cKeyFk, String strInTime,
-			String strOutTime){
-		this.id = id;
-		this.eKey = eKey;
-		this.inDate = inDate;
-		this.inTime = inTime;
-		this.outTime = outTime;
-		this.cKeyFk = cKeyFk;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	
-	
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -114,10 +134,8 @@ public class CommuteCheckVo {
 	public String toString() {
 		return "CommuteCheckVo [id=" + id + ", eKey=" + eKey + ", inDate=" + inDate + ", inTime=" + inTime
 				+ ", outTime=" + outTime + ", cKeyFk=" + cKeyFk + ", strInTime=" + strInTime + ", strOutTime="
-				+ strOutTime + "]";
+				+ strOutTime + ", name=" + name + ", job=" + job + "]";
 	}
-
-	
 
 
 	

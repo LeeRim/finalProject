@@ -33,9 +33,12 @@
   	</select>
   	
   	<select id="selectAllCommute" resultType="Commute" parameterType="EmployeeVo"><!-- 이게 회사관리자가볼거 -->
-  		select E_KEY_FK as"eKey" ,comm_date as "inDate",to_char(comm_intime,'hh:mm:ss') as "strInTime" ,to_char(comm_outtime,'hh:mm:ss') as "strOutTime"
-		from commute
-		where C_KEY_FK = ${cKeyFk}
+  	select C.E_KEY_FK as"eKey" ,comm_date as "inDate",to_char(comm_intime,'hh:mm:ss') as "strInTime" ,to_char(comm_outtime,'hh:mm:ss') as "strOutTime"
+        ,E.E_NAME AS "NAME", D.DIV_INFO AS "JOB" 
+		from commute C
+        JOIN EMPLOYEE E ON(C.E_KEY_FK = E.E_KEY)
+        JOIN DIVISION D ON(E.E_JOBCODE_FK = D.DIV_KEY)
+		where C.C_KEY_FK = ${cKeyFk}   
   	</select>
   	
   	<select id="selectOneCommute" resultType="Commute">

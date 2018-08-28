@@ -55,7 +55,7 @@
 	   }).click(function(){
 		  if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
 	      var boardNo = $(this).parent("tr").data("key");
-	      location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1"; 
+	       location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1";  
 		  }
 	   });
 	});
@@ -69,7 +69,8 @@
 		   }).click(function(){
 			  if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
 		      var attach = $(this).parent("tr").data("key");
-		      location.href = "attachDetailPage.do?attaKey=" + attach;
+		      console.log(attach);
+		       location.href = "attachDetailPage.do?attaKey=" + attach; 
 			  }
 		   });
 		});  

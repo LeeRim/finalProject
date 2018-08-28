@@ -26,9 +26,6 @@ public class AttachmentService {
 		return dao.selectAttachment();
 	}
 
-	public AttachmentVo selectAttachDetail(AttachmentVo av) {
-		return dao.selectAttachmentDetail(av);
-	}
 
 	public int deleteGallery(AttachmentVo av) {
 		return dao.deleteAttachGallery(av);
@@ -48,6 +45,10 @@ public class AttachmentService {
 
 	public AttachmentVo qnaAttach(int qKey) {
 		return dao.selectQnaAttach(qKey);
+	}
+
+	public AttachmentVo selectAttachDetail(AttachmentVo av) {
+		return dao.selectAttachmentDetail(av);
 	}
 
 

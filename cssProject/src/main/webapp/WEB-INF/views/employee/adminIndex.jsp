@@ -455,24 +455,24 @@
 				<div class="box-body table-responsive no-padding">
 					<table class="table table-hover">
 						<tr>
-							<th colspan="3" style="background:#bcbcbc;">문의사항</th>
+							<th colspan="3" style="background:#bcbcbc;">자유 게시판</th>
 						</tr>
 						<tr>
 							<th class="title">글제목</th>
 							<th class="writer">작성자</th>
 							<th class="date">작성일</th>
 						</tr>
-						 <c:if test="${board1.size() == 0}">
+						 <c:if test="${board2.size() == 0}">
 		    	            <tr>
 		                		<td colspan="5" id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
 		 	               </tr>
                 		</c:if>
-		                <c:if test="${board1.size() != 0}">
-								<c:forEach items="${board1}" var="board1" varStatus="status">
-									<tr data-key=${board1.boardKey }>
-										<td class="title"><c:out value="${board1.bTitle }" /></td>
-										<td class="writer"><c:out value="${board1.eName }" /></td>
-										<td class="date"><c:out value="${board1.bDate }" /></td>
+		                <c:if test="${board2.size() != 0}">
+								<c:forEach items="${board2}" var="board2" varStatus="status">
+									<tr data-key=${board2.boardKey }>
+										<td class="title"><c:out value="${board2.bTitle }" /></td>
+										<td class="writer"><c:out value="${board2.eName }" /></td>
+										<td class="date"><c:out value="${board2.bDate }" /></td>
 									</tr>
 								</c:forEach>
 						</c:if>
