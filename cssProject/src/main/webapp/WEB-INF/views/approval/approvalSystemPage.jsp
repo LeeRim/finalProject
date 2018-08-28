@@ -180,7 +180,7 @@ desired effect
 							<div class="box-body box-profile">
 								<img id="profileImg"
 									class="profile-user-img img-responsive img-circle"
-									src="resources/upload/approval/KakaoTalk_20170331_022521650.jpg"
+									src="resources/upload/empPhoto/${instead.ePhoto }"
 									alt="User profile picture" style="width: 150px; height: 150px;">
 
 								<h3 id="name" class="profile-username text-center">
