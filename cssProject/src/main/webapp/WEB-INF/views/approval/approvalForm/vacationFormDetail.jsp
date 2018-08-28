@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:import url="/WEB-INF/views/include/header.jsp" />
+<c:import url="../doApprovalPage.jsp" />
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -23,9 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" />
 <script type="text/javascript">
-	function openSelectApprover() {
-		$('div.modal').modal();
-	}
+
 	$(function() {
 		$('#vfStartdate,#vfEnddate').datepicker({
 			format : "yyyy/mm/dd",
@@ -276,7 +275,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	</div>
 
 
-	<c:import url="../selectApproverPage.jsp"/>
 	<c:import url="/WEB-INF/views/include/footer.jsp" />
 	<script>
 		$(function(){
