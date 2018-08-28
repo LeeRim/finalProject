@@ -437,7 +437,7 @@ function photoDelete() {
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        조직도
+        내정보 수정
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -450,7 +450,7 @@ function photoDelete() {
 		
 		<div class="box box-primary" style="margin-top:50px; width:1300px;">
 		<div class="box-header with-border">
-              <h3 class="box-title">내정보 수정</h3>
+              <h3 class="box-title">내정보</h3>
             </div>
 		<div style="width:80%; margin: 0 auto;">
             <!-- /.box-header -->
