@@ -677,10 +677,10 @@ td {
 						</div>
 					</div>
 
-					<div class="employee_list">
+					<div class="employee_list"  style="hieght:590px; overflow-y:scroll;">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0"
 							class="tbl_board1" style="color:#585858;">
-							<tbody>
+							<thead>
 								<tr height="24" style="text-align:center; background: #F2F2F2;">
 									<td class="employee_list_tab">No</td>
 									<td class="employee_list_tab" style="width:130px;">아이디</td>
@@ -694,7 +694,7 @@ td {
 									<td class="employee_list_tab">정보수정</td>
 									<td class="employee_list_tab">사원삭제</td>
 								</tr>
-								</tbody>
+								</thead>
 								<tbody id="listView">
 								<c:forEach items="${list }" var="e" varStatus="status">
 									<tr bgcolor="#FFFFFF" height="26">
