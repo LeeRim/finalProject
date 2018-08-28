@@ -59,12 +59,12 @@
   		width:80%;
   	}
   	.bcontent{
-  		width:1500px;
+  		width:1550px;
   		height:500px;
   	}
   	.row{
   		width:100%;
-  		margin-left:180px;
+  		margin-left:30px;
   	}
 </style>
 <script>
@@ -127,9 +127,9 @@
 </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" >
    <c:import url="/WEB-INF/views/border/left_column_board.jsp"/>
-	<div class="content-wrapper">
+	<div class="content-wrapper" style="height:942.5px;">
 	<section class="content-header">
       <h1>
        게시판

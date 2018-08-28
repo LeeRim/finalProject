@@ -105,7 +105,7 @@
 		<c:import url="left_column_note.jsp" />
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper" style="height: 100%;">
+		<div class="content-wrapper" style="height: 980px;">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>

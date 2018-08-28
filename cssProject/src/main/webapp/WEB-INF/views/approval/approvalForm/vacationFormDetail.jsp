@@ -60,7 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 			</section>
 
 			<!-- Main content -->
-			<section class="content container-fluid" style="margin-left:500px; margin-top:20px;">
+			<section class="content container-fluid" style="margin-left:300px; margin-top:20px;">
 
 				<!--------------------------
         | Your Page Content Here |

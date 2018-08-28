@@ -18,7 +18,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 	
-	<c:import url="/WEB-INF/views/include/left_column.jsp"/>
+<%-- 	<c:import url="/WEB-INF/views/include/left_column.jsp"/> --%>
+<c:if test="${sessionScope.user.eType == '1' }">
+<c:import url="/WEB-INF/views/include/left_column_companyAdmin.jsp"/>
+</c:if>
+<c:if test="${sessionScope.user.eType == '2' }">
+<c:import url="/WEB-INF/views/include/left_column_employee.jsp"/>
+</c:if>
   
 
   <div class="content-wrapper" style="height: 100%;">
@@ -29,8 +35,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <section class="content">
     <div class="row">
-    	<div class="col-xs-12">
-    	<div class="box">
+    	<div class="col-md-12">
+    	<div class="box" style="width:100%;">
     	<div class="box-header">
     		 <h3 class="box-title">근태관리</h3>
 		</div>

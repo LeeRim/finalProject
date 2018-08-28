@@ -614,7 +614,7 @@ public class ApprovalController {
 			result = "redirect:openJobPropsalDetail.do?aKey=" + aKey;
 			break;
 		case 5:
-			result = "redirect:openJobPropsalDetail.do?aKey=" + aKey;
+			result = "redirect:openVacationFormDetail.do?aKey=" + aKey;
 			break;
 		}
 
@@ -661,8 +661,8 @@ public class ApprovalController {
 			updateAResult = aService.updateApproval(app);
 		}
 		if(doctype==5){
-			updateVacation(app);
-			if(updateVacation(app) >0){
+			updateVacation(app,session);
+			if(updateVacation(app,session) >0){
 			     //근속년수에 따른 총 휴가 값 가지고오기
 				GivevacationVo giveVacation = vService.selectTotalVacation(user);
 			      //휴가 사용일 가져오기
@@ -683,13 +683,14 @@ public class ApprovalController {
 		return result;
 	}
 	
-	public int updateVacation(ApprovalVo a){
+	public int updateVacation(ApprovalVo a, HttpSession session){
 		int result=0;
+		EmployeeVo user = (EmployeeVo) session.getAttribute("user");
 		a = aService.selectApprovalDetail(a);
 		VacationFormVo vacation = aService.selectVacationForm(a.getaKey());
 		if(a.getaCondition()==1){
 			VacationVo v = new VacationVo();
-			v.setcKeyFk(a.getcKeyFk());
+			v.setcKeyFk(user.getcKeyFk());
 			v.seteKeyFk(a.getaWriterFk());
 			v.setvStartdate(vacation.getVfStartdate());
 			v.setvRecalldate(vacation.getVfEnddate());
@@ -698,7 +699,7 @@ public class ApprovalController {
 			
 			CalenderVo vCal = new CalenderVo();
 			String title = a.getWriter().geteName()+" "+a.getWriter().getJob()+"님 휴가";
-			vCal.setcKeyFk(a.getcKeyFk());
+			vCal.setcKeyFk(user.getcKeyFk());
 			vCal.setTitle(title);
 			vCal.setStartDate(Date.valueOf(vacation.getVfStartdate()));
 			vCal.setEndDate(Date.valueOf(vacation.getVfEnddate()));

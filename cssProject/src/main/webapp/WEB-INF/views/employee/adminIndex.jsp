@@ -241,7 +241,7 @@
         </div>
         
         
-        <div class="col-md-4" style="margin-left:12px;">
+        <div class="col-md-4" >
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user-2 cProfileBody">
             <!-- Add the bg color to the header using any of the bg-* classes -->
@@ -319,7 +319,7 @@
         
         
         
-	        <div class="col-md-3" style="margin-left:12px;">
+	        <div class="col-md-3" >
 	        <div class="box box-default boxTime" style="height:150px; text-align:center;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title" style="padding:10px;"><c:out value="${ipLocation}"></c:out></h3>
@@ -335,7 +335,7 @@
 	          </div>
 	          
 	          <div class="row" >
-	          <div class="box box-default" style="width:48.4%; height:112px;">
+	          <div class="box box-default" style="width:47.5%; height:112px; margin-left:3px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">출근시간</h3>
 				  <c:if test="${oneSelect eq null}">
@@ -354,7 +354,7 @@
 	          </div>
 	          <!-- /.box -->
 	          
-	          <div class="box box-default" style="width:48.4%; height:112px; margin-left:14px;">
+	          <div class="box box-default" style="width:47.5%; height:112px; margin-left:14px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">퇴근시간</h3>
 					 <c:if test="${oneSelect ne null}">
@@ -503,8 +503,8 @@
      
     var donutData = [
     	<c:forEach items="${departCountList }" var="dc" varStatus="status">
-	    	<c:if test="${!status.last}">{ label: '${dc.department}', data: ${dc.count}, color: '#3c8dbc' },</c:if>
-			<c:if test="${status.last}">{ label: '${dc.department}', data: ${dc.count}, color: '#3c8dbb' }</c:if>
+		    	<c:if test="${!status.last}">{ label: '${dc.department}', data: ${dc.count}, color: '#79BD9A' },</c:if>
+				<c:if test="${status.last}">{ label: '${dc.department}', data: ${dc.count}, color: '#79BD9A' }</c:if>
       </c:forEach>	
     ]
     
@@ -516,7 +516,7 @@
           innerRadius: 0.5,
           label      : {
             show     : true,
-            radius   : 2 / 3,
+            radius   : 3 / 4,
             formatter: labelFormatter,
             threshold: 0.1
           }
@@ -538,7 +538,7 @@
    * ----------------------
    */
   function labelFormatter(label, series) {
-    return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
+    return '<div style="font-size:13px; text-align:center; padding:2px; color: black; font-weight: 600;">'
       + label
       + '<br>'
       + Math.round(series.percent) + '%</div>'

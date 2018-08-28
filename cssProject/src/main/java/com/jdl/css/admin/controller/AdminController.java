@@ -109,13 +109,11 @@ public class AdminController {
 		String cKey = request.getParameter("companyList");
 		String listValue = request.getParameter("listValue");
 		int result = service.updateCompanyLevel(cLevel, cKey);
-		if(result >0){
-			user.setcLevel(cLevel);
-			session.setAttribute("user", user);
-		} 
+		
 		if(listValue.equals("setList")){
 			return "redirect:companySet.do";			
 		}
+		System.out.println(user);
 		return "redirect:companyList.do";
 	}
 	
@@ -127,7 +125,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="companyPaymentP.do", produces="application/text; charset=utf-8")
-	public @ResponseBody String companyPaymentP(HttpServletRequest request){
+	public @ResponseBody String companyPaymentP(HttpServletRequest request,HttpSession session){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
 		int cKeyFk = Integer.parseInt(request.getParameter("cKeyFk"));
 		String payMileage = request.getParameter("payMileage");
 		int payVoucher = Integer.parseInt(request.getParameter("payVoucher"));
@@ -148,8 +147,12 @@ public class AdminController {
 		}else{
 			company.setPayVoucher(365);
 		}
-		service.insertCompanyPaymentC(company);
+		int result = service.insertCompanyPaymentC(company);
 		String mmmm = "redirect:companyPayment.do?cKeyFk="+cKeyFk;
+		if(result >0){
+			user.setcLevel(cLevel);
+			session.setAttribute("user", user);
+		} 
 		return mmmm;
 	}
 	

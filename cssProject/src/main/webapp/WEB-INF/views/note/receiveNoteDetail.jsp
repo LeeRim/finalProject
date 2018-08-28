@@ -54,6 +54,9 @@
   <div class="content-wrapper" style="height: 100%;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+    <h1>
+					쪽지 <small>받은쪽지함</small>
+				</h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
         <li class="active">Here</li>
@@ -62,10 +65,10 @@
 
     <!-- Main content -->
     <section class="content container-fluid">
- 		<div class="row">
-       
-        <div class="col-md-9" style="width: 99%">
-          <div class="box box-primary">
+ 		<div class="row" style="margin-top:20px;">
+       <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <div class="box box-primary" style="width: 99%">
             <div class="box-header with-border">
               <h3 class="box-title"><c:out value="${sendDetail.snTitle}"/></h3>
 				<span class="mailbox-read-time pull-right"><c:out value="${sendDetail.snWriteDate}"/></span>
@@ -132,6 +135,7 @@
           </div>
           <!-- /. box -->
         </div>
+        <div class="col-md-1"></div>
         <!-- /.col -->
       </div>
 
