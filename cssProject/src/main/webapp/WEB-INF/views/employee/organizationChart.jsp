@@ -86,7 +86,6 @@
 	font-size: 15px !important;
 	border-bottom: 3px solid #3c8dbc;
 }
-
 .employee_list_tab {
 	border-bottom: 1px #BDBDBD solid;
 	border-right: 1px #BDBDBD solid;
@@ -582,10 +581,10 @@ td {
 
 					</div>
 
-					<div class="employee_list">
+					<div class="employee_list"  style="hieght:590px; overflow-y:scroll;">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0"
 							class="tbl_board1" style="color:#585858;">
-							<tbody>
+							<thead>
 								<tr height="24" style="text-align:center; background: #F2F2F2;">
 									<td class="employee_list_tab">No</td>
 									<td class="employee_list_tab" style="width:130px;">아이디</td>
@@ -596,7 +595,7 @@ td {
 									<td class="employee_list_tab">핸드폰</td>
 									<td class="employee_list_tab">입사일</td>
 								</tr>
-								</tbody>
+								</thead>
 								<tbody id="listView">
 								<c:forEach items="${list }" var="e" varStatus="status">
 								<c:if test="${e.eEntYn.toString() eq 'N' }">
