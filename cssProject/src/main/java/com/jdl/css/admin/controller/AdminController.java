@@ -79,6 +79,9 @@ public class AdminController {
 		List<CompanyVo> nowCalList = service.selectNowCalList();
 		mv.addObject("nowCalList",nowCalList);
 		
+		List<PaymentVo> userAddList = service.selectUserAddList();
+		mv.addObject("userAddList",userAddList);
+		
 		mv.setViewName("admin/admin_main");
 		return mv;
 	}
@@ -176,4 +179,5 @@ public class AdminController {
 		mv.setViewName("admin/companyPaymentList");
 		return mv;
 	}
+	
 }

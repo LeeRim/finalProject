@@ -80,7 +80,7 @@ font-size:45px;
 .headerMenu li a span{
 font-size:15px;
 }
-.pull-right{
+.logout{
 	margin-left:1750px;
 	margin-top:8px;
 }
@@ -120,7 +120,7 @@ font-size:15px;
 		<nav class="navbar navbar-static-top" role="navigation">
 			<div class="btn-group">
 				<a class="sidebar-toggle" data-toggle="dropdown"> </a>
-				<div class="pull-right"><a href="logout.do" class="btn btn-default btn-flat">로그아웃</a></div>
+				<div class="pull-right logout"><a href="logout.do" class="btn btn-default btn-flat">로그아웃</a></div>
 				</div>
 		</nav>
 	</header>

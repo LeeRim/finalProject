@@ -117,6 +117,10 @@ public class AdminService {
 		return dao.selectCompanyPaymentList();
 	}
 
+	public List<PaymentVo> selectUserAddList() {
+		return dao.selectUserAddList();
+	}
+
 	
 
 
