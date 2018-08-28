@@ -257,7 +257,7 @@ desired effect
 														value="" data-id="subject" data-name="subject"
 														data-require="false" data-maxlength="" data-width=""
 														data-defaultstr="" data-editable="false" data-value=""
-														placeholder=""><br></td>
+														placeholder="" style="width:100%;"><br></td>
 												</tr>
 											</tbody>
 											<colgroup>
@@ -373,7 +373,7 @@ desired effect
 														data-dsl="{{text}}" name="oPurpose" id="oPurpose" value=""
 														data-id="" data-name="" data-require="false"
 														data-maxlength="" data-width="" data-defaultstr=""
-														data-editable="false" data-value="" placeholder=""><br></td>
+														data-editable="false" data-value="" placeholder="" style="width:100%;"><br></td>
 												</tr>
 											</tbody>
 										</table>
@@ -1154,7 +1154,7 @@ desired effect
 															data-dsl="{{textarea}}" name="aContent" id="aContent"
 															value="" data-id="" data-name="" data-require="false"
 															data-maxlength="" data-width="" data-defaultstr=""
-															data-editable="false" data-value="" placeholder=""></textarea><br></td>
+															data-editable="false" data-value="" placeholder="" class="txta_editor" style="width:100%;height:100%; border:none;"></textarea><br></td>
 												</tr>
 											</tbody>
 										</table>

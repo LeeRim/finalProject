@@ -285,7 +285,7 @@ desired effect
 														<td
 															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"><input
 															type="text" class="ipt_editor" name="jpCooperation"
-															id="jpCooperation" value=""></td>
+															id="jpCooperation" value="" style="width:100%;"></td>
 													</tr>
 
 													<tr>
@@ -296,7 +296,7 @@ desired effect
 														<td
 															style="background: rgb(255, 255, 255); padding: 5px; border: 1px solid black; border-image: none; text-align: left; color: rgb(0, 0, 0); font-size: 14px; font-weight: normal; vertical-align: middle;"
 															colspan="3"><input type="text" class="ipt_editor"
-															name="aTitle" id="aTitle" value=""></td>
+															name="aTitle" id="aTitle" value="" style="width:100%;"></td>
 													</tr>
 													<tr>
 														<td
