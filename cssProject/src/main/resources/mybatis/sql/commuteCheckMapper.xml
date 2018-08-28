@@ -35,7 +35,7 @@
   	<select id="selectAllCommute" resultType="Commute" parameterType="EmployeeVo"><!-- 이게 회사관리자가볼거 -->
   		select E_KEY_FK as"eKey" ,comm_date as "inDate",to_char(comm_intime,'hh:mm:ss') as "strInTime" ,to_char(comm_outtime,'hh:mm:ss') as "strOutTime"
 		from commute
-		where C_KEY_FK = ${cKeyFk} and to_char(comm_date,'dd') = to_char(sysdate,'dd')
+		where C_KEY_FK = ${cKeyFk}
   	</select>
   	
   	<select id="selectOneCommute" resultType="Commute">
