@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
 import com.jdl.css.commuteCheck.model.commuteCheckService.CommuteCheckService;
 import com.jdl.css.commuteCheck.model.commuteCheckVo.CommuteCheckVo;
 import com.jdl.css.employee.model.vo.EmployeeVo;
@@ -44,38 +46,41 @@ CommuteCheckService service;
 	}
 	
 	
-	@RequestMapping("commuteOut.do")
-	public ModelAndView insertOutCommuteCheck(CommuteCheckVo commute, ModelAndView mav,HttpSession session){
-		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
-		System.out.println(user);
-		
-		int result = service.insertOutCommuteCheck(user);
-		CommuteCheckVo cc=service.selectCommute(commute);
-		mav.addObject("user",user);
-		mav.addObject("commute",commute);
-		mav.setViewName("redirect:commuteCheck.do");
-		return mav;
-	}
+//	@RequestMapping("commuteOut.do")
+//	public ModelAndView insertOutCommuteCheck(CommuteCheckVo commute, ModelAndView mav,HttpSession session){
+//		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+//		int result = service.insertOutCommuteCheck(user);
+//		mav.addObject("user",user);
+//		CommuteCheckVo cc=service.selectCommute(user);
+//		mav.addObject("commute",commute);
+//		mav.setViewName("employee/employeeIndex");
+//		return mav;
+//	}
 	
-	@RequestMapping("commuteone.do")
-	public ModelAndView innerCommute(ModelAndView mv, CommuteCheckVo commute,HttpServletRequest request, HttpSession session)throws ServletException, IOException{
+	/*@RequestMapping("commuteone.do")
+	public ModelAndView innerCommute(ModelAndView mav, HttpServletRequest request, HttpSession session)throws ServletException, IOException{
 		
 		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
 		InetAddress addr = null;
 		addr = InetAddress.getLocalHost();
 		String ipLocation = addr.getHostAddress();
+		mav.addObject("user",user);
+		String oneSelect = null;
 		
 		int point1 = ipLocation.indexOf(".");
 		int point2 = ipLocation.indexOf(".", point1 + 1);
 		if(ipLocation.substring(0, point1).equals("192") && ipLocation.substring(point1 + 1, point2).equals("168")){	
-			int result = service.innserCommute(user);	
-			CommuteCheckVo cc = service.selectCommute(commute);
-			mv.addObject("user",user);
-			mv.addObject("commute",commute);
+			int commute = service.innserCommute(user);	
+			CommuteCheckVo cc = service.selectCommute(user);
+			mav.addObject("commute",commute);
+			oneSelect = service.selectOneCommute(user);
+			
 		}
-		mv.setViewName("redirect:commuteCheck.do");
-		return mv;
-	}
+			
+			mav.addObject("oneSelect", oneSelect);
+			mav.setViewName("employee/employeeIndex");
+		return mav;
+	}*/
 	
 
 	

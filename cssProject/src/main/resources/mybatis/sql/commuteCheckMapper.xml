@@ -13,6 +13,18 @@
 		<result property="outTime" column="COMM_OUTTIME" />
 	
 	</resultMap>
+	
+	<select id="selectInTimeCommute" resultType="string">
+	SELECT TO_CHAR(COMM_DATE,'YYYY-MM-DD HH24:MI:SS') AS "COMM_DATE"
+	FROM COMMUTE
+	WHERE TO_CHAR(COMM_DATE,'DD') = TO_CHAR(SYSDATE,'DD') AND E_KEY_FK = ${eKey} AND C_KEY_FK = ${cKeyFk}
+	</select>
+  
+  	<select id="selectOutTimeCommute" resultType="string">
+  	SELECT TO_CHAR(COMM_OUTTIME,'YYYY-MM-DD HH24:MI:SS') AS "COMM_DATE"
+	FROM COMMUTE
+	WHERE TO_CHAR(COMM_DATE,'DD') = TO_CHAR(SYSDATE,'DD') AND E_KEY_FK = ${eKey} AND C_KEY_FK = ${cKeyFk}
+  	</select>
   
   	<select id="selectCommute" resultType="Commute">
   		SELECT COMM_DATE AS "INDATE",TO_CHAR(COMM_INTIME,'HH:MM:SS') AS "STRINTIME" ,TO_CHAR(COMM_OUTTIME,'HH:MM:SS') AS "STROUTTIME"
@@ -44,8 +56,14 @@
   	</insert>
   	
   	<update id="insertOutCommute" parameterType="Commute">
-  	UPDATE COMMUTE SET COMM_OUTTIME= SYSDATE
-	WHERE TO_NUMBER(TO_CHAR(COMM_DATE, 'DD')) = TO_NUMBER(TO_CHAR(SYSDATE, 'DD')) AND E_KEY_FK = ${eKey} AND C_KEY_FK = ${cKeyFk}
+  	MERGE INTO COMMUTE
+ 		USING DUAL
+ 		ON(E_KEY_FK = ${eKey} AND C_KEY_FK= ${cKeyFk} AND TO_NUMBER(TO_CHAR(COMM_DATE, 'DD'))=TO_NUMBER(TO_CHAR(SYSDATE, 'DD')))
+ 		WHEN MATCHED THEN
+   		 UPDATE SET
+   			 COMM_OUTTIME = SYSDATE
+		WHEN NOT MATCHED THEN
+    		INSERT VALUES(SEQ_COMMUTE.NEXTVAL, ${cKeyFk} , ${eKey}, SYSDATE, SYSDATE, NULL)
   	</update>
 
   </mapper>

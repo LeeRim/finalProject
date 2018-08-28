@@ -28,10 +28,16 @@ public class CommuteCheckDao {
 	public int insertInnsr(EmployeeVo user) {
 		return sqlsession.insert("commuteCheckMapper.insertInner", user);
 	}
-	public CommuteCheckVo selectInnsr(CommuteCheckVo commute) {
-		return sqlsession.selectOne("commuteCheckMapper.selectOneCommute", commute);
+	public CommuteCheckVo selectInnsr(EmployeeVo user) {
+		return sqlsession.selectOne("commuteCheckMapper.selectOneCommute", user);
 	}
 	public List<CommuteCheckVo> showCommuteAllCheck(EmployeeVo user) {
 		return sqlsession.selectList("commuteCheckMapper.selectAllCommute",user);
+	}
+	public String selectOneCommute(EmployeeVo user) {
+		return sqlsession.selectOne("commuteCheckMapper.selectInTimeCommute",user);
+	}
+	public String selectOutCommute(EmployeeVo user) {
+		return sqlsession.selectOne("commuteCheckMapper.selectOutTimeCommute",user);
 	}
 }
