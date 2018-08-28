@@ -114,22 +114,20 @@
 	}
 	
 	function inTime(){
-	    var today = new Date();
+		var today = new Date();
 		year = today.getFullYear(); 
 		month = today.getMonth();
 		date = today.getDate();
 	    h = today.getHours();
 	    m = today.getMinutes();
 	    s = today.getSeconds();
-	    var cKeyFk = ${user.cKeyFk}
-	    var eKeyFk= ${user.eKey} 
+	    now = year +"/"+month+"/"+date+"/"+h+":"+m+":"+s
 		$.ajax({
 			type:"post",
 	        url:"commuteone.do",
-	        data : {inHour:h, inMinute:m, cKeyFk:cKeyFk , eKeyFk:eKeyFk},
+	        data : {oneSelect:date, strInTime:now},
 	        success: function(data){
-	        	 document.getElementById('inTime').innerHTML =
-	        	h + "시" + m+ "분"+ s + "초"
+	        	alert("출근이 정상 처리되었습니다");
 	        },
 	        error: function(error) {
 	            alert(error);
@@ -138,22 +136,20 @@
 	}
 	
 	function outTime(){
-	    var today = new Date();
+		var today = new Date();
 		year = today.getFullYear(); 
 		month = today.getMonth();
 		date = today.getDate();
 	    h = today.getHours();
 	    m = today.getMinutes();
 	    s = today.getSeconds();
-	    var cKeyFk = ${user.cKeyFk}
-	    var eKeyFk= ${user.eKey}
+	    now = year +"/"+month+"/"+date+"/"+h+":"+m+":"+s
 		$.ajax({
 			type:"post",
 	        url:"commuteOut.do",
-	        data : {inHour:h, inMinute:m,cKeyFk:cKeyFk,eKeyFk:eKeyFk},
+	        data : {oneSelect:date, strOutTime:now},
 	        success: function(data){
-	        	 document.getElementById('outTime').innerHTML =
-	        		 h + "시" + m+ "분"+ s + "초"
+	        	alert("퇴근이 정상 처리되었습니다");
 	        },
 	        error: function(error) {
 	            alert(error);
@@ -335,12 +331,17 @@
 	          <div class="box box-default" style="width:48.5%; height:112px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">출근시간</h3>
-				  <input type="submit" value="출근" onclick="inTime();" class="btn btn-box-tool" >
+				  <c:if test="${oneSelect eq null}">
+              <input type="submit" value="출근" onclick="inTime();" class="btn btn-box-tool">
+              </c:if>
+              <c:if test="${oneSelect ne null}">
+              <input type="submit" value="출근" class="btn btn-box-tool" readonly>
+              </c:if>
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
 	            <div id="inTime" class="box-body">
-	              
+	              <c:out value="${oneSelect}"></c:out>
 	            </div>
 	            <!-- /.box-body -->
 	          </div>
@@ -349,12 +350,17 @@
 	          <div class="box box-default" style="width:48.5%; height:112px; margin-left:10px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">퇴근시간</h3>
-					<input type="submit" value="퇴근" onclick="outTime();" class="btn btn-box-tool" >
+					 <c:if test="${oneSelect ne null}">
+              <input type="submit" value="퇴근" onclick="outTime();" class="btn btn-box-tool">
+              </c:if>
+              <c:if test="${oneSelect eq null}">
+              <input type="submit" value="퇴근" class="btn btn-box-tool" readonly>
+              </c:if>
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
 	            <div id="outTime" class="box-body">
-	              
+	              <c:out value="${outSelect}"></c:out>
 	            </div>
 	            <!-- /.box-body -->
 	          </div>

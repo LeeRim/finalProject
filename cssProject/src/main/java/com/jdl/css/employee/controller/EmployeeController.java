@@ -40,6 +40,8 @@ import com.jdl.css.common.model.service.AttachmentService;
 import com.jdl.css.common.model.service.VacationService;
 import com.jdl.css.common.model.vo.DivisionVo;
 import com.jdl.css.common.model.vo.VacationVo;
+import com.jdl.css.commuteCheck.model.commuteCheckService.CommuteCheckService;
+import com.jdl.css.commuteCheck.model.commuteCheckVo.CommuteCheckVo;
 import com.jdl.css.company.model.service.CompanyService;
 import com.jdl.css.company.model.vo.CompanyVo;
 import com.jdl.css.employee.model.service.EmployeeService;
@@ -67,6 +69,9 @@ public class EmployeeController {
 	ApprovalService aService;
 	@Autowired
 	CompanyService companyService;
+	@Autowired
+	CommuteCheckService commservice;
+	
 
 	@RequestMapping("loginForm.do")
 	public String openLoginForm(HttpSession session) {
@@ -714,7 +719,7 @@ public class EmployeeController {
 	}
 
 	@RequestMapping("employeeIndex.do")
-	public ModelAndView employeeIndex(ModelAndView mav,HttpSession session)throws ServletException, IOException {
+	public ModelAndView employeeIndex(ModelAndView mav,HttpSession session, CommuteCheckVo commute)throws ServletException, IOException {
 		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
 		//세션값 없으면 로그인페이지
 		 if(user == null){
@@ -723,7 +728,12 @@ public class EmployeeController {
 			 
 		InetAddress addr = null;
 		addr = InetAddress.getLocalHost();
-		String ipLocation = addr.getHostAddress();
+		String ipLocation = addr.getHostAddress();		
+		
+		String oneSelect = commservice.selectOneCommute(user);	
+		mav.addObject("oneSelect", oneSelect);
+		String outSelect = commservice.selectOutCommute(user);		
+		mav.addObject("outSelect",outSelect);
 		
 		List<CalenderVo> list = cservice.showCalender(user);
 		mav.addObject("list", list);
@@ -735,9 +745,49 @@ public class EmployeeController {
 		mav.addObject("board2", board2);
 		mav.addObject("board3", board3);
 		mav.addObject("ipLocation",ipLocation);
-
+		mav.addObject("user",user);
+		
 		mav.setViewName("employee/employeeIndex");
 		 }
+		return mav;
+	}
+	
+	@RequestMapping("commuteone.do")
+	public ModelAndView innerCommute(ModelAndView mav, HttpServletRequest request, HttpSession session)throws ServletException, IOException{
+		
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		InetAddress addr = null;
+		addr = InetAddress.getLocalHost();
+		String ipLocation = addr.getHostAddress();
+		mav.addObject("user",user);
+		
+		int point1 = ipLocation.indexOf(".");
+		int point2 = ipLocation.indexOf(".", point1 + 1);
+		if(ipLocation.substring(0, point1).equals("192") && ipLocation.substring(point1 + 1, point2).equals("168")){	
+			int commute = commservice.innserCommute(user);	
+			CommuteCheckVo cc = commservice.selectCommute(user);
+			mav.addObject("commute",commute);
+		}
+		    String oneSelect = commservice.selectOneCommute(user);	
+			mav.addObject("oneSelect", oneSelect);
+			
+			mav.setViewName("employee/employeeIndex");
+		return mav;
+	}
+	
+	@RequestMapping("commuteOut.do")
+	public ModelAndView insertOutCommuteCheck(CommuteCheckVo commute, ModelAndView mav,HttpSession session){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		mav.addObject("user",user);
+		
+		int result = commservice.insertOutCommuteCheck(user);
+		CommuteCheckVo cc= commservice.selectCommute(user);
+		String outSelect = commservice.selectOutCommute(user);
+		
+		mav.addObject("outSelect",outSelect);
+		System.out.println(outSelect);
+		mav.addObject("commute",commute);
+		mav.setViewName("employee/employeeIndex");
 		return mav;
 	}
 
@@ -748,11 +798,16 @@ public class EmployeeController {
 		addr = InetAddress.getLocalHost();
 		String ipLocation = addr.getHostAddress();
 		mav.addObject("ipLocation",ipLocation);
+		
 		List<BorderVo> board1 = borderservice.selectBoardOneEmp(); // 공지사항
 		mav.addObject("board1", board1);
 		
 		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		//세션값 없으면 로그인페이지
+		String oneSelect = commservice.selectOneCommute(employee);	
+		mav.addObject("oneSelect", oneSelect);
+		String outSelect = commservice.selectOutCommute(employee);		
+		mav.addObject("outSelect",outSelect);
 		 if(employee == null){
 			 mav.setViewName("index/login");
 		 }else{

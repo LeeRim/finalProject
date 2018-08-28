@@ -32,12 +32,20 @@ public class CommuteCheckService {
 		return dao.insertInnsr(user);
 	}
 
-	public CommuteCheckVo selectCommute(CommuteCheckVo commute) {
-		return dao.selectInnsr(commute);
+	public CommuteCheckVo selectCommute(EmployeeVo user) {
+		return dao.selectInnsr(user);
 	}
 
 	public List<CommuteCheckVo> showCommuteAllCheck(EmployeeVo user) {
 		return dao.showCommuteAllCheck(user);
+	}
+
+	public String selectOneCommute(EmployeeVo user) {
+		return dao.selectOneCommute(user);
+	}
+
+	public String selectOutCommute(EmployeeVo user) {
+		return dao.selectOutCommute(user);
 	}
 	
 	
