@@ -87,11 +87,6 @@ font-size:15px;
 	<header class="main-header">
 
 		<!-- Logo -->
-		<c:if test="${sessionScope.user.cLevel== 0}">
-			<a href="#" class="logo" onclick="menuHighlight(1);">
-			<span class="logo-mini"><b>C</b>SS</span> <span class="logo-lg"><b>C</b>SS</span>
-		</a>
-		</c:if>
 		<c:if test="${sessionScope.user.eType=='2' }">
 			<!-- 사원 -->
 			<a href="employeeIndex.do" class="logo" onclick="menuHighlight(1);">
@@ -117,6 +112,7 @@ font-size:15px;
 			<!-- Sidebar toggle button-->
 			<div class="btn-group">
 				<a class="sidebar-toggle" data-toggle="dropdown"> </a>
+			<c:if test ="${sessionScope.user.cLevel !=0}">
 				<c:if test="${sessionScope.user.eType=='2' }">
 					<!-- 사원 -->
 					<ul class="dropdown-menu headerMenu">
@@ -157,6 +153,7 @@ font-size:15px;
 								<span>문의하기</span></a></li>
 
 					</ul>
+					</c:if>
 				</c:if>
 			</div>
 			<!-- Navbar Right Menu -->

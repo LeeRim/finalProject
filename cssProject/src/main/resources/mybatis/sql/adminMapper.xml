@@ -113,8 +113,8 @@
 	</insert>
 	
 	<insert id="insertEmployeeAdmin" parameterType="EmployeeVo">
-		INSERT INTO EMPLOYEE(E_KEY, C_KEY_FK, E_TYPE, E_ID, E_PWD, E_NAME)
-		VALUES(SEQ_EMPLOYEE.NEXTVAL, #{cKeyFk},1, #{eId}, #{ePwd}, #{eName})
+		INSERT INTO EMPLOYEE(E_KEY, C_KEY_FK, E_TYPE, E_ID, E_PWD, E_NAME,E_PHOTO )
+		VALUES(SEQ_EMPLOYEE.NEXTVAL, #{cKeyFk},1, #{eId}, #{ePwd}, #{eName},#{ePhoto})
 	</insert>
 	
 	<select id="selectCompanyPayment" resultType="Company">
