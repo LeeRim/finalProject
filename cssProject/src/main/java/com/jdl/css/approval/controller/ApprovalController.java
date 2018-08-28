@@ -538,7 +538,7 @@ public class ApprovalController {
 
 		attService.insertAttachments(attachList);
 		// System.out.println(attachResult);
-		return "redirect:openVacationFormDetail.do?aKey=" + app.getaKey();
+	return "redirect:openVacationFormDetail.do?aKey=" + app.getaKey();
 	}
 
 	// 문서디테일열람

@@ -226,7 +226,7 @@ font-size:15px;
 															<!-- User Image -->
 															<img
 																src="resources/upload/empPhoto/${approval.writer.ePhoto}"
-																class="img-circle" alt="user">
+																class="img-circle" alt="user" style="height:30px;width:30px;">
 														</div> <!-- Message title and timestamp -->
 														<h4>
 															<c:out
@@ -245,7 +245,7 @@ font-size:15px;
 															<!-- User Image -->
 															<img
 																src="resources/upload/empPhoto/${approval.writer.ePhoto}"
-																class="img-circle" alt="user">
+																class="img-circle" alt="user" style="height:30px;width:30px;">
 														</div> <!-- Message title and timestamp -->
 														<h4>
 															<c:out
@@ -264,7 +264,7 @@ font-size:15px;
 															<!-- User Image -->
 															<img
 																src="resources/upload/empPhoto/${approval.writer.ePhoto}"
-																class="img-circle" alt="user">
+																class="img-circle" alt="user" style="height:30px;width:30px;">
 														</div> <!-- Message title and timestamp -->
 														<h4>
 															<c:out
@@ -283,7 +283,7 @@ font-size:15px;
 															<!-- User Image -->
 															<img
 																src="resources/upload/empPhoto/${approval.writer.ePhoto}"
-																class="img-circle" alt="user">
+																class="img-circle" alt="user" style="height:30px;width:30px;">
 														</div> <!-- Message title and timestamp -->
 														<h4>
 															<c:out
@@ -302,7 +302,7 @@ font-size:15px;
 															<!-- User Image -->
 															<img
 																src="resources/upload/empPhoto/${approval.writer.ePhoto}"
-																class="img-circle" alt="user">
+																class="img-circle" alt="user" style="height:30px;width:30px;">
 														</div> <!-- Message title and timestamp -->
 														<h4>
 															<c:out
