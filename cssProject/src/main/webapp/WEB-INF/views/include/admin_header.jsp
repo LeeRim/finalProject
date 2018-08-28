@@ -81,7 +81,6 @@ font-size:45px;
 font-size:15px;
 }
 .logout{
-	margin-left:1750px;
 	margin-top:8px;
 }
 </style>
