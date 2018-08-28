@@ -112,6 +112,10 @@ public class AdminDao {
 		return sqlSession.selectList("AdminMapper.selectCompanyPaymentList");
 	}
 
+	public List<PaymentVo> selectUserAddList() {
+		return sqlSession.selectList("AdminMapper.selectUserAddList");
+	}
+
 	
 	
 

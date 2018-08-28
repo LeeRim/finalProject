@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:import url ="/WEB-INF/views/include/header.jsp"/>
+<c:import url ="/WEB-INF/views/include/admin_header.jsp"/>
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -204,7 +204,7 @@ desired effect
               <div class="row">
                 <div class="col-sm-6">
                   <c:forEach items="${nowCalList}" var="nCList" varStatus="status">
-                  	<c:if test="${status.count <=3}">
+                  	<c:if test="${status.count le 3}">
                   		<div class="clearfix">
 							<span class="pull-left">${nCList.cName}</span>
 							<small class="pull-right">${nCList.cCloseDay}</small>
@@ -214,7 +214,7 @@ desired effect
 	            </div>
 				<div class="new-col-sm-6">
 					<c:forEach items="${nowCalList}" var="nCList" varStatus="status">
-                  	<c:if test="${status.count >=4}">
+                  	<c:if test="${status.count gt 3}">
                   		<div class="clearfix">
 							<span class="pull-left">${nCList.cName}</span>
 							<small class="pull-right">${nCList.cCloseDay}</small>
@@ -264,7 +264,7 @@ desired effect
               <div class="row">
                 <div class="col-md-8">
                   <div class="chart-responsive pieChart">
-                    <canvas id="pieChart" height="300px;" ></canvas>
+                    <canvas id="pieChart" height="295px;" ></canvas>
                   </div>
                   <!-- ./chart-responsive -->
                 </div>
@@ -380,17 +380,10 @@ desired effect
       element: 'line-chart',
       resize: true,
       data: [
-        {y: '2016-01', item1: 1},
-        {y: '2016-04', item1: 7},
-        {y: '2016-07', item1: 13},
-        {y: '2016-10', item1: 21},
-        {y: '2017-01', item1: 41},
-        {y: '2017-04', item1: 48},
-        {y: '2017-07', item1: 53},
-        {y: '2017-10', item1: 59},
-        {y: '2018-01', item1: 67},
-        {y: '2018-04', item1: 88},
-        {y: '2018-07', item1: 91}
+    	  <c:forEach items="${userAddList}" var="ua" varStatus="status">
+  	  		<c:if test="${!status.last}">{y: '${ua.allmonth}', item1: ${ua.count}},</c:if>
+			<c:if test="${status.last}">{y: '${ua.allmonth}', item1: ${ua.count}}</c:if>
+  	  	  </c:forEach>
       ],
       xkey: 'y',
       ykeys: ['item1'],
