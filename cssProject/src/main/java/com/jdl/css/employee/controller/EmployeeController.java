@@ -917,7 +917,7 @@ public class EmployeeController {
 			session.setAttribute("user", eKeyEm);
 		}
 		
-		mv.setViewName("employee/employeeIndex");
+		mv.setViewName("redirect:employeeIndex.do");
 		return mv;
 	}
 	
