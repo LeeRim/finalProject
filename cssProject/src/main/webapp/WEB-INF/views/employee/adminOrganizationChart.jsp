@@ -44,7 +44,7 @@
 }
 .org_map {
 	float: left;
-	width: 20%;
+	width: 21%;
 	/* border: 1px solid black; */
 }
 
@@ -81,7 +81,7 @@ margin-left:10px;
 
 .employee_list {
 	float: left;
-	width: 80%;
+	width: 79%;
 	height: 619px;
 	background:white;
     border-top-right-radius: 3px;
