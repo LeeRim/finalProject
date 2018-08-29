@@ -38,6 +38,14 @@
 		WHERE A.ATTA_KEY = #{attaKey} AND B.B_CATEGORY = 4
 	</select>
 	
+	<select id="selectAttachmentDetail2" parameterType="Border" resultMap="AttachMap">
+		SELECT A.ATTA_KEY, A.ATTA_LOCATION, A.ATTA_FILENAME, A.ATTA_FILEPATH, B_KEY, B_DATE, B_TITLE, B_CONTENT, B_WRITER_FK, E_NAME
+		FROM ATTACHMENT A
+		JOIN BOARD B ON (A.ATTA_LOCATION = B.B_KEY)
+		JOIN EMPLOYEE E ON (B.B_WRITER_FK = E.E_KEY)
+		WHERE A.ATTA_LOCATION = #{boardKey} AND B.B_CATEGORY = 4
+	</select>
+	
 	<delete id="deleteAttachment">
 		DELETE FROM ATTACHMENT WHERE ATTA_KEY = #{attaKey}
 	</delete>

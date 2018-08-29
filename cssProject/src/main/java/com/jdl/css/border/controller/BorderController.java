@@ -38,7 +38,7 @@ public class BorderController {
 	AttachmentService attachservice;
 	
 	@RequestMapping("borderList.do")
-	public ModelAndView boaderList(@RequestParam(value="currentPage", required=false)String currentPagestr, HttpServletRequest request, BorderVo board, ModelAndView mv){
+	public ModelAndView boaderList(@RequestParam(value="currentPage", required=false)String currentPagestr, HttpServletRequest request, BorderVo board, ModelAndView mv, HttpSession session){
 		
 		int currentPage;	//현재 페이지의 번호
 		int limitPage;		//한페이지에 출력할 페이지 갯수
@@ -75,7 +75,7 @@ public class BorderController {
 //==================페이징 처리의 끝===============
 		int startRow = (currentPage - 1) * limit + 1; 
 		int endRow = startRow + limit - 1;
-		
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
 		pi.setStartRow(startRow);
 		pi.setEndRow(endRow);
 		
@@ -85,7 +85,7 @@ public class BorderController {
 		
 		board.setCurrentPage(currentPage);
 		board.setLimit(limit);
-		
+		board.setCompanyKey(user.getcKeyFk());
 		List<BorderVo> list = borderservice.getNoticeList(board);
 		System.out.println(board.getbCateGory());
 		if(list != null){
@@ -159,12 +159,14 @@ public class BorderController {
 	}
 	
 	@RequestMapping("borderIndex.do")
-	public ModelAndView borderIndex(ModelAndView mv){
-		
-		List<BorderVo> board1 = borderservice.selectBoardOne(); //공지사항
-		List<BorderVo> board2 = borderservice.selectBoardTwo(); //자유
-		List<BorderVo> board3 = borderservice.selectBoardThr(); //경조사
-		List<BorderVo> board4 = borderservice.selectBoardFor(); //앨범
+	public ModelAndView borderIndex(HttpSession session, ModelAndView mv){
+		EmployeeVo user = (EmployeeVo)session.getAttribute("user");
+		BorderVo board = new BorderVo();
+		board.setCompanyKey(user.getcKeyFk());
+		List<BorderVo> board1 = borderservice.selectBoardOne(board); //공지사항
+		List<BorderVo> board2 = borderservice.selectBoardTwo(board); //자유
+		List<BorderVo> board3 = borderservice.selectBoardThr(board); //경조사
+		List<BorderVo> board4 = borderservice.selectBoardFor(board); //앨범
 		List<AttachmentVo> attach = attachservice.selectAttachSev();
 		
 		mv.addObject("bo1", 1);
@@ -456,4 +458,22 @@ public class BorderController {
 		return mv;
 	}
 	
+	@RequestMapping("attachDetailPage2.do")
+	public ModelAndView att(ModelAndView mv, BorderVo board){
+		
+		AttachmentVo attach = attachservice.selectAttachDetail2(board);
+		List<BoardCommentVo> bList = borderservice.selectCommentList(attach.getBoardKey());
+		BorderVo b = borderservice.selectBoard(attach.getBoardKey());
+		
+		System.out.println("갤러리 디테일 : " + attach);
+		System.out.println("갤러리 디테일2 : " + bList);
+		System.out.println("갤러리 보드 : " + b);
+		
+		mv.addObject("board", b);
+		mv.addObject("attach", attach);
+		mv.addObject("bList", bList);
+		mv.setViewName("border/borderGalleryDetail");
+		
+		return mv;
+	}
 }

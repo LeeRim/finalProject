@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jdl.css.border.model.vo.BorderVo;
 import com.jdl.css.common.model.vo.AttachmentVo;
 
 @Repository
@@ -45,5 +46,9 @@ public class AttachmentDao {
 
 	public AttachmentVo selectAttachmentDetail(AttachmentVo av) {
 		return session.selectOne("AttachmentMapper.selectAttachmentDetail", av);
+	}
+
+	public AttachmentVo selectAttachmentDetail2(BorderVo board) {
+		return session.selectOne("AttachmentMapper.selectAttachmentDetail2", board);
 	}
 }

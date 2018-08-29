@@ -70,7 +70,7 @@
 			  if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
 		      var attach = $(this).parent("tr").data("key");
 		      console.log(attach);
-		       location.href = "attachDetailPage.do?attaKey=" + attach; 
+		       location.href = "attachDetailPage2.do?boardKey=" + attach; 
 			  }
 		   });
 		});  
@@ -99,7 +99,9 @@
 				<div class="box-body table-responsive no-padding">
 					<c:choose>
 						<c:when test="${bo1 eq 1}">
-							<span class="bordName">공지사항</span>
+							<span class="bordName">
+								<img src="resources/upload/image/공지사항.png" class="img" width="120px" height="50px" onclick="border(1);"/>
+							</span>
 							<div class="image" onclick="border(1);">
 							<img src="resources/upload/image/more.png" class="img" width="100px" height="50px" onclick="border(1);"/>
 							</div>
@@ -135,7 +137,9 @@
 				<div class="box-body table-responsive no-padding">
 				<c:choose>
 					<c:when test="${bo2 eq 2}">
-						<span class="bordName">자유게시판</span>
+						<span class="bordName">
+							<img src="resources/upload/image/자유.png" class="img" width="150px" height="50px" onclick="border(1);"/>
+						</span>
 							<div class="image" onclick="border(2);">
 							<img src="resources/upload/image/more.png" 
 									class="img" width="100px" height="50px"/>
@@ -173,7 +177,9 @@
 				<div class="box-body table-responsive no-padding">
 				<c:choose>
 					<c:when test="${bo3 eq 3}">
-						<span class="bordName">경조사 게시판</span>
+						<span class="bordName">
+							<img src="resources/upload/image/경조사.png" class="img" width="155px" height="50px" onclick="border(1);"/>
+						</span>
 						<div class="image" onclick="border(3);">
 							<img src="resources/upload/image/more.png" 
 									class="img" width="100px" height="50px"/>
@@ -212,7 +218,9 @@
 				<div class="Attach">
 				<c:choose>
 					<c:when test="${bo4 eq 4}">
-						<span class="bordName">앨범 게시판</span>
+						<span class="bordName">
+							<img src="resources/upload/image/갤러리.png" class="img" width="100px" height="50px" onclick="border(1);"/>
+						</span>
 						<div class="image" onclick="border(4);">
 							<img src="resources/upload/image/more.png" 
 									class="img" width="100px" height="50px"/>

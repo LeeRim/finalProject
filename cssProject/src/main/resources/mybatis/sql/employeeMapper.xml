@@ -355,6 +355,7 @@
 		JOIN DIVISION D ON(E.E_DEPART_FK = D.DIV_KEY)
 		WHERE
 		E.C_KEY_FK = #{cKey} AND TO_CHAR(E_BIRTH,'MM/DD') = TO_CHAR(SYSDATE,'MM/DD') 
+		AND ROWNUM <![CDATA[ <= ]]> 8
 	</select>
 
 	<select id="selectDepartCountList" parameterType="int"
@@ -409,7 +410,7 @@
 	<!-- 임시 비밀번호 발급 -->
 	<update id="updatePwd" parameterType="EmployeeVo">
 		UPDATE EMPLOYEE
-		SET E_STATE = #{eState}
+		SET E_PWD = #{ePwd}
 		WHERE E_KEY = #{eKey}
 	</update>
 

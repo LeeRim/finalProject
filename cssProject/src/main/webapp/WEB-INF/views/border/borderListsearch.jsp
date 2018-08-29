@@ -106,9 +106,15 @@ $(function(){
 	}).mouseout(function(){
 		$(this).parent().css("background","white");
 	}).click(function(){
+		if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
 		var boardNo = $(this).parent().children().eq(0).text();
 		location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=${pi.currentPage}"; 		
+		}
 	});
+
+$("#nullList").hover(function(){
+	$(this).css("background","white");
+});
 });
 
 	$(document).ready(function(){
@@ -177,6 +183,12 @@ $(function(){
                   <th>조회수</th>
                   <th>작성일</th>
                 </tr>
+                <c:if test="${map.list.size() == 0}">
+    	            <tr>
+                		<td colspan="5" id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
+ 	               </tr>
+                </c:if>
+                <c:if test="${map.list.size() != 0}">
                 <c:forEach items="${map.list }" var="b">
                 <tr>
                   <td><c:out value="${b.boardKey }"/></td>
@@ -186,6 +198,7 @@ $(function(){
                   <td><c:out value="${b.bDate }"/></td>
                 </tr>
                 </c:forEach>
+                </c:if>
               </table>
               </div>
               <c:if test="${!empty user}">

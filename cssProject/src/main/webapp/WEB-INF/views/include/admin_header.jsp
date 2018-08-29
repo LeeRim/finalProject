@@ -80,9 +80,6 @@ font-size:45px;
 .headerMenu li a span{
 font-size:15px;
 }
-.logout{
-	margin-top:8px;
-}
 </style>
 </head>
 <body>
@@ -117,9 +114,8 @@ font-size:15px;
 
 		<!-- Header Navbar -->
 		<nav class="navbar navbar-static-top" role="navigation">
-			<div class="btn-group">
+			<div class="btn-group" style="margin-left:0px;">
 				<a class="sidebar-toggle" data-toggle="dropdown"> </a>
-				<div class="pull-right logout"><a href="logout.do" class="btn btn-default btn-flat">로그아웃</a></div>
 				</div>
 		</nav>
 	</header>

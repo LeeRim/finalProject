@@ -83,7 +83,7 @@ desired effect
 				<!--------------------------
         | Your Page Content Here |
         -------------------------->
-				<div class="col-md-3">
+				<div class="col-md-3" style="height: 960px;overflow-y:auto;">
 					<label class="btn btn-primary btn-block margin-bottom" id="labelBtn">대결자
 						선택</label>
 

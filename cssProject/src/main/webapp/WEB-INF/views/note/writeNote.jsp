@@ -120,42 +120,42 @@
 			<!-- Main content -->
 			<section class="content container-fluid">
 				<div class="row">
-					<div class="col-md-3">
-						<label class="btn btn-primary btn-block margin-bottom"
-							id="labelBtn">수신자 선택</label>
+					<div class="col-md-3" style="height: 920px;overflow-y:auto;">
+                  <label class="btn btn-primary btn-block margin-bottom" id="labelBtn">수신자
+                     선택</label>
 
-						<c:forEach items="${department}" var="department">
-							<div class="box box-solid" style="width: 100%">
-								<div class="box-header with-border">
-									<h3 class="box-title">
-										<c:out value="${department.department}" />
-									</h3>
+                  <c:forEach items="${department}" var="department">
+                     <div class="box box-solid collapsed-box" style="width: 100%">
+                        <div class="box-header with-border">
+                           <h3 class="box-title">
+                              <c:out value="${department.department}" />
+                           </h3>
 
-									<div class="box-tools">
-										<button type="button" class="btn btn-box-tool"
-											data-widget="collapse">
-											<i class="fa fa-minus"></i>
-										</button>
-									</div>
-								</div>
-								<div class="box-body no-padding">
-									<ul class="nav nav-pills nav-stacked">
-										<c:forEach items="${employee}" var="employee">
-											<c:if test="${employee.department == department.department}">
-												<li><a href="#"
-													onclick="select(${employee.eKey},'${employee.eName}');"><i
-														class="fa fa-circle-o text-red"></i> <c:out
-															value="${employee.eName}" /></a></li>
-											</c:if>
-										</c:forEach>
-									</ul>
-								</div>
-								<!-- /.box-body -->
-							</div>
-						</c:forEach>
-						<!-- /.box -->
-					</div>
-					<!-- /.col -->
+                           <div class="box-tools">
+                              <button type="button" class="btn btn-box-tool"
+                                 data-widget="collapse" style="margin-top:0px;">
+                                 <i class="fa fa-plus"></i>
+                              </button>
+                           </div>
+                        </div>
+                        <div class="box-body no-padding" style="display: none;">
+                           <ul class="nav nav-pills nav-stacked">
+                              <c:forEach items="${employee}" var="employee" varStatus="st">
+                                 <c:if test="${employee.department == department.department}">
+                                    <li><a
+                                       onclick="select(${st.index},${employee.eKey},'${employee.eName}','${employee.job}','${employee.department}',${employee.eState},${employee.instead.eKey},'${employee.instead.eName}','${employee.instead.job}','${employee.instead.department}');"><i
+                                          class="fa fa-circle-o text-red"></i> <c:out
+                                             value="${employee.eName} ${employee.job }" /></a></li>
+                                 </c:if>
+                              </c:forEach>
+                           </ul>
+                        </div>
+                        <!-- /.box-body -->
+                     </div>
+                  </c:forEach>
+                  <!-- /.box -->
+               </div>
+               <!-- /.col -->
 
 					<div class="col-md-9">
 						<div class="box box-primary" style="width: 80%">

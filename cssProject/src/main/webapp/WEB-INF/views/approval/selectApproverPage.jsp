@@ -339,7 +339,7 @@ if (window.FileReader) { // modern browser
 
 				<div class="row" style="height: 490px;">
 					<div class="col-md-1"></div>
-					<div class="col-md-3" style="height: 450px;overflow-y:scroll;">
+					<div class="col-md-3" style="height: 450px;overflow-y:auto;">
 						<label class="btn btn-primary btn-block margin-bottom" id="labelBtn">수신자
 							선택</label>
 

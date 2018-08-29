@@ -74,7 +74,7 @@
 		FROM ( SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
 		FROM BOARD b 
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
-		WHERE B_CATEGORY = #{bCateGory}
+		WHERE B_CATEGORY = #{bCateGory} AND b.C_KEY_FK = #{companyKey} 
 		ORDER BY b.B_KEY DESC) P)
 		WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
@@ -111,68 +111,68 @@
 		DELETE FROM BOARD_COMMENT WHERE CO_KEY = #{commentKey}
 	</delete>
 	
-	<select id="selectBoardOne" resultMap="BorderMap">
+	<select id="selectBoardOne" parameterType="Border" resultMap="BorderMap">
 		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM 
 		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
 		FROM BOARD b
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
-		WHERE B_CATEGORY = 1
+		WHERE B_CATEGORY = 1 AND b.C_KEY_FK = #{companyKey} 
 		ORDER BY B_DATE DESC)
 		WHERE ROWNUM BETWEEN 1 AND 7
 	</select>
 	
-	<select id="selectBoardTwo" resultMap="BorderMap">
+	<select id="selectBoardTwo" parameterType="Border" resultMap="BorderMap">
 		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM 
 		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
 		FROM BOARD b
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
-		WHERE B_CATEGORY = 2
+		WHERE B_CATEGORY = 2 AND b.C_KEY_FK = #{companyKey} 
 		ORDER BY B_DATE DESC)
 		WHERE ROWNUM BETWEEN 1 AND 7
 	</select>
 	
-	<select id="selectBoardThr" resultMap="BorderMap">
+	<select id="selectBoardThr" parameterType="Border" resultMap="BorderMap">
 		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM 
 		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
 		FROM BOARD b
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
-		WHERE B_CATEGORY = 3
+		WHERE B_CATEGORY = 3 AND b.C_KEY_FK = #{companyKey} 
 		ORDER BY B_DATE DESC)
 		WHERE ROWNUM BETWEEN 1 AND 7
 	</select>
 	
-	<select id="selectBoardOneEmp" resultMap="BorderMap">
+	<select id="selectBoardOneEmp" parameterType="Border"  resultMap="BorderMap">
 		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM 
 		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
 		FROM BOARD b
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
-		WHERE B_CATEGORY = 1
+		WHERE B_CATEGORY = 1 AND b.C_KEY_FK = #{companyKey}
 		ORDER BY B_DATE DESC)
 		WHERE ROWNUM BETWEEN 1 AND 6
 	</select>
 	
-	<select id="selectBoardTwoEmp" resultMap="BorderMap">
+	<select id="selectBoardTwoEmp" parameterType="Border"  resultMap="BorderMap">
 		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM 
 		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
 		FROM BOARD b
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
-		WHERE B_CATEGORY = 2
+		WHERE B_CATEGORY = 2 AND b.C_KEY_FK = #{companyKey}
 		ORDER BY B_DATE DESC)
 		WHERE ROWNUM BETWEEN 1 AND 6
 	</select>
 	
-	<select id="selectBoardThrEmp" resultMap="BorderMap">
+	<select id="selectBoardThrEmp" parameterType="Border"  resultMap="BorderMap">
 		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM 
 		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
 		FROM BOARD b
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
-		WHERE B_CATEGORY = 3
+		WHERE B_CATEGORY = 3 AND b.C_KEY_FK = #{companyKey}
 		ORDER BY B_DATE DESC)
 		WHERE ROWNUM BETWEEN 1 AND 6
 	</select>
@@ -189,13 +189,13 @@
 		</selectKey>
 	</insert>
 	
-	<select id="selectBoardFor" resultMap="BorderMap">
+	<select id="selectBoardFor" parameterType="Border" resultMap="BorderMap">
 		SELECT B_KEY, C_KEY_FK, B_TITLE, B_WRITER_FK, B_COUNT, B_DATE, B_CATEGORY, E_NAME
 		FROM 
 		(SELECT b.B_KEY, b.C_KEY_FK, b.B_TITLE, b.B_CONTENT, b.B_WRITER_FK, b.B_COUNT, b.B_DATE, b.B_CATEGORY, e.E_NAME
 		FROM BOARD b
 		JOIN EMPLOYEE e on (b.B_WRITER_FK = e.E_KEY)
-		WHERE B_CATEGORY = 4
+		WHERE B_CATEGORY = 4 AND b.C_KEY_FK = #{companyKey} 
 		ORDER BY B_DATE DESC)
 		WHERE ROWNUM BETWEEN 1 AND 7
 	</select>

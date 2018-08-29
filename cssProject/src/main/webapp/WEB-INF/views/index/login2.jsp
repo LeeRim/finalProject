@@ -40,7 +40,7 @@ console.log(email);
     success     : function(data) {
     	
     	console.log("yn : "+data)
-    	
+    	location.href="index.do";
     	
     	if(data >= 1 ){
     		alert("입력하신 이메일로 아이디와 임시 비밀번호가 발송 되었습니다.");

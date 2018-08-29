@@ -66,36 +66,36 @@ public class BorderService {
 		return dao.deleteComment(bc);
 	}
 
-	public List<BorderVo> selectBoardOne() {
-		return dao.selectBoardOne();
+	public List<BorderVo> selectBoardOne(BorderVo board) {
+		return dao.selectBoardOne(board);
 	}
 
-	public List<BorderVo> selectBoardTwo() {
-		return dao.selectBoardTwo();
+	public List<BorderVo> selectBoardTwo(BorderVo board) {
+		return dao.selectBoardTwo(board);
 	}
 
-	public List<BorderVo> selectBoardThr() {
-		return dao.selectBoardThr();
+	public List<BorderVo> selectBoardThr(BorderVo board) {
+		return dao.selectBoardThr(board);
 	}
 	
-	public List<BorderVo> selectBoardOneEmp() {
-		return dao.selectBoardOneEmp();
+	public List<BorderVo> selectBoardOneEmp(BorderVo board) {
+		return dao.selectBoardOneEmp(board);
 	}
 
-	public List<BorderVo> selectBoardTwoEmp() {
-		return dao.selectBoardTwoEmp();
+	public List<BorderVo> selectBoardTwoEmp(BorderVo board) {
+		return dao.selectBoardTwoEmp(board);
 	}
 
-	public List<BorderVo> selectBoardThrEmp() {
-		return dao.selectBoardThrEmp();
+	public List<BorderVo> selectBoardThrEmp(BorderVo board) {
+		return dao.selectBoardThrEmp(board);
 	}
 
 	public int insertBoard(BorderVo board) {
 		return dao.insertboard(board);
 	}
 
-	public List<BorderVo> selectBoardFor() {
-		return dao.selectBoardFor();
+	public List<BorderVo> selectBoardFor(BorderVo board) {
+		return dao.selectBoardFor(board);
 	}
 
 	public List<BorderVo> listsearch(String condition, String keyword, String getbCateGory) {

@@ -680,6 +680,8 @@ public class ApprovalController {
 			      session.setAttribute("user", user);
 			}
 		}
+		List<ApprovalVo> waitingApprovals = aService.selectWaitingApprovalList(user.geteKey());
+	      session.setAttribute("indexApproval", waitingApprovals);
 		return result;
 	}
 	

@@ -12,57 +12,57 @@
   <link rel="stylesheet" href="resources/bower_components/fullcalendar/dist/fullcalendar.min.css">
   <link rel="stylesheet" href="resources/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
  <style>
- 	.row{
- 		margin-left:auto;
- 		margin-right:auto;
- 	}
-	.box{
-		width:100%;
-	}
-	.box.box-default{
-		height:82px;
-	}
-	.box-footer{
-		height:80px; 
-		padding-top:11px;
-	}
-	.empInfo{
-		margin-left:40px;
-		margin-top:10px;
-	}
-	.widget-user-2 .widget-user-image > img{
-		width:80px;
-	}
-	.widget-user-image{
-		margin-top:-13px;
-		padding:7px;
-	}
-	#calendar{
-		height:720px;
-	}
-	.bordName{
-		margin-left:10px;
-		font-size:17px;
-		font-weight:bold;
-	}
-	.table, th{
-		text-align:center;
-		background:white;
-	}
-	.no{
-		width:200px;
-	}
-	.bindex{
-		display:inline-block;
-		width:45%;
-		margin-left:60px;
-	}
-	.date,.writer{
-		width:150px;
-	}
-	th{
-		font-weight:bold;
-	}
+    .row{
+       margin-left:auto;
+       margin-right:auto;
+    }
+   .box{
+      width:100%;
+   }
+   .box.box-default{
+      height:82px;
+   }
+   .box-footer{
+      height:80px; 
+      padding-top:11px;
+   }
+   .empInfo{
+      margin-left:40px;
+      margin-top:10px;
+   }
+   .widget-user-2 .widget-user-image > img{
+      width:80px;
+   }
+   .widget-user-image{
+      margin-top:-13px;
+      padding:7px;
+   }
+   #calendar{
+      height:720px;
+   }
+   .bordName{
+      margin-left:10px;
+      font-size:17px;
+      font-weight:bold;
+   }
+   .table, th{
+      text-align:center;
+      background:white;
+   }
+   .no{
+      width:200px;
+   }
+   .bindex{
+      display:inline-block;
+      width:45%;
+      margin-left:60px;
+   }
+   .date,.writer{
+      width:150px;
+   }
+   th{
+      font-weight:bold;
+   }
  </style>
  <script>
    $(function(){
@@ -72,10 +72,10 @@
       }).mouseout(function(){
          $(this).parent().css("background","white");
       }).click(function(){
-    	 if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
+        if($("#nullList").text()!=$(this).parent().children().eq(0).text()){
          var boardNo = $(this).parent("tr").data("key");
          location.href = "selectBoard.do?boardKey=" + boardNo + "&currentPage=1";
-    	 }
+        }
       });
    });
    
@@ -83,68 +83,71 @@
       location.href="borderList.do?bCateGory=" + b;
    }
    
-	function startTime() {
-	    var today = new Date();
-	    var year = today.getFullYear();
-		var month = today.getMonth();
-		var date = today.getDate();
-	    var h = today.getHours();
-	    var m = today.getMinutes();
-	    var s = today.getSeconds();
-	    m = checkTime(m);
-	    s = checkTime(s);	    
-	    document.getElementById('clock').innerHTML =
-	   year+ "년" + month + "월" + date + "일" + h + ":" + m + ":" + s;
-	    var t = setTimeout(startTime, 500);
-	}
-	function checkTime(i) {
-	    if (i < 10) {i = "0" + i}; // 숫자가 10보다 작을 경우 앞에 0을 붙여줌
-	    return i;
-	}
-	
-	function inTime(){
-		var today = new Date();
-		year = today.getFullYear(); 
-		month = today.getMonth();
-		date = today.getDate();
-	    h = today.getHours();
-	    m = today.getMinutes();
-	    s = today.getSeconds();
-	    now = year +"/"+month+"/"+date+"/"+h+":"+m+":"+s
-		$.ajax({
-			type:"post",
-	        url:"commuteone.do",
-	        data : {oneSelect:date, strInTime:now},
-	        success: function(data){
-	        	alert("출근이 정상 처리되었습니다");
-	        },
-	        error: function(error) {
-	            alert(error);
-	        }
-		});
-	}
-	
-	function outTime(){
-		var today = new Date();
-		year = today.getFullYear(); 
-		month = today.getMonth();
-		date = today.getDate();
-	    h = today.getHours();
-	    m = today.getMinutes();
-	    s = today.getSeconds();
-	    now = year +"/"+month+"/"+date+"/"+h+":"+m+":"+s
-		$.ajax({
-			type:"post",
-	        url:"commuteOut.do",
-	        data : {oneSelect:date, strOutTime:now},
-	        success: function(data){
-	        	alert("퇴근이 정상 처리되었습니다");
-	        },
-	        error: function(error) {
-	            alert(error);
-	        }
-		});
-	}
+   function startTime() {
+       var today = new Date();
+       var year = today.getFullYear();
+      var month = today.getMonth();
+      var date = today.getDate();
+       var h = today.getHours();
+       var m = today.getMinutes();
+       var s = today.getSeconds();
+       m = checkTime(m);
+       s = checkTime(s);       
+       document.getElementById('clock').innerHTML =
+      year+ "년" + month + "월" + date + "일" + h + ":" + m + ":" + s;
+       var t = setTimeout(startTime, 500);
+   }
+   function checkTime(i) {
+       if (i < 10) {i = "0" + i}; // 숫자가 10보다 작을 경우 앞에 0을 붙여줌
+       return i;
+   }
+   
+   function inTime(){
+      var today = new Date();
+      year = today.getFullYear(); 
+      month = today.getMonth();
+      date = today.getDate();
+       h = today.getHours();
+       m = today.getMinutes();
+       s = today.getSeconds();
+       now = year +"/"+month+"/"+date+"/"+h+":"+m+":"+s
+      $.ajax({
+         type:"post",
+           url:"commuteone.do",
+           data : {oneSelect:date, strInTime:now},
+           success: function(data){
+              alert("출근이 정상 처리되었습니다");
+              //console.log(now);
+              $("#inTime").text(now);
+           },
+           error: function(error) {
+               alert(error);
+           }
+      });
+   }
+   
+   function outTime(){
+      var today = new Date();
+      year = today.getFullYear(); 
+      month = today.getMonth();
+      date = today.getDate();
+       h = today.getHours();
+       m = today.getMinutes();
+       s = today.getSeconds();
+       now = year +"/"+month+"/"+date+"/"+h+":"+m+":"+s
+      $.ajax({
+         type:"post",
+           url:"commuteOut.do",
+           data : {outSelect:date, strOutTime:now},
+           success: function(data){
+              alert("퇴근이 정상 처리되었습니다");
+              $("#outTime").text(now);
+           },
+           error: function(error) {
+               alert(error);
+           }
+      });
+   }
 </script>
 
 </head>
@@ -269,8 +272,11 @@
                  <!-- /.box-tools -->
                </div>
                <!-- /.box-header -->
-               <div id="inTime" class="box-body">
-          			<c:out value="${oneSelect}"></c:out>
+               <div id="inTime" class="box-body" style="text-align: center;">
+                    <c:if test="${oneSelect!=null}">
+                    <c:out value="${oneSelect}"></c:out>
+                    </c:if> 
+                   
                </div>
                <!-- /.box-body -->
              </div>
@@ -279,17 +285,19 @@
              <div class="box box-default" style="width:48.5%; height:106.5px; margin-left:10px;">
                <div class="box-header with-border">
                  <h3 class="box-title">퇴근시간</h3>
-                <c:if test="${oneSelect ne null}">
+               <%--  <c:if test="${outSelect == null}"> --%>
               <input type="submit" value="퇴근" onclick="outTime();" class="btn btn-box-tool">
-              </c:if>
-               <c:if test="${oneSelect eq null}">
+              <%--  </c:if>
+              <c:if test="${outSelect != null}">
               <input type="submit" value="퇴근" class="btn btn-box-tool" readonly>
-              </c:if>
+              </c:if> --%>
                  <!-- /.box-tools -->
                </div>
                <!-- /.box-header -->
-               <div id="outTime" class="box-body">
-                 <c:out value="${outSelect}"></c:out>
+               <div id="outTime" class="box-body" style="text-align: center;">
+                  <c:if test="${outSelect!=null}">
+                    <c:out value="${outSelect}"></c:out>
+                    </c:if> 
                </div>
                <!-- /.box-body -->
              </div>
@@ -309,11 +317,11 @@
                      <th class="date">작성일</th>
                   </tr>
                   <c:if test="${board1.size() == 0}">
-		    	            <tr>
-		                		<td colspan="3" id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
-		 	               </tr>
-		                </c:if>
-		                <c:if test="${board1.size() != 0}">
+                         <tr>
+                            <td colspan="3" id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
+                         </tr>
+                      </c:if>
+                      <c:if test="${board1.size() != 0}">
                   <c:forEach items="${board1}" var="board1" varStatus="status">
                      <tr data-key=${board1.boardKey }>
                         <td class="title"><c:out value="${board1.bTitle }" /></td>
@@ -328,9 +336,9 @@
            
      </div>      
      
-	  
-	  <div class="row">
-     	<div class="col-md-9" style="width:58.3%; margin-top:-30px; ">
+     
+     <div class="row">
+        <div class="col-md-9" style="width:58.3%; margin-top:-30px; ">
           <div class="box box-primary">
             <div class="box-body no-padding">
               <!-- THE CALENDAR -->
@@ -342,63 +350,63 @@
         </div>
         
         <div class="row">
-				<div class="col-md-4" style="margin-top:10px; width:41%">
-					<div class="box-body table-responsive no-padding">
-						<table class="table table-hover">
-							<tr>
-								<th colspan="3" style="background:#bcbcbc;">경조사 게시판</th>
-							</tr>
-							<tr>
-								<th class="title">글제목</th>
-								<th class="writer">작성자</th>
-								<th class="date">작성일</th>
-							</tr>
-							<c:if test="${board3.size() == 0}">
-			    	            <tr>
-			                		<td colspan="3"  id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
-			 	               </tr>
-			                </c:if>
-			                <c:if test="${board3.size() != 0}">
-								<c:forEach items="${board3}" var="board3" varStatus="status">
-								 <tr data-key="${board3.boardKey}">
-									<td class="title"><c:out value="${board3.bTitle}" /></td>
-									<td class="writer"><c:out value="${board3.eName}" /></td>
-									<td class="date"><c:out value="${board3.bDate}" /></td>
-								</tr>
-							</c:forEach>
-						</c:if>
-						</table>
-					</div>
-				</div>
-				 <div class="col-md-4" style="margin-top:15px; width:41%">
-					<div class="box-body table-responsive no-padding">
-						<table class="table table-hover">
-							<tr>
-								<th colspan="3" style="background:#bcbcbc;">자유게시판</th>
-							</tr>
-							<tr>
-								<th class="title">글제목</th>
-								<th class="writer">작성자</th>
-								<th class="date">작성일</th>
-							</tr>
-							<c:if test="${board2.size() == 0}">
-			    	            <tr>
-			                		<td colspan="3" >조회 된 게시글이 없습니다.</td>
-			 	               </tr>
-			                </c:if>
-			                <c:if test="${board2.size() != 0}">
-							<c:forEach items="${board2}" var="board2" varStatus="status">
-								<tr data-key="${board2.boardKey }">
-									<td class="title"><c:out value="${board2.bTitle }" /></td>
-									<td class="writer"><c:out value="${board2.eName }" /></td>
-									<td class="date"><c:out value="${board2.bDate }" /></td>
-								</tr>
-							</c:forEach>
-							</c:if>
-						</table>
-					</div>
-				</div>
-			</div>
+            <div class="col-md-4" style="margin-top:10px; width:41%">
+               <div class="box-body table-responsive no-padding">
+                  <table class="table table-hover">
+                     <tr>
+                        <th colspan="3" style="background:#bcbcbc;">경조사 게시판</th>
+                     </tr>
+                     <tr>
+                        <th class="title">글제목</th>
+                        <th class="writer">작성자</th>
+                        <th class="date">작성일</th>
+                     </tr>
+                     <c:if test="${board3.size() == 0}">
+                            <tr>
+                               <td colspan="3"  id="nullList" style="cursor:default">조회 된 게시글이 없습니다.</td>
+                            </tr>
+                         </c:if>
+                         <c:if test="${board3.size() != 0}">
+                        <c:forEach items="${board3}" var="board3" varStatus="status">
+                         <tr data-key="${board3.boardKey}">
+                           <td class="title"><c:out value="${board3.bTitle}" /></td>
+                           <td class="writer"><c:out value="${board3.eName}" /></td>
+                           <td class="date"><c:out value="${board3.bDate}" /></td>
+                        </tr>
+                     </c:forEach>
+                  </c:if>
+                  </table>
+               </div>
+            </div>
+             <div class="col-md-4" style="margin-top:15px; width:41%">
+               <div class="box-body table-responsive no-padding">
+                  <table class="table table-hover">
+                     <tr>
+                        <th colspan="3" style="background:#bcbcbc;">자유게시판</th>
+                     </tr>
+                     <tr>
+                        <th class="title">글제목</th>
+                        <th class="writer">작성자</th>
+                        <th class="date">작성일</th>
+                     </tr>
+                     <c:if test="${board2.size() == 0}">
+                            <tr>
+                               <td colspan="3" >조회 된 게시글이 없습니다.</td>
+                            </tr>
+                         </c:if>
+                         <c:if test="${board2.size() != 0}">
+                     <c:forEach items="${board2}" var="board2" varStatus="status">
+                        <tr data-key="${board2.boardKey }">
+                           <td class="title"><c:out value="${board2.bTitle }" /></td>
+                           <td class="writer"><c:out value="${board2.eName }" /></td>
+                           <td class="date"><c:out value="${board2.bDate }" /></td>
+                        </tr>
+                     </c:forEach>
+                     </c:if>
+                  </table>
+               </div>
+            </div>
+         </div>
      </div>
 
     </section>
@@ -455,8 +463,8 @@
     
     
     $('#calendar').fullCalendar({
-    	height: 720, 
-    	header    : {
+       height: 720, 
+       header    : {
         left  : '',
         center: 'title',
         right : 'prev,next today'

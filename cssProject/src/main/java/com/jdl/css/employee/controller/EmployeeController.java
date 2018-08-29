@@ -740,9 +740,12 @@ public class EmployeeController {
 		List<CalenderVo> list = cservice.showCalender(user);
 		mav.addObject("list", list);
 
-		List<BorderVo> board1 = borderservice.selectBoardOneEmp(); // 공지사항
-		List<BorderVo> board2 = borderservice.selectBoardTwoEmp(); // 자유
-		List<BorderVo> board3 = borderservice.selectBoardThrEmp(); // 경조사
+		BorderVo board = new BorderVo();
+		board.setCompanyKey(user.getcKeyFk());
+		
+		List<BorderVo> board1 = borderservice.selectBoardOneEmp(board); // 공지사항
+		List<BorderVo> board2 = borderservice.selectBoardTwoEmp(board); // 자유
+		List<BorderVo> board3 = borderservice.selectBoardThrEmp(board); // 경조사
 		mav.addObject("board1", board1);
 		mav.addObject("board2", board2);
 		mav.addObject("board3", board3);
@@ -801,11 +804,14 @@ public class EmployeeController {
 		String ipLocation = addr.getHostAddress();
 		mav.addObject("ipLocation",ipLocation);
 		
-		List<BorderVo> board1 = borderservice.selectBoardOneEmp(); // 공지사항
+		EmployeeVo employee = (EmployeeVo)session.getAttribute("user");
+		BorderVo board = new BorderVo();
+		board.setCompanyKey(employee.getcKeyFk());
+		
+		List<BorderVo> board1 = borderservice.selectBoardOneEmp(board); // 공지사항
 		mav.addObject("board1", board1);
-		List<BorderVo> board2 = borderservice.selectBoardTwoEmp(); //자유
+		List<BorderVo> board2 = borderservice.selectBoardTwoEmp(board); //자유
 		mav.addObject("board2", board2);
-		EmployeeVo employee = (EmployeeVo) session.getAttribute("user");
 		//세션값 없으면 로그인페이지
 		String oneSelect = commservice.selectOneCommute(employee);	
 		mav.addObject("oneSelect", oneSelect);
@@ -819,6 +825,7 @@ public class EmployeeController {
 		int cKey = employee.getcKeyFk();
 		List<EmployeeVo> todayBList = eService.selectTodayBList(cKey);
 		mav.addObject("todayBList",todayBList);
+		System.out.println(todayBList);
 
 		List<EmployeeVo> departCountList = eService.selectDepartCountList(cKey);
 		mav.addObject("departCountList",departCountList);

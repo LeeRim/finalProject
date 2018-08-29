@@ -12,7 +12,7 @@ import com.jdl.css.common.model.vo.AttachmentVo;
 public class BorderVo extends PageInfo{
 	
 	private int boardKey; //게시판 기본키
-	private String companyKey; //회사키
+	private int companyKey; //회사키
 	private String bTitle; //게시글 제목
 	private String bContent; //글내용
 	private int bWriter; //작성자키
@@ -55,21 +55,6 @@ public class BorderVo extends PageInfo{
 		this.bAttach = bAttach;
 	}
 
-	public BorderVo(int boardKey, String companyKey, String bTitle, String bContent, int bWriter, int bCount,
-			Date bDate, String bCateGory, String eName, int bType, int startRow, int endRow) {
-		this.boardKey = boardKey;
-		this.companyKey = companyKey;
-		this.bTitle = bTitle;
-		this.bContent = bContent;
-		this.bWriter = bWriter;
-		this.bCount = bCount;
-		this.bDate = bDate;
-		this.bCateGory = bCateGory;
-		this.eName = eName;
-		this.bType = bType;
-		this.startRow = startRow;
-		this.endRow = endRow;
-	}
 
 	public int getStartRow() {
 		return startRow;
@@ -103,13 +88,6 @@ public class BorderVo extends PageInfo{
 		this.boardKey = boardKey;
 	}
 
-	public String getCompanyKey() {
-		return companyKey;
-	}
-
-	public void setCompanyKey(String companyKey) {
-		this.companyKey = companyKey;
-	}
 
 	public String getbTitle() {
 		return bTitle;
@@ -173,6 +151,35 @@ public class BorderVo extends PageInfo{
 				+ bContent + ", bWriter=" + bWriter + ", bCount=" + bCount + ", bDate=" + bDate + ", bCateGory="
 				+ bCateGory + ", eName=" + eName + ", bType=" + bType + ", startRow=" + startRow + ", endRow=" + endRow
 				+ "]";
+	}
+
+	public int getCompanyKey() {
+		return companyKey;
+	}
+
+	public void setCompanyKey(int companyKey) {
+		this.companyKey = companyKey;
+	}
+
+	public BorderVo(int boardKey, int companyKey, String bTitle, String bContent, int bWriter, int bCount, Date bDate,
+			String bCateGory, String eName, int bType, int startRow, int endRow, String bAttach,
+			List<AttachmentVo> attach, String ePhoto) {
+		super();
+		this.boardKey = boardKey;
+		this.companyKey = companyKey;
+		this.bTitle = bTitle;
+		this.bContent = bContent;
+		this.bWriter = bWriter;
+		this.bCount = bCount;
+		this.bDate = bDate;
+		this.bCateGory = bCateGory;
+		this.eName = eName;
+		this.bType = bType;
+		this.startRow = startRow;
+		this.endRow = endRow;
+		this.bAttach = bAttach;
+		this.attach = attach;
+		this.ePhoto = ePhoto;
 	}
 
 

@@ -247,10 +247,10 @@
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
               <div class="widget-user-image">
-                <img class="img-circle" src="resources/upload/empPhoto/${sessionScope.user.ePhoto}" alt="User Avatar">
+                <img class="img-circle" src="resources/upload/empPhoto/${sessionScope.user.ePhoto}"  style="width:100px; height:100px;"alt="User Avatar">
               </div>
               <!-- /.widget-user-image -->
-              <div class="empInfo">
+              <div class="empInfo" style="margin-left:70px;">
 	              <h3 class="widget-user-username"><c:out value="${sessionScope.user.cName}"/></h3>
 	              <h5 class="widget-user-desc"><c:out value="${sessionScope.user.eName} ${sessionScope.user.job}"/></h5>
               </div>

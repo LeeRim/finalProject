@@ -69,36 +69,36 @@ public class BorderDao {
 		return sqlSession.delete("BorderMapper.deleteComment", bc);
 	}
 
-	public List<BorderVo> selectBoardOne() {
-		return sqlSession.selectList("BorderMapper.selectBoardOne");
+	public List<BorderVo> selectBoardOne(BorderVo board) {
+		return sqlSession.selectList("BorderMapper.selectBoardOne", board);
 	}
 
-	public List<BorderVo> selectBoardTwo() {
-		return sqlSession.selectList("BorderMapper.selectBoardTwo");
+	public List<BorderVo> selectBoardTwo(BorderVo board) {
+		return sqlSession.selectList("BorderMapper.selectBoardTwo", board);
 	}
 
-	public List<BorderVo> selectBoardThr() {
-		return sqlSession.selectList("BorderMapper.selectBoardThr");
+	public List<BorderVo> selectBoardThr(BorderVo board) {
+		return sqlSession.selectList("BorderMapper.selectBoardThr", board);
 	}
 	
-	public List<BorderVo> selectBoardOneEmp() {
-		return sqlSession.selectList("BorderMapper.selectBoardOneEmp");
+	public List<BorderVo> selectBoardOneEmp(BorderVo board) {
+		return sqlSession.selectList("BorderMapper.selectBoardOneEmp", board);
 	}
 
-	public List<BorderVo> selectBoardTwoEmp() {
-		return sqlSession.selectList("BorderMapper.selectBoardTwoEmp");
+	public List<BorderVo> selectBoardTwoEmp(BorderVo board) {
+		return sqlSession.selectList("BorderMapper.selectBoardTwoEmp", board);
 	}
 
-	public List<BorderVo> selectBoardThrEmp() {
-		return sqlSession.selectList("BorderMapper.selectBoardThrEmp");
+	public List<BorderVo> selectBoardThrEmp(BorderVo board) {
+		return sqlSession.selectList("BorderMapper.selectBoardThrEmp", board);
 	}
 
 	public int insertboard(BorderVo board) {
 		return sqlSession.insert("BorderMapper.insertBoard", board);
 	}
 
-	public List<BorderVo> selectBoardFor() {
-		return sqlSession.selectList("BorderMapper.selectBoardFor");
+	public List<BorderVo> selectBoardFor(BorderVo board) {
+		return sqlSession.selectList("BorderMapper.selectBoardFor", board);
 	}
 
 	public List<BorderVo> selectsearch(String condition, String keyword, String getbCateGory) {

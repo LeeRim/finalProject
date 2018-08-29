@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jdl.css.border.model.vo.BorderVo;
 import com.jdl.css.common.model.dao.AttachmentDao;
 import com.jdl.css.common.model.vo.AttachmentVo;
 
@@ -49,6 +50,10 @@ public class AttachmentService {
 
 	public AttachmentVo selectAttachDetail(AttachmentVo av) {
 		return dao.selectAttachmentDetail(av);
+	}
+
+	public AttachmentVo selectAttachDetail2(BorderVo board) {
+		return dao.selectAttachmentDetail2(board);
 	}
 
 
