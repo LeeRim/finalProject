@@ -127,6 +127,7 @@
 	        data : {oneSelect:date, strInTime:now},
 	        success: function(data){
 	        	alert("출근이 정상 처리되었습니다");
+	        	 $("#inTime").text(now);
 	        },
 	        error: function(error) {
 	            alert(error);
@@ -146,9 +147,10 @@
 		$.ajax({
 			type:"post",
 	        url:"commuteOut.do",
-	        data : {oneSelect:date, strOutTime:now},
+	        data : {outSelect:date, strOutTime:now},
 	        success: function(data){
 	        	alert("퇴근이 정상 처리되었습니다");
+	        	$("#outTime").text(now);
 	        },
 	        error: function(error) {
 	            alert(error);
@@ -347,8 +349,10 @@
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
-	            <div id="inTime" class="box-body">
-	              <c:out value="${oneSelect}"></c:out>
+	            <div id="inTime" class="box-body" style="text-align: center;">
+	             <c:if test="${oneSelect!=null}">
+                    <c:out value="${oneSelect}"></c:out>
+                    </c:if> 
 	            </div>
 	            <!-- /.box-body -->
 	          </div>
@@ -357,17 +361,19 @@
 	          <div class="box box-default" style="width:47.5%; height:112px; margin-left:14px;">
 	            <div class="box-header with-border">
 	              <h3 class="box-title">퇴근시간</h3>
-					 <c:if test="${oneSelect ne null}">
+					<%--  <c:if test="${oneSelect ne null}"> --%>
               <input type="submit" value="퇴근" onclick="outTime();" class="btn btn-box-tool">
-              </c:if>
+            <%--   </c:if>
               <c:if test="${oneSelect eq null}">
               <input type="submit" value="퇴근" class="btn btn-box-tool" readonly>
-              </c:if>
+              </c:if> --%>
 	              <!-- /.box-tools -->
 	            </div>
 	            <!-- /.box-header -->
-	            <div id="outTime" class="box-body">
-	              <c:out value="${outSelect}"></c:out>
+	            <div id="outTime" class="box-body" style="text-align: center;">
+	              <c:if test="${outSelect!=null}">
+                    <c:out value="${outSelect}"></c:out>
+                    </c:if> 
 	            </div>
 	            <!-- /.box-body -->
 	          </div>
