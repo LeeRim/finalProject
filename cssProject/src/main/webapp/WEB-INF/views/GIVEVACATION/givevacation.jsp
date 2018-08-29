@@ -20,16 +20,16 @@
 	}
 	.year, .day{
 		text-align:center;
+		background:white;
 	}
+	
+		
 	input[type=text]{
 		border:none;
 		text-align:center;
 		background:none;
 	}
-	.btn{
-		border:1px solid #bcbcbc;
-		background:none;
-	}
+	
 </style>
 <script>
 function subV(){
@@ -57,8 +57,8 @@ function subV(){
 		<div class="row">
 			<table id="table1" class="table table-bordered ">
 				<tr>
-					<td class="year">근로년수</td>
-					<td class="day">지급일수</td>
+					<td class="year" style="background:#3c8dbc; font-weight:bold; font-size: 18px; color:#424242;">근로년수</td>
+					<td class="day"style="background:#3c8dbc; font-weight:bold; font-size: 18px; color:#424242;">지급일수</td>
 				</tr>
 				
 				<c:if test="${list.size() != 0}">
@@ -121,8 +121,8 @@ function subV(){
 			<div class="row">
 				<table id="table1" class="table table-bordered ">
 				<tr>
-					<td class="year">근로년수</td>
-					<td class="day">지급일수</td>
+					<td class="year"style="background:#3c8dbc; font-weight:bold; font-size: 18px; color:#424242; font-size: 18px;">근로년수</td>
+					<td class="day"style="background:#3c8dbc;font-weight:bold; font-size: 18px;' color:#424242; font-size: 18px;">지급일수</td>
 				</tr>
 				
 				<c:if test="${list.size() != 0}">
@@ -181,7 +181,7 @@ function subV(){
 				</c:if>
 			</table>
 			</div>
-			<div class="btn" onclick="subV();">휴가 지급</div>
+			<div class="btn btn-primary" onclick="subV();" style=" display:block; width:120px; margin-left:36%; font-size:18px;">휴가 지급</div>
 		</form>
 		</div>
 </div>
